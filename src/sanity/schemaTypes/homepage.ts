@@ -33,13 +33,50 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "homepageTitle",
-      title: "Homepage Title",
-      type: "string",
+      name: "sliderMain",
+      title: "Slider Main",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+            }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+            }),
+            defineField({
+              name: "description",
+              title: "Description",
+              type: "string",
+            }),
+            defineField({
+              name: "linkLabel",
+              title: "Link Label",
+              type: "string",
+            }),
+            defineField({
+              name: "linkDestination",
+              title: "Link Destination",
+              type: "string",
+            }),
+            defineField({
+              name: "brochure",
+              title: "Brochure",
+              type: "file",
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
-      name: "homepageDescription",
-      title: "Homepage Description",
+      name: "homepageTitle",
+      title: "Homepage Title",
       type: "string",
     }),
     // optional
