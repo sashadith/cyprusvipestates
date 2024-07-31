@@ -4,6 +4,7 @@ import { getHomePageByLang } from "../../sanity/sanity.utils";
 import { i18n } from "@/i18n.config";
 import { Translation } from "@/types/homepage";
 import Header from "../components/Header/Header";
+import Hero from "../components/Hero/Hero";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -24,7 +25,7 @@ export default async function Home({ params }: Props) {
   // const formDocument: FormStandardDocument =
   //   await getFormStandardDocumentByLang(params.lang);
 
-  // console.log("homePage", homePage);
+  console.log("homePage", homePage);
 
   const homePageTranslationSlugs: { [key: string]: { current: string } }[] =
     homePage?._translations.map((item) => {
@@ -66,7 +67,9 @@ export default async function Home({ params }: Props) {
   return (
     <>
       <Header params={params} translations={translations} />
-      <main>homepage</main>
+      <main>
+        <Hero slides={homePage.sliderMain} />
+      </main>
     </>
   );
 }

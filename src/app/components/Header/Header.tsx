@@ -23,18 +23,25 @@ const Header = async ({ translations, params }: Props) => {
           <div className={styles.companyData}>
             <Link className={styles.logoLink} href={`/${params.lang}`}>
               <Image
-                alt="Academgo Logo"
+                alt="Cyprus VIP Estates Logo"
                 src={urlFor(data.logo).url()}
-                width={200}
-                height={200}
+                width={100}
+                height={100}
                 className={styles.logoImage}
+              />
+              <Image
+                alt="Academgo Logo"
+                src={urlFor(data.logoMobile).url()}
+                width={40}
+                height={40}
+                className={`${styles.logoImageMobile} logoImageMobile`}
               />
             </Link>
           </div>
-          <div className={styles.navWrapperParent}>
-            <NavWrapper navLinks={data.navLinks} params={params} />
-          </div>
           <div className={styles.contacts}>
+            <div className={styles.navWrapperParent}>
+              <NavWrapper navLinks={data.navLinks} params={params} />
+            </div>
             <div className={styles.contactData}>
               <div className={styles.contactButtons}>
                 <LocaleSwitcher translations={translations} />

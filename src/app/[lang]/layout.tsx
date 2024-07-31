@@ -1,11 +1,11 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
 // import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
-import { Inter } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 // import { ModalProvider } from "../context/ModalContext";
 import { Suspense } from "react";
 // import { FacebookPixelEvents } from "../components/pixel-events";
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
   title: "Cyprus VIP Estates",
