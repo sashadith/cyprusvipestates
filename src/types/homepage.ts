@@ -15,15 +15,24 @@ export type Image = {
   url: string;
 };
 
+export type File = {
+  _key: string;
+  _ref: string;
+  _type: string;
+  url: string;
+};
+
 export type Slide = {
   _key: string;
   _type: string;
   image: Image;
   title: string;
   description: string;
-  linkLabel: string;
-  linkDestination: string;
-  brochure: File;
+  type: "link" | "file";
+  linkLabel?: string;
+  linkDestination?: string;
+  fileLabel?: string;
+  file?: File;
 };
 
 export type Homepage = {

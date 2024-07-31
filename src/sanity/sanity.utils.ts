@@ -7,9 +7,8 @@ export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
     _id,
     logo,
-    phones,
-    menuItems,
-    linkItems,
+    logoMobile,
+    navLinks,
   }`;
 
   const header = await client.fetch(headerQuery, { lang });
@@ -22,7 +21,18 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
     _id,
     title,
     seo,
-    sliderMain,
+    sliderMain[]{
+      _key,
+      _type,
+      image,
+      title,
+      description,
+      type,
+      linkLabel,
+      linkDestination,
+      fileLabel,
+      file
+    },
     homepageTitle,
     language,
     slug,

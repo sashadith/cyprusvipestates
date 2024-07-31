@@ -13,41 +13,37 @@ type Props = {
 
 const LocaleSwitcher = ({ translations }: Props) => {
   const params = useParams();
+  const currentLang = params.lang;
 
   const availableTranslations = useMemo<Translation[]>(
     () =>
       i18n.languages.reduce<Translation[]>((acc, cur) => {
-        const availableTranslation = translations?.find(
-          (translation) => translation.language === cur.id
-        );
-        return availableTranslation ? [...acc, availableTranslation] : acc;
+        if (cur.id !== currentLang) {
+          const availableTranslation = translations?.find(
+            (translation) => translation.language === cur.id
+          );
+          if (availableTranslation) {
+            acc.push(availableTranslation);
+          }
+        }
+        return acc;
       }, []),
-    [translations]
+    [translations, currentLang]
   );
 
   return (
-    <label>
-      <div className={styles.language}>
-        {availableTranslations.map((version, index) => (
-          <React.Fragment key={version.language}>
-            <Link
-              href={version.path}
-              locale={version.language}
-              className={`${
-                params?.lang == version.language
-                  ? styles.currentLang
-                  : styles.switchLang
-              }`}
-            >
-              {version.language}
-            </Link>
-            {index < availableTranslations.length - 1 && (
-              <span className={styles.divider}></span>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-    </label>
+    <div className={styles.localeSwitcher}>
+      {availableTranslations.map((version) => (
+        <Link
+          key={version.language}
+          href={version.path}
+          locale={version.language}
+          className={styles.localeSwitcherLink}
+        >
+          {version.language}
+        </Link>
+      ))}
+    </div>
   );
 };
 

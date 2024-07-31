@@ -56,19 +56,39 @@ export default defineType({
               type: "string",
             }),
             defineField({
+              name: "type",
+              title: "Type",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Link", value: "link" },
+                  { title: "File", value: "file" },
+                ],
+              },
+            }),
+            defineField({
               name: "linkLabel",
               title: "Link Label",
               type: "string",
+              hidden: ({ parent }) => parent?.type !== "link",
             }),
             defineField({
               name: "linkDestination",
               title: "Link Destination",
               type: "string",
+              hidden: ({ parent }) => parent?.type !== "link",
             }),
             defineField({
-              name: "brochure",
-              title: "Brochure",
+              name: "fileLabel",
+              title: "File Label",
+              type: "string",
+              hidden: ({ parent }) => parent?.type !== "file",
+            }),
+            defineField({
+              name: "file",
+              title: "File",
               type: "file",
+              hidden: ({ parent }) => parent?.type !== "file",
             }),
           ],
         },

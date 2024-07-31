@@ -7,7 +7,7 @@ const header = {
   fields: [
     defineField({
       name: "title",
-      title: "Title",
+      title: "Header title",
       type: "string",
     }),
     defineField({
@@ -16,49 +16,14 @@ const header = {
       type: "image",
     }),
     defineField({
-      name: "phones",
-      title: "Phone numbers",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          fields: [
-            defineField({
-              name: "phone",
-              title: "Phone number",
-              type: "string",
-            }),
-          ],
-        },
-      ],
+      name: "logoMobile",
+      title: "Logo mobile",
+      type: "image",
     }),
     defineField({
-      name: "menuItems",
-      title: "Menu items",
+      name: "navLinks",
+      title: "Navigation links",
       type: "array",
-      of: [
-        {
-          type: "object",
-          fields: [
-            defineField({
-              name: "label",
-              title: "Label",
-              type: "string",
-            }),
-            defineField({
-              name: "link",
-              title: "Link",
-              type: "string",
-            }),
-          ],
-        },
-      ],
-    }),
-    defineField({
-      name: "linkItems",
-      title: "Link items",
-      type: "array",
-      description: "Links to social and messengers",
       of: [
         {
           type: "object",
