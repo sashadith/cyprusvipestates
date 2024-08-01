@@ -20,8 +20,7 @@ const Hero: FC<Props> = ({ slides }) => {
             description={slide.description}
             linkLabel={slide.linkLabel}
             linkDestination={slide.linkDestination}
-            fileLabel={slide.fileLabel}
-            file={slide.file}
+            buttonLabel={slide.buttonLabel}
           />
         ))}
       </SliderMain>

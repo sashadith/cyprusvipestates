@@ -28,11 +28,10 @@ export type Slide = {
   image: Image;
   title: string;
   description: string;
-  type: "link" | "file";
+  type: "link" | "button";
   linkLabel?: string;
   linkDestination?: string;
-  fileLabel?: string;
-  file?: File;
+  buttonLabel?: string;
 };
 
 export type Homepage = {

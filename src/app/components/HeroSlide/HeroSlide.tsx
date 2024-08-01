@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import styles from "./HeroSlide.module.scss";
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
+import Link from "next/link";
 
 type Props = {
   image: ImageType;
@@ -10,8 +11,7 @@ type Props = {
   description: string;
   linkLabel?: string;
   linkDestination?: string;
-  fileLabel?: string;
-  file?: File;
+  buttonLabel?: string;
 };
 
 const HeroSlide: FC<Props> = ({
@@ -20,10 +20,9 @@ const HeroSlide: FC<Props> = ({
   description,
   linkLabel,
   linkDestination,
-  fileLabel,
-  file,
+  buttonLabel,
 }) => {
-  console.log("file", file);
+  // console.log("file", file);
   return (
     <div className={styles.slide}>
       <Image
@@ -32,19 +31,20 @@ const HeroSlide: FC<Props> = ({
         fill={true}
         className={styles.imagePoster}
       />
+      <div className={styles.overlay}></div>
       <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
-        <p className={styles.description}>{description}</p>
-        {linkLabel && linkDestination && (
-          <a href={linkDestination} className={styles.link}>
-            {linkLabel}
-          </a>
-        )}
-        {/* {fileLabel && file && (
-          <a href={urlFor(file).url()} className={styles.link}>
-            {fileLabel}
-          </a>
-        )} */}
+        <div className={styles.contentWrapper}>
+          <h2 className={styles.title}>{title}</h2>
+          <p className={styles.description}>{description}</p>
+          {linkLabel && linkDestination && (
+            <Link href={linkDestination} className={styles.link}>
+              {linkLabel}
+            </Link>
+          )}
+          {buttonLabel && (
+            <button className={styles.link}>{buttonLabel}</button>
+          )}
+        </div>
       </div>
     </div>
   );

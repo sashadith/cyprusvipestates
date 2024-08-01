@@ -25,7 +25,7 @@ export default async function Home({ params }: Props) {
   // const formDocument: FormStandardDocument =
   //   await getFormStandardDocumentByLang(params.lang);
 
-  console.log("homePage", homePage);
+  // console.log("homePage", homePage);
 
   const homePageTranslationSlugs: { [key: string]: { current: string } }[] =
     homePage?._translations.map((item) => {

@@ -30,8 +30,7 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
       type,
       linkLabel,
       linkDestination,
-      fileLabel,
-      file
+      buttonLabel,
     },
     homepageTitle,
     language,

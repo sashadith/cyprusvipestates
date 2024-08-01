@@ -62,7 +62,7 @@ export default defineType({
               options: {
                 list: [
                   { title: "Link", value: "link" },
-                  { title: "File", value: "file" },
+                  { title: "Button", value: "button" },
                 ],
               },
             }),
@@ -79,17 +79,17 @@ export default defineType({
               hidden: ({ parent }) => parent?.type !== "link",
             }),
             defineField({
-              name: "fileLabel",
-              title: "File Label",
+              name: "buttonLabel",
+              title: "Button Label",
               type: "string",
-              hidden: ({ parent }) => parent?.type !== "file",
+              hidden: ({ parent }) => parent?.type !== "button",
             }),
-            defineField({
-              name: "file",
-              title: "File",
-              type: "file",
-              hidden: ({ parent }) => parent?.type !== "file",
-            }),
+            // defineField({
+            //   name: "file",
+            //   title: "File",
+            //   type: "file",
+            //   hidden: ({ parent }) => parent?.type !== "button",
+            // }),
           ],
         },
       ],
