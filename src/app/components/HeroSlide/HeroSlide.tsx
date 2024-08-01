@@ -4,6 +4,7 @@ import styles from "./HeroSlide.module.scss";
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
 import Link from "next/link";
+import { ButtonModal } from "../ButtonModal/ButtonModal";
 
 type Props = {
   image: ImageType;
@@ -42,7 +43,8 @@ const HeroSlide: FC<Props> = ({
             </Link>
           )}
           {buttonLabel && (
-            <button className={styles.link}>{buttonLabel}</button>
+            // <button className={styles.link}>{buttonLabel}</button>
+            <ButtonModal>{buttonLabel}</ButtonModal>
           )}
         </div>
       </div>

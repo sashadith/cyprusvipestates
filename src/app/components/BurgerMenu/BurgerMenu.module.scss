@@ -19,7 +19,7 @@
 .bar {
   width: 15px;
   height: 2px;
-  background-color: #F39708; /* Цвет полос бургер-меню */
+  background-color: #c09d75; /* Цвет полос бургер-меню */
   transition: 0.4s; /* Анимация для перехода состояния полос */
 
   &:not(:last-child) {

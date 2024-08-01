@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 // import { ModalProvider } from "../context/ModalContext";
 import { Suspense } from "react";
+import { ModalProvider } from "../context/ModalContext";
 // import { FacebookPixelEvents } from "../components/pixel-events";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
@@ -22,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang={params.lang}>
       <body className={inter.className}>
-        {/* <ModalProvider> */}
-        {children}
-        {/* </ModalProvider> */}
+        <ModalProvider>{children}</ModalProvider>
         {/* <GoogleAnalytics gaId="G-XTMLVRC9RR" /> */}
         {/* <GoogleTagManager gtmId="G-XTMLVRC9RR" /> */}
         {/* <Suspense fallback={null}>

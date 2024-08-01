@@ -71,7 +71,7 @@
     right: 0;
     bottom: 0;
     z-index: 100;
-    background: #112546;
+    background: #c09d75;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -207,13 +207,29 @@
 }
 
 .navLink {
-  color: #fefefe;
+  color: #c09d75;
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 20px; /* 125% */
   letter-spacing: -0.8px;
   cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #c09d75;
+    transition: width 0.3s;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 
   @media screen and (max-width: 768px){
     color: #fff;
