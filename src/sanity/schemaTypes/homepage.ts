@@ -95,6 +95,33 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "brochureBlock",
+      title: "Brochure Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "string",
+        }),
+        defineField({
+          name: "buttonLabel",
+          title: "Button Label",
+          type: "string",
+        }),
+        defineField({
+          name: "image",
+          title: "Image",
+          type: "image",
+        }),
+      ],
+    }),
+    defineField({
       name: "homepageTitle",
       title: "Homepage Title",
       type: "string",

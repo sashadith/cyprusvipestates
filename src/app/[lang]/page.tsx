@@ -6,6 +6,7 @@ import { Translation } from "@/types/homepage";
 import Header from "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
 import ModalBrochure from "../components/ModalBrochure/ModalBrochure";
+import BrochureBlock from "../components/BrochureBlock/BrochureBlock";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -70,6 +71,7 @@ export default async function Home({ params }: Props) {
       <Header params={params} translations={translations} />
       <main>
         <Hero slides={homePage.sliderMain} />
+        <BrochureBlock brochure={homePage.brochureBlock} />
         <ModalBrochure lang={params.lang} />
       </main>
     </>

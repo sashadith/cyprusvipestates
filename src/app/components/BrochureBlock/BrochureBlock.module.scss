@@ -1,0 +1,65 @@
+.brochureBlock {
+  overflow-y: hidden;
+  margin-top: clamp(2.813rem, 1.563rem + 6.25vw, 6.25rem);
+  margin-bottom: clamp(2.813rem, 1.563rem + 6.25vw, 6.25rem);
+}
+
+.brochure {
+  background: #c09d75;
+  padding: clamp(1.25rem, 0.568rem + 3.41vw, 3.125rem);
+  height: 70lvh;
+  position: relative;
+
+  @media screen and (max-width: 768px) {
+    overflow: hidden;
+  }
+}
+
+.title {
+  font-size: clamp(1.563rem, 1.04rem + 2.61vw, 3rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: clamp(1.25rem, 1.023rem + 1.14vw, 1.875rem);
+  text-shadow: 1px 1px 25px #020102;
+
+  @media screen and (min-width: 768px) {
+    max-width: 800px;
+  }
+}
+
+.description {
+  font-size: clamp(1rem, 0.773rem + 1.14vw, 1.625rem);
+  line-height: 1.5;
+  color: #fff;
+  margin-bottom: clamp(1.25rem, -0.114rem + 6.82vw, 5rem);
+
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
+  }
+}
+
+.customButtonClass {
+  color: #fff;
+  border: 2px solid #fff;
+
+  &:hover {
+    background: #fff;
+    color: #333;
+  }
+}
+
+.imageBlock {
+  position: absolute;
+  bottom: clamp(1.25rem, 0.568rem + 3.41vw, 3.125rem);
+  left: 0;
+  // padding: clamp(1.25rem, 0.568rem + 3.41vw, 3.125rem);
+  transform: rotate(-15deg);
+
+  @media screen and (min-width: 768px) {
+    left: unset;
+    right: -30px;
+    bottom: -60px;
+    z-index: 100;
+  }
+}

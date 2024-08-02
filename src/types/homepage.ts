@@ -22,6 +22,15 @@ export type File = {
   url: string;
 };
 
+export type Brochure = {
+  _key: string;
+  _type: string;
+  title: string;
+  description: string;
+  buttonLabel: string;
+  image: Image;
+};
+
 export type Slide = {
   _key: string;
   _type: string;
@@ -42,6 +51,7 @@ export type Homepage = {
   seo: Seo;
   sliderMain: Slide[];
   homepageTitle: string;
+  brochureBlock: Brochure;
   language: string;
   slug: {
     [lang: string]: {
