@@ -165,6 +165,98 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "projectsBlock",
+      title: "Projects Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "project",
+          title: "Project",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "image",
+                  title: "Image",
+                  type: "image",
+                }),
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                }),
+                defineField({
+                  name: "description",
+                  title: "Description",
+                  type: "string",
+                }),
+                defineField({
+                  name: "city",
+                  title: "City",
+                  type: "string",
+                  options: {
+                    list: [
+                      { title: "Paphos", value: "Paphos" },
+                      { title: "Limassol", value: "Limassol" },
+                      { title: "Larnaca", value: "Larnaca" },
+                    ],
+                  },
+                }),
+                defineField({
+                  name: "propertyType",
+                  title: "Property Type",
+                  type: "string",
+                  options: {
+                    list: [
+                      { title: "Villa", value: "Villa" },
+                      { title: "Apartment", value: "Apartment" },
+                    ],
+                  },
+                }),
+                defineField({
+                  name: "adress",
+                  title: "Adress",
+                  type: "string",
+                }),
+                defineField({
+                  name: "flatsAmount",
+                  title: "Flats Amount",
+                  type: "string",
+                }),
+                defineField({
+                  name: "area",
+                  title: "Area",
+                  type: "string",
+                }),
+                defineField({
+                  name: "price",
+                  title: "Price",
+                  type: "string",
+                }),
+                defineField({
+                  name: "buttonLabel",
+                  title: "Button Label",
+                  type: "string",
+                }),
+                defineField({
+                  name: "buttonAltLabel",
+                  title: "Button Alternate Label",
+                  type: "string",
+                }),
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
     // optional
     defineField({
       name: "language",
