@@ -25,8 +25,8 @@ const Header = async ({ translations, params }: Props) => {
               <Image
                 alt="Cyprus VIP Estates Logo"
                 src={urlFor(data.logo).url()}
-                width={100}
-                height={100}
+                width={300}
+                height={300}
                 className={styles.logoImage}
               />
               <Image

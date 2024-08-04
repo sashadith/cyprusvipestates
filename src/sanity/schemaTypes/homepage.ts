@@ -126,6 +126,45 @@ export default defineType({
       title: "Homepage Title",
       type: "string",
     }),
+    defineField({
+      name: "aboutBlock",
+      title: "About Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "string",
+        }),
+        defineField({
+          name: "bullets",
+          title: "Bullets",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "image",
+                  title: "Image",
+                  type: "image",
+                }),
+                defineField({
+                  name: "description",
+                  title: "Description",
+                  type: "string",
+                }),
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
     // optional
     defineField({
       name: "language",

@@ -43,6 +43,21 @@ export type Slide = {
   buttonLabel?: string;
 };
 
+export type Bullet = {
+  _key: string;
+  _type: string;
+  image: Image;
+  text: string;
+};
+
+export type AboutBlock = {
+  _key: string;
+  _type: string;
+  title: string;
+  description: string;
+  bullets: Bullet[];
+};
+
 export type Homepage = {
   _type: "homepage";
   _id: string;
@@ -52,6 +67,7 @@ export type Homepage = {
   sliderMain: Slide[];
   homepageTitle: string;
   brochureBlock: Brochure;
+  aboutBlock: AboutBlock;
   language: string;
   slug: {
     [lang: string]: {
