@@ -7,6 +7,7 @@ import Header from "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
 import ModalBrochure from "../components/ModalBrochure/ModalBrochure";
 import BrochureBlock from "../components/BrochureBlock/BrochureBlock";
+import AboutBlock from "../components/AboutBlock/AboutBlock";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -72,6 +73,7 @@ export default async function Home({ params }: Props) {
       <main>
         <Hero slides={homePage.sliderMain} />
         <BrochureBlock brochure={homePage.brochureBlock} />
+        <AboutBlock aboutBlock={homePage.aboutBlock} />
         <ModalBrochure lang={params.lang} />
       </main>
     </>

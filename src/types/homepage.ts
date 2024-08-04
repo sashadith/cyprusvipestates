@@ -50,7 +50,7 @@ export type Bullet = {
   _key: string;
   _type: string;
   image: Image;
-  text: string;
+  description: string;
 };
 
 export type AboutBlock = {
