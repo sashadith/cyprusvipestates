@@ -1,0 +1,51 @@
+type ContactType = "Email" | "Phone" | "Link";
+
+type Image = {
+  _key: string;
+  _ref: string;
+  _type: string;
+  url: string;
+};
+
+export type Link = {
+  _key: string;
+  label: string;
+  link: string;
+};
+
+type socialLink = {
+  _key: string;
+  label: string;
+  link: string;
+  icon: Image;
+};
+
+export type paragraph = {
+  _key: string;
+  paragraph: string;
+};
+
+export type Contact = {
+  _key: string;
+  _type: string;
+  icon: Image;
+  label: string;
+  type: ContactType;
+};
+
+export type Footer = {
+  _type: "footer";
+  _id: string;
+  _rev: string;
+  logo: Image;
+  socialLinks: socialLink[];
+  companyTitle: string;
+  companyParagraphs: paragraph[];
+  vatNumber: string;
+  contactTitle: string;
+  contacts: Contact[];
+  newsletterTitle: string;
+  newsletterButtonLabel: string;
+  copyright: string;
+  policyLinks: Link[];
+};

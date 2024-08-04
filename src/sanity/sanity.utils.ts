@@ -55,3 +55,24 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
 
   return homepage;
 }
+
+export async function getFooterByLang(lang: string) {
+  const footerQuery = groq`*[_type == "footer" && language == $lang][0] {
+    _id,
+    logo,
+    socialLinks,
+    companyTitle,
+    companyParagraphs,
+    vatNumber,
+    contactTitle,
+    contacts,
+    newsletterTitle,
+    newsletterButtonLabel,
+    copyright,
+    policyLinks,
+  }`;
+
+  const footer = await client.fetch(footerQuery, { lang });
+
+  return footer;
+}

@@ -1,0 +1,49 @@
+.footer {
+  padding-top: clamp(2.813rem, 1.563rem + 6.25vw, 6.25rem);
+  padding-bottom: clamp(2.813rem, 1.563rem + 6.25vw, 6.25rem);
+  background-color: #000;
+  color: #fff;
+}
+
+.paragraph {
+  font-size: clamp(0.875rem, 0.83rem + 0.23vw, 1rem);
+  line-height: 120%;
+}
+
+.bottomWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.policyLinks {
+  display: flex;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-start;
+  }
+}
+
+.policyLink {
+  font-size: clamp(0.875rem, 0.83rem + 0.23vw, 1rem);
+  color: #fff;
+  text-decoration: none;
+
+  @media screen and (min-width: 768px) {
+    &::after {
+      content: '|';
+      margin: 0 20px;
+    }
+
+    &:last-child::after {
+      content: ''; // Убираем контент псевдоэлемента
+      margin: 0;   // Убираем отступы, если они не нужны
+    }
+  }
+}
