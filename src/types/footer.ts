@@ -13,14 +13,14 @@ export type Link = {
   link: string;
 };
 
-type socialLink = {
+export type SocialLink = {
   _key: string;
   label: string;
   link: string;
   icon: Image;
 };
 
-export type paragraph = {
+export type Paragraph = {
   _key: string;
   paragraph: string;
 };
@@ -38,9 +38,9 @@ export type Footer = {
   _id: string;
   _rev: string;
   logo: Image;
-  socialLinks: socialLink[];
+  socialLinks: SocialLink[];
   companyTitle: string;
-  companyParagraphs: paragraph[];
+  companyParagraphs: Paragraph[];
   vatNumber: string;
   contactTitle: string;
   contacts: Contact[];

@@ -5,9 +5,11 @@
   color: #fff;
 }
 
-.paragraph {
-  font-size: clamp(0.875rem, 0.83rem + 0.23vw, 1rem);
-  line-height: 120%;
+.footerDivider {
+  margin-top: clamp(1.25rem, 0.795rem + 2.27vw, 2.5rem);
+  margin-bottom: clamp(1.25rem, 0.795rem + 2.27vw, 2.5rem);
+  height: clamp(0.625rem, 0.398rem + 1.14vw, 1.25rem);
+  background-color: #c09d75;
 }
 
 .bottomWrapper {
@@ -45,5 +47,115 @@
       content: ''; // Убираем контент псевдоэлемента
       margin: 0;   // Убираем отступы, если они не нужны
     }
+  }
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 0.341rem + 4.55vw, 3.75rem);
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 980px) {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+}
+
+.logoLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  @media screen and (min-width: 768px) {
+    justify-content: space-between;
+  }
+}
+
+.title {
+  font-size: clamp(1.125rem, 1.034rem + 0.45vw, 1.375rem);
+  font-weight: 500;
+  margin-bottom: 60px;
+  position: relative;
+  width: fit-content;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #c09d75;
+  }
+}
+
+.companyBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.paragraphs {
+  margin-bottom: clamp(1.25rem, 0.341rem + 4.55vw, 3.75rem);
+}
+
+.paragraph {
+  font-size: clamp(0.875rem, 0.83rem + 0.23vw, 1rem);
+  line-height: 120%;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contactLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.newsLetterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsLetterInput {
+  padding: 10px;
+  border: 1px solid #c09d75;
+  background-color: transparent;
+  color: #fff;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.newsLetterButton {
+  padding: 10px;
+  background-color: #c09d75;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #a97b4d;
   }
 }
