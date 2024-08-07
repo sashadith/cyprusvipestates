@@ -1,5 +1,5 @@
-type City = "Paphos" | "Limassol" | "Larnaca";
-type PropertyType = "Apartment" | "Villa";
+export type City = "Paphos" | "Limassol" | "Larnaca";
+export type PropertyType = "Apartment" | "Villa";
 
 export type Translation = {
   path: string;

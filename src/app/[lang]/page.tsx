@@ -9,6 +9,7 @@ import ModalBrochure from "../components/ModalBrochure/ModalBrochure";
 import BrochureBlock from "../components/BrochureBlock/BrochureBlock";
 import AboutBlock from "../components/AboutBlock/AboutBlock";
 import Footer from "../components/Footer/Footer";
+import ProjectsBlock from "../components/ProjectsBlock/ProjectsBlock";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -29,7 +30,8 @@ export default async function Home({ params }: Props) {
   // const formDocument: FormStandardDocument =
   //   await getFormStandardDocumentByLang(params.lang);
 
-  // console.log("homePage", homePage);
+  // console.log("homePage", homePage.projectsBlock.projects);
+  // console.log("projectsBlock", homePage?.projectsBlock);
 
   const homePageTranslationSlugs: { [key: string]: { current: string } }[] =
     homePage?._translations.map((item) => {
@@ -75,6 +77,7 @@ export default async function Home({ params }: Props) {
         <Hero slides={homePage.sliderMain} />
         <BrochureBlock brochure={homePage.brochureBlock} />
         <AboutBlock aboutBlock={homePage.aboutBlock} />
+        {/* <ProjectsBlock projectsBlock={homePage.projectsBlock} /> */}
         <Footer params={params} />
         <ModalBrochure lang={params.lang} />
       </main>

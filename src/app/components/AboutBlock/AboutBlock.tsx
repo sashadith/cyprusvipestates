@@ -14,7 +14,7 @@ const AboutBlock: FC<Props> = ({ aboutBlock }) => {
   // console.log("bullets", bullets);
 
   return (
-    <section className={styles.aboutBlock}>
+    <section className={styles.aboutBlock} id="about">
       <div className="container">
         <h2 className="h2">{title}</h2>
         <div className={styles.descriptionBlock}>

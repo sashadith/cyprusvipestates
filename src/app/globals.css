@@ -36,8 +36,36 @@ body {
   }
 }
 
+.container-short {
+  max-width: 1240px;
+  padding: 0 10px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1240px) {
+    max-width: 1140px;
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 0 20px;
+  }
+}
+
 .h2 {
   color: #000;
+  font-size: clamp(2rem, 2.5vw, 3.75rem);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+}
+
+.h2-white {
+  color: #fff;
   font-size: clamp(2rem, 2.5vw, 3.75rem);
   font-style: normal;
   font-weight: 500;

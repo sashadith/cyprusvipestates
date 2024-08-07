@@ -7,10 +7,6 @@
   padding-top: 20px;
   padding-bottom: 20px;
   background: linear-gradient(to bottom, rgba(2, 1, 2, .45) 0, rgba(2, 1, 2, .05) 100%);
-  background: rgba(2, 1, 2, 0.3); /* Полупрозрачный фон */
-  backdrop-filter: blur(3px); /* Размытие заднего фона */
-  -webkit-backdrop-filter: blur(3px); /* Для поддержки в Safari */
-  // border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Линия внизу для четкости */
 }
 
 .wrapper {
@@ -211,7 +207,7 @@
 
 .navLink {
   color: #c09d75;
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 300;
   line-height: 20px; /* 125% */

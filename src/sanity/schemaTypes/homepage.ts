@@ -176,8 +176,8 @@ export default defineType({
           type: "string",
         }),
         defineField({
-          name: "project",
-          title: "Project",
+          name: "projects",
+          title: "Projects",
           type: "array",
           of: [
             {

@@ -2,7 +2,7 @@
 import styles from "./SliderMain.module.scss";
 import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
@@ -48,8 +48,12 @@ const SliderMain = ({ children }: any) => {
     <div className={styles.sliderMain}>
       <div className={styles.sliderSlides}>
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           // spaceBetween={15}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: true,
+          }}
           slidesPerView={1}
           navigation={{
             nextEl: `.swiper-main-next`,

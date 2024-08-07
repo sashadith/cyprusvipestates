@@ -13,7 +13,7 @@ const BrochureBlock: FC<Props> = ({ brochure }) => {
   const { title, description, buttonLabel, image } = brochure;
 
   return (
-    <section className={styles.brochureBlock}>
+    <section className={styles.brochureBlock} id="brochure">
       <div className="container">
         <div className={styles.brochure}>
           <div className={styles.content}>

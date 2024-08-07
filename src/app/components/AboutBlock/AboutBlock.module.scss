@@ -5,15 +5,16 @@
 }
 
 .descriptionBlock {
-  padding-left: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-left: clamp(1.25rem, 0.568rem + 3.41vw, 3.125rem);
+  padding-top: clamp(0.625rem, 0.398rem + 1.14vw, 1.25rem);
+  padding-bottom: clamp(0.625rem, 0.398rem + 1.14vw, 1.25rem);
   border-left: 3px solid #c2925b;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
 }
 
 .description {
-  font-size: clamp(1rem, 0.955rem + 0.23vw, 1.125rem);
+  font-size: clamp(0.875rem, 0.83rem + 0.23vw, 1rem);
+  font-weight: 300;
   line-height: 150%;
 }
 
