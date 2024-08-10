@@ -56,7 +56,7 @@ const Footer = async ({ params }: Props) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.top}>
-        <div className="container-short">
+        <div className="container">
           <div className={styles.footerGrid}>
             <div className={styles.logoLinks}>
               <div className={styles.logoBlock}>
@@ -134,7 +134,7 @@ const Footer = async ({ params }: Props) => {
       </div>
       <div className={styles.footerDivider}></div>
       <div className={styles.bottom}>
-        <div className="container-short">
+        <div className="container">
           <div className={styles.bottomWrapper}>
             <div className={styles.bottomLeft}>
               <p className={styles.paragraph}>{copyright}</p>
