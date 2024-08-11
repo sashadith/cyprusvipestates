@@ -20,7 +20,7 @@ export default defineConfig({
     visionTool(),
     documentInternationalization({
       supportedLanguages: i18n.languages,
-      schemaTypes: ["homepage", "header", "footer"],
+      schemaTypes: ["homepage", "header", "footer", "formStandardDocument"],
     }),
   ],
 
@@ -29,7 +29,10 @@ export default defineConfig({
     // Filter out the default template for new type documents
     templates: (prev) =>
       prev.filter(
-        (template) => !["homepage", "header", "footer"].includes(template.id)
+        (template) =>
+          !["homepage", "header", "footer", "formStandardDocument"].includes(
+            template.id
+          )
       ),
   },
 });

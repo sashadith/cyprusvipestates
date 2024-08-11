@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { getHomePageByLang } from "../../sanity/sanity.utils";
+import {
+  getFormStandardDocumentByLang,
+  getHomePageByLang,
+} from "../../sanity/sanity.utils";
 import { i18n } from "@/i18n.config";
 import { Translation } from "@/types/homepage";
 import Header from "../components/Header/Header";
@@ -11,6 +14,7 @@ import AboutBlock from "../components/AboutBlock/AboutBlock";
 import Footer from "../components/Footer/Footer";
 import ProjectsBlock from "../components/ProjectsBlock/ProjectsBlock";
 import HeaderWrapper from "../components/HeaderWrapper/HeaderWrapper";
+import { FormStandardDocument } from "@/types/formStandardDocument";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -28,11 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Home({ params }: Props) {
   const homePage = await getHomePageByLang(params.lang);
 
-  // const formDocument: FormStandardDocument =
-  //   await getFormStandardDocumentByLang(params.lang);
+  const formDocument: FormStandardDocument =
+    await getFormStandardDocumentByLang(params.lang);
 
-  // console.log("homePage", homePage.projectsBlock.projects);
-  // console.log("projectsBlock", homePage?.projectsBlock);
+  // console.log("homePage", homePage);
+  // console.log("formDocument", formDocument);
 
   const homePageTranslationSlugs: { [key: string]: { current: string } }[] =
     homePage?._translations.map((item) => {
@@ -82,7 +86,7 @@ export default async function Home({ params }: Props) {
         <AboutBlock aboutBlock={homePage.aboutBlock} />
         {/* <ProjectsBlock projectsBlock={homePage.projectsBlock} /> */}
         <Footer params={params} />
-        <ModalBrochure lang={params.lang} />
+        <ModalBrochure lang={params.lang} formDocument={formDocument} />
       </main>
     </>
   );

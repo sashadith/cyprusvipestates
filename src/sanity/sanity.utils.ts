@@ -2,6 +2,7 @@ import { groq } from "next-sanity";
 import { client } from "./sanity.client";
 import { Homepage } from "@/types/homepage";
 import { Header } from "@/types/header";
+import { FormStandardDocument } from "@/types/formStandardDocument";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -75,4 +76,20 @@ export async function getFooterByLang(lang: string) {
   const footer = await client.fetch(footerQuery, { lang });
 
   return footer;
+}
+
+export async function getFormStandardDocumentByLang(
+  lang: string
+): Promise<FormStandardDocument> {
+  const formStandardDocumentQuery = groq`*[_type == "formStandardDocument" && language == $lang][0] {
+  _id,
+  form,
+  language
+  }`;
+
+  const formStandardDocument = await client.fetch(formStandardDocumentQuery, {
+    lang,
+  });
+
+  return formStandardDocument;
 }

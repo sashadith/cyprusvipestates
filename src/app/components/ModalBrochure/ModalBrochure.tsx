@@ -4,8 +4,8 @@ import Modal from "react-modal";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./ModalBrochure.module.scss";
 import { useModal } from "@/app/context/ModalContext";
-// import { FormStandardDocument } from "@/types/formStandardDocument";
-// import FormStandard from "../FormStandard/FormStandard";
+import { FormStandardDocument } from "@/types/formStandardDocument";
+import FormStandard from "../FormStandard/FormStandard";
 
 const customStyles: ReactModal.Styles = {
   overlay: {
@@ -14,7 +14,7 @@ const customStyles: ReactModal.Styles = {
   },
   content: {
     position: "absolute",
-    backgroundColor: "rgba(20, 50, 88, 0.7)",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     padding: "20px",
     width: "100%",
     height: "100%",
@@ -28,10 +28,10 @@ const customStyles: ReactModal.Styles = {
 
 type Props = {
   lang: string;
-  // formDocument: FormStandardDocument;
+  formDocument: FormStandardDocument;
 };
 
-const ModalBrochure = ({ lang }: Props) => {
+const ModalBrochure = ({ lang, formDocument }: Props) => {
   const { isModalOpen, closeModal } = useModal(); // Используйте хук useModal для управления состоянием модального окна
 
   useEffect(() => {
@@ -61,6 +61,7 @@ const ModalBrochure = ({ lang }: Props) => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.3 }}
+          style={{ width: "100%" }}
         >
           <div className={styles.popupContent}>
             <div className={styles.popupContentWrapper}>
@@ -69,17 +70,26 @@ const ModalBrochure = ({ lang }: Props) => {
                   <h3 className={styles.modalTitle}>
                     {lang === "ru"
                       ? "Укажите контакты для связи"
-                      : "Please provide your contact details"}
+                      : lang === "de"
+                        ? "Bitte geben Sie Ihre Kontaktdaten an"
+                        : lang === "pl"
+                          ? "Proszę podać swoje dane kontaktowe"
+                          : "Please provide your contact details"}
                   </h3>
                   <p className={styles.modalText}>
                     {lang === "ru"
                       ? "Свяжемся с вами как можно скорее"
-                      : "We will contact you as soon as possible"}
+                      : lang === "de"
+                        ? "Wir werden Sie so schnell wie möglich kontaktieren"
+                        : lang === "pl"
+                          ? "Skontaktujemy się z Tobą jak najszybciej"
+                          : "We will contact you as soon as possible"}
                   </p>
                 </div>
-                {/* <div className={styles.formInner}>
+
+                <div className={styles.formInner}>
                   <FormStandard form={formDocument} />
-                </div> */}
+                </div>
               </div>
               <button className={styles.closeButton} onClick={closeModal}>
                 <svg

@@ -55,6 +55,64 @@ body {
   }
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
+/* styles for the flag */
+.PhoneInputInput {
+  height: 100%;
+  background-color: #f5f5f5;
+  padding: 3px 0;
+}
+
+.PhoneInputInput:focus {
+  outline: none;
+}
+
+.PhoneInputCountry {
+  left: -5px;
+
+  @media screen and (min-width: 768px) {
+    left: -20px;
+  }
+}
+
+.PhoneInputCountrySelectArrow {
+  display: none !important;
+}
+
+.PhoneInputInternationalIconPhone {
+  stroke: #c09d75; /* Цвет линии */
+  fill: #c09d75; /* Цвет заливки */
+  stroke-width: 3px; /* Толщина линии */
+  width: 32px; /* Ширина значка */
+  height: 32px; /* Высота значка */
+}
+
+.PhoneInputInternationalIconGlobe {
+  stroke: #c09d75; /* Цвет линии */
+  stroke-width: 3px; /* Толщина линии */
+  width: 32px; /* Ширина значка */
+  height: 32px; /* Высота значка */
+}
+
+.PhoneInputCountryIcon {
+  margin-right: 8px; /* Отступ справа */
+}
+
+.PhoneInputInput {
+  width: 100% !important;
+  box-sizing: border-box;
+  font-size: transparent;
+}
+
+
+.grayscale-flag img {
+  filter: grayscale(100%);
+}
+/* styles for the flag */
+
 .h2 {
   color: #000;
   font-size: clamp(2rem, 2.5vw, 3.75rem);
