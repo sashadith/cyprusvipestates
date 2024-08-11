@@ -7,6 +7,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   background: linear-gradient(to bottom, rgba(2, 1, 2, .45) 0, rgba(2, 1, 2, .05) 100%);
+  transition: background-color 0.3s;
 }
 
 .wrapper {
@@ -70,7 +71,7 @@
     right: 0;
     bottom: 0;
     z-index: 100;
-    background: #c09d75;
+    background: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -214,6 +215,7 @@
   letter-spacing: -0.8px;
   cursor: pointer;
   position: relative;
+  text-transform: uppercase;
 
   &::after {
     content: '';
@@ -233,4 +235,9 @@
   @media screen and (max-width: 768px){
     color: #fff;
   }
+}
+
+.scrolled .header {
+  background: #fff;
+  transition: background-color 0.3s ease;
 }

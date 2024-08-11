@@ -25,11 +25,11 @@
 
 .policyLinks {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 
-  @media screen and (min-width: 768px) {
-    justify-content: flex-start;
-  }
+  // @media screen and (min-width: 768px) {
+  //   justify-content: flex-start;
+  // }
 }
 
 .policyLink {
@@ -37,7 +37,7 @@
   color: #fff;
   text-decoration: none;
 
-  @media screen and (min-width: 768px) {
+  // @media screen and (min-width: 768px) {
     &::after {
       content: '|';
       margin: 0 20px;
@@ -47,7 +47,7 @@
       content: ''; // Убираем контент псевдоэлемента
       margin: 0;   // Убираем отступы, если они не нужны
     }
-  }
+  // }
 }
 
 .footerGrid {
@@ -72,11 +72,12 @@
 
 .socialLinks {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   gap: 10px;
 
   @media screen and (min-width: 768px) {
     justify-content: space-between;
+    justify-content: center;
   }
 }
 
@@ -101,11 +102,11 @@
 .companyBlock {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 
 .paragraphs {
-  margin-bottom: clamp(1.25rem, 0.341rem + 4.55vw, 3.75rem);
+  margin-bottom: 20px;
 }
 
 .paragraph {

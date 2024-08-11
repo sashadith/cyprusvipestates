@@ -10,6 +10,7 @@ import BrochureBlock from "../components/BrochureBlock/BrochureBlock";
 import AboutBlock from "../components/AboutBlock/AboutBlock";
 import Footer from "../components/Footer/Footer";
 import ProjectsBlock from "../components/ProjectsBlock/ProjectsBlock";
+import HeaderWrapper from "../components/HeaderWrapper/HeaderWrapper";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -72,7 +73,9 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      <Header params={params} translations={translations} />
+      <HeaderWrapper>
+        <Header params={params} translations={translations} />
+      </HeaderWrapper>
       <main>
         <Hero slides={homePage.sliderMain} />
         <BrochureBlock brochure={homePage.brochureBlock} />
