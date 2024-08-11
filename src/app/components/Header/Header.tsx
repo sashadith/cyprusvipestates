@@ -30,7 +30,7 @@ const Header = async ({ translations, params }: Props) => {
                 className={styles.logoImage}
               />
               <Image
-                alt="Academgo Logo"
+                alt="Cyprus VIP Estates Logo"
                 src={urlFor(data.logoMobile).url()}
                 width={40}
                 height={40}
