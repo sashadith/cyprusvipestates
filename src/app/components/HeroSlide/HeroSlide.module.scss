@@ -57,7 +57,8 @@
 }
 
 .description {
-  font-size: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+  font-size: clamp(0.875rem, 0.83rem + 0.23vw, 1rem);
+  letter-spacing: .4px;
   margin-bottom: 1.25rem;
   text-shadow: 1px 1px 25px #020102;
 }
