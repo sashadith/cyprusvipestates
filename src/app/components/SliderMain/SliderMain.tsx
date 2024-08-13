@@ -51,7 +51,7 @@ const SliderMain = ({ children }: any) => {
           modules={[Navigation, Autoplay]}
           // spaceBetween={15}
           autoplay={{
-            delay: 4000,
+            delay: 6000,
             disableOnInteraction: true,
           }}
           slidesPerView={1}
