@@ -52,6 +52,7 @@
 
 .title {
   font-size: clamp(2rem, 2.5vw, 3.75rem);
+  line-height: 120%;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
   text-shadow: 1px 1px 25px #020102;
 }
@@ -59,8 +60,9 @@
 .description {
   font-size: clamp(0.875rem, 0.83rem + 0.23vw, 1rem);
   letter-spacing: .4px;
-  margin-bottom: 1.25rem;
+  margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
   text-shadow: 1px 1px 25px #020102;
+  max-width: 500px;
 }
 
 .link {
