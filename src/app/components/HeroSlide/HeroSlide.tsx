@@ -32,8 +32,9 @@ const HeroSlide: FC<Props> = ({
         fill={true}
         className={styles.imagePoster}
       />
-      {/* <div className={styles.overlay}></div> */}
+      <div className={styles.overlayWide}></div>
       <div className={styles.content}>
+        <div className={styles.overlay}></div>
         <div className={styles.contentWrapper}>
           <h2 className={styles.title}>{title}</h2>
           <p className={styles.description}>{description}</p>

@@ -18,14 +18,6 @@
   }
 }
 
-.overlay {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-}
-
 .content {
   position: absolute;
   top: 50%;
@@ -49,6 +41,35 @@
     left: 20%;
   }
 }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: -10px;
+  bottom: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.overlayWide {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: -10px;
+  bottom: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+// .contentWrapper {
+//   position: relative;
+//   max-width: 550px;
+// }
 
 .title {
   font-size: clamp(2rem, 2.5vw, 3.75rem);
