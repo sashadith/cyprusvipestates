@@ -46,12 +46,12 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
 
   const homepage = await client.fetch(
     homepageQuery,
-    { lang }
-    // {
-    //   next: {
-    //     revalidate: 60,
-    //   },
-    // }
+    { lang },
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
   );
 
   return homepage;
