@@ -1,6 +1,7 @@
 .footer {
   padding-top: clamp(2.813rem, 1.563rem + 6.25vw, 6.25rem);
-  padding-bottom: clamp(2.813rem, 1.563rem + 6.25vw, 6.25rem);
+  // padding-bottom: clamp(2.813rem, 1.563rem + 6.25vw, 6.25rem);
+  padding-bottom: clamp(1.25rem, 0.795rem + 2.27vw, 2.5rem);
   background-color: #000;
   color: #fff;
 }
@@ -137,6 +138,7 @@
 .contactLabel {
   font-size: 16px;
   font-weight: 300;
+  letter-spacing: .4px;
 }
 
 .newsLetterForm {
