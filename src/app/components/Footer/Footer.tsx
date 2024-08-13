@@ -63,8 +63,8 @@ const Footer = async ({ params }: Props) => {
                 <Image
                   alt="Cyprys VIP Estates"
                   src={urlFor(logo).url()}
-                  width={350}
-                  height={350}
+                  width={400}
+                  height={400}
                   className={styles.image}
                 />
               </div>
