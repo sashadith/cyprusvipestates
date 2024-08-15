@@ -2,9 +2,10 @@
 import styles from "./SliderMain.module.scss";
 import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 const SliderMain = ({ children }: any) => {
@@ -48,7 +49,7 @@ const SliderMain = ({ children }: any) => {
     <div className={styles.sliderMain}>
       <div className={styles.sliderSlides}>
         <Swiper
-          modules={[Navigation, Autoplay]}
+          modules={[Navigation, Autoplay, Pagination]}
           // spaceBetween={15}
           autoplay={{
             delay: 6000,
@@ -59,16 +60,11 @@ const SliderMain = ({ children }: any) => {
             nextEl: `.swiper-main-next`,
             prevEl: `.swiper-main-prev`,
           }}
+          grabCursor={true}
           pagination={{
             clickable: true,
             el: `.swiper-pagination`,
           }}
-          // breakpoints={{
-          //   640: { spaceBetween: 20 },
-          //   768: { spaceBetween: 30 },
-          //   980: { spaceBetween: 30 },
-          //   1024: { spaceBetween: 30 },
-          // }}
         >
           {children.map((child: any, index: number) => (
             <SwiperSlide key={index}>
@@ -84,7 +80,7 @@ const SliderMain = ({ children }: any) => {
         </Swiper>
       </div>
       <div className={styles.sliderButtons}>
-        <div className={styles.navigation}>
+        {/* <div className={styles.navigation}>
           <button
             className={`swiper-main-prev ${styles.swiperMainPrev} ${styles.swiperButton}`}
           >
@@ -103,7 +99,7 @@ const SliderMain = ({ children }: any) => {
               className={`${styles.arrow} ${styles.arrowRight}`}
             />
           </button>
-        </div>
+        </div> */}
         <div className={styles.pagination}>
           <div className={`swiper-pagination`}>
             <span className="swiper-pagination-bullet"></span>

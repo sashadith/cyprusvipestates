@@ -130,3 +130,20 @@ body {
   line-height: 120%;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
 }
+
+.swiper-pagination-bullet {
+  background-color: #fff !important;
+  width: 12px !important;
+  height: 12px !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+
+  &.swiper-pagination-bullet-active {
+    background-color: #c09d75 !important;
+    opacity: 1;
+    width: 50px !important;
+    height: 12px !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease !important;
+  }
+}

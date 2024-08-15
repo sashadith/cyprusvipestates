@@ -27,14 +27,15 @@
   display: flex;
   flex-direction: column;
   color: white;
-  padding-left: 50px;
+  padding-inline: clamp(1.25rem, 0.568rem + 3.41vw, 3.125rem);
   padding-top: 20px;
   padding-bottom: 20px;
   border-left: 3px solid #c09d75;
-  max-width: 800px;
+  max-width: 90%;
 
   @media screen and (min-width: 768px) {
     left: 10%;
+    max-width: 800px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -45,7 +46,7 @@
 .overlay {
   position: absolute;
   top: 0;
-  left: 30px;
+  left: clamp(0.313rem, -0.256rem + 2.84vw, 1.875rem);
   right: -10px;
   bottom: 0;
   z-index: -1;
