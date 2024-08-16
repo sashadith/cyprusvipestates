@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --corp-color: #c09d75;
+  --corp-color: #aa7f2e;
   --corp-color-dark: #8b6f4e;
   --corp-color-light: #e0c8a7;
   --black-color: #000000;
@@ -83,15 +83,15 @@ body {
 }
 
 .PhoneInputInternationalIconPhone {
-  stroke: #c09d75; /* Цвет линии */
-  fill: #c09d75; /* Цвет заливки */
+  stroke: #aa7f2e; /* Цвет линии */
+  fill: #aa7f2e; /* Цвет заливки */
   stroke-width: 3px; /* Толщина линии */
   width: 32px; /* Ширина значка */
   height: 32px; /* Высота значка */
 }
 
 .PhoneInputInternationalIconGlobe {
-  stroke: #c09d75; /* Цвет линии */
+  stroke: #aa7f2e; /* Цвет линии */
   stroke-width: 3px; /* Толщина линии */
   width: 32px; /* Ширина значка */
   height: 32px; /* Высота значка */
@@ -135,11 +135,11 @@ body {
   background-color: #fff !important;
   width: 12px !important;
   height: 12px !important;
-  opacity: 1 !important;
+  opacity: 0.8 !important;
   transition: all 0.3s ease !important;
 
   &.swiper-pagination-bullet-active {
-    background-color: #c09d75 !important;
+    background-color: #aa7f2e !important;
     opacity: 1;
     width: 50px !important;
     height: 12px !important;

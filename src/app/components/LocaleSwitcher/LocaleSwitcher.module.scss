@@ -14,7 +14,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: #c09d75;
+  background-color: #aa7f2e;
   border-radius: 50%;
   cursor: pointer;
 
@@ -60,14 +60,14 @@
 .localeSwitcherLink {
   display: block;
   padding: 10px 15px;
-  color: #c09d75;
+  color: #aa7f2e;
   text-transform: uppercase;
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s;
 
   &:hover {
-    background-color: #c09d75;
+    background-color: #aa7f2e;
     color: #fff;
   }
 
