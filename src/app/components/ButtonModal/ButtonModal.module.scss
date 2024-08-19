@@ -1,16 +1,16 @@
 .buttonModal {
   display: inline-block;
   padding: 0.625rem 1.25rem;
-  background: #aa7f2e;
+  background: transparent;
   border: 2px solid #aa7f2e;
   color: #fff;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
   // text-transform: uppercase;
   transition: background 0.3s, color 0.3s;
 
   &:hover {
-    background: transparent;
+    background: #aa7f2e;
     color: #fff;
   }
 }
