@@ -18,6 +18,12 @@ export type Image = {
   url: string;
 };
 
+export type ListItem = {
+  _key: string;
+  _type: string;
+  listItem: string;
+};
+
 export type File = {
   _key: string;
   _ref: string;
@@ -28,8 +34,11 @@ export type File = {
 export type Brochure = {
   _key: string;
   _type: string;
+  logo: Image;
   title: string;
+  subtitle: string;
   description: string;
+  list: ListItem[];
   buttonLabel: string;
   image: Image;
 };

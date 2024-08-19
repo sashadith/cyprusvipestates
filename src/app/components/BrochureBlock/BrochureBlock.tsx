@@ -9,16 +9,47 @@ type Props = {
   brochure: Brochure;
 };
 
+import checkMark from "../../../../public/checkmark.png";
+
 const BrochureBlock: FC<Props> = ({ brochure }) => {
-  const { title, description, buttonLabel, image } = brochure;
+  const { logo, title, subtitle, description, list, buttonLabel, image } =
+    brochure;
 
   return (
     <section className={styles.brochureBlock} id="brochure">
       <div className="container">
         <div className={styles.brochure}>
           <div className={styles.content}>
-            <div className={styles.title}>{title}</div>
+            <div className={styles.contentStart}>
+              <div className={styles.startImage}>
+                <Image
+                  alt={title}
+                  src={urlFor(logo).url()}
+                  width={80}
+                  height={80}
+                  className={styles.logo}
+                />
+              </div>
+              <div className={styles.startText}>
+                <div className={styles.title}>{title}</div>
+                <div className={styles.subtitle}>{subtitle}</div>
+              </div>
+            </div>
             <div className={styles.description}>{description}</div>
+            <ul className={styles.list}>
+              {list.map((item, index) => (
+                <li key={index} className={styles.listItem}>
+                  <Image
+                    alt="checkmark"
+                    src={checkMark}
+                    width={20}
+                    height={20}
+                    className={styles.checkMark}
+                  />
+                  {item.listItem}
+                </li>
+              ))}
+            </ul>
             <ButtonModal className={styles.customButtonClass}>
               {buttonLabel}
             </ButtonModal>
@@ -27,8 +58,8 @@ const BrochureBlock: FC<Props> = ({ brochure }) => {
             <Image
               alt={title}
               src={urlFor(image).url()}
-              width={750}
-              height={500}
+              width={1000}
+              height={700}
               className={styles.image}
             />
           </div>

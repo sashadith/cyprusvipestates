@@ -100,14 +100,41 @@ export default defineType({
       type: "object",
       fields: [
         defineField({
+          name: "logo",
+          title: "Logo",
+          type: "image",
+        }),
+        defineField({
           name: "title",
           title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "subtitle",
+          title: "Subtitle",
           type: "string",
         }),
         defineField({
           name: "description",
           title: "Description",
           type: "string",
+        }),
+        defineField({
+          name: "list",
+          title: "List",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "listItem",
+                  title: "List Item",
+                  type: "string",
+                }),
+              ],
+            },
+          ],
         }),
         defineField({
           name: "buttonLabel",
