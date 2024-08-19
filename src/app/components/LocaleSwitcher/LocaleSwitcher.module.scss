@@ -68,9 +68,11 @@
 .localeSwitcherLink {
   display: block;
   padding: 8px 10px;
-  color: #aa7f2e;
+  color: #000;
   text-transform: uppercase;
-  font-weight: 600;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s;
 
