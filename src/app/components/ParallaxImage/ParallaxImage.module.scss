@@ -1,0 +1,9 @@
+.parallaxWrapper {
+  position: relative;
+  height: 30vh; /* Высота блока равна высоте видимого окна браузера */
+  overflow: hidden;
+  background-size: cover; /* Масштабирует изображение, чтобы оно заполнило весь контейнер */
+  background-attachment: fixed; /* Фиксирует изображение для создания параллакса */
+  background-position: center; /* Центрирует изображение */
+  background-repeat: no-repeat; /* Отключает повторение изображения */
+}

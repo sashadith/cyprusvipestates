@@ -284,6 +284,11 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "parallaxImage",
+      title: "Parallax Image",
+      type: "image",
+    }),
     // optional
     defineField({
       name: "language",

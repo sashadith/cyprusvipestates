@@ -15,6 +15,7 @@ import Footer from "../components/Footer/Footer";
 import ProjectsBlock from "../components/ProjectsBlock/ProjectsBlock";
 import HeaderWrapper from "../components/HeaderWrapper/HeaderWrapper";
 import { FormStandardDocument } from "@/types/formStandardDocument";
+import ParallaxImage from "../components/ParallaxImage/ParallaxImage";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -84,6 +85,7 @@ export default async function Home({ params }: Props) {
         <Hero slides={homePage.sliderMain} />
         <BrochureBlock brochure={homePage.brochureBlock} />
         <AboutBlock aboutBlock={homePage.aboutBlock} />
+        <ParallaxImage image={homePage.parallaxImage} />
         {/* <ProjectsBlock projectsBlock={homePage.projectsBlock} /> */}
         <Footer params={params} />
         <ModalBrochure lang={params.lang} formDocument={formDocument} />

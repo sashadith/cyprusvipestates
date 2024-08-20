@@ -104,6 +104,7 @@ export type Homepage = {
   brochureBlock: Brochure;
   aboutBlock: AboutBlock;
   projectsBlock: ProjectsBlock;
+  parallaxImage: Image;
   language: string;
   slug: {
     [lang: string]: {
