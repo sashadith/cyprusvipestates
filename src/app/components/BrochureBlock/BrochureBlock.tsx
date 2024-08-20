@@ -54,15 +54,17 @@ const BrochureBlock: FC<Props> = ({ brochure }) => {
               {buttonLabel}
             </ButtonModal>
           </div>
-          <div className={styles.imageBlock}>
-            <Image
-              alt={title}
-              src={urlFor(image).url()}
-              width={1000}
-              height={700}
-              className={styles.image}
-            />
-          </div>
+          {image && (
+            <div className={styles.imageBlock}>
+              <Image
+                alt={title}
+                src={urlFor(image).url()}
+                width={1000}
+                height={700}
+                className={styles.image}
+              />
+            </div>
+          )}
         </div>
       </div>
     </section>
