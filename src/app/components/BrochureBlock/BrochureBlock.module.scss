@@ -60,7 +60,7 @@
 
 .subtitle {
   color: #aa7f2e;
-  font-size: clamp(1.25rem, 1.159rem + 0.45vw, 1.5rem);
+  font-size: clamp(1.125rem, 1.08rem + 0.23vw, 1.25rem);
   line-height: 1.2;
   font-weight: 300;
   letter-spacing: 0.4;
@@ -69,6 +69,7 @@
 .description {
   font-size: 16px;
   line-height: 1.5;
+  letter-spacing: 0.4px;
   color: #fff;
 
   @media screen and (min-width: 768px) {
