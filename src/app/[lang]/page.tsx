@@ -86,7 +86,6 @@ export default async function Home({ params }: Props) {
         <BrochureBlock brochure={homePage.brochureBlock} />
         <AboutBlock aboutBlock={homePage.aboutBlock} />
         <ParallaxImage image={homePage.parallaxImage} />
-        {/* <ProjectsBlock projectsBlock={homePage.projectsBlock} /> */}
         <Footer params={params} />
         <ModalBrochure lang={params.lang} formDocument={formDocument} />
       </main>
