@@ -25,8 +25,8 @@ const BrochureBlock: FC<Props> = ({ brochure }) => {
                 <Image
                   alt={title}
                   src={urlFor(logo).url()}
-                  width={80}
-                  height={80}
+                  width={70}
+                  height={70}
                   className={styles.logo}
                 />
               </div>
