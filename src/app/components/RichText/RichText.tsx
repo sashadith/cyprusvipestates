@@ -28,7 +28,7 @@ export const RichText = {
         <div className={styles.blogImage}>
           <Image
             src={urlFor(value).url()}
-            alt={alt || "Academgo image"}
+            alt={alt || "Cyprus VIP Estates image"}
             fill={true}
           />
         </div>
