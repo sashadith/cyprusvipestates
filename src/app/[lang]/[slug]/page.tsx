@@ -136,7 +136,9 @@ const SinglePage = async ({ params }: Props) => {
     <>
       <Header params={params} translations={translations} />
       <main>
-        <PreviewMain previewImage={page.previewImage} title={page.title} />
+        {page.previewImage && (
+          <PreviewMain previewImage={page.previewImage} title={page.title} />
+        )}
         <div className="container">
           <SinglePageIntroBlock title={page.title} />
           {page.contentBlocks.map((block) => renderContentBlock(block))}
