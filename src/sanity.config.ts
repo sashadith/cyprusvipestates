@@ -20,7 +20,13 @@ export default defineConfig({
     visionTool(),
     documentInternationalization({
       supportedLanguages: i18n.languages,
-      schemaTypes: ["homepage", "header", "footer", "formStandardDocument"],
+      schemaTypes: [
+        "homepage",
+        "header",
+        "footer",
+        "formStandardDocument",
+        "singlepage",
+      ],
     }),
   ],
 
@@ -30,9 +36,13 @@ export default defineConfig({
     templates: (prev) =>
       prev.filter(
         (template) =>
-          !["homepage", "header", "footer", "formStandardDocument"].includes(
-            template.id
-          )
+          ![
+            "homepage",
+            "header",
+            "footer",
+            "formStandardDocument",
+            "singlepage",
+          ].includes(template.id)
       ),
   },
 });
