@@ -71,7 +71,7 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
                     {lang === "ru"
                       ? "Укажите контакты для связи"
                       : lang === "de"
-                        ? "Bitte geben Sie Ihre Kontaktdaten an"
+                        ? "Kontaktieren Sie mich!"
                         : lang === "pl"
                           ? "Proszę podać swoje dane kontaktowe"
                           : "Please provide your contact details"}
@@ -80,7 +80,7 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
                     {lang === "ru"
                       ? "Свяжемся с вами как можно скорее"
                       : lang === "de"
-                        ? "Wir werden Sie so schnell wie möglich kontaktieren"
+                        ? "Geben Sie Ihre Daten ein, damit wir Sie kontaktieren können"
                         : lang === "pl"
                           ? "Skontaktujemy się z Tobą jak najszybciej"
                           : "We will contact you as soon as possible"}
