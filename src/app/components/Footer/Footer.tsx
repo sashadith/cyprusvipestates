@@ -54,7 +54,7 @@ const Footer = async ({ params }: Props) => {
   };
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} id="footer">
       <div className={styles.top}>
         <div className="container">
           <div className={styles.footerGrid}>
