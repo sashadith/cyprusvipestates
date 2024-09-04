@@ -7,28 +7,28 @@ export async function POST(request: NextRequest) {
 
   console.log("Received data:", data); // Журналирование данных для отладки
 
+  // Используем переменные из окружения для настроек SMTP
   const transport = nodemailer.createTransport({
-    service: "gmail",
+    host: process.env.SMTP_HOST, // Хост берется из окружения
+    port: Number(process.env.SMTP_PORT), // Порт также берется из окружения
+    secure: true, // true для порта 465 (SSL), false для порта 587
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD,
+      user: process.env.EMAIL_USER, // Email пользователя
+      pass: process.env.EMAIL_PASSWORD, // Пароль пользователя
     },
   });
 
   let mailBody = "";
   let isValid = false;
 
-  // Проверка и формирование тела письма в зависимости от присутствующих полей
+  // Проверка и формирование тела письма
   if (data.name && data.phone && !data.country && !data.email) {
-    // Обработка формы с только телефоном
     mailBody = `Name: ${data.name}\nPhone: ${data.phone}\nCountry: ${data.country}\nEmail: ${data.email}`;
     isValid = true;
   } else if (data.phone && data.country && data.email && !data.whatsapp) {
-    // Обработка формы с телефоном, страной и email
     mailBody = `Phone: ${data.phone}\Country: ${data.country}\nEmail: ${data.email}`;
     isValid = true;
   } else if (data.whatsapp && !data.phone && !data.country && !data.email) {
-    // Обработка формы с только Whatsapp
     mailBody = `Whatsapp: ${data.whatsapp}`;
     isValid = true;
   } else {
