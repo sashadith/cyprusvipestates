@@ -74,6 +74,8 @@ const Footer = async ({ params }: Props) => {
                     href={socialLink.link}
                     key={socialLink._key}
                     className={styles.socialLink}
+                    target="_blank"
+                    rel="noopener nofollow"
                   >
                     <Image
                       alt={socialLink.label}
