@@ -15,27 +15,10 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  let mailBody = "";
-  let isValid = false;
+  // Проверка наличия всех полей
+  if (data.name && data.phone && data.country && data.email) {
+    const mailBody = `Name: ${data.name}\nPhone: ${data.phone}\nCountry: ${data.country}\nEmail: ${data.email}`;
 
-  // Проверка и формирование тела письма в зависимости от присутствующих полей
-  if (data.name && data.phone && !data.country && !data.email) {
-    // Обработка формы с только телефоном
-    mailBody = `Nameeeee: ${data.name}\nPhone: ${data.phone}\nCountry: ${data.country}\nEmail: ${data.email}`;
-    isValid = true;
-  } else if (data.phone && data.country && data.email && !data.whatsapp) {
-    // Обработка формы с телефоном, страной и email
-    mailBody = `Phone: ${data.phone}\Country: ${data.country}\nEmail: ${data.email}`;
-    isValid = true;
-  } else if (data.whatsapp && !data.phone && !data.country && !data.email) {
-    // Обработка формы с только Whatsapp
-    mailBody = `Whatsapp: ${data.whatsapp}`;
-    isValid = true;
-  } else {
-    return NextResponse.json({ error: "Invalid data" }, { status: 400 });
-  }
-
-  if (isValid) {
     const mailOptions: Mail.Options = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -51,5 +34,6 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Если какие-то данные отсутствуют, вернуть ошибку
   return NextResponse.json({ error: "Invalid data" }, { status: 400 });
 }
