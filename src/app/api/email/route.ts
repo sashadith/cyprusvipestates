@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   // Проверка и формирование тела письма в зависимости от присутствующих полей
   if (data.name && data.phone && !data.country && !data.email) {
     // Обработка формы с только телефоном
-    mailBody = `Name: ${data.name}\nPhone: ${data.phone}\nCountry: ${data.country}\nEmail: ${data.email}`;
+    mailBody = `Nameeeee: ${data.name}\nPhone: ${data.phone}\nCountry: ${data.country}\nEmail: ${data.email}`;
     isValid = true;
   } else if (data.phone && data.country && data.email && !data.whatsapp) {
     // Обработка формы с телефоном, страной и email
