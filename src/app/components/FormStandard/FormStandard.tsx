@@ -199,6 +199,9 @@ const FormStandard: FC<ContactFormProps> = ({
                 type="checkbox"
                 name="agreedToPolicy"
                 id="agreedToPolicy"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setFieldValue("agreedToPolicy", e.target.checked);
+                }}
               />
               <ErrorMessage
                 name="agreedToPolicy"
