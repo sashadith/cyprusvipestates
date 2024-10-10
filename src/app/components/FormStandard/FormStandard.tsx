@@ -73,8 +73,8 @@ const FormStandard: FC<ContactFormProps> = ({
     phone: Yup.string().required(`${dataForm.validationPhoneRequired}`),
     country: Yup.string().required(`${dataForm.validationCountryRequired}`),
     email: Yup.string()
-      .email(`${dataForm.validationEmailRequired}`)
-      .required(`${dataForm.validationEmailInvalid}`),
+      .email(`${dataForm.validationEmailInvalid}`)
+      .required(`${dataForm.validationEmailRequired}`),
     agreedToPolicy: Yup.boolean()
       .required(`${dataForm.validationAgreementRequired}`)
       .oneOf([true], `${dataForm.validationAgreementOneOf}`),
@@ -118,6 +118,28 @@ const FormStandard: FC<ContactFormProps> = ({
       >
         {({ isSubmitting, setFieldValue }) => (
           <Form>
+            {/* Поле для имени */}
+            <div className={styles.inputWrapper}>
+              <label
+                htmlFor="name"
+                className={`${styles.label} ${filled.name ? styles.filled : ""}`}
+              >
+                {dataForm.inputName}
+              </label>
+              <Field
+                id="name"
+                name="name"
+                type="text"
+                className={`${styles.inputField}`}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="name"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+
             <div className={styles.inputWrapper}>
               <label
                 htmlFor="phone"
@@ -126,7 +148,6 @@ const FormStandard: FC<ContactFormProps> = ({
                 {dataForm.inputPhone}
               </label>
               <PhoneInput
-                // defaultCountry="PL"
                 id="phone"
                 name="phone"
                 className={`${styles.inputField}`}
@@ -139,26 +160,7 @@ const FormStandard: FC<ContactFormProps> = ({
                 className={styles.error}
               />
             </div>
-            <div className={styles.inputWrapper}>
-              <label
-                htmlFor="country"
-                className={`${styles.label} ${filled.country ? styles.filled : ""}`}
-              >
-                {dataForm.inputCountry}
-              </label>
-              <Field
-                id="country"
-                name="country"
-                type="text"
-                className={`${styles.inputField}`}
-                onBlur={handleBlur}
-              />
-              <ErrorMessage
-                name="country"
-                component="div"
-                className={styles.error}
-              />
-            </div>
+
             <div className={styles.inputWrapper}>
               <label
                 htmlFor="email"
@@ -179,6 +181,7 @@ const FormStandard: FC<ContactFormProps> = ({
                 className={styles.error}
               />
             </div>
+
             <div>
               <button
                 type="submit"
@@ -194,6 +197,7 @@ const FormStandard: FC<ContactFormProps> = ({
                 )}
               </button>
             </div>
+
             <div className={styles.customCheckbox}>
               <Field
                 type="checkbox"
