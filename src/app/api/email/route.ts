@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
   // Проверка наличия всех полей
   if (data.name && data.phone && data.country && data.email) {
-    const mailBody = `Name: ${data.name}\nPhone: ${data.phone}\nCountry: ${data.country}\nEmail: ${data.email}`;
+    const mailBody = `Name: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}`;
 
     const mailOptions: Mail.Options = {
       from: process.env.EMAIL_USER,
