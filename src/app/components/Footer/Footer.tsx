@@ -33,21 +33,33 @@ const Footer = async ({ params }: Props) => {
   } = data;
 
   const cleanLink = (link: string) => {
-    return link.replace(/[^a-zA-Z0-9]/g, "");
+    // Оставляем буквы, цифры, символы @ и +
+    return link.replace(/[^a-zA-Z0-9@+]/g, "");
   };
 
   const getContactHref = (contact: Contact) => {
-    const cleanedLink = cleanLink(contact.label);
+    const cleanedLabel = cleanLink(contact.label);
+
     switch (contact.type) {
       case "Email":
-        return `mailto:${cleanedLink}`;
+        return `mailto:${cleanedLabel}`;
+
       case "Phone":
-        return `tel:${cleanedLink}`;
+        // Если это телефон, возвращаем ссылку для звонка
+        return `tel:${cleanedLabel}`;
+
       case "Link":
-        return cleanedLink.startsWith("http://") ||
-          cleanedLink.startsWith("https://")
-          ? cleanedLink
-          : `https://${cleanedLink}`;
+        // Если в label содержится номер телефона, формируем ссылку на WhatsApp
+        if (cleanedLabel.match(/^\+?\d+$/)) {
+          const whatsappNumber = cleanedLabel.replace("+", ""); // Убираем плюс для WhatsApp
+          return `https://wa.me/${whatsappNumber}`;
+        }
+        // Если это обычная ссылка, проверяем на наличие http/https
+        return cleanedLabel.startsWith("http://") ||
+          cleanedLabel.startsWith("https://")
+          ? cleanedLabel
+          : `https://${cleanedLabel}`;
+
       default:
         return "#";
     }
