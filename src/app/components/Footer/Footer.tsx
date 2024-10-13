@@ -65,6 +65,21 @@ const Footer = async ({ params }: Props) => {
     }
   };
 
+  const getPlaceholderText = (lang: string) => {
+    switch (lang) {
+      case "en":
+        return "Your email";
+      case "de":
+        return "Ihre E-Mail Adresse";
+      case "pl":
+        return "Twój adres e-mail";
+      case "ru":
+        return "Ваш email";
+      default:
+        return "Your email"; // Значение по умолчанию
+    }
+  };
+
   return (
     <footer className={styles.footer} id="footer">
       <div className={styles.top}>
@@ -135,7 +150,7 @@ const Footer = async ({ params }: Props) => {
               <div className={styles.newsLetterForm}>
                 <input
                   type="email"
-                  placeholder="Your email"
+                  placeholder={getPlaceholderText(params.lang)}
                   className={styles.newsLetterInput}
                 />
                 <button className={styles.newsLetterButton}>
