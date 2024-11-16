@@ -4,6 +4,7 @@ import { Homepage } from "@/types/homepage";
 import { Header } from "@/types/header";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Singlepage } from "@/types/singlepage";
+import { Property } from "@/types/property";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -116,4 +117,49 @@ export async function getSinglePageByLang(
   const singlePage = await client.fetch(singlePageQuery, { lang, slug });
 
   return singlePage;
+}
+
+export async function getPropertyByLang(
+  lang: string,
+  slug: string
+): Promise<Property | null> {
+  const propertyQuery = groq`*[_type == "property" && slug[$lang].current == $slug][0] {
+    _id,
+    seo,
+    slug,
+    title,
+    price,
+    videoId,
+    images,
+    address,
+    city,
+    district,
+    type,
+    purpose,
+    propertyType,
+    location,
+    area,
+    rooms,
+    hasParking,
+    hasPool,
+    distances,
+    marketType,
+    isActual,
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      slug,
+    },
+  }`;
+
+  const property = await client.fetch(
+    propertyQuery,
+    { lang, slug },
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  return property;
 }

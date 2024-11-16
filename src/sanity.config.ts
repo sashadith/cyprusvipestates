@@ -26,6 +26,7 @@ export default defineConfig({
         "footer",
         "formStandardDocument",
         "singlepage",
+        "property",
       ],
     }),
   ],
@@ -42,6 +43,7 @@ export default defineConfig({
             "footer",
             "formStandardDocument",
             "singlepage",
+            "property",
           ].includes(template.id)
       ),
   },

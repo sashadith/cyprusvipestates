@@ -1,0 +1,78 @@
+.popertyIntro {
+  margin-top: 70px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 5vw, 3.75rem);
+
+  @media (min-width: 980px) {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.title {
+  font-size: clamp(2.25rem, 2.063rem + 0.75vw, 2.625rem);
+  line-height: 120%;
+  margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+  text-shadow: 1px 1px 25px #020102;
+  max-width: 550px;
+  color: #fff;
+}
+
+.price {
+  font-size: clamp(1.5rem, 1.25rem + 0.5vw, 2rem);
+  line-height: 120%;
+  margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+  text-shadow: 1px 1px 25px #020102;
+  color: #fff;
+}
+
+.info {
+
+  @media (min-width: 980px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.detailsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.options {
+  display: flex;
+  gap: 20px;
+}
+
+.option {
+  flex: 1 0;
+  flex-basis: calc(50% - 10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px;
+  border: 1px solid #aa7f2e;
+  border-radius: 5px;
+}
+
+.optionText {
+  font-size: clamp(1rem, 0.938rem + 0.25vw, 1.25rem);
+  line-height: 120%;
+  margin-top: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.buttonBlock {
+
+  button {
+    width: 100%;
+  }
+}
