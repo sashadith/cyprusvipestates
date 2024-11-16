@@ -58,6 +58,7 @@ export type Property = {
   address: string;
   city: string;
   district: string;
+  description: any;
   type: PropertyType;
   purpose: PropertyPurpose;
   propertyType: PropertyTypeClassification;

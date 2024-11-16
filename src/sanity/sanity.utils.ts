@@ -134,6 +134,7 @@ export async function getPropertyByLang(
     address,
     city,
     district,
+    description,
     type,
     purpose,
     propertyType,

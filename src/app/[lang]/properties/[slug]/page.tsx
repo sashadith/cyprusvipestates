@@ -6,6 +6,7 @@ import Footer from "@/app/components/Footer/Footer";
 import { i18n } from "@/i18n.config";
 import { Translation } from "@/types/homepage";
 import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
+import PropertyDescription from "@/app/components/PropertyDescription/PropertyDescription";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -81,6 +82,7 @@ const PropertyPage = async ({ params }: Props) => {
         rooms={property.rooms}
         lang={lang}
       />
+      <PropertyDescription description={property.description} />
       <Footer params={params} />
     </>
   );
