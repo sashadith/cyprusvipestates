@@ -7,6 +7,7 @@ import { i18n } from "@/i18n.config";
 import { Translation } from "@/types/homepage";
 import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
 import PropertyDescription from "@/app/components/PropertyDescription/PropertyDescription";
+import dynamic from "next/dynamic";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -68,7 +69,12 @@ const PropertyPage = async ({ params }: Props) => {
       : acc;
   }, []);
 
-  console.log("property", property);
+  const MapWithNoSSR = dynamic(
+    () => import("../../../components/PropertyMap/PropertyMap"),
+    {
+      ssr: false,
+    }
+  );
 
   return (
     <>
@@ -83,6 +89,7 @@ const PropertyPage = async ({ params }: Props) => {
         lang={lang}
       />
       <PropertyDescription description={property.description} />
+      <MapWithNoSSR lat={property.location.lat} lng={property.location.lng} />
       <Footer params={params} />
     </>
   );
