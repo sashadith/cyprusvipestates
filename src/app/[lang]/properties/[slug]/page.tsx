@@ -8,6 +8,7 @@ import { Translation } from "@/types/homepage";
 import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
 import PropertyDescription from "@/app/components/PropertyDescription/PropertyDescription";
 import dynamic from "next/dynamic";
+import PropertyDistances from "@/app/components/PropertyDistances/PropertyDistances";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -88,6 +89,7 @@ const PropertyPage = async ({ params }: Props) => {
         rooms={property.rooms}
         lang={lang}
       />
+      <PropertyDistances distances={property.distances || {}} />
       <PropertyDescription description={property.description} />
       <MapWithNoSSR lat={property.location.lat} lng={property.location.lng} />
       <Footer params={params} />

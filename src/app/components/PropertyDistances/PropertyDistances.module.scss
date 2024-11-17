@@ -1,0 +1,30 @@
+.propertyDistances {
+  margin-top: 70px;
+  margin-bottom: clamp(2.5rem, 1.25rem + 5vw, 5rem);
+}
+
+.distanceText {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #aa7f2e;
+  margin: 0;
+  padding: 0;
+}
+
+.distances {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+  @media (min-width: 980px) {
+    justify-content: space-between;
+  }
+}
+
+.distance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}

@@ -26,14 +26,14 @@ export type ImageAlt = {
   };
 };
 
-type GeoPoint = {
+export type GeoPoint = {
   _type: "geopoint";
   lat: number;
   lng: number;
   alt?: number;
 };
 
-type Distances = {
+export type Distances = {
   toCenter?: string;
   toBeach?: string;
   toAirport?: string;
