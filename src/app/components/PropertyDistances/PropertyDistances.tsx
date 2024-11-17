@@ -15,7 +15,6 @@ type Props = {
 };
 
 const PropertyDistances: FC<Props> = ({ distances }) => {
-  console.log("distances", distances);
   return (
     <section className={styles.propertyDistances}>
       <div className="container">
