@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation"; // Импортируйте useRout
 export type FormData = {
   name: string;
   phone: string;
-  country: string;
+  // country: string;
   email: string;
   agreedToPolicy: boolean;
 };
@@ -35,7 +35,7 @@ const FormStandard: FC<ContactFormProps> = ({
   const [filled, setFilled] = useState({
     name: false,
     phone: false,
-    country: false,
+    // country: false,
     email: false,
   });
 
@@ -44,7 +44,7 @@ const FormStandard: FC<ContactFormProps> = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      ["name", "phone", "country", "email"].forEach((field) => {
+      ["name", "phone", "email"].forEach((field) => {
         const input = document.getElementById(field) as HTMLInputElement;
         if (input && input.value) {
           setFilled((f) => ({ ...f, [field]: true }));
@@ -63,7 +63,7 @@ const FormStandard: FC<ContactFormProps> = ({
   const initialValues: FormData = {
     name: "",
     phone: "",
-    country: "",
+    // country: "",
     email: "",
     agreedToPolicy: false,
   };
@@ -71,7 +71,7 @@ const FormStandard: FC<ContactFormProps> = ({
   const validationSchema = Yup.object({
     name: Yup.string().required(`${dataForm.validationNameRequired}`),
     phone: Yup.string().required(`${dataForm.validationPhoneRequired}`),
-    country: Yup.string().required(`${dataForm.validationCountryRequired}`),
+    // country: Yup.string().required(`${dataForm.validationCountryRequired}`),
     email: Yup.string()
       .email(`${dataForm.validationEmailInvalid}`)
       .required(`${dataForm.validationEmailRequired}`),
@@ -89,7 +89,7 @@ const FormStandard: FC<ContactFormProps> = ({
       const response = await axios.post("/api/monday", values);
       if (response.status === 200) {
         resetForm({});
-        setFilled({ name: false, phone: false, country: false, email: false });
+        setFilled({ name: false, phone: false, email: false });
         onFormSubmitSuccess && onFormSubmitSuccess();
         setMessage("Lead successfully sent to monday.com");
         setTimeout(() => {
