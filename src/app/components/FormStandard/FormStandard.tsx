@@ -86,20 +86,21 @@ const FormStandard: FC<ContactFormProps> = ({
   ) => {
     setSubmitting(true);
     try {
-      const response = await axios.post("/api/email", values);
-      if (response.data.message === "Email sent") {
+      const response = await axios.post("/api/monday", values);
+      if (response.status === 200) {
         resetForm({});
-        setFilled({ name: false, phone: false, country: false, email: false }); // Reset the filled state
+        setFilled({ name: false, phone: false, country: false, email: false });
         onFormSubmitSuccess && onFormSubmitSuccess();
-        setMessage(`${dataForm.successMessage}`);
+        setMessage("Lead successfully sent to monday.com");
         setTimeout(() => {
           setMessage(null);
         }, 5000);
       } else {
-        throw new Error("Server responded with an error");
+        throw new Error("Failed to send lead to monday.com");
       }
     } catch (error) {
-      setMessage(`${dataForm.errorMessage}`);
+      console.error("Error:", error);
+      setMessage("Failed to send lead to monday.com. Please try again later.");
       setTimeout(() => {
         setMessage(null);
       }, 7000);

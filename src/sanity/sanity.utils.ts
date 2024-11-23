@@ -5,6 +5,7 @@ import { Header } from "@/types/header";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Singlepage } from "@/types/singlepage";
 import { Property } from "@/types/property";
+import { SanityFile } from "@/types/sanityFile";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -163,4 +164,20 @@ export async function getPropertyByLang(
   );
 
   return property;
+}
+
+export async function getFileBySlug(slug: string): Promise<SanityFile | null> {
+  const query = groq`*[_type == "docFile" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    file {
+      asset-> {
+        url
+      }
+    }
+  }`;
+
+  const file: SanityFile | null = await client.fetch(query, { slug });
+  return file;
 }

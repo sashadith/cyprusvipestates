@@ -19,6 +19,7 @@
     "formik": "^2.4.6",
     "framer-motion": "^11.3.21",
     "leaflet": "^1.9.4",
+    "monday-sdk-js": "^0.5.5",
     "negotiator": "^0.6.3",
     "next": "14.2.5",
     "next-intl": "^3.19.1",
