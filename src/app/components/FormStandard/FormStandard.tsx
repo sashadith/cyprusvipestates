@@ -109,6 +109,10 @@ const FormStandard: FC<ContactFormProps> = ({
     }
   };
 
+  const handleButtonClick = () => {
+    console.log("Button clicked");
+  };
+
   return (
     <>
       {message && <div className={styles.popup}>{message}</div>}
@@ -188,6 +192,7 @@ const FormStandard: FC<ContactFormProps> = ({
                 type="submit"
                 className={styles.sentBtn}
                 disabled={isSubmitting}
+                onClick={handleButtonClick}
               >
                 {isSubmitting ? (
                   <div className={styles.loader}></div>
