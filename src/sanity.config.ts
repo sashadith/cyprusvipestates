@@ -27,6 +27,7 @@ export default defineConfig({
         "formStandardDocument",
         "singlepage",
         "property",
+        "propertiesPage",
       ],
     }),
   ],
@@ -44,6 +45,7 @@ export default defineConfig({
             "formStandardDocument",
             "singlepage",
             "property",
+            "propertiesPage",
           ].includes(template.id)
       ),
   },

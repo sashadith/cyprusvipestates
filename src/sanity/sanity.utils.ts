@@ -6,6 +6,7 @@ import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Singlepage } from "@/types/singlepage";
 import { Property } from "@/types/property";
 import { SanityFile } from "@/types/sanityFile";
+import { PropertiesPage } from "@/types/propertiesPage";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -166,6 +167,20 @@ export async function getPropertyByLang(
   return property;
 }
 
+export async function getAllProperties(lang: string) {
+  const query = groq`*[_type == "property" && language == $lang] | order(publishedAt desc) {
+    _id,
+    title,
+    price,
+    city,
+    images,
+    slug
+  }`;
+
+  const properties = await client.fetch(query, { lang });
+  return properties;
+}
+
 export async function getFileBySlug(slug: string): Promise<SanityFile | null> {
   const query = groq`*[_type == "docFile" && slug.current == $slug][0] {
     _id,
@@ -180,4 +195,31 @@ export async function getFileBySlug(slug: string): Promise<SanityFile | null> {
 
   const file: SanityFile | null = await client.fetch(query, { slug });
   return file;
+}
+
+export async function getPropertiesPageByLang(
+  lang: string
+): Promise<PropertiesPage> {
+  const propertiesPageQuery = groq`*[_type == "propertiesPage" && language == $lang][0] {
+    _id,
+    metaTitle,
+    metaDescription,
+    title,
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      slug,
+    },
+  }`;
+
+  const propertiesPage = await client.fetch(
+    propertiesPageQuery,
+    { lang },
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  return propertiesPage;
 }

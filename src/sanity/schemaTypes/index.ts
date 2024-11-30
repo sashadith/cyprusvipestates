@@ -7,6 +7,7 @@ import formStandardDocument from "./formStandardDocument";
 import header from "./header";
 import homepage from "./homepage";
 import localizedSlug from "./localizedSlug";
+import propertiesPage from "./propertiesPage";
 import property from "./property";
 import singlepage from "./singlepage";
 import textContent from "./textContent";
@@ -15,6 +16,7 @@ export const schemaTypes = [
   header,
   homepage,
   singlepage,
+  propertiesPage,
   property,
   footer,
   formStandard,

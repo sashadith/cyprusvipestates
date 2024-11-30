@@ -1,6 +1,9 @@
 import React from "react";
 import { Metadata } from "next";
-import { getPropertyByLang } from "@/sanity/sanity.utils";
+import {
+  getFormStandardDocumentByLang,
+  getPropertyByLang,
+} from "@/sanity/sanity.utils";
 import Header from "@/app/components/Header/Header";
 import Footer from "@/app/components/Footer/Footer";
 import { i18n } from "@/i18n.config";
@@ -9,6 +12,8 @@ import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
 import PropertyDescription from "@/app/components/PropertyDescription/PropertyDescription";
 import dynamic from "next/dynamic";
 import PropertyDistances from "@/app/components/PropertyDistances/PropertyDistances";
+import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
+import { FormStandardDocument } from "@/types/formStandardDocument";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -31,6 +36,9 @@ const PropertyPage = async ({ params }: Props) => {
   if (!property) {
     return null;
   }
+
+  const formDocument: FormStandardDocument =
+    await getFormStandardDocumentByLang(params.lang);
 
   const propertyPageTranslationSlugs: {
     [key: string]: { current: string };
@@ -93,6 +101,7 @@ const PropertyPage = async ({ params }: Props) => {
       <PropertyDescription description={property.description} />
       <MapWithNoSSR lat={property.location.lat} lng={property.location.lng} />
       <Footer params={params} />
+      <ModalBrochure lang={params.lang} formDocument={formDocument} />
     </>
   );
 };
