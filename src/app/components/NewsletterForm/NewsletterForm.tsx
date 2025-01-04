@@ -6,18 +6,63 @@ import styles from "./NewsletterForm.module.scss";
 type NewsletterFormProps = {
   placeholder: string;
   buttonLabel: string;
+  lang: string; // Теперь допускаем любой `string`
 };
 
 const NewsletterForm: React.FC<NewsletterFormProps> = ({
   placeholder,
   buttonLabel,
+  lang,
 }) => {
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string | null>(null);
 
+  // Допустимые языки с локализованными сообщениями
+  const supportedLanguages = ["en", "de", "pl", "ru"] as const;
+  type SupportedLang = (typeof supportedLanguages)[number];
+
+  const getValidatedLang = (lang: string): SupportedLang => {
+    return supportedLanguages.includes(lang as SupportedLang)
+      ? (lang as SupportedLang)
+      : "en"; // Значение по умолчанию
+  };
+
+  const getLocalizedMessage = (
+    type: "success" | "error" | "invalid",
+    lang: string
+  ): string => {
+    const validatedLang = getValidatedLang(lang);
+
+    const messages = {
+      en: {
+        success: "You have successfully subscribed to our newsletter!",
+        error: "Failed to subscribe. Please try again.",
+        invalid: "Please enter a valid email address.",
+      },
+      de: {
+        success:
+          "Sie haben sich erfolgreich für unseren Newsletter angemeldet!",
+        error: "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+        invalid: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      },
+      pl: {
+        success: "Pomyślnie zapisałeś się na nasz newsletter!",
+        error: "Nie udało się zapisać. Spróbuj ponownie.",
+        invalid: "Wprowadź poprawny adres e-mail.",
+      },
+      ru: {
+        success: "Вы успешно подписались на нашу рассылку!",
+        error: "Не удалось подписаться. Попробуйте еще раз.",
+        invalid: "Пожалуйста, введите корректный адрес электронной почты.",
+      },
+    };
+
+    return messages[validatedLang][type];
+  };
+
   const handleNewsletterSubmit = async () => {
     if (!email) {
-      setMessage("Please enter a valid email address.");
+      setMessage(getLocalizedMessage("invalid", lang));
       return;
     }
 
@@ -31,15 +76,15 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
       });
 
       if (response.ok) {
-        setMessage("You have successfully subscribed to our newsletter!");
+        setMessage(getLocalizedMessage("success", lang));
         setEmail(""); // Очистка поля
       } else {
         const errorData = await response.json();
-        setMessage(errorData.error || "Failed to subscribe. Please try again.");
+        setMessage(errorData.error || getLocalizedMessage("error", lang));
       }
     } catch (error) {
       console.error("Error subscribing to newsletter:", error);
-      setMessage("Failed to subscribe. Please try again later.");
+      setMessage(getLocalizedMessage("error", lang));
     }
   };
 

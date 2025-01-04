@@ -151,17 +151,8 @@ const Footer = async ({ params }: Props) => {
               <NewsletterForm
                 placeholder={getPlaceholderText(params.lang)}
                 buttonLabel={newsletterButtonLabel}
+                lang={params.lang}
               />
-              {/* <div className={styles.newsLetterForm}>
-                <input
-                  type="email"
-                  placeholder={getPlaceholderText(params.lang)}
-                  className={styles.newsLetterInput}
-                />
-                <button className={styles.newsLetterButton}>
-                  {newsletterButtonLabel}
-                </button>
-              </div> */}
             </div>
           </div>
         </div>
