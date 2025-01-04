@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const MONDAY_API_URL = "https://api.monday.com/v2";
 const MONDAY_API_KEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjQ0MDQyNzMyNiwiYWFpIjoxMSwidWlkIjo2MjE1MTQ3MSwiaWFkIjoiMjAyNC0xMS0yM1QxODo1NTo0Ny40NThaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjM5NDMwODYsInJnbiI6ImV1YzEifQ.t5IONmg4UE6uHeN7qmkBI1cEGE4YKcYkDgutGA6q_Ic";
-const BOARD_ID = "1716772206";
+const BOARD_ID = "1761987486";
 
 export async function POST(request: Request) {
   try {
@@ -16,15 +16,32 @@ export async function POST(request: Request) {
           board_id: ${BOARD_ID},
           item_name: "${name}",
           column_values: "${JSON.stringify({
-            phone,
-            email,
-            country,
+            text_mkkwm0b4: phone,
+            text_mkkwekh3: email,
+            text_mkkwk9kt: country,
           }).replace(/"/g, '\\"')}"
         ) {
           id
         }
       }
     `;
+
+    //     const query = `
+    //       mutation {
+    //         create_item (
+    //           board_id: ${BOARD_ID},
+    //           item_name: "${country}",
+    //           column_values: ${JSON.stringify(
+    //             JSON.stringify({
+    //               tekst_Mjj5PRDd: phone, // Указание идентификатора колонки телефона
+    //               tekst_Mjj5fnLd: email,
+    //             })
+    //           )}
+    //         ) {
+    //           id
+    //         }
+    //       }
+    // `;
 
     const response = await fetch(MONDAY_API_URL, {
       method: "POST",
