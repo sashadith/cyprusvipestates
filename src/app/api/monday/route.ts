@@ -10,6 +10,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, phone, email, currentPage } = body;
 
+    const currentDate = new Date().toISOString().split("T")[0];
+
     const query = `
       mutation {
         create_item (
@@ -19,6 +21,7 @@ export async function POST(request: Request) {
             text_mkkwm0b4: phone,
             text_mkkwekh3: email,
             text_mkkwk9kt: currentPage,
+            date4: currentDate,
           }).replace(/"/g, '\\"')}"
         ) {
           id
