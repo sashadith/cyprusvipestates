@@ -10,7 +10,7 @@ import "react-phone-number-input/style.css";
 import styles from "./FormStandard.module.scss";
 import { Form as FormType } from "@/types/form";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Импортируйте useRouter из next/navigation
+import { useRouter } from "next/navigation";
 
 export type FormData = {
   name: string;
@@ -23,12 +23,14 @@ export type FormData = {
 export interface ContactFormProps {
   onFormSubmitSuccess?: () => void; // Функция обратного вызова для успешной отправки
   form: any;
+  lang: string;
   offerButtonCustomText?: string;
 }
 
 const FormStandard: FC<ContactFormProps> = ({
   onFormSubmitSuccess,
   form,
+  lang,
   offerButtonCustomText,
 }) => {
   const [message, setMessage] = useState<string | null>(null);
@@ -91,7 +93,15 @@ const FormStandard: FC<ContactFormProps> = ({
         resetForm({});
         setFilled({ name: false, phone: false, email: false });
         onFormSubmitSuccess && onFormSubmitSuccess();
-        setMessage("Lead successfully sent to somewhere");
+        setMessage(
+          lang === "ru"
+            ? "Мы получили вашу заявку и свяжемся с вами в ближайшее время."
+            : lang === "de"
+              ? "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden."
+              : lang === "pl"
+                ? "Otrzymaliśmy Twoje zapytanie i skontaktujemy się z Tobą wkrótce."
+                : "We have received your request and will contact you shortly."
+        );
         setTimeout(() => {
           setMessage(null);
         }, 5000);
@@ -100,7 +110,15 @@ const FormStandard: FC<ContactFormProps> = ({
       }
     } catch (error) {
       console.error("Error:", error);
-      setMessage("Failed to send lead to monday.com. Please try again later.");
+      setMessage(
+        lang === "ru"
+          ? "Произошла ошибка при отправке заявки. Попробуйте позже."
+          : lang === "de"
+            ? "Beim Senden der Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
+            : lang === "pl"
+              ? "Wystąpił błąd podczas wysyłania zapytania. Spróbuj ponownie później."
+              : "An error occurred while sending the request. Please try again later."
+      );
       setTimeout(() => {
         setMessage(null);
       }, 7000);

@@ -88,7 +88,7 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
                 </div>
 
                 <div className={styles.formInner}>
-                  <FormStandard form={formDocument} />
+                  <FormStandard form={formDocument} lang={lang} />
                 </div>
               </div>
               <button className={styles.closeButton} onClick={closeModal}>
