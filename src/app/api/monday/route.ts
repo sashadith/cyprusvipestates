@@ -26,23 +26,6 @@ export async function POST(request: Request) {
       }
     `;
 
-    //     const query = `
-    //       mutation {
-    //         create_item (
-    //           board_id: ${BOARD_ID},
-    //           item_name: "${country}",
-    //           column_values: ${JSON.stringify(
-    //             JSON.stringify({
-    //               tekst_Mjj5PRDd: phone, // Указание идентификатора колонки телефона
-    //               tekst_Mjj5fnLd: email,
-    //             })
-    //           )}
-    //         ) {
-    //           id
-    //         }
-    //       }
-    // `;
-
     const response = await fetch(MONDAY_API_URL, {
       method: "POST",
       headers: {

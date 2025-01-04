@@ -91,7 +91,7 @@ const FormStandard: FC<ContactFormProps> = ({
         resetForm({});
         setFilled({ name: false, phone: false, email: false });
         onFormSubmitSuccess && onFormSubmitSuccess();
-        setMessage("Lead successfully sent to monday.com");
+        setMessage("Lead successfully sent to somewhere");
         setTimeout(() => {
           setMessage(null);
         }, 5000);
