@@ -88,7 +88,11 @@ const FormStandard: FC<ContactFormProps> = ({
   ) => {
     setSubmitting(true);
     try {
-      const response = await axios.post("/api/monday", values);
+      const currentPage = window.location.href; // Получаем текущий URL
+      const response = await axios.post("/api/monday", {
+        ...values,
+        currentPage,
+      });
       if (response.status === 200) {
         resetForm({});
         setFilled({ name: false, phone: false, email: false });

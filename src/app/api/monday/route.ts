@@ -8,7 +8,7 @@ const BOARD_ID = "1761987486";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, phone, email } = body;
+    const { name, phone, email, currentPage } = body;
 
     const query = `
       mutation {
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
           column_values: "${JSON.stringify({
             text_mkkwm0b4: phone,
             text_mkkwekh3: email,
-            // text_mkkwk9kt: country,
+            text_mkkwk9kt: currentPage,
           }).replace(/"/g, '\\"')}"
         ) {
           id
