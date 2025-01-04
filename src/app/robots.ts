@@ -5,9 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        // allow: "/",
-        // disallow: ["/admin", "/ru/success", "/en/success"],
-        disallow: "/",
+        allow: "/",
+        disallow: ["/admin", "/api", "/_next", "/_assets", "/_static"],
       },
     ],
     // sitemap: "https://cyprusvipestates.com/sitemap.xml",
