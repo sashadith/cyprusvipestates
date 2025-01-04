@@ -8,7 +8,7 @@ const NEWSLETTER_BOARD_ID = "1761993654"; // Укажите ID доски для
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email } = body;
+    const { email, currentDate, currentPage } = body;
 
     if (!email || typeof email !== "string") {
       return NextResponse.json(
@@ -23,7 +23,8 @@ export async function POST(request: Request) {
           board_id: ${NEWSLETTER_BOARD_ID},
           item_name: "${email}",
           column_values: "${JSON.stringify({
-            email: email,
+            date4: currentDate,
+            text_mkkwhb80: currentPage,
           }).replace(/"/g, '\\"')}"
         ) {
           id

@@ -65,13 +65,21 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
       return;
     }
 
+    // Получение текущей даты и текущей страницы
+    const currentDate = new Date().toISOString().split("T")[0]; // Формат YYYY-MM-DD
+    const currentPage = window.location.href; // Текущий URL страницы
+
     try {
       const response = await fetch("/api/monday-newsletter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email,
+          currentDate,
+          currentPage,
+        }),
       });
 
       if (response.ok) {
@@ -91,9 +99,9 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
     if (message) {
       const timer = setTimeout(() => {
         setMessage(null);
-      }, 5000); // Убираем сообщение через 5 секунд
+      }, 5000);
 
-      return () => clearTimeout(timer); // Очищаем таймер при размонтировании
+      return () => clearTimeout(timer);
     }
   }, [message]);
 
