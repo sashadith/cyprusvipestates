@@ -141,32 +141,32 @@
   letter-spacing: .4px;
 }
 
-.newsLetterForm {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+// .newsLetterForm {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+// }
 
-.newsLetterInput {
-  padding: 10px;
-  border: 1px solid #aa7f2e;
-  background-color: transparent;
-  color: #fff;
+// .newsLetterInput {
+//   padding: 10px;
+//   border: 1px solid #aa7f2e;
+//   background-color: transparent;
+//   color: #fff;
 
-  &:focus {
-    outline: none;
-  }
-}
+//   &:focus {
+//     outline: none;
+//   }
+// }
 
-.newsLetterButton {
-  padding: 10px;
-  background-color: #aa7f2e;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
+// .newsLetterButton {
+//   padding: 10px;
+//   background-color: #aa7f2e;
+//   color: #fff;
+//   border: none;
+//   cursor: pointer;
+//   transition: all 0.2s ease;
 
-  &:hover {
-    background-color: #a97b4d;
-  }
-}
+//   &:hover {
+//     background-color: #a97b4d;
+//   }
+// }

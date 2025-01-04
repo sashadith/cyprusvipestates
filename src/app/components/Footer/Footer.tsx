@@ -10,6 +10,7 @@ import {
 } from "@/types/footer"; // Импортируйте тип Link и переименуйте его, чтобы избежать конфликта с Link из next/link
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
+import NewsletterForm from "../NewsletterForm/NewsletterForm";
 
 type Props = {
   params: { lang: string };
@@ -147,7 +148,11 @@ const Footer = async ({ params }: Props) => {
             </div>
             <div className={styles.newsLetterBlock}>
               <p className={styles.title}>{newsletterTitle}</p>
-              <div className={styles.newsLetterForm}>
+              <NewsletterForm
+                placeholder={getPlaceholderText(params.lang)}
+                buttonLabel={newsletterButtonLabel}
+              />
+              {/* <div className={styles.newsLetterForm}>
                 <input
                   type="email"
                   placeholder={getPlaceholderText(params.lang)}
@@ -156,7 +161,7 @@ const Footer = async ({ params }: Props) => {
                 <button className={styles.newsLetterButton}>
                   {newsletterButtonLabel}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
