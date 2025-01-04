@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./NewsletterForm.module.scss";
 
 type NewsletterFormProps = {
   placeholder: string;
   buttonLabel: string;
-  lang: string; // Теперь допускаем любой `string`
+  lang: string;
 };
 
 const NewsletterForm: React.FC<NewsletterFormProps> = ({
@@ -17,14 +17,13 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string | null>(null);
 
-  // Допустимые языки с локализованными сообщениями
   const supportedLanguages = ["en", "de", "pl", "ru"] as const;
   type SupportedLang = (typeof supportedLanguages)[number];
 
   const getValidatedLang = (lang: string): SupportedLang => {
     return supportedLanguages.includes(lang as SupportedLang)
       ? (lang as SupportedLang)
-      : "en"; // Значение по умолчанию
+      : "en";
   };
 
   const getLocalizedMessage = (
@@ -87,6 +86,16 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
       setMessage(getLocalizedMessage("error", lang));
     }
   };
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage(null);
+      }, 5000); // Убираем сообщение через 5 секунд
+
+      return () => clearTimeout(timer); // Очищаем таймер при размонтировании
+    }
+  }, [message]);
 
   return (
     <div className={styles.newsLetterForm}>
