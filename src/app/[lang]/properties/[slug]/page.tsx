@@ -93,7 +93,7 @@ const PropertyPage = async ({ params }: Props) => {
         price={property.price}
         images={property.images}
         videoId={property.videoId}
-        area={property.area}
+        floorSize={property.floorSize}
         rooms={property.rooms}
         lang={lang}
       />

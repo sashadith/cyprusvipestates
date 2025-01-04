@@ -63,7 +63,7 @@ export type Property = {
   purpose: PropertyPurpose;
   propertyType: PropertyTypeClassification;
   location: GeoPoint;
-  area: number;
+  floorSize: number;
   rooms: number;
   hasParking?: boolean;
   hasPool?: boolean;

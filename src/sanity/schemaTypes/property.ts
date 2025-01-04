@@ -104,7 +104,7 @@ const property = {
     }),
     defineField({
       name: "district",
-      title: "Район",
+      title: "District",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
@@ -147,8 +147,8 @@ const property = {
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "area",
-      title: "Area",
+      name: "floorSize",
+      title: "Floor size",
       type: "number",
       validation: (Rule) => Rule.required(),
       description: "Only numbers",
@@ -162,7 +162,7 @@ const property = {
     }),
     defineField({
       name: "hasParking",
-      title: "Парковка есть/нет",
+      title: "Parking has/no",
       type: "boolean",
     }),
     defineField({
@@ -203,7 +203,7 @@ const property = {
     }),
     defineField({
       name: "isActual",
-      title: "Актуальность",
+      title: "Is actual",
       type: "boolean",
       initialValue: true,
       description: "Is this property actual?",

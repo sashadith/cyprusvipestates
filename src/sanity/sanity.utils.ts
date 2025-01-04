@@ -141,7 +141,7 @@ export async function getPropertyByLang(
     purpose,
     propertyType,
     location,
-    area,
+    floorSize,
     rooms,
     hasParking,
     hasPool,

@@ -22,7 +22,7 @@ type Props = {
   price: number;
   images: ImageAlt[];
   videoId?: string;
-  area: number;
+  floorSize: number;
   rooms: number;
   lang: string;
 };
@@ -32,10 +32,11 @@ const PropertyIntro: FC<Props> = ({
   price,
   images,
   videoId,
-  area,
+  floorSize,
   rooms,
   lang,
 }) => {
+  // console.log("floorSize", floorSize);
   return (
     <section className={styles.popertyIntro}>
       <div className="container">
@@ -69,7 +70,7 @@ const PropertyIntro: FC<Props> = ({
                             : lang === "ru"
                               ? "Площадь: "
                               : "Area: "}
-                      {area} m²
+                      {floorSize} m²
                     </p>
                   </div>
                   <div className={styles.option}>
