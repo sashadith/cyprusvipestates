@@ -1,0 +1,61 @@
+"use client";
+import { ImageAlt } from "@/types/property";
+import React, { FC, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, Thumbs } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
+import styles from "./PropertySlider.module.scss";
+import PropertySlide from "../PropertySlide/PropertySlide";
+import PropertySlideThumb from "../PropertySlideThumb/PropertySlideThumb";
+
+type Props = {
+  images: ImageAlt[];
+};
+
+const PropertySlider: FC<Props> = ({ images }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+
+  return (
+    <>
+      {/* Основной слайдер */}
+      <Swiper
+        // navigation={true}
+        pagination={{ clickable: true }}
+        modules={[Navigation, Pagination, Thumbs]}
+        thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined} // Проверка
+        className="mySwiper"
+      >
+        {images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <PropertySlide image={image} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Галерея миниатюр */}
+      <div className="container">
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          spaceBetween={10}
+          slidesPerView={3}
+          freeMode={true}
+          watchSlidesProgress={true}
+          modules={[Thumbs]}
+          className="mySwiperThumbs"
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <PropertySlideThumb image={image} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </>
+  );
+};
+
+export default PropertySlider;

@@ -14,6 +14,7 @@ import dynamic from "next/dynamic";
 import PropertyDistances from "@/app/components/PropertyDistances/PropertyDistances";
 import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
 import { FormStandardDocument } from "@/types/formStandardDocument";
+import PropertySlider from "@/app/components/PropertySlider/PropertySlider";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -88,6 +89,7 @@ const PropertyPage = async ({ params }: Props) => {
   return (
     <>
       <Header params={params} translations={translations} />
+      <PropertySlider images={property.images} />
       <PropertyIntro
         title={property.title}
         price={property.price}
