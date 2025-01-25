@@ -12,28 +12,42 @@ import styles from "./PropertySlider.module.scss";
 import PropertySlide from "../PropertySlide/PropertySlide";
 import PropertySlideThumb from "../PropertySlideThumb/PropertySlideThumb";
 
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 type Props = {
   images: ImageAlt[];
+  videoId?: string;
 };
 
-const PropertySlider: FC<Props> = ({ images }) => {
+const PropertySlider: FC<Props> = ({ images, videoId }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
   return (
     <>
       {/* Основной слайдер */}
       <Swiper
-        // navigation={true}
+        navigation={{
+          nextEl: ".next-button",
+          prevEl: ".prev-button",
+        }}
         pagination={{ clickable: true }}
         modules={[Navigation, Pagination, Thumbs]}
         thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined} // Проверка
-        className="mySwiper"
+        className={styles.slider}
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
             <PropertySlide image={image} />
           </SwiperSlide>
         ))}
+        <div className={styles.navButtons}>
+          <button className="prev-button">
+            <IoIosArrowBack fontSize="3.5rem" color="#aa7f2e" />
+          </button>
+          <button className="next-button">
+            <IoIosArrowForward fontSize="3.5rem" color="#aa7f2e" />
+          </button>
+        </div>
       </Swiper>
 
       {/* Галерея миниатюр */}

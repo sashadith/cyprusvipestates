@@ -147,6 +147,22 @@ body {
   }
 }
 
+.prev-button {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.next-button {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
 /* styles for loader */
 .loader-wrapper {
   display: flex;

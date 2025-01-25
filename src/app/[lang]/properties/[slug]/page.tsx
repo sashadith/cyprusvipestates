@@ -90,7 +90,7 @@ const PropertyPage = async ({ params }: Props) => {
   return (
     <>
       <Header params={params} translations={translations} />
-      <PropertySlider images={property.images} />
+      <PropertySlider images={property.images} videoId={property.videoId} />
       <PropertyIntro
         title={property.title}
         price={property.price}
