@@ -15,6 +15,7 @@ import PropertyDistances from "@/app/components/PropertyDistances/PropertyDistan
 import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import PropertySlider from "@/app/components/PropertySlider/PropertySlider";
+import PropertyFeatures from "@/app/components/PropertyFeatures/PropertyFeatures";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -100,6 +101,16 @@ const PropertyPage = async ({ params }: Props) => {
         lang={lang}
       />
       <PropertyDistances distances={property.distances || {}} />
+      <PropertyFeatures
+        city={property.city}
+        district={property.district}
+        type={property.type}
+        rooms={property.rooms}
+        floorSize={property.floorSize}
+        hasParking={property.hasParking}
+        hasPool={property.hasPool}
+        lang={lang}
+      />
       <PropertyDescription description={property.description} />
       <MapWithNoSSR lat={property.location.lat} lng={property.location.lng} />
       <Footer params={params} />

@@ -1,10 +1,4 @@
-type PropertyType =
-  | "Apartment"
-  | "Villa"
-  | "Townhouse"
-  | "Semi-detached villa"
-  | "Office"
-  | "Shop";
+type PropertyType = "Apartment" | "Villa";
 
 type PropertyPurpose = "Sale" | "Rent";
 
