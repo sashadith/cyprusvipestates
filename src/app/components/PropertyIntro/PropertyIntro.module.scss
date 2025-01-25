@@ -15,10 +15,11 @@
 
 .title {
   font-size: clamp(2.25rem, 2.063rem + 0.75vw, 2.625rem);
+  font-weight: 700;
   line-height: 120%;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
   text-shadow: 1px 1px 25px #020102;
-  max-width: 550px;
+  max-width: 850px;
   color: #fff;
 }
 
@@ -28,13 +29,18 @@
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
   text-shadow: 1px 1px 25px #020102;
   color: #fff;
+
+  span {
+    font-weight: 600;
+    color: #aa7f2e;
+  }
 }
 
 .info {
 
   @media (min-width: 980px) {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: space-between;
   }
 }

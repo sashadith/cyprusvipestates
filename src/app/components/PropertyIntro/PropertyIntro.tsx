@@ -40,72 +40,81 @@ const PropertyIntro: FC<Props> = ({
   return (
     <section className={styles.popertyIntro}>
       <div className="container">
-        <div className={styles.wrapper}>
-          <div className={styles.gallery}>
+        {/* <div className={styles.wrapper}> */}
+        {/* <div className={styles.gallery}>
             <PropertyPhotoGallery
               photos={images}
               videoId={videoId}
               lang={lang}
             />
-          </div>
-          <div className={styles.info}>
-            <div className={styles.content}>
-              <h1 className={styles.title}>{title}</h1>
-              <div className={styles.price}>
-                {price.toLocaleString("en-US")} €
-              </div>
+          </div> */}
+        <div className={styles.info}>
+          <div className={styles.content}>
+            <h1 className={styles.title}>{title}</h1>
+            <div className={styles.price}>
+              {lang === "en"
+                ? "Price: "
+                : lang === "de"
+                  ? "Preis: "
+                  : lang === "pl"
+                    ? "Cena: "
+                    : lang === "ru"
+                      ? "Цена: "
+                      : "Price: "}
+              <span>{price.toLocaleString("en-US")} €</span>
             </div>
-            <div className={styles.details}>
-              <div className={styles.detailsWrapper}>
-                <div className={styles.options}>
-                  <div className={styles.option}>
-                    <FaArrowsToCircle fontSize="2.5rem" color="#aa7f2e" />
-                    <p className={styles.optionText}>
-                      {lang === "en"
-                        ? "Area: "
-                        : lang === "de"
-                          ? "Fläche: "
-                          : lang === "pl"
-                            ? "Powierzchnia: "
-                            : lang === "ru"
-                              ? "Площадь: "
-                              : "Area: "}
-                      {floorSize} m²
-                    </p>
-                  </div>
-                  <div className={styles.option}>
-                    <FaHouseCircleCheck fontSize="2.5rem" color="#aa7f2e" />
-                    <p className={styles.optionText}>
-                      {lang === "en"
-                        ? "Rooms: "
-                        : lang === "de"
-                          ? "Zimmer: "
-                          : lang === "pl"
-                            ? "Pokoje: "
-                            : lang === "ru"
-                              ? "Комнаты: "
-                              : "Rooms: "}
-                      {rooms}
-                    </p>
-                  </div>
-                </div>
-                <div className={styles.buttonBlock}>
-                  <ButtonModal>
+          </div>
+          <div className={styles.details}>
+            <div className={styles.detailsWrapper}>
+              <div className={styles.options}>
+                <div className={styles.option}>
+                  <FaArrowsToCircle fontSize="2.5rem" color="#aa7f2e" />
+                  <p className={styles.optionText}>
                     {lang === "en"
-                      ? "Request a call"
+                      ? "Area: "
                       : lang === "de"
-                        ? "Rufen Sie an"
+                        ? "Fläche: "
                         : lang === "pl"
-                          ? "Zadzwoń"
+                          ? "Powierzchnia: "
                           : lang === "ru"
-                            ? "Заказать звонок"
-                            : "Request a call"}
-                  </ButtonModal>
+                            ? "Площадь: "
+                            : "Area: "}
+                    {floorSize} m²
+                  </p>
                 </div>
+                <div className={styles.option}>
+                  <FaHouseCircleCheck fontSize="2.5rem" color="#aa7f2e" />
+                  <p className={styles.optionText}>
+                    {lang === "en"
+                      ? "Rooms: "
+                      : lang === "de"
+                        ? "Zimmer: "
+                        : lang === "pl"
+                          ? "Pokoje: "
+                          : lang === "ru"
+                            ? "Комнаты: "
+                            : "Rooms: "}
+                    {rooms}
+                  </p>
+                </div>
+              </div>
+              <div className={styles.buttonBlock}>
+                <ButtonModal>
+                  {lang === "en"
+                    ? "Request a call"
+                    : lang === "de"
+                      ? "Rufen Sie an"
+                      : lang === "pl"
+                        ? "Zadzwoń"
+                        : lang === "ru"
+                          ? "Заказать звонок"
+                          : "Request a call"}
+                </ButtonModal>
               </div>
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </section>
   );
