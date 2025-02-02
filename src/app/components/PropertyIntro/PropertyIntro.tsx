@@ -16,9 +16,13 @@ import {
 } from "react-icons/fa6";
 import PropertyPhotoGallery from "../PropertyPhotoGallery/PropertyPhotoGallery";
 import { ButtonModal } from "../ButtonModal/ButtonModal";
+import Image from "next/image";
+import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
   title: string;
+  excerpt: string;
+  previewImage: ImageAlt;
   price: number;
   images: ImageAlt[];
   videoId?: string;
@@ -29,6 +33,8 @@ type Props = {
 
 const PropertyIntro: FC<Props> = ({
   title,
+  excerpt,
+  previewImage,
   price,
   images,
   videoId,
@@ -36,85 +42,23 @@ const PropertyIntro: FC<Props> = ({
   rooms,
   lang,
 }) => {
-  // console.log("floorSize", floorSize);
+  // console.log("data", excerpt, previewImage);
   return (
     <section className={styles.popertyIntro}>
-      <div className="container">
-        {/* <div className={styles.wrapper}> */}
-        {/* <div className={styles.gallery}>
-            <PropertyPhotoGallery
-              photos={images}
-              videoId={videoId}
-              lang={lang}
-            />
-          </div> */}
-        <div className={styles.info}>
-          <div className={styles.content}>
+      <Image
+        alt={previewImage.alt || title}
+        src={urlFor(previewImage).url()}
+        fill={true}
+        className={styles.imagePoster}
+      />
+      <div className={`container ${styles.contentInner}`}>
+        <div className={styles.overlay}></div>
+        <div className={styles.content}>
+          <div className={styles.contentWrapper}>
             <h1 className={styles.title}>{title}</h1>
-            <div className={styles.price}>
-              {lang === "en"
-                ? "Price: "
-                : lang === "de"
-                  ? "Preis: "
-                  : lang === "pl"
-                    ? "Cena: "
-                    : lang === "ru"
-                      ? "Цена: "
-                      : "Price: "}
-              <span>{price.toLocaleString("en-US")} €</span>
-            </div>
-          </div>
-          <div className={styles.details}>
-            <div className={styles.detailsWrapper}>
-              <div className={styles.options}>
-                <div className={styles.option}>
-                  <FaArrowsToCircle fontSize="2.5rem" color="#aa7f2e" />
-                  <p className={styles.optionText}>
-                    {lang === "en"
-                      ? "Area: "
-                      : lang === "de"
-                        ? "Fläche: "
-                        : lang === "pl"
-                          ? "Powierzchnia: "
-                          : lang === "ru"
-                            ? "Площадь: "
-                            : "Area: "}
-                    {floorSize} m²
-                  </p>
-                </div>
-                <div className={styles.option}>
-                  <FaHouseCircleCheck fontSize="2.5rem" color="#aa7f2e" />
-                  <p className={styles.optionText}>
-                    {lang === "en"
-                      ? "Rooms: "
-                      : lang === "de"
-                        ? "Zimmer: "
-                        : lang === "pl"
-                          ? "Pokoje: "
-                          : lang === "ru"
-                            ? "Комнаты: "
-                            : "Rooms: "}
-                    {rooms}
-                  </p>
-                </div>
-              </div>
-              <div className={styles.buttonBlock}>
-                <ButtonModal>
-                  {lang === "en"
-                    ? "Request a call"
-                    : lang === "de"
-                      ? "Rufen Sie an"
-                      : lang === "pl"
-                        ? "Zadzwoń"
-                        : lang === "ru"
-                          ? "Заказать звонок"
-                          : "Request a call"}
-                </ButtonModal>
-              </div>
-            </div>
+            <p className={styles.description}>{excerpt}</p>
           </div>
         </div>
-        {/* </div> */}
       </div>
     </section>
   );

@@ -13,7 +13,7 @@ const PropertySlide: FC<Props> = ({ image }) => {
     <div className={styles.propertySlide}>
       <Image
         src={urlFor(image).url()}
-        alt={`Photo`}
+        alt={image.alt || "default alt text"}
         className={styles.image}
         fill={true}
       />

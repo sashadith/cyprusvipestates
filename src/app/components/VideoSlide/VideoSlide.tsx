@@ -9,10 +9,10 @@ import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
   videoId: string;
-  posterImage: ImageAlt;
+  videoPreview: ImageAlt;
 };
 
-const VideoSlide: FC<Props> = ({ videoId, posterImage }) => {
+const VideoSlide: FC<Props> = ({ videoId, videoPreview }) => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const playerRef = useRef<YouTubePlayer | null>(null);
 
@@ -49,7 +49,7 @@ const VideoSlide: FC<Props> = ({ videoId, posterImage }) => {
         {!isVideoPlaying && (
           <>
             <Image
-              src={urlFor(posterImage).url()}
+              src={urlFor(videoPreview).url()}
               alt={videoId}
               width={1920}
               height={1080}

@@ -17,9 +17,10 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 type Props = {
   images: ImageAlt[];
   videoId?: string;
+  videoPreview?: ImageAlt;
 };
 
-const PropertySlider: FC<Props> = ({ images, videoId }) => {
+const PropertySlider: FC<Props> = ({ images, videoId, videoPreview }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
   return (

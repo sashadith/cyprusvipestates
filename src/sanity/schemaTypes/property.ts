@@ -58,6 +58,31 @@ const property = {
           .error("Name should be less than 200 characters"),
     }),
     defineField({
+      name: "excerpt",
+      title: "Excerpt",
+      type: "text",
+      rows: 3,
+      validation: (Rule) =>
+        Rule.required()
+          .max(200)
+          .error("Excerpt should be less than 200 characters"),
+    }),
+    defineField({
+      name: "previewImage",
+      title: "Preview image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+        },
+      ],
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "localizedSlug",
@@ -72,6 +97,11 @@ const property = {
       name: "videoId",
       title: "YouTube Video ID",
       type: "string",
+    }),
+    defineField({
+      name: "videoPreview",
+      title: "Video preview",
+      type: "image",
     }),
     defineField({
       name: "images",

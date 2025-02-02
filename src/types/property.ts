@@ -46,8 +46,11 @@ export type Property = {
   _type: "property";
   seo: Seo;
   title: string;
+  excerpt: string;
+  previewImage: ImageAlt;
   price: number;
   videoId?: string;
+  videoPreview?: ImageAlt;
   images: ImageAlt[];
   address: string;
   city: string;

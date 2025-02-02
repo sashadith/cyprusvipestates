@@ -16,6 +16,7 @@ import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import PropertySlider from "@/app/components/PropertySlider/PropertySlider";
 import PropertyFeatures from "@/app/components/PropertyFeatures/PropertyFeatures";
+import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -89,10 +90,14 @@ const PropertyPage = async ({ params }: Props) => {
 
   return (
     <>
-      <Header params={params} translations={translations} />
-      <PropertySlider images={property.images} videoId={property.videoId} />
+      <HeaderWrapper>
+        <Header params={params} translations={translations} />
+      </HeaderWrapper>
+      {/* <PropertySlider images={property.images} videoId={property.videoId} /> */}
       <PropertyIntro
         title={property.title}
+        excerpt={property.excerpt}
+        previewImage={property.previewImage}
         price={property.price}
         images={property.images}
         videoId={property.videoId}
