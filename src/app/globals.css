@@ -222,16 +222,12 @@ body {
   }
 }
 
-.property-description {
-  /* flex-basis: 65%; */
-}
-
 .property-features {
   
   @media screen and (min-width: 768px) {
     flex: 1 0 38%;
     padding-left: 50px;
-    border-left: 4px solid #aa7f2e;
+    border-left: 3px solid #aa7f2e;
   }
 }
 
