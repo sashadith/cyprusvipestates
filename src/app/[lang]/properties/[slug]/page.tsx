@@ -99,12 +99,6 @@ const PropertyPage = async ({ params }: Props) => {
         title={property.title}
         excerpt={property.excerpt}
         previewImage={property.previewImage}
-        price={property.price}
-        images={property.images}
-        videoId={property.videoId}
-        floorSize={property.floorSize}
-        rooms={property.rooms}
-        lang={lang}
       />
       <div className="container">
         <div className="property-content">
@@ -125,7 +119,7 @@ const PropertyPage = async ({ params }: Props) => {
             </div>
           </div>
           <div className="property-features">
-            <PropertyFeatures
+            {/* <PropertyFeatures
               city={property.city}
               district={property.district}
               type={property.type}
@@ -135,11 +129,11 @@ const PropertyPage = async ({ params }: Props) => {
               hasPool={property.hasPool}
               price={property.price}
               lang={lang}
-            />
+            /> */}
           </div>
         </div>
       </div>
-      <PropertyDistances distances={property.distances || {}} />
+      {/* <PropertyDistances distances={property.distances || {}} /> */}
       <MapWithNoSSR lat={property.location.lat} lng={property.location.lng} />
       <Footer params={params} />
       <ModalBrochure lang={params.lang} formDocument={formDocument} />
