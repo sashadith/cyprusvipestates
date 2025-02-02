@@ -1,196 +1,170 @@
 import React, { FC } from "react";
 import styles from "./PropertyFeatures.module.scss";
 import { PropertyType } from "@/types/homepage";
+import { KeyFeatures } from "@/types/project";
 
 type Props = {
-  city: string;
-  district: string;
-  type: PropertyType;
-  rooms: number;
-  floorSize: number;
-  hasParking?: boolean;
-  hasPool?: boolean;
+  keyFeatures: KeyFeatures;
   lang: string;
 };
 
-const PropertyFeatures: FC<Props> = ({
-  city,
-  district,
-  type,
-  rooms,
-  floorSize,
-  hasParking,
-  hasPool,
-  lang,
-}) => {
+const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
   return (
     <section className={styles.propertyFeatures}>
-      <div className="container">
-        <div className={styles.propertyFeaturesInner}>
-          <p className={styles.featuresTitle}>
-            {lang === "en"
-              ? "Property Features"
-              : lang === "de"
-                ? "Eigenschaften der Immobilie"
-                : lang === "pl"
-                  ? "Cechy nieruchomości"
-                  : lang === "ru"
-                    ? "Характеристики недвижимости"
-                    : "Property Features"}
-          </p>
-          <div className={styles.features}>
-            <div className={styles.featuresWrapper}>
-              <div className={styles.feature}>
-                <div className={styles.featureText}>
-                  {lang === "en"
-                    ? "City"
-                    : lang === "de"
-                      ? "Stadt"
-                      : lang === "pl"
-                        ? "Miasto"
-                        : lang === "ru"
-                          ? "Город"
-                          : "City"}
-                </div>
-                {city ? (
-                  <div className={styles.featureValue}>{city}</div>
-                ) : (
-                  <div className={styles.featureNoValue}>
-                    {lang === "en"
-                      ? "Not available"
-                      : lang === "de"
-                        ? "Nicht verfügbar"
-                        : lang === "pl"
-                          ? "Niedostępne"
-                          : lang === "ru"
-                            ? "Недоступно"
-                            : "Not available"}
-                  </div>
-                )}
+      <div className={styles.propertyFeaturesInner}>
+        <p className={styles.featuresTitle}>
+          {lang === "en"
+            ? "Key features"
+            : lang === "de"
+              ? "Hauptmerkmale"
+              : lang === "pl"
+                ? "Kluczowe cechy"
+                : lang === "ru"
+                  ? "Основные характеристики"
+                  : "Key features"}
+        </p>
+        <div className={styles.features}>
+          <div className={styles.featuresWrapper}>
+            <div className={styles.feature}>
+              <div className={styles.featureText}>
+                {lang === "en"
+                  ? "City"
+                  : lang === "de"
+                    ? "Stadt"
+                    : lang === "pl"
+                      ? "Miasto"
+                      : lang === "ru"
+                        ? "Город"
+                        : "City"}
               </div>
-              <div className={styles.feature}>
-                <div className={styles.featureText}>
+              {keyFeatures.city ? (
+                <div className={styles.featureValue}>{keyFeatures.city}</div>
+              ) : (
+                <div className={styles.featureNoValue}>
                   {lang === "en"
-                    ? "District"
+                    ? "Not available"
                     : lang === "de"
-                      ? "Bezirk"
+                      ? "Nicht verfügbar"
                       : lang === "pl"
-                        ? "Dzielnica"
+                        ? "Niedostępne"
                         : lang === "ru"
-                          ? "Район"
-                          : "District"}
-                </div>
-                {district ? (
-                  <div className={styles.featureValue}>{district}</div>
-                ) : (
-                  <div className={styles.featureNoValue}>
-                    {lang === "en"
-                      ? "Not available"
-                      : lang === "de"
-                        ? "Nicht verfügbar"
-                        : lang === "pl"
-                          ? "Niedostępne"
-                          : lang === "ru"
-                            ? "Недоступно"
-                            : "Not available"}
-                  </div>
-                )}
-              </div>
-              <div className={styles.feature}>
-                <div className={styles.featureText}>
-                  {lang === "en"
-                    ? "Type"
-                    : lang === "de"
-                      ? "Typ"
-                      : lang === "pl"
-                        ? "Typ"
-                        : lang === "ru"
-                          ? "Тип"
-                          : "Type"}
-                </div>
-                <div className={styles.featureValue}>{type}</div>
-              </div>
-              <div className={styles.feature}>
-                <div className={styles.featureText}>
-                  {lang === "en"
-                    ? "Rooms"
-                    : lang === "de"
-                      ? "Zimmer"
-                      : lang === "pl"
-                        ? "Pokoje"
-                        : lang === "ru"
-                          ? "Комнаты"
-                          : "Rooms"}
-                </div>
-                <div className={styles.featureValue}>{rooms}</div>
-              </div>
-              <div className={styles.feature}>
-                <div className={styles.featureText}>
-                  {lang === "en"
-                    ? "Floor size"
-                    : lang === "de"
-                      ? "Größe"
-                      : lang === "pl"
-                        ? "Rozmiar"
-                        : lang === "ru"
-                          ? "Размер"
-                          : "Floor size"}
-                </div>
-                <div className={styles.featureValue}>{floorSize} m²</div>
-              </div>
-              {hasParking && (
-                <div className={styles.feature}>
-                  <div className={styles.featureText}>
-                    {lang === "en"
-                      ? "Parking"
-                      : lang === "de"
-                        ? "Parkplatz"
-                        : lang === "pl"
-                          ? "Parking"
-                          : lang === "ru"
-                            ? "Парковка"
-                            : "Parking"}
-                  </div>
-                  <div className={styles.featureValue}>
-                    {lang === "en"
-                      ? "Yes"
-                      : lang === "de"
-                        ? "Ja"
-                        : lang === "pl"
-                          ? "Tak"
-                          : lang === "ru"
-                            ? "Да"
-                            : "Yes"}
-                  </div>
-                </div>
-              )}
-              {hasPool && (
-                <div className={styles.feature}>
-                  <div className={styles.featureText}>
-                    {lang === "en"
-                      ? "Pool"
-                      : lang === "de"
-                        ? "Schwimmbad"
-                        : lang === "pl"
-                          ? "Basen"
-                          : lang === "ru"
-                            ? "Бассейн"
-                            : "Pool"}
-                  </div>
-                  <div className={styles.featureValue}>
-                    {lang === "en"
-                      ? "Yes"
-                      : lang === "de"
-                        ? "Ja"
-                        : lang === "pl"
-                          ? "Tak"
-                          : lang === "ru"
-                            ? "Да"
-                            : "Yes"}
-                  </div>
+                          ? "Недоступно"
+                          : "Not available"}
                 </div>
               )}
             </div>
+            <div className={styles.feature}>
+              <div className={styles.featureText}>
+                {lang === "en"
+                  ? "Type"
+                  : lang === "de"
+                    ? "Typ"
+                    : lang === "pl"
+                      ? "Typ"
+                      : lang === "ru"
+                        ? "Тип"
+                        : "Type"}
+              </div>
+              {keyFeatures.propertyType ? (
+                <div className={styles.featureValue}>
+                  {keyFeatures.propertyType}
+                </div>
+              ) : (
+                <div className={styles.featureNoValue}>
+                  {lang === "en"
+                    ? "Not available"
+                    : lang === "de"
+                      ? "Nicht verfügbar"
+                      : lang === "pl"
+                        ? "Niedostępne"
+                        : lang === "ru"
+                          ? "Недоступно"
+                          : "Not available"}
+                </div>
+              )}
+            </div>
+            <div className={styles.feature}>
+              <div className={styles.featureText}>
+                {lang === "en"
+                  ? "Bedrooms"
+                  : lang === "de"
+                    ? "Schlafzimmer"
+                    : lang === "pl"
+                      ? "Sypialnie"
+                      : lang === "ru"
+                        ? "Спальни"
+                        : "Bedrooms"}
+              </div>
+              <div className={styles.featureValue}>{keyFeatures.bedrooms}</div>
+            </div>
+            <div className={styles.feature}>
+              <div className={styles.featureText}>
+                {lang === "en"
+                  ? "Covered area"
+                  : lang === "de"
+                    ? "Überdachte Fläche"
+                    : lang === "pl"
+                      ? "Powierzchnia zadaszona"
+                      : lang === "ru"
+                        ? "Площадь крытая"
+                        : "Covered area"}
+              </div>
+              <div className={styles.featureValue}>
+                {keyFeatures.coveredArea}
+              </div>
+            </div>
+            <div className={styles.feature}>
+              <div className={styles.featureText}>
+                {lang === "en"
+                  ? "Plot size"
+                  : lang === "de"
+                    ? "Grundstücksgröße"
+                    : lang === "pl"
+                      ? "Powierzchnia działki"
+                      : lang === "ru"
+                        ? "Площадь участка"
+                        : "Plot size"}
+              </div>
+              <div className={styles.featureValue}>
+                {keyFeatures.plotSize} m²
+              </div>
+            </div>
+            {keyFeatures.energyEfficiency && (
+              <div className={styles.feature}>
+                <div className={styles.featureText}>
+                  {lang === "en"
+                    ? "Energy efficiency"
+                    : lang === "de"
+                      ? "Energieeffizienz"
+                      : lang === "pl"
+                        ? "Efektywność energetyczna"
+                        : lang === "ru"
+                          ? "Энергоэффективность"
+                          : "Energy efficiency"}
+                </div>
+                <div className={styles.featureValue}>
+                  {keyFeatures.energyEfficiency}
+                </div>
+              </div>
+            )}
+            {keyFeatures.price && (
+              <div className={styles.feature}>
+                <div className={styles.featureText}>
+                  {lang === "en"
+                    ? "Price from (+VAT)"
+                    : lang === "de"
+                      ? "Preis ab (+MwSt)"
+                      : lang === "pl"
+                        ? "Cena od (+VAT)"
+                        : lang === "ru"
+                          ? "Цена от (+НДС)"
+                          : "Price from (+VAT)"}
+                </div>
+                <div className={styles.featureValue}>
+                  {keyFeatures.price.toLocaleString()} €
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

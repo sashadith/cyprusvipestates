@@ -10,10 +10,8 @@ type Props = {
 const PropertyDescription: FC<Props> = ({ description }) => {
   return (
     <section className={styles.propetryDescription}>
-      <div className="container">
-        <div className={styles.content}>
-          <PortableText value={description} components={RichText} />
-        </div>
+      <div className={styles.content}>
+        <PortableText value={description} components={RichText} />
       </div>
     </section>
   );

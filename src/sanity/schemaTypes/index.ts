@@ -7,6 +7,7 @@ import formStandardDocument from "./formStandardDocument";
 import header from "./header";
 import homepage from "./homepage";
 import localizedSlug from "./localizedSlug";
+import project from "./project";
 import propertiesPage from "./propertiesPage";
 import property from "./property";
 import singlepage from "./singlepage";
@@ -16,6 +17,7 @@ export const schemaTypes = [
   header,
   homepage,
   singlepage,
+  project,
   propertiesPage,
   property,
   footer,

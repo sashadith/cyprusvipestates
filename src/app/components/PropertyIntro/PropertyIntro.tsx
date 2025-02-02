@@ -23,25 +23,9 @@ type Props = {
   title: string;
   excerpt: string;
   previewImage: ImageAlt;
-  price: number;
-  images: ImageAlt[];
-  videoId?: string;
-  floorSize: number;
-  rooms: number;
-  lang: string;
 };
 
-const PropertyIntro: FC<Props> = ({
-  title,
-  excerpt,
-  previewImage,
-  price,
-  images,
-  videoId,
-  floorSize,
-  rooms,
-  lang,
-}) => {
+const PropertyIntro: FC<Props> = ({ title, excerpt, previewImage }) => {
   // console.log("data", excerpt, previewImage);
   return (
     <section className={styles.popertyIntro}>

@@ -40,6 +40,7 @@ const PropertyMap: FC<Props> = ({ lat, lng }) => {
         center={[lat, lng]}
         zoom={16}
         scrollWheelZoom={true}
+        attributionControl={false}
         style={{ height: "100%", width: "100%" }}
       >
         {/* Черно-белая тема для карты */}

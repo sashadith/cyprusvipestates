@@ -2,7 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import {
   getFormStandardDocumentByLang,
-  getPropertyByLang,
+  getProjectByLang,
 } from "@/sanity/sanity.utils";
 import Header from "@/app/components/Header/Header";
 import Footer from "@/app/components/Footer/Footer";
@@ -25,7 +25,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = params;
-  const data = await getPropertyByLang(lang, slug);
+  const data = await getProjectByLang(lang, slug);
 
   return {
     title: data?.seo.metaTitle,
@@ -33,11 +33,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const PropertyPage = async ({ params }: Props) => {
+const ProjectPage = async ({ params }: Props) => {
   const { lang, slug } = params;
-  const property = await getPropertyByLang(lang, slug);
+  const project = await getProjectByLang(lang, slug);
 
-  if (!property) {
+  if (!project) {
     return null;
   }
 
@@ -46,7 +46,7 @@ const PropertyPage = async ({ params }: Props) => {
 
   const propertyPageTranslationSlugs: {
     [key: string]: { current: string };
-  }[] = property?._translations.map((item) => {
+  }[] = project?._translations.map((item) => {
     const newItem: { [key: string]: { current: string } } = {};
 
     for (const key in item.slug) {
@@ -76,7 +76,7 @@ const PropertyPage = async ({ params }: Props) => {
           ...acc,
           {
             language: lang.id,
-            path: `/${lang.id}/property/${translationSlug}`,
+            path: `/${lang.id}/project/${translationSlug}`,
           },
         ]
       : acc;
@@ -96,20 +96,14 @@ const PropertyPage = async ({ params }: Props) => {
       </HeaderWrapper>
       {/* <PropertySlider images={property.images} videoId={property.videoId} /> */}
       <PropertyIntro
-        title={property.title}
-        excerpt={property.excerpt}
-        previewImage={property.previewImage}
-        price={property.price}
-        images={property.images}
-        videoId={property.videoId}
-        floorSize={property.floorSize}
-        rooms={property.rooms}
-        lang={lang}
+        title={project.title}
+        excerpt={project.excerpt}
+        previewImage={project.previewImage}
       />
       <div className="container">
         <div className="property-content">
           <div className="property-description">
-            <PropertyDescription description={property.description} />
+            <PropertyDescription description={project.description} />
             <div className="property-button">
               <ButtonModal>
                 {lang === "en"
@@ -125,26 +119,16 @@ const PropertyPage = async ({ params }: Props) => {
             </div>
           </div>
           <div className="property-features">
-            <PropertyFeatures
-              city={property.city}
-              district={property.district}
-              type={property.type}
-              rooms={property.rooms}
-              floorSize={property.floorSize}
-              hasParking={property.hasParking}
-              hasPool={property.hasPool}
-              price={property.price}
-              lang={lang}
-            />
+            <PropertyFeatures keyFeatures={project.keyFeatures} lang={lang} />
           </div>
         </div>
       </div>
-      <PropertyDistances distances={property.distances || {}} />
-      <MapWithNoSSR lat={property.location.lat} lng={property.location.lng} />
+      <PropertyDistances distances={project.distances || []} />
+      <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
       <Footer params={params} />
       <ModalBrochure lang={params.lang} formDocument={formDocument} />
     </>
   );
 };
 
-export default PropertyPage;
+export default ProjectPage;

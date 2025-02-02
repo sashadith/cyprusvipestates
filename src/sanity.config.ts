@@ -28,6 +28,7 @@ export default defineConfig({
         "singlepage",
         "property",
         "propertiesPage",
+        "project",
       ],
     }),
   ],
@@ -46,6 +47,7 @@ export default defineConfig({
             "singlepage",
             "property",
             "propertiesPage",
+            "project",
           ].includes(template.id)
       ),
   },

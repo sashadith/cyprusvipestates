@@ -9,9 +9,12 @@ import {
   FaSchool,
   FaGolfBallTee,
 } from "react-icons/fa6";
+import { DistanceItem } from "@/types/project";
+import Image from "next/image";
+import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
-  distances: Distances;
+  distances: DistanceItem[];
 };
 
 const PropertyDistances: FC<Props> = ({ distances }) => {
@@ -19,6 +22,25 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
     <section className={styles.propertyDistances}>
       <div className="container">
         <div className={styles.distances}>
+          {distances.map((distance) => (
+            <div key={distance._key} className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt={distance.icon.alt || ""}
+                  src={urlFor(distance.icon).url()}
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceLabel}>{distance.label}</p>
+                <p className={styles.distanceValue}>{distance.value}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* <div className={styles.distances}>
           <div className={styles.distance}>
             <FaMapLocationDot fontSize="2.5rem" color="#aa7f2e" />
             <p className={styles.distanceText}>
@@ -51,7 +73,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               {distances.toGolf} to golf court
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
