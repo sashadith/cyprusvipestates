@@ -68,8 +68,8 @@ const ProjectSlider: FC<Props> = ({ images }) => {
         }}
         slidesPerView={4}
         spaceBetween={20}
-        pagination={{ clickable: true }}
-        modules={[Navigation, Pagination, Controller]}
+        // pagination={{ clickable: true }}
+        modules={[Navigation, Controller]}
         breakpoints={{
           0: {
             slidesPerView: 1.2,
