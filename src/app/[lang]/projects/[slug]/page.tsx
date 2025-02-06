@@ -18,6 +18,7 @@ import PropertySlider from "@/app/components/PropertySlider/PropertySlider";
 import PropertyFeatures from "@/app/components/PropertyFeatures/PropertyFeatures";
 import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { ButtonModal } from "@/app/components/ButtonModal/ButtonModal";
+import ProjectSlider from "@/app/components/ProjectSlider/ProjectSlider";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -94,12 +95,15 @@ const ProjectPage = async ({ params }: Props) => {
       <HeaderWrapper>
         <Header params={params} translations={translations} />
       </HeaderWrapper>
-      {/* <PropertySlider images={property.images} videoId={property.videoId} /> */}
+      {/* <PropertySlider images={project.images} videoId={project.videoId} /> */}
       <PropertyIntro
         title={project.title}
         excerpt={project.excerpt}
         previewImage={project.previewImage}
       />
+      <div className="container">
+        <ProjectSlider images={project.images} />
+      </div>
       <div className="container">
         <div className="property-content">
           <div className="property-description">

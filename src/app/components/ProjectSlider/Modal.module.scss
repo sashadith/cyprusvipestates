@@ -1,0 +1,91 @@
+/* Modal.module.scss */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); // затемнение фона
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; // убедитесь, что z-index выше остальных элементов
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.modalContent {
+  position: relative;
+  // background: #fff;
+  width: 90%;
+  max-width: 90%;
+  // border-radius: 10px;
+  // padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  font-size: 3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #aa7f2e;
+  }
+}
+
+.fullscreenSlider {
+  width: 100%;
+  height: 90dvh; // Высота слайдера, можно настроить под ваши нужды
+  margin-top: 40px;
+  position: relative;
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.fullscreenImage {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  aspect-ratio: 16/9;
+}
+
+.modalNavButtons {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none; // чтобы кнопки не мешали кликам по слайдам
+
+  button {
+    pointer-events: auto; // включаем события для кнопок
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #aa7f2e;
+    }
+  }
+}
