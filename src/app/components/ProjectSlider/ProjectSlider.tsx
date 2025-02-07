@@ -140,7 +140,7 @@ const ProjectSlider: FC<Props> = ({ images }) => {
             <SwiperSlide key={index}>
               <Image
                 src={urlFor(image).url()}
-                alt={image.alt || "default alt text"}
+                alt={image.alt || "Cyprus VIP Estate Project"}
                 className={modalStyles.fullscreenImage}
                 fill={true}
               />

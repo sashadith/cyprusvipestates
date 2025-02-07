@@ -10,6 +10,8 @@ type PropertyTypeClassification =
 
 type MarketType = "Primary" | "Secondary";
 
+type Cities = "Paphos" | "Limassol" | "Larnaca";
+
 type EnergyEfficiency = "A" | "B" | "C" | "D" | "E" | "F" | "G";
 
 export type ImageAlt = {
@@ -22,6 +24,13 @@ export type ImageAlt = {
   };
 };
 
+export type Developer = {
+  _key: string;
+  _type: string;
+  name: string;
+  logo: ImageAlt;
+};
+
 export type GeoPoint = {
   _type: "geopoint";
   lat: number;
@@ -30,7 +39,7 @@ export type GeoPoint = {
 };
 
 export type KeyFeatures = {
-  city: string;
+  city: Cities;
   propertyType: PropertyType;
   bedrooms: string;
   coveredArea: string;
@@ -75,6 +84,7 @@ export type Project = {
   images: ImageAlt[];
   description: any;
   location: GeoPoint;
+  developer: Developer;
   keyFeatures: KeyFeatures;
   distances?: DistanceItem[];
   // isActual: boolean;

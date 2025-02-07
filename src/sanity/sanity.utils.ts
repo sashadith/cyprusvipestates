@@ -187,6 +187,7 @@ export async function getProjectByLang(
     images,
     description,
     location,
+    developer,
     keyFeatures,
     distances[]{
       _key,

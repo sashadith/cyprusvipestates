@@ -38,6 +38,12 @@ export const propertyType = [
   { title: "Exclusive", value: "Exclusive" },
 ];
 
+const cities = [
+  { title: "Paphos", value: "Paphos" },
+  { title: "Limassol", value: "Limassol" },
+  { title: "Larnaca", value: "Larnaca" },
+];
+
 export const market = [
   { title: "Primary", value: "Primary" },
   { title: "Secondary", value: "Secondary" },
@@ -154,6 +160,33 @@ const project = {
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "developer",
+      title: "Developer",
+      type: "object",
+      fields: [
+        {
+          name: "name",
+          title: "Name",
+          type: "string",
+        },
+        {
+          name: "logo",
+          title: "Logo",
+          type: "image",
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: "alt",
+              title: "Alt Text",
+              type: "string",
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: "keyFeatures",
       title: "Key features",
       type: "object",
@@ -162,6 +195,9 @@ const project = {
           name: "city",
           title: "City",
           type: "string",
+          options: {
+            list: cities,
+          },
         },
         {
           name: "propertyType",
