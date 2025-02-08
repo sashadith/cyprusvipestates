@@ -6,6 +6,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
 import { defaultLocale } from "@/i18n.config";
 import styles from "./ProjectSameCity.module.scss";
+import ProjectLink from "../ProjectLink/ProjectLink";
 
 type Props = {
   lang: string;
@@ -48,37 +49,17 @@ const ProjectSameCity = async ({ lang, city, currentProjectId }: Props) => {
                 ? `/projects/${project.slug.current}`
                 : `/${lang}/projects/${project.slug.current}`;
             return (
-              <Link
+              <ProjectLink
                 key={project._id}
-                href={projectUrl}
-                className={styles.project}
-              >
-                <div className={styles.overlay}></div>
-                <div className={styles.projectImage}>
-                  <Image
-                    src={urlFor(project.previewImage).url()}
-                    alt={project.previewImage.alt || project.title}
-                    className={styles.image}
-                    fill={true}
-                  />
-                </div>
-                <div className={styles.projectInfo}>
-                  <p className={styles.projectTitle}>{project.title}</p>
-                  <p className={styles.projectPrice}>
-                    {lang === "en"
-                      ? "Price from"
-                      : lang === "de"
-                        ? "Preis ab"
-                        : lang === "pl"
-                          ? "Cena od"
-                          : lang === "ru"
-                            ? "Цена от"
-                            : "Price from"}
-                    &nbsp;
-                    {project.keyFeatures.price.toLocaleString()} €
-                  </p>
-                </div>
-              </Link>
+                url={projectUrl}
+                previewImage={project.previewImage}
+                title={project.title}
+                price={project.keyFeatures.price}
+                bedrooms={project.keyFeatures.bedrooms}
+                coveredArea={project.keyFeatures.coveredArea}
+                plotSize={project.keyFeatures.plotSize}
+                lang={lang}
+              />
             );
           })}
         </div>

@@ -78,7 +78,7 @@ const ProjectPage = async ({ params }: Props) => {
           ...acc,
           {
             language: lang.id,
-            path: `/${lang.id}/project/${translationSlug}`,
+            path: `/${lang.id}/projects/${translationSlug}`,
           },
         ]
       : acc;
@@ -131,7 +131,7 @@ const ProjectPage = async ({ params }: Props) => {
       <PropertyDistances distances={project.distances || []} />
       <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
       <ProjectSameCity
-        lang={params.lang as "en" | "de" | "pl" | "ru"}
+        lang={params.lang}
         city={project.keyFeatures.city}
         currentProjectId={project._id}
       />

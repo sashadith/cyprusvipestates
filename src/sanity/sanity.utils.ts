@@ -243,6 +243,95 @@ export async function getThreeProjectsBySameCity(
   return shuffledProjects.slice(0, 3);
 }
 
+// Функция для получения списка проектов с фильтрами и пагинацией
+export async function getFilteredProjects(
+  lang: string,
+  skip: number,
+  limit: number,
+  filters: {
+    city?: string;
+    priceFrom?: number | null;
+    priceTo?: number | null;
+    roomsFrom?: number | null;
+    roomsTo?: number | null;
+  }
+) {
+  const {
+    city = "",
+    priceFrom = null,
+    priceTo = null,
+    roomsFrom = null,
+    roomsTo = null,
+  } = filters;
+  const query = groq`
+    *[
+      _type == "project" &&
+      language == $lang &&
+      ($city == "" || keyFeatures.city == $city) &&
+      ($priceFrom == null || price >= $priceFrom) &&
+      ($priceTo == null || price <= $priceTo) &&
+      ($roomsFrom == null || keyFeatures.bedrooms >= $roomsFrom) &&
+      ($roomsTo == null || keyFeatures.bedrooms <= $roomsTo)
+    ] | order(price asc)[${skip}...${skip + limit}]{
+      _id,
+      title,
+      "slug": slug[$lang],
+      previewImage,
+      keyFeatures,
+      price
+    }
+  `;
+  return await client.fetch(query, {
+    lang,
+    city,
+    priceFrom,
+    priceTo,
+    roomsFrom,
+    roomsTo,
+  });
+}
+
+// Функция для получения общего количества отфильтрованных проектов
+export async function getFilteredProjectsCount(
+  lang: string,
+  filters: {
+    city?: string;
+    priceFrom?: number | null;
+    priceTo?: number | null;
+    roomsFrom?: number | null;
+    roomsTo?: number | null;
+  }
+) {
+  const {
+    city = "",
+    priceFrom = null,
+    priceTo = null,
+    roomsFrom = null,
+    roomsTo = null,
+  } = filters;
+  const query = groq`
+    count(
+      *[
+        _type == "project" &&
+        language == $lang &&
+        ($city == "" || keyFeatures.city == $city) &&
+        ($priceFrom == null || price >= $priceFrom) &&
+        ($priceTo == null || price <= $priceTo) &&
+        ($roomsFrom == null || keyFeatures.bedrooms >= $roomsFrom) &&
+        ($roomsTo == null || keyFeatures.bedrooms <= $roomsTo)
+      ]
+    )
+  `;
+  return await client.fetch(query, {
+    lang,
+    city,
+    priceFrom,
+    priceTo,
+    roomsFrom,
+    roomsTo,
+  });
+}
+
 export async function getAllProperties(lang: string) {
   const query = groq`*[_type == "property" && language == $lang] | order(publishedAt desc) {
     _id,
