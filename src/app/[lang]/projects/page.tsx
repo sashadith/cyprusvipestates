@@ -7,6 +7,8 @@ import {
 } from "@/sanity/sanity.utils";
 import { defaultLocale } from "@/i18n.config";
 import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
+import ProjectFilters from "@/app/components/ProjectFilters/ProjectFilters";
+import NoProjects from "@/app/components/NoProjects/NoProjects";
 
 // Размер страницы — сколько проектов выводить на одной странице
 const PAGE_SIZE = 10;
@@ -78,150 +80,45 @@ export default async function ProjectsPage({
                     : "Luxury Real Estate Projects in Cyprus"}
           </h1>
 
-          {/* Форма для фильтрации */}
-          <form method="get" style={{ marginBottom: "1rem" }}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-              <div>
-                <label htmlFor="city">
-                  {lang === "en"
-                    ? "City"
-                    : lang === "de"
-                      ? "Stadt"
-                      : lang === "pl"
-                        ? "Miasto"
-                        : lang === "ru"
-                          ? "Город"
-                          : "City"}
-                  :{" "}
-                </label>
-                <select name="city" id="city" defaultValue={city}>
-                  <option value="">
-                    {lang === "en"
-                      ? "All cities"
-                      : lang === "de"
-                        ? "Alle Städte"
-                        : lang === "pl"
-                          ? "Wszystkie miasta"
-                          : lang === "ru"
-                            ? "Все города"
-                            : "All cities"}
-                  </option>
-                  <option value="Paphos">
-                    {lang === "en"
-                      ? "Paphos"
-                      : lang === "de"
-                        ? "Paphos"
-                        : lang === "pl"
-                          ? "Pafos"
-                          : lang === "ru"
-                            ? "Пафос"
-                            : "Paphos"}
-                  </option>
-                  <option value="Limassol">
-                    {lang === "en"
-                      ? "Limassol"
-                      : lang === "de"
-                        ? "Limassol"
-                        : lang === "pl"
-                          ? "Limassol"
-                          : lang === "ru"
-                            ? "Лимассол"
-                            : "Limassol"}
-                  </option>
-                  <option value="Larnaca">
-                    {lang === "en"
-                      ? "Larnaca"
-                      : lang === "de"
-                        ? "Larnaca"
-                        : lang === "pl"
-                          ? "Larnaca"
-                          : lang === "ru"
-                            ? "Ларнака"
-                            : "Larnaca"}
-                  </option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="priceFrom">Price from: </label>
-                <input
-                  type="number"
-                  name="priceFrom"
-                  id="priceFrom"
-                  defaultValue={priceFrom || ""}
-                />
-              </div>
-              <div>
-                <label htmlFor="priceTo">Price to: </label>
-                <input
-                  type="number"
-                  name="priceTo"
-                  id="priceTo"
-                  defaultValue={priceTo || ""}
-                />
-              </div>
-              <div>
-                <label htmlFor="roomsFrom">Rooms from: </label>
-                <input
-                  type="number"
-                  name="roomsFrom"
-                  id="roomsFrom"
-                  defaultValue={roomsFrom || ""}
-                />
-              </div>
-              <div>
-                <label htmlFor="roomsTo">Rooms to: </label>
-                <input
-                  type="number"
-                  name="roomsTo"
-                  id="roomsTo"
-                  defaultValue={roomsTo || ""}
-                />
-              </div>
-            </div>
-            {/* Кнопка для отправки формы (старта фильтрации) */}
-            <div style={{ marginTop: "1rem", color: "blue" }}>
-              <button type="submit">
-                {lang === "en"
-                  ? "Apply filters"
-                  : lang === "de"
-                    ? "Filter anwenden"
-                    : lang === "pl"
-                      ? "Zastosuj filtry"
-                      : lang === "ru"
-                        ? "Применить фильтры"
-                        : "Apply filters"}
-              </button>
-            </div>
-          </form>
+          <ProjectFilters
+            lang={lang}
+            city={city}
+            priceFrom={priceFrom}
+            priceTo={priceTo}
+            roomsFrom={roomsFrom}
+            roomsTo={roomsTo}
+          />
         </div>
-
         <div className="container">
-          {/* Список проектов */}
-          <div className="projects">
-            {projects.map((project: any) => {
-              // Формируем URL для проекта: если текущий язык совпадает с defaultLocale, префикс не добавляем
-              const projectUrl =
-                lang === defaultLocale
-                  ? `/projects/${project.slug.current}`
-                  : `/${lang}/projects/${project.slug.current}`;
+          {/* Список проектов или сообщение, если ничего не найдено */}
+          {projects.length === 0 ? (
+            <NoProjects lang={lang} />
+          ) : (
+            <div className="projects">
+              {projects.map((project: any) => {
+                // Формирование URL для проекта: если текущий язык совпадает с defaultLocale, префикс не добавляем
+                const projectUrl =
+                  lang === defaultLocale
+                    ? `/projects/${project.slug.current}`
+                    : `/${lang}/projects/${project.slug.current}`;
 
-              return (
-                <ProjectLink
-                  key={project._id}
-                  url={projectUrl}
-                  previewImage={project.previewImage}
-                  title={project.title}
-                  price={project.keyFeatures.price}
-                  bedrooms={project.keyFeatures.bedrooms}
-                  coveredArea={project.keyFeatures.coveredArea}
-                  plotSize={project.keyFeatures.plotSize}
-                  lang={lang}
-                />
-              );
-            })}
-          </div>
+                return (
+                  <ProjectLink
+                    key={project._id}
+                    url={projectUrl}
+                    previewImage={project.previewImage}
+                    title={project.title}
+                    price={project.keyFeatures.price}
+                    bedrooms={project.keyFeatures.bedrooms}
+                    coveredArea={project.keyFeatures.coveredArea}
+                    plotSize={project.keyFeatures.plotSize}
+                    lang={lang}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
-
         {/* Пагинация */}
         <div style={{ marginTop: "2rem" }}>
           {Array.from({ length: totalPages }, (_, index) => {
