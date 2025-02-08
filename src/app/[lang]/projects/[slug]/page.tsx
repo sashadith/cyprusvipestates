@@ -19,6 +19,7 @@ import PropertyFeatures from "@/app/components/PropertyFeatures/PropertyFeatures
 import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { ButtonModal } from "@/app/components/ButtonModal/ButtonModal";
 import ProjectSlider from "@/app/components/ProjectSlider/ProjectSlider";
+import ProjectSameCity from "@/app/components/ProjectSameCity/ProjectSameCity";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -129,6 +130,12 @@ const ProjectPage = async ({ params }: Props) => {
       </div>
       <PropertyDistances distances={project.distances || []} />
       <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
+      <ProjectSameCity
+        lang={params.lang as "en" | "de" | "pl" | "ru"}
+        city={project.keyFeatures.city}
+        currentProjectId={project._id}
+      />
+
       <Footer params={params} />
       <ModalBrochure lang={params.lang} formDocument={formDocument} />
     </>

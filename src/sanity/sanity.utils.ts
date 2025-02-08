@@ -215,6 +215,34 @@ export async function getProjectByLang(
   return project;
 }
 
+export async function getThreeProjectsBySameCity(
+  lang: string,
+  city: string,
+  excludeProjectId?: string // чтобы исключить текущий проект
+) {
+  const query = groq`
+    *[
+      _type == "project" &&
+      keyFeatures.city == $city &&
+      language == $lang &&
+      ($excludeProjectId == null || _id != $excludeProjectId)
+    ]{
+      _id,
+      title,
+      "slug": slug[$lang],
+      previewImage,
+      keyFeatures
+    }
+  `;
+  const projects = await client.fetch(query, { lang, city, excludeProjectId });
+
+  // Перемешиваем полученный массив случайным образом
+  const shuffledProjects = projects.sort(() => Math.random() - 0.5);
+
+  // Берем ровно первые 4 проекта (если их меньше 4 – вернутся все)
+  return shuffledProjects.slice(0, 3);
+}
+
 export async function getAllProperties(lang: string) {
   const query = groq`*[_type == "property" && language == $lang] | order(publishedAt desc) {
     _id,

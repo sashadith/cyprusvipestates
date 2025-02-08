@@ -3,6 +3,34 @@ import styles from "./PropertyFeatures.module.scss";
 import { PropertyType } from "@/types/homepage";
 import { KeyFeatures } from "@/types/project";
 
+const cityTranslations: {
+  [city in "Paphos" | "Limassol" | "Larnaca"]: {
+    en: string;
+    de: string;
+    pl: string;
+    ru: string;
+  };
+} = {
+  Paphos: {
+    en: "Paphos",
+    de: "Paphos",
+    pl: "Pafos",
+    ru: "Пафос",
+  },
+  Limassol: {
+    en: "Limassol",
+    de: "Limassol",
+    pl: "Limassol",
+    ru: "Лимассол",
+  },
+  Larnaca: {
+    en: "Larnaca",
+    de: "Larnaca",
+    pl: "Larnaca",
+    ru: "Ларнака",
+  },
+};
+
 type Props = {
   keyFeatures: KeyFeatures;
   lang: string;
@@ -38,7 +66,16 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
                         : "City"}
               </div>
               {keyFeatures.city ? (
-                <div className={styles.featureValue}>{keyFeatures.city}</div>
+                <div className={styles.featureValue}>
+                  {(
+                    cityTranslations[keyFeatures.city] as {
+                      en: string;
+                      de: string;
+                      pl: string;
+                      ru: string;
+                    }
+                  )[lang as "en" | "de" | "pl" | "ru"] || keyFeatures.city}
+                </div>
               ) : (
                 <div className={styles.featureNoValue}>
                   {lang === "en"
