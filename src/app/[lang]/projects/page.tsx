@@ -110,10 +110,10 @@ export default async function ProjectsPage({
                     url={projectUrl}
                     previewImage={project.previewImage}
                     title={project.title}
-                    price={project.keyFeatures.price}
-                    bedrooms={project.keyFeatures.bedrooms}
-                    coveredArea={project.keyFeatures.coveredArea}
-                    plotSize={project.keyFeatures.plotSize}
+                    price={project.keyFeatures?.price || 0} // если keyFeatures отсутствует, будет 0 (или можно вывести "N/A")
+                    bedrooms={project.keyFeatures?.bedrooms || 0}
+                    coveredArea={project.keyFeatures?.coveredArea || 0}
+                    plotSize={project.keyFeatures?.plotSize || 0}
                     lang={lang}
                   />
                 );
