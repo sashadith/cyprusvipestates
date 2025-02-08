@@ -98,9 +98,11 @@ export default async function ProjectsPage({
               {projects.map((project: any) => {
                 // Формирование URL для проекта: если текущий язык совпадает с defaultLocale, префикс не добавляем
                 const projectUrl =
-                  lang === defaultLocale
-                    ? `/projects/${project.slug.current}`
-                    : `/${lang}/projects/${project.slug.current}`;
+                  project.slug && project.slug.current
+                    ? lang === defaultLocale
+                      ? `/projects/${project.slug.current}`
+                      : `/${lang}/projects/${project.slug.current}`
+                    : "#"; // или, например, пропустите такой проект
 
                 return (
                   <ProjectLink
