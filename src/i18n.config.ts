@@ -3,10 +3,10 @@ import { getRequestConfig } from "next-intl/server";
 
 // Here we set English as the default language
 const languages = [
-  { id: "en", title: "English" },
-  { id: "ru", title: "Russian" },
   { id: "de", title: "German", isDefault: true },
   { id: "pl", title: "Polish" },
+  { id: "en", title: "English" },
+  { id: "ru", title: "Russian" },
 ];
 
 export const i18n = {
