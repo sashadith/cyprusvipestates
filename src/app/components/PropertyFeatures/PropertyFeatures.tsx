@@ -37,6 +37,9 @@ type Props = {
 };
 
 const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
+  if (!keyFeatures) {
+    return <div>Нет данных о ключевых особенностях</div>;
+  }
   return (
     <section className={styles.propertyFeatures}>
       <div className={styles.propertyFeaturesInner}>
