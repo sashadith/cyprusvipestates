@@ -24,16 +24,16 @@ type SearchParams = {
 };
 
 type ProjectsPageProps = {
+  params: { lang: string };
   searchParams: SearchParams;
 };
 
 export default async function ProjectsPage({
+  params,
   searchParams,
 }: ProjectsPageProps) {
-  // В этом примере язык берём из defaultLocale; если у вас есть route-параметры, их можно использовать
-  const lang = defaultLocale;
+  const { lang } = params; // Используем язык из URL, а не defaultLocale
 
-  // Извлекаем параметры фильтрации и пагинации из searchParams
   const currentPage = Number(searchParams.page) || 1;
   const city = searchParams.city || "";
   const priceFrom = searchParams.priceFrom
@@ -47,7 +47,6 @@ export default async function ProjectsPage({
 
   const skip = (currentPage - 1) * PAGE_SIZE;
 
-  // Получаем список проектов и общее количество с учетом фильтров
   const projects = await getFilteredProjects(lang, skip, PAGE_SIZE, {
     city,
     priceFrom,
@@ -75,9 +74,7 @@ export default async function ProjectsPage({
                 ? "Luxusimmobilienprojekte in Zypern"
                 : lang === "pl"
                   ? "Luksusowe projekty nieruchomości na Cyprze"
-                  : lang === "ru"
-                    ? "Роскошные проекты недвижимости на Кипре"
-                    : "Luxury Real Estate Projects in Cyprus"}
+                  : "Luxury Real Estate Projects in Cyprus"}
           </h1>
 
           <ProjectFilters
@@ -90,27 +87,24 @@ export default async function ProjectsPage({
           />
         </div>
         <div className="container">
-          {/* Список проектов или сообщение, если ничего не найдено */}
           {projects.length === 0 ? (
             <NoProjects lang={lang} />
           ) : (
             <div className="projects">
               {projects.map((project: any) => {
-                // Формирование URL для проекта: если текущий язык совпадает с defaultLocale, префикс не добавляем
                 const projectUrl =
                   project.slug && project.slug.current
                     ? lang === defaultLocale
                       ? `/projects/${project.slug.current}`
                       : `/${lang}/projects/${project.slug.current}`
-                    : "#"; // или, например, пропустите такой проект
-
+                    : "#";
                 return (
                   <ProjectLink
                     key={project._id}
                     url={projectUrl}
                     previewImage={project.previewImage}
                     title={project.title}
-                    price={project.keyFeatures?.price ?? project.price ?? 0} // если keyFeatures отсутствует, можно взять project.price или установить значение по умолчанию
+                    price={project.keyFeatures?.price ?? project.price ?? 0}
                     bedrooms={project.keyFeatures?.bedrooms ?? 0}
                     coveredArea={project.keyFeatures?.coveredArea ?? 0}
                     plotSize={project.keyFeatures?.plotSize ?? 0}
@@ -121,11 +115,9 @@ export default async function ProjectsPage({
             </div>
           )}
         </div>
-        {/* Пагинация */}
         <div style={{ marginTop: "2rem" }}>
           {Array.from({ length: totalPages }, (_, index) => {
             const pageNum = index + 1;
-            // Сохраняем текущие фильтры в URL-параметрах
             const href =
               `?page=${pageNum}` +
               (city ? `&city=${city}` : "") +
