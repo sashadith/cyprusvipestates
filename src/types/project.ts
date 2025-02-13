@@ -49,22 +49,15 @@ export type KeyFeatures = {
   lang: string;
 };
 
-export type DistanceItem = {
-  _key: string;
-  _type: string;
-  label: string; // Например, "Distance to the beach"
-  value: string;
-  icon: ImageAlt;
-};
-
 export type Distances = {
-  toBeach?: string;
-  toShop?: string;
-  toAirport?: string;
-  toHospital?: string;
-  toSchool?: string;
-  toCenter?: string;
-  toGolf?: string;
+  beach: string;
+  shops: string;
+  airport: string;
+  hospital: string;
+  school: string;
+  cityCenter: string;
+  golfCourt: string;
+  restaurants: string;
 };
 
 export type Seo = {
@@ -86,7 +79,7 @@ export type Project = {
   location: GeoPoint;
   developer: Developer;
   keyFeatures: KeyFeatures;
-  distances?: DistanceItem[];
+  distances: Distances;
   // isActual: boolean;
   language: string;
   slug: {

@@ -1,20 +1,10 @@
-import { Distances } from "@/types/property";
 import React, { FC } from "react";
 import styles from "./PropertyDistances.module.scss";
-import {
-  FaMapLocationDot,
-  FaAnchor,
-  FaPlane,
-  FaBasketShopping,
-  FaSchool,
-  FaGolfBallTee,
-} from "react-icons/fa6";
-import { DistanceItem } from "@/types/project";
 import Image from "next/image";
-import { urlFor } from "@/sanity/sanity.client";
+import { Distances } from "@/types/project";
 
 type Props = {
-  distances: DistanceItem[];
+  distances: Distances;
 };
 
 const PropertyDistances: FC<Props> = ({ distances }) => {
@@ -22,58 +12,151 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
     <section className={styles.propertyDistances}>
       <div className="container">
         <div className={styles.distances}>
-          {distances.map((distance) => (
-            <div key={distance._key} className={styles.distance}>
+          {distances.beach && (
+            <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt={distance.icon.alt || ""}
-                  src={urlFor(distance.icon).url()}
+                  alt="Icon for beach"
+                  src="/icons/beach.png"
                   width={70}
                   height={70}
                   className={styles.image}
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceLabel}>{distance.label}</p>
-                <p className={styles.distanceValue}>{distance.value}</p>
+                <p className={styles.distanceValue}>
+                  {distances.beach} to beach
+                </p>
               </div>
             </div>
-          ))}
+          )}
+          {distances.shops && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt="Icon for shops"
+                  src="/icons/shops.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceValue}>
+                  {distances.shops} to shops
+                </p>
+              </div>
+            </div>
+          )}
+          {distances.airport && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt="Icon for airport"
+                  src="/icons/airport.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceValue}>
+                  {distances.airport} to airport
+                </p>
+              </div>
+            </div>
+          )}
+          {distances.hospital && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt="Icon for hospital"
+                  src="/icons/hospital.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceValue}>
+                  {distances.hospital} to hospital
+                </p>
+              </div>
+            </div>
+          )}
+          {distances.school && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt="Icon for school"
+                  src="/icons/school.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceValue}>
+                  {distances.school} to school
+                </p>
+              </div>
+            </div>
+          )}
+          {distances.cityCenter && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt="Icon for city center"
+                  src="/icons/city-center.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceValue}>
+                  {distances.cityCenter} to city center
+                </p>
+              </div>
+            </div>
+          )}
+          {distances.golfCourt && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt="Icon for golf court"
+                  src="/icons/golf-court.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceValue}>
+                  {distances.golfCourt} to golf court
+                </p>
+              </div>
+            </div>
+          )}
+          {distances.restaurants && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt="Icon for restaurants"
+                  src="/icons/restaurants.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceValue}>
+                  {distances.restaurants} to restaurants
+                </p>
+              </div>
+            </div>
+          )}
         </div>
-        {/* <div className={styles.distances}>
-          <div className={styles.distance}>
-            <FaMapLocationDot fontSize="2.5rem" color="#aa7f2e" />
-            <p className={styles.distanceText}>
-              {distances.toCenter} to center
-            </p>
-          </div>
-          <div className={styles.distance}>
-            <FaAnchor fontSize="2.5rem" color="#aa7f2e" />
-            <p className={styles.distanceText}>{distances.toBeach} to beach</p>
-          </div>
-          <div className={styles.distance}>
-            <FaPlane fontSize="2.5rem" color="#aa7f2e" />
-            <p className={styles.distanceText}>
-              {distances.toAirport} to airport
-            </p>
-          </div>
-          <div className={styles.distance}>
-            <FaBasketShopping fontSize="2.5rem" color="#aa7f2e" />
-            <p className={styles.distanceText}>{distances.toShop} to shop</p>
-          </div>
-          <div className={styles.distance}>
-            <FaSchool fontSize="2.5rem" color="#aa7f2e" />
-            <p className={styles.distanceText}>
-              {distances.toSchool} to school
-            </p>
-          </div>
-          <div className={styles.distance}>
-            <FaGolfBallTee fontSize="2.5rem" color="#aa7f2e" />
-            <p className={styles.distanceText}>
-              {distances.toGolf} to golf court
-            </p>
-          </div>
-        </div> */}
       </div>
     </section>
   );

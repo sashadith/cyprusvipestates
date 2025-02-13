@@ -240,21 +240,27 @@ const project = {
     defineField({
       name: "distances",
       title: "Distances",
-      type: "array",
-      of: [
+      type: "object",
+      fields: [
+        { name: "beach", title: "Distance to the Beach", type: "string" },
+        { name: "shops", title: "Distance to Shops", type: "string" },
+        { name: "airport", title: "Distance to the Airport", type: "string" },
+        { name: "hospital", title: "Distance to the Hospital", type: "string" },
+        { name: "school", title: "Distance to the School", type: "string" },
         {
-          type: "object",
-          fields: [
-            { name: "label", title: "Label", type: "string" }, // Например, "Distance to the beach"
-            { name: "value", title: "Distance", type: "string" },
-            {
-              name: "icon",
-              title: "Icon",
-              type: "image",
-              options: { hotspot: true },
-              fields: [{ name: "alt", title: "Alt Text", type: "string" }],
-            },
-          ],
+          name: "cityCenter",
+          title: "Distance to the City Center",
+          type: "string",
+        },
+        {
+          name: "golfCourt",
+          title: "Distance to the Golf Court",
+          type: "string",
+        },
+        {
+          name: "restaurants",
+          title: "Distance to Restaurants",
+          type: "string",
         },
       ],
     }),
