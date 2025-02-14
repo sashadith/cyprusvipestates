@@ -20,19 +20,6 @@ const nextConfig = {
         pathname: '**',
         port: '',
       },
-      {
-        protocol: 'https',
-        hostname: 'cyprusvipestates.com',
-        pathname: '**',
-        port: '',
-      },
-      // localhost images
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        pathname: '**',
-        port: '3333',
-      },
     ],
   },
 };

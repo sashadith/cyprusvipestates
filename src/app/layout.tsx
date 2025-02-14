@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 
@@ -8,12 +7,7 @@ export const metadata: Metadata = {
 };
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  return (
-    <html>
-      <head />
-      <body>{children}</body>
-    </html>
-  );
+  return <>{children}</>;
 };
 
 export default Layout;

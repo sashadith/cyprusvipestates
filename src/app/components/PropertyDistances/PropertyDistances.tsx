@@ -17,7 +17,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for beach"
-                  src="/icons/beach.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/21910cdeda8b4c0b1273cb9e487ea1c16873fcd7.png"
                   width={70}
                   height={70}
                   className={styles.image}
@@ -35,7 +35,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for shops"
-                  src="/icons/shops.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/91095253a8e1d58c1f8eb5a5356c3ec11e1f7d31.png"
                   width={70}
                   height={70}
                   className={styles.image}
@@ -53,7 +53,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for airport"
-                  src="/icons/airport.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/a9935ed23f1f65da3447f3a896c879659619badd.png"
                   width={70}
                   height={70}
                   className={styles.image}
@@ -71,7 +71,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for hospital"
-                  src="/icons/hospital.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/87c44c6343496d1f4e1990505b571ae0b959d7e9.png"
                   width={70}
                   height={70}
                   className={styles.image}
@@ -89,7 +89,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for school"
-                  src="/icons/school.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/080c0ffcaa49fb8967915d21cadcd6b2b286b5d3.png"
                   width={70}
                   height={70}
                   className={styles.image}
@@ -107,7 +107,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for city center"
-                  src="/icons/city-center.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/18fd16655d5281fa114048456caee2eeffcb2b73.png"
                   width={70}
                   height={70}
                   className={styles.image}
@@ -125,7 +125,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for golf court"
-                  src="/icons/golf-court.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/d72f5770e677f6830968baefeb4129ee9da2acc3.png"
                   width={70}
                   height={70}
                   className={styles.image}
@@ -138,7 +138,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
               </div>
             </div>
           )}
-          {distances.restaurants && (
+          {/* {distances.restaurants && (
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
@@ -155,7 +155,7 @@ const PropertyDistances: FC<Props> = ({ distances }) => {
                 </p>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </section>
