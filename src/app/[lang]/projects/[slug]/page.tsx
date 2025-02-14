@@ -128,7 +128,7 @@ const ProjectPage = async ({ params }: Props) => {
           </div>
         </div>
       </div>
-      <PropertyDistances distances={project.distances} />
+      <PropertyDistances distances={project.distances} lang={params.lang} />
       <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
       <ProjectSameCity
         lang={params.lang}

@@ -20,6 +20,7 @@
 
   @media (min-width: 980px) {
     justify-content: space-between;
+    flex-wrap: nowrap;
   }
 }
 
@@ -34,6 +35,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 5px;
 }
 
