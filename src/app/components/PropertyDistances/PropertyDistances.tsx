@@ -25,18 +25,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.beach}
+                <p className={styles.distanceLabel}>
                   {lang === "en"
-                    ? " to beach"
+                    ? "Beach"
                     : lang === "de"
-                      ? " zum Strand"
+                      ? "Strand"
                       : lang === "pl"
-                        ? " do plaży"
+                        ? "Plaż"
                         : lang === "ru"
-                          ? " до пляжа"
-                          : " to beach"}
+                          ? "Пляж"
+                          : "Beach"}
                 </p>
+                <p className={styles.distanceValue}>{distances.beach}</p>
               </div>
             </div>
           )}
@@ -52,18 +52,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.shops}
+                <p className={styles.distanceLabel}>
                   {lang === "en"
-                    ? " to shops"
+                    ? "Shops"
                     : lang === "de"
-                      ? " zu den Geschäften"
+                      ? "Supermarket"
                       : lang === "pl"
-                        ? " do sklepów"
+                        ? "Sklepy"
                         : lang === "ru"
-                          ? " до магазинов"
-                          : " to shops"}
+                          ? "Супермаркет"
+                          : "Shops"}
                 </p>
+                <p className={styles.distanceValue}>{distances.shops}</p>
               </div>
             </div>
           )}
@@ -79,18 +79,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.airport}
+                <p className={styles.distanceLabel}>
                   {lang === "en"
-                    ? " to airport"
+                    ? "Airport"
                     : lang === "de"
-                      ? " zum Flughafen"
+                      ? "Flughafen"
                       : lang === "pl"
-                        ? " do lotniska"
+                        ? "Lotnisko"
                         : lang === "ru"
-                          ? " до аэропорта"
-                          : " to airport"}
+                          ? "Аэропорт"
+                          : "Airport"}
                 </p>
+                <p className={styles.distanceValue}>{distances.airport}</p>
               </div>
             </div>
           )}
@@ -106,18 +106,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.hospital}
+                <p className={styles.distanceLabel}>
                   {lang === "en"
-                    ? " to hospital"
+                    ? "Hospital"
                     : lang === "de"
-                      ? " zum Krankenhaus"
+                      ? "Klinik"
                       : lang === "pl"
-                        ? " do szpitala"
+                        ? "Szpital"
                         : lang === "ru"
-                          ? " до больницы"
-                          : " to hospital"}
+                          ? "Больница"
+                          : "Hospital"}
                 </p>
+                <p className={styles.distanceValue}>{distances.hospital}</p>
               </div>
             </div>
           )}
@@ -133,18 +133,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.school}
+                <p className={styles.distanceLabel}>
                   {lang === "en"
-                    ? " to school"
+                    ? "School"
                     : lang === "de"
-                      ? " zur Schule"
+                      ? "Schule"
                       : lang === "pl"
-                        ? " do szkoły"
+                        ? "Szkoła"
                         : lang === "ru"
-                          ? " до школы"
-                          : " to school"}
+                          ? "Школа"
+                          : "School"}
                 </p>
+                <p className={styles.distanceValue}>{distances.school}</p>
               </div>
             </div>
           )}
@@ -160,18 +160,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.cityCenter}
+                <p className={styles.distanceLabel}>
                   {lang === "en"
-                    ? " to city center"
+                    ? "City center"
                     : lang === "de"
-                      ? " zum Stadtzentrum"
+                      ? "Zentrum"
                       : lang === "pl"
-                        ? " do centrum miasta"
+                        ? "Centrum miasta"
                         : lang === "ru"
-                          ? " до центра города"
-                          : " to city center"}
+                          ? " Центр города"
+                          : "City center"}
                 </p>
+                <p className={styles.distanceValue}>{distances.cityCenter}</p>
               </div>
             </div>
           )}
@@ -187,18 +187,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.golfCourt}
+                <p className={styles.distanceLabel}>
                   {lang === "en"
-                    ? " to golf court"
+                    ? "Golf court"
                     : lang === "de"
-                      ? " zum Golfplatz"
+                      ? "Golfplatz"
                       : lang === "pl"
-                        ? " do pola golfowego"
+                        ? "Pole golfowe"
                         : lang === "ru"
-                          ? " до гольф-поля"
-                          : " to golf court"}
+                          ? "Поле для гольфа"
+                          : "Golf court"}
                 </p>
+                <p className={styles.distanceValue}>{distances.golfCourt}</p>
               </div>
             </div>
           )}
