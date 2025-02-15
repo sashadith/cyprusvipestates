@@ -150,7 +150,16 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
                         : "Covered area"}
               </div>
               <div className={styles.featureValue}>
-                {keyFeatures.coveredArea} m²
+                {keyFeatures.coveredArea}
+                {lang === "en"
+                  ? " m²"
+                  : lang === "de"
+                    ? " m²"
+                    : lang === "pl"
+                      ? " m²"
+                      : lang === "ru"
+                        ? " м²"
+                        : " m²"}
               </div>
             </div>
             <div className={styles.feature}>
@@ -166,7 +175,16 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
                         : "Plot size"}
               </div>
               <div className={styles.featureValue}>
-                {keyFeatures.plotSize} m²
+                {keyFeatures.plotSize}
+                {lang === "en"
+                  ? " m²"
+                  : lang === "de"
+                    ? " m²"
+                    : lang === "pl"
+                      ? " m²"
+                      : lang === "ru"
+                        ? " м²"
+                        : " m²"}
               </div>
             </div>
             {keyFeatures.energyEfficiency && (
