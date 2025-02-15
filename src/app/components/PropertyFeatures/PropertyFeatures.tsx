@@ -150,7 +150,7 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
                         : "Covered area"}
               </div>
               <div className={styles.featureValue}>
-                {keyFeatures.coveredArea}
+                {keyFeatures.coveredArea} m²
               </div>
             </div>
             <div className={styles.feature}>
