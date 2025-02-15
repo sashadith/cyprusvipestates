@@ -20,6 +20,7 @@ import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { ButtonModal } from "@/app/components/ButtonModal/ButtonModal";
 import ProjectSlider from "@/app/components/ProjectSlider/ProjectSlider";
 import ProjectSameCity from "@/app/components/ProjectSameCity/ProjectSameCity";
+import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -29,9 +30,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = params;
   const data = await getProjectByLang(lang, slug);
 
+  let previewImageUrl: string | undefined = undefined;
+  if (data?.previewImage) {
+    previewImageUrl = urlFor(data.previewImage).width(1200).url();
+  }
+
   return {
     title: data?.seo.metaTitle,
     description: data?.seo.metaDescription,
+    openGraph: {
+      title: data?.seo.metaTitle,
+      description: data?.seo.metaDescription,
+      images: previewImageUrl ? [{ url: previewImageUrl }] : [],
+    },
   };
 }
 
