@@ -107,7 +107,7 @@ const ProjectPage = async ({ params }: Props) => {
       <div
         style={{
           backgroundColor: "#212121",
-          height: "60px",
+          height: "62px",
         }}
       >
         <HeaderWrapper>

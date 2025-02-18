@@ -14,13 +14,20 @@
 
 .distances {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+
+  @media (min-width: 500px) {
+    flex-direction: row;
+  }
 
   @media (min-width: 980px) {
     justify-content: space-between;
     flex-wrap: nowrap;
+    gap: 20px;
   }
 }
 

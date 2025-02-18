@@ -202,24 +202,33 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
               </div>
             </div>
           )}
-          {/* {distances.restaurants && (
+          {distances.restaurants && (
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
                   alt="Icon for restaurants"
-                  src="/icons/restaurants.png"
+                  src="https://cdn.sanity.io/files/88gk88s2/production/2667dfd1da48a595caf5f9d65c27df5c70695ae1.png"
                   width={70}
                   height={70}
                   className={styles.image}
                 />
               </div>
               <div className={styles.distanceContent}>
-                <p className={styles.distanceValue}>
-                  {distances.restaurants} to restaurants
+                <p className={styles.distanceLabel}>
+                  {lang === "en"
+                    ? "Restaurants"
+                    : lang === "de"
+                      ? "Restaurants"
+                      : lang === "pl"
+                        ? "Restauracje"
+                        : lang === "ru"
+                          ? "Рестораны"
+                          : "Restaurants"}
                 </p>
+                <p className={styles.distanceValue}>{distances.restaurants}</p>
               </div>
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </section>
