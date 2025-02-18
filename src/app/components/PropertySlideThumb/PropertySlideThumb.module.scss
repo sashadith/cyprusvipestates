@@ -2,9 +2,9 @@
   position: relative;
   aspect-ratio: 10 / 7;
 
-  // @media screen and (min-width: 768px) {
-  //   aspect-ratio: 10/4;
-  // }
+  @media screen and (min-width: 768px) {
+    aspect-ratio: 16/9;
+  }
 
   img {
     width: 100%;

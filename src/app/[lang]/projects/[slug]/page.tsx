@@ -104,9 +104,17 @@ const ProjectPage = async ({ params }: Props) => {
 
   return (
     <>
-      <HeaderWrapper>
-        <Header params={params} translations={translations} />
-      </HeaderWrapper>
+      <div
+        style={{
+          backgroundColor: "#212121",
+          height: "60px",
+        }}
+      >
+        <HeaderWrapper>
+          <Header params={params} translations={translations} />
+        </HeaderWrapper>
+      </div>
+
       {/* <PropertySlider images={project.images} videoId={project.videoId} /> */}
       <PropertyIntro
         title={project.title}
