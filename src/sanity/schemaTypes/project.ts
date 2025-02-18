@@ -63,11 +63,21 @@ const project = {
           name: "metaTitle",
           title: "Meta Title",
           type: "string",
+          description: "Max 60 characters",
+          validation: (Rule) =>
+            Rule.required()
+              .max(60)
+              .error("Title should be less than 60 characters"),
         }),
         defineField({
           name: "metaDescription",
           title: "Meta Description",
           type: "string",
+          description: "Max 160 characters",
+          validation: (Rule) =>
+            Rule.required()
+              .max(160)
+              .error("Description should be less than 160 characters"),
         }),
       ],
     }),
@@ -264,7 +274,6 @@ const project = {
         },
       ],
     }),
-    // defineField({
     //   name: "distances",
     //   title: "Distances",
     //   type: "object",
