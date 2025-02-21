@@ -17,7 +17,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for beach"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the beach"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zum Strand"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do plaży"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до пляжа"
+                            : "Distance from Cyprus villa to the beach"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/21910cdeda8b4c0b1273cb9e487ea1c16873fcd7.png"
                   width={70}
                   height={70}
@@ -44,7 +54,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for shops"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the shops"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zu den Geschäften"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do sklepów"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до магазинов"
+                            : "Distance from Cyprus villa to the shops"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/91095253a8e1d58c1f8eb5a5356c3ec11e1f7d31.png"
                   width={70}
                   height={70}
@@ -71,7 +91,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for airport"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the airport"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zum Flughafen"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do lotniska"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до аэропорта"
+                            : "Distance from Cyprus villa to the airport"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/a9935ed23f1f65da3447f3a896c879659619badd.png"
                   width={70}
                   height={70}
@@ -98,7 +128,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for hospital"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the hospital"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zum Krankenhaus"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do szpitala"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до больницы"
+                            : "Distance from Cyprus villa to the hospital"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/87c44c6343496d1f4e1990505b571ae0b959d7e9.png"
                   width={70}
                   height={70}
@@ -125,7 +165,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for school"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the school"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zur Schule"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do szkoły"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до школы"
+                            : "Distance from Cyprus villa to the school"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/080c0ffcaa49fb8967915d21cadcd6b2b286b5d3.png"
                   width={70}
                   height={70}
@@ -152,7 +202,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for city center"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the city center"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zum Stadtzentrum"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do centrum miasta"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до центра города"
+                            : "Distance from Cyprus villa to the city center"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/18fd16655d5281fa114048456caee2eeffcb2b73.png"
                   width={70}
                   height={70}
@@ -179,7 +239,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for golf court"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the golf court"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zum Golfplatz"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do pola golfowego"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до поля для гольфа"
+                            : "Distance from Cyprus villa to the golf court"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/d72f5770e677f6830968baefeb4129ee9da2acc3.png"
                   width={70}
                   height={70}
@@ -206,7 +276,17 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
                 <Image
-                  alt="Icon for restaurants"
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the restaurants"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zu den Restaurants"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do restauracji"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до ресторанов"
+                            : "Distance from Cyprus villa to the restaurants"
+                  }
                   src="https://cdn.sanity.io/files/88gk88s2/production/2667dfd1da48a595caf5f9d65c27df5c70695ae1.png"
                   width={70}
                   height={70}

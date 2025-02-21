@@ -128,10 +128,10 @@ const ProjectSlider: FC<Props> = ({ images }) => {
           // Синхронизация с главным слайдером
           controller={{ control: mainSwiper }}
           spaceBetween={10}
-          // navigation={{
-          //   nextEl: ".modal-next-button",
-          //   prevEl: ".modal-prev-button",
-          // }}
+          navigation={{
+            nextEl: ".modal-next-button",
+            prevEl: ".modal-prev-button",
+          }}
           pagination={{ clickable: true }}
           modules={[Navigation, Pagination, Controller]}
           className={modalStyles.fullscreenSlider}
@@ -143,18 +143,20 @@ const ProjectSlider: FC<Props> = ({ images }) => {
                 alt={image.alt || "Cyprus VIP Estate Project"}
                 className={modalStyles.fullscreenImage}
                 fill={true}
+                // width={1080}
+                // height={720}
               />
             </SwiperSlide>
           ))}
 
-          {/* <div className={modalStyles.modalNavButtons}>
+          <div className={modalStyles.modalNavButtons}>
             <button className="modal-prev-button">
               <IoIosArrowBack fontSize="3.5rem" color="#aa7f2e" />
             </button>
             <button className="modal-next-button">
               <IoIosArrowForward fontSize="3.5rem" color="#aa7f2e" />
             </button>
-          </div> */}
+          </div>
         </Swiper>
       </ReactModal>
     </>
