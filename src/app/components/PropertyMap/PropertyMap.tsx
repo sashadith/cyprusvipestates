@@ -30,9 +30,9 @@ L.Icon.Default.mergeOptions({
 
 const customMarkerIcon = new L.Icon({
   iconUrl:
-    "https://cdn.sanity.io/files/88gk88s2/production/ee440e32847adc482c7013426a18c4d5e50bc486.png", // замените на URL вашего изображения
-  iconSize: [70, 85], // размер изображения
-  iconAnchor: [12.5, 41], // точка привязки (середина нижней части)
+    "https://cdn.sanity.io/files/88gk88s2/production/b505baf3de67bb4a320352ebbb2af98fe2e04537.png", // замените на URL вашего изображения
+  iconSize: [62, 95], // размер изображения
+  iconAnchor: [20, 100], // точка привязки (середина нижней части)
   popupAnchor: [0, -41], // положение всплывающего окна относительно маркера
 });
 
