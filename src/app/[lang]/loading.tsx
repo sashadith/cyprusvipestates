@@ -7,8 +7,8 @@ export default function Loading() {
         <Image
           src="https://cdn.sanity.io/files/88gk88s2/production/82c40f36d0c0cec712ca09a2c7149ac3c9b7dbf1.png"
           alt="Cyprus VIP Estatees Logo"
-          width={400}
-          height={511}
+          width={180}
+          height={230}
         />
       </span>
     </div>
