@@ -4,12 +4,15 @@ import Link from "next/link";
 import {
   getFilteredProjects,
   getFilteredProjectsCount,
+  getPropertiesPageByLang,
 } from "@/sanity/sanity.utils";
-import { defaultLocale } from "@/i18n.config";
+import { defaultLocale, i18n } from "@/i18n.config";
+import { Translation } from "@/types/homepage";
 import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
-import ProjectFilters from "@/app/components/ProjectFilters/ProjectFilters";
 import NoProjects from "@/app/components/NoProjects/NoProjects";
 import StyledProjectFilters from "@/app/components/StyledProjectFilters/StyledProjectFilters";
+import Header from "@/app/components/Header/Header";
+import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 
 const PAGE_SIZE = 10;
 
@@ -32,6 +35,46 @@ export default async function ProjectsPage({
 }: ProjectsPageProps) {
   const { lang } = params;
 
+  // Получаем переводы для страницы проектов (например, propertiesPage документ из Sanity)
+  const propertiesPage = await getPropertiesPageByLang(lang);
+
+  // Извлекаем массив slug из _translations, аналогично странице проекта
+  const propertyPageTranslationSlugs: { [key: string]: { current: string } }[] =
+    propertiesPage?._translations.map((item: any) => {
+      const newItem: { [key: string]: { current: string } } = {};
+      for (const key in item.slug) {
+        if (key !== "_type") {
+          newItem[key] = { current: item.slug[key].current };
+        }
+      }
+      return newItem;
+    }) || [];
+
+  // Формируем массив переводов для Header
+  const translations: Translation[] = i18n.languages.reduce<Translation[]>(
+    (acc, langObj) => {
+      const translationSlug = propertyPageTranslationSlugs
+        .reduce((slugAcc: string[], slugObj) => {
+          const current = slugObj[langObj.id]?.current;
+          if (current) {
+            slugAcc.push(current);
+          }
+          return slugAcc;
+        }, [])
+        .join(" ");
+      return translationSlug
+        ? [
+            ...acc,
+            {
+              language: langObj.id,
+              path: `/${langObj.id}/projects/${translationSlug}`,
+            },
+          ]
+        : acc;
+    },
+    []
+  );
+
   const currentPage = Number(searchParams.page) || 1;
   const city = searchParams.city || "";
   const priceFrom = searchParams.priceFrom
@@ -39,7 +82,6 @@ export default async function ProjectsPage({
     : null;
   const priceTo = searchParams.priceTo ? Number(searchParams.priceTo) : null;
   const propertyType = searchParams.propertyType || "";
-
   const skip = (currentPage - 1) * PAGE_SIZE;
 
   const projects = await getFilteredProjects(lang, skip, PAGE_SIZE, {
@@ -58,6 +100,13 @@ export default async function ProjectsPage({
 
   return (
     <>
+      {/* Рендерим Header с переводами аналогично странице проекта */}
+      <div style={{ backgroundColor: "#212121", height: "62px" }}>
+        <HeaderWrapper>
+          <Header params={params} translations={translations} />
+        </HeaderWrapper>
+      </div>
+
       <div style={{ padding: "2rem" }}>
         <div className="container">
           <h1 className="h2-white">
@@ -69,14 +118,6 @@ export default async function ProjectsPage({
                   ? "Luksusowe projekty nieruchomości na Cyprze"
                   : "Luxury Real Estate Projects in Cyprus"}
           </h1>
-
-          {/* <ProjectFilters
-            lang={lang}
-            city={city}
-            priceFrom={priceFrom}
-            priceTo={priceTo}
-            propertyType={propertyType}
-          /> */}
           <StyledProjectFilters
             lang={lang}
             city={city}
