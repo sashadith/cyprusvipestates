@@ -1,0 +1,42 @@
+.form {
+  margin-bottom: 2rem;
+}
+
+.formElements {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  border: 2px solid #aa7f2e;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  // text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+  width: 100%;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    width: unset;
+
+    &:hover {
+      background: #aa7f2e;
+      color: #fff;
+    }
+    
+  }
+
+}

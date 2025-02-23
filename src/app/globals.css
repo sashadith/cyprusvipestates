@@ -134,6 +134,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-weight: 500;
   line-height: 120%;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+  word-break: break-all;
 }
 
 .swiper-pagination-bullet {

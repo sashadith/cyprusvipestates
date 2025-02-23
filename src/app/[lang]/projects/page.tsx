@@ -9,6 +9,7 @@ import { defaultLocale } from "@/i18n.config";
 import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
 import ProjectFilters from "@/app/components/ProjectFilters/ProjectFilters";
 import NoProjects from "@/app/components/NoProjects/NoProjects";
+import StyledProjectFilters from "@/app/components/StyledProjectFilters/StyledProjectFilters";
 
 const PAGE_SIZE = 10;
 
@@ -69,7 +70,14 @@ export default async function ProjectsPage({
                   : "Luxury Real Estate Projects in Cyprus"}
           </h1>
 
-          <ProjectFilters
+          {/* <ProjectFilters
+            lang={lang}
+            city={city}
+            priceFrom={priceFrom}
+            priceTo={priceTo}
+            propertyType={propertyType}
+          /> */}
+          <StyledProjectFilters
             lang={lang}
             city={city}
             priceFrom={priceFrom}
