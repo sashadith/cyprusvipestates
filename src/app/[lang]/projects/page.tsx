@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   getFilteredProjects,
   getFilteredProjectsCount,
+  getProjectsPageByLang,
   getPropertiesPageByLang,
 } from "@/sanity/sanity.utils";
 import { defaultLocale, i18n } from "@/i18n.config";
@@ -13,6 +14,7 @@ import NoProjects from "@/app/components/NoProjects/NoProjects";
 import StyledProjectFilters from "@/app/components/StyledProjectFilters/StyledProjectFilters";
 import Header from "@/app/components/Header/Header";
 import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
+import { Metadata } from "next";
 
 const PAGE_SIZE = 10;
 
@@ -29,6 +31,22 @@ type ProjectsPageProps = {
   searchParams: SearchParams;
 };
 
+type MetaDataProps = {
+  params: { lang: string };
+};
+
+// Dynamic metadata for SEO
+export async function generateMetadata({
+  params,
+}: MetaDataProps): Promise<Metadata> {
+  const data = await getProjectsPageByLang(params.lang);
+
+  return {
+    title: data?.seo.metaTitle,
+    description: data?.seo.metaDescription,
+  };
+}
+
 export default async function ProjectsPage({
   params,
   searchParams,
@@ -36,44 +54,45 @@ export default async function ProjectsPage({
   const { lang } = params;
 
   // Получаем переводы для страницы проектов (например, propertiesPage документ из Sanity)
-  const propertiesPage = await getPropertiesPageByLang(lang);
+  const projectsPage = await getProjectsPageByLang(lang);
 
-  // Извлекаем массив slug из _translations, аналогично странице проекта
-  const propertyPageTranslationSlugs: { [key: string]: { current: string } }[] =
-    propertiesPage?._translations.map((item: any) => {
-      const newItem: { [key: string]: { current: string } } = {};
-      for (const key in item.slug) {
-        if (key !== "_type") {
-          newItem[key] = { current: item.slug[key].current };
-        }
+  const propertyPageTranslationSlugs: {
+    [key: string]: { current: string };
+  }[] = projectsPage?._translations.map((item) => {
+    const newItem: { [key: string]: { current: string } } = {};
+
+    for (const key in item.slug) {
+      if (key !== "_type") {
+        newItem[key] = { current: item.slug[key].current };
       }
-      return newItem;
-    }) || [];
+    }
+    return newItem;
+  });
 
-  // Формируем массив переводов для Header
-  const translations: Translation[] = i18n.languages.reduce<Translation[]>(
-    (acc, langObj) => {
-      const translationSlug = propertyPageTranslationSlugs
-        .reduce((slugAcc: string[], slugObj) => {
-          const current = slugObj[langObj.id]?.current;
+  const translations = i18n.languages.reduce<Translation[]>((acc, lang) => {
+    const translationSlug = propertyPageTranslationSlugs
+      ?.reduce(
+        (acc: string[], slug: { [key: string]: { current: string } }) => {
+          const current = slug[lang.id]?.current;
           if (current) {
-            slugAcc.push(current);
+            acc.push(current);
           }
-          return slugAcc;
-        }, [])
-        .join(" ");
-      return translationSlug
-        ? [
-            ...acc,
-            {
-              language: langObj.id,
-              path: `/${langObj.id}/projects/${translationSlug}`,
-            },
-          ]
-        : acc;
-    },
-    []
-  );
+          return acc;
+        },
+        []
+      )
+      .join(" ");
+
+    return translationSlug
+      ? [
+          ...acc,
+          {
+            language: lang.id,
+            path: `/${lang.id}/projects`,
+          },
+        ]
+      : acc;
+  }, []);
 
   const currentPage = Number(searchParams.page) || 1;
   const city = searchParams.city || "";

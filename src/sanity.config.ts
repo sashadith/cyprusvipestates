@@ -29,6 +29,7 @@ export default defineConfig({
         "property",
         "propertiesPage",
         "project",
+        "projectsPage",
       ],
     }),
   ],
@@ -48,6 +49,7 @@ export default defineConfig({
             "property",
             "propertiesPage",
             "project",
+            "projectsPage",
           ].includes(template.id)
       ),
   },

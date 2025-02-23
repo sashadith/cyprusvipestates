@@ -8,6 +8,7 @@ import { Property } from "@/types/property";
 import { SanityFile } from "@/types/sanityFile";
 import { PropertiesPage } from "@/types/propertiesPage";
 import { Project } from "@/types/project";
+import { ProjectsPage } from "@/types/projectsPage";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -169,6 +170,32 @@ export async function getPropertyByLang(
   );
 
   return property;
+}
+
+export async function getProjectsPageByLang(
+  lang: string
+): Promise<ProjectsPage> {
+  const projectsPageQuery = groq`*[_type == "projectsPage" && language == $lang][0] {
+    _id,
+    seo,
+    title,
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      slug,
+    },
+  }`;
+
+  const projects = await client.fetch(
+    projectsPageQuery,
+    { lang },
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  return projects;
 }
 
 export async function getProjectByLang(

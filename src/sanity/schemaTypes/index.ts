@@ -8,6 +8,7 @@ import header from "./header";
 import homepage from "./homepage";
 import localizedSlug from "./localizedSlug";
 import project from "./project";
+import projectsPage from "./projectsPage";
 import propertiesPage from "./propertiesPage";
 import property from "./property";
 import singlepage from "./singlepage";
@@ -18,6 +19,7 @@ export const schemaTypes = [
   homepage,
   singlepage,
   project,
+  projectsPage,
   propertiesPage,
   property,
   footer,
