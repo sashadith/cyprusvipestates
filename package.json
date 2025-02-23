@@ -32,6 +32,7 @@
     "react-leaflet": "^4.2.1",
     "react-modal": "^3.16.3",
     "react-phone-number-input": "^3.4.5",
+    "react-select": "^5.10.0",
     "react-use": "^17.5.1",
     "react-youtube": "^10.1.0",
     "sanity": "^3.52.2",

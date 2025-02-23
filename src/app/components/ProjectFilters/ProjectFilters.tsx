@@ -1,14 +1,65 @@
 // app/components/ProjectFilters/ProjectFilters.tsx
 import React from "react";
 import styles from "./ProjectFilters.module.scss";
+import Select from "react-select";
+
+type OptionType = {
+  title: string;
+  value: string;
+};
+
+type PropertyTypesOptionsTranslations = {
+  en: OptionType[];
+  de: OptionType[];
+  ru: OptionType[];
+  pl: OptionType[];
+};
 
 type ProjectFiltersProps = {
   lang: string;
   city: string;
   priceFrom?: number | string | null;
   priceTo?: number | string | null;
-  roomsFrom?: number | string | null;
-  roomsTo?: number | string | null;
+  propertyType?: string;
+};
+
+const propertyTypesOptionsTranslations: PropertyTypesOptionsTranslations = {
+  en: [
+    { title: "All types", value: "" },
+    { title: "Apartment", value: "Apartment" },
+    { title: "Villa", value: "Villa" },
+    { title: "Townhouse", value: "Townhouse" },
+    { title: "Semi-detached villa", value: "Semi-detached villa" },
+    { title: "Office", value: "Office" },
+    { title: "Shop", value: "Shop" },
+  ],
+  de: [
+    { title: "Alle Typen", value: "" },
+    { title: "Apartment", value: "Apartment" },
+    { title: "Villa", value: "Villa" },
+    { title: "Reihenhaus", value: "Townhouse" },
+    { title: "Halb freistehende Villa", value: "Semi-detached villa" },
+    { title: "Büro", value: "Office" },
+    { title: "Geschäft", value: "Shop" },
+  ],
+  ru: [
+    { title: "Все типы", value: "" },
+    { title: "Квартира", value: "Apartment" },
+    { title: "Вилла", value: "Villa" },
+    { title: "Таунхаус", value: "Townhouse" },
+    { title: "Двойной дом", value: "Semi-detached villa" },
+    { title: "Офис", value: "Office" },
+    { title: "Магазин", value: "Shop" },
+  ],
+  pl: [
+    { title: "Wszystkie typy", value: "" },
+    { title: "Mieszkanie", value: "Apartment" },
+    { title: "Willa", value: "Villa" },
+    { title: "Dom szeregowy", value: "Townhouse" },
+    { title: "Willa bliźniacza", value: "Semi-detached villa" },
+    { title: "Biuro", value: "Office" },
+    { title: "Sklep", value: "Shop" },
+  ],
 };
 
 const ProjectFilters: React.FC<ProjectFiltersProps> = ({
@@ -16,9 +67,15 @@ const ProjectFilters: React.FC<ProjectFiltersProps> = ({
   city,
   priceFrom,
   priceTo,
-  roomsFrom,
-  roomsTo,
+  propertyType,
 }) => {
+  // Определяем нужный массив опций в зависимости от выбранного языка,
+  // если для текущего языка перевода нет – используется английская версия
+  const propertyTypesOptions =
+    propertyTypesOptionsTranslations[
+      lang as keyof PropertyTypesOptionsTranslations
+    ] || propertyTypesOptionsTranslations["en"];
+
   return (
     <form method="get" style={{ marginBottom: "1rem" }}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
@@ -101,25 +158,31 @@ const ProjectFilters: React.FC<ProjectFiltersProps> = ({
           />
         </div>
         <div>
-          <label htmlFor="roomsFrom">Rooms from: </label>
-          <input
-            type="number"
-            name="roomsFrom"
-            id="roomsFrom"
-            defaultValue={roomsFrom || ""}
-          />
-        </div>
-        <div>
-          <label htmlFor="roomsTo">Rooms to: </label>
-          <input
-            type="number"
-            name="roomsTo"
-            id="roomsTo"
-            defaultValue={roomsTo || ""}
-          />
+          <label htmlFor="propertyType">
+            {lang === "en"
+              ? "Property Type"
+              : lang === "de"
+                ? "Immobilientyp"
+                : lang === "pl"
+                  ? "Typ nieruchomości"
+                  : lang === "ru"
+                    ? "Тип недвижимости"
+                    : "Property Type"}
+            :{" "}
+          </label>
+          <select
+            name="propertyType"
+            id="propertyType"
+            defaultValue={propertyType}
+          >
+            {propertyTypesOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.title}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
-      {/* Кнопка для отправки формы */}
       <div style={{ marginTop: "1rem", color: "blue" }}>
         <button type="submit" className={styles.button}>
           {lang === "en"

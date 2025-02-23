@@ -10,17 +10,14 @@ import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
 import ProjectFilters from "@/app/components/ProjectFilters/ProjectFilters";
 import NoProjects from "@/app/components/NoProjects/NoProjects";
 
-// Размер страницы — сколько проектов выводить на одной странице
 const PAGE_SIZE = 10;
 
-// Типы для параметров фильтрации
 type SearchParams = {
   page?: string;
   city?: string;
   priceFrom?: string;
   priceTo?: string;
-  roomsFrom?: string;
-  roomsTo?: string;
+  propertyType?: string;
 };
 
 type ProjectsPageProps = {
@@ -32,7 +29,7 @@ export default async function ProjectsPage({
   params,
   searchParams,
 }: ProjectsPageProps) {
-  const { lang } = params; // Используем язык из URL, а не defaultLocale
+  const { lang } = params;
 
   const currentPage = Number(searchParams.page) || 1;
   const city = searchParams.city || "";
@@ -40,10 +37,7 @@ export default async function ProjectsPage({
     ? Number(searchParams.priceFrom)
     : null;
   const priceTo = searchParams.priceTo ? Number(searchParams.priceTo) : null;
-  const roomsFrom = searchParams.roomsFrom
-    ? Number(searchParams.roomsFrom)
-    : null;
-  const roomsTo = searchParams.roomsTo ? Number(searchParams.roomsTo) : null;
+  const propertyType = searchParams.propertyType || "";
 
   const skip = (currentPage - 1) * PAGE_SIZE;
 
@@ -51,15 +45,13 @@ export default async function ProjectsPage({
     city,
     priceFrom,
     priceTo,
-    roomsFrom,
-    roomsTo,
+    propertyType,
   });
   const totalProjects = await getFilteredProjectsCount(lang, {
     city,
     priceFrom,
     priceTo,
-    roomsFrom,
-    roomsTo,
+    propertyType,
   });
   const totalPages = Math.ceil(totalProjects / PAGE_SIZE);
 
@@ -82,8 +74,7 @@ export default async function ProjectsPage({
             city={city}
             priceFrom={priceFrom}
             priceTo={priceTo}
-            roomsFrom={roomsFrom}
-            roomsTo={roomsTo}
+            propertyType={propertyType}
           />
         </div>
         <div className="container">
@@ -104,7 +95,7 @@ export default async function ProjectsPage({
                     url={projectUrl}
                     previewImage={project.previewImage}
                     title={project.title}
-                    price={project.keyFeatures?.price ?? project.price ?? 0}
+                    price={project.keyFeatures?.price ?? 0}
                     bedrooms={project.keyFeatures?.bedrooms ?? 0}
                     coveredArea={project.keyFeatures?.coveredArea ?? 0}
                     plotSize={project.keyFeatures?.plotSize ?? 0}
@@ -123,8 +114,7 @@ export default async function ProjectsPage({
               (city ? `&city=${city}` : "") +
               (priceFrom !== null ? `&priceFrom=${priceFrom}` : "") +
               (priceTo !== null ? `&priceTo=${priceTo}` : "") +
-              (roomsFrom !== null ? `&roomsFrom=${roomsFrom}` : "") +
-              (roomsTo !== null ? `&roomsTo=${roomsTo}` : "");
+              (propertyType ? `&propertyType=${propertyType}` : "");
             return (
               <Link
                 key={pageNum}
