@@ -15,6 +15,7 @@ import StyledProjectFilters from "@/app/components/StyledProjectFilters/StyledPr
 import Header from "@/app/components/Header/Header";
 import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { Metadata } from "next";
+import Footer from "@/app/components/Footer/Footer";
 
 const PAGE_SIZE = 10;
 
@@ -199,6 +200,7 @@ export default async function ProjectsPage({
           })}
         </div>
       </div>
+      <Footer params={params} />
     </>
   );
 }
