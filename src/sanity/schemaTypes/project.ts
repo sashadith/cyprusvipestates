@@ -253,6 +253,11 @@ const project = {
       type: "object",
       fields: [
         { name: "beach", title: "Distance to the Beach", type: "string" },
+        {
+          name: "restaurants",
+          title: "Distance to Restaurants",
+          type: "string",
+        },
         { name: "shops", title: "Distance to Shops", type: "string" },
         { name: "airport", title: "Distance to the Airport", type: "string" },
         { name: "hospital", title: "Distance to the Hospital", type: "string" },
@@ -265,11 +270,6 @@ const project = {
         {
           name: "golfCourt",
           title: "Distance to the Golf Court",
-          type: "string",
-        },
-        {
-          name: "restaurants",
-          title: "Distance to Restaurants",
           type: "string",
         },
       ],

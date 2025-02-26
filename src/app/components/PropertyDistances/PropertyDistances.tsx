@@ -50,6 +50,43 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
               </div>
             </div>
           )}
+          {distances.restaurants && (
+            <div className={styles.distance}>
+              <div className={styles.imageBlock}>
+                <Image
+                  alt={
+                    lang === "en"
+                      ? "Distance from Cyprus villa to the restaurants"
+                      : lang === "de"
+                        ? "Entfernung von der Zypern Villa zu den Restaurants"
+                        : lang === "pl"
+                          ? "Odległość od willi na Cyprze do restauracji"
+                          : lang === "ru"
+                            ? "Расстояние от виллы на Кипре до ресторанов"
+                            : "Distance from Cyprus villa to the restaurants"
+                  }
+                  src="https://cdn.sanity.io/files/88gk88s2/production/2667dfd1da48a595caf5f9d65c27df5c70695ae1.png"
+                  width={70}
+                  height={70}
+                  className={styles.image}
+                />
+              </div>
+              <div className={styles.distanceContent}>
+                <p className={styles.distanceLabel}>
+                  {lang === "en"
+                    ? "Restaurants"
+                    : lang === "de"
+                      ? "Restaurants"
+                      : lang === "pl"
+                        ? "Restauracje"
+                        : lang === "ru"
+                          ? "Рестораны"
+                          : "Restaurants"}
+                </p>
+                <p className={styles.distanceValue}>{distances.restaurants}</p>
+              </div>
+            </div>
+          )}
           {distances.shops && (
             <div className={styles.distance}>
               <div className={styles.imageBlock}>
@@ -269,43 +306,6 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           : "Golf court"}
                 </p>
                 <p className={styles.distanceValue}>{distances.golfCourt}</p>
-              </div>
-            </div>
-          )}
-          {distances.restaurants && (
-            <div className={styles.distance}>
-              <div className={styles.imageBlock}>
-                <Image
-                  alt={
-                    lang === "en"
-                      ? "Distance from Cyprus villa to the restaurants"
-                      : lang === "de"
-                        ? "Entfernung von der Zypern Villa zu den Restaurants"
-                        : lang === "pl"
-                          ? "Odległość od willi na Cyprze do restauracji"
-                          : lang === "ru"
-                            ? "Расстояние от виллы на Кипре до ресторанов"
-                            : "Distance from Cyprus villa to the restaurants"
-                  }
-                  src="https://cdn.sanity.io/files/88gk88s2/production/2667dfd1da48a595caf5f9d65c27df5c70695ae1.png"
-                  width={70}
-                  height={70}
-                  className={styles.image}
-                />
-              </div>
-              <div className={styles.distanceContent}>
-                <p className={styles.distanceLabel}>
-                  {lang === "en"
-                    ? "Restaurants"
-                    : lang === "de"
-                      ? "Restaurants"
-                      : lang === "pl"
-                        ? "Restauracje"
-                        : lang === "ru"
-                          ? "Рестораны"
-                          : "Restaurants"}
-                </p>
-                <p className={styles.distanceValue}>{distances.restaurants}</p>
               </div>
             </div>
           )}
