@@ -9,6 +9,7 @@ export default function Loading() {
           alt="Cyprus VIP Estatees Logo"
           width={180}
           height={230}
+          className="loader-img"
         />
       </span>
     </div>
