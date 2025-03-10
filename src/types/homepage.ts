@@ -62,12 +62,25 @@ export type Bullet = {
   description: string;
 };
 
+export type DescriptionField = any;
+
 export type AboutBlock = {
   _key: string;
   _type: string;
   title: string;
   description: string;
   bullets: Bullet[];
+};
+
+export type DescriptionBlock = {
+  _key: string;
+  _type: string;
+  title: string;
+  descriptionFields: {
+    _key: string;
+    _type: string;
+    descriptionField: DescriptionField;
+  }[];
 };
 
 export type Project = {
@@ -103,6 +116,7 @@ export type Homepage = {
   homepageTitle: string;
   brochureBlock: Brochure;
   aboutBlock: AboutBlock;
+  descriptionBlock: DescriptionBlock;
   projectsBlock: ProjectsBlock;
   parallaxImage: Image;
   language: string;

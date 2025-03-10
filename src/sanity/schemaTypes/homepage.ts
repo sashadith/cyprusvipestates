@@ -193,6 +193,35 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "descriptionBlock",
+      title: "Description Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "descriptionFields",
+          title: "Description Fields",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "descriptionField",
+                  title: "Description Field",
+                  type: "contentBlock",
+                }),
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: "projectsBlock",
       title: "Projects Block",
       type: "object",

@@ -42,6 +42,16 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
     brochureBlock,
     homepageTitle,
     aboutBlock,
+    descriptionBlock{
+      _key,
+      _type,
+      title,
+      descriptionFields[]{
+        _key,
+        _type,
+        descriptionField
+      }
+    },
     projectsBlock,
     parallaxImage,
     language,
