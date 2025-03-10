@@ -232,19 +232,19 @@ input[type="number"]::-webkit-outer-spin-button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 60px;
+  height: 30px;
   width: auto;
 
   @media screen and (min-width: 768px) {
-    height: 100px;
+    height: 50px;
   }
 
   @media screen and (min-width: 980px) {
-    height: 150px;
+    height: 70px;
   }
 
   @media screen and (min-width: 1280px) {
-    height: 200px;
+    height: 100px;
   }
 }
 /* styles for loader */
