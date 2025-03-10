@@ -274,6 +274,30 @@ export async function getThreeProjectsBySameCity(
   return shuffledProjects.slice(0, 3);
 }
 
+export async function getLastFiveProjectsByLang(
+  lang: string
+): Promise<Project[]> {
+  const lastFiveProjectsQuery = groq`
+    *[_type == "project" && language == $lang] | order(_createdAt desc)[0...5] {
+      _id,
+      title,
+      slug,
+      previewImage,
+      keyFeatures
+    }
+  `;
+
+  const projects = await client.fetch(
+    lastFiveProjectsQuery,
+    { lang },
+    {
+      next: { revalidate: 60 },
+    }
+  );
+
+  return projects;
+}
+
 export async function getFilteredProjects(
   lang: string,
   skip: number,
