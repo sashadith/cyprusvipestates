@@ -50,7 +50,7 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
       {isPreviewVisible && (
         <div className={styles.previewWrapper} onClick={handlePreviewClick}>
           <Image
-            alt={videoPreview.alt || "Video preview"}
+            alt="Video preview"
             src={urlFor(videoPreview).url()}
             fill
             className={styles.imagePoster}
