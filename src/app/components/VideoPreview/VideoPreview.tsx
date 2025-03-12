@@ -76,6 +76,8 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
             playlist: videoId,
             playsinline: 1,
             showinfo: 0,
+            vq: "hd720",
+            fs: 0,
           },
         }}
         onReady={onPlayerReady}
