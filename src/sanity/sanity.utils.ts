@@ -298,6 +298,20 @@ export async function getLastFiveProjectsByLang(
   return projects;
 }
 
+export async function getAllProjectsByLang(lang: string): Promise<Project[]> {
+  const allProjectsQuery = groq`*[_type == "project" && language == $lang] | order(_createdAt desc) {
+    _id,
+    title,
+    slug,
+    previewImage,
+    keyFeatures,
+    language
+  }`;
+
+  const projects = await client.fetch(allProjectsQuery, { lang });
+  return projects;
+}
+
 export async function getFilteredProjects(
   lang: string,
   skip: number,
