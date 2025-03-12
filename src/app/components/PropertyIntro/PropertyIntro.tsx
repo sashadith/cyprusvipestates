@@ -16,9 +16,8 @@ import {
 } from "react-icons/fa6";
 import PropertyPhotoGallery from "../PropertyPhotoGallery/PropertyPhotoGallery";
 import { ButtonModal } from "../ButtonModal/ButtonModal";
-import Image from "next/image";
+import ResponsiveMedia from "../ResponsiveMedia/ResponsiveMedia";
 import { urlFor } from "@/sanity/sanity.client";
-import VideoPreview from "../VideoPreview/VideoPreview";
 
 type Props = {
   title: string;
@@ -35,19 +34,14 @@ const PropertyIntro: FC<Props> = ({
   videoId,
   videoPreview,
 }) => {
-  // console.log("data", excerpt, previewImage);
   return (
     <section className={styles.popertyIntro}>
-      {videoId && videoPreview ? (
-        <VideoPreview videoId={videoId} videoPreview={videoPreview} />
-      ) : (
-        <Image
-          alt={previewImage.alt || title}
-          src={urlFor(previewImage).url()}
-          fill
-          className={styles.imagePoster}
-        />
-      )}
+      <ResponsiveMedia
+        title={title}
+        previewImage={previewImage}
+        videoId={videoId}
+        videoPreview={videoPreview}
+      />
       <div className={`container ${styles.contentInner}`}>
         <div className={styles.overlay}></div>
         <div className={styles.content}>
