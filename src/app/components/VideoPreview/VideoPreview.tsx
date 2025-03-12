@@ -30,10 +30,13 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
     if (event.data === 1) {
       // Видео начало воспроизводиться
       setIsVideoPlaying(true);
-      // Скрываем предпросмотр при старте воспроизведения
       setIsPreviewVisible(false);
-    } else if (event.data === 0 || event.data === 2) {
-      // Видео закончилось или поставлено на паузу
+    } else if (event.data === 0) {
+      // Видео закончилось
+      setIsVideoPlaying(false);
+      setIsPreviewVisible(true);
+    } else if (event.data === 2) {
+      // Видео поставлено на паузу
       setIsVideoPlaying(false);
     }
   };
@@ -71,6 +74,8 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
             disablekb: 1,
             loop: 1,
             playlist: videoId,
+            playsinline: 1,
+            showinfo: 0,
           },
         }}
         onReady={onPlayerReady}
