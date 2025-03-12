@@ -18,23 +18,33 @@ import PropertyPhotoGallery from "../PropertyPhotoGallery/PropertyPhotoGallery";
 import { ButtonModal } from "../ButtonModal/ButtonModal";
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
+import VideoPreview from "../VideoPreview/VideoPreview";
 
 type Props = {
   title: string;
   excerpt: string;
   previewImage: ImageAlt;
+  videoId: string;
+  videoPreview: ImageAlt;
 };
 
-const PropertyIntro: FC<Props> = ({ title, excerpt, previewImage }) => {
+const PropertyIntro: FC<Props> = ({
+  title,
+  excerpt,
+  previewImage,
+  videoId,
+  videoPreview,
+}) => {
   // console.log("data", excerpt, previewImage);
   return (
     <section className={styles.popertyIntro}>
-      <Image
+      {/* <Image
         alt={previewImage.alt || title}
         src={urlFor(previewImage).url()}
         fill={true}
         className={styles.imagePoster}
-      />
+      /> */}
+      <VideoPreview videoId={videoId} videoPreview={videoPreview} />
       <div className={`container ${styles.contentInner}`}>
         <div className={styles.overlay}></div>
         <div className={styles.content}>

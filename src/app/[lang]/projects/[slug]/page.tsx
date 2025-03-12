@@ -120,6 +120,8 @@ const ProjectPage = async ({ params }: Props) => {
         title={project.title}
         excerpt={project.excerpt}
         previewImage={project.previewImage}
+        videoId={project.videoId}
+        videoPreview={project.videoPreview}
       />
       <div className="container">
         <ProjectSlider images={project.images} />

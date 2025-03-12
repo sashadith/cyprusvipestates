@@ -72,8 +72,8 @@ export type Project = {
   title: string;
   excerpt: string;
   previewImage: ImageAlt;
-  videoId?: string;
-  videoPreview?: ImageAlt;
+  videoId: string;
+  videoPreview: ImageAlt;
   images: ImageAlt[];
   description: any;
   location: GeoPoint;
