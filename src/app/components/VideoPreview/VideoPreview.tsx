@@ -3,6 +3,8 @@ import React, { FC, useRef, useState } from "react";
 import styles from "./VideoPreview.module.scss";
 import YouTube, { YouTubePlayer } from "react-youtube";
 import { ImageAlt } from "@/types/project";
+import Image from "next/image";
+import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
   videoId: string;
@@ -13,6 +15,7 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isPreviewVisible, setIsPreviewVisible] = useState(true);
   const playerRef = useRef<YouTubePlayer | null>(null);
 
   const onPlayerReady = (event: { target: YouTubePlayer }) => {
@@ -20,45 +23,40 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
     setIsPlayerReady(true);
     if (isVideoLoaded) {
       event.target.playVideo();
-      setIsVideoPlaying(true);
     }
   };
 
   const onPlayerStateChange = (event: { data: number }) => {
-    console.log("Player state changed:", event.data);
-    if (event.data === 0) {
-      // Video ended
-      setIsVideoPlaying(false);
-    } else if (event.data === 1) {
-      // Video playing
+    if (event.data === 1) {
+      // Видео начало воспроизводиться
       setIsVideoPlaying(true);
-    } else if (event.data === 2) {
-      // Video paused
+      // Скрываем предпросмотр при старте воспроизведения
+      setIsPreviewVisible(false);
+    } else if (event.data === 0 || event.data === 2) {
+      // Видео закончилось или поставлено на паузу
       setIsVideoPlaying(false);
     }
   };
 
-  const handlePlayPause = () => {
-    if (!isVideoLoaded) {
-      setIsVideoLoaded(true);
-      return;
-    }
-
+  const handlePreviewClick = () => {
+    setIsVideoLoaded(true);
     if (isPlayerReady && playerRef.current) {
-      if (isVideoPlaying) {
-        playerRef.current.pauseVideo();
-      } else {
-        playerRef.current.playVideo();
-      }
-      setIsVideoPlaying(!isVideoPlaying);
-    } else {
-      console.log("Player is not ready");
+      playerRef.current.playVideo();
     }
   };
 
   return (
     <div className={styles.videoPreview}>
-      <div className={styles.overlay}></div>
+      {isPreviewVisible && (
+        <div className={styles.previewWrapper} onClick={handlePreviewClick}>
+          <Image
+            alt={videoPreview.alt || "Video preview"}
+            src={urlFor(videoPreview).url()}
+            fill
+            className={styles.imagePoster}
+          />
+        </div>
+      )}
       <YouTube
         videoId={videoId}
         opts={{
@@ -70,13 +68,16 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
             controls: 0,
             modestbranding: 1,
             rel: 0,
-            disablekb: 1, // отключает клавиатурное управление (опционально)
+            disablekb: 1,
+            loop: 1,
+            playlist: videoId,
           },
         }}
         onReady={onPlayerReady}
         onStateChange={onPlayerStateChange}
         className={styles.videoFrame}
       />
+      <div className={styles.overlay}></div>
     </div>
   );
 };

@@ -38,13 +38,16 @@ const PropertyIntro: FC<Props> = ({
   // console.log("data", excerpt, previewImage);
   return (
     <section className={styles.popertyIntro}>
-      {/* <Image
-        alt={previewImage.alt || title}
-        src={urlFor(previewImage).url()}
-        fill={true}
-        className={styles.imagePoster}
-      /> */}
-      <VideoPreview videoId={videoId} videoPreview={videoPreview} />
+      {videoId ? (
+        <VideoPreview videoId={videoId} videoPreview={videoPreview} />
+      ) : (
+        <Image
+          alt={previewImage.alt || title}
+          src={urlFor(previewImage).url()}
+          fill
+          className={styles.imagePoster}
+        />
+      )}
       <div className={`container ${styles.contentInner}`}>
         <div className={styles.overlay}></div>
         <div className={styles.content}>
