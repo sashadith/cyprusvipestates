@@ -24,8 +24,8 @@ type Props = {
   title: string;
   excerpt: string;
   previewImage: ImageAlt;
-  videoId: string;
-  videoPreview: ImageAlt;
+  videoId?: string;
+  videoPreview?: ImageAlt;
 };
 
 const PropertyIntro: FC<Props> = ({
@@ -38,7 +38,7 @@ const PropertyIntro: FC<Props> = ({
   // console.log("data", excerpt, previewImage);
   return (
     <section className={styles.popertyIntro}>
-      {videoId ? (
+      {videoId && videoPreview ? (
         <VideoPreview videoId={videoId} videoPreview={videoPreview} />
       ) : (
         <Image
