@@ -121,11 +121,11 @@ export default async function ProjectsPage({
   return (
     <>
       {/* Рендерим Header с переводами аналогично странице проекта */}
-      <div style={{ backgroundColor: "#212121", height: "62px" }}>
-        <HeaderWrapper>
-          <Header params={params} translations={translations} />
-        </HeaderWrapper>
-      </div>
+      {/* <div style={{ backgroundColor: "#212121", height: "62px" }}>
+        <HeaderWrapper> */}
+      <Header params={params} translations={translations} />
+      {/* </HeaderWrapper>
+      </div> */}
 
       <div style={{ padding: "2rem" }}>
         <div className="container">

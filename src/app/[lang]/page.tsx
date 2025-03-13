@@ -80,9 +80,9 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      <HeaderWrapper>
-        <Header params={params} translations={translations} />
-      </HeaderWrapper>
+      {/* <HeaderWrapper> */}
+      <Header params={params} translations={translations} />
+      {/* </HeaderWrapper> */}
       <main>
         <Hero slides={homePage.sliderMain} />
         <BrochureBlock brochure={homePage.brochureBlock} />
