@@ -18,6 +18,7 @@
     "axios": "^1.7.3",
     "formik": "^2.4.6",
     "framer-motion": "^11.3.21",
+    "gsap": "^3.12.7",
     "leaflet": "^1.9.4",
     "monday-sdk-js": "^0.5.5",
     "negotiator": "^0.6.3",

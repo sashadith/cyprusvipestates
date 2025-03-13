@@ -3,7 +3,7 @@ import React, { FC, useRef, useState } from "react";
 import styles from "./VideoPreview.module.scss";
 import YouTube, { YouTubePlayer } from "react-youtube";
 import { ImageAlt } from "@/types/project";
-import Image from "next/image";
+import AnimatedPreview from "../AnimatedPreview/AnimatedPreview";
 import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
@@ -12,53 +12,50 @@ type Props = {
 };
 
 const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+  const [showPoster, setShowPoster] = useState(true); // статичная заставка
+  const [animateOut, setAnimateOut] = useState(false); // флаг запуска анимации
   const playerRef = useRef<YouTubePlayer | null>(null);
 
   const onPlayerReady = (event: { target: YouTubePlayer }) => {
     playerRef.current = event.target;
-    setIsPlayerReady(true);
-    if (isVideoLoaded) {
-      event.target.playVideo();
-    }
+    // Запускаем видео (автовоспроизведение)
+    event.target.playVideo();
   };
 
   const onPlayerStateChange = (event: { data: number }) => {
-    if (event.data === 1) {
-      // Видео начало воспроизводиться
-      setIsVideoPlaying(true);
-      setIsPreviewVisible(false);
+    if (event.data === 1 && !animateOut) {
+      // Видео начинает играть – запускаем анимацию для скрытия заставки
+      setAnimateOut(true);
     } else if (event.data === 0) {
-      // Видео закончилось
-      setIsVideoPlaying(false);
-      setIsPreviewVisible(true);
-    } else if (event.data === 2) {
-      // Видео поставлено на паузу
-      setIsVideoPlaying(false);
+      // Видео закончилось – возвращаем статичную заставку
+      setShowPoster(true);
     }
   };
 
-  const handlePreviewClick = () => {
-    setIsVideoLoaded(true);
-    if (isPlayerReady && playerRef.current) {
-      playerRef.current.playVideo();
-    }
+  const handleAnimationComplete = () => {
+    // По окончании анимации убираем AnimatedPreview и скрываем заставку, чтобы видео было видно
+    setAnimateOut(false);
+    setShowPoster(false);
   };
 
   return (
     <div className={styles.videoPreview}>
-      {isPreviewVisible && (
-        <div className={styles.previewWrapper} onClick={handlePreviewClick}>
-          <Image
+      {/* Показываем статичный постер, если он должен отображаться и анимация не активна */}
+      {showPoster && !animateOut && (
+        <div className={styles.previewWrapper}>
+          <img
             alt="Video preview"
             src={urlFor(videoPreview).url()}
-            fill
             className={styles.imagePoster}
           />
         </div>
+      )}
+      {/* Если анимация запущена – показываем AnimatedPreview */}
+      {animateOut && (
+        <AnimatedPreview
+          imageUrl={urlFor(videoPreview).url()}
+          onAnimationComplete={handleAnimationComplete}
+        />
       )}
       <YouTube
         videoId={videoId}
@@ -72,7 +69,8 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
             modestbranding: 1,
             rel: 0,
             disablekb: 1,
-            loop: 1,
+            // Чтобы видео завершилось (и сработало событие ended), можно убрать loop
+            // loop: 1,
             playlist: videoId,
             playsinline: 1,
             showinfo: 0,
