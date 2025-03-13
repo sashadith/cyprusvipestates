@@ -46,7 +46,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? "Пляж"
                           : "Beach"}
                 </p>
-                <p className={styles.distanceValue}>{distances.beach}</p>
+                <p className={styles.distanceValue}>
+                  {distances.beach}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
@@ -83,7 +94,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? "Рестораны"
                           : "Restaurants"}
                 </p>
-                <p className={styles.distanceValue}>{distances.restaurants}</p>
+                <p className={styles.distanceValue}>
+                  {distances.restaurants}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
@@ -120,7 +142,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? "Супермаркет"
                           : "Shops"}
                 </p>
-                <p className={styles.distanceValue}>{distances.shops}</p>
+                <p className={styles.distanceValue}>
+                  {distances.shops}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
@@ -157,7 +190,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? "Аэропорт"
                           : "Airport"}
                 </p>
-                <p className={styles.distanceValue}>{distances.airport}</p>
+                <p className={styles.distanceValue}>
+                  {distances.airport}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
@@ -194,7 +238,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? "Больница"
                           : "Hospital"}
                 </p>
-                <p className={styles.distanceValue}>{distances.hospital}</p>
+                <p className={styles.distanceValue}>
+                  {distances.hospital}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
@@ -231,7 +286,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? "Школа"
                           : "School"}
                 </p>
-                <p className={styles.distanceValue}>{distances.school}</p>
+                <p className={styles.distanceValue}>
+                  {distances.school}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
@@ -268,7 +334,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? " Центр города"
                           : "City center"}
                 </p>
-                <p className={styles.distanceValue}>{distances.cityCenter}</p>
+                <p className={styles.distanceValue}>
+                  {distances.cityCenter}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
@@ -305,7 +382,18 @@ const PropertyDistances: FC<Props> = ({ distances, lang }) => {
                           ? "Поле для гольфа"
                           : "Golf court"}
                 </p>
-                <p className={styles.distanceValue}>{distances.golfCourt}</p>
+                <p className={styles.distanceValue}>
+                  {distances.golfCourt}
+                  {lang === "en"
+                    ? " min"
+                    : lang === "de"
+                      ? " min"
+                      : lang === "pl"
+                        ? " min"
+                        : lang === "ru"
+                          ? " мин"
+                          : " min"}
+                </p>
               </div>
             </div>
           )}
