@@ -25,8 +25,14 @@
   border-left: 3px solid #aa7f2e;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
 
-  p, h2, h3, ul, li {
+  p, h2, h3 {
     color: inherit;
+  }
+
+  li {
+    span {
+      color: #000;
+    }
   }
 
   h2, h3, h4 {
