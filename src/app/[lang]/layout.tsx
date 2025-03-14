@@ -5,6 +5,7 @@ import { Inter, Outfit, Rubik } from "next/font/google";
 // import { ModalProvider } from "../context/ModalContext";
 import { Suspense } from "react";
 import { ModalProvider } from "../context/ModalContext";
+import MicrosoftClarity from "../components/MicrosoftClarity/MicrosoftClarity";
 // import { FacebookPixelEvents } from "../components/pixel-events";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={rubik.className}>
         <ModalProvider>{children}</ModalProvider>
         <GoogleAnalytics gaId="G-WLD3B6GN9P" />
+        <MicrosoftClarity />
         {/* <GoogleTagManager gtmId="G-XTMLVRC9RR" /> */}
         {/* <Suspense fallback={null}>
           <FacebookPixelEvents />
