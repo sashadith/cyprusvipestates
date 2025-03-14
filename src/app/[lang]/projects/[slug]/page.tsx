@@ -21,6 +21,7 @@ import { ButtonModal } from "@/app/components/ButtonModal/ButtonModal";
 import ProjectSlider from "@/app/components/ProjectSlider/ProjectSlider";
 import ProjectSameCity from "@/app/components/ProjectSameCity/ProjectSameCity";
 import { urlFor } from "@/sanity/sanity.client";
+import FormStatic from "@/app/components/FormStatic/FormStatic";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -151,6 +152,7 @@ const ProjectPage = async ({ params }: Props) => {
       </div>
       <PropertyDistances distances={project.distances} lang={params.lang} />
       <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
+      <FormStatic lang={params.lang} />
       <ProjectSameCity
         lang={params.lang}
         city={project.keyFeatures.city}
