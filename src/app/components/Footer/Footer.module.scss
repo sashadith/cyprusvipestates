@@ -32,11 +32,11 @@
 
 .policyLinks {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 
-  // @media screen and (min-width: 768px) {
-  //   justify-content: flex-start;
-  // }
+  @media screen and (min-width: 768px) {
+    justify-content: flex-start;
+  }
 }
 
 .policyLink {
@@ -44,6 +44,7 @@
   letter-spacing: .4px;
   color: #fff;
   text-decoration: none;
+  text-align: center;
 
   // @media screen and (min-width: 768px) {
     &::after {
@@ -56,6 +57,10 @@
       margin: 0;   // Убираем отступы, если они не нужны
     }
   // }
+
+  @media screen and (min-width: 768px) {
+    text-align: unset;
+  }
 }
 
 .footerGrid {
@@ -87,7 +92,7 @@
 
 .socialLinks {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   gap: 10px;
 
   @media screen and (min-width: 768px) {
