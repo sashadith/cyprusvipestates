@@ -129,7 +129,7 @@ export default async function ProjectsPage({
 
       <div style={{ padding: "2rem" }}>
         <div className="container">
-          <h1 className="h2-white">
+          <h1 className="h2-white header-mt">
             {lang === "en"
               ? "Luxury Real Estate Projects in Cyprus"
               : lang === "de" || lang === "ru"
