@@ -14,14 +14,14 @@
 
 .distances {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 40px;
 
   @media (min-width: 500px) {
-    flex-direction: row;
+    // flex-direction: row;
   }
 
   @media (min-width: 980px) {
