@@ -78,7 +78,7 @@ export default async function NewListnigs({ lang }: Props) {
             {lang === "en"
               ? "Show all projects"
               : lang === "de"
-                ? "Zu allen Immobilienprojekten"
+                ? "Alle Immobilienprojekte"
                 : lang === "pl"
                   ? "Pokaż wszystkie projekty"
                   : lang === "ru"
