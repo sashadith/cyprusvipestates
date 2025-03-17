@@ -17,7 +17,7 @@ import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { Metadata } from "next";
 import Footer from "@/app/components/Footer/Footer";
 
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 12;
 
 type SearchParams = {
   page?: string;
@@ -175,7 +175,7 @@ export default async function ProjectsPage({
             </div>
           )}
         </div>
-        <div style={{ marginTop: "2rem" }}>
+        <div className="pagination-links" style={{ marginTop: "2rem" }}>
           {Array.from({ length: totalPages }, (_, index) => {
             const pageNum = index + 1;
             const href =
@@ -193,6 +193,7 @@ export default async function ProjectsPage({
                   textDecoration:
                     currentPage === pageNum ? "underline" : "none",
                 }}
+                className="pagination-link"
               >
                 {pageNum}
               </Link>
