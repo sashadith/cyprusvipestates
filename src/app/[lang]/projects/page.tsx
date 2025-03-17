@@ -176,29 +176,43 @@ export default async function ProjectsPage({
           )}
         </div>
         <div className="pagination-links" style={{ marginTop: "2rem" }}>
-          {Array.from({ length: totalPages }, (_, index) => {
-            const pageNum = index + 1;
-            const href =
-              `?page=${pageNum}` +
-              (city ? `&city=${city}` : "") +
-              (priceFrom !== null ? `&priceFrom=${priceFrom}` : "") +
-              (priceTo !== null ? `&priceTo=${priceTo}` : "") +
-              (propertyType ? `&propertyType=${propertyType}` : "");
-            return (
-              <Link
-                key={pageNum}
-                href={href}
-                style={{
-                  marginRight: "0.5rem",
-                  textDecoration:
-                    currentPage === pageNum ? "underline" : "none",
-                }}
-                className="pagination-link"
-              >
-                {pageNum}
-              </Link>
-            );
-          })}
+          {totalPages > 1 && (
+            <div className="pagination-links" style={{ marginTop: "2rem" }}>
+              {Array.from({ length: totalPages }, (_, index) => {
+                const pageNum = index + 1;
+                const href =
+                  `?page=${pageNum}` +
+                  (city ? `&city=${city}` : "") +
+                  (priceFrom !== null ? `&priceFrom=${priceFrom}` : "") +
+                  (priceTo !== null ? `&priceTo=${priceTo}` : "") +
+                  (propertyType ? `&propertyType=${propertyType}` : "");
+
+                // Если текущая страница - активная, рендерим кнопку, иначе ссылку.
+                return currentPage === pageNum ? (
+                  <button
+                    key={pageNum}
+                    disabled
+                    style={{
+                      marginRight: "0.5rem",
+                      textDecoration: "underline",
+                    }}
+                    className="pagination-link"
+                  >
+                    {pageNum}
+                  </button>
+                ) : (
+                  <Link
+                    key={pageNum}
+                    href={href}
+                    style={{ marginRight: "0.5rem" }}
+                    className="pagination-link"
+                  >
+                    {pageNum}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
       <Footer params={params} />
