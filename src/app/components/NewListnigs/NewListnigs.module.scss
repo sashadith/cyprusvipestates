@@ -96,3 +96,30 @@
   border: 1px solid #fff;
   padding: 10px;
 }
+
+.showAll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  border: 2px solid #aa7f2e;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  // text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+
+  &:hover {
+    background: #aa7f2e;
+    color: #fff;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: fit-content;
+    margin-inline: auto;
+  }
+}

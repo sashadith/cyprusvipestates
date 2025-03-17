@@ -23,7 +23,7 @@ export default async function NewListnigs({ lang }: Props) {
               {lang === "en"
                 ? "New Listings"
                 : lang === "de"
-                  ? "Neue Angebote"
+                  ? "Neue Projekte"
                   : lang === "pl"
                     ? "Nowe oferty"
                     : lang === "ru"
@@ -47,6 +47,7 @@ export default async function NewListnigs({ lang }: Props) {
                 />
                 <div className={styles.projectInfo}>
                   <div className={styles.content}>
+                    <p className={styles.projectTitle}>{project.title}</p>
                     <p className={styles.projectPrice}>
                       {lang === "en"
                         ? "Price from"
@@ -60,7 +61,6 @@ export default async function NewListnigs({ lang }: Props) {
                       &nbsp;
                       {project.keyFeatures.price.toLocaleString()} €
                     </p>
-                    <p className={styles.projectTitle}>{project.title}</p>
                   </div>
                   <div className={styles.button}>
                     <BsChevronDoubleRight fontSize="1.5rem" color="#fff" />
@@ -69,6 +69,22 @@ export default async function NewListnigs({ lang }: Props) {
               </div>
             </Link>
           ))}
+        </div>
+        <div className={styles.showAllBlock}>
+          <Link
+            href={lang === "de" ? "/projects" : `/${lang}/projects`}
+            className={styles.showAll}
+          >
+            {lang === "en"
+              ? "Show all projects"
+              : lang === "de"
+                ? "Zu allen Immobilienprojekten"
+                : lang === "pl"
+                  ? "Pokaż wszystkie projekty"
+                  : lang === "ru"
+                    ? "Показать все проекты"
+                    : "Show all projects"}
+          </Link>
         </div>
       </div>
     </section>
