@@ -17,7 +17,7 @@ import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { Metadata } from "next";
 import Footer from "@/app/components/Footer/Footer";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 15;
 
 type SearchParams = {
   page?: string;
