@@ -91,7 +91,7 @@ const ProjectLink: FC<Props> = ({
             {lang === "en"
               ? "Plot size"
               : lang === "de"
-                ? "Grundstücksgröße"
+                ? "Grundstück"
                 : lang === "pl"
                   ? "Powierzchnia działki"
                   : lang === "ru"
