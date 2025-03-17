@@ -133,7 +133,7 @@ export default async function ProjectsPage({
             {lang === "en"
               ? "Luxury Real Estate Projects in Cyprus"
               : lang === "de" || lang === "ru"
-                ? "Luxusimmobilienprojekte in Zypern"
+                ? "Luxusimmobilien auf Zypern"
                 : lang === "pl"
                   ? "Luksusowe projekty nieruchomości na Cyprze"
                   : "Luxury Real Estate Projects in Cyprus"}
