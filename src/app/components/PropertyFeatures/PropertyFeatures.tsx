@@ -45,14 +45,14 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
       <div className={styles.propertyFeaturesInner}>
         <p className={styles.featuresTitle}>
           {lang === "en"
-            ? "Key features"
+            ? "Project overview"
             : lang === "de"
-              ? "Hauptmerkmale"
+              ? "Projektübersicht"
               : lang === "pl"
-                ? "Kluczowe cechy"
+                ? "Przegląd projektu"
                 : lang === "ru"
-                  ? "Основные характеристики"
-                  : "Key features"}
+                  ? "Обзор проекта"
+                  : "Project overview"}
         </p>
         <div className={styles.features}>
           <div className={styles.featuresWrapper}>

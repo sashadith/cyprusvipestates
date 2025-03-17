@@ -318,7 +318,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                     {lang === "ru"
                       ? "Я согласен с "
                       : lang === "de"
-                        ? "Ich bin einverstanden mit den Bedingungen der "
+                        ? "Ich habe die Bedingungen der "
                         : lang === "pl"
                           ? "Zgadzam się z "
                           : "I agree with the terms of the "}
