@@ -127,7 +127,7 @@ export default async function ProjectsPage({
       {/* </HeaderWrapper>
       </div> */}
 
-      <div style={{ padding: "2rem" }}>
+      <div style={{ paddingTop: "2rem" }}>
         <div className="container">
           <h1 className="h2-white header-mt">
             {lang === "en"
