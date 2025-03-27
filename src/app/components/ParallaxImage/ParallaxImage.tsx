@@ -29,7 +29,6 @@ const ParallaxImage: React.FC<Props> = ({ image }) => {
       className={styles.parallax}
       style={{
         backgroundImage: `url(${imageUrl})`,
-        backgroundPositionY: `${y * 0.3}px`, // параллакс эффект
       }}
     />
   );
