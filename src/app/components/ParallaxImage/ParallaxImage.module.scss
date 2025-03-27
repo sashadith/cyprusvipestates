@@ -7,12 +7,8 @@
 }
 
 .parallaxMobile {
-  height: 40vh; /* Высота для мобильных устройств */
-  // object-fit: cover;
-  aspect-ratio: 16 / 9;
+  height: 40vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  // background-attachment: fixed;
-  // object-fit: contain;
 }
