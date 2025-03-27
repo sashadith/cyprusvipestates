@@ -1,14 +1,15 @@
 .parallax {
-  height: 40vh; /* Высота для остальных устройств */
+  height: 40vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
 
-.parallaxMobile {
-  height: 40vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+.imageMobile {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9; // можно убрать при необходимости
+  object-fit: contain;
 }

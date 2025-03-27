@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useWindowScroll } from "react-use";
 import styles from "./ParallaxImage.module.scss";
 import { Image as ImageType } from "@/types/homepage";
@@ -12,24 +12,26 @@ type Props = {
 const ParallaxImage: React.FC<Props> = ({ image }) => {
   const { y } = useWindowScroll();
 
-  const parallaxStyle = {
-    backgroundPositionY: `${y * 0.3}px`, // Параллакс эффект через backgroundPosition
-  };
+  const [isIOSMobile, setIsIOSMobile] = useState(false);
 
-  const [scrollY, setScrollY] = useState(0);
-  const isBrowser = typeof window !== "undefined";
-  const isMobile = isBrowser ? window.innerWidth <= 480 : false;
-  const isIOSMobile =
-    isBrowser && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  useEffect(() => {
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 480;
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    setIsIOSMobile(isMobile && isIOS);
+  }, []);
 
-  return (
+  const imageUrl = urlFor(image).url();
+
+  return isIOSMobile ? (
+    <img src={imageUrl} alt="" className={styles.imageMobile} />
+  ) : (
     <div
-      className={isIOSMobile ? styles.parallaxMobile : styles.parallax}
+      className={styles.parallax}
       style={{
-        backgroundImage: `url(${urlFor(image).url()})`,
-        // ...parallaxStyle,
+        backgroundImage: `url(${imageUrl})`,
+        backgroundPositionY: `${y * 0.3}px`, // параллакс эффект
       }}
-    ></div>
+    />
   );
 };
 
