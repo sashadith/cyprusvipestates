@@ -27,10 +27,9 @@ const SliderReviews: FC<Props> = ({ reviews }) => {
         onSlideChange={(swiper) => setCurrentPhotoIndex(swiper.activeIndex)}
         initialSlide={currentPhotoIndex}
         breakpoints={{
-          320: { slidesPerView: 1, spaceBetween: 20 },
-          768: { slidesPerView: 1.2, spaceBetween: 20 },
-          1280: { slidesPerView: 1.5, spaceBetween: 20 },
-          1440: { slidesPerView: 2, spaceBetween: 20 },
+          320: { slidesPerView: 1.2, spaceBetween: 20 },
+          768: { slidesPerView: 2, spaceBetween: 20 },
+          1280: { slidesPerView: 2.4, spaceBetween: 20 },
           1920: { slidesPerView: 3.4, spaceBetween: 20 },
         }}
       >
