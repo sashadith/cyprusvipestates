@@ -1,7 +1,7 @@
 .slide {
   border-radius: 30px 0 30px 0;
   padding: 30px;
-  height: 400px;
+  height: 300px;
   background: #f6f6f5;
   cursor: pointer;
   margin-bottom: 50px;
@@ -45,7 +45,7 @@
 
   p {
     color: #000;
-    font-size: clamp(1rem, 0.938rem + 0.25vw, 1.125rem);
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 130%;

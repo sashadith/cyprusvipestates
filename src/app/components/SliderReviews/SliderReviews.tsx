@@ -18,7 +18,7 @@ const SliderReviews: FC<Props> = ({ reviews }) => {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
   return (
-    <div className={styles.sliderDiplomas}>
+    <div className={styles.sliderReviews}>
       <Swiper
         modules={[Pagination]}
         pagination={{ clickable: true }}
@@ -31,7 +31,7 @@ const SliderReviews: FC<Props> = ({ reviews }) => {
           768: { slidesPerView: 1.2, spaceBetween: 20 },
           1280: { slidesPerView: 1.5, spaceBetween: 20 },
           1440: { slidesPerView: 2, spaceBetween: 20 },
-          1920: { slidesPerView: 2.4, spaceBetween: 20 },
+          1920: { slidesPerView: 3.4, spaceBetween: 20 },
         }}
       >
         {reviews.map((review, index) => (
