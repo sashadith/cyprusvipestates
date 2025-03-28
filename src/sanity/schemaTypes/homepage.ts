@@ -318,6 +318,40 @@ export default defineType({
       title: "Parallax Image",
       type: "image",
     }),
+    defineField({
+      name: "reviewsBlock",
+      title: "Reviews Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "reviews",
+          title: "Reviews",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "reviewText",
+                  title: "Review Text",
+                  type: "contentBlock",
+                }),
+                defineField({
+                  name: "name",
+                  title: "Name",
+                  type: "string",
+                }),
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
     // optional
     defineField({
       name: "language",

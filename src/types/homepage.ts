@@ -83,6 +83,20 @@ export type DescriptionBlock = {
   }[];
 };
 
+export type Review = {
+  _key: string;
+  _type: string;
+  reviewText: any;
+  name: string;
+};
+
+export type ReviewsBlock = {
+  _key: string;
+  _type: string;
+  title: string;
+  reviews: Review[];
+};
+
 export type Project = {
   _key: string;
   _type: string;
@@ -119,6 +133,7 @@ export type Homepage = {
   descriptionBlock: DescriptionBlock;
   projectsBlock: ProjectsBlock;
   parallaxImage: Image;
+  reviewsBlock: ReviewsBlock;
   language: string;
   slug: {
     [lang: string]: {

@@ -18,6 +18,8 @@ import { FormStandardDocument } from "@/types/formStandardDocument";
 import ParallaxImage from "../components/ParallaxImage/ParallaxImage";
 import DescriptionBlock from "../components/DescriptionBlock/DescriptionBlock";
 import NewListnigs from "../components/NewListnigs/NewListnigs";
+import Reviews from "../components/Reviews/Reviews";
+import FormStatic from "../components/FormStatic/FormStatic";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -90,6 +92,8 @@ export default async function Home({ params }: Props) {
         <DescriptionBlock descriptionBlock={homePage.descriptionBlock} />
         <NewListnigs lang={params.lang} />
         <ParallaxImage image={homePage.parallaxImage} />
+        <Reviews reviews={homePage.reviewsBlock} />
+        <FormStatic lang={params.lang} />
         <Footer params={params} />
         <ModalBrochure lang={params.lang} formDocument={formDocument} />
       </main>
