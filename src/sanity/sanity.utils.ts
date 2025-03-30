@@ -228,6 +228,8 @@ export async function getProjectByLang(
     developer,
     keyFeatures,
     distances,
+    fullDescription,
+    faq,
     language,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
       slug,

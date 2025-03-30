@@ -22,6 +22,8 @@ import ProjectSlider from "@/app/components/ProjectSlider/ProjectSlider";
 import ProjectSameCity from "@/app/components/ProjectSameCity/ProjectSameCity";
 import { urlFor } from "@/sanity/sanity.client";
 import FormStatic from "@/app/components/FormStatic/FormStatic";
+import FullDescriptionBlock from "@/app/components/FullDescriptionBlock/FullDescriptionBlock";
+import AccordionContainer from "@/app/components/AccordionContainer/AccordionContainer";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -54,6 +56,8 @@ const ProjectPage = async ({ params }: Props) => {
   if (!project) {
     return null;
   }
+
+  // console.log("faq", project.faq);
 
   const formDocument: FormStandardDocument =
     await getFormStandardDocumentByLang(params.lang);
@@ -153,6 +157,23 @@ const ProjectPage = async ({ params }: Props) => {
       <PropertyDistances distances={project.distances} lang={params.lang} />
       <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
       <FormStatic lang={params.lang} />
+      <FullDescriptionBlock description={project.fullDescription} />
+      {project.faq && (
+        <div className="container">
+          <div className="property-faq">
+            <h2 className="h2-white">
+              {lang === "en"
+                ? "FAQ"
+                : lang === "pl"
+                  ? "Najczęściej zadawane pytania"
+                  : lang === "ru"
+                    ? "Часто задаваемые вопросы"
+                    : "Häufig gestellte Fragen"}
+            </h2>
+            <AccordionContainer block={project.faq} />
+          </div>
+        </div>
+      )}
       <ProjectSameCity
         lang={params.lang}
         city={project.keyFeatures.city}

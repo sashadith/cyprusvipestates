@@ -274,152 +274,16 @@ const project = {
         },
       ],
     }),
-    //   name: "distances",
-    //   title: "Distances",
-    //   type: "object",
-    //   fields: [
-    //     {
-    //       name: "toBeach",
-    //       title: "Distance to the beach",
-    //       type: "object",
-    //       fields: [
-    //         { name: "value", title: "Distance", type: "string" },
-    //         {
-    //           name: "icon",
-    //           title: "Icon",
-    //           type: "image",
-    //           fields: [
-    //             {
-    //               name: "alt",
-    //               title: "Alt Text",
-    //               type: "string",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       name: "toShop",
-    //       title: "Distance to the shop",
-    //       type: "object",
-    //       fields: [
-    //         { name: "value", title: "Distance", type: "string" },
-    //         {
-    //           name: "icon",
-    //           title: "Icon",
-    //           type: "image",
-    //           fields: [
-    //             {
-    //               name: "alt",
-    //               title: "Alt Text",
-    //               type: "string",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       name: "toAirport",
-    //       title: "Distance to the airport",
-    //       type: "object",
-    //       fields: [
-    //         { name: "value", title: "Distance", type: "string" },
-    //         {
-    //           name: "icon",
-    //           title: "Icon",
-    //           type: "image",
-    //           fields: [
-    //             {
-    //               name: "alt",
-    //               title: "Alt Text",
-    //               type: "string",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       name: "toHospital",
-    //       title: "Distance to the hospital",
-    //       type: "object",
-    //       fields: [
-    //         { name: "value", title: "Distance", type: "string" },
-    //         {
-    //           name: "icon",
-    //           title: "Icon",
-    //           type: "image",
-    //           fields: [
-    //             {
-    //               name: "alt",
-    //               title: "Alt Text",
-    //               type: "string",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       name: "toSchool",
-    //       title: "Distance to the school",
-    //       type: "object",
-    //       fields: [
-    //         { name: "value", title: "Distance", type: "string" },
-    //         {
-    //           name: "icon",
-    //           title: "Icon",
-    //           type: "image",
-    //           fields: [
-    //             {
-    //               name: "alt",
-    //               title: "Alt Text",
-    //               type: "string",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       name: "toCenter",
-    //       title: "Distance to the center",
-    //       type: "object",
-    //       fields: [
-    //         { name: "value", title: "Distance", type: "string" },
-    //         {
-    //           name: "icon",
-    //           title: "Icon",
-    //           type: "image",
-    //           fields: [
-    //             {
-    //               name: "alt",
-    //               title: "Alt Text",
-    //               type: "string",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       name: "toGolf",
-    //       title: "Distance to the golf club",
-    //       type: "object",
-    //       fields: [
-    //         { name: "value", title: "Distance", type: "string" },
-    //         {
-    //           name: "icon",
-    //           title: "Icon",
-    //           type: "image",
-    //           fields: [
-    //             {
-    //               name: "alt",
-    //               title: "Alt Text",
-    //               type: "string",
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // }),
+    defineField({
+      name: "fullDescription",
+      title: "Full description",
+      type: "contentBlock",
+    }),
+    defineField({
+      name: "faq",
+      title: "FAQ",
+      type: "accordionBlock",
+    }),
     defineField({
       name: "publishedAt",
       title: "Published At",
