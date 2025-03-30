@@ -9,6 +9,10 @@ type Props = {
 };
 
 const DevelopersLogos: FC<Props> = ({ logos, lang }) => {
+  if (!logos || logos.length === 0) {
+    return null;
+  }
+
   return (
     <section className={styles.develpersLogos}>
       <div className="container">
