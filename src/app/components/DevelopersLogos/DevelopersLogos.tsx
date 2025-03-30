@@ -16,7 +16,7 @@ const DevelopersLogos: FC<Props> = ({ logos, lang }) => {
   return (
     <section className={styles.develpersLogos}>
       <div className="container">
-        <h2 className="h2-white">
+        {/* <h2 className="h2-white">
           {lang === "de"
             ? "Die besten Entwickler Zyperns vertrauen uns"
             : lang === "ru"
@@ -24,7 +24,7 @@ const DevelopersLogos: FC<Props> = ({ logos, lang }) => {
               : lang === "pl"
                 ? "Współpracujemy z najlepszymi deweloperami na Cyprze"
                 : "We work with the best developers in Cyprus"}
-        </h2>
+        </h2> */}
       </div>
       <LogosCarousel logos={logos} />
     </section>
