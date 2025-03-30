@@ -24,6 +24,7 @@ import { urlFor } from "@/sanity/sanity.client";
 import FormStatic from "@/app/components/FormStatic/FormStatic";
 import FullDescriptionBlock from "@/app/components/FullDescriptionBlock/FullDescriptionBlock";
 import AccordionContainer from "@/app/components/AccordionContainer/AccordionContainer";
+import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -109,6 +110,7 @@ const ProjectPage = async ({ params }: Props) => {
 
   return (
     <>
+      <SchemaMarkup project={project} />
       {/* <div
         style={{
           backgroundColor: "#212121",
