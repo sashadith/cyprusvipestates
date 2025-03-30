@@ -1,5 +1,5 @@
 .logosCarousel {
-  // background-color: #fff;
+  background-color: #2A2415;
 }
 
 .scrollContainer {
@@ -57,11 +57,19 @@
   display: block;
   // position: relative;
   flex-shrink: 0;
-  margin: 0 50px;
+  margin: 0 20px;
+
+  @media screen and (min-width: 768px) {
+      margin: 0 50px;
+  }
 
   img {
-    width: 200px;
+    width: 150px;
     height: auto;
     object-fit: cover;
+
+    @media screen and (min-width: 768px) {
+      width: 200px;
+    }
   }
 }
