@@ -7,6 +7,7 @@ interface SchemaMarkupProps {
 }
 
 const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ project }) => {
+  // Определяем тип недвижимости для itemOffered
   const schemaType =
     project.keyFeatures.propertyType === "Apartment" ? "Apartment" : "House";
 
@@ -35,29 +36,13 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ project }) => {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": schemaType,
-    name: project.title,
-    description: project.excerpt,
-    image: project.images?.map((img: any) => urlFor(img).url()),
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: project.keyFeatures.city,
-      addressCountry: "CY",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: project.location.lat,
-      longitude: project.location.lng,
-    },
-    offers: {
-      "@type": "Offer",
-      price: project.keyFeatures.price,
-      priceCurrency: "EUR",
-      availability:
-        project.propertyPurpose === "Sale"
-          ? "https://schema.org/InStock"
-          : "https://schema.org/ForRent",
-    },
+    "@type": "Offer",
+    price: project.keyFeatures.price,
+    priceCurrency: "EUR",
+    availability:
+      project.propertyPurpose === "Sale"
+        ? "https://schema.org/InStock"
+        : "https://schema.org/ForRent",
     seller: {
       "@type": "Organization",
       name: project.developer?.name,
@@ -65,7 +50,23 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ project }) => {
         ? urlFor(project.developer.logo).url()
         : undefined,
     },
-    additionalProperty: additionalProperties,
+    itemOffered: {
+      "@type": schemaType,
+      name: project.title,
+      description: project.excerpt,
+      image: project.images?.map((img: any) => urlFor(img).url()),
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: project.keyFeatures.city,
+        addressCountry: "CY",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: project.location.lat,
+        longitude: project.location.lng,
+      },
+      additionalProperty: additionalProperties,
+    },
   };
 
   return (
