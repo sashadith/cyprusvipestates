@@ -53,6 +53,7 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
       }
     },
     projectsBlock,
+    logosBlock,
     parallaxImage,
     reviewsBlock,
     language,

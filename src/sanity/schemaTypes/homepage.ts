@@ -314,6 +314,30 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "logosBlock",
+      title: "Logos Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "logos",
+          title: "Logos",
+          type: "array",
+          of: [
+            {
+              type: "image",
+              fields: [
+                {
+                  name: "alt",
+                  title: "Alt Text",
+                  type: "string",
+                },
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: "parallaxImage",
       title: "Parallax Image",
       type: "image",

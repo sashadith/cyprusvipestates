@@ -20,6 +20,8 @@ import DescriptionBlock from "../components/DescriptionBlock/DescriptionBlock";
 import NewListnigs from "../components/NewListnigs/NewListnigs";
 import Reviews from "../components/Reviews/Reviews";
 import FormStatic from "../components/FormStatic/FormStatic";
+import LogosCarousel from "../components/LogosCarousel/LogosCarousel";
+import DevelopersLogos from "../components/DevelopersLogos/DevelopersLogos";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -91,6 +93,7 @@ export default async function Home({ params }: Props) {
         <AboutBlock aboutBlock={homePage.aboutBlock} />
         <DescriptionBlock descriptionBlock={homePage.descriptionBlock} />
         <NewListnigs lang={params.lang} />
+        <DevelopersLogos logos={homePage.logosBlock.logos} lang={params.lang} />
         <ParallaxImage image={homePage.parallaxImage} />
         <Reviews reviews={homePage.reviewsBlock} />
         <FormStatic lang={params.lang} />

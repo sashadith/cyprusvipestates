@@ -1,3 +1,5 @@
+import { ImageAlt } from "./project";
+
 export type City = "Paphos" | "Limassol" | "Larnaca";
 export type PropertyType = "Apartment" | "Villa";
 
@@ -83,6 +85,12 @@ export type DescriptionBlock = {
   }[];
 };
 
+export type Logo = {
+  _key: string;
+  _type: string;
+  image: ImageAlt;
+};
+
 export type Review = {
   _key: string;
   _type: string;
@@ -95,6 +103,13 @@ export type ReviewsBlock = {
   _type: string;
   title: string;
   reviews: Review[];
+};
+
+export type LogosBlock = {
+  _key: string;
+  _type: string;
+  title: string;
+  logos: Logo[];
 };
 
 export type Project = {
@@ -132,6 +147,7 @@ export type Homepage = {
   aboutBlock: AboutBlock;
   descriptionBlock: DescriptionBlock;
   projectsBlock: ProjectsBlock;
+  logosBlock: LogosBlock;
   parallaxImage: Image;
   reviewsBlock: ReviewsBlock;
   language: string;
