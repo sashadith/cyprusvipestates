@@ -1,4 +1,5 @@
-import Head from "next/head";
+// components/SchemaMarkup.tsx
+import Script from "next/script";
 import { urlFor } from "@/sanity/sanity.client";
 
 interface SchemaMarkupProps {
@@ -6,12 +7,9 @@ interface SchemaMarkupProps {
 }
 
 const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ project }) => {
-  // Определяем тип объекта недвижимости.
-  // Здесь в качестве примера: если тип "Apartment" – используем тип "Apartment", иначе "House".
   const schemaType =
     project.keyFeatures.propertyType === "Apartment" ? "Apartment" : "House";
 
-  // Формируем дополнительные характеристики в виде массива PropertyValue
   const additionalProperties = [
     {
       "@type": "PropertyValue",
@@ -40,12 +38,11 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ project }) => {
     "@type": schemaType,
     name: project.title,
     description: project.excerpt,
-    // Если есть несколько изображений, создаём массив URL
     image: project.images?.map((img: any) => urlFor(img).url()),
     address: {
       "@type": "PostalAddress",
       addressLocality: project.keyFeatures.city,
-      addressCountry: "CY", // ISO-код для Кипра
+      addressCountry: "CY",
     },
     geo: {
       "@type": "GeoCoordinates",
@@ -56,7 +53,6 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ project }) => {
       "@type": "Offer",
       price: project.keyFeatures.price,
       priceCurrency: "EUR",
-      // Пример: если объект на продажу, ставим InStock, если на аренду – ForRent
       availability:
         project.propertyPurpose === "Sale"
           ? "https://schema.org/InStock"
@@ -73,9 +69,13 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ project }) => {
   };
 
   return (
-    <Head>
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-    </Head>
+    <Script
+      id="schema-markup"
+      type="application/ld+json"
+      strategy="beforeInteractive"
+    >
+      {JSON.stringify(jsonLd)}
+    </Script>
   );
 };
 
