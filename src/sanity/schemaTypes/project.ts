@@ -49,24 +49,6 @@ export const market = [
   { title: "Secondary", value: "Secondary" },
 ];
 
-export const developers = [
-  { title: "Korantina Homes", value: "Korantina Homes" },
-  { title: "Olias Homes", value: "Olias Homes" },
-  { title: "Medousa Developers", value: "Medousa Developers" },
-  { title: "Kuutio Homes", value: "Kuutio Homes" },
-  { title: "Luma Development", value: "Luma Development" },
-  { title: "Domenica Group", value: "Domenica Group" },
-  { title: "Leptos Estates", value: "Leptos Estates" },
-  { title: "Pafilia", value: "Pafilia" },
-  { title: "Aristo Developers", value: "Aristo Developers" },
-  { title: "Island Blue", value: "Island Blue" },
-  { title: "INEX Development", value: "INEX Development" },
-  { title: "Prospecta Development", value: "Prospecta Development" },
-  { title: "AGG Luxury Homes", value: "AGG Luxury Homes" },
-  { title: "Square One", value: "Square One" },
-  { title: "MITO Developers", value: "MITO Developers" },
-];
-
 const project = {
   name: "project",
   title: "Project",
@@ -190,32 +172,16 @@ const project = {
     defineField({
       name: "developer",
       title: "Developer",
-      type: "object",
-      fields: [
-        {
-          name: "name",
-          title: "Name",
-          type: "string",
-          options: {
-            list: developers,
-          },
+      type: "reference",
+      to: [{ type: "developer" }],
+      options: {
+        filter: ({ document }) => {
+          return {
+            filter: "language == $language",
+            params: { language: document.language },
+          };
         },
-        {
-          name: "logo",
-          title: "Logo",
-          type: "image",
-          options: {
-            hotspot: true,
-          },
-          fields: [
-            {
-              name: "alt",
-              title: "Alt Text",
-              type: "string",
-            },
-          ],
-        },
-      ],
+      },
     }),
     defineField({
       name: "keyFeatures",

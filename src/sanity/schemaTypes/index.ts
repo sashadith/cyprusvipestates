@@ -1,6 +1,7 @@
 import accordionBlock from "./accordionBlock";
 import contentBlock from "./contentBlock";
 import docFile from "./docFile";
+import developer from "./developer";
 import footer from "./footer";
 import formStandard from "./formStandard";
 import formStandardDocument from "./formStandardDocument";
@@ -28,6 +29,7 @@ export const schemaTypes = [
   contentBlock,
   textContent,
   accordionBlock,
+  developer,
   docFile,
   localizedSlug,
 ];

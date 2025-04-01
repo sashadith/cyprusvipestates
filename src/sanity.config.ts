@@ -30,6 +30,7 @@ export default defineConfig({
         "propertiesPage",
         "project",
         "projectsPage",
+        "developer",
       ],
     }),
   ],
@@ -50,6 +51,7 @@ export default defineConfig({
             "propertiesPage",
             "project",
             "projectsPage",
+            "developer",
           ].includes(template.id)
       ),
   },
