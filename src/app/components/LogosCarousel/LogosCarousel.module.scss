@@ -1,6 +1,6 @@
-.logosCarousel {
-  background-color: #2A2415;
-}
+// .logosCarousel {
+//   background-color: #2A2415;
+// }
 
 .scrollContainer {
   position: relative;
@@ -53,6 +53,7 @@
 
 .logoLink {
   border-radius: 10px;
+  border: 1px solid #2A2415;
   overflow: hidden;
   display: block;
   // position: relative;
@@ -60,7 +61,7 @@
   margin: 0 20px;
 
   @media screen and (min-width: 768px) {
-      margin: 0 50px;
+      margin: 0 20px;
   }
 
   img {
