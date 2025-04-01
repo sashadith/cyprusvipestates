@@ -22,6 +22,23 @@ type MarketType = "Primary" | "Secondary";
 
 type Cities = "Paphos" | "Limassol" | "Larnaca";
 
+type Developers =
+  | "Korantina Homes"
+  | "Olias Homes"
+  | "Medousa Developers"
+  | "Kuutio Homes"
+  | "Luma Development"
+  | "Domenica Group"
+  | "Leptos Estates"
+  | "Pafilia"
+  | "Aristo Developers"
+  | "Island Blue"
+  | "INEX Development"
+  | "Prospecta Development"
+  | "AGG Luxury Homes"
+  | "Square One"
+  | "MITO Developers";
+
 type EnergyEfficiency = "A" | "B" | "C" | "D" | "E" | "F" | "G";
 
 export type ImageAlt = {
@@ -37,7 +54,7 @@ export type ImageAlt = {
 export type Developer = {
   _key: string;
   _type: string;
-  name: string;
+  name: Developers;
   logo: ImageAlt;
 };
 
