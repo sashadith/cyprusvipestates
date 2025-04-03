@@ -38,6 +38,10 @@
     max-width: 800px;
   }
 
+  @media screen and (min-width: 980px) {
+    top: 60%;
+  }
+
   @media screen and (min-width: 1024px) {
     left: 20%;
   }
