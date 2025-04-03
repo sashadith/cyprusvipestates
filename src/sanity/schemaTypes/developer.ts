@@ -1,23 +1,5 @@
 import { defineField } from "sanity";
 
-export const developers = [
-  { title: "Korantina Homes", value: "Korantina Homes" },
-  { title: "Olias Homes", value: "Olias Homes" },
-  { title: "Medousa Developers", value: "Medousa Developers" },
-  { title: "Kuutio Homes", value: "Kuutio Homes" },
-  { title: "Luma Development", value: "Luma Development" },
-  { title: "Domenica Group", value: "Domenica Group" },
-  { title: "Leptos Estates", value: "Leptos Estates" },
-  { title: "Pafilia", value: "Pafilia" },
-  { title: "Aristo Developers", value: "Aristo Developers" },
-  { title: "Island Blue", value: "Island Blue" },
-  { title: "INEX Development", value: "INEX Development" },
-  { title: "Prospecta Development", value: "Prospecta Development" },
-  { title: "AGG Luxury Homes", value: "AGG Luxury Homes" },
-  { title: "Square One", value: "Square One" },
-  { title: "MITO Developers", value: "MITO Developers" },
-];
-
 export default {
   name: "developer",
   title: "Developer",
@@ -54,9 +36,17 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
-      options: {
-        list: developers,
-      },
+    }),
+    defineField({
+      name: "titleFull",
+      title: "Title Full",
+      type: "string",
+    }),
+    defineField({
+      name: "excerpt",
+      title: "Excerpt",
+      type: "string",
+      description: "Short description of the developer",
     }),
     defineField({
       name: "logo",
