@@ -42,7 +42,7 @@
 
 .label {
   display: block;
-  font-size: clamp(1.125rem, 1.063rem + 0.25vw, 1.25rem);
+  font-size: 16px;
   font-weight: 400;
   color: rgb(55 65 81 / 70%);
   position: absolute;
@@ -106,7 +106,7 @@
   padding: 20px 28px;
   color: #FFF;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   cursor: pointer;
@@ -117,7 +117,7 @@
 
   @media screen and (min-width: 768px) {
     height: 69px;
-    font-size: 20px;
+    // font-size: 20px;
     font-style: normal;
   }
 
