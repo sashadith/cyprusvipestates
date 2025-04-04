@@ -20,8 +20,8 @@ const LogosCarousel: FC<Props> = ({ logos }) => {
               alt={logo.image?.alt || "Property Developer in Cyprus"}
               title={logo.image?.alt || "Property Developer in Cyprus"}
               src={urlFor(logo).url()}
-              width={300}
-              height={300}
+              width={250}
+              height={200}
               className={styles.logoIcon}
             />
           </div>
