@@ -9,6 +9,7 @@ import { SanityFile } from "@/types/sanityFile";
 import { PropertiesPage } from "@/types/propertiesPage";
 import { Project } from "@/types/project";
 import { ProjectsPage } from "@/types/projectsPage";
+import { Developer } from "@/types/developer";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -248,6 +249,30 @@ export async function getProjectByLang(
   );
 
   return project;
+}
+
+export async function getDeveloperByLang(
+  lang: string,
+  slug: string
+): Promise<Developer | null> {
+  const developerQuery = groq`*[_type == "developer" && slug[$lang].current == $slug][0] {
+    _id,
+    seo,
+    slug,
+    title,
+    titleFull,
+    excerpt,
+    logo,
+    description,
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      slug,
+    },
+  }`;
+
+  const developer = await client.fetch(developerQuery, { lang, slug });
+
+  return developer;
 }
 
 export async function getThreeProjectsBySameCity(

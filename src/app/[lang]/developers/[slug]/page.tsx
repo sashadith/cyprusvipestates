@@ -1,0 +1,131 @@
+import React from "react";
+import { Metadata } from "next";
+import {
+  getFormStandardDocumentByLang,
+  getDeveloperByLang,
+} from "@/sanity/sanity.utils";
+import Header from "@/app/components/Header/Header";
+import Footer from "@/app/components/Footer/Footer";
+import { i18n } from "@/i18n.config";
+import { Translation } from "@/types/homepage";
+import dynamic from "next/dynamic";
+import PropertyDistances from "@/app/components/PropertyDistances/PropertyDistances";
+import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
+import { FormStandardDocument } from "@/types/formStandardDocument";
+import PropertyFeatures from "@/app/components/PropertyFeatures/PropertyFeatures";
+import { ButtonModal } from "@/app/components/ButtonModal/ButtonModal";
+import { urlFor } from "@/sanity/sanity.client";
+import FormStatic from "@/app/components/FormStatic/FormStatic";
+import FullDescriptionBlock from "@/app/components/FullDescriptionBlock/FullDescriptionBlock";
+import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
+import PropertyDescription from "@/app/components/PropertyDescription/PropertyDescription";
+import DeveloperIntro from "@/app/components/DeveloperIntro/DeveloperIntro";
+
+type Props = {
+  params: { lang: string; slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang, slug } = params;
+  const data = await getDeveloperByLang(lang, slug);
+
+  let previewImageUrl: string | undefined = undefined;
+  if (data?.logo) {
+    previewImageUrl = urlFor(data.logo).width(1200).url();
+  }
+
+  return {
+    title: data?.seo.metaTitle,
+    description: data?.seo.metaDescription,
+    openGraph: {
+      title: data?.seo.metaTitle,
+      description: data?.seo.metaDescription,
+      images: previewImageUrl ? [{ url: previewImageUrl }] : [],
+    },
+  };
+}
+
+const DeveloperPage = async ({ params }: Props) => {
+  const { lang, slug } = params;
+  const developer = await getDeveloperByLang(lang, slug);
+
+  if (!developer) {
+    return null;
+  }
+
+  // console.log("full title", developer.titleFull);
+
+  const formDocument: FormStandardDocument =
+    await getFormStandardDocumentByLang(params.lang);
+
+  const propertyPageTranslationSlugs: {
+    [key: string]: { current: string };
+  }[] = developer?._translations.map((item) => {
+    const newItem: { [key: string]: { current: string } } = {};
+
+    for (const key in item.slug) {
+      if (key !== "_type") {
+        newItem[key] = { current: item.slug[key].current };
+      }
+    }
+    return newItem;
+  });
+
+  const translations = i18n.languages.reduce<Translation[]>((acc, lang) => {
+    const translationSlug = propertyPageTranslationSlugs
+      ?.reduce(
+        (acc: string[], slug: { [key: string]: { current: string } }) => {
+          const current = slug[lang.id]?.current;
+          if (current) {
+            acc.push(current);
+          }
+          return acc;
+        },
+        []
+      )
+      .join(" ");
+
+    return translationSlug
+      ? [
+          ...acc,
+          {
+            language: lang.id,
+            path: `/${lang.id}/developers/${translationSlug}`,
+          },
+        ]
+      : acc;
+  }, []);
+
+  return (
+    <>
+      {/* <SchemaMarkup project={developer} /> */}
+      <Header params={params} translations={translations} />
+      <DeveloperIntro
+        titleFull={developer.titleFull}
+        excerpt={developer.excerpt}
+        logo={developer.logo}
+      />
+      <FormStatic lang={params.lang} />
+      <FullDescriptionBlock description={developer.description} />
+      <div className="container">
+        <div className="developers-button">
+          <ButtonModal>
+            {lang === "en"
+              ? "Buy property from this developer now!"
+              : lang === "de"
+                ? "Kaufen Sie jetzt eine Immobilie von diesem Entwickler!"
+                : lang === "pl"
+                  ? "Kup teraz nieruchomość od tego dewelopera!"
+                  : lang === "ru"
+                    ? "Купите недвижимость у этого застройщика!"
+                    : "Buy property from this developer now!"}
+          </ButtonModal>
+        </div>
+      </div>
+      <Footer params={params} />s
+      <ModalBrochure lang={params.lang} formDocument={formDocument} />
+    </>
+  );
+};
+
+export default DeveloperPage;
