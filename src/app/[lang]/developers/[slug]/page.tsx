@@ -122,21 +122,25 @@ const DeveloperPage = async ({ params }: Props) => {
         <div className="container">
           <h2 className="h2-white">
             {lang === "en"
-              ? "Developer projects"
+              ? `Projects of developer ${developer.title}`
               : lang === "de"
-                ? "Entwicklerprojekte"
+                ? `Projekte des Entwicklers ${developer.title}`
                 : lang === "pl"
-                  ? "Projekty dewelopera"
+                  ? `Projekty dewelopera ${developer.title}`
                   : lang === "ru"
-                    ? "Проекты застройщика"
-                    : "Developer projects"}
+                    ? `Проекты застройщика ${developer.title}`
+                    : `Projects of developer ${developer.title}`}
           </h2>
           <div className="projectsDeveloper">
             {projects.length ? (
               projects.map((project) => (
                 <div key={project._id}>
                   <ProjectLink
-                    url={`/${lang}/properties/${project.slug[lang].current}`}
+                    url={
+                      lang === "de"
+                        ? `/projects/${project.slug[lang].current}`
+                        : `/${lang}/projects/${project.slug[lang].current}`
+                    }
                     previewImage={project.previewImage}
                     title={project.title}
                     price={project.keyFeatures.price}
