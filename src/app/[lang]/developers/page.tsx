@@ -7,10 +7,10 @@ const DevelopersPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/"); // Redirect to the home page
+    router.back(); // Navigate back to the previous page
   }, [router]);
 
-  return null; // This page won't render because of the redirect
+  return null; // This page won't render because of the navigation
 };
 
 export default DevelopersPage;
