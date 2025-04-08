@@ -22,6 +22,7 @@ import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
 import PropertyDescription from "@/app/components/PropertyDescription/PropertyDescription";
 import DeveloperIntro from "@/app/components/DeveloperIntro/DeveloperIntro";
 import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
+import DeveloperSchemaMarkup from "@/app/components/DeveloperSchemaMarkup/DeveloperSchemaMarkup";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -56,6 +57,13 @@ const DeveloperPage = async ({ params }: Props) => {
   }
 
   const projects = await getProjectsByDeveloper(lang, developer._id);
+
+  // const pageUrl = `/${lang}/developers/${developer.slug[lang].current}`;
+
+  const pageUrl =
+    lang === "de"
+      ? `https://cyprusvipestates.com/developers/${developer.slug[lang].current}`
+      : `https://cyprusvipestates.com/${lang}/developers/${developer.slug[lang].current}`;
 
   // console.log("projects", projects);
 
@@ -103,6 +111,7 @@ const DeveloperPage = async ({ params }: Props) => {
   return (
     <>
       {/* <SchemaMarkup project={developer} /> */}
+      <DeveloperSchemaMarkup developer={developer} pageUrl={pageUrl} />
       <Header params={params} translations={translations} />
       <DeveloperIntro
         titleFull={developer.titleFull}
