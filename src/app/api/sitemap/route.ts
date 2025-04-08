@@ -2,28 +2,40 @@ import {
   getProjectsPageByLang,
   getAllProjectsByLang,
   getHomePageByLang,
+  getAllDevelopersByLang, // <-- Импорт новой функции
 } from "@/sanity/sanity.utils";
 
 const generateSlug = (slug: any, language: string) => {
   if (!slug || !slug[language]?.current) return "#";
 
-  // Если язык "en", не добавляем /en/
+  // Если язык "de", не добавляем /de/
   return language === "de"
     ? `/projects/${slug[language].current}`
     : `/${language}/projects/${slug[language].current}`;
 };
 
+const generateDeveloperSlug = (slug: any, language: string) => {
+  if (!slug || !slug[language]?.current) return "#";
+
+  // Если язык "de", не добавляем префикс языка
+  return language === "de"
+    ? `/developers/${slug[language].current}`
+    : `/${language}/developers/${slug[language].current}`;
+};
+
 async function generateSitemap() {
-  const langs = ["de", "pl", "en", "ru"]; // Получите список поддерживаемых языков из вашего i18n конфигурации или другого источника
+  const langs = ["de", "pl", "en", "ru"]; // Список поддерживаемых языков
   const websiteUrl = "https://cyprusvipestates.com";
 
   const pages = [];
 
   for (const lang of langs) {
+    // Получаем страницы для проектов
     const projects = await getAllProjectsByLang(lang);
     const mainPage = await getHomePageByLang(lang);
     const projectsPage = await getProjectsPageByLang(lang);
 
+    // Добавляем главную страницу и раздел проектов
     pages.push(
       {
         route: "/",
@@ -44,6 +56,28 @@ async function generateSitemap() {
       ...projects.map((post) => ({
         route: generateSlug(post.slug, lang),
         url: `${websiteUrl}${generateSlug(post.slug, lang)}`,
+        changefreq: "weekly",
+        priority: 0.8,
+      }))
+    );
+
+    // Получаем раздел разработчиков
+    const developers = await getAllDevelopersByLang(lang);
+
+    // Добавляем главную страницу для разработчиков и их отдельные страницы
+    pages.push(
+      {
+        route: "/developers",
+        url:
+          lang === "de"
+            ? `${websiteUrl}/developers`
+            : `${websiteUrl}/${lang}/developers`,
+        changefreq: "weekly",
+        priority: 0.9,
+      },
+      ...developers.map((dev) => ({
+        route: generateDeveloperSlug(dev.slug, lang),
+        url: `${websiteUrl}${generateDeveloperSlug(dev.slug, lang)}`,
         changefreq: "weekly",
         priority: 0.8,
       }))
