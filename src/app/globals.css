@@ -295,6 +295,17 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+.projectsDeveloper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+
 .pagination-links {
   display: flex;
   justify-content: center;

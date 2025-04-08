@@ -275,6 +275,29 @@ export async function getDeveloperByLang(
   return developer;
 }
 
+export async function getProjectsByDeveloper(
+  lang: string,
+  developerId: string
+): Promise<Project[]> {
+  const query = groq`
+    *[
+      _type == "project" &&
+      language == $lang &&
+      developer._ref == $developerId
+    ] | order(_createdAt desc) {
+      _id,
+      title,
+      slug,
+      previewImage,
+      keyFeatures,
+      language
+    }
+  `;
+
+  const projects = await client.fetch(query, { lang, developerId });
+  return projects;
+}
+
 export async function getThreeProjectsBySameCity(
   lang: string,
   city: string,

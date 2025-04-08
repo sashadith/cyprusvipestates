@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import {
   getFormStandardDocumentByLang,
   getDeveloperByLang,
+  getProjectsByDeveloper,
 } from "@/sanity/sanity.utils";
 import Header from "@/app/components/Header/Header";
 import Footer from "@/app/components/Footer/Footer";
@@ -20,6 +21,7 @@ import FullDescriptionBlock from "@/app/components/FullDescriptionBlock/FullDesc
 import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
 import PropertyDescription from "@/app/components/PropertyDescription/PropertyDescription";
 import DeveloperIntro from "@/app/components/DeveloperIntro/DeveloperIntro";
+import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -53,7 +55,9 @@ const DeveloperPage = async ({ params }: Props) => {
     return null;
   }
 
-  // console.log("full title", developer.titleFull);
+  const projects = await getProjectsByDeveloper(lang, developer._id);
+
+  // console.log("projects", projects);
 
   const formDocument: FormStandardDocument =
     await getFormStandardDocumentByLang(params.lang);
@@ -105,6 +109,51 @@ const DeveloperPage = async ({ params }: Props) => {
         excerpt={developer.excerpt}
         logo={developer.logo}
       />
+      <section className="">
+        <div className="container">
+          <h2 className="h2-white">
+            {lang === "en"
+              ? "Developer projects"
+              : lang === "de"
+                ? "Entwicklerprojekte"
+                : lang === "pl"
+                  ? "Projekty dewelopera"
+                  : lang === "ru"
+                    ? "Проекты застройщика"
+                    : "Developer projects"}
+          </h2>
+          <div className="projectsDeveloper">
+            {projects.length ? (
+              projects.map((project) => (
+                <div key={project._id}>
+                  <ProjectLink
+                    url={`/${lang}/properties/${project.slug[lang].current}`}
+                    previewImage={project.previewImage}
+                    title={project.title}
+                    price={project.keyFeatures.price}
+                    bedrooms={parseFloat(project.keyFeatures.bedrooms)} // Преобразование строки в число
+                    coveredArea={parseFloat(project.keyFeatures.coveredArea)} // Преобразование строки в число
+                    plotSize={parseFloat(project.keyFeatures.plotSize)} // Преобразование строки в число
+                    lang={params.lang}
+                  />
+                </div>
+              ))
+            ) : (
+              <p>
+                {lang === "en"
+                  ? "No projects available for this developer."
+                  : lang === "de"
+                    ? "Keine Projekte für diesen Entwickler verfügbar."
+                    : lang === "pl"
+                      ? "Brak projektów dostępnych dla tego dewelopera."
+                      : lang === "ru"
+                        ? "Нет доступных проектов для этого застройщика."
+                        : "No projects available for this developer."}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
       <FormStatic lang={params.lang} />
       <FullDescriptionBlock description={developer.description} />
       <div className="container">
