@@ -113,18 +113,6 @@ const SinglePage = async ({ params }: Props) => {
             block={block as AccordionBlock}
           />
         );
-      // case "doubleImagesBlock":
-      //   return (
-      //     <DoubleImagesBlockComponent
-      //       key={block._key}
-      //       block={block as DoubleImagesBlock}
-      //       title={page.title}
-      //     />
-      //   );
-      // case "tabsBlock":
-      //   return (
-      //     <TabsBlockComponent key={block._key} block={block as TabsBlock} />
-      //   );
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }

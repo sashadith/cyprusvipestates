@@ -49,6 +49,59 @@ const singlepage = {
         "Блоки контента, которые будут отображаться в статье. Это основное содержание статьи",
       of: [{ type: "textContent" }, { type: "accordionBlock" }],
     }),
+    // Раздел для ручного выбора проектов с фильтрацией по языку
+    defineField({
+      name: "projectSection",
+      title: "Секция проектов",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Заголовок секции проектов",
+          type: "string",
+          description: "Например, «Проекты для семей»",
+        }),
+        defineField({
+          name: "projects",
+          title: "Выбранные проекты",
+          type: "array",
+          of: [
+            {
+              type: "reference",
+              to: [{ type: "project" }],
+              options: {
+                filter: ({ document }) => ({
+                  filter: "language == $language",
+                  params: { language: document.language },
+                }),
+              },
+            },
+          ],
+          description:
+            "Выберите проекты, которые необходимо отобразить на странице (SEO-оптимизированная подборка)",
+        }),
+      ],
+    }),
+    // Поле для подстраниц с фильтрацией по языку
+    defineField({
+      name: "subpages",
+      title: "Подстраницы",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "singlepage" }],
+          options: {
+            filter: ({ document }) => ({
+              filter: "language == $language",
+              params: { language: document.language },
+            }),
+          },
+        },
+      ],
+      description:
+        "Выберите подстраницы, которые будут вложены в эту страницу. Отображаются только страницы с тем же языком.",
+    }),
     defineField({
       name: "language",
       type: "string",

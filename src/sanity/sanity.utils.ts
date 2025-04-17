@@ -114,25 +114,71 @@ export async function getFormStandardDocumentByLang(
   return formStandardDocument;
 }
 
+// export async function getSinglePageByLang(
+//   lang: string,
+//   slug: string
+// ): Promise<Singlepage> {
+//   const singlePageQuery = groq`*[_type == 'singlepage' && slug[$lang].current == $slug][0] {
+//     _id,
+//     title,
+//     slug,
+//     seo,
+//     previewImage,
+//     contentBlocks,
+//     language,
+//     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+//       slug,
+//     },
+//   }`;
+
+//   const singlePage = await client.fetch(singlePageQuery, { lang, slug });
+
+//   return singlePage;
+// }
+
 export async function getSinglePageByLang(
   lang: string,
   slug: string
 ): Promise<Singlepage> {
-  const singlePageQuery = groq`*[_type == 'singlepage' && slug[$lang].current == $slug][0] {
-    _id,
-    title,
-    slug,
-    seo,
-    previewImage,
-    contentBlocks,
-    language,
-    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+  const singlePageQuery = groq`
+    *[_type == 'singlepage' && slug[$lang].current == $slug][0]{
+      _id,
+      title,
       slug,
-    },
-  }`;
+      seo,
+      previewImage,
+      contentBlocks,
+      language,
+      projectSection {
+        title,
+        projects[]->{
+          _id,
+          title,
+          slug,
+          previewImage
+          // можно добавить другие нужные поля проекта
+        }
+      },
+      subpages[]->{
+        ...,
+        "subpages": subpages[]->{
+          ...,
+          "subpages": subpages[]->{
+            ...,
+            "subpages": subpages[]->{
+              ...,
+              "subpages": subpages[]->
+            }
+          }
+        }
+      },
+      "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+        slug,
+      }
+    }
+  `;
 
   const singlePage = await client.fetch(singlePageQuery, { lang, slug });
-
   return singlePage;
 }
 
