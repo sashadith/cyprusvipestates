@@ -31,8 +31,8 @@ const BrochureBlock: FC<Props> = ({ brochure }) => {
                 />
               </div>
               <div className={styles.startText}>
-                <div className={styles.title}>{title}</div>
-                <div className={styles.subtitle}>{subtitle}</div>
+                <h1 className={styles.title}>{title}</h1>
+                <h2 className={styles.subtitle}>{subtitle}</h2>
               </div>
             </div>
             <div className={styles.description}>{description}</div>
