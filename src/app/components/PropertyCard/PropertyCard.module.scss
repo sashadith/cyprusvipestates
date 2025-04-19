@@ -27,7 +27,7 @@
   font-size: clamp(0.875rem, 0.813rem + 0.25vw, 1rem);
   font-weight: 400;
   padding: 0.25rem 0.5rem;
-  background: #aa7f2e;
+  background: #bd8948;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -40,13 +40,13 @@
   line-height: 1.2;
   margin: 0.625rem 0;
   padding: 0 0.5rem;
-  color: #aa7f2e;
+  color: #bd8948;
 }
 
 .button {
   padding: 0.625rem 1.25rem;
   background: transparent;
-  border: 2px solid #aa7f2e;
+  border: 2px solid #bd8948;
   color: #fff;
   font-size: 1rem;
   font-weight: 400;
@@ -57,7 +57,7 @@
 
   @media screen and (min-width: 980px) {
     &:hover {
-      background: #aa7f2e;
+      background: #bd8948;
       color: #fff;
     }
   }

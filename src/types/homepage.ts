@@ -91,6 +91,43 @@ export type Logo = {
   image: ImageAlt;
 };
 
+export type Counting = {
+  _key: string;
+  _type: "counting";
+  conuntNumber: number;
+  sign: string;
+};
+
+export type Benefit = {
+  _key: string;
+  _type: "benefits";
+  counting: Counting;
+  title: string;
+  description: string;
+};
+
+export type BenefitsBlock = {
+  _key: string;
+  _type: "benefitsBlock";
+  title: string;
+  benefits: Benefit[];
+};
+
+export type Step = {
+  _key: string;
+  _type: "steps";
+  icon: Image;
+  text: string;
+};
+
+export type HowWeWorkBlock = {
+  _key: string;
+  _type: "howWeWorkBlock";
+  title: string;
+  steps: Step[];
+  description: string;
+};
+
 export type Review = {
   _key: string;
   _type: string;
@@ -149,6 +186,8 @@ export type Homepage = {
   projectsBlock: ProjectsBlock;
   logosBlock: LogosBlock;
   parallaxImage: Image;
+  benefitsBlock: BenefitsBlock;
+  howWeWorkBlock: HowWeWorkBlock;
   reviewsBlock: ReviewsBlock;
   language: string;
   slug: {

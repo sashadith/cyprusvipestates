@@ -343,6 +343,96 @@ export default defineType({
       type: "image",
     }),
     defineField({
+      name: "benefitsBlock",
+      title: "Benefits Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "benefits",
+          title: "Benefits",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "counting",
+                  title: "Counting",
+                  type: "object",
+                  fields: [
+                    defineField({
+                      name: "conuntNumber",
+                      title: "Count Number",
+                      type: "number",
+                    }),
+                    defineField({
+                      name: "sign",
+                      title: "Sign",
+                      type: "string",
+                    }),
+                  ],
+                }),
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                }),
+                defineField({
+                  name: "description",
+                  title: "Description",
+                  type: "string",
+                }),
+              ],
+            },
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "howWeWorkBlock",
+      title: "How We Work Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "steps",
+          title: "Steps",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "icon",
+                  title: "Icon",
+                  type: "image",
+                }),
+                defineField({
+                  name: "text",
+                  title: "text",
+                  type: "string",
+                }),
+              ],
+            },
+          ],
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
       name: "reviewsBlock",
       title: "Reviews Block",
       type: "object",

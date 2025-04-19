@@ -43,10 +43,10 @@ const PropertySlider: FC<Props> = ({ images, videoId, videoPreview }) => {
         ))}
         <div className={styles.navButtons}>
           <button className="prev-button">
-            <IoIosArrowBack fontSize="3.5rem" color="#aa7f2e" />
+            <IoIosArrowBack fontSize="3.5rem" color="#bd8948" />
           </button>
           <button className="next-button">
-            <IoIosArrowForward fontSize="3.5rem" color="#aa7f2e" />
+            <IoIosArrowForward fontSize="3.5rem" color="#bd8948" />
           </button>
         </div>
       </Swiper>

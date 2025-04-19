@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --corp-color: #aa7f2e;
+  --corp-color: #bd8948;
   --corp-color-dark: #8b6f4e;
   --corp-color-light: #e0c8a7;
   --black-color: #000000;
@@ -89,15 +89,15 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .PhoneInputInternationalIconPhone {
-  stroke: #aa7f2e; /* Цвет линии */
-  fill: #aa7f2e; /* Цвет заливки */
+  stroke: #bd8948; /* Цвет линии */
+  fill: #bd8948; /* Цвет заливки */
   stroke-width: 3px; /* Толщина линии */
   width: 32px; /* Ширина значка */
   height: 32px; /* Высота значка */
 }
 
 .PhoneInputInternationalIconGlobe {
-  stroke: #aa7f2e; /* Цвет линии */
+  stroke: #bd8948; /* Цвет линии */
   stroke-width: 3px; /* Толщина линии */
   width: 32px; /* Ширина значка */
   height: 32px; /* Высота значка */
@@ -149,7 +149,7 @@ input[type="number"]::-webkit-outer-spin-button {
   transition: all 0.3s ease !important;
 
   &.swiper-pagination-bullet-active {
-    background-color: #aa7f2e !important;
+    background-color: #bd8948 !important;
     opacity: 1;
     width: 50px !important;
     height: 12px !important;
@@ -194,7 +194,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .loader {
   width: 50px;
   height: 50px;
-  border: 5px solid #aa7f2e;
+  border: 5px solid #bd8948;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
@@ -268,7 +268,7 @@ input[type="number"]::-webkit-outer-spin-button {
   @media screen and (min-width: 768px) {
     flex: 1 0 38%;
     padding-left: 50px;
-    border-left: 3px solid #aa7f2e;
+    border-left: 3px solid #bd8948;
   }
 }
 
@@ -318,14 +318,14 @@ input[type="number"]::-webkit-outer-spin-button {
   display: inline-block;
   padding: 0.625rem 1.25rem;
   background: transparent;
-  border: 2px solid #aa7f2e;
+  border: 2px solid #bd8948;
   color: #fff;
   font-size: 1rem;
   font-weight: 400;
   transition: background 0.3s, color 0.3s;
 
   &:hover {
-    background: #aa7f2e;
+    background: #bd8948;
     color: #fff;
   }
 }

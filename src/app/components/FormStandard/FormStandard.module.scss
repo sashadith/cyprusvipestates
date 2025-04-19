@@ -67,8 +67,8 @@
   justify-content: center;
   margin-inline: auto;
   margin-bottom: clamp(0.813rem, 0.594rem + 0.88vw, 1.25rem);
-  border: 1px solid #aa7f2e;
-  background: #aa7f2e;
+  border: 1px solid #bd8948;
+  background: #bd8948;
   padding: 20px 28px;
   color: #FFF;
   text-align: center;
@@ -143,7 +143,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #aa7f2e;
+  background-color: #bd8948;
   color: #fff;
   padding: clamp(1.25rem, 1.023rem + 1.14vw, 1.875rem);
   max-width: 90%;
@@ -209,8 +209,8 @@
 }
 
 .customCheckbox input[type="checkbox"]:checked + label::before {
-  background-color: #aa7f2e; /* Цвет фона при активации */
-  border-color: #aa7f2e; /* Цвет границы при активации */
+  background-color: #bd8948; /* Цвет фона при активации */
+  border-color: #bd8948; /* Цвет границы при активации */
 }
 
 .customCheckbox input[type="checkbox"]:checked + label::after {

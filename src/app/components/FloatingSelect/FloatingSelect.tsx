@@ -54,9 +54,9 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
       ...provided,
       minHeight: "48px",
       height: "48px",
-      borderColor: state.isFocused ? "#aa7f2e" : "#ccc",
-      boxShadow: state.isFocused ? "0 0 0 1px #aa7f2e" : "none",
-      "&:hover": { borderColor: state.isFocused ? "#aa7f2e" : "#aaa" },
+      borderColor: state.isFocused ? "#bd8948" : "#ccc",
+      boxShadow: state.isFocused ? "0 0 0 1px #bd8948" : "none",
+      "&:hover": { borderColor: state.isFocused ? "#bd8948" : "#aaa" },
       padding: "0 5px",
     }),
     valueContainer: (provided) => ({
@@ -95,14 +95,14 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
       ...provided,
       // Если опция выбрана, используем основной цвет, иначе при ховере – прозрачную версию
       backgroundColor: state.isSelected
-        ? "#aa7f2e"
+        ? "#bd8948"
         : state.isFocused
           ? "rgba(170, 127, 46, 0.2)"
           : provided.backgroundColor,
       color: state.isSelected ? "#fff" : provided.color,
       cursor: "pointer",
       ":active": {
-        backgroundColor: "#aa7f2e",
+        backgroundColor: "#bd8948",
       },
     }),
   };
