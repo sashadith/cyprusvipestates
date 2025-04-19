@@ -24,6 +24,7 @@ import LogosCarousel from "../components/LogosCarousel/LogosCarousel";
 import DevelopersLogos from "../components/DevelopersLogos/DevelopersLogos";
 import BenefitsBlock from "../components/BenefitsBlock/BenefitsBlock";
 import homepage from "@/sanity/schemaTypes/homepage";
+import HowWeWorkBlock from "../components/HowWeWorkBlock/HowWeWorkBlock";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -101,6 +102,7 @@ export default async function Home({ params }: Props) {
         />
         <ParallaxImage image={homePage.parallaxImage} />
         <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />
+        <HowWeWorkBlock work={homePage.howWeWorkBlock} />
         <Reviews reviews={homePage.reviewsBlock} />
         <FormStatic lang={params.lang} />
         <Footer params={params} />

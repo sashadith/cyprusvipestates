@@ -18,8 +18,8 @@ const BenefitsBlock: FC<Props> = ({ benefitsBlock }) => {
         <div className={styles.inner}>
           {benefitsBlock.title && <h2 className="h2">{benefitsBlock.title}</h2>}
           <div className={styles.benefitsList}>
-            {benefitsBlock.benefits.map((benefit, index) => (
-              <div key={index} className={styles.benefitItem}>
+            {benefitsBlock.benefits.map((benefit) => (
+              <div key={benefit._key} className={styles.benefitItem}>
                 <div className={styles.image}>
                   <Image
                     src="https://cdn.sanity.io/files/88gk88s2/production/ebfc38d9953475424b1414a9cdf930b3bdcafb82.png"
