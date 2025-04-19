@@ -44,6 +44,11 @@ const HowWeWorkBlock: FC<Props> = ({ work }) => {
             </div>
           ))}
         </div>
+        {work.description && (
+          <div className={styles.descriptionText}>
+            <p>{work.description}</p>
+          </div>
+        )}
       </div>
     </section>
   );
