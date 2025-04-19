@@ -33,13 +33,32 @@ const singlepage = {
       ],
     }),
     defineField({
+      name: "excerpt",
+      title: "Excerpt",
+      type: "string",
+      description:
+        "Краткое описание страницы, которое будет отображаться в превью",
+    }),
+    defineField({
       name: "previewImage",
       title: "Preview Image",
       type: "image",
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+        },
+      ],
       description: "Основное изображение страницы",
+    }),
+    defineField({
+      name: "allowIntroBlock",
+      title: "Allow Intro Block",
+      type: "boolean",
     }),
     defineField({
       name: "contentBlocks",

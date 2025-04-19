@@ -148,7 +148,9 @@ export async function getSinglePageByLang(
       title,
       slug,
       seo,
+      excerpt,
       previewImage,
+      allowIntroBlock,
       contentBlocks,
       language,
       projectSection {

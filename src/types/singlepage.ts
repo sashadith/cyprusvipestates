@@ -1,6 +1,6 @@
 import { AccordionBlock, Seo, TextContent } from "./blog";
 import { Image } from "./homepage";
-import { Project } from "./project";
+import { ImageAlt, Project } from "./project";
 
 export type ProjectSection = {
   title: string;
@@ -12,7 +12,9 @@ export type Singlepage = {
   _type: string;
   title: string;
   seo: Seo;
-  previewImage: Image;
+  excerpt: string;
+  previewImage: ImageAlt;
+  allowIntroBlock: boolean;
   contentBlocks: Array<TextContent | AccordionBlock>;
   projectSection?: ProjectSection;
   subpages?: Singlepage[];

@@ -23,6 +23,7 @@ import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
 import TextContentComponent from "@/app/components/TextContentComponent/TextContentComponent";
 import SinglePageIntroBlock from "@/app/components/SinglePageIntroBlock/SinglePageIntroBlock";
 import PreviewMain from "@/app/components/PreviewMain/PreviewMain";
+import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -124,12 +125,20 @@ const SinglePage = async ({ params }: Props) => {
     <>
       <Header params={params} translations={translations} />
       <main>
-        {page.previewImage && (
-          <PreviewMain previewImage={page.previewImage} title={page.title} />
-        )}
+        {page.previewImage &&
+          page.title &&
+          page.excerpt &&
+          page.allowIntroBlock && (
+            <PropertyIntro
+              title={page.title}
+              previewImage={page.previewImage}
+              excerpt={page.excerpt}
+            />
+          )}
         <div className="container">
           <SinglePageIntroBlock title={page.title} />
-          {page.contentBlocks.map((block) => renderContentBlock(block))}
+          {page.contentBlocks?.length > 0 &&
+            page.contentBlocks.map((block) => renderContentBlock(block))}
         </div>
       </main>
       <Footer params={params} />
