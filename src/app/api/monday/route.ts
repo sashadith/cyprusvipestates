@@ -8,21 +8,27 @@ const BOARD_ID = "1761987486";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, phone, email, currentPage } = body;
+    // const { name, phone, email, currentPage } = body;
+    const { name, phone, email, message, currentPage } = body;
 
     const currentDate = new Date().toISOString().split("T")[0];
+
+    // Собираем column_values динамически
+    const cols: Record<string, string> = {
+      text_mkkwm0b4: phone,
+      text_mkkwekh3: email,
+      text_mkkwk9kt: currentPage,
+      text_mkq6spmc: message,
+      date4: currentDate,
+    };
+    if (message) cols.text_message = message;
 
     const query = `
       mutation {
         create_item (
           board_id: ${BOARD_ID},
           item_name: "${name}",
-          column_values: "${JSON.stringify({
-            text_mkkwm0b4: phone,
-            text_mkkwekh3: email,
-            text_mkkwk9kt: currentPage,
-            date4: currentDate,
-          }).replace(/"/g, '\\"')}"
+          column_values: "${JSON.stringify(cols).replace(/"/g, '\\"')}"
         ) {
           id
         }

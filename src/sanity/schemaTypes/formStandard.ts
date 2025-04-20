@@ -31,6 +31,11 @@ const formStandard = defineType({
       type: "string",
     }),
     defineField({
+      name: "inputMessage",
+      title: "Input Message",
+      type: "string",
+    }),
+    defineField({
       name: "buttonText",
       title: "Button Text",
       type: "string",
@@ -78,6 +83,12 @@ const formStandard = defineType({
       title: "Validation Email Invalid",
       type: "string",
       description: "Validation message for invalid email",
+    }),
+    defineField({
+      name: "validationMessageRequired",
+      title: "Validation Message Required",
+      type: "string",
+      description: "Validation message for message input",
     }),
     defineField({
       name: "validationAgreementRequired",

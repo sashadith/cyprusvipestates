@@ -3,6 +3,7 @@ export type Form = {
   inputPhone: string;
   inputCountry: string;
   inputEmail: string;
+  inputMessage: string;
   buttonText: string;
   agreementText: string;
   agreementLinkLabel: string;
@@ -12,6 +13,7 @@ export type Form = {
   validationCountryRequired: string;
   validationEmailRequired: string;
   validationEmailInvalid: string;
+  validationMessageRequired: string;
   validationAgreementRequired: string;
   validationAgreementOneOf: string;
   successMessage: string;
