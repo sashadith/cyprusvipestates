@@ -247,7 +247,7 @@ const FormStandard: FC<ContactFormProps> = ({
                 component="div"
                 className={styles.errorCheckbox}
               />
-              <label id={`${uid}-agreedToPolicy`}>
+              <label htmlFor={`${uid}-agreedToPolicy`}>
                 {dataForm.agreementText}{" "}
                 <Link
                   className={styles.policyLink}
