@@ -96,13 +96,13 @@ export default async function Home({ params }: Props) {
         <AboutBlock aboutBlock={homePage.aboutBlock} />
         <DescriptionBlock descriptionBlock={homePage.descriptionBlock} />
         <NewListnigs lang={params.lang} />
+        <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />
+        <HowWeWorkBlock work={homePage.howWeWorkBlock} />
         <DevelopersLogos
           logos={homePage.logosBlock?.logos}
           lang={params.lang}
         />
         <ParallaxImage image={homePage.parallaxImage} />
-        <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />
-        <HowWeWorkBlock work={homePage.howWeWorkBlock} />
         <Reviews reviews={homePage.reviewsBlock} />
         <FormStatic lang={params.lang} />
         <Footer params={params} />
