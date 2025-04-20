@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useId } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -26,6 +26,7 @@ export interface ContactFormProps {
 }
 
 const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
+  const uid = useId();
   const [message, setMessage] = useState<string | null>(null);
   const [filled, setFilled] = useState({
     name: false,
@@ -199,7 +200,8 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                   <div className={styles.inputs}>
                     <div className={styles.inputWrapper}>
                       <label
-                        htmlFor="name"
+                        // htmlFor="name"
+                        htmlFor={`${uid}-name`}
                         className={`${styles.label} ${filled.name ? styles.filled : ""}`}
                       >
                         {lang === "ru"
@@ -211,7 +213,8 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                               : "Your name"}
                       </label>
                       <Field
-                        id="name"
+                        // id="name"
+                        id={`${uid}-name`}
                         name="name"
                         type="text"
                         className={`${styles.inputField}`}
@@ -226,7 +229,8 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
 
                     <div className={styles.inputWrapper}>
                       <label
-                        htmlFor="phone"
+                        // htmlFor="phone"
+                        htmlFor={`${uid}-phone`}
                         className={`${styles.label} ${styles.labelPhone} ${filled.phone ? styles.filled : ""}`}
                       >
                         {lang === "ru"
@@ -238,7 +242,8 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                               : "Phone"}
                       </label>
                       <PhoneInput
-                        id="phone"
+                        // id="phone"
+                        id={`${uid}-phone`}
                         name="phone"
                         className={`${styles.inputField}`}
                         onBlur={handleBlur}
@@ -253,7 +258,8 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
 
                     <div className={styles.inputWrapper}>
                       <label
-                        htmlFor="email"
+                        // htmlFor="email"
+                        htmlFor={`${uid}-email`}
                         className={`${styles.label} ${filled.email ? styles.filled : ""}`}
                       >
                         {lang === "ru"
@@ -265,7 +271,8 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                               : "Email"}
                       </label>
                       <Field
-                        id="email"
+                        // id="email"
+                        id={`${uid}-email`}
                         name="email"
                         type="email"
                         className={`${styles.inputField}`}
@@ -304,7 +311,8 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                   <Field
                     type="checkbox"
                     name="agreedToPolicy"
-                    id="agreedToPolicy"
+                    // id="agreedToPolicy"
+                    id={`${uid}-agreedToPolicy`}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setFieldValue("agreedToPolicy", e.target.checked);
                     }}
@@ -314,7 +322,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                     component="div"
                     className={styles.errorCheckbox}
                   />
-                  <label htmlFor="agreedToPolicy">
+                  <label htmlFor={`${uid}-agreedToPolicy`}>
                     {lang === "ru"
                       ? "Я согласен с "
                       : lang === "de"
