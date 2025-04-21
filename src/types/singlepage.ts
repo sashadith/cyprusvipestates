@@ -1,4 +1,4 @@
-import { AccordionBlock, Seo, TextContent } from "./blog";
+import { AccordionBlock, Seo, TextContent, ContactFullBlock } from "./blog";
 import { Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
 
@@ -15,7 +15,7 @@ export type Singlepage = {
   excerpt: string;
   previewImage: ImageAlt;
   allowIntroBlock: boolean;
-  contentBlocks: Array<TextContent | AccordionBlock>;
+  contentBlocks: Array<TextContent | AccordionBlock | ContactFullBlock>;
   projectSection?: ProjectSection;
   subpages?: Singlepage[];
   language: string;

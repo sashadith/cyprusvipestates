@@ -9,12 +9,7 @@ import {
   getSinglePageByLang,
   // getNotFoundPageByLang,
 } from "@/sanity/sanity.utils";
-import {
-  AccordionBlock,
-  DoubleImagesBlock,
-  TabsBlock,
-  TextContent,
-} from "@/types/blog";
+import { AccordionBlock, TextContent, ContactFullBlock } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Translation } from "@/types/homepage";
 import { Metadata } from "next";
@@ -24,6 +19,7 @@ import TextContentComponent from "@/app/components/TextContentComponent/TextCont
 import SinglePageIntroBlock from "@/app/components/SinglePageIntroBlock/SinglePageIntroBlock";
 import PreviewMain from "@/app/components/PreviewMain/PreviewMain";
 import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
+import ContactFullBlockComponent from "@/app/components/ContactFullBlockComponent/ContactFullBlockComponent";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -33,7 +29,7 @@ type Props = {
   params: { lang: string; slug: string };
 };
 
-type ContentBlock = TextContent | AccordionBlock;
+type ContentBlock = TextContent | AccordionBlock | ContactFullBlock;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -114,6 +110,14 @@ const SinglePage = async ({ params }: Props) => {
             block={block as AccordionBlock}
           />
         );
+      case "contactFullBlock":
+        return (
+          <ContactFullBlockComponent
+            key={block._key}
+            block={block as ContactFullBlock}
+            lang={params.lang}
+          />
+        );
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }
@@ -135,11 +139,9 @@ const SinglePage = async ({ params }: Props) => {
               excerpt={page.excerpt}
             />
           )}
-        <div className="container">
-          <SinglePageIntroBlock title={page.title} />
-          {page.contentBlocks?.length > 0 &&
-            page.contentBlocks.map((block) => renderContentBlock(block))}
-        </div>
+        {/* <SinglePageIntroBlock title={page.title} /> */}
+        {page.contentBlocks?.length > 0 &&
+          page.contentBlocks.map((block) => renderContentBlock(block))}
       </main>
       <Footer params={params} />
       <ModalBrochure lang={params.lang} formDocument={formDocument} />

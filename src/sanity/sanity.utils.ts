@@ -151,7 +151,42 @@ export async function getSinglePageByLang(
       excerpt,
       previewImage,
       allowIntroBlock,
-      contentBlocks,
+      contentBlocks[]{
+        _type=="contactFullBlock" => {
+          _key,
+          _type,
+          title,
+          description,
+          contacts,
+          form->{
+            _id,
+            _type,
+            language,
+            form{
+              inputName,
+              inputPhone,
+              inputCountry,
+              inputEmail,
+              inputMessage,
+              buttonText,
+              agreementText,
+              agreementLinkLabel,
+              agreementLinkDestination,
+              validationNameRequired,
+              validationPhoneRequired,
+              validationCountryRequired,
+              validationEmailRequired,
+              validationEmailInvalid,
+              validationMessageRequired,
+              validationAgreementRequired,
+              validationAgreementOneOf,
+              successMessage,
+              errorMessage
+            }
+          }
+        },
+        _type!="contactFullBlock" => @
+      },
       language,
       projectSection {
         title,

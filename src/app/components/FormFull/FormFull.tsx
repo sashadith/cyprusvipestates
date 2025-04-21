@@ -7,11 +7,10 @@ import axios from "axios";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
-import styles from "./FormStandard.module.scss";
+import styles from "./FormFull.module.scss";
 import { Form as FormType } from "@/types/form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { m } from "framer-motion";
 
 export type FormData = {
   name: string;
@@ -215,7 +214,7 @@ const FormFull: FC<ContactFormProps> = ({
             <div className={styles.inputWrapper}>
               <label
                 htmlFor="message"
-                className={`${styles.label} ${filled.message ? styles.filled : ""}`}
+                className={`${styles.label} ${styles.labelMessage} ${filled.message ? styles.filled : ""}`}
               >
                 {dataForm.inputMessage}
               </label>

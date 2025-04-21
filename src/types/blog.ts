@@ -1,3 +1,6 @@
+import { Contact } from "./footer";
+import { FormStandardDocument } from "./formStandardDocument";
+
 export type Image = {
   _key: string;
   _ref: string;
@@ -32,6 +35,15 @@ export type DoubleImagesBlock = {
   _type: string;
   leftImage: Image;
   rightImage: Image;
+};
+
+export type ContactFullBlock = {
+  _key: string;
+  _type: string;
+  title: string;
+  description: string;
+  contacts: Contact[];
+  form: FormStandardDocument;
 };
 
 export type AccordionBlock = {

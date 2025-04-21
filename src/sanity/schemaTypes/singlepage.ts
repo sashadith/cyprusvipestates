@@ -66,7 +66,11 @@ const singlepage = {
       type: "array",
       description:
         "Блоки контента, которые будут отображаться в статье. Это основное содержание статьи",
-      of: [{ type: "textContent" }, { type: "accordionBlock" }],
+      of: [
+        { type: "textContent" },
+        { type: "accordionBlock" },
+        { type: "contactFullBlock" },
+      ],
     }),
     // Раздел для ручного выбора проектов с фильтрацией по языку
     defineField({

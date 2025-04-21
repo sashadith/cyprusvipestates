@@ -14,6 +14,7 @@ import propertiesPage from "./propertiesPage";
 import property from "./property";
 import singlepage from "./singlepage";
 import textContent from "./textContent";
+import contactFullBlock from "./contactFullBlock";
 
 export const schemaTypes = [
   header,
@@ -28,6 +29,7 @@ export const schemaTypes = [
   formStandardDocument,
   contentBlock,
   textContent,
+  contactFullBlock,
   accordionBlock,
   developer,
   docFile,
