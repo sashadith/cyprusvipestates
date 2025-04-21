@@ -29,6 +29,11 @@ const contactFullBlock = defineType({
               type: "image",
             }),
             defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+            }),
+            defineField({
               name: "label",
               title: "Label",
               type: "string",

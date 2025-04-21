@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useId } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -33,6 +33,7 @@ const FormFull: FC<ContactFormProps> = ({
   lang,
   offerButtonCustomText,
 }) => {
+  const uid = useId();
   const [message, setMessage] = useState<string | null>(null);
   const [filled, setFilled] = useState({
     name: false,
@@ -150,13 +151,15 @@ const FormFull: FC<ContactFormProps> = ({
             {/* Поле для имени */}
             <div className={styles.inputWrapper}>
               <label
-                htmlFor="name"
+                // htmlFor="name"
+                htmlFor={`${uid}-name`}
                 className={`${styles.label} ${filled.name ? styles.filled : ""}`}
               >
                 {dataForm.inputName}
               </label>
               <Field
-                id="name"
+                // id="name"
+                id={`${uid}-name`}
                 name="name"
                 type="text"
                 className={`${styles.inputField}`}
@@ -171,13 +174,15 @@ const FormFull: FC<ContactFormProps> = ({
 
             <div className={styles.inputWrapper}>
               <label
-                htmlFor="phone"
+                // htmlFor="phone"
+                htmlFor={`${uid}-phone`}
                 className={`${styles.label} ${styles.labelPhone} ${filled.phone ? styles.filled : ""}`}
               >
                 {dataForm.inputPhone}
               </label>
               <PhoneInput
-                id="phone"
+                // id="phone"
+                id={`${uid}-phone`}
                 name="phone"
                 className={`${styles.inputField}`}
                 onBlur={handleBlur}
@@ -192,13 +197,15 @@ const FormFull: FC<ContactFormProps> = ({
 
             <div className={styles.inputWrapper}>
               <label
-                htmlFor="email"
+                // htmlFor="email"
+                htmlFor={`${uid}-email`}
                 className={`${styles.label} ${filled.email ? styles.filled : ""}`}
               >
                 {dataForm.inputEmail}
               </label>
               <Field
-                id="email"
+                // id="email"
+                id={`${uid}-email`}
                 name="email"
                 type="email"
                 className={`${styles.inputField}`}
@@ -213,14 +220,16 @@ const FormFull: FC<ContactFormProps> = ({
 
             <div className={styles.inputWrapper}>
               <label
-                htmlFor="message"
+                // htmlFor="message"
+                htmlFor={`${uid}-message`}
                 className={`${styles.label} ${styles.labelMessage} ${filled.message ? styles.filled : ""}`}
               >
                 {dataForm.inputMessage}
               </label>
               <Field
                 as="textarea"
-                id="message"
+                // id="message"
+                id={`${uid}-message`}
                 name="message"
                 className={styles.inputField}
                 onBlur={handleBlur}
@@ -230,6 +239,60 @@ const FormFull: FC<ContactFormProps> = ({
                 component="div"
                 className={styles.error}
               />
+            </div>
+
+            <div className={styles.customCheckbox}>
+              <Field
+                type="checkbox"
+                name="agreedToPolicy"
+                // id="agreedToPolicy"
+                id={`${uid}-agreedToPolicy`}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setFieldValue("agreedToPolicy", e.target.checked);
+                }}
+              />
+              <ErrorMessage
+                name="agreedToPolicy"
+                component="div"
+                className={styles.errorCheckbox}
+              />
+              <label htmlFor={`${uid}-agreedToPolicy`}>
+                {lang === "ru"
+                  ? "Я согласен с "
+                  : lang === "de"
+                    ? "Ich habe die Bedingungen der "
+                    : lang === "pl"
+                      ? "Zgadzam się z "
+                      : "I agree with the terms of the "}
+                <Link
+                  className={styles.policyLink}
+                  href={
+                    lang === "ru"
+                      ? "/ru/politika-privatnosti"
+                      : lang === "de"
+                        ? "/datenschutzrichtlinie"
+                        : lang === "pl"
+                          ? "/pl/polityka-prywatnosci"
+                          : "/en/privacy-policy"
+                  }
+                  target="_blank"
+                >
+                  {lang === "ru"
+                    ? "Пользовательским соглашением"
+                    : lang === "de"
+                      ? "Benutzervereinbarung"
+                      : lang === "pl"
+                        ? "Umowa użytkownika"
+                        : "User agreement"}
+                </Link>
+                {lang === "ru"
+                  ? " прочитал и принимаю их"
+                  : lang === "de"
+                    ? " gelesen und akzeptiere sie"
+                    : lang === "pl"
+                      ? " przeczytałem i akceptuję je"
+                      : " read and accept them"}
+              </label>
             </div>
 
             <div>
@@ -247,32 +310,6 @@ const FormFull: FC<ContactFormProps> = ({
                   dataForm.buttonText
                 )}
               </button>
-            </div>
-
-            <div className={styles.customCheckbox}>
-              <Field
-                type="checkbox"
-                name="agreedToPolicy"
-                id="agreedToPolicy"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setFieldValue("agreedToPolicy", e.target.checked);
-                }}
-              />
-              <ErrorMessage
-                name="agreedToPolicy"
-                component="div"
-                className={styles.errorCheckbox}
-              />
-              <label htmlFor="agreedToPolicy">
-                {dataForm.agreementText}{" "}
-                <Link
-                  className={styles.policyLink}
-                  href={dataForm.agreementLinkDestination}
-                  target="_blank"
-                >
-                  {dataForm.agreementLinkLabel}
-                </Link>
-              </label>
             </div>
           </Form>
         )}

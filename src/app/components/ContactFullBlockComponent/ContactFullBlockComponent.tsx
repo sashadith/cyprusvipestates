@@ -68,7 +68,9 @@ const ContactFullBlockComponent: FC<Props> = ({ block, lang }) => {
                     width={50}
                     height={50}
                   />
-                  <p className={styles.contactLabel}>{contact.label}</p>
+                  <p className={styles.contactLabel}>
+                    {contact.title}: {contact.label}
+                  </p>
                 </Link>
               ))}
             </div>

@@ -1,6 +1,7 @@
-import { Contact } from "./footer";
 import { FormStandardDocument } from "./formStandardDocument";
 import { GeoPoint, ImageAlt } from "./project";
+
+type ContactType = "Email" | "Phone" | "Link";
 
 export type Image = {
   _key: string;
@@ -38,12 +39,21 @@ export type DoubleImagesBlock = {
   rightImage: Image;
 };
 
+export type FullContact = {
+  _key: string;
+  _type: string;
+  icon: Image;
+  title: string;
+  label: string;
+  type: ContactType;
+};
+
 export type ContactFullBlock = {
   _key: string;
   _type: string;
   title: string;
   description: string;
-  contacts: Contact[];
+  contacts: FullContact[];
   form: FormStandardDocument;
 };
 
