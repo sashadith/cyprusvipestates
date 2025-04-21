@@ -70,6 +70,7 @@ const singlepage = {
         { type: "textContent" },
         { type: "accordionBlock" },
         { type: "contactFullBlock" },
+        { type: "teamBlock" },
       ],
     }),
     // Раздел для ручного выбора проектов с фильтрацией по языку

@@ -1,5 +1,6 @@
 import { Contact } from "./footer";
 import { FormStandardDocument } from "./formStandardDocument";
+import { ImageAlt } from "./project";
 
 export type Image = {
   _key: string;
@@ -44,6 +45,21 @@ export type ContactFullBlock = {
   description: string;
   contacts: Contact[];
   form: FormStandardDocument;
+};
+
+export type Member = {
+  _key: string;
+  image: ImageAlt;
+  name: string;
+  position: string;
+  description: string;
+};
+
+export type TeamBlock = {
+  _key: string;
+  _type: string;
+  title: string;
+  members: Member[];
 };
 
 export type AccordionBlock = {
