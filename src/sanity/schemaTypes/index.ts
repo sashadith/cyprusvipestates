@@ -16,6 +16,7 @@ import singlepage from "./singlepage";
 import textContent from "./textContent";
 import contactFullBlock from "./contactFullBlock";
 import teamBlock from "./teamBlock";
+import locationBlock from "./locationBlock";
 
 export const schemaTypes = [
   header,
@@ -33,6 +34,7 @@ export const schemaTypes = [
   contactFullBlock,
   teamBlock,
   accordionBlock,
+  locationBlock,
   developer,
   docFile,
   localizedSlug,

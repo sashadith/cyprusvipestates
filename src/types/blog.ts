@@ -1,6 +1,6 @@
 import { Contact } from "./footer";
 import { FormStandardDocument } from "./formStandardDocument";
-import { ImageAlt } from "./project";
+import { GeoPoint, ImageAlt } from "./project";
 
 export type Image = {
   _key: string;
@@ -60,6 +60,13 @@ export type TeamBlock = {
   _type: string;
   title: string;
   members: Member[];
+};
+
+export type LocationBlock = {
+  _key: string;
+  _type: string;
+  title: string;
+  location: GeoPoint;
 };
 
 export type AccordionBlock = {
