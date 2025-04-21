@@ -73,9 +73,9 @@
   padding: 20px 28px;
   color: #FFF;
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   -webkit-box-shadow: 0px 6px 20px -5px rgba(0,0,0,0.28);
@@ -84,9 +84,6 @@
 
   @media screen and (min-width: 768px) {
     height: 70px;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
     padding-top: 20px;
   }
 
@@ -181,9 +178,8 @@
   color: #FFF;
   font-size: 10px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: normal;
-  letter-spacing: -0.3px;
 
   @media screen and (min-width: 768px) {
     color: #FFF;
