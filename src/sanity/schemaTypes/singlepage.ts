@@ -68,6 +68,7 @@ const singlepage = {
         "Блоки контента, которые будут отображаться в статье. Это основное содержание статьи",
       of: [
         { type: "textContent" },
+        { type: "doubleTextBlock" },
         { type: "accordionBlock" },
         { type: "contactFullBlock" },
         { type: "teamBlock" },

@@ -6,6 +6,7 @@ import {
   TeamBlock,
   LocationBlock,
   ImageFullBlock,
+  DoubleTextBlock,
 } from "./blog";
 import { Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
@@ -30,6 +31,7 @@ export type Singlepage = {
     | TeamBlock
     | LocationBlock
     | ImageFullBlock
+    | DoubleTextBlock
   >;
   projectSection?: ProjectSection;
   subpages?: Singlepage[];

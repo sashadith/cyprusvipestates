@@ -1,0 +1,39 @@
+.doubleTextBlock {
+  margin-bottom: 70px;
+
+  a {
+    word-break: break-word;
+  }
+}
+
+.wrapper {
+  display: flex;
+  gap: 20px;
+
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+  }
+}
+
+.textBlock,
+.imageBlock,
+.leftContent,
+.rightContent
+{
+  flex: 1; // Обеспечивает равное распределение
+}
+
+.imageBlock {
+  overflow: hidden;
+}
+
+.divider {
+  width: 1px;
+  background-color: #bd8948;
+  margin: 0 30px;
+  display: none; // Скрываем по умолчанию
+
+  @media screen and (min-width: 980px) {
+    display: block; // Показываем только на больших экранах
+  }
+}

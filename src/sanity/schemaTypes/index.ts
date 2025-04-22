@@ -18,6 +18,8 @@ import contactFullBlock from "./contactFullBlock";
 import teamBlock from "./teamBlock";
 import locationBlock from "./locationBlock";
 import imageFullBlock from "./imageFullBlock";
+import doubleTextBlock from "./doubleTextBlock";
+import blockContentWithStyle from "./blockContentWithStyle";
 
 export const schemaTypes = [
   header,
@@ -35,6 +37,8 @@ export const schemaTypes = [
   contactFullBlock,
   teamBlock,
   imageFullBlock,
+  doubleTextBlock,
+  blockContentWithStyle,
   accordionBlock,
   locationBlock,
   developer,

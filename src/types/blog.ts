@@ -110,6 +110,34 @@ export type ImageFullBlock = {
 };
 // === Конец типов для imageFullBlock ===
 
+// === Типы для DoubleTextBlock ===
+export type BlockContentWithStyle = {
+  _key: string;
+  _type: string;
+  content: any;
+  backgroundColor: string;
+};
+
+export type ContentChoice = {
+  type: "text" | "image";
+  blockContent?: BlockContentWithStyle;
+  image?: ImageAlt;
+};
+
+export type DoubleTextBlock = {
+  _key: string;
+  _type: string;
+  doubleTextBlockTitle?: string;
+  leftContent: ContentChoice;
+  rightContent: ContentChoice;
+  isDivider: boolean;
+  marginTop?: "small" | "medium" | "large";
+  marginBottom?: "small" | "medium" | "large";
+  paddingTop?: "small" | "medium" | "large";
+  paddingBottom?: "small" | "medium" | "large";
+};
+// === Конец типов для DoubleTextBlock ===
+
 export type AccordionBlock = {
   _key: string;
   _type: "accordionBlock";
