@@ -15,6 +15,7 @@ import {
   ContactFullBlock,
   TeamBlock,
   LocationBlock,
+  ImageFullBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Translation } from "@/types/homepage";
@@ -28,6 +29,7 @@ import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
 import ContactFullBlockComponent from "@/app/components/ContactFullBlockComponent/ContactFullBlockComponent";
 import TeamBlockComponent from "@/app/components/TeamBlockComponent/TeamBlockComponent";
 import LocationBlockComponent from "@/app/components/LocationBlockComponent/LocationBlockComponent";
+import ImageFullBlockComponent from "@/app/components/ImageFullBlockComponent/ImageFullBlockComponent";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -42,7 +44,8 @@ type ContentBlock =
   | AccordionBlock
   | ContactFullBlock
   | TeamBlock
-  | LocationBlock;
+  | LocationBlock
+  | ImageFullBlock;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -145,6 +148,13 @@ const SinglePage = async ({ params }: Props) => {
             key={block._key}
             block={block as LocationBlock}
             lang={params.lang}
+          />
+        );
+      case "imageFullBlock":
+        return (
+          <ImageFullBlockComponent
+            key={block._key}
+            block={block as ImageFullBlock}
           />
         );
       default:

@@ -79,6 +79,37 @@ export type LocationBlock = {
   location: GeoPoint;
 };
 
+// === Типы для imageFullBlock ===
+
+/** Элемент текста с флагом подсветки */
+export type TextItem = {
+  text: string;
+  highlighted: boolean;
+};
+
+/** Описание блока: массив текстовых элементов и тег-обёртка */
+export type DescriptionFull = {
+  textItems: TextItem[];
+  tag: "h1" | "h2" | "h3" | "p";
+};
+
+/** Основное изображение с альтернативным текстом и соотношением сторон */
+export type ImageMain = {
+  picture: ImageAlt;
+  aspectRatio: "16:9" | "4:3" | "1:1";
+};
+
+/** Полный блок изображения с опциональным описанием */
+export type ImageFullBlock = {
+  _key: string;
+  _type: "imageFullBlock";
+  title: string;
+  imageMain: ImageMain;
+  hasDescription: boolean;
+  description?: DescriptionFull;
+};
+// === Конец типов для imageFullBlock ===
+
 export type AccordionBlock = {
   _key: string;
   _type: "accordionBlock";

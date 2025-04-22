@@ -5,6 +5,7 @@ import {
   ContactFullBlock,
   TeamBlock,
   LocationBlock,
+  ImageFullBlock,
 } from "./blog";
 import { Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
@@ -23,7 +24,12 @@ export type Singlepage = {
   previewImage: ImageAlt;
   allowIntroBlock: boolean;
   contentBlocks: Array<
-    TextContent | AccordionBlock | ContactFullBlock | TeamBlock | LocationBlock
+    | TextContent
+    | AccordionBlock
+    | ContactFullBlock
+    | TeamBlock
+    | LocationBlock
+    | ImageFullBlock
   >;
   projectSection?: ProjectSection;
   subpages?: Singlepage[];

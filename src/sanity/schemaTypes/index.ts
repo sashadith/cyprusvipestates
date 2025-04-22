@@ -17,6 +17,7 @@ import textContent from "./textContent";
 import contactFullBlock from "./contactFullBlock";
 import teamBlock from "./teamBlock";
 import locationBlock from "./locationBlock";
+import imageFullBlock from "./imageFullBlock";
 
 export const schemaTypes = [
   header,
@@ -33,6 +34,7 @@ export const schemaTypes = [
   textContent,
   contactFullBlock,
   teamBlock,
+  imageFullBlock,
   accordionBlock,
   locationBlock,
   developer,

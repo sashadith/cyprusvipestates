@@ -72,6 +72,7 @@ const singlepage = {
         { type: "contactFullBlock" },
         { type: "teamBlock" },
         { type: "locationBlock" },
+        { type: "imageFullBlock" },
       ],
     }),
     // Раздел для ручного выбора проектов с фильтрацией по языку
