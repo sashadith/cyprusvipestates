@@ -30,6 +30,10 @@ export type TextContent = {
   _key: string;
   _type: string;
   content: any;
+  backgroundColor: string;
+  paddingVertical: "small" | "medium" | "large";
+  paddingHorizontal: "small" | "medium" | "large";
+  textAlign: "left" | "center" | "right";
 };
 
 export type DoubleImagesBlock = {

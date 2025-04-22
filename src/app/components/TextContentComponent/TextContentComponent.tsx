@@ -8,10 +8,40 @@ type Props = {
   block: TextContent;
 };
 
+const marginValues: Record<string, string> = {
+  small: "clamp(1.563rem, 0.938rem + 2.5vw, 2.813rem)",
+  medium: "clamp(1.563rem, 6.25vw, 4.688rem)",
+  large: "clamp(1.563rem, -1.406rem + 11.88vw, 7.5rem)",
+};
+
 const TextContentComponent: FC<Props> = ({ block }) => {
+  const { paddingVertical, paddingHorizontal } = block;
+
+  const computedPaddingVertical =
+    paddingVertical && marginValues[paddingVertical]
+      ? marginValues[paddingVertical]
+      : "25px";
+
+  const computedPaddingHorizontal =
+    paddingHorizontal && marginValues[paddingHorizontal]
+      ? marginValues[paddingHorizontal]
+      : "25px";
+
   return (
-    <div className={styles.textContentComponent}>
-      <PortableText value={block.content} components={RichText} />
+    <div className="container">
+      <div
+        className={styles.textContentComponent}
+        style={{
+          background: block.backgroundColor || "transparent",
+          paddingTop: computedPaddingVertical,
+          paddingBottom: computedPaddingVertical,
+          paddingLeft: computedPaddingHorizontal,
+          paddingRight: computedPaddingHorizontal,
+          textAlign: block.textAlign || "left",
+        }}
+      >
+        <PortableText value={block.content} components={RichText} />
+      </div>
     </div>
   );
 };
