@@ -74,6 +74,7 @@ const singlepage = {
         { type: "teamBlock" },
         { type: "locationBlock" },
         { type: "imageFullBlock" },
+        { type: "buttonBlock" },
       ],
     }),
     // Раздел для ручного выбора проектов с фильтрацией по языку

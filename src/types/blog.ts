@@ -138,6 +138,18 @@ export type DoubleTextBlock = {
 };
 // === Конец типов для DoubleTextBlock ===
 
+// === Типы для ButtonBlock ===
+export type ButtonBlock = {
+  _key: string;
+  _type: "buttonBlock";
+  buttonText: string;
+  justifyContent: "start" | "center" | "end";
+  alignItems: "start" | "center" | "end";
+  marginTop?: "small" | "medium" | "large";
+  marginBottom?: "small" | "medium" | "large";
+};
+// === Конец типов для ButtonBlock ===
+
 export type AccordionBlock = {
   _key: string;
   _type: "accordionBlock";

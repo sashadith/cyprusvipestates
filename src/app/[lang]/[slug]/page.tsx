@@ -17,6 +17,7 @@ import {
   LocationBlock,
   ImageFullBlock,
   DoubleTextBlock,
+  ButtonBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Translation } from "@/types/homepage";
@@ -32,6 +33,7 @@ import TeamBlockComponent from "@/app/components/TeamBlockComponent/TeamBlockCom
 import LocationBlockComponent from "@/app/components/LocationBlockComponent/LocationBlockComponent";
 import ImageFullBlockComponent from "@/app/components/ImageFullBlockComponent/ImageFullBlockComponent";
 import DoubleTextBlockComponent from "@/app/components/DoubleTextBlockComponent/DoubleTextBlockComponent";
+import ButtonBlockComponent from "@/app/components/ButtonBlockComponent/ButtonBlockComponent";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -48,7 +50,8 @@ type ContentBlock =
   | TeamBlock
   | LocationBlock
   | ImageFullBlock
-  | DoubleTextBlock;
+  | DoubleTextBlock
+  | ButtonBlock;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -166,6 +169,10 @@ const SinglePage = async ({ params }: Props) => {
             key={block._key}
             block={block as DoubleTextBlock}
           />
+        );
+      case "buttonBlock":
+        return (
+          <ButtonBlockComponent key={block._key} block={block as ButtonBlock} />
         );
       default:
         return <p key={block._key}>Unsupported block type</p>;

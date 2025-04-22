@@ -20,6 +20,7 @@ import locationBlock from "./locationBlock";
 import imageFullBlock from "./imageFullBlock";
 import doubleTextBlock from "./doubleTextBlock";
 import blockContentWithStyle from "./blockContentWithStyle";
+import buttonBlock from "./buttonBlock";
 
 export const schemaTypes = [
   header,
@@ -39,6 +40,7 @@ export const schemaTypes = [
   imageFullBlock,
   doubleTextBlock,
   blockContentWithStyle,
+  buttonBlock,
   accordionBlock,
   locationBlock,
   developer,
