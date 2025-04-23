@@ -174,6 +174,21 @@ export type ImageBulletsBlock = {
 };
 // === Конец типов для ImageBulletsBlock ===
 
+// === Типы для ReviewsFullBlock ===
+export type ReviewFull = {
+  _key: string;
+  name: string;
+  text: any;
+  image: ImageAlt;
+};
+export type ReviewsFullBlock = {
+  _key: string;
+  _type: "reviewsFullBlock";
+  title: string;
+  reviews: ReviewFull[];
+};
+// === Конец типов для ReviewsFullBlock ===
+
 export type AccordionBlock = {
   _key: string;
   _type: "accordionBlock";

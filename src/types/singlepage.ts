@@ -9,6 +9,7 @@ import {
   DoubleTextBlock,
   ButtonBlock,
   ImageBulletsBlock,
+  ReviewsFullBlock,
 } from "./blog";
 import { BenefitsBlock, Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
@@ -37,6 +38,7 @@ export type Singlepage = {
     | ButtonBlock
     | ImageBulletsBlock
     | BenefitsBlock
+    | ReviewsFullBlock
   >;
   projectSection?: ProjectSection;
   subpages?: Singlepage[];

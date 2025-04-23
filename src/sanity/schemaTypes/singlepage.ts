@@ -77,6 +77,7 @@ const singlepage = {
         { type: "buttonBlock" },
         { type: "imageBulletsBlock" },
         { type: "benefitsBlock" },
+        { type: "reviewsFullBlock" },
       ],
     }),
     // Раздел для ручного выбора проектов с фильтрацией по языку
