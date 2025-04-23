@@ -16,7 +16,7 @@ const BenefitsBlock: FC<Props> = ({ benefitsBlock }) => {
     <section className={styles.benefitsBlock}>
       <div className="container">
         <div className={styles.inner}>
-          {benefitsBlock.title && <h2 className="h2">{benefitsBlock.title}</h2>}
+          {/* {benefitsBlock.title && <h2 className="h2">{benefitsBlock.title}</h2>} */}
           <div className={styles.benefitsList}>
             {benefitsBlock.benefits.map((benefit) => (
               <div key={benefit._key} className={styles.benefitItem}>

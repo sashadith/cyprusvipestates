@@ -21,7 +21,10 @@ import {
   ImageBulletsBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
-import { Translation } from "@/types/homepage";
+import {
+  BenefitsBlock as BenefitsBlockType,
+  Translation,
+} from "@/types/homepage";
 import { Metadata } from "next";
 // import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
@@ -36,6 +39,7 @@ import ImageFullBlockComponent from "@/app/components/ImageFullBlockComponent/Im
 import DoubleTextBlockComponent from "@/app/components/DoubleTextBlockComponent/DoubleTextBlockComponent";
 import ButtonBlockComponent from "@/app/components/ButtonBlockComponent/ButtonBlockComponent";
 import ImageBulletsBlockComponent from "@/app/components/ImageBulletsBlockComponent/ImageBulletsBlockComponent";
+import BenefitsBlock from "@/app/components/BenefitsBlock/BenefitsBlock";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -54,7 +58,8 @@ type ContentBlock =
   | ImageFullBlock
   | DoubleTextBlock
   | ButtonBlock
-  | ImageBulletsBlock;
+  | ImageBulletsBlock
+  | BenefitsBlockType;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -182,6 +187,13 @@ const SinglePage = async ({ params }: Props) => {
           <ImageBulletsBlockComponent
             key={block._key}
             block={block as ImageBulletsBlock}
+          />
+        );
+      case "benefitsBlock":
+        return (
+          <BenefitsBlock
+            key={block._key}
+            benefitsBlock={block as BenefitsBlockType}
           />
         );
       default:

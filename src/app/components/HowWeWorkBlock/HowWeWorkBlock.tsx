@@ -17,38 +17,40 @@ const HowWeWorkBlock: FC<Props> = ({ work }) => {
   return (
     <section className={styles.howWeWorkBlock}>
       <div className="container">
-        {work.title && <h2 className="h2">{work.title}</h2>}
-        <div className={styles.steps}>
-          {work.steps.map((step, index) => (
-            <div key={step._key} className={styles.step}>
-              <div className={styles.icon}>
-                <Image
-                  alt={step.text}
-                  src={urlFor(step.icon).url()}
-                  width={80}
-                  height={80}
-                  className={styles.icon}
-                />
+        <div className={styles.inner}>
+          {work.title && <h2 className="h2">{work.title}</h2>}
+          <div className={styles.steps}>
+            {work.steps.map((step, index) => (
+              <div key={step._key} className={styles.step}>
+                <div className={styles.icon}>
+                  <Image
+                    alt={step.text}
+                    src={urlFor(step.icon).url()}
+                    width={80}
+                    height={80}
+                    className={styles.icon}
+                  />
+                </div>
+                <div className={styles.text}>
+                  {step.text && <p className={styles.title}>{step.text}</p>}
+                </div>
+                {index < work.steps.length - 1 && (
+                  <MdOutlineArrowCircleDown
+                    size={35}
+                    color="#bd8948"
+                    className={styles.arrow}
+                    aria-hidden="true"
+                  />
+                )}
               </div>
-              <div className={styles.text}>
-                {step.text && <p className={styles.title}>{step.text}</p>}
-              </div>
-              {index < work.steps.length - 1 && (
-                <MdOutlineArrowCircleDown
-                  size={35}
-                  color="#bd8948"
-                  className={styles.arrow}
-                  aria-hidden="true"
-                />
-              )}
-            </div>
-          ))}
-        </div>
-        {work.description && (
-          <div className={styles.descriptionText}>
-            <p>{work.description}</p>
+            ))}
           </div>
-        )}
+          {work.description && (
+            <div className={styles.descriptionText}>
+              <p>{work.description}</p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
