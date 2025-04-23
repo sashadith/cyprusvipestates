@@ -1,6 +1,10 @@
 .doubleTextBlock {
   margin-bottom: 70px;
 
+  p {
+    line-height: 1.5;
+  }
+
   a {
     word-break: break-word;
   }

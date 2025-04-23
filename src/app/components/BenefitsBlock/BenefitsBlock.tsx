@@ -22,7 +22,7 @@ const BenefitsBlock: FC<Props> = ({ benefitsBlock }) => {
               <div key={benefit._key} className={styles.benefitItem}>
                 <div className={styles.image}>
                   <Image
-                    src="https://cdn.sanity.io/files/88gk88s2/production/ebfc38d9953475424b1414a9cdf930b3bdcafb82.png"
+                    src="https://cdn.sanity.io/files/88gk88s2/production/fc32736b9254db609636afb517d52ee174377d9f.png"
                     alt="Cyprus VIP Estates Benefits"
                     width={80}
                     height={80}
