@@ -35,6 +35,7 @@
   justify-content: center;
   gap: 30px;
   position: relative;
+  color: #000307;
 
   @media screen and (min-width: 600px) and (max-width: 979px) {
     &:nth-child(even) {
@@ -95,5 +96,6 @@
     font-size: 16px;
     font-weight: 300;
     line-height: 150%;
+    color: #000307;
   }
 }

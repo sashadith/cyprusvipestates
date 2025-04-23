@@ -34,6 +34,8 @@ export type TextContent = {
   paddingVertical: "small" | "medium" | "large";
   paddingHorizontal: "small" | "medium" | "large";
   textAlign: "left" | "center" | "right";
+  textColor: string;
+  backgroundFull: string;
 };
 
 export type DoubleImagesBlock = {

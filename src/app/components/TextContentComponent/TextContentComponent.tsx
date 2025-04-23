@@ -28,19 +28,26 @@ const TextContentComponent: FC<Props> = ({ block }) => {
       : "25px";
 
   return (
-    <div className="container">
-      <div
-        className={styles.textContentComponent}
-        style={{
-          background: block.backgroundColor || "transparent",
-          paddingTop: computedPaddingVertical,
-          paddingBottom: computedPaddingVertical,
-          paddingLeft: computedPaddingHorizontal,
-          paddingRight: computedPaddingHorizontal,
-          textAlign: block.textAlign || "left",
-        }}
-      >
-        <PortableText value={block.content} components={RichText} />
+    <div
+      style={{
+        background: block.backgroundFull || "transparent",
+      }}
+    >
+      <div className="container">
+        <div
+          className={styles.textContentComponent}
+          style={{
+            background: block.backgroundColor || "transparent",
+            paddingTop: computedPaddingVertical,
+            paddingBottom: computedPaddingVertical,
+            paddingLeft: computedPaddingHorizontal,
+            paddingRight: computedPaddingHorizontal,
+            textAlign: block.textAlign || "left",
+            color: block.textColor || "inherit",
+          }}
+        >
+          <PortableText value={block.content} components={RichText} />
+        </div>
       </div>
     </div>
   );

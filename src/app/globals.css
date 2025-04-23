@@ -11,6 +11,7 @@
 
 body {
   background: #000307;
+  color: #fff;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

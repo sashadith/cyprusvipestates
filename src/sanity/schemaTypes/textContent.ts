@@ -52,6 +52,16 @@ const textContent = defineType({
       },
       initialValue: "left",
     }),
+    defineField({
+      name: "textColor",
+      title: "Text Color",
+      type: "string",
+    }),
+    defineField({
+      name: "backgroundFull",
+      title: "Background Full",
+      type: "string",
+    }),
   ],
 });
 
