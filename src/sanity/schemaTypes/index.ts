@@ -21,6 +21,7 @@ import imageFullBlock from "./imageFullBlock";
 import doubleTextBlock from "./doubleTextBlock";
 import blockContentWithStyle from "./blockContentWithStyle";
 import buttonBlock from "./buttonBlock";
+import imageBulletsBlock from "./imageBulletsBlock";
 
 export const schemaTypes = [
   header,
@@ -43,6 +44,7 @@ export const schemaTypes = [
   buttonBlock,
   accordionBlock,
   locationBlock,
+  imageBulletsBlock,
   developer,
   docFile,
   localizedSlug,

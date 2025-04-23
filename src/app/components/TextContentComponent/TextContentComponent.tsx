@@ -9,6 +9,7 @@ type Props = {
 };
 
 const marginValues: Record<string, string> = {
+  none: "0",
   small: "clamp(1.563rem, 0.938rem + 2.5vw, 2.813rem)",
   medium: "clamp(1.563rem, 6.25vw, 4.688rem)",
   large: "clamp(1.563rem, -1.406rem + 11.88vw, 7.5rem)",
@@ -31,6 +32,14 @@ const TextContentComponent: FC<Props> = ({ block }) => {
     <div
       style={{
         background: block.backgroundFull || "transparent",
+        marginTop:
+          block.marginTop && marginValues[block.marginTop]
+            ? marginValues[block.marginTop]
+            : "0",
+        marginBottom:
+          block.marginBottom && marginValues[block.marginBottom]
+            ? marginValues[block.marginBottom]
+            : "clamp(1.25rem, 5vw, 3.75rem)",
       }}
     >
       <div className="container">

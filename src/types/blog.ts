@@ -31,8 +31,10 @@ export type TextContent = {
   _type: string;
   content: any;
   backgroundColor: string;
-  paddingVertical: "small" | "medium" | "large";
-  paddingHorizontal: "small" | "medium" | "large";
+  paddingVertical: "none" | "small" | "medium" | "large";
+  paddingHorizontal: "none" | "small" | "medium" | "large";
+  marginTop: "none" | "small" | "medium" | "large";
+  marginBottom: "none" | "small" | "medium" | "large";
   textAlign: "left" | "center" | "right";
   textColor: string;
   backgroundFull: string;
@@ -155,6 +157,22 @@ export type ButtonBlock = {
   marginBottom?: "small" | "medium" | "large";
 };
 // === Конец типов для ButtonBlock ===
+
+// === Типы для ImageBulletsBlock ===
+export type Bullet = {
+  _key: string;
+  title: string;
+  description: string;
+};
+
+export type ImageBulletsBlock = {
+  _key: string;
+  _type: "imageBulletsBlock";
+  title: string;
+  image: ImageAlt;
+  bullets: Bullet[];
+};
+// === Конец типов для ImageBulletsBlock ===
 
 export type AccordionBlock = {
   _key: string;
