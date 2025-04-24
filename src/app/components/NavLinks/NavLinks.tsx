@@ -14,6 +14,12 @@ const NavLinks: React.FC<Props> = ({ navLinks, params, closeMenu }) => {
   const [activeSection, setActiveSection] = useState("");
   const [isHomePage, setIsHomePage] = useState(false);
 
+  const getNormalizedHref = (lang: string, link: string) => {
+    const normalizedLink = link.startsWith("/") ? link.slice(1) : link;
+    const languagePrefix = lang === "de" ? "" : `/${lang}`;
+    return `${languagePrefix}/${normalizedLink}`;
+  };
+
   useEffect(() => {
     // Проверяем, находимся ли мы на главной странице
     setIsHomePage(window.location.pathname === `/${params.lang}`);
@@ -63,30 +69,39 @@ const NavLinks: React.FC<Props> = ({ navLinks, params, closeMenu }) => {
 
   return (
     <nav className={styles.navLinks}>
-      {navLinks.map((link) => (
-        <div key={link.label}>
-          {link.link.startsWith("/") ? (
-            <Link
-              href={`/${params.lang}/${link.link}`}
-              className={styles.navLink}
-              onClick={closeMenu}
-            >
-              {link.label}
-            </Link>
-          ) : (
-            <a
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(link.link);
-                closeMenu();
-              }}
-              className={styles.navLink}
-            >
-              {link.label}
-            </a>
-          )}
-        </div>
-      ))}
+      {navLinks.map((link) => {
+        const isPageLink = link.link.startsWith("/");
+
+        return (
+          <div key={link.label}>
+            {isPageLink ? (
+              <Link
+                href={getNormalizedHref(params.lang, link.link)}
+                className={`${styles.navLink} ${
+                  activeSection === link.link ? styles.active : ""
+                }`}
+                onClick={closeMenu}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                href={`#${link.link}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.link);
+                  closeMenu();
+                }}
+                className={`${styles.navLink} ${
+                  activeSection === link.link ? styles.active : ""
+                }`}
+              >
+                {link.label}
+              </a>
+            )}
+          </div>
+        );
+      })}
     </nav>
   );
 };
