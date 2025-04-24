@@ -53,7 +53,14 @@
 
 .fiveStars {
   display: flex;
-  gap: 5px;
+  gap: 2px;
+}
+
+.buttonReadMore {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 300;
+  text-decoration: underline;
 }
 
 .videoReview {

@@ -6,16 +6,17 @@ import SliderReviewsFull from "../SliderReviewsFull/SliderReviewsFull";
 
 type Props = {
   block: ReviewsFullBlock;
+  lang: string;
 };
 
-const ReviewsFullBlockComponent: FC<Props> = ({ block }) => {
+const ReviewsFullBlockComponent: FC<Props> = ({ block, lang }) => {
   const { title, reviews } = block;
 
   return (
     <section id="reviews" className={styles.reviews}>
       <div className="container">
         <h2 className={styles.title}>{title}</h2>
-        <SliderReviewsFull reviews={reviews} />
+        <SliderReviewsFull reviews={reviews} lang={lang} />
       </div>
     </section>
   );

@@ -204,6 +204,7 @@ const SinglePage = async ({ params }: Props) => {
           <ReviewsFullBlockComponent
             key={block._key}
             block={block as ReviewsFullBlock}
+            lang={params.lang}
           />
         );
       default:

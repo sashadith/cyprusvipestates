@@ -16,9 +16,55 @@ import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
   reviews: ReviewFull[];
+  lang: string;
 };
 
-const SliderReviewsFull: FC<Props> = ({ reviews }) => {
+function truncatePortableText(blocks: any[], maxChars: number): any[] {
+  let charCount = 0;
+  const result: any[] = [];
+
+  // Проходим по каждому блоку
+  for (const block of blocks) {
+    if (block._type !== "block" || !Array.isArray(block.children)) {
+      continue; // пропускаем не-текстовые блоки
+    }
+
+    const newBlock = { ...block, children: [] as any[] };
+
+    for (const child of block.children) {
+      if (charCount >= maxChars) break;
+
+      const text: string = child.text || "";
+      const remaining = maxChars - charCount;
+
+      if (text.length <= remaining) {
+        // весь спан помещается
+        newBlock.children.push(child);
+        charCount += text.length;
+      } else {
+        // обрезаем этот спан ровно по оставшимся символам + добавляем …
+        newBlock.children.push({
+          ...child,
+          text: text.slice(0, remaining) + "…",
+        });
+        charCount = maxChars;
+        break;
+      }
+    }
+
+    if (newBlock.children.length > 0) {
+      result.push(newBlock);
+    }
+
+    if (charCount >= maxChars) {
+      break;
+    }
+  }
+
+  return result;
+}
+
+const SliderReviewsFull: FC<Props> = ({ reviews, lang }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -79,53 +125,67 @@ const SliderReviewsFull: FC<Props> = ({ reviews }) => {
           1200: { slidesPerView: 4, spaceBetween: 10 },
         }}
       >
-        {reviews.map((review, index) => (
-          <SwiperSlide
-            key={review._key}
-            className={styles.slide}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-            onClick={(event) => openModal(index, event)}
-          >
-            {/* {hoveredIndex === index && ( */}
-            <div className={styles.reviewBlock}>
-              <div className={styles.reviewer}>
-                <div className={styles.reviewerImageBlock}>
-                  {review.image ? (
-                    <Image
-                      alt={review.name}
-                      src={urlFor(review.image).url()}
-                      width={50}
-                      height={50}
-                      className={styles.reviewerImage}
-                    />
-                  ) : (
-                    <Image
-                      alt={review.name}
-                      src="https://cdn.sanity.io/files/88gk88s2/production/89f48e6b04046faa19f0098ef071e4ac22ebcc74.png"
-                      width={50}
-                      height={50}
-                      className={styles.reviewerImage}
-                    />
-                  )}
-                </div>
-                <div className={styles.reviewerName}>
-                  <p>{review.name}</p>
-                  <div className={styles.fiveStars}>
-                    <FaStar fontSize="15px" color="#bd8948" />
-                    <FaStar fontSize="15px" color="#bd8948" />
-                    <FaStar fontSize="15px" color="#bd8948" />
-                    <FaStar fontSize="15px" color="#bd8948" />
-                    <FaStar fontSize="15px" color="#bd8948" />
+        {reviews.map((review, index) => {
+          const previewBlocks = truncatePortableText(review.text, 135);
+          return (
+            <SwiperSlide
+              key={review._key}
+              className={styles.slide}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={(event) => openModal(index, event)}
+            >
+              {/* {hoveredIndex === index && ( */}
+              <div className={styles.reviewBlock}>
+                <div className={styles.reviewer}>
+                  <div className={styles.reviewerImageBlock}>
+                    {review.image ? (
+                      <Image
+                        alt={review.name}
+                        src={urlFor(review.image).url()}
+                        width={50}
+                        height={50}
+                        className={styles.reviewerImage}
+                      />
+                    ) : (
+                      <Image
+                        alt={review.name}
+                        src="https://cdn.sanity.io/files/88gk88s2/production/89f48e6b04046faa19f0098ef071e4ac22ebcc74.png"
+                        width={50}
+                        height={50}
+                        className={styles.reviewerImage}
+                      />
+                    )}
+                  </div>
+                  <div className={styles.reviewerName}>
+                    <p>{review.name}</p>
+                    <div className={styles.fiveStars}>
+                      <FaStar fontSize="13px" color="#bd8948" />
+                      <FaStar fontSize="13px" color="#bd8948" />
+                      <FaStar fontSize="13px" color="#bd8948" />
+                      <FaStar fontSize="13px" color="#bd8948" />
+                      <FaStar fontSize="13px" color="#bd8948" />
+                    </div>
                   </div>
                 </div>
+                <div className={styles.textReview}>
+                  <PortableText value={previewBlocks} components={RichText} />
+                </div>
+                <button className={styles.buttonReadMore}>
+                  {lang === "de"
+                    ? "Ganze Bewertung lesen"
+                    : lang === "en"
+                      ? "Read full review"
+                      : lang === "pl"
+                        ? "Przeczytaj całą recenzję"
+                        : lang === "ru"
+                          ? "Читать полный отзыв"
+                          : "Read full review"}
+                </button>
               </div>
-              <div className={styles.textReview}>
-                <PortableText value={review.text} components={RichText} />
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
 
       {showModal && (
