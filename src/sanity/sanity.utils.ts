@@ -58,6 +58,7 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
     parallaxImage,
     benefitsBlock,
     howWeWorkBlock,
+    reviewsFullBlock,
     reviewsBlock,
     language,
     slug,

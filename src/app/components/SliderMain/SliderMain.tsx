@@ -11,59 +11,32 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 const SliderMain = ({ children }: any) => {
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const observer = new ResizeObserver((entries) => {
-      let maxHeight = 0;
-      entries.forEach((entry) => {
-        if (entry.target instanceof HTMLElement) {
-          const slideHeight = entry.target.offsetHeight;
-          if (slideHeight > maxHeight) {
-            maxHeight = slideHeight;
-          }
-        }
-      });
-
-      slideRefs.current.forEach((slide) => {
-        if (slide) {
-          slide.style.height = `${maxHeight}px`;
-        }
-      });
-    });
-
-    slideRefs.current.forEach((slide) => {
-      if (slide) {
-        observer.observe(slide);
-      }
-    });
-
-    return () => {
-      slideRefs.current.forEach((slide) => {
-        if (slide) {
-          observer.unobserve(slide);
-        }
-      });
-    };
-  }, [children]);
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div className={styles.sliderMain}>
       <div className={styles.sliderSlides}>
         <Swiper
           modules={[Navigation, Autoplay, Pagination]}
-          // spaceBetween={15}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: true,
-          }}
+          autoplay={{ delay: 6000, disableOnInteraction: true }}
           slidesPerView={1}
-          navigation={{
-            nextEl: `.swiper-main-next`,
-            prevEl: `.swiper-main-prev`,
-          }}
-          grabCursor={true}
+          // autoHeight={true}
+          grabCursor
           pagination={{
             clickable: true,
-            el: `.swiper-pagination`,
+            el: `.${styles.pagination} .swiper-pagination`,
+          }}
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
+          onBeforeInit={(swiper) => {
+            // привязываем рефы до инициализации
+            // @ts-ignore
+            swiper.params.navigation.prevEl = prevRef.current;
+            // @ts-ignore
+            swiper.params.navigation.nextEl = nextRef.current;
           }}
         >
           {children.map((child: any, index: number) => (
@@ -80,26 +53,6 @@ const SliderMain = ({ children }: any) => {
         </Swiper>
       </div>
       <div className={styles.sliderButtons}>
-        {/* <div className={styles.navigation}>
-          <button
-            className={`swiper-main-prev ${styles.swiperMainPrev} ${styles.swiperButton}`}
-          >
-            <FaArrowLeftLong
-              aria-label="Previous slide"
-              fontSize="1.8em"
-              className={`${styles.arrow} ${styles.arrowLeft}`}
-            />
-          </button>
-          <button
-            className={`swiper-main-next ${styles.swiperMainNext} ${styles.swiperButton}`}
-          >
-            <FaArrowRightLong
-              aria-label="Next slide"
-              fontSize="1.8em"
-              className={`${styles.arrow} ${styles.arrowRight}`}
-            />
-          </button>
-        </div> */}
         <div className={styles.pagination}>
           <div className={`swiper-pagination`}>
             <span className="swiper-pagination-bullet"></span>

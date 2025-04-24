@@ -25,6 +25,7 @@ import DevelopersLogos from "../components/DevelopersLogos/DevelopersLogos";
 import BenefitsBlock from "../components/BenefitsBlock/BenefitsBlock";
 import homepage from "@/sanity/schemaTypes/homepage";
 import HowWeWorkBlock from "../components/HowWeWorkBlock/HowWeWorkBlock";
+import ReviewsFullBlockComponent from "../components/ReviewsFullBlockComponent/ReviewsFullBlockComponent";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -87,9 +88,7 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      {/* <HeaderWrapper> */}
       <Header params={params} translations={translations} />
-      {/* </HeaderWrapper> */}
       <main>
         <Hero slides={homePage.sliderMain} />
         <BrochureBlock brochure={homePage.brochureBlock} />
@@ -103,7 +102,11 @@ export default async function Home({ params }: Props) {
           lang={params.lang}
         />
         <ParallaxImage image={homePage.parallaxImage} />
-        <Reviews reviews={homePage.reviewsBlock} />
+        <ReviewsFullBlockComponent
+          block={homePage.reviewsFullBlock}
+          lang={params.lang}
+        />
+        {/* <Reviews reviews={homePage.reviewsBlock} /> */}
         <FormStatic lang={params.lang} />
         <Footer params={params} />
         <ModalBrochure lang={params.lang} formDocument={formDocument} />

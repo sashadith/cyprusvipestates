@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import styles from "./SliderReviewsFull.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
@@ -66,6 +66,9 @@ function truncatePortableText(blocks: any[], maxChars: number): any[] {
 }
 
 const SliderReviewsFull: FC<Props> = ({ reviews, lang }) => {
+  const modalPrevRef = useRef<HTMLButtonElement>(null);
+  const modalNextRef = useRef<HTMLButtonElement>(null);
+
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -115,6 +118,7 @@ const SliderReviewsFull: FC<Props> = ({ reviews, lang }) => {
         pagination={{ clickable: true }}
         spaceBetween={20}
         slidesPerView={1}
+        autoHeight={true}
         onSlideChange={(swiper) => setCurrentPhotoIndex(swiper.activeIndex)}
         initialSlide={currentPhotoIndex}
         breakpoints={{
@@ -125,6 +129,7 @@ const SliderReviewsFull: FC<Props> = ({ reviews, lang }) => {
           1024: { slidesPerView: 3, spaceBetween: 20 },
           1200: { slidesPerView: 4, spaceBetween: 10 },
         }}
+        wrapperClass={styles.reviewsWrapper}
       >
         {reviews.map((review, index) => {
           const previewBlocks = truncatePortableText(review.text, 135);
@@ -199,8 +204,14 @@ const SliderReviewsFull: FC<Props> = ({ reviews, lang }) => {
           <Swiper
             modules={[Navigation, Pagination]}
             navigation={{
-              nextEl: ".swiperModalNext",
-              prevEl: ".swiperModalPrev",
+              prevEl: modalPrevRef.current,
+              nextEl: modalNextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              // @ts-ignore
+              swiper.params.navigation.prevEl = modalPrevRef.current;
+              // @ts-ignore
+              swiper.params.navigation.nextEl = modalNextRef.current;
             }}
             pagination={{
               clickable: true, // Делает кнопки пагинации кликабельными

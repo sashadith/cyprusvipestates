@@ -1,3 +1,4 @@
+import { ReviewsFullBlock } from "./blog";
 import { ImageAlt } from "./project";
 
 export type City = "Paphos" | "Limassol" | "Larnaca";
@@ -188,6 +189,7 @@ export type Homepage = {
   parallaxImage: Image;
   benefitsBlock: BenefitsBlock;
   howWeWorkBlock: HowWeWorkBlock;
+  reviewsFullBlock: ReviewsFullBlock;
   reviewsBlock: ReviewsBlock;
   language: string;
   slug: {
