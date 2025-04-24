@@ -15,6 +15,7 @@
     "@sanity/document-internationalization": "^3.0.0",
     "@sanity/vision": "^3.52.2",
     "@szhsin/react-accordion": "^1.2.5",
+    "aos": "^2.3.4",
     "axios": "^1.7.3",
     "formik": "^2.4.6",
     "framer-motion": "^11.3.21",
@@ -46,6 +47,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/leaflet": "^1.9.14",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",

@@ -9,6 +9,7 @@ import { RichText } from "../RichText/RichText";
 import Image from "next/image";
 import styles from "./DoubleTextBlockComponent.module.scss";
 import { urlFor } from "@/sanity/sanity.client";
+import FadeUpAnimate from "../FadeUpAnimate/FadeUpAnimate";
 
 type Props = {
   block: DoubleTextBlock;
@@ -81,38 +82,40 @@ const DoubleTextBlockComponent: FC<Props> = ({ block }) => {
 
   return (
     <div className="container">
-      <div
-        className={styles.doubleTextBlock}
-        style={{
-          marginTop: computedMarginTop,
-          marginBottom: computedMarginBottom,
-        }}
-      >
-        {/* {block.doubleTextBlockTitle && (
+      <FadeUpAnimate>
+        <div
+          className={styles.doubleTextBlock}
+          style={{
+            marginTop: computedMarginTop,
+            marginBottom: computedMarginBottom,
+          }}
+        >
+          {/* {block.doubleTextBlockTitle && (
           <h2 className="h2-main mb-h2">{block.doubleTextBlockTitle}</h2>
         )} */}
-        <div className={styles.wrapper}>
-          <div
-            className={styles.leftContent}
-            style={{
-              paddingTop: computedPaddingTop,
-              paddingBottom: computedPaddingBottom,
-            }}
-          >
-            {block.leftContent && renderContent(block.leftContent)}
-          </div>
-          {block.isDivider && <div className={styles.divider} />}
-          <div
-            className={styles.rightContent}
-            style={{
-              paddingTop: computedPaddingTop,
-              paddingBottom: computedPaddingBottom,
-            }}
-          >
-            {block.rightContent && renderContent(block.rightContent)}
+          <div className={styles.wrapper}>
+            <div
+              className={styles.leftContent}
+              style={{
+                paddingTop: computedPaddingTop,
+                paddingBottom: computedPaddingBottom,
+              }}
+            >
+              {block.leftContent && renderContent(block.leftContent)}
+            </div>
+            {block.isDivider && <div className={styles.divider} />}
+            <div
+              className={styles.rightContent}
+              style={{
+                paddingTop: computedPaddingTop,
+                paddingBottom: computedPaddingBottom,
+              }}
+            >
+              {block.rightContent && renderContent(block.rightContent)}
+            </div>
           </div>
         </div>
-      </div>
+      </FadeUpAnimate>
     </div>
   );
 };

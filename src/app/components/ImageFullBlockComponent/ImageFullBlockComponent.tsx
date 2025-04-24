@@ -3,6 +3,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
 import styles from "./ImageFullBlockComponent.module.scss";
 import { ImageFullBlock } from "@/types/blog";
+import FadeUpAnimate from "../FadeUpAnimate/FadeUpAnimate";
 
 type Props = {
   block: ImageFullBlock;
@@ -47,17 +48,19 @@ const ImageFullBlockComponent: FC<Props> = ({ block }) => {
           <div className={`container ${styles.contentInner}`}>
             <div className={styles.overlay}></div>
             <div className={styles.content}>
-              <Tag className={`${styles.description} ${tagStyle}`}>
-                {description.textItems.map((item, idx) =>
-                  item.highlighted ? (
-                    <span key={idx} className={styles.highlight}>
-                      {item.text}
-                    </span>
-                  ) : (
-                    <React.Fragment key={idx}>{item.text}</React.Fragment>
-                  )
-                )}
-              </Tag>
+              <FadeUpAnimate>
+                <Tag className={`${styles.description} ${tagStyle}`}>
+                  {description.textItems.map((item, idx) =>
+                    item.highlighted ? (
+                      <span key={idx} className={styles.highlight}>
+                        {item.text}
+                      </span>
+                    ) : (
+                      <React.Fragment key={idx}>{item.text}</React.Fragment>
+                    )
+                  )}
+                </Tag>
+              </FadeUpAnimate>
             </div>
           </div>
         </div>
