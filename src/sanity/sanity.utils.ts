@@ -222,6 +222,19 @@ export async function getSinglePageByLang(
   return singlePage;
 }
 
+export async function getAllSinglePagesByLang(
+  lang: string
+): Promise<Singlepage[]> {
+  const query = groq`
+    *[_type == "singlepage" && language == $lang]{
+      _id,
+      title,
+      slug
+    }
+  `;
+  return await client.fetch(query, { lang });
+}
+
 export async function getPropertyByLang(
   lang: string,
   slug: string

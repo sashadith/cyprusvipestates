@@ -2,7 +2,8 @@ import {
   getProjectsPageByLang,
   getAllProjectsByLang,
   getHomePageByLang,
-  getAllDevelopersByLang, // <-- Импорт новой функции
+  getAllDevelopersByLang,
+  getAllSinglePagesByLang,
 } from "@/sanity/sanity.utils";
 
 const generateSlug = (slug: any, language: string) => {
@@ -21,6 +22,13 @@ const generateDeveloperSlug = (slug: any, language: string) => {
   return language === "de"
     ? `/developers/${slug[language].current}`
     : `/${language}/developers/${slug[language].current}`;
+};
+
+const generateSinglePageSlug = (slug: any, language: string) => {
+  if (!slug || !slug[language]?.current) return "#";
+  return language === "de"
+    ? `/${slug[language].current}`
+    : `/${language}/${slug[language].current}`;
 };
 
 async function generateSitemap() {
@@ -80,6 +88,17 @@ async function generateSitemap() {
         url: `${websiteUrl}${generateDeveloperSlug(dev.slug, lang)}`,
         changefreq: "weekly",
         priority: 0.8,
+      }))
+    );
+
+    const singlepages = await getAllSinglePagesByLang(lang);
+
+    pages.push(
+      ...singlepages.map((page) => ({
+        route: generateSinglePageSlug(page.slug, lang),
+        url: `${websiteUrl}${generateSinglePageSlug(page.slug, lang)}`,
+        changefreq: "weekly",
+        priority: 0.9,
       }))
     );
   }
