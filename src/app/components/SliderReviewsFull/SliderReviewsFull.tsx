@@ -219,8 +219,10 @@ const SliderReviewsFull: FC<Props> = ({ reviews, lang }) => {
               <SwiperSlide key={review._key} className={styles.modalSlide}>
                 <div className={styles.reviewPopup}>
                   <div className={styles.textReviewPopup}>
-                    <h3 className={styles.reviewTitle}>{review.name}</h3>
-                    <PortableText value={review.text} components={RichText} />
+                    <p className={styles.reviewTitle}>{review.name}</p>
+                    <div className={styles.reviewText}>
+                      <PortableText value={review.text} components={RichText} />
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>
