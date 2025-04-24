@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
@@ -242,10 +243,10 @@ const SliderReviewsFull: FC<Props> = ({ reviews, lang }) => {
               </SwiperSlide>
             ))}
             <div className={styles.navButtonsModal}>
-              <button className="swiperModalPrev">
+              <button ref={modalPrevRef} className="swiperModalPrev">
                 <SlArrowLeft color="#fff" fontSize="3.5em" />
               </button>
-              <button className="swiperModalNext">
+              <button ref={modalNextRef} className="swiperModalNext">
                 <SlArrowRight color="#fff" fontSize="3.5em" />
               </button>
             </div>
