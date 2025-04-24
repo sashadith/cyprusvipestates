@@ -48,19 +48,17 @@ const ImageFullBlockComponent: FC<Props> = ({ block }) => {
           <div className={`container ${styles.contentInner}`}>
             <div className={styles.overlay}></div>
             <div className={styles.content}>
-              <FadeUpAnimate>
-                <Tag className={`${styles.description} ${tagStyle}`}>
-                  {description.textItems.map((item, idx) =>
-                    item.highlighted ? (
-                      <span key={idx} className={styles.highlight}>
-                        {item.text}
-                      </span>
-                    ) : (
-                      <React.Fragment key={idx}>{item.text}</React.Fragment>
-                    )
-                  )}
-                </Tag>
-              </FadeUpAnimate>
+              <Tag className={`${styles.description} ${tagStyle}`}>
+                {description.textItems.map((item, idx) =>
+                  item.highlighted ? (
+                    <span key={idx} className={styles.highlight}>
+                      {item.text}
+                    </span>
+                  ) : (
+                    <React.Fragment key={idx}>{item.text}</React.Fragment>
+                  )
+                )}
+              </Tag>
             </div>
           </div>
         </div>
