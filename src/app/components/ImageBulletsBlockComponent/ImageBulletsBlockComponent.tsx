@@ -10,7 +10,6 @@ type Props = {
 
 const ImageBulletsBlockComponent: FC<Props> = ({ block }) => {
   const { title, image, bullets } = block;
-  console.log("ImageBulletsBlockComponent", block);
   return (
     <section className={styles.imageBulletsBlock}>
       <div className="container">
