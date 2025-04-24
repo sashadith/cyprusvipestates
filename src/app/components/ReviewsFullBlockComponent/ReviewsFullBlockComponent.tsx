@@ -10,6 +10,10 @@ type Props = {
 };
 
 const ReviewsFullBlockComponent: FC<Props> = ({ block, lang }) => {
+  if (!block || block.reviews.length === 0) {
+    return null;
+  }
+
   const { title, reviews } = block;
 
   return (
