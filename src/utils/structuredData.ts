@@ -1,13 +1,13 @@
+// app/utils/structuredData.ts
+
 import {
   ContactFullBlock,
   TeamBlock,
   LocationBlock,
   ReviewsFullBlock,
+  ReviewFull,
 } from "@/types/blog";
 
-/**
- * Тип входных данных для StructuredData
- */
 export type PageInput = {
   slug: string;
   lang: string;
@@ -19,23 +19,20 @@ export type PageInput = {
   >;
 };
 
-// Type guards для проверки блока
-export function isContactFullBlock(b: any): b is ContactFullBlock {
+// Type guards
+function isContactFullBlock(b: any): b is ContactFullBlock {
   return b._type === "contactFullBlock";
 }
-export function isLocationBlock(b: any): b is LocationBlock {
+function isLocationBlock(b: any): b is LocationBlock {
   return b._type === "locationBlock";
 }
-export function isTeamBlock(b: any): b is TeamBlock {
+function isTeamBlock(b: any): b is TeamBlock {
   return b._type === "teamBlock";
 }
-export function isReviewsFullBlock(b: any): b is ReviewsFullBlock {
+function isReviewsFullBlock(b: any): b is ReviewsFullBlock {
   return b._type === "reviewsFullBlock";
 }
 
-/**
- * Генерация JSON-LD разметки по schema.org
- */
 export function generateStructuredData({
   slug,
   lang,
@@ -46,14 +43,16 @@ export function generateStructuredData({
 }: PageInput) {
   const aboutKeywords = ["ueber-uns", "about", "o-kompanii", "o-nas"];
   const contactsKeywords = ["kontakt", "contacts", "kontakty"];
-
   const slugLower = slug.toLowerCase();
-  let pageType: "AboutPage" | "ContactPage" | "WebPage" = "WebPage";
-  if (aboutKeywords.some((kw) => slugLower.includes(kw))) {
-    pageType = "AboutPage";
-  } else if (contactsKeywords.some((kw) => slugLower.includes(kw))) {
-    pageType = "ContactPage";
-  }
+
+  // Определяем тип страницы
+  const pageType: "AboutPage" | "ContactPage" | "WebPage" = aboutKeywords.some(
+    (kw) => slugLower.includes(kw)
+  )
+    ? "AboutPage"
+    : contactsKeywords.some((kw) => slugLower.includes(kw))
+      ? "ContactPage"
+      : "WebPage";
 
   const jsonLd: any = {
     "@context": "https://schema.org",
@@ -61,50 +60,66 @@ export function generateStructuredData({
     name: metaTitle,
     description: metaDescription,
     url,
-    hasPart: [] as any[],
   };
 
-  for (const block of blocks) {
-    if (isContactFullBlock(block)) {
-      // ContactFullBlock.contacts: FullContact[]
-      block.contacts.forEach((c) => {
+  if (pageType === "ContactPage") {
+    // Сбор ContactPoint-ов
+    const contactPoints = blocks.filter(isContactFullBlock).flatMap((b) =>
+      b.contacts.map((c) => {
         const cp: any = {
           "@type": "ContactPoint",
           contactType: c.type.toLowerCase(),
           availableLanguage: lang.toUpperCase(),
         };
-        if (c.type === "Phone") {
-          cp.telephone = c.label;
-        } else if (c.type === "Email") {
-          cp.email = c.label;
-        } else if (c.type === "Link") {
-          cp.url = c.label;
+        if (c.type === "Phone") cp.telephone = c.label;
+        if (c.type === "Email") cp.email = c.label;
+        if (c.type === "Link") cp.url = c.label;
+        return cp;
+      })
+    );
+
+    // Блок Location
+    const loc = blocks.find(isLocationBlock);
+    const place = loc
+      ? {
+          "@type": "Place",
+          name: loc.title,
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: loc.location.lat,
+            longitude: loc.location.lng,
+          },
         }
-        jsonLd.hasPart.push(cp);
-      });
-    } else if (isLocationBlock(block)) {
-      jsonLd.hasPart.push({
-        "@type": "Place",
-        name: block.title,
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: block.location.lat,
-          longitude: block.location.lng,
-        },
-      });
-    } else if (isTeamBlock(block)) {
-      jsonLd.hasPart.push({
-        "@type": "Organization",
-        name: block.title,
-        member: block.members.map((m) => ({
-          "@type": "Person",
-          name: m.name,
-          jobTitle: m.position,
-          description: m.description,
-        })),
-      });
-    } else if (isReviewsFullBlock(block)) {
-      block.reviews.forEach((r) => {
+      : undefined;
+
+    // Блок Team
+    const members = blocks.filter(isTeamBlock).flatMap((b) =>
+      b.members.map((m) => ({
+        "@type": "Person",
+        name: m.name,
+        jobTitle: m.position,
+        description: m.description,
+      }))
+    );
+
+    jsonLd.mainEntity = {
+      "@type": "Organization",
+      name: metaTitle, // или реальное имя вашей компании
+      url,
+      ...(contactPoints.length && { contactPoint: contactPoints }),
+      ...(place && { location: place }),
+      ...(members.length && { member: members }),
+    };
+
+    return jsonLd;
+  }
+
+  // Для AboutPage и WebPage: пока обрабатываем только Reviews
+  jsonLd.hasPart = [];
+
+  for (const block of blocks) {
+    if (isReviewsFullBlock(block)) {
+      block.reviews.forEach((r: ReviewFull) => {
         jsonLd.hasPart.push({
           "@type": "Review",
           author: { "@type": "Person", name: r.name },

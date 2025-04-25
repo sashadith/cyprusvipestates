@@ -95,7 +95,9 @@ const SinglePage = async ({ params }: Props) => {
     await getFormStandardDocumentByLang(params.lang);
 
   // Собираем все контент-блоки
-  const allBlocks = page.contentBlocks as ContentBlock[];
+  const allBlocks = page.contentBlocks
+    ? (page.contentBlocks as ContentBlock[])
+    : [];
 
   // Фильтруем только поддерживаемые для JSON-LD
   const sdBlocks = allBlocks.filter(
