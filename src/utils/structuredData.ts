@@ -19,7 +19,7 @@ export type PageInput = {
   >;
 };
 
-// Type guards
+// ---- Type guards ----
 function isContactFullBlock(b: any): b is ContactFullBlock {
   return b._type === "contactFullBlock";
 }
@@ -31,6 +31,26 @@ function isTeamBlock(b: any): b is TeamBlock {
 }
 function isReviewsFullBlock(b: any): b is ReviewsFullBlock {
   return b._type === "reviewsFullBlock";
+}
+
+// ---- Portable Text → plain text helper ----
+function portableTextToPlainText(pt: any): string {
+  if (typeof pt === "string") {
+    return pt;
+  }
+  if (!Array.isArray(pt)) {
+    return "";
+  }
+  // Берём только блоки с _type="block" и children[]
+  return pt
+    .filter((blk) => blk._type === "block" && Array.isArray(blk.children))
+    .map((blk) =>
+      blk.children
+        .filter((child: any) => typeof child.text === "string")
+        .map((child: any) => child.text)
+        .join("")
+    )
+    .join("\n\n");
 }
 
 export function generateStructuredData({
@@ -45,7 +65,6 @@ export function generateStructuredData({
   const contactsKeywords = ["kontakt", "contacts", "kontakty"];
   const slugLower = slug.toLowerCase();
 
-  // Определяем тип страницы
   const pageType: "AboutPage" | "ContactPage" | "WebPage" = aboutKeywords.some(
     (kw) => slugLower.includes(kw)
   )
@@ -63,7 +82,7 @@ export function generateStructuredData({
   };
 
   if (pageType === "ContactPage") {
-    // Сбор ContactPoint-ов
+    // Собираем контакты
     const contactPoints = blocks.filter(isContactFullBlock).flatMap((b) =>
       b.contacts.map((c) => {
         const cp: any = {
@@ -78,7 +97,7 @@ export function generateStructuredData({
       })
     );
 
-    // Блок Location
+    // Локация (Place)
     const loc = blocks.find(isLocationBlock);
     const place = loc
       ? {
@@ -92,7 +111,7 @@ export function generateStructuredData({
         }
       : undefined;
 
-    // Блок Team
+    // Команда (Person)
     const members = blocks.filter(isTeamBlock).flatMap((b) =>
       b.members.map((m) => ({
         "@type": "Person",
@@ -104,7 +123,7 @@ export function generateStructuredData({
 
     jsonLd.mainEntity = {
       "@type": "Organization",
-      name: metaTitle, // или реальное имя вашей компании
+      name: metaTitle,
       url,
       ...(contactPoints.length && { contactPoint: contactPoints }),
       ...(place && { location: place }),
@@ -114,17 +133,15 @@ export function generateStructuredData({
     return jsonLd;
   }
 
-  // Для AboutPage и WebPage: пока обрабатываем только Reviews
+  // Для AboutPage и WebPage обрабатываем отзывы
   jsonLd.hasPart = [];
-
   for (const block of blocks) {
     if (isReviewsFullBlock(block)) {
       block.reviews.forEach((r: ReviewFull) => {
         jsonLd.hasPart.push({
           "@type": "Review",
           author: { "@type": "Person", name: r.name },
-          reviewBody:
-            typeof r.text === "string" ? r.text : JSON.stringify(r.text),
+          reviewBody: portableTextToPlainText(r.text),
         });
       });
     }
