@@ -42,6 +42,7 @@ import ButtonBlockComponent from "@/app/components/ButtonBlockComponent/ButtonBl
 import ImageBulletsBlockComponent from "@/app/components/ImageBulletsBlockComponent/ImageBulletsBlockComponent";
 import BenefitsBlock from "@/app/components/BenefitsBlock/BenefitsBlock";
 import ReviewsFullBlockComponent from "@/app/components/ReviewsFullBlockComponent/ReviewsFullBlockComponent";
+import { StructuredData } from "@/app/components/StructuredData/StructuredData";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -92,6 +93,37 @@ const SinglePage = async ({ params }: Props) => {
 
   const formDocument: FormStandardDocument =
     await getFormStandardDocumentByLang(params.lang);
+
+  // Собираем все контент-блоки
+  const allBlocks = page.contentBlocks as ContentBlock[];
+
+  // Фильтруем только поддерживаемые для JSON-LD
+  const sdBlocks = allBlocks.filter(
+    (b): b is ContactFullBlock | TeamBlock | LocationBlock | ReviewsFullBlock =>
+      b._type === "contactFullBlock" ||
+      b._type === "locationBlock" ||
+      b._type === "teamBlock" ||
+      b._type === "reviewsFullBlock"
+  );
+
+  const generateSlug = (slug: any, language: string) => {
+    if (!slug || !slug[language]?.current) return "#";
+
+    // Если язык "de", не добавляем /de/
+    return language === "de"
+      ? `https://cyprusvipestates.com/${slug[language].current}`
+      : `https://cyprusvipestates.com/${language}/${slug[language].current}`;
+  };
+
+  const url = generateSlug({ [lang]: { current: slug } }, lang);
+  const structuredDataProps = {
+    slug,
+    lang,
+    metaTitle: page.seo.metaTitle,
+    metaDescription: page.seo.metaDescription,
+    url,
+    blocks: sdBlocks,
+  };
 
   const singlePageTranslationSlugs: { [key: string]: { current: string } }[] =
     page?._translations.map((item) => {
@@ -217,6 +249,8 @@ const SinglePage = async ({ params }: Props) => {
   return (
     <>
       <Header params={params} translations={translations} />
+      {/* вставляем JSON-LD */}
+      <StructuredData {...structuredDataProps} />
       <main>
         {page.previewImage &&
           page.title &&
