@@ -1,5 +1,5 @@
 import { FormStandardDocument } from "./formStandardDocument";
-import { GeoPoint, ImageAlt } from "./project";
+import { GeoPoint, ImageAlt, Project } from "./project";
 
 type ContactType = "Email" | "Phone" | "Link";
 
@@ -188,6 +188,15 @@ export type ReviewsFullBlock = {
   reviews: ReviewFull[];
 };
 // === Конец типов для ReviewsFullBlock ===
+
+// === Типы для ProjectsSectionBlick ===
+export type ProjectsSectionBlock = {
+  _key: string;
+  _type: "projectsSectionBlock";
+  title: string;
+  projects: Project[];
+};
+// === Конец типов для ProjectsSectionBlick ===
 
 export type AccordionBlock = {
   _key: string;

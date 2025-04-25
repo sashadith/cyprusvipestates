@@ -20,6 +20,7 @@ import {
   ButtonBlock,
   ImageBulletsBlock,
   ReviewsFullBlock,
+  ProjectsSectionBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import {
@@ -63,7 +64,8 @@ type ContentBlock =
   | ButtonBlock
   | ImageBulletsBlock
   | BenefitsBlockType
-  | ReviewsFullBlock;
+  | ReviewsFullBlock
+  | ProjectsSectionBlock;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -241,6 +243,14 @@ const SinglePage = async ({ params }: Props) => {
             lang={params.lang}
           />
         );
+      // case "projectsSectionBlock":
+      //   return (
+      //     <PreviewMain
+      //       key={block._key}
+      //       block={block as ProjectsSectionBlock}
+      //       lang={params.lang}
+      //     />
+      //   );
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }

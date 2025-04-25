@@ -78,45 +78,12 @@ const singlepage = {
         { type: "imageBulletsBlock" },
         { type: "benefitsBlock" },
         { type: "reviewsFullBlock" },
+        { type: "projectsSectionBlock" },
       ],
     }),
-    // Раздел для ручного выбора проектов с фильтрацией по языку
-    defineField({
-      name: "projectSection",
-      title: "Секция проектов",
-      type: "object",
-      fields: [
-        defineField({
-          name: "title",
-          title: "Заголовок секции проектов",
-          type: "string",
-          description: "Например, «Проекты для семей»",
-        }),
-        defineField({
-          name: "projects",
-          title: "Выбранные проекты",
-          type: "array",
-          of: [
-            {
-              type: "reference",
-              to: [{ type: "project" }],
-              options: {
-                filter: ({ document }) => ({
-                  filter: "language == $language",
-                  params: { language: document.language },
-                }),
-              },
-            },
-          ],
-          description:
-            "Выберите проекты, которые необходимо отобразить на странице (SEO-оптимизированная подборка)",
-        }),
-      ],
-    }),
-    // Поле для подстраниц с фильтрацией по языку
     defineField({
       name: "subpages",
-      title: "Подстраницы",
+      title: "Subpages",
       type: "array",
       of: [
         {
