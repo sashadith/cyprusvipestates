@@ -210,6 +210,16 @@ export type AccordionBlock = {
   }>;
 };
 
+// === Типы для FAQBlock ===
+export type FaqBlock = {
+  _key: string;
+  _type: "faqBlock";
+  faq: AccordionBlock;
+  marginTop?: "small" | "medium" | "large";
+  marginBottom?: "small" | "medium" | "large";
+};
+// === Конец типов для FAQBlock ===
+
 export type TabsBlock = {
   _key: string;
   _type: string;

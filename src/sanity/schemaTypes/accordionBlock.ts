@@ -3,7 +3,7 @@ import { defineType, defineField, defineArrayMember } from "sanity";
 const accordionBlock = defineType({
   name: "accordionBlock",
   title: "Accordion Block",
-  type: "object", // Change to object
+  type: "object",
   fields: [
     defineField({
       name: "items",

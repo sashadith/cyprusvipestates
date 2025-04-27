@@ -71,6 +71,7 @@ const singlepage = {
         { type: "doubleTextBlock" },
         { type: "accordionBlock" },
         { type: "contactFullBlock" },
+        { type: "faqBlock" },
         { type: "teamBlock" },
         { type: "locationBlock" },
         { type: "imageFullBlock" },

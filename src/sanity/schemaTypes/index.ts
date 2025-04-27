@@ -25,6 +25,7 @@ import imageBulletsBlock from "./imageBulletsBlock";
 import benefitsBlock from "./benefitsBlock";
 import reviewsFullBlock from "./reviewsFullBlock";
 import projectsSectionBlock from "./projectsSectionBlock";
+import faqBlock from "./faqBlock";
 
 export const schemaTypes = [
   header,
@@ -40,6 +41,7 @@ export const schemaTypes = [
   contentBlock,
   projectsSectionBlock,
   textContent,
+  faqBlock,
   contactFullBlock,
   teamBlock,
   imageFullBlock,
