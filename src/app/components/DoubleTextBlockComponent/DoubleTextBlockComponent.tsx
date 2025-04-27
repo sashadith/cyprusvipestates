@@ -114,6 +114,7 @@ const DoubleTextBlockComponent: FC<Props> = ({ block }) => {
               {block.rightContent && renderContent(block.rightContent)}
             </div>
           </div>
+          {!block.isDivider && <div className={styles.dividerHorizontal} />}
         </div>
       </FadeUpAnimate>
     </div>
