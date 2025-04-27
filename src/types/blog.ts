@@ -195,6 +195,8 @@ export type ProjectsSectionBlock = {
   _type: "projectsSectionBlock";
   title: string;
   projects: Project[];
+  marginTop?: "small" | "medium" | "large";
+  marginBottom?: "small" | "medium" | "large";
 };
 // === Конец типов для ProjectsSectionBlick ===
 

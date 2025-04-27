@@ -30,5 +30,29 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "marginTop",
+      title: "Margin Top",
+      type: "string",
+      options: {
+        list: [
+          { title: "Small", value: "small" },
+          { title: "Medium", value: "medium" },
+          { title: "Large", value: "large" },
+        ],
+      },
+    }),
+    defineField({
+      name: "marginBottom",
+      title: "Margin Bottom",
+      type: "string",
+      options: {
+        list: [
+          { title: "Small", value: "small" },
+          { title: "Medium", value: "medium" },
+          { title: "Large", value: "large" },
+        ],
+      },
+    }),
   ],
 });

@@ -44,6 +44,7 @@ import ImageBulletsBlockComponent from "@/app/components/ImageBulletsBlockCompon
 import BenefitsBlock from "@/app/components/BenefitsBlock/BenefitsBlock";
 import ReviewsFullBlockComponent from "@/app/components/ReviewsFullBlockComponent/ReviewsFullBlockComponent";
 import { StructuredData } from "@/app/components/StructuredData/StructuredData";
+import ProjectsSectionBlockComponent from "@/app/components/ProjectsSectionBlockComponent/ProjectsSectionBlockComponent";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -243,14 +244,14 @@ const SinglePage = async ({ params }: Props) => {
             lang={params.lang}
           />
         );
-      // case "projectsSectionBlock":
-      //   return (
-      //     <PreviewMain
-      //       key={block._key}
-      //       block={block as ProjectsSectionBlock}
-      //       lang={params.lang}
-      //     />
-      //   );
+      case "projectsSectionBlock":
+        return (
+          <ProjectsSectionBlockComponent
+            key={block._key}
+            block={block as ProjectsSectionBlock}
+            lang={params.lang}
+          />
+        );
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }

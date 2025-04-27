@@ -186,19 +186,24 @@ export async function getSinglePageByLang(
             }
           }
         },
-        _type!="contactFullBlock" => @
+        _type == "projectsSectionBlock" => {
+          _key,
+          _type,
+          title,
+          projects[]->{
+            _id,
+            title,
+            excerpt,
+            previewImage,
+            "slug": slug[$lang].current,
+            keyFeatures
+          },
+          marginTop,
+          marginBottom
+        },
+        _type!="contactFullBlock" && _type!="projectsSectionBlock" => @
       },
       language,
-      projectSection {
-        title,
-        projects[]->{
-          _id,
-          title,
-          slug,
-          previewImage
-          // можно добавить другие нужные поля проекта
-        }
-      },
       subpages[]->{
         ...,
         "subpages": subpages[]->{
