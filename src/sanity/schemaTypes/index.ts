@@ -26,6 +26,7 @@ import benefitsBlock from "./benefitsBlock";
 import reviewsFullBlock from "./reviewsFullBlock";
 import projectsSectionBlock from "./projectsSectionBlock";
 import faqBlock from "./faqBlock";
+import formMinimalBlock from "./formMinimalBlock";
 
 export const schemaTypes = [
   header,
@@ -43,6 +44,7 @@ export const schemaTypes = [
   textContent,
   faqBlock,
   contactFullBlock,
+  formMinimalBlock,
   teamBlock,
   imageFullBlock,
   doubleTextBlock,

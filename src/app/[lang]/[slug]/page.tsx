@@ -22,6 +22,7 @@ import {
   ReviewsFullBlock,
   ProjectsSectionBlock,
   FaqBlock,
+  FormMinimalBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import {
@@ -46,6 +47,7 @@ import BenefitsBlock from "@/app/components/BenefitsBlock/BenefitsBlock";
 import ReviewsFullBlockComponent from "@/app/components/ReviewsFullBlockComponent/ReviewsFullBlockComponent";
 import { StructuredData } from "@/app/components/StructuredData/StructuredData";
 import ProjectsSectionBlockComponent from "@/app/components/ProjectsSectionBlockComponent/ProjectsSectionBlockComponent";
+import FormMinimalBlockComponent from "@/app/components/FormMinimalBlockComponent/FormMinimalBlockComponent";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -68,7 +70,8 @@ type ContentBlock =
   | BenefitsBlockType
   | ReviewsFullBlock
   | ProjectsSectionBlock
-  | FaqBlock;
+  | FaqBlock
+  | FormMinimalBlock;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -263,6 +266,17 @@ const SinglePage = async ({ params }: Props) => {
             />
           </div>
         );
+      case "formMinimalBlock": {
+        const minimal = block as FormMinimalBlock;
+        return (
+          <FormMinimalBlockComponent
+            key={minimal._key}
+            form={minimal.form}
+            lang={params.lang}
+            offerButtonCustomText={minimal.buttonText}
+          />
+        );
+      }
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }

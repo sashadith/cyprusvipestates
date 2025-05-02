@@ -12,6 +12,7 @@ import {
   ReviewsFullBlock,
   ProjectsSectionBlock,
   FaqBlock,
+  FormMinimalBlock,
 } from "./blog";
 import { BenefitsBlock, Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
@@ -43,6 +44,7 @@ export type Singlepage = {
     | ReviewsFullBlock
     | ProjectsSectionBlock
     | FaqBlock
+    | FormMinimalBlock
   >;
   projectSection?: ProjectSection;
   subpages?: Singlepage[];

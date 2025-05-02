@@ -184,7 +184,7 @@ const DeveloperPage = async ({ params }: Props) => {
           </ButtonModal>
         </div>
       </div>
-      <Footer params={params} />s
+      <Footer params={params} />
       <ModalBrochure lang={params.lang} formDocument={formDocument} />
     </>
   );

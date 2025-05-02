@@ -60,9 +60,20 @@ export type ContactFullBlock = {
   _key: string;
   _type: string;
   title: string;
+  buttonText: string;
   description: string;
   contacts: FullContact[];
   form: FormStandardDocument;
+};
+
+export type FormMinimalBlock = {
+  _key: string;
+  _type: "formMinimalBlock";
+  title: string;
+  buttonText: string;
+  form: FormStandardDocument;
+  marginTop?: "small" | "medium" | "large";
+  marginBottom?: "small" | "medium" | "large";
 };
 
 export type Member = {

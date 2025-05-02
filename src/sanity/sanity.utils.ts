@@ -186,6 +186,40 @@ export async function getSinglePageByLang(
             }
           }
         },
+        _type=="formMinimalBlock" => {
+          _key,
+          _type,
+          title,
+          buttonText,
+          form->{
+            _id,
+            _type,
+            language,
+            form{
+              inputName,
+              inputPhone,
+              inputCountry,
+              inputEmail,
+              inputMessage,
+              buttonText,
+              agreementText,
+              agreementLinkLabel,
+              agreementLinkDestination,
+              validationNameRequired,
+              validationPhoneRequired,
+              validationCountryRequired,
+              validationEmailRequired,
+              validationEmailInvalid,
+              validationMessageRequired,
+              validationAgreementRequired,
+              validationAgreementOneOf,
+              successMessage,
+              errorMessage
+            }
+          },
+          marginTop,
+          marginBottom
+        },
         _type == "projectsSectionBlock" => {
           _key,
           _type,
@@ -201,7 +235,7 @@ export async function getSinglePageByLang(
           marginTop,
           marginBottom
         },
-        _type!="contactFullBlock" && _type!="projectsSectionBlock" => @
+        _type!="contactFullBlock" && _type!="formMinimalBlock" && _type!="projectsSectionBlock" => @
       },
       language,
       subpages[]->{

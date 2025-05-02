@@ -80,6 +80,7 @@ const singlepage = {
         { type: "benefitsBlock" },
         { type: "reviewsFullBlock" },
         { type: "projectsSectionBlock" },
+        { type: "formMinimalBlock" },
       ],
     }),
     defineField({
