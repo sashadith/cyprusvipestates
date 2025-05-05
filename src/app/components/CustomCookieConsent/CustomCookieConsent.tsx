@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import styles from "./CustomCookieConsent.module.scss";
 
@@ -52,6 +53,8 @@ const dictionary = {
 };
 
 export default function CustomCookieConsent({ lang }: Props) {
+  const router = useRouter();
+
   const getNormalizedHref = (lang: string, link: string) => {
     const normalizedLink = link.startsWith("/") ? link.slice(1) : link;
     const languagePrefix = lang === "de" ? "" : `/${lang}`;
@@ -77,7 +80,7 @@ export default function CustomCookieConsent({ lang }: Props) {
     };
     Cookies.set(COOKIE_NAME, JSON.stringify(consent), { expires: 180 });
     setVisible(false);
-    window.location.reload();
+    router.refresh();
   };
 
   const rejectAll = () => {
@@ -88,7 +91,7 @@ export default function CustomCookieConsent({ lang }: Props) {
     };
     Cookies.set(COOKIE_NAME, JSON.stringify(consent), { expires: 180 });
     setVisible(false);
-    window.location.reload();
+    router.refresh();
   };
 
   if (!visible) return null;
