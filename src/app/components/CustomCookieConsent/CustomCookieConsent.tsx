@@ -22,7 +22,7 @@ const dictionary = {
     description:
       "We use cookies to improve your experience. By accepting, you agree to our use of cookies.",
     accept: "Accept all",
-    reject: "Reject non-essential",
+    reject: "Reject",
     privacy: "Privacy Policy",
   },
   de: {
@@ -30,7 +30,7 @@ const dictionary = {
     description:
       "Wir verwenden Cookies zur Verbesserung Ihrer Erfahrung. Durch Klicken auf 'Akzeptieren' stimmen Sie der Verwendung zu.",
     accept: "Alle akzeptieren",
-    reject: "Nicht notwendige ablehnen",
+    reject: "Ablehnen",
     privacy: "Datenschutzrichtlinie",
   },
   pl: {
@@ -38,7 +38,7 @@ const dictionary = {
     description:
       "Używamy plików cookie, aby poprawić Twoje doświadczenia. Klikając 'Akceptuj', wyrażasz zgodę.",
     accept: "Zaakceptuj wszystkie",
-    reject: "Odrzuć niekonieczne",
+    reject: "Odrzuć",
     privacy: "Polityka prywatności",
   },
   ru: {
@@ -46,7 +46,7 @@ const dictionary = {
     description:
       "Мы используем cookies для улучшения работы сайта. Нажимая 'Принять', вы соглашаетесь на их использование.",
     accept: "Принять все",
-    reject: "Отклонить лишние",
+    reject: "Отклонить",
     privacy: "Политика конфиденциальности",
   },
 };

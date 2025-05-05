@@ -1,20 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import Cookies from "js-cookie";
 
 const MicrosoftClarity = () => {
   useEffect(() => {
-    const consent = Cookies.get("cookieConsent");
-    if (!consent) return;
-
-    try {
-      const parsed = JSON.parse(consent);
-      if (!parsed.analytics) return; // Только если пользователь согласен
-    } catch {
-      return;
-    }
-
     (function (c: any, l: Document, a: string, r: string, i: string) {
       c[a] =
         c[a] ||

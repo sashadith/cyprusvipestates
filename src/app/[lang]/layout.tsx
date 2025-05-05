@@ -1,15 +1,12 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
-// import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
-import { Inter, Outfit, Rubik } from "next/font/google";
-// import { ModalProvider } from "../context/ModalContext";
-import { Suspense } from "react";
+import { Rubik } from "next/font/google";
+import { cookies } from "next/headers";
 import { ModalProvider } from "../context/ModalContext";
+import GoogleAnalyticsWrapper from "../components/GoogleAnalyticsWrapper/GoogleAnalyticsWrapper";
 import MicrosoftClarity from "../components/MicrosoftClarity/MicrosoftClarity";
 import CustomCookieConsent from "../components/CustomCookieConsent/CustomCookieConsent";
-import GoogleAnalyticsWrapper from "../components/GoogleAnalyticsWrapper/GoogleAnalyticsWrapper";
-// import { FacebookPixelEvents } from "../components/pixel-events";
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+
 const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
@@ -24,13 +21,31 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
+  const cookieStore = cookies();
+  const consentCookie = cookieStore.get("cookieConsent");
+  let hasAnalytics = false;
+
+  try {
+    const consent = consentCookie?.value
+      ? JSON.parse(consentCookie.value)
+      : null;
+    hasAnalytics = consent?.analytics === true;
+  } catch {
+    // ignore error
+  }
+
   return (
     <html lang={params.lang}>
       <body className={rubik.className}>
         <ModalProvider>{children}</ModalProvider>
-        {/* <GoogleAnalytics gaId="G-WLD3B6GN9P" /> */}
-        <GoogleAnalyticsWrapper />
+
+        {hasAnalytics && (
+          <>
+            <GoogleAnalyticsWrapper />
+          </>
+        )}
         <MicrosoftClarity />
+
         <CustomCookieConsent lang={params.lang as "en" | "de" | "pl" | "ru"} />
       </body>
     </html>
