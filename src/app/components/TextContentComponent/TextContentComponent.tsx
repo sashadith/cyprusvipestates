@@ -27,7 +27,7 @@ const TextContentComponent: FC<Props> = ({ block }) => {
   const computedPaddingHorizontal =
     paddingHorizontal && marginValues[paddingHorizontal]
       ? marginValues[paddingHorizontal]
-      : "25px";
+      : "0";
 
   return (
     <div
