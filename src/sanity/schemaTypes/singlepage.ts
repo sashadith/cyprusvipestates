@@ -81,6 +81,7 @@ const singlepage = {
         { type: "reviewsFullBlock" },
         { type: "projectsSectionBlock" },
         { type: "formMinimalBlock" },
+        { type: "howWeWorkBlock" },
       ],
     }),
     defineField({

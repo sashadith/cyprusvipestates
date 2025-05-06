@@ -13,6 +13,7 @@ import {
   ProjectsSectionBlock,
   FaqBlock,
   FormMinimalBlock,
+  HowWeWorkBlock,
 } from "./blog";
 import { BenefitsBlock, Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
@@ -45,6 +46,7 @@ export type Singlepage = {
     | ProjectsSectionBlock
     | FaqBlock
     | FormMinimalBlock
+    | HowWeWorkBlock
   >;
   projectSection?: ProjectSection;
   subpages?: Singlepage[];

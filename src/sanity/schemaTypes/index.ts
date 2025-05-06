@@ -27,6 +27,7 @@ import reviewsFullBlock from "./reviewsFullBlock";
 import projectsSectionBlock from "./projectsSectionBlock";
 import faqBlock from "./faqBlock";
 import formMinimalBlock from "./formMinimalBlock";
+import howWeWorkBlock from "./howWeWorkBlock";
 
 export const schemaTypes = [
   header,
@@ -55,6 +56,7 @@ export const schemaTypes = [
   reviewsFullBlock,
   imageBulletsBlock,
   benefitsBlock,
+  howWeWorkBlock,
   developer,
   docFile,
   localizedSlug,

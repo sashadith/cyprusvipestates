@@ -23,6 +23,7 @@ import {
   ProjectsSectionBlock,
   FaqBlock,
   FormMinimalBlock,
+  HowWeWorkBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import {
@@ -48,6 +49,7 @@ import ReviewsFullBlockComponent from "@/app/components/ReviewsFullBlockComponen
 import { StructuredData } from "@/app/components/StructuredData/StructuredData";
 import ProjectsSectionBlockComponent from "@/app/components/ProjectsSectionBlockComponent/ProjectsSectionBlockComponent";
 import FormMinimalBlockComponent from "@/app/components/FormMinimalBlockComponent/FormMinimalBlockComponent";
+import HowWeWorkBlockComponent from "@/app/components/HowWeWorkBlockComponent/HowWeWorkBlockComponent";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -71,7 +73,8 @@ type ContentBlock =
   | ReviewsFullBlock
   | ProjectsSectionBlock
   | FaqBlock
-  | FormMinimalBlock;
+  | FormMinimalBlock
+  | HowWeWorkBlock;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -265,6 +268,14 @@ const SinglePage = async ({ params }: Props) => {
               block={(block as FaqBlock).faq}
             />
           </div>
+        );
+      case "howWeWorkBlock":
+        return (
+          <HowWeWorkBlockComponent
+            key={block._key}
+            block={block as HowWeWorkBlock}
+            lang={params.lang}
+          />
         );
       case "formMinimalBlock": {
         const minimal = block as FormMinimalBlock;
