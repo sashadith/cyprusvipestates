@@ -24,6 +24,21 @@ export type ProjectSection = {
   projects: Project[];
 };
 
+/** Минимальный «референс» на страницу, без дочерних блоков */
+export type SinglepageRef = {
+  _id: string;
+  title: string;
+  slug: {
+    [lang: string]: { current: string };
+  };
+
+  _translations?: Array<{
+    slug: {
+      [lang: string]: { current: string };
+    };
+  }>;
+};
+
 export type Singlepage = {
   _id: string;
   _type: string;
@@ -51,20 +66,14 @@ export type Singlepage = {
     | BulletsBlock
   >;
   projectSection?: ProjectSection;
-  subpages?: Singlepage[];
+  parentPage?: SinglepageRef;
   language: string;
   slug: {
-    [lang: string]: {
-      current: string;
-    };
+    [lang: string]: { current: string };
   };
-  _translations: [
-    {
-      slug: {
-        [lang: string]: {
-          current: string;
-        };
-      };
-    },
-  ];
+  _translations: Array<{
+    slug: {
+      [lang: string]: { current: string };
+    };
+  }>;
 };

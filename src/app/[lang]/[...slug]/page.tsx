@@ -1,5 +1,7 @@
+// app/[lang]/[[...slug]]/page.tsx
 import React from "react";
-import dynamic from "next/dynamic";
+import { groq } from "next-sanity";
+import { client } from "@/sanity/sanity.client";
 import AccordionContainer from "@/app/components/AccordionContainer/AccordionContainer";
 import Footer from "@/app/components/Footer/Footer";
 import Header from "@/app/components/Header/Header";
@@ -7,7 +9,7 @@ import { i18n } from "@/i18n.config";
 import {
   getFormStandardDocumentByLang,
   getSinglePageByLang,
-  // getNotFoundPageByLang,
+  getAllPathsForLang,
 } from "@/sanity/sanity.utils";
 import {
   AccordionBlock,
@@ -31,12 +33,10 @@ import {
   BenefitsBlock as BenefitsBlockType,
   Translation,
 } from "@/types/homepage";
+import { Singlepage } from "@/types/singlepage";
 import { Metadata } from "next";
-// import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
 import TextContentComponent from "@/app/components/TextContentComponent/TextContentComponent";
-import SinglePageIntroBlock from "@/app/components/SinglePageIntroBlock/SinglePageIntroBlock";
-import PreviewMain from "@/app/components/PreviewMain/PreviewMain";
 import PropertyIntro from "@/app/components/PropertyIntro/PropertyIntro";
 import ContactFullBlockComponent from "@/app/components/ContactFullBlockComponent/ContactFullBlockComponent";
 import TeamBlockComponent from "@/app/components/TeamBlockComponent/TeamBlockComponent";
@@ -53,87 +53,105 @@ import FormMinimalBlockComponent from "@/app/components/FormMinimalBlockComponen
 import HowWeWorkBlockComponent from "@/app/components/HowWeWorkBlockComponent/HowWeWorkBlockComponent";
 import BulletsBlockComponent from "@/app/components/BulletsBlockComponent/BulletsBlockComponent";
 
-// const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
-//   ssr: false,
-// });
-
 type Props = {
-  params: { lang: string; slug: string };
+  params: {
+    lang: string;
+    slug: string[];
+  };
 };
 
-type ContentBlock =
-  | TextContent
-  | AccordionBlock
-  | ContactFullBlock
-  | TeamBlock
-  | LocationBlock
-  | ImageFullBlock
-  | DoubleTextBlock
-  | ButtonBlock
-  | ImageBulletsBlock
-  | BenefitsBlockType
-  | ReviewsFullBlock
-  | ProjectsSectionBlock
-  | FaqBlock
-  | FormMinimalBlock
-  | HowWeWorkBlock
-  | BulletsBlock;
+export const dynamicParams = false;
+export const revalidate = 60;
 
-// Dynamic metadata for SEO
+/**
+ * Собираем все combinations [lang, slug[]] для SSG
+ */
+export async function generateStaticParams(): Promise<Props["params"][]> {
+  const langs = i18n.languages.map((l) => l.id);
+  const paths: Props["params"][] = [];
+
+  for (const lang of langs) {
+    const items: { current: string; parent?: string }[] = await client.fetch(
+      groq`*[_type=='singlepage' && language==$lang]{
+        "current": slug[$lang].current,
+        "parent": parentPage->slug[$lang].current
+      }`,
+      { lang }
+    );
+
+    const map: Record<string, string[]> = {};
+    // корневые
+    items.forEach(({ current, parent }) => {
+      if (!parent) map[current] = [current];
+    });
+    // дочерние (итерации на случай глубокой вложенности)
+    let added = true;
+    while (added) {
+      added = false;
+      items.forEach(({ current, parent }) => {
+        if (parent && map[parent] && !map[current]) {
+          map[current] = [...map[parent], current];
+          added = true;
+        }
+      });
+    }
+    // формируем пути
+    Object.values(map).forEach((slugArr) => {
+      paths.push({ lang, slug: slugArr });
+    });
+  }
+
+  return paths;
+}
+
+/**
+ * Динамическая SEO-мета
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { lang, slug } = params;
-  const data = await getSinglePageByLang(lang, slug);
+  const { lang, slug = [] } = params;
+  const current = slug[slug.length - 1] || "";
+  const page = (await getSinglePageByLang(lang, current)) as Singlepage | null;
 
   return {
-    title: data?.seo.metaTitle,
-    description: data?.seo.metaDescription,
+    title: page?.seo.metaTitle,
+    description: page?.seo.metaDescription,
   };
 }
 
 const SinglePage = async ({ params }: Props) => {
   const { lang, slug } = params;
-  const page = await getSinglePageByLang(lang, slug);
+  const current = slug[slug.length - 1] || "";
+  const page = (await getSinglePageByLang(lang, current)) as Singlepage | null;
 
-  // if (!page) {
-  //   const notFoundPage = await getNotFoundPageByLang(lang);
-  //   return (
-  //     <>
-  //       <Header params={params} translations={[]} />
-  //       <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
-  //       <Footer params={params} />
-  //     </>
-  //   ); // Рендеринг компонента NotFound
-  // }
+  if (!page) {
+    return <p>Страница не найдена</p>;
+  }
 
   const formDocument: FormStandardDocument =
-    await getFormStandardDocumentByLang(params.lang);
+    await getFormStandardDocumentByLang(lang);
 
-  // Собираем все контент-блоки
-  const allBlocks = page.contentBlocks
-    ? (page.contentBlocks as ContentBlock[])
-    : [];
-
-  // Фильтруем только поддерживаемые для JSON-LD
+  const allBlocks = page.contentBlocks || [];
   const sdBlocks = allBlocks.filter(
     (b): b is ContactFullBlock | TeamBlock | LocationBlock | ReviewsFullBlock =>
-      b._type === "contactFullBlock" ||
-      b._type === "locationBlock" ||
-      b._type === "teamBlock" ||
-      b._type === "reviewsFullBlock"
+      [
+        "contactFullBlock",
+        "locationBlock",
+        "teamBlock",
+        "reviewsFullBlock",
+      ].includes(b._type)
   );
 
-  const generateSlug = (slug: any, language: string) => {
-    if (!slug || !slug[language]?.current) return "#";
-
-    // Если язык "de", не добавляем /de/
+  const generateSlug = (slugObj: any, language: string) => {
+    const cur = slugObj?.[language]?.current;
+    if (!cur) return "#";
     return language === "de"
-      ? `https://cyprusvipestates.com/${slug[language].current}`
-      : `https://cyprusvipestates.com/${language}/${slug[language].current}`;
+      ? `https://cyprusvipestates.com/${cur}`
+      : `https://cyprusvipestates.com/${language}/${cur}`;
   };
 
-  const url = generateSlug({ [lang]: { current: slug } }, lang);
+  const url = generateSlug({ [lang]: { current } }, lang);
   const structuredDataProps = {
-    slug,
+    slug: current,
     lang,
     metaTitle: page.seo.metaTitle,
     metaDescription: page.seo.metaDescription,
@@ -141,44 +159,29 @@ const SinglePage = async ({ params }: Props) => {
     blocks: sdBlocks,
   };
 
-  const singlePageTranslationSlugs: { [key: string]: { current: string } }[] =
-    page?._translations.map((item) => {
-      const newItem: { [key: string]: { current: string } } = {};
+  // Правильный маппинг переводов без ошибки TS
+  const translations: Translation[] = [];
+  for (const { id: code } of i18n.languages) {
+    if (code === lang) continue; // пропускаем текущий язык
 
-      for (const key in item.slug) {
-        if (key !== "_type") {
-          newItem[key] = { current: item.slug[key].current };
-        }
-      }
-      return newItem;
+    // находим перевод слуга текущей страницы
+    const childSlug = page._translations.find((t) => Boolean(t.slug[code]))
+      ?.slug[code].current;
+    if (!childSlug) continue;
+
+    // получаем все пути для этого языка
+    const allPaths = await getAllPathsForLang(code);
+    // ищем путь, у которого последний сегмент === childSlug
+    const match = allPaths.find((arr) => arr[arr.length - 1] === childSlug);
+    if (!match) continue;
+
+    translations.push({
+      language: code,
+      path: `/${code}/${match.join("/")}`,
     });
+  }
 
-  const translations = i18n.languages.reduce<Translation[]>((acc, lang) => {
-    const translationSlug = singlePageTranslationSlugs
-      ?.reduce(
-        (acc: string[], slug: { [key: string]: { current: string } }) => {
-          const current = slug[lang.id]?.current;
-          if (current) {
-            acc.push(current);
-          }
-          return acc;
-        },
-        []
-      )
-      .join(" ");
-
-    return translationSlug
-      ? [
-          ...acc,
-          {
-            language: lang.id,
-            path: `/${lang.id}/${translationSlug}`,
-          },
-        ]
-      : acc;
-  }, []);
-
-  const renderContentBlock = (block: ContentBlock) => {
+  const renderContentBlock = (block: any) => {
     switch (block._type) {
       case "textContent":
         return (
@@ -196,7 +199,7 @@ const SinglePage = async ({ params }: Props) => {
           <ContactFullBlockComponent
             key={block._key}
             block={block as ContactFullBlock}
-            lang={params.lang}
+            lang={lang}
           />
         );
       case "teamBlock":
@@ -204,7 +207,7 @@ const SinglePage = async ({ params }: Props) => {
           <TeamBlockComponent
             key={block._key}
             block={block as TeamBlock}
-            lang={params.lang}
+            lang={lang}
           />
         );
       case "locationBlock":
@@ -212,7 +215,7 @@ const SinglePage = async ({ params }: Props) => {
           <LocationBlockComponent
             key={block._key}
             block={block as LocationBlock}
-            lang={params.lang}
+            lang={lang}
           />
         );
       case "imageFullBlock":
@@ -252,7 +255,7 @@ const SinglePage = async ({ params }: Props) => {
           <ReviewsFullBlockComponent
             key={block._key}
             block={block as ReviewsFullBlock}
-            lang={params.lang}
+            lang={lang}
           />
         );
       case "projectsSectionBlock":
@@ -260,43 +263,38 @@ const SinglePage = async ({ params }: Props) => {
           <ProjectsSectionBlockComponent
             key={block._key}
             block={block as ProjectsSectionBlock}
-            lang={params.lang}
+            lang={lang}
           />
         );
       case "faqBlock":
         return (
-          <div className="container">
-            <AccordionContainer
-              key={block._key}
-              block={(block as FaqBlock).faq}
-            />
+          <div className="container" key={block._key}>
+            <AccordionContainer block={(block as FaqBlock).faq} />
           </div>
+        );
+      case "formMinimalBlock":
+        return (
+          <FormMinimalBlockComponent
+            key={(block as FormMinimalBlock)._key}
+            form={(block as FormMinimalBlock).form}
+            lang={lang}
+            offerButtonCustomText={(block as FormMinimalBlock).buttonText}
+          />
         );
       case "howWeWorkBlock":
         return (
           <HowWeWorkBlockComponent
             key={block._key}
             block={block as HowWeWorkBlock}
-            lang={params.lang}
+            lang={lang}
           />
         );
-      case "formMinimalBlock": {
-        const minimal = block as FormMinimalBlock;
-        return (
-          <FormMinimalBlockComponent
-            key={minimal._key}
-            form={minimal.form}
-            lang={params.lang}
-            offerButtonCustomText={minimal.buttonText}
-          />
-        );
-      }
       case "bulletsBlock":
         return (
           <BulletsBlockComponent
             key={block._key}
             block={block as BulletsBlock}
-            lang={params.lang}
+            lang={lang}
           />
         );
       default:
@@ -304,30 +302,22 @@ const SinglePage = async ({ params }: Props) => {
     }
   };
 
-  const currentPostId = page._id;
-
   return (
     <>
       <Header params={params} translations={translations} />
-      {/* вставляем JSON-LD */}
       <StructuredData {...structuredDataProps} />
       <main>
-        {page.previewImage &&
-          page.title &&
-          page.excerpt &&
-          page.allowIntroBlock && (
-            <PropertyIntro
-              title={page.title}
-              previewImage={page.previewImage}
-              excerpt={page.excerpt}
-            />
-          )}
-        {/* <SinglePageIntroBlock title={page.title} /> */}
-        {page.contentBlocks?.length > 0 &&
-          page.contentBlocks.map((block) => renderContentBlock(block))}
+        {page.previewImage && page.allowIntroBlock && (
+          <PropertyIntro
+            title={page.title}
+            previewImage={page.previewImage}
+            excerpt={page.excerpt}
+          />
+        )}
+        {allBlocks.map(renderContentBlock)}
       </main>
       <Footer params={params} />
-      <ModalBrochure lang={params.lang} formDocument={formDocument} />
+      <ModalBrochure lang={lang} formDocument={formDocument} />
     </>
   );
 };

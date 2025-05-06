@@ -139,12 +139,138 @@ export async function getFormStandardDocumentByLang(
 //   return singlePage;
 // }
 
+// export async function getSinglePageByLang(
+//   lang: string,
+//   slug: string
+// ): Promise<Singlepage> {
+//   const singlePageQuery = groq`
+//     *[_type == 'singlepage' && slug[$lang].current == $slug][0]{
+//       _id,
+//       title,
+//       slug,
+//       seo,
+//       excerpt,
+//       previewImage,
+//       allowIntroBlock,
+//       contentBlocks[]{
+//         _type=="contactFullBlock" => {
+//           _key,
+//           _type,
+//           title,
+//           description,
+//           contacts,
+//           form->{
+//             _id,
+//             _type,
+//             language,
+//             form{
+//               inputName,
+//               inputPhone,
+//               inputCountry,
+//               inputEmail,
+//               inputMessage,
+//               buttonText,
+//               agreementText,
+//               agreementLinkLabel,
+//               agreementLinkDestination,
+//               validationNameRequired,
+//               validationPhoneRequired,
+//               validationCountryRequired,
+//               validationEmailRequired,
+//               validationEmailInvalid,
+//               validationMessageRequired,
+//               validationAgreementRequired,
+//               validationAgreementOneOf,
+//               successMessage,
+//               errorMessage
+//             }
+//           }
+//         },
+//         _type=="formMinimalBlock" => {
+//           _key,
+//           _type,
+//           title,
+//           buttonText,
+//           form->{
+//             _id,
+//             _type,
+//             language,
+//             form{
+//               inputName,
+//               inputPhone,
+//               inputCountry,
+//               inputEmail,
+//               inputMessage,
+//               buttonText,
+//               agreementText,
+//               agreementLinkLabel,
+//               agreementLinkDestination,
+//               validationNameRequired,
+//               validationPhoneRequired,
+//               validationCountryRequired,
+//               validationEmailRequired,
+//               validationEmailInvalid,
+//               validationMessageRequired,
+//               validationAgreementRequired,
+//               validationAgreementOneOf,
+//               successMessage,
+//               errorMessage
+//             }
+//           },
+//           marginTop,
+//           marginBottom
+//         },
+//         _type == "projectsSectionBlock" => {
+//           _key,
+//           _type,
+//           title,
+//           projects[]->{
+//             _id,
+//             title,
+//             excerpt,
+//             previewImage,
+//             "slug": slug[$lang].current,
+//             keyFeatures
+//           },
+//           marginTop,
+//           marginBottom
+//         },
+//         _type!="contactFullBlock" && _type!="formMinimalBlock" && _type!="projectsSectionBlock" => @
+//       },
+//       language,
+//       subpages[]->{
+//         ...,
+//         "subpages": subpages[]->{
+//           ...,
+//           "subpages": subpages[]->{
+//             ...,
+//             "subpages": subpages[]->{
+//               ...,
+//               "subpages": subpages[]->
+//             }
+//           }
+//         }
+//       },
+//       "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+//         slug,
+//       }
+//     }
+//   `;
+
+//   const singlePage = await client.fetch(singlePageQuery, { lang, slug });
+//   return singlePage;
+// }
+
 export async function getSinglePageByLang(
   lang: string,
   slug: string
-): Promise<Singlepage> {
+): Promise<Singlepage | null> {
   const singlePageQuery = groq`
-    *[_type == 'singlepage' && slug[$lang].current == $slug][0]{
+    *[
+      _type == "singlepage" &&
+      language == $lang &&
+      slug[$lang].current == $slug
+    ][0] {
       _id,
       title,
       slug,
@@ -152,8 +278,8 @@ export async function getSinglePageByLang(
       excerpt,
       previewImage,
       allowIntroBlock,
-      contentBlocks[]{
-        _type=="contactFullBlock" => {
+      contentBlocks[] {
+        _type == "contactFullBlock" => {
           _key,
           _type,
           title,
@@ -163,7 +289,7 @@ export async function getSinglePageByLang(
             _id,
             _type,
             language,
-            form{
+            form{ 
               inputName,
               inputPhone,
               inputCountry,
@@ -186,7 +312,7 @@ export async function getSinglePageByLang(
             }
           }
         },
-        _type=="formMinimalBlock" => {
+        _type == "formMinimalBlock" => {
           _key,
           _type,
           title,
@@ -235,43 +361,78 @@ export async function getSinglePageByLang(
           marginTop,
           marginBottom
         },
-        _type!="contactFullBlock" && _type!="formMinimalBlock" && _type!="projectsSectionBlock" => @
+        _type != "contactFullBlock" &&
+        _type != "formMinimalBlock" &&
+        _type != "projectsSectionBlock" => @
       },
-      language,
-      subpages[]->{
-        ...,
-        "subpages": subpages[]->{
-          ...,
-          "subpages": subpages[]->{
-            ...,
-            "subpages": subpages[]->{
-              ...,
-              "subpages": subpages[]->
-            }
-          }
+      "parentPage": parentPage->{
+        _id,
+        title,
+        slug,
+        "_translations": *[
+          _type == "translation.metadata" &&
+          references(^._id)
+        ].translations[].value->{
+          slug
         }
       },
-      "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
-        slug,
+      language,
+      "_translations": *[
+        _type == "translation.metadata" &&
+        references(^._id)
+      ].translations[].value->{
+        slug
       }
     }
   `;
 
-  const singlePage = await client.fetch(singlePageQuery, { lang, slug });
-  return singlePage;
+  return await client.fetch(singlePageQuery, { lang, slug });
 }
 
-export async function getAllSinglePagesByLang(
-  lang: string
-): Promise<Singlepage[]> {
+export async function getAllSinglePagesByLang(lang: string): Promise<
+  {
+    _id: string;
+    slug: { [lang: string]: { current: string } };
+    parentPage?: { slug: { [lang: string]: { current: string } } };
+  }[]
+> {
   const query = groq`
     *[_type == "singlepage" && language == $lang]{
       _id,
-      title,
-      slug
+      "slug": slug,
+      "parentPage": parentPage->{ slug }
     }
   `;
   return await client.fetch(query, { lang });
+}
+
+export async function getAllPathsForLang(lang: string): Promise<string[][]> {
+  const items: { current: string; parent?: string }[] = await client.fetch(
+    groq`
+      *[_type=='singlepage' && language==$lang]{
+        "current": slug[$lang].current,
+        "parent": parentPage->slug[$lang].current
+      }
+    `,
+    { lang }
+  );
+
+  // строим дерево — точно так же, как в generateStaticParams
+  const map: Record<string, string[]> = {};
+  items.forEach(({ current, parent }) => {
+    if (!parent) map[current] = [current];
+  });
+  let added = true;
+  while (added) {
+    added = false;
+    items.forEach(({ current, parent }) => {
+      if (parent && map[parent] && !map[current]) {
+        map[current] = [...map[parent], current];
+        added = true;
+      }
+    });
+  }
+  return Object.values(map);
 }
 
 export async function getPropertyByLang(
