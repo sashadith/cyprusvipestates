@@ -239,6 +239,17 @@ export type HowWeWorkBlock = {
   marginTop?: "small" | "medium" | "large";
   marginBottom?: "small" | "medium" | "large";
 };
+// === Конец типов для HowWeWorkBlock ===
+
+// === Типы для BulletsBlock ===
+export type BulletsBlock = {
+  _key: string;
+  _type: "bulletsBlock";
+  title: string;
+  marginTop?: "small" | "medium" | "large";
+  marginBottom?: "small" | "medium" | "large";
+};
+// === Конец типов для BulletsBlock ===
 
 export type TabsBlock = {
   _key: string;

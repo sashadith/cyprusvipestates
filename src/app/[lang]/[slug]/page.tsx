@@ -24,6 +24,7 @@ import {
   FaqBlock,
   FormMinimalBlock,
   HowWeWorkBlock,
+  BulletsBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import {
@@ -50,6 +51,7 @@ import { StructuredData } from "@/app/components/StructuredData/StructuredData";
 import ProjectsSectionBlockComponent from "@/app/components/ProjectsSectionBlockComponent/ProjectsSectionBlockComponent";
 import FormMinimalBlockComponent from "@/app/components/FormMinimalBlockComponent/FormMinimalBlockComponent";
 import HowWeWorkBlockComponent from "@/app/components/HowWeWorkBlockComponent/HowWeWorkBlockComponent";
+import BulletsBlockComponent from "@/app/components/BulletsBlockComponent/BulletsBlockComponent";
 
 // const NotFound = dynamic(() => import("@/app/components/NotFound/NotFound"), {
 //   ssr: false,
@@ -74,7 +76,8 @@ type ContentBlock =
   | ProjectsSectionBlock
   | FaqBlock
   | FormMinimalBlock
-  | HowWeWorkBlock;
+  | HowWeWorkBlock
+  | BulletsBlock;
 
 // Dynamic metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -288,6 +291,14 @@ const SinglePage = async ({ params }: Props) => {
           />
         );
       }
+      case "bulletsBlock":
+        return (
+          <BulletsBlockComponent
+            key={block._key}
+            block={block as BulletsBlock}
+            lang={params.lang}
+          />
+        );
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }

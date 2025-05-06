@@ -28,6 +28,7 @@ import projectsSectionBlock from "./projectsSectionBlock";
 import faqBlock from "./faqBlock";
 import formMinimalBlock from "./formMinimalBlock";
 import howWeWorkBlock from "./howWeWorkBlock";
+import bulletsBlock from "./bulletsBlock";
 
 export const schemaTypes = [
   header,
@@ -57,6 +58,7 @@ export const schemaTypes = [
   imageBulletsBlock,
   benefitsBlock,
   howWeWorkBlock,
+  bulletsBlock,
   developer,
   docFile,
   localizedSlug,
