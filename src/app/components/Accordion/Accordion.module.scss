@@ -10,7 +10,7 @@
 }
 
 .item {
-  border-radius: 15px;
+  // border-radius: 15px;
   background: #FFF;
 
   &:not(:last-child) {
@@ -62,7 +62,6 @@
   transition: height 0.25s cubic-bezier(0, 0, 0, 1);
   background-color: #fff;
   color: #091728;
-  border-radius: 0 0 15px 15px;
 }
 
 .itemPanel {

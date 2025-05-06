@@ -10,8 +10,7 @@
 }
 
 .item {
-  border-radius: 15px;
-  background: #FFF;
+  // background: #FFF;
 
   &:not(:last-child) {
     margin-bottom: clamp(0.938rem, 0.469rem + 1.88vw, 1.875rem);

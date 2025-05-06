@@ -43,7 +43,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
                   height="49.9439"
                   rx="24.9719"
                   transform="rotate(-90 0.0566406 50)"
-                  fill="#091728"
+                  fill="none"
                 />
                 <path
                   d="M17.8036 19.2411L31.0847 32.5222L32.5283 31.0786L19.2472 17.7975L17.8036 19.2411Z"
@@ -70,7 +70,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
                   height="49.9439"
                   rx="24.9719"
                   transform="rotate(-90 0.0566406 50)"
-                  fill="#091728"
+                  fill="none"
                 />
                 <path
                   d="M17.8036 19.2411L31.0847 32.5222L32.5283 31.0786L19.2472 17.7975L17.8036 19.2411Z"
