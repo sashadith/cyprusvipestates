@@ -1,105 +1,97 @@
+// api/sitemap/route.ts
 import {
   getProjectsPageByLang,
   getAllProjectsByLang,
   getHomePageByLang,
   getAllDevelopersByLang,
-  getAllSinglePagesByLang,
+  // вместо старого импорта:
+  // getAllSinglePagesByLang,
+  // подключаем новую функцию
+  getAllPathsForLang,
 } from "@/sanity/sanity.utils";
 
-const generateSlug = (slug: any, language: string) => {
-  if (!slug || !slug[language]?.current) return "#";
-
-  // Если язык "de", не добавляем /de/
-  return language === "de"
-    ? `/projects/${slug[language].current}`
-    : `/${language}/projects/${slug[language].current}`;
-};
-
-const generateDeveloperSlug = (slug: any, language: string) => {
-  if (!slug || !slug[language]?.current) return "#";
-
-  // Если язык "de", не добавляем префикс языка
-  return language === "de"
-    ? `/developers/${slug[language].current}`
-    : `/${language}/developers/${slug[language].current}`;
-};
-
-const generateSinglePageSlug = (slug: any, language: string) => {
-  if (!slug || !slug[language]?.current) return "#";
-  return language === "de"
-    ? `/${slug[language].current}`
-    : `/${language}/${slug[language].current}`;
-};
+const websiteUrl = "https://cyprusvipestates.com";
+const langs = ["de", "pl", "en", "ru"];
 
 async function generateSitemap() {
-  const langs = ["de", "pl", "en", "ru"]; // Список поддерживаемых языков
-  const websiteUrl = "https://cyprusvipestates.com";
-
-  const pages = [];
+  const pages: Array<{
+    route: string;
+    url: string;
+    changefreq: string;
+    priority: number;
+  }> = [];
 
   for (const lang of langs) {
-    // Получаем страницы для проектов
+    // — проекты и главная (без изменений) —
     const projects = await getAllProjectsByLang(lang);
-    const mainPage = await getHomePageByLang(lang);
-    const projectsPage = await getProjectsPageByLang(lang);
+    await getHomePageByLang(lang); // вы, видимо, используете его где-то ещё
+    await getProjectsPageByLang(lang);
 
-    // Добавляем главную страницу и раздел проектов
     pages.push(
       {
-        route: "/",
-        // Если язык "de", не добавляем /de/
+        route: lang === "de" ? `/` : `/${lang}`,
         url: lang === "de" ? `${websiteUrl}/` : `${websiteUrl}/${lang}`,
         changefreq: "weekly",
         priority: 1,
       },
       {
-        route: "/projects",
-        url:
-          lang === "de"
-            ? `${websiteUrl}/projects`
-            : `${websiteUrl}/${lang}/projects`,
+        route: lang === "de" ? `/projects` : `/${lang}/projects`,
+        url: `${websiteUrl}${lang === "de" ? `/projects` : `/${lang}/projects`}`,
         changefreq: "weekly",
         priority: 0.9,
       },
-      ...projects.map((post) => ({
-        route: generateSlug(post.slug, lang),
-        url: `${websiteUrl}${generateSlug(post.slug, lang)}`,
-        changefreq: "weekly",
-        priority: 0.8,
-      }))
+      ...projects.map((post) => {
+        const slug = post.slug[lang].current;
+        const route =
+          lang === "de" ? `/projects/${slug}` : `/${lang}/projects/${slug}`;
+        return {
+          route,
+          url: `${websiteUrl}${route}`,
+          changefreq: "weekly",
+          priority: 0.8,
+        };
+      })
     );
 
-    // Получаем раздел разработчиков
+    // — разработчики (без изменений) —
     const developers = await getAllDevelopersByLang(lang);
-
-    // Добавляем главную страницу для разработчиков и их отдельные страницы
     pages.push(
       {
-        route: "/developers",
-        url:
-          lang === "de"
-            ? `${websiteUrl}/developers`
-            : `${websiteUrl}/${lang}/developers`,
+        route: lang === "de" ? `/developers` : `/${lang}/developers`,
+        url: `${websiteUrl}${lang === "de" ? `/developers` : `/${lang}/developers`}`,
         changefreq: "weekly",
         priority: 0.9,
       },
-      ...developers.map((dev) => ({
-        route: generateDeveloperSlug(dev.slug, lang),
-        url: `${websiteUrl}${generateDeveloperSlug(dev.slug, lang)}`,
-        changefreq: "weekly",
-        priority: 0.8,
-      }))
+      ...developers.map((dev) => {
+        const slug = dev.slug[lang].current;
+        const route =
+          lang === "de" ? `/developers/${slug}` : `/${lang}/developers/${slug}`;
+        return {
+          route,
+          url: `${websiteUrl}${route}`,
+          changefreq: "weekly",
+          priority: 0.8,
+        };
+      })
     );
 
-    const singlepages = await getAllSinglePagesByLang(lang);
-
+    // — обычные страницы любой вложенности —
+    // вместо getAllSinglePagesByLang(lang):
+    const allPaths = await getAllPathsForLang(lang);
     pages.push(
-      ...singlepages.map((page) => ({
-        route: generateSinglePageSlug(page.slug, lang),
-        url: `${websiteUrl}${generateSinglePageSlug(page.slug, lang)}`,
-        changefreq: "weekly",
-        priority: 0.9,
-      }))
+      ...allPaths.map((segments) => {
+        const route =
+          lang === "de"
+            ? `/${segments.join("/")}`
+            : `/${lang}/${segments.join("/")}`;
+        return {
+          route,
+          url: `${websiteUrl}${route}`,
+          changefreq: "weekly",
+          // можно делать более глубокие чуть менее приоритетными
+          priority: segments.length === 1 ? 0.9 : 0.8,
+        };
+      })
     );
   }
 
@@ -108,26 +100,20 @@ async function generateSitemap() {
 
 export async function GET() {
   const pages = await generateSitemap();
-
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${pages
-        .map((page) => {
-          return `
-            <url>
-              <loc>${page.url}</loc>
-              <changefreq>${page.changefreq}</changefreq>
-              <priority>${page.priority}</priority>
-            </url>
-          `;
-        })
-        .join("")}
-    </urlset>
-  `;
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages
+  .map(
+    ({ url, changefreq, priority }) => `
+  <url>
+    <loc>${url}</loc>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`
+  )
+  .join("")}
+</urlset>`;
   return new Response(sitemap, {
-    headers: {
-      "Content-Type": "application/xml",
-    },
+    headers: { "Content-Type": "application/xml" },
   });
 }
