@@ -86,23 +86,16 @@ const singlepage = {
       ],
     }),
     defineField({
-      name: "subpages",
-      title: "Subpages",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "singlepage" }],
-          options: {
-            filter: ({ document }) => ({
-              filter: "language == $language",
-              params: { language: document.language },
-            }),
-          },
-        },
-      ],
-      description:
-        "Выберите подстраницы, которые будут вложены в эту страницу. Отображаются только страницы с тем же языком.",
+      name: "parentPage",
+      title: "Parent Page",
+      type: "reference",
+      to: [{ type: "singlepage" }],
+      options: {
+        filter: ({ document }) => ({
+          filter: "language == $language",
+          params: { language: document.language },
+        }),
+      },
     }),
     defineField({
       name: "language",
