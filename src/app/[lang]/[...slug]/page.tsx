@@ -52,6 +52,7 @@ import ProjectsSectionBlockComponent from "@/app/components/ProjectsSectionBlock
 import FormMinimalBlockComponent from "@/app/components/FormMinimalBlockComponent/FormMinimalBlockComponent";
 import HowWeWorkBlockComponent from "@/app/components/HowWeWorkBlockComponent/HowWeWorkBlockComponent";
 import BulletsBlockComponent from "@/app/components/BulletsBlockComponent/BulletsBlockComponent";
+import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 
 type Props = {
   params: {
@@ -126,6 +127,9 @@ const SinglePage = async ({ params }: Props) => {
   if (!page) {
     return <p>Страница не найдена</p>;
   }
+
+  const parentSlug = page.parentPage?.slug[lang]?.current;
+  const parentTitle = page.parentPage?.title;
 
   const formDocument: FormStandardDocument =
     await getFormStandardDocumentByLang(lang);
@@ -308,11 +312,27 @@ const SinglePage = async ({ params }: Props) => {
       <StructuredData {...structuredDataProps} />
       <main>
         {page.previewImage && page.allowIntroBlock && (
-          <PropertyIntro
-            title={page.title}
-            previewImage={page.previewImage}
-            excerpt={page.excerpt}
-          />
+          <>
+            <PropertyIntro
+              title={page.title}
+              previewImage={page.previewImage}
+              excerpt={page.excerpt}
+            />
+            <Breadcrumbs
+              lang={lang}
+              segments={params.slug}
+              currentTitle={page.title}
+            />
+          </>
+        )}
+        {!page.previewImage && !page.allowIntroBlock && (
+          <div className="breadcrumbs-mt">
+            <Breadcrumbs
+              lang={lang}
+              segments={params.slug}
+              currentTitle={page.title}
+            />
+          </div>
         )}
         {allBlocks.map(renderContentBlock)}
       </main>
