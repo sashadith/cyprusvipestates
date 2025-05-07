@@ -19,6 +19,33 @@ const cityOptions: OptionType[] = [
   { label: "Larnaca", value: "Larnaca" },
 ];
 
+const cityOptionsByLang: Record<string, OptionType[]> = {
+  en: [
+    { label: "All cities", value: "" },
+    { label: "Paphos", value: "Paphos" },
+    { label: "Limassol", value: "Limassol" },
+    { label: "Larnaca", value: "Larnaca" },
+  ],
+  de: [
+    { label: "Alle Städte", value: "" },
+    { label: "Paphos", value: "Paphos" },
+    { label: "Limassol", value: "Limassol" },
+    { label: "Larnaka", value: "Larnaca" },
+  ],
+  ru: [
+    { label: "Все города", value: "" },
+    { label: "Пафос", value: "Paphos" },
+    { label: "Лимассол", value: "Limassol" },
+    { label: "Ларнака", value: "Larnaca" },
+  ],
+  pl: [
+    { label: "Wszystkie miasta", value: "" },
+    { label: "Pafos", value: "Paphos" },
+    { label: "Limasol", value: "Limassol" },
+    { label: "Larnaka", value: "Larnaca" },
+  ],
+};
+
 const propertyTypeOptionsByLang: Record<string, OptionType[]> = {
   en: [
     { label: "All types", value: "" },
@@ -65,6 +92,10 @@ const StyledProjectFilters: React.FC<ProjectFiltersProps> = ({
   priceTo,
   propertyType,
 }) => {
+  const cityOptions = cityOptionsByLang[lang] || cityOptionsByLang["en"];
+  const propertyTypeOptions =
+    propertyTypeOptionsByLang[lang] || propertyTypeOptionsByLang["en"];
+
   return (
     <form method="get" className={styles.form}>
       <div className={styles.formElements}>
@@ -81,23 +112,9 @@ const StyledProjectFilters: React.FC<ProjectFiltersProps> = ({
                     : "City"
           }
           name="city"
-          options={cityOptions.map((opt) => ({
-            label:
-              lang === "en"
-                ? opt.label
-                : lang === "de"
-                  ? opt.label // при необходимости можно добавить перевод
-                  : lang === "pl"
-                    ? opt.label
-                    : lang === "ru"
-                      ? opt.label
-                      : opt.label,
-            value: opt.value,
-          }))}
+          options={cityOptions}
           defaultValue={
-            city
-              ? cityOptions.find((option) => option.value === city) || null
-              : null
+            city ? cityOptions.find((opt) => opt.value === city) || null : null
           }
         />
 
@@ -128,15 +145,11 @@ const StyledProjectFilters: React.FC<ProjectFiltersProps> = ({
                     : "Property Type"
           }
           name="propertyType"
-          options={
-            propertyTypeOptionsByLang[lang] || propertyTypeOptionsByLang["en"]
-          }
+          options={propertyTypeOptions}
           defaultValue={
             propertyType
-              ? (
-                  propertyTypeOptionsByLang[lang] ||
-                  propertyTypeOptionsByLang["en"]
-                ).find((option) => option.value === propertyType) || null
+              ? propertyTypeOptions.find((opt) => opt.value === propertyType) ||
+                null
               : null
           }
         />
