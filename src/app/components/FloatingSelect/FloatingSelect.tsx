@@ -99,7 +99,7 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
         : state.isFocused
           ? "rgba(170, 127, 46, 0.2)"
           : provided.backgroundColor,
-      color: state.isSelected ? "#fff" : provided.color,
+      color: state.isSelected ? "#fff" : "#000",
       cursor: "pointer",
       ":active": {
         backgroundColor: "#bd8948",
