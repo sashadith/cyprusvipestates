@@ -42,9 +42,9 @@ export default function RootLayout({
         {hasAnalytics && (
           <>
             <GoogleAnalyticsWrapper />
+            <MicrosoftClarity />
           </>
         )}
-        <MicrosoftClarity />
 
         <CustomCookieConsent lang={params.lang as "en" | "de" | "pl" | "ru"} />
       </body>
