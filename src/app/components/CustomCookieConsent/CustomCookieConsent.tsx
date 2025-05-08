@@ -22,7 +22,7 @@ const dictionary = {
     title: "We use cookies",
     description:
       "We use cookies to improve your experience. By accepting, you agree to our use of cookies.",
-    accept: "Accept all",
+    accept: "Accept",
     reject: "Reject",
     privacy: "Privacy Policy",
   },
@@ -30,7 +30,7 @@ const dictionary = {
     title: "Wir verwenden Cookies",
     description:
       "Wir verwenden Cookies zur Verbesserung Ihrer Erfahrung. Durch Klicken auf 'Akzeptieren' stimmen Sie der Verwendung zu.",
-    accept: "Alle akzeptieren",
+    accept: "Akzeptieren",
     reject: "Ablehnen",
     privacy: "Datenschutzrichtlinie",
   },
@@ -38,7 +38,7 @@ const dictionary = {
     title: "Używamy plików cookie",
     description:
       "Używamy plików cookie, aby poprawić Twoje doświadczenia. Klikając 'Akceptuj', wyrażasz zgodę.",
-    accept: "Zaakceptuj wszystkie",
+    accept: "Zaakceptuj",
     reject: "Odrzuć",
     privacy: "Polityka prywatności",
   },
@@ -102,8 +102,8 @@ export default function CustomCookieConsent({ lang }: Props) {
       <p>{t.description}</p>
 
       <div className={styles.buttons}>
-        <button onClick={rejectAll}>{t.reject}</button>
         <button onClick={acceptAll}>{t.accept}</button>
+        <button onClick={rejectAll}>{t.reject}</button>
       </div>
 
       <p className={styles.policyLink}>
