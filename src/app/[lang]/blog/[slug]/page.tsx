@@ -16,19 +16,11 @@ import {
 import {
   AccordionBlock,
   TextContent,
-  ContactFullBlock,
-  TeamBlock,
-  LocationBlock,
   ImageFullBlock,
   DoubleTextBlock,
   ButtonBlock,
-  ImageBulletsBlock,
-  ReviewsFullBlock,
-  ProjectsSectionBlock,
   FaqBlock,
   FormMinimalBlock,
-  HowWeWorkBlock,
-  BulletsBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Metadata } from "next";
@@ -43,6 +35,7 @@ import PopularProperties from "@/app/components/PopularProperties/PopularPropert
 import FormStatic from "@/app/components/FormStatic/FormStatic";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import BreadcrumbsBlog from "@/app/components/BreadcrumbsBlog/BreadcrumbsBlog";
+import SchemaBlogPost from "@/app/components/SchemaBlogPost/SchemaBlogPost";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -165,7 +158,7 @@ const PagePost = async ({ params }: Props) => {
   return (
     <>
       <Header params={params} translations={translations} />
-
+      <SchemaBlogPost blog={blog} lang={lang} />
       <BreadcrumbsBlog
         lang={lang}
         segments={[slug]}
