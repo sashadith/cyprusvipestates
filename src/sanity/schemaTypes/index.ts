@@ -29,6 +29,8 @@ import faqBlock from "./faqBlock";
 import formMinimalBlock from "./formMinimalBlock";
 import howWeWorkBlock from "./howWeWorkBlock";
 import bulletsBlock from "./bulletsBlock";
+import blog from "./blog";
+import category from "./category";
 
 export const schemaTypes = [
   header,
@@ -36,6 +38,8 @@ export const schemaTypes = [
   singlepage,
   project,
   projectsPage,
+  blog,
+  category,
   propertiesPage,
   property,
   footer,

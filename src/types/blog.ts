@@ -1,4 +1,6 @@
 import { FormStandardDocument } from "./formStandardDocument";
+import { navLink } from "./header";
+import { BenefitsBlock } from "./homepage";
 import { GeoPoint, ImageAlt, Project } from "./project";
 
 type ContactType = "Email" | "Phone" | "Link";
@@ -23,7 +25,7 @@ export type UnknownBlock = {
 export type VideoBlock = {
   _key: string;
   videoId: string;
-  posterImage: Image;
+  posterImage: ImageAlt;
 };
 
 export type TextContent = {
@@ -293,15 +295,29 @@ export type Blog = {
   _id: string;
   _type: string;
   title: string;
-  // slug: string;
   seo: Seo;
-  category: Category;
   publishedAt: string;
-  firstContent: any;
-  previewImage: Image;
-  contentBlocks: Array<TextContent | AccordionBlock>;
+  category: Category;
+  previewImage: ImageAlt;
+  excerpt: string;
+  contentBlocks: Array<
+    | TextContent
+    | AccordionBlock
+    | ContactFullBlock
+    | TeamBlock
+    | LocationBlock
+    | ImageFullBlock
+    | ButtonBlock
+    | ImageBulletsBlock
+    | BenefitsBlock
+    | ReviewsFullBlock
+    | FaqBlock
+    | FormMinimalBlock
+    | HowWeWorkBlock
+    | BulletsBlock
+  >;
   videoBlock: VideoBlock;
-  relatedArticles: RelatedArticle[];
+  popularProperties: navLink[];
   language: string;
   slug: {
     [lang: string]: {

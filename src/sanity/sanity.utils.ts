@@ -10,6 +10,7 @@ import { PropertiesPage } from "@/types/propertiesPage";
 import { Project } from "@/types/project";
 import { ProjectsPage } from "@/types/projectsPage";
 import { Developer } from "@/types/developer";
+import { Blog } from "@/types/blog";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -304,6 +305,116 @@ export async function getAllPathsForLang(lang: string): Promise<string[][]> {
   }
   return Object.values(map);
 }
+
+// === Blog Post ===
+export async function getBlogPostByLang(
+  lang: string,
+  slug: string
+): Promise<Blog> {
+  const blogQuery = groq`*[_type == 'blog' && slug[$lang].current == $slug][0] {
+    _id,
+    title,
+    slug,
+    seo,
+    publishedAt,
+    category->{
+      title,
+      slug
+    },
+    previewImage,
+    excerpt,
+    contentBlocks[] {
+        _type == "contactFullBlock" => {
+          _key,
+          _type,
+          title,
+          description,
+          contacts,
+          form->{
+            _id,
+            _type,
+            language,
+            form{ 
+              inputName,
+              inputPhone,
+              inputCountry,
+              inputEmail,
+              inputMessage,
+              buttonText,
+              agreementText,
+              agreementLinkLabel,
+              agreementLinkDestination,
+              validationNameRequired,
+              validationPhoneRequired,
+              validationCountryRequired,
+              validationEmailRequired,
+              validationEmailInvalid,
+              validationMessageRequired,
+              validationAgreementRequired,
+              validationAgreementOneOf,
+              successMessage,
+              errorMessage
+            }
+          }
+        },
+        _type == "formMinimalBlock" => {
+          _key,
+          _type,
+          title,
+          buttonText,
+          form->{
+            _id,
+            _type,
+            language,
+            form{
+              inputName,
+              inputPhone,
+              inputCountry,
+              inputEmail,
+              inputMessage,
+              buttonText,
+              agreementText,
+              agreementLinkLabel,
+              agreementLinkDestination,
+              validationNameRequired,
+              validationPhoneRequired,
+              validationCountryRequired,
+              validationEmailRequired,
+              validationEmailInvalid,
+              validationMessageRequired,
+              validationAgreementRequired,
+              validationAgreementOneOf,
+              successMessage,
+              errorMessage
+            }
+          },
+          marginTop,
+          marginBottom
+        },
+        _type != "contactFullBlock" &&
+        _type != "formMinimalBlock" => @
+      },
+    videoBlock,
+    popularProperties,
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      slug,
+    },
+  }`;
+
+  const blog = await client.fetch(
+    blogQuery,
+    { lang, slug },
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  return blog;
+}
+// === Blog Post ===
 
 export async function getPropertyByLang(
   lang: string,

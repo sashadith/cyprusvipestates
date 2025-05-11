@@ -5,7 +5,7 @@ export type Image = {
   url: string;
 };
 
-type navLink = {
+export type navLink = {
   _key: string;
   label: string;
   link: string;

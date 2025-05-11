@@ -352,3 +352,22 @@ input[type="number"]::-webkit-outer-spin-button {
 .breadcrumbs-mt {
   margin-top: 90px;
 }
+
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 1.563rem + 3.75vw, 4.375rem);
+  /* margin-top: 100px; */
+  margin-bottom: clamp(3.125rem, 2.5rem + 2.5vw, 4.375rem);
+}
+
+@media screen and (min-width: 980px) {
+  .post-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .post-grid {
+    grid-template-columns: 3fr 1fr;
+  }
+}
