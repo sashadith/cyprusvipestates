@@ -47,7 +47,7 @@
   position: relative;
   aspect-ratio: 276/180;
   overflow: hidden;
-  margin-bottom: clamp(1.25rem, 5vw, 3.75rem);
+  margin-bottom: 30px;
 
   @media screen and (min-width: 768px) {
     aspect-ratio: 16/9;
