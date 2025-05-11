@@ -206,12 +206,26 @@ export async function getSinglePageByLang(
           _key,
           _type,
           title,
+          filterCity,
+          filterPropertyType,
           projects[]->{
             _id,
             title,
             excerpt,
             previewImage,
             "slug": slug[$lang].current,
+            keyFeatures
+          },
+          "filteredProjects": *[
+            _type == "project" &&
+            language == $lang &&
+            (!defined(^.filterCity) || keyFeatures.city == ^.filterCity) &&
+            (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType)
+          ] | order(keyFeatures.price asc)[]{
+            _id,
+            title,
+            "slug": slug[$lang].current,
+            previewImage,
             keyFeatures
           },
           marginTop,

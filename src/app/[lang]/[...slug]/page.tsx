@@ -262,14 +262,32 @@ const SinglePage = async ({ params }: Props) => {
             lang={lang}
           />
         );
-      case "projectsSectionBlock":
+      case "projectsSectionBlock": {
+        const b = block as ProjectsSectionBlock;
+        // Если поле projects отсутствует или null — считаем его пустым массивом
+        const manual = Array.isArray(b.projects) ? b.projects : [];
+        const projectsToShow =
+          manual.length > 0
+            ? manual
+            : Array.isArray(b.filteredProjects)
+              ? b.filteredProjects
+              : [];
+
         return (
           <ProjectsSectionBlockComponent
-            key={block._key}
-            block={block as ProjectsSectionBlock}
+            key={b._key}
+            block={{
+              _key: b._key,
+              _type: b._type,
+              title: b.title,
+              projects: projectsToShow,
+              marginTop: b.marginTop,
+              marginBottom: b.marginBottom,
+            }}
             lang={lang}
           />
         );
+      }
       case "faqBlock":
         return (
           <div className="container" key={block._key}>

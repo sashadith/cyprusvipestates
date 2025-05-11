@@ -205,7 +205,16 @@ export type ProjectsSectionBlock = {
   _key: string;
   _type: "projectsSectionBlock";
   title: string;
+  filterCity?: "Paphos" | "Limassol" | "Larnaca";
+  filterPropertyType?:
+    | "Apartment"
+    | "Villa"
+    | "Townhouse"
+    | "Semi-detached villa"
+    | "Office"
+    | "Shop";
   projects: Project[];
+  filteredProjects?: Project[];
   marginTop?: "small" | "medium" | "large";
   marginBottom?: "small" | "medium" | "large";
 };
