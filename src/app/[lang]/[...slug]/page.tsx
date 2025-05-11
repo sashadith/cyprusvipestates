@@ -1,6 +1,7 @@
 // app/[lang]/[[...slug]]/page.tsx
 import React from "react";
 import { groq } from "next-sanity";
+import { notFound } from "next/navigation";
 import { client } from "@/sanity/sanity.client";
 import AccordionContainer from "@/app/components/AccordionContainer/AccordionContainer";
 import Footer from "@/app/components/Footer/Footer";
@@ -133,6 +134,10 @@ const SinglePage = async ({ params }: Props) => {
 
   if (!page) {
     return <p>Страница не найдена</p>;
+  }
+
+  if (slug.length === 1 && page?.parentPage) {
+    notFound();
   }
 
   const parentSlug = page.parentPage?.slug[lang]?.current;
