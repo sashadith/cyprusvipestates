@@ -72,6 +72,7 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
   const paths: Props["params"][] = [];
 
   for (const lang of langs) {
+    // получаем у каждого документа current и parent
     const items: { current: string; parent?: string }[] = await client.fetch(
       groq`*[_type=='singlepage' && language==$lang]{
         "current": slug[$lang].current,
@@ -80,12 +81,11 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
       { lang }
     );
 
+    // строим вложенные массивы slug
     const map: Record<string, string[]> = {};
-    // корневые
     items.forEach(({ current, parent }) => {
       if (!parent) map[current] = [current];
     });
-    // дочерние (итерации на случай глубокой вложенности)
     let added = true;
     while (added) {
       added = false;
@@ -96,9 +96,16 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
         }
       });
     }
-    // формируем пути
+
+    // теперь пушим только:
+    // • root-страницы (parent undefined) — slugArr.length === 1
+    // • реальные дочерние (slugArr.length > 1)
     Object.values(map).forEach((slugArr) => {
-      paths.push({ lang, slug: slugArr });
+      const last = slugArr[slugArr.length - 1];
+      const hadParent = items.find((i) => i.current === last)?.parent;
+      if (!hadParent || slugArr.length > 1) {
+        paths.push({ lang, slug: slugArr });
+      }
     });
   }
 
