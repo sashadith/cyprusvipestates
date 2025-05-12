@@ -43,6 +43,15 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+.container-content {
+  padding-left: max(20px,(100% - 1320px) / 2);
+
+  @media screen and (max-width: 980px){
+    padding-left: 20px;
+    padding-right: 0;
+  }
+}
+
 .container-short {
   max-width: 1240px;
   padding: 0 10px;

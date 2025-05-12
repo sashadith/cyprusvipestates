@@ -16,7 +16,7 @@
     "@sanity/vision": "^3.52.2",
     "@szhsin/react-accordion": "^1.2.5",
     "aos": "^2.3.4",
-    "axios": "^1.7.3",
+    "axios": "^1.9.0",
     "formik": "^2.4.6",
     "framer-motion": "^11.3.21",
     "gsap": "^3.12.7",

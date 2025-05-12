@@ -31,6 +31,7 @@ import howWeWorkBlock from "./howWeWorkBlock";
 import bulletsBlock from "./bulletsBlock";
 import blog from "./blog";
 import category from "./category";
+import blogPage from "./blogPage";
 
 export const schemaTypes = [
   header,
@@ -39,6 +40,7 @@ export const schemaTypes = [
   project,
   projectsPage,
   blog,
+  blogPage,
   category,
   propertiesPage,
   property,

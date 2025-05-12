@@ -32,6 +32,7 @@ export default defineConfig({
         "projectsPage",
         "developer",
         "blog",
+        "blogPage",
         "category",
       ],
     }),
@@ -55,6 +56,7 @@ export default defineConfig({
             "projectsPage",
             "developer",
             "blog",
+            "blogPage",
             "category",
           ].includes(template.id)
       ),

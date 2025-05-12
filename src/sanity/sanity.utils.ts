@@ -11,6 +11,7 @@ import { Project } from "@/types/project";
 import { ProjectsPage } from "@/types/projectsPage";
 import { Developer } from "@/types/developer";
 import { Blog } from "@/types/blog";
+import { BlogPage } from "@/types/blogPage";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -415,6 +416,81 @@ export async function getBlogPostByLang(
   return blog;
 }
 // === Blog Post ===
+
+// === Blog Page All ===
+export async function getBlogPageByLang(lang: string): Promise<BlogPage> {
+  const blogPageQuery = groq`*[_type == "blogPage" && language == $lang][0] {
+    _id,
+    title,
+    metaTitle,
+    metaDescription,
+    content,
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      slug,
+    },
+  }`;
+
+  const blogPage = await client.fetch(
+    blogPageQuery,
+    { lang },
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  return blogPage;
+}
+// === Blog Page All ===
+
+// === Blog Posts with Pagination ===
+export async function getBlogPostsByLangWithPagination(
+  lang: string,
+  limit: number,
+  offset: number
+): Promise<Blog[]> {
+  const blogPostsQuery = groq`
+    *[_type == "blog" && language == $lang] | order(publishedAt desc)[$offset...$offset + $limit] {
+      _id,
+      title,
+      excerpt,
+      slug,
+      previewImage,
+      category->{
+        title,
+        slug
+      },
+      publishedAt,
+      language,
+      "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+        slug,
+      },
+    }
+  `;
+
+  const blogPosts = await client.fetch(
+    blogPostsQuery,
+    { lang, limit, offset },
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  return blogPosts;
+}
+// === Blog Posts with Pagination ===
+
+// === Blog Posts Count ===
+export async function getTotalBlogPostsByLang(lang: string): Promise<number> {
+  const totalPostsQuery = groq`count(*[_type == "blog" && language == $lang])`;
+  const total = await client.fetch(totalPostsQuery, { lang });
+  return total;
+}
+// === Blog Posts Count ===
 
 export async function getPropertyByLang(
   lang: string,
