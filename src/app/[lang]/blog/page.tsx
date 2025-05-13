@@ -6,6 +6,7 @@ import {
   getBlogPageByLang,
   getBlogPostsByLangWithPagination,
   getFormStandardDocumentByLang,
+  getTotalBlogPostsByLang,
 } from "@/sanity/sanity.utils";
 import Header from "@/app/components/Header/Header";
 import BlogPostsAll from "@/app/components/BlogPostsAll/BlogPostsAll";
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const PageBlog = async ({ params }: Props) => {
   const { lang } = params;
   const initialPosts = await getBlogPostsByLangWithPagination(lang, 12, 0);
+  const totalPosts = await getTotalBlogPostsByLang(lang);
   const blogPage = await getBlogPageByLang(lang);
 
   const formDocument: FormStandardDocument =
@@ -83,6 +85,7 @@ const PageBlog = async ({ params }: Props) => {
         <BlogPostsAll
           title={blogPage.title}
           blogPosts={initialPosts}
+          totalPosts={totalPosts}
           lang={params.lang}
         />
         <FormStatic lang={params.lang} />

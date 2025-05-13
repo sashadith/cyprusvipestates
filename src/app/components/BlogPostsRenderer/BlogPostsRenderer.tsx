@@ -1,4 +1,6 @@
+// BlogPostsRenderer.tsx
 "use client";
+
 import React, { FC, useState } from "react";
 import styles from "./BlogPostsRenderer.module.scss";
 import { Blog } from "@/types/blog";
@@ -7,61 +9,72 @@ import { urlFor } from "@/sanity/sanity.client";
 import Image from "next/image";
 import axios from "axios";
 import ButtonPrimary from "../ButtonPrimary/ButtonPrimary";
-import Loading from "@/app/[lang]/loading";
 
 type Props = {
   blogPosts: Blog[];
+  totalPosts: number;
   lang: string;
 };
 
-const BlogPostsRenderer: FC<Props> = ({ blogPosts, lang }) => {
+const LIMIT = 9;
+
+const BlogPostsRenderer: FC<Props> = ({ blogPosts, totalPosts, lang }) => {
   const [posts, setPosts] = useState<Blog[]>(blogPosts);
   const [loading, setLoading] = useState(false);
-  const [totalPosts, setTotalPosts] = useState<number | null>(null);
 
   const formatDate = (dateString: string) => {
-    const parsedDate = new Date(dateString);
-    return parsedDate.toLocaleDateString("en-GB").replace(/\//g, ".");
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB").replace(/\//g, ".");
   };
 
-  const generateSlug = (slug: any, language: string) => {
-    return slug && slug[language]?.current
+  const generateSlug = (slug: any, language: string) =>
+    slug?.[language]?.current
       ? `/${language}/blog/${slug[language].current}`
       : "#";
+
+  const getLoadMoreText = () => {
+    switch (lang) {
+      case "de":
+        return `Noch ${LIMIT} Beiträge laden`;
+      case "ru":
+        return `Загрузить ещё ${LIMIT} постов`;
+      case "pl":
+        return `Załaduj jeszcze ${LIMIT} postów`;
+      case "en":
+      default:
+        return `Load ${LIMIT} more posts`;
+    }
   };
 
   const loadMorePosts = async () => {
     setLoading(true);
-    const limit = 9;
     const offset = posts.length;
 
     try {
-      const response = await axios.get(
-        `/api/getMorePosts?lang=${lang}&limit=${limit}&offset=${offset}`
+      const { data } = await axios.get(
+        `/api/getMorePosts?lang=${lang}&limit=${LIMIT}&offset=${offset}`
       );
-      const newPosts = response.data.posts;
-      const total = response.data.total;
-
-      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
-      setTotalPosts(total);
-    } catch (error) {
-      console.error("Error loading more posts:", error);
+      const newPosts: Blog[] = data.posts;
+      setPosts((prev) => [...prev, ...newPosts]);
+    } catch (err) {
+      console.error("Error loading more posts:", err);
     } finally {
       setLoading(false);
     }
   };
 
+  // категории для табов
   const categories = Array.from(
     new Set(posts.map((post) => post.category.title))
   );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
   const filteredPosts = selectedCategory
-    ? posts.filter((post) => post.category.title === selectedCategory)
+    ? posts.filter((p) => p.category.title === selectedCategory)
     : posts;
 
   return (
     <div className={styles.blogPostsRenderer}>
+      {/* Табы категорий */}
       <div className={styles.tabsBlock}>
         <div className="container-content">
           <div className={styles.tabs}>
@@ -73,24 +86,24 @@ const BlogPostsRenderer: FC<Props> = ({ blogPosts, lang }) => {
                 ? "Alle"
                 : lang === "ru"
                   ? "Все"
-                  : lang === "en"
-                    ? "All"
-                    : lang === "pl"
-                      ? "Wszystkie"
-                      : "All"}
+                  : lang === "pl"
+                    ? "Wszystkie"
+                    : "All"}
             </button>
-            {categories.map((category) => (
+            {categories.map((cat) => (
               <button
-                key={category}
-                className={`${selectedCategory === category ? styles.active : ""} ${styles.tab}`}
-                onClick={() => setSelectedCategory(category)}
+                key={cat}
+                className={`${selectedCategory === cat ? styles.active : ""} ${styles.tab}`}
+                onClick={() => setSelectedCategory(cat)}
               >
-                {category}
+                {cat}
               </button>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Список статей */}
       <div className={styles.articlesBlock}>
         <div className="container">
           <div className={styles.articles}>
@@ -104,7 +117,7 @@ const BlogPostsRenderer: FC<Props> = ({ blogPosts, lang }) => {
                   <Image
                     alt={post.title}
                     src={urlFor(post.previewImage).url()}
-                    fill={true}
+                    fill
                     className={styles.image}
                   />
                 </div>
@@ -128,43 +141,22 @@ const BlogPostsRenderer: FC<Props> = ({ blogPosts, lang }) => {
               </Link>
             ))}
           </div>
+
+          {/* Кнопка «загрузить ещё» */}
           <div className={styles.loadingBlock}>
             <div className={styles.loaderWrapper}>
               {loading && (
-                <div className={styles.loader}>
-                  <div className={styles.bar1}></div>
-                  <div className={styles.bar2}></div>
-                  <div className={styles.bar3}></div>
-                  <div className={styles.bar4}></div>
-                  <div className={styles.bar5}></div>
-                  <div className={styles.bar6}></div>
-                  <div className={styles.bar7}></div>
-                  <div className={styles.bar8}></div>
-                  <div className={styles.bar9}></div>
-                  <div className={styles.bar10}></div>
-                  <div className={styles.bar11}></div>
-                  <div className={styles.bar12}></div>
-                </div>
+                <div className={styles.loader}>{/* ваш лоадер */}</div>
               )}
             </div>
-            {!loading && (totalPosts === null || posts.length < totalPosts) ? (
+            {!loading && posts.length < totalPosts && (
               <ButtonPrimary
                 onClick={loadMorePosts}
                 disabled={loading}
                 className={styles.loadMoreButton}
               >
-                {lang === "en"
-                  ? "Load more 9 posts"
-                  : lang === "de"
-                    ? "Mehr 9 Beiträge laden"
-                    : lang === "ru"
-                      ? "Загрузить еще 9 постов"
-                      : lang === "pl"
-                        ? "Załaduj więcej 9 postów"
-                        : "Load more 9 posts"}
+                {getLoadMoreText()}
               </ButtonPrimary>
-            ) : (
-              ""
             )}
           </div>
         </div>
