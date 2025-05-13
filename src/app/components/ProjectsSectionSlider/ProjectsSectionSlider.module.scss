@@ -16,6 +16,18 @@
   margin: 0;
   padding: 0;
 
+  :global(.swiper-wrapper) {
+    /* пусть слайды никогда не «усыхают» из-за flex */
+    display: flex;
+    will-change: transform;
+  }
+
+  :global(.swiper-slide) {
+    flex-shrink: 0;          /* запрещаем «сжиматься» */
+    width: 100% !important;  /* каждый слайд ровно 100% от контейнера */
+    box-sizing: border-box;
+  }
+
   @media screen and (max-width: 768px) {
     :global(.swiper-pagination) {
       display: none !important;
@@ -47,12 +59,12 @@
   box-sizing: border-box;
 }
 
-// .slide {
-//   /* Ваш HeroSlide wrapper */
-//   width: 100%;
-//   max-width: 100%;
-//   box-sizing: border-box;
-// }
+.slide {
+  /* Ваш HeroSlide wrapper */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 .title {
   color: #fff;
