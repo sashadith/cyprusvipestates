@@ -137,6 +137,31 @@ export async function getSinglePageByLang(
       previewImage,
       allowIntroBlock,
       contentBlocks[] {
+      _type == "textContent" => {
+          _key,
+          _type,
+          backgroundColor,
+          paddingVertical,
+          paddingHorizontal,
+          marginTop,
+          marginBottom,
+          textAlign,
+          textColor,
+          backgroundFull,
+          content[] {
+          ...,
+            _type == "image" => {
+              _key,
+              _type,
+              alt,
+              asset->{
+                _ref,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+          }
+        },
         _type == "contactFullBlock" => {
           _key,
           _type,
@@ -233,6 +258,7 @@ export async function getSinglePageByLang(
           marginTop,
           marginBottom
         },
+        _type != "textContent" &&
         _type != "contactFullBlock" &&
         _type != "formMinimalBlock" &&
         _type != "projectsSectionBlock" => @
