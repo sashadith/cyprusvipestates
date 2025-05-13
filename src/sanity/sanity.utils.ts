@@ -685,12 +685,80 @@ export async function getProjectByLang(
     videoId,
     videoPreview,
     images,
-    description,
+    description[]{
+        _type,
+        _key,
+        _type == "block" => {
+          _key,
+          _type,
+          style,
+          list,
+          children[]{
+            _key,
+            _type,
+            text,
+            marks
+          },
+          markDefs[]{
+            _key,
+            _type,
+            _type == "link" => {
+              _key,
+              _type,
+              href
+            }
+          }
+        },
+        _type == "image" => {
+              _key,
+              _type,
+              alt,
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+      },
     location,
     developer,
     keyFeatures,
     distances,
-    fullDescription,
+    fullDescription[]{
+        _type,
+        _key,
+        _type == "block" => {
+          _key,
+          _type,
+          style,
+          list,
+          children[]{
+            _key,
+            _type,
+            text,
+            marks
+          },
+          markDefs[]{
+            _key,
+            _type,
+            _type == "link" => {
+              _key,
+              _type,
+              href
+            }
+          }
+        },
+        _type == "image" => {
+              _key,
+              _type,
+              alt,
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+      },
     faq,
     language,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
