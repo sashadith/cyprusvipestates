@@ -392,8 +392,38 @@ export async function getBlogPostByLang(
           marginTop,
           marginBottom
         },
+        _type == "projectsSectionBlock" => {
+          _key,
+          _type,
+          title,
+          filterCity,
+          filterPropertyType,
+          projects[]->{
+            _id,
+            title,
+            excerpt,
+            previewImage,
+            "slug": slug[$lang].current,
+            keyFeatures
+          },
+          "filteredProjects": *[
+            _type == "project" &&
+            language == $lang &&
+            (!defined(^.filterCity) || keyFeatures.city == ^.filterCity) &&
+            (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType)
+          ] | order(keyFeatures.price asc)[]{
+            _id,
+            title,
+            "slug": slug[$lang].current,
+            previewImage,
+            keyFeatures
+          },
+          marginTop,
+          marginBottom
+        },
         _type != "contactFullBlock" &&
-        _type != "formMinimalBlock" => @
+        _type != "formMinimalBlock" &&
+        _type != "projectsSectionBlock" => @
       },
     videoBlock,
     popularProperties,

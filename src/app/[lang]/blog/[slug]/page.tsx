@@ -21,6 +21,7 @@ import {
   ButtonBlock,
   FaqBlock,
   FormMinimalBlock,
+  ProjectsSectionBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Metadata } from "next";
@@ -36,6 +37,7 @@ import FormStatic from "@/app/components/FormStatic/FormStatic";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import BreadcrumbsBlog from "@/app/components/BreadcrumbsBlog/BreadcrumbsBlog";
 import SchemaBlogPost from "@/app/components/SchemaBlogPost/SchemaBlogPost";
+import ProjectsSectionSlider from "@/app/components/ProjectsSectionSlider/ProjectsSectionSlider";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -148,6 +150,27 @@ const PagePost = async ({ params }: Props) => {
             offerButtonCustomText={(block as FormMinimalBlock).buttonText}
           />
         );
+      case "projectsSectionBlock": {
+        const b = block as ProjectsSectionBlock;
+        // ручных проектов нет — берём фильтрованные
+        const manual = Array.isArray(b.projects) ? b.projects : [];
+        const projectsToShow = manual.length
+          ? manual
+          : Array.isArray(b.filteredProjects)
+            ? b.filteredProjects
+            : [];
+
+        return (
+          <ProjectsSectionSlider
+            key={b._key}
+            block={{
+              ...b,
+              projects: projectsToShow,
+            }}
+            lang={lang}
+          />
+        );
+      }
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }

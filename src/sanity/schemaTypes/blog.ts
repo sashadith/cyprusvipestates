@@ -95,6 +95,7 @@ const blog = {
         { type: "formMinimalBlock" },
         { type: "howWeWorkBlock" },
         { type: "bulletsBlock" },
+        { type: "projectsSectionBlock" },
       ],
     }),
     defineField({

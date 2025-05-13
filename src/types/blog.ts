@@ -315,6 +315,7 @@ export type Blog = {
     | FormMinimalBlock
     | HowWeWorkBlock
     | BulletsBlock
+    | ProjectsSectionBlock
   >;
   videoBlock: VideoBlock;
   popularProperties: navLink[];
