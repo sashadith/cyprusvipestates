@@ -21,34 +21,30 @@ const dictionary = {
   en: {
     title: "We use cookies",
     description:
-      "We use cookies to improve your experience. By accepting, you agree to our use of cookies.",
-    accept: "Accept",
-    reject: "Reject",
-    privacy: "Privacy Policy",
+      "By continuing to use our site, you agree to our Cookie Policy.",
+    accept: "Continue",
+    privacy: "Cookie Policy",
   },
   de: {
     title: "Wir verwenden Cookies",
     description:
-      "Wir verwenden Cookies zur Verbesserung Ihrer Erfahrung. Durch Klicken auf 'Akzeptieren' stimmen Sie der Verwendung zu.",
-    accept: "Akzeptieren",
-    reject: "Ablehnen",
-    privacy: "Datenschutzrichtlinie",
+      "Wenn Sie unsere Website weiterhin nutzen, stimmen Sie unserer Cookie-Richtlinie zu.",
+    accept: "Weiter",
+    privacy: "Cookie-Richtlinie",
   },
   pl: {
     title: "Używamy plików cookie",
     description:
-      "Używamy plików cookie, aby poprawić Twoje doświadczenia. Klikając 'Akceptuj', wyrażasz zgodę.",
-    accept: "Zaakceptuj",
-    reject: "Odrzuć",
-    privacy: "Polityka prywatności",
+      "Kontynuując korzystanie z naszej witryny, zgadzasz się z polityką plików cookie.",
+    accept: "Kontynuuj",
+    privacy: "Polityka plików cookie",
   },
   ru: {
     title: "Мы используем cookies",
     description:
-      "Мы используем cookies для улучшения работы сайта. Нажимая 'Принять', вы соглашаетесь на их использование.",
-    accept: "Принять все",
-    reject: "Отклонить",
-    privacy: "Политика конфиденциальности",
+      "Используя наш сайт, вы соглашаетесь с нашей политикой в отношении cookies.",
+    accept: "Продолжить",
+    privacy: "Политика использования cookies",
   },
 };
 
@@ -103,7 +99,6 @@ export default function CustomCookieConsent({ lang }: Props) {
 
       <div className={styles.buttons}>
         <button onClick={acceptAll}>{t.accept}</button>
-        <button onClick={rejectAll}>{t.reject}</button>
       </div>
 
       <p className={styles.policyLink}>
