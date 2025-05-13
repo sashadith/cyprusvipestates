@@ -23,13 +23,24 @@ const BulletIcon = () => (
 export const RichText = {
   types: {
     image: ({ value }: any) => {
-      const { alt } = value;
+      const {
+        alt,
+        asset: {
+          url,
+          metadata: {
+            dimensions: { width, height },
+          },
+        },
+      } = value;
       return (
         <div className={styles.blogImage}>
           <Image
-            src={urlFor(value).url()}
+            src={url}
             alt={alt || "Cyprus VIP Estates image"}
-            fill={true}
+            width={width}
+            height={height}
+            style={{ width: "100%", height: "auto" }}
+            loading="lazy"
           />
         </div>
       );

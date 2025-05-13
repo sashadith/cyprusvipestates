@@ -312,19 +312,63 @@ export async function getBlogPostByLang(
   lang: string,
   slug: string
 ): Promise<Blog> {
-  const blogQuery = groq`*[_type == 'blog' && slug[$lang].current == $slug][0] {
-    _id,
-    title,
-    slug,
-    seo,
-    publishedAt,
-    category->{
+  const blogQuery = groq`
+    *[
+      _type == "blog" &&
+      language == $lang &&
+      slug[$lang].current == $slug
+    ][0] {
+      _id,
       title,
-      slug
-    },
-    previewImage,
-    excerpt,
-    contentBlocks[] {
+      slug,
+      seo {
+        metaTitle,
+        metaDescription
+      },
+      publishedAt,
+      category->{
+        _id,
+        title,
+        slug
+      },
+      previewImage {
+        asset->{
+          _id,
+          url,
+          metadata { dimensions { width, height } }
+        },
+        alt
+      },
+      excerpt,
+      contentBlocks[] {
+        // === текстовый блок ===
+        _type == "textContent" => {
+          _key,
+          _type,
+          backgroundColor,
+          paddingVertical,
+          paddingHorizontal,
+          marginTop,
+          marginBottom,
+          textAlign,
+          textColor,
+          backgroundFull,
+          content[] {
+            ..., // все стандартные поля блоков Portable Text
+            // для вставленных картинок вытянем размеры
+            _type == "image" => {
+              _key,
+              _type,
+              alt,
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+          }
+        },
+        // === контактный блок ===
         _type == "contactFullBlock" => {
           _key,
           _type,
@@ -335,7 +379,7 @@ export async function getBlogPostByLang(
             _id,
             _type,
             language,
-            form{ 
+            form {
               inputName,
               inputPhone,
               inputCountry,
@@ -358,16 +402,19 @@ export async function getBlogPostByLang(
             }
           }
         },
+        // === минимальная форма ===
         _type == "formMinimalBlock" => {
           _key,
           _type,
           title,
           buttonText,
+          marginTop,
+          marginBottom,
           form->{
             _id,
             _type,
             language,
-            form{
+            form {
               inputName,
               inputPhone,
               inputCountry,
@@ -388,10 +435,9 @@ export async function getBlogPostByLang(
               successMessage,
               errorMessage
             }
-          },
-          marginTop,
-          marginBottom
+          }
         },
+        // === секция проектов ===
         _type == "projectsSectionBlock" => {
           _key,
           _type,
@@ -402,7 +448,14 @@ export async function getBlogPostByLang(
             _id,
             title,
             excerpt,
-            previewImage,
+            previewImage {
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              },
+              alt
+            },
             "slug": slug[$lang].current,
             keyFeatures
           },
@@ -411,38 +464,59 @@ export async function getBlogPostByLang(
             language == $lang &&
             (!defined(^.filterCity) || keyFeatures.city == ^.filterCity) &&
             (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType)
-          ] | order(keyFeatures.price asc)[]{
+          ] | order(keyFeatures.price asc)[] {
             _id,
             title,
+            previewImage {
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              },
+              alt
+            },
             "slug": slug[$lang].current,
-            previewImage,
             keyFeatures
           },
           marginTop,
           marginBottom
         },
+        // все прочие блоки пропускаем «как есть»
+        _type != "textContent" &&
         _type != "contactFullBlock" &&
         _type != "formMinimalBlock" &&
         _type != "projectsSectionBlock" => @
       },
-    videoBlock,
-    popularProperties,
-    language,
-    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
-      slug,
-    },
-  }`;
+      videoBlock {
+        videoId,
+        posterImage {
+          asset->{
+            _id,
+            url,
+            metadata { dimensions { width, height } }
+          },
+          alt
+        }
+      },
+      popularProperties[] {
+        label,
+        link
+      },
+      language,
+      "_translations": *[
+        _type == "translation.metadata" &&
+        references(^._id)
+      ].translations[].value-> {
+        slug
+      }
+    }
+  `;
 
   const blog = await client.fetch(
     blogQuery,
     { lang, slug },
-    {
-      next: {
-        revalidate: 60,
-      },
-    }
+    { next: { revalidate: 60 } }
   );
-
   return blog;
 }
 // === Blog Post ===
