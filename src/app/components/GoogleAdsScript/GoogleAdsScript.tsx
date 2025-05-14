@@ -2,9 +2,7 @@
 
 import Script from "next/script";
 
-export default function GoogleAdsScript({ consent }: { consent: boolean }) {
-  if (!consent) return null;
-
+export default function GoogleAdsScript() {
   return (
     <>
       <Script
