@@ -6,6 +6,7 @@ import { ModalProvider } from "../context/ModalContext";
 import GoogleAnalyticsWrapper from "../components/GoogleAnalyticsWrapper/GoogleAnalyticsWrapper";
 import MicrosoftClarity from "../components/MicrosoftClarity/MicrosoftClarity";
 import CustomCookieConsent from "../components/CustomCookieConsent/CustomCookieConsent";
+import GoogleAdsScript from "../components/GoogleAdsScript/GoogleAdsScript";
 
 const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 
@@ -43,6 +44,7 @@ export default function RootLayout({
           <>
             <GoogleAnalyticsWrapper />
             <MicrosoftClarity />
+            <GoogleAdsScript consent={hasAnalytics} />
           </>
         )}
 
