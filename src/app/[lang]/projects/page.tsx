@@ -16,6 +16,7 @@ import Header from "@/app/components/Header/Header";
 import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { Metadata } from "next";
 import Footer from "@/app/components/Footer/Footer";
+import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 
 const PAGE_SIZE = 12;
 
@@ -127,7 +128,7 @@ export default async function ProjectsPage({
       {/* </HeaderWrapper>
       </div> */}
 
-      <div style={{ paddingTop: "2rem" }}>
+      <main style={{ paddingTop: "2rem" }}>
         <div className="container">
           <h1 className="h2-white header-mt">
             {lang === "en"
@@ -214,7 +215,8 @@ export default async function ProjectsPage({
             </div>
           )}
         </div>
-      </div>
+        <WhatsAppButton lang={params.lang} />
+      </main>
       <Footer params={params} />
     </>
   );

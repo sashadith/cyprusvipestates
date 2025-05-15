@@ -38,6 +38,7 @@ import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import BreadcrumbsBlog from "@/app/components/BreadcrumbsBlog/BreadcrumbsBlog";
 import SchemaBlogPost from "@/app/components/SchemaBlogPost/SchemaBlogPost";
 import ProjectsSectionSlider from "@/app/components/ProjectsSectionSlider/ProjectsSectionSlider";
+import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -234,6 +235,7 @@ const PagePost = async ({ params }: Props) => {
       </main>
       <Footer params={params} />
       <ModalBrochure lang={lang} formDocument={formDocument} />
+      <WhatsAppButton lang={params.lang} />
     </>
   );
 };

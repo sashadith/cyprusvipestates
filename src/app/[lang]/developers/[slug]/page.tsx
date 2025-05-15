@@ -23,6 +23,7 @@ import PropertyDescription from "@/app/components/PropertyDescription/PropertyDe
 import DeveloperIntro from "@/app/components/DeveloperIntro/DeveloperIntro";
 import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
 import DeveloperSchemaMarkup from "@/app/components/DeveloperSchemaMarkup/DeveloperSchemaMarkup";
+import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -113,79 +114,82 @@ const DeveloperPage = async ({ params }: Props) => {
       {/* <SchemaMarkup project={developer} /> */}
       <DeveloperSchemaMarkup developer={developer} pageUrl={pageUrl} />
       <Header params={params} translations={translations} />
-      <DeveloperIntro
-        titleFull={developer.titleFull}
-        excerpt={developer.excerpt}
-        logo={developer.logo}
-      />
-      <section className="">
+      <main>
+        <DeveloperIntro
+          titleFull={developer.titleFull}
+          excerpt={developer.excerpt}
+          logo={developer.logo}
+        />
+        <section className="">
+          <div className="container">
+            <h2 className="h2-white">
+              {lang === "en"
+                ? `Projects of developer ${developer.title}`
+                : lang === "de"
+                  ? `Projekte des Entwicklers ${developer.title}`
+                  : lang === "pl"
+                    ? `Projekty dewelopera ${developer.title}`
+                    : lang === "ru"
+                      ? `Проекты застройщика ${developer.title}`
+                      : `Projects of developer ${developer.title}`}
+            </h2>
+            <div className="projectsDeveloper">
+              {projects.length ? (
+                projects.map((project) => (
+                  <div key={project._id}>
+                    <ProjectLink
+                      url={
+                        lang === "de"
+                          ? `/projects/${project.slug[lang].current}`
+                          : `/${lang}/projects/${project.slug[lang].current}`
+                      }
+                      previewImage={project.previewImage}
+                      title={project.title}
+                      price={project.keyFeatures.price}
+                      bedrooms={parseFloat(project.keyFeatures.bedrooms)} // Преобразование строки в число
+                      coveredArea={parseFloat(project.keyFeatures.coveredArea)} // Преобразование строки в число
+                      plotSize={parseFloat(project.keyFeatures.plotSize)} // Преобразование строки в число
+                      lang={params.lang}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p>
+                  {lang === "en"
+                    ? "No projects available for this developer."
+                    : lang === "de"
+                      ? "Keine Projekte für diesen Entwickler verfügbar."
+                      : lang === "pl"
+                        ? "Brak projektów dostępnych dla tego dewelopera."
+                        : lang === "ru"
+                          ? "Нет доступных проектов для этого застройщика."
+                          : "No projects available for this developer."}
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+        <FormStatic lang={params.lang} />
+        <FullDescriptionBlock description={developer.description} />
         <div className="container">
-          <h2 className="h2-white">
-            {lang === "en"
-              ? `Projects of developer ${developer.title}`
-              : lang === "de"
-                ? `Projekte des Entwicklers ${developer.title}`
-                : lang === "pl"
-                  ? `Projekty dewelopera ${developer.title}`
-                  : lang === "ru"
-                    ? `Проекты застройщика ${developer.title}`
-                    : `Projects of developer ${developer.title}`}
-          </h2>
-          <div className="projectsDeveloper">
-            {projects.length ? (
-              projects.map((project) => (
-                <div key={project._id}>
-                  <ProjectLink
-                    url={
-                      lang === "de"
-                        ? `/projects/${project.slug[lang].current}`
-                        : `/${lang}/projects/${project.slug[lang].current}`
-                    }
-                    previewImage={project.previewImage}
-                    title={project.title}
-                    price={project.keyFeatures.price}
-                    bedrooms={parseFloat(project.keyFeatures.bedrooms)} // Преобразование строки в число
-                    coveredArea={parseFloat(project.keyFeatures.coveredArea)} // Преобразование строки в число
-                    plotSize={parseFloat(project.keyFeatures.plotSize)} // Преобразование строки в число
-                    lang={params.lang}
-                  />
-                </div>
-              ))
-            ) : (
-              <p>
-                {lang === "en"
-                  ? "No projects available for this developer."
-                  : lang === "de"
-                    ? "Keine Projekte für diesen Entwickler verfügbar."
-                    : lang === "pl"
-                      ? "Brak projektów dostępnych dla tego dewelopera."
-                      : lang === "ru"
-                        ? "Нет доступных проектов для этого застройщика."
-                        : "No projects available for this developer."}
-              </p>
-            )}
+          <div className="developers-button">
+            <ButtonModal>
+              {lang === "en"
+                ? "Buy property from this developer now!"
+                : lang === "de"
+                  ? "Kaufen Sie jetzt eine Immobilie von diesem Entwickler!"
+                  : lang === "pl"
+                    ? "Kup teraz nieruchomość od tego dewelopera!"
+                    : lang === "ru"
+                      ? "Купите недвижимость у этого застройщика!"
+                      : "Buy property from this developer now!"}
+            </ButtonModal>
           </div>
         </div>
-      </section>
-      <FormStatic lang={params.lang} />
-      <FullDescriptionBlock description={developer.description} />
-      <div className="container">
-        <div className="developers-button">
-          <ButtonModal>
-            {lang === "en"
-              ? "Buy property from this developer now!"
-              : lang === "de"
-                ? "Kaufen Sie jetzt eine Immobilie von diesem Entwickler!"
-                : lang === "pl"
-                  ? "Kup teraz nieruchomość od tego dewelopera!"
-                  : lang === "ru"
-                    ? "Купите недвижимость у этого застройщика!"
-                    : "Buy property from this developer now!"}
-          </ButtonModal>
-        </div>
-      </div>
+      </main>
       <Footer params={params} />
       <ModalBrochure lang={params.lang} formDocument={formDocument} />
+      <WhatsAppButton lang={params.lang} />
     </>
   );
 };

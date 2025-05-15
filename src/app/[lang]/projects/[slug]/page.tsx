@@ -25,6 +25,7 @@ import FormStatic from "@/app/components/FormStatic/FormStatic";
 import FullDescriptionBlock from "@/app/components/FullDescriptionBlock/FullDescriptionBlock";
 import AccordionContainer from "@/app/components/AccordionContainer/AccordionContainer";
 import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
+import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -121,61 +122,62 @@ const ProjectPage = async ({ params }: Props) => {
       <Header params={params} translations={translations} />
       {/* </HeaderWrapper> */}
       {/* </div> */}
-
-      {/* <PropertySlider images={project.images} videoId={project.videoId} /> */}
-      <PropertyIntro
-        title={project.title}
-        excerpt={project.excerpt}
-        previewImage={project.previewImage}
-        videoId={project.videoId}
-        videoPreview={project.videoPreview}
-      />
-      <div className="container">
-        <ProjectSlider images={project.images} />
-      </div>
-      <div className="container">
-        <div className="property-content">
-          <div className="property-description">
-            <PropertyDescription description={project.description} />
-            <div className="property-button">
-              <ButtonModal>
-                {lang === "en"
-                  ? "Enquire this amazing project now!"
-                  : lang === "de"
-                    ? "Fragen Sie dieses erstaunliche Projekt jetzt an!"
-                    : lang === "pl"
-                      ? "Zapytaj o ten niesamowity projekt teraz!"
-                      : lang === "ru"
-                        ? "Узнайте об этом проекте!"
-                        : "Enquire this amazing project now!"}
-              </ButtonModal>
+      <main>
+        <PropertyIntro
+          title={project.title}
+          excerpt={project.excerpt}
+          previewImage={project.previewImage}
+          videoId={project.videoId}
+          videoPreview={project.videoPreview}
+        />
+        <div className="container">
+          <ProjectSlider images={project.images} />
+        </div>
+        <div className="container">
+          <div className="property-content">
+            <div className="property-description">
+              <PropertyDescription description={project.description} />
+              <div className="property-button">
+                <ButtonModal>
+                  {lang === "en"
+                    ? "Enquire this amazing project now!"
+                    : lang === "de"
+                      ? "Fragen Sie dieses erstaunliche Projekt jetzt an!"
+                      : lang === "pl"
+                        ? "Zapytaj o ten niesamowity projekt teraz!"
+                        : lang === "ru"
+                          ? "Узнайте об этом проекте!"
+                          : "Enquire this amazing project now!"}
+                </ButtonModal>
+              </div>
+            </div>
+            <div className="property-features">
+              <PropertyFeatures keyFeatures={project.keyFeatures} lang={lang} />
             </div>
           </div>
-          <div className="property-features">
-            <PropertyFeatures keyFeatures={project.keyFeatures} lang={lang} />
-          </div>
         </div>
-      </div>
-      <PropertyDistances distances={project.distances} lang={params.lang} />
-      <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
-      <FormStatic lang={params.lang} />
-      <FullDescriptionBlock description={project.fullDescription} />
-      {project.faq && (
-        <div className="container">
-          <div className="property-faq">
-            <h2 className="h2-white">
-              {lang === "en"
-                ? "FAQ"
-                : lang === "pl"
-                  ? "Najczęściej zadawane pytania"
-                  : lang === "ru"
-                    ? "Часто задаваемые вопросы"
-                    : "Häufig gestellte Fragen"}
-            </h2>
-            <AccordionContainer block={project.faq} />
+        <PropertyDistances distances={project.distances} lang={params.lang} />
+        <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
+        <FormStatic lang={params.lang} />
+        <FullDescriptionBlock description={project.fullDescription} />
+        {project.faq && (
+          <div className="container">
+            <div className="property-faq">
+              <h2 className="h2-white">
+                {lang === "en"
+                  ? "FAQ"
+                  : lang === "pl"
+                    ? "Najczęściej zadawane pytania"
+                    : lang === "ru"
+                      ? "Часто задаваемые вопросы"
+                      : "Häufig gestellte Fragen"}
+              </h2>
+              <AccordionContainer block={project.faq} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        <WhatsAppButton lang={params.lang} />
+      </main>
       <ProjectSameCity
         lang={params.lang}
         city={project.keyFeatures.city}

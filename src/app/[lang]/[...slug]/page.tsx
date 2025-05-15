@@ -54,6 +54,7 @@ import FormMinimalBlockComponent from "@/app/components/FormMinimalBlockComponen
 import HowWeWorkBlockComponent from "@/app/components/HowWeWorkBlockComponent/HowWeWorkBlockComponent";
 import BulletsBlockComponent from "@/app/components/BulletsBlockComponent/BulletsBlockComponent";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 
 type Props = {
   params: {
@@ -368,6 +369,7 @@ const SinglePage = async ({ params }: Props) => {
       </main>
       <Footer params={params} />
       <ModalBrochure lang={lang} formDocument={formDocument} />
+      <WhatsAppButton lang={params.lang} />
     </>
   );
 };

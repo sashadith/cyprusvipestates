@@ -17,6 +17,7 @@ import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
 import { Translation } from "@/types/homepage";
 import BlogPageContent from "@/app/components/BlogPageContent/BlogPageContent";
 import FormStatic from "@/app/components/FormStatic/FormStatic";
+import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 
 type Props = {
   params: { lang: string };
@@ -93,6 +94,7 @@ const PageBlog = async ({ params }: Props) => {
       </main>
       <Footer params={params} />
       <ModalBrochure lang={lang} formDocument={formDocument} />
+      <WhatsAppButton lang={params.lang} />
     </>
   );
 };
