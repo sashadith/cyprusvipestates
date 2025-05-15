@@ -761,40 +761,18 @@ export async function getProjectByLang(
     keyFeatures,
     distances,
     fullDescription[]{
-        _type,
+      ...,
+      _type == "image" => {
         _key,
-        _type == "block" => {
-          _key,
-          _type,
-          style,
-          list,
-          children[]{
-            _key,
-            _type,
-            text,
-            marks
-          },
-          markDefs[]{
-            _key,
-            _type,
-            _type == "link" => {
-              _key,
-              _type,
-              href
-            }
-          }
-        },
-        _type == "image" => {
-              _key,
-              _type,
-              alt,
-              asset->{
-                _id,
-                url,
-                metadata { dimensions { width, height } }
-              }
-            }
-      },
+        _type,
+        alt,
+        asset->{
+          _id,
+          url,
+          metadata { dimensions { width, height } }
+        }
+      }
+    },
     faq,
     language,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
