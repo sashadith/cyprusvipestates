@@ -26,6 +26,7 @@ import BenefitsBlock from "../components/BenefitsBlock/BenefitsBlock";
 import homepage from "@/sanity/schemaTypes/homepage";
 import HowWeWorkBlock from "../components/HowWeWorkBlock/HowWeWorkBlock";
 import ReviewsFullBlockComponent from "../components/ReviewsFullBlockComponent/ReviewsFullBlockComponent";
+import WhatsAppButton from "../components/WhatsAppButton/WhatsAppButton";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -110,6 +111,7 @@ export default async function Home({ params }: Props) {
         <FormStatic lang={params.lang} />
         <Footer params={params} />
         <ModalBrochure lang={params.lang} formDocument={formDocument} />
+        <WhatsAppButton lang={params.lang} />
       </main>
     </>
   );
