@@ -744,29 +744,7 @@ export async function getProjectByLang(
     videoPreview,
     images,
     description[]{
-        _type,
-        _key,
-        _type == "block" => {
-          _key,
-          _type,
-          style,
-          list,
-          children[]{
-            _key,
-            _type,
-            text,
-            marks
-          },
-          markDefs[]{
-            _key,
-            _type,
-            _type == "link" => {
-              _key,
-              _type,
-              href
-            }
-          }
-        },
+      ...,
         _type == "image" => {
               _key,
               _type,
