@@ -863,7 +863,19 @@ export async function getDeveloperByLang(
     titleFull,
     excerpt,
     logo,
-    description,
+    description[]{
+      ...,
+      _type == "image" => {
+        _key,
+        _type,
+        alt,
+        asset->{
+          _id,
+          url,
+          metadata { dimensions { width, height } }
+        }
+      },
+    },
     language,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
       slug,
