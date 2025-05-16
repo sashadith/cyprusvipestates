@@ -32,6 +32,7 @@ import bulletsBlock from "./bulletsBlock";
 import blog from "./blog";
 import category from "./category";
 import blogPage from "./blogPage";
+import tableBlock from "./tableBlock";
 
 export const schemaTypes = [
   header,
@@ -60,6 +61,7 @@ export const schemaTypes = [
   buttonBlock,
   accordionBlock,
   locationBlock,
+  tableBlock,
   reviewsFullBlock,
   imageBulletsBlock,
   benefitsBlock,

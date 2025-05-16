@@ -1,0 +1,22 @@
+.container {
+  overflow: auto;
+  margin: 2rem 0; /* эквивалент my-8 */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th {
+  padding: 0.7rem;           /* эквивалент px-4 py-2 */
+  border: 1px solid #e5e7eb; /* Tailwind border-gray-200 */
+  background-color: #f3f4f6; /* Tailwind bg-gray-100 */
+  text-align: left;
+  color: #000;             /* текст чёрный */
+}
+
+.td {
+  padding: 0.7rem;           /* эквивалент px-4 py-2 */
+  border: 1px solid #e5e7eb; /* Tailwind border-gray-200 */
+}

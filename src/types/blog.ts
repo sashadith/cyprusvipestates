@@ -262,6 +262,23 @@ export type BulletsBlock = {
 };
 // === Конец типов для BulletsBlock ===
 
+// === Типы для TableBlock ===
+export type TableRow = {
+  _key: string;
+  _type: "tableRow";
+  cells: string[];
+};
+
+export type TableBlock = {
+  _key: string;
+  _type: "tableBlock";
+  columns: string[];
+  rows: TableRow[];
+  marginTop?: "small" | "medium" | "large";
+  marginBottom?: "small" | "medium" | "large";
+};
+// === Конец типов для TableBlock ===
+
 export type TabsBlock = {
   _key: string;
   _type: string;
@@ -316,6 +333,7 @@ export type Blog = {
     | HowWeWorkBlock
     | BulletsBlock
     | ProjectsSectionBlock
+    | TableBlock
   >;
   videoBlock: VideoBlock;
   popularProperties: navLink[];

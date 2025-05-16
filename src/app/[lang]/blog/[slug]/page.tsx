@@ -22,6 +22,7 @@ import {
   FaqBlock,
   FormMinimalBlock,
   ProjectsSectionBlock,
+  TableBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Metadata } from "next";
@@ -39,6 +40,7 @@ import BreadcrumbsBlog from "@/app/components/BreadcrumbsBlog/BreadcrumbsBlog";
 import SchemaBlogPost from "@/app/components/SchemaBlogPost/SchemaBlogPost";
 import ProjectsSectionSlider from "@/app/components/ProjectsSectionSlider/ProjectsSectionSlider";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
+import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -172,6 +174,10 @@ const PagePost = async ({ params }: Props) => {
           />
         );
       }
+      case "tableBlock":
+        return (
+          <TableBlockComponent key={block._key} block={block as TableBlock} />
+        );
       default:
         return <p key={block._key}>Unsupported block type</p>;
     }

@@ -96,6 +96,7 @@ const blog = {
         { type: "howWeWorkBlock" },
         { type: "bulletsBlock" },
         { type: "projectsSectionBlock" },
+        { type: "tableBlock" },
       ],
     }),
     defineField({
