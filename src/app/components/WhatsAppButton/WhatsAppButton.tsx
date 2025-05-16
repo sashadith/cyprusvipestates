@@ -11,7 +11,7 @@ const WhatsAppButton: FC<Props> = ({ lang }) => {
 
   const messages: Record<string, string> = {
     en: "Hello, I’m interested in buying property in Cyprus. Could you help me find suitable villas or apartments?",
-    de: "Hallo, ich interessiere mich für den Kauf einer Immobilie auf Zypern. Können Sie mir passende Villen oder Apartments empfehlen?",
+    de: "Hallo, ich interessiere mich für den Kauf einer Immobilie auf Zypern. Bitte kontaktieren Sie mich.",
     pl: "Dzień dobry, interesuję się zakupem nieruchomości na Cyprze. Czy mogą mi Państwo doradzić odpowiednie wille lub apartamenty?",
     ru: "Здравствуйте! Я интересуюсь покупкой недвижимости на Кипре. Подскажите, пожалуйста, какие виллы или апартаменты доступны сейчас?",
   };
@@ -23,7 +23,7 @@ const WhatsAppButton: FC<Props> = ({ lang }) => {
     lang === "en"
       ? "WhatsApp us now"
       : lang === "de"
-        ? "WhatsApp uns jetzt"
+        ? "WhatsApp senden"
         : lang === "pl"
           ? "Napisz do nas teraz"
           : lang === "ru"
