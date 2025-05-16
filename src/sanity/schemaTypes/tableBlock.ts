@@ -70,16 +70,4 @@ export default defineType({
       },
     }),
   ],
-  preview: {
-    select: {
-      cols: "columns",
-      rows: "rows.length",
-    },
-    prepare({ cols, rows }: { cols: string[]; rows: number }) {
-      return {
-        title: `Table: ${cols.join(", ")}`,
-        subtitle: `${rows} row${rows === 1 ? "" : "s"}`,
-      };
-    },
-  },
 });
