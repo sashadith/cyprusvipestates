@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import { cookies } from "next/headers";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { ModalProvider } from "../context/ModalContext";
 import GoogleAnalyticsWrapper from "../components/GoogleAnalyticsWrapper/GoogleAnalyticsWrapper";
 import MicrosoftClarity from "../components/MicrosoftClarity/MicrosoftClarity";
@@ -46,6 +47,7 @@ export default function RootLayout({
             <MicrosoftClarity />
           </>
         )}
+        <GoogleTagManager gtmId="GTM-MQNF6L9V" />
         <GoogleAdsScript />
 
         <CustomCookieConsent lang={params.lang as "en" | "de" | "pl" | "ru"} />
