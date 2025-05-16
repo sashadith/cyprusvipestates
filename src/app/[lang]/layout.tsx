@@ -41,12 +41,12 @@ export default function RootLayout({
       <body className={rubik.className}>
         <ModalProvider>{children}</ModalProvider>
 
-        {hasAnalytics && (
+        {/* {hasAnalytics && (
           <>
-            <GoogleAnalyticsWrapper />
-            <MicrosoftClarity />
           </>
-        )}
+        )} */}
+        <GoogleAnalyticsWrapper />
+        <MicrosoftClarity />
         <GoogleTagManager gtmId="GTM-MQNF6L9V" />
         <GoogleAdsScript />
 
