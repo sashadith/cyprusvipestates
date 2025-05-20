@@ -136,6 +136,16 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
       if (response.status === 200) {
         resetForm({});
         setFilled({ name: false, phone: false, email: false });
+
+        // GTM event
+        if (typeof window !== "undefined" && window.dataLayer) {
+          window.dataLayer.push({
+            event: "form_submission_success",
+            form_name: "form_static",
+            page_url: window.location.href,
+          });
+        }
+
         onFormSubmitSuccess && onFormSubmitSuccess();
         setMessage(
           lang === "ru"
