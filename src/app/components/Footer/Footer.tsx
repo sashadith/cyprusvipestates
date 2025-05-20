@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
 import NewsletterForm from "../NewsletterForm/NewsletterForm";
+import ContactLink from "../ContactLink/ContactLink";
 
 type Props = {
   params: { lang: string };
@@ -130,19 +131,7 @@ const Footer = async ({ params }: Props) => {
               <p className={styles.title}>{contactTitle}</p>
               <div className={styles.contacts}>
                 {contacts.map((contact: Contact) => (
-                  <Link
-                    href={getContactHref(contact)}
-                    key={contact._key}
-                    className={styles.contact}
-                  >
-                    <Image
-                      alt={contact.label}
-                      src={urlFor(contact.icon).url()}
-                      width={30}
-                      height={30}
-                    />
-                    <p className={styles.contactLabel}>{contact.label}</p>
-                  </Link>
+                  <ContactLink key={contact._key} contact={contact} />
                 ))}
               </div>
             </div>
