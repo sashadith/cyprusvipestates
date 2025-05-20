@@ -84,6 +84,16 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
 
       if (response.ok) {
         setMessage(getLocalizedMessage("success", lang));
+
+        // GTM event
+        if (typeof window !== "undefined" && window.dataLayer) {
+          window.dataLayer.push({
+            event: "newsletter_subscribe",
+            email: email,
+            page_url: window.location.href,
+          });
+        }
+
         setEmail(""); // Очистка поля
       } else {
         const errorData = await response.json();
