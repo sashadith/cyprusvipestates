@@ -89,7 +89,6 @@ const NewsletterForm: React.FC<NewsletterFormProps> = ({
         if (typeof window !== "undefined" && window.dataLayer) {
           window.dataLayer.push({
             event: "newsletter_subscribe",
-            email: email,
             page_url: window.location.href,
           });
         }
