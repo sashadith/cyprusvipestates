@@ -99,6 +99,16 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
       if (response.status === 200) {
         resetForm({});
         setFilled({ name: false, phone: false, email: false, message: false });
+
+        // GTM event
+        if (typeof window !== "undefined" && window.dataLayer) {
+          window.dataLayer.push({
+            event: "form_submission_success",
+            form_name: "form_minimal",
+            page_url: window.location.href,
+          });
+        }
+
         onFormSubmitSuccess && onFormSubmitSuccess();
         setMessage(
           lang === "ru"
