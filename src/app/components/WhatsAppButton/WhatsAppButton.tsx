@@ -30,12 +30,24 @@ const WhatsAppButton: FC<Props> = ({ lang }) => {
             ? "Напишите нам сейчас"
             : "WhatsApp us";
 
+  const handleClick = () => {
+    if (typeof window !== "undefined" && window.dataLayer) {
+      window.dataLayer.push({
+        event: "whatsapp_click",
+        phone_number: phone,
+        page_url: window.location.href,
+      });
+    }
+  };
+
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
       className={styles.whatsappButton}
+      onClick={handleClick}
+      aria-label={label}
     >
       <FaWhatsapp size={20} />
       <span className={styles.label}>{label}</span>
