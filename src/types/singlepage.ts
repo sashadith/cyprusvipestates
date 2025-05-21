@@ -15,6 +15,7 @@ import {
   FormMinimalBlock,
   HowWeWorkBlock,
   BulletsBlock,
+  TableBlock,
 } from "./blog";
 import { BenefitsBlock, Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
@@ -64,6 +65,7 @@ export type Singlepage = {
     | FormMinimalBlock
     | HowWeWorkBlock
     | BulletsBlock
+    | TableBlock
   >;
   projectSection?: ProjectSection;
   parentPage?: SinglepageRef;

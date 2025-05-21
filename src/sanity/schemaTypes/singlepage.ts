@@ -83,6 +83,7 @@ const singlepage = {
         { type: "formMinimalBlock" },
         { type: "howWeWorkBlock" },
         { type: "bulletsBlock" },
+        { type: "tableBlock" },
       ],
     }),
     defineField({

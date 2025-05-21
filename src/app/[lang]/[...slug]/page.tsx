@@ -28,6 +28,7 @@ import {
   FormMinimalBlock,
   HowWeWorkBlock,
   BulletsBlock,
+  TableBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import {
@@ -55,6 +56,7 @@ import HowWeWorkBlockComponent from "@/app/components/HowWeWorkBlockComponent/Ho
 import BulletsBlockComponent from "@/app/components/BulletsBlockComponent/BulletsBlockComponent";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
+import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
 
 type Props = {
   params: {
@@ -331,6 +333,10 @@ const SinglePage = async ({ params }: Props) => {
             block={block as BulletsBlock}
             lang={lang}
           />
+        );
+      case "tableBlock":
+        return (
+          <TableBlockComponent key={block._key} block={block as TableBlock} />
         );
       default:
         return <p key={block._key}>Unsupported block type</p>;
