@@ -1,3 +1,9 @@
+.tableBlockComponent {
+  /* даём контейнеру таблицы собственную прокрутку, а не всей странице */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* плавный скролл на iOS */
+  }
+
 .table {
   width: 100%;
   border-collapse: collapse;

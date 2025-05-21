@@ -1,6 +1,6 @@
 .articles {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: clamp(0.938rem, 0.469rem + 1.88vw, 1.875rem);
 
   @media screen and (min-width: 768px){
@@ -104,11 +104,15 @@
 
 .articleTitle {
   color: #FFF;
-  font-size: clamp(0.75rem, 0.375rem + 1.5vw, 1.5rem);
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1;
   position: relative;
+
+  @media screen and (min-width: 768px){
+    line-height: 1.2;
+  }
 }
 
 .excerpt {
