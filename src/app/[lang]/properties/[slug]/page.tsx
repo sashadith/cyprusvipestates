@@ -99,6 +99,7 @@ const PropertyPage = async ({ params }: Props) => {
         title={property.title}
         excerpt={property.excerpt}
         previewImage={property.previewImage}
+        lang={params.lang}
       />
       <div className="container">
         <div className="property-content">

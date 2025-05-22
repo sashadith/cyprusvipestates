@@ -112,16 +112,7 @@ const ProjectPage = async ({ params }: Props) => {
   return (
     <>
       <SchemaMarkup project={project} />
-      {/* <div
-        style={{
-          backgroundColor: "#212121",
-          height: "62px",
-        }}
-      > */}
-      {/* <HeaderWrapper> */}
       <Header params={params} translations={translations} />
-      {/* </HeaderWrapper> */}
-      {/* </div> */}
       <main>
         <PropertyIntro
           title={project.title}
