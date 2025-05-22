@@ -25,6 +25,7 @@ type Props = {
   previewImage: ImageAlt;
   videoId?: string;
   videoPreview?: ImageAlt;
+  lang: string;
 };
 
 const PropertyIntro: FC<Props> = ({
@@ -33,6 +34,7 @@ const PropertyIntro: FC<Props> = ({
   previewImage,
   videoId,
   videoPreview,
+  lang,
 }) => {
   return (
     <section className={styles.popertyIntro}>
@@ -48,6 +50,19 @@ const PropertyIntro: FC<Props> = ({
           <div className={styles.contentWrapper}>
             <h1 className={styles.title}>{title}</h1>
             <p className={styles.description}>{excerpt}</p>
+            <div className={styles.button}>
+              <ButtonModal>
+                {lang === "en"
+                  ? "Request Personal Offer"
+                  : lang === "de"
+                    ? "Persönliches Angebot anfordern"
+                    : lang === "pl"
+                      ? "Poproś o indywidualną ofertę"
+                      : lang === "ru"
+                        ? "Запросить персональное предложение"
+                        : "Request Personal Offer"}
+              </ButtonModal>
+            </div>
           </div>
         </div>
       </div>

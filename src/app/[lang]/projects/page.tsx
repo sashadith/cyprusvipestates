@@ -17,6 +17,7 @@ import HeaderWrapper from "@/app/components/HeaderWrapper/HeaderWrapper";
 import { Metadata } from "next";
 import Footer from "@/app/components/Footer/Footer";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
+import FormStatic from "@/app/components/FormStatic/FormStatic";
 
 const PAGE_SIZE = 12;
 
@@ -215,6 +216,7 @@ export default async function ProjectsPage({
             </div>
           )}
         </div>
+        <FormStatic lang={params.lang} />
         <WhatsAppButton lang={params.lang} />
       </main>
       <Footer params={params} />
