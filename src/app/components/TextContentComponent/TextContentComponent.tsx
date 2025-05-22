@@ -40,7 +40,7 @@ const TextContentComponent: FC<Props> = ({ block }) => {
         marginBottom:
           block.marginBottom && marginValues[block.marginBottom]
             ? marginValues[block.marginBottom]
-            : "clamp(1.25rem, 5vw, 3.75rem)",
+            : "0",
       }}
     >
       <FadeUpAnimate>
