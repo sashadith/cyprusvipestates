@@ -26,6 +26,7 @@ import FullDescriptionBlock from "@/app/components/FullDescriptionBlock/FullDesc
 import AccordionContainer from "@/app/components/AccordionContainer/AccordionContainer";
 import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
+import WhatAppButtonProject from "@/app/components/WhatAppButtonProject/WhatAppButtonProject";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -141,6 +142,7 @@ const ProjectPage = async ({ params }: Props) => {
                           ? "Узнайте об этом проекте!"
                           : "Enquire this amazing project now!"}
                 </ButtonModal>
+                <WhatAppButtonProject lang={params.lang} />
               </div>
             </div>
             <div className="property-features">
