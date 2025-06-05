@@ -107,39 +107,53 @@ const BlogPostsRenderer: FC<Props> = ({ blogPosts, totalPosts, lang }) => {
       <div className={styles.articlesBlock}>
         <div className="container">
           <div className={styles.articles}>
-            {filteredPosts.map((post) => (
-              <Link
-                href={generateSlug(post.slug, lang)}
-                key={post._id}
-                className={styles.article}
-              >
-                <div className={styles.imageBlock}>
-                  <Image
-                    alt={post.title}
-                    src={urlFor(post.previewImage).url()}
-                    fill
-                    className={styles.image}
-                  />
-                </div>
-                <div className={styles.overlay}></div>
-                <div className={styles.content}>
-                  <div className={styles.contentWrapper}>
-                    <div className={styles.contentTop}>
-                      <p className={styles.articleCategory}>
-                        {post.category.title}
-                      </p>
-                    </div>
-                    <div className={styles.contentBottom}>
-                      <p className={styles.articleDate}>
-                        {formatDate(post.publishedAt)}
-                      </p>
-                      <h3 className={styles.articleTitle}>{post.title}</h3>
-                      <p className={styles.excerpt}>{post.excerpt}</p>
+            {filteredPosts.map((post) => {
+              // Ссылка-заглушка
+              const PLACEHOLDER =
+                "https://cdn.sanity.io/files/88gk88s2/production/1580d3312e8cb973526a4d8f1019c78868ab3a45.jpg";
+
+              // Попытаемся взять asset._ref; если его нет — сразу в заглушку
+              const hasValidImage = Boolean(post.previewImage?.asset?._ref);
+
+              // Если asset._ref есть – формируем URL, иначе – плейсхолдер
+              const imageUrl = hasValidImage
+                ? urlFor(post.previewImage).url()
+                : PLACEHOLDER;
+
+              return (
+                <Link
+                  href={generateSlug(post.slug, lang)}
+                  key={post._id}
+                  className={styles.article}
+                >
+                  <div className={styles.imageBlock}>
+                    <Image
+                      alt={post.title}
+                      src={imageUrl}
+                      fill
+                      className={styles.image}
+                    />
+                  </div>
+                  <div className={styles.overlay}></div>
+                  <div className={styles.content}>
+                    <div className={styles.contentWrapper}>
+                      <div className={styles.contentTop}>
+                        <p className={styles.articleCategory}>
+                          {post.category.title}
+                        </p>
+                      </div>
+                      <div className={styles.contentBottom}>
+                        <p className={styles.articleDate}>
+                          {formatDate(post.publishedAt)}
+                        </p>
+                        <h3 className={styles.articleTitle}>{post.title}</h3>
+                        <p className={styles.excerpt}>{post.excerpt}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Кнопка «загрузить ещё» */}
