@@ -1,8 +1,8 @@
 "use client";
 import styles from "./SliderMain.module.scss";
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useId } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,37 +10,33 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 const SliderMain = ({ children }: any) => {
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
-  const paginationRef = useRef<HTMLDivElement>(null);
+
+  const uniqueId = useId().replace(/[^a-zA-Z0-9_-]/g, ""); // безопасный класс
+  const wrapperClass = `pagination-wrapper-${uniqueId}`;
 
   return (
     <div className={styles.sliderMain}>
       <div className={styles.sliderSlides}>
         <Swiper
-          modules={[Navigation, Autoplay, Pagination]}
+          modules={[Autoplay, Pagination]}
           autoplay={{ delay: 6000, disableOnInteraction: true }}
           slidesPerView={1}
-          // autoHeight={true}
           grabCursor
           pagination={{
             clickable: true,
-            // el: `.${styles.pagination} .swiper-pagination`,
-            el: paginationRef.current,
+            el: `.${styles.pagination}.${wrapperClass} .swiper-pagination`,
           }}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
+          // navigation={{
+          //   prevEl: prevRef.current,
+          //   nextEl: nextRef.current,
+          // }}
           onBeforeInit={(swiper) => {
-            // привязываем рефы до инициализации
             // @ts-ignore
-            swiper.params.navigation.prevEl = prevRef.current;
+            // swiper.params.navigation.prevEl = prevRef.current;
             // @ts-ignore
-            swiper.params.navigation.nextEl = nextRef.current;
-            // @ts-ignore
-            swiper.params.pagination.el = paginationRef.current;
+            // swiper.params.navigation.nextEl = nextRef.current;
           }}
         >
           {children.map((child: any, index: number) => (
@@ -56,9 +52,10 @@ const SliderMain = ({ children }: any) => {
           ))}
         </Swiper>
       </div>
+
       <div className={styles.sliderButtons}>
-        <div className={styles.pagination}>
-          <div className={`swiper-pagination`} ref={paginationRef}>
+        <div className={`${styles.pagination} ${wrapperClass}`}>
+          <div className="swiper-pagination">
             <span className="swiper-pagination-bullet"></span>
           </div>
         </div>
