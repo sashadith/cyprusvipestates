@@ -13,6 +13,7 @@ const SliderMain = ({ children }: any) => {
 
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const paginationRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className={styles.sliderMain}>
@@ -25,7 +26,8 @@ const SliderMain = ({ children }: any) => {
           grabCursor
           pagination={{
             clickable: true,
-            el: `.${styles.pagination} .swiper-pagination`,
+            // el: `.${styles.pagination} .swiper-pagination`,
+            el: paginationRef.current,
           }}
           navigation={{
             prevEl: prevRef.current,
@@ -37,6 +39,8 @@ const SliderMain = ({ children }: any) => {
             swiper.params.navigation.prevEl = prevRef.current;
             // @ts-ignore
             swiper.params.navigation.nextEl = nextRef.current;
+            // @ts-ignore
+            swiper.params.pagination.el = paginationRef.current;
           }}
         >
           {children.map((child: any, index: number) => (
@@ -54,7 +58,7 @@ const SliderMain = ({ children }: any) => {
       </div>
       <div className={styles.sliderButtons}>
         <div className={styles.pagination}>
-          <div className={`swiper-pagination`}>
+          <div className={`swiper-pagination`} ref={paginationRef}>
             <span className="swiper-pagination-bullet"></span>
           </div>
         </div>

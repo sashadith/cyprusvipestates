@@ -10,7 +10,7 @@ type Props = {
 };
 
 const BlogPageContent: FC<Props> = ({ content, lang }) => {
-  console.log("BlogPageContent", content);
+  // console.log("BlogPageContent", content);
   return (
     <section className={styles.blogPageContent}>
       <div className="container">
