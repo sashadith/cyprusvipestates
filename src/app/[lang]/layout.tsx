@@ -8,6 +8,7 @@ import GoogleAnalyticsWrapper from "../components/GoogleAnalyticsWrapper/GoogleA
 import MicrosoftClarity from "../components/MicrosoftClarity/MicrosoftClarity";
 import CustomCookieConsent from "../components/CustomCookieConsent/CustomCookieConsent";
 import GoogleAdsScript from "../components/GoogleAdsScript/GoogleAdsScript";
+import FacebookPixel from "../components/FacebookPixel/FacebookPixel";
 
 const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 
@@ -49,6 +50,7 @@ export default function RootLayout({
         <MicrosoftClarity />
         <GoogleTagManager gtmId="GTM-MQNF6L9V" />
         <GoogleAdsScript />
+        <FacebookPixel />
 
         <CustomCookieConsent lang={params.lang as "en" | "de" | "pl" | "ru"} />
       </body>
