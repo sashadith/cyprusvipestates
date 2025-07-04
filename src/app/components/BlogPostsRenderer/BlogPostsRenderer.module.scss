@@ -127,9 +127,10 @@
 .tabs {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 15px;
-  overflow-x: auto;
-  white-space: nowrap;
+  // overflow-x: auto;
+  // white-space: nowrap;
 }
 
 .tab {
@@ -147,7 +148,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 25px;
-  margin-bottom: clamp(1.563rem, 1.406rem + 0.63vw, 1.875rem);
+  // margin-bottom: clamp(1.563rem, 1.406rem + 0.63vw, 1.875rem);
   transition: all 0.2s ease-in-out;
 
   @media screen and (min-width: 768px){
@@ -157,6 +158,10 @@
       color: #FFF;
     }
   }
+}
+
+.articlesBlock {
+  margin-top: clamp(1.563rem, 1.406rem + 0.63vw, 1.875rem);
 }
 
 .tab.active {

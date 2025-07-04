@@ -119,14 +119,34 @@ const StyledProjectFilters: React.FC<ProjectFiltersProps> = ({
         />
 
         <FloatingLabelInput
-          label="Price from"
+          label={
+            lang === "en"
+              ? "Price from (€)"
+              : lang === "de"
+                ? "Preis von (€)"
+                : lang === "pl"
+                  ? "Cena od (€)"
+                  : lang === "ru"
+                    ? "Цена от (€)"
+                    : "Price from (€)"
+          }
           name="priceFrom"
           type="number"
           defaultValue={priceFrom ? String(priceFrom) : ""}
         />
 
         <FloatingLabelInput
-          label="Price to"
+          label={
+            lang === "en"
+              ? "Price to (€)"
+              : lang === "de"
+                ? "Preis bis (€)"
+                : lang === "pl"
+                  ? "Cena do (€)"
+                  : lang === "ru"
+                    ? "Цена до (€)"
+                    : "Price to (€)"
+          }
           name="priceTo"
           type="number"
           defaultValue={priceTo ? String(priceTo) : ""}

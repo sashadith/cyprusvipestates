@@ -76,7 +76,7 @@ const BlogPostsRenderer: FC<Props> = ({ blogPosts, totalPosts, lang }) => {
     <div className={styles.blogPostsRenderer}>
       {/* Табы категорий */}
       <div className={styles.tabsBlock}>
-        <div className="container-content">
+        <div className="container">
           <div className={styles.tabs}>
             <button
               className={`${!selectedCategory ? styles.active : ""} ${styles.tab}`}
