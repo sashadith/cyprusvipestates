@@ -109,10 +109,10 @@ export default async function Home({ params }: Props) {
         />
         {/* <Reviews reviews={homePage.reviewsBlock} /> */}
         <FormStatic lang={params.lang} />
-        <Footer params={params} />
         <ModalBrochure lang={params.lang} formDocument={formDocument} />
         <WhatsAppButton lang={params.lang} />
       </main>
+      <Footer params={params} />
     </>
   );
 }
