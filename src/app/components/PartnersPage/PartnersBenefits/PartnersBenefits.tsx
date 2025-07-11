@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import styles from "./PartnersBenefits.module.scss";
 import { Oswald } from "next/font/google";
-import { number } from "yup";
 
 type Props = {
   lang: string;
@@ -38,6 +37,7 @@ const BenefitsData = [
       "Jeder Schritt des Kunden wird digital erfasst. Deine Anfragen werden automatisch in unser CRM-System übernommen. Über das Partnerportal behältst Du jederzeit den Überblick über den aktuellen Stand. Detaillierte Reports stehen Dir jederzeit zur Verfügung.",
   },
 ];
+
 const PartnersBenefits: FC<Props> = ({ lang }) => {
   return (
     <section className={styles.benefits}>

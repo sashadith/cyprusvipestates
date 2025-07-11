@@ -1,4 +1,4 @@
-.benefits {
+.stars {
   margin-bottom: clamp(3.75rem, 2.5rem + 5vw, 6.25rem);
 }
 
@@ -20,17 +20,18 @@
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .benefitsItem {
   flex: 1 1 100%;
   display: grid;
-  grid-template-columns: 70px 1fr;
+  grid-template-columns: 100px 1fr;
   align-items: center;
 
   @media screen and (min-width: 980px) {
     
-    flex: 1 1 calc(50% - 20px);
+    flex: 0 1 calc(50% - 20px);
     grid-template-columns: 150px 1fr;
     
   }
