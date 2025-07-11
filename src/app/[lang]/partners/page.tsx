@@ -11,6 +11,7 @@ import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
 import PartnersBenefits from "@/app/components/PartnersPage/PartnersBenefits/PartnersBenefits";
 import PartnersCta from "@/app/components/PartnersPage/PartnersCta/PartnersCta";
 import PartnersStars from "@/app/components/PartnersPage/PartnersStars/PartnersStars";
+import PartnersCount from "@/app/components/PartnersPage/PartnersCount/PartnersCount";
 
 type Props = {
   params: { lang: string };
@@ -38,6 +39,7 @@ const PartnersPage = async ({ params }: Props) => {
           <PartnersBenefits lang={lang} />
           <PartnersCta lang={lang} />
           <PartnersStars lang={lang} />
+          <PartnersCount lang={lang} />
         </div>
       </main>
 
