@@ -71,6 +71,21 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+.container-full {
+  max-width: 1360px;
+  padding: 0 20px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1240px) {
+    max-width: 1140px;
+  }
+
+  @media screen and (max-width: 980px) {
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
 .no-scroll {
   overflow: hidden;
 }
@@ -392,4 +407,13 @@ input[type="number"]::-webkit-outer-spin-button {
   .post-grid {
     grid-template-columns: 3fr 1fr;
   }
+}
+
+.main-partners {
+
+}
+
+.partners-wrapper {
+  padding-top: 60px;
+  background-color: #F5F5F5;
 }
