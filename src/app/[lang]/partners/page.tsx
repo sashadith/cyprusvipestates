@@ -8,6 +8,7 @@ import { Translation } from "@/types/homepage";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import PartnersHero from "@/app/components/PartnersPage/PartnersHero/PartnersHero";
 import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
+import PartnersBenefits from "@/app/components/PartnersPage/PartnersBenefits/PartnersBenefits";
 
 type Props = {
   params: { lang: string };
@@ -32,6 +33,7 @@ const PartnersPage = async ({ params }: Props) => {
       <main className="main-partners">
         <div className="partners-wrapper">
           <PartnersHero lang={lang} />
+          <PartnersBenefits lang={lang} />
         </div>
       </main>
 
