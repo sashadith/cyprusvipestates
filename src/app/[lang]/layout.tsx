@@ -9,6 +9,7 @@ import MicrosoftClarity from "../components/MicrosoftClarity/MicrosoftClarity";
 import CustomCookieConsent from "../components/CustomCookieConsent/CustomCookieConsent";
 import GoogleAdsScript from "../components/GoogleAdsScript/GoogleAdsScript";
 import FacebookPixel from "../components/FacebookPixel/FacebookPixel";
+import LenisProvider from "../components/LenisProvider/LenisProvider";
 
 const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 
@@ -39,6 +40,7 @@ export default function RootLayout({
 
   return (
     <html lang={params.lang}>
+      <LenisProvider />
       <body className={rubik.className}>
         <ModalProvider>{children}</ModalProvider>
 
