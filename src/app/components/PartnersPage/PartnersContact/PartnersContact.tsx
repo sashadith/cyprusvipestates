@@ -6,26 +6,57 @@ import { Oswald } from "next/font/google";
 import Image from "next/image";
 import FadeUpAnimate from "../../FadeUpAnimate/FadeUpAnimate";
 
-type Props = {
-  lang: string;
-  form: FormStandardDocument;
-};
-
 const oswald = Oswald({
   subsets: ["latin", "cyrillic"],
   weight: ["300", "400"],
 });
 
+type Props = {
+  lang: string;
+  form: FormStandardDocument;
+};
+
+type PartnersContactTranslation = {
+  titleStart: string;
+  titleHighlight: string;
+  titleEnd: string;
+};
+
+const translations: Record<string, PartnersContactTranslation> = {
+  de: {
+    titleStart: "Registriere ",
+    titleHighlight: "dich",
+    titleEnd: " als partner!",
+  },
+  en: {
+    titleStart: "Register ",
+    titleHighlight: "now",
+    titleEnd: " as a partner!",
+  },
+  pl: {
+    titleStart: "Zarejestruj ",
+    titleHighlight: "się",
+    titleEnd: " jako partner!",
+  },
+  ru: {
+    titleStart: "Зарегистрируйся ",
+    titleHighlight: "сейчас",
+    titleEnd: " как партнёр!",
+  },
+};
+
 const PartnersContact: FC<Props> = ({ lang, form }) => {
+  const t = translations[lang] ?? translations["de"];
+
   return (
     <section className={styles.contacts}>
       <div className="container">
         <div className={styles.contactsBlock}>
           <div className={styles.contactsWrapper}>
             <h2 className={`${styles.title} ${oswald.className}`}>
-              Registriere
-              <span className={styles.highlight}> dich </span>
-              als partner!
+              {t.titleStart}
+              <span className={styles.highlight}>{t.titleHighlight}</span>
+              {t.titleEnd}
             </h2>
             <FadeUpAnimate>
               <div className={styles.formContainer}>

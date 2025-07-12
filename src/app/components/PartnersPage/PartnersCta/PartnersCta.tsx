@@ -5,16 +5,54 @@ import { ButtonModal } from "../../ButtonModal/ButtonModal";
 import Image from "next/image";
 import FadeUpAnimate from "../../FadeUpAnimate/FadeUpAnimate";
 
-type Props = {
-  lang: string;
-};
-
 const oswald = Oswald({
   subsets: ["latin", "cyrillic"],
   weight: ["300", "400"],
 });
 
+type Props = {
+  lang: string;
+};
+
+type PartnersCtaTranslation = {
+  titleStart: string;
+  titleHighlight: string;
+  description: string;
+  button: string;
+};
+
+const translations: Record<string, PartnersCtaTranslation> = {
+  de: {
+    titleStart: "werde unser ",
+    titleHighlight: "partner!",
+    description:
+      "Fülle das Formular aus und werde Teil unseres internationalen Teams",
+    button: "jetzt partner werden!",
+  },
+  en: {
+    titleStart: "become our ",
+    titleHighlight: "partner!",
+    description: "Fill out the form and become part of our international team",
+    button: "become a partner",
+  },
+  pl: {
+    titleStart: "zostań naszym ",
+    titleHighlight: "partnerem!",
+    description:
+      "Wypełnij formularz i dołącz do naszego międzynarodowego zespołu",
+    button: "zostań partnerem",
+  },
+  ru: {
+    titleStart: "стань нашим ",
+    titleHighlight: "партнёром!",
+    description: "Заполни форму и стань частью нашей международной команды",
+    button: "стать партнёром",
+  },
+};
+
 const PartnersCta: FC<Props> = ({ lang }) => {
+  const t = translations[lang] ?? translations["de"];
+
   return (
     <section className={styles.partnersCta}>
       <div className="container">
@@ -22,26 +60,14 @@ const PartnersCta: FC<Props> = ({ lang }) => {
           <div className={styles.ctaWrapper}>
             <div className={styles.ctaContent}>
               <h2 className={`${styles.title} ${oswald.className}`}>
-                werde unser <span className={styles.highlight}>partner!</span>
+                {t.titleStart}
+                <span className={styles.highlight}>{t.titleHighlight}</span>
               </h2>
-              <p className={styles.description}>
-                Fülle das Formular aus und werde Teil unseres internationalen
-                Teams
-              </p>
+              <p className={styles.description}>{t.description}</p>
             </div>
             <FadeUpAnimate delay={150}>
               <div className={styles.ctaButton}>
-                <ButtonModal>
-                  {lang === "de"
-                    ? "jetzt partner werden!"
-                    : lang === "ru"
-                      ? "стать партнером"
-                      : lang === "en"
-                        ? "become a partner"
-                        : lang === "pl"
-                          ? "zostań partnerem"
-                          : "join as a partner"}
-                </ButtonModal>
+                <ButtonModal>{t.button}</ButtonModal>
               </div>
             </FadeUpAnimate>
           </div>
