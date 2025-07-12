@@ -89,7 +89,6 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
                 </div>
 
                 <div className={styles.formInner}>
-                  {/* <FormStandard form={formDocument} lang={lang} /> */}
                   <FormPartners form={formDocument} lang={lang} />
                 </div>
               </div>

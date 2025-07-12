@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from "./PartnersStars.module.scss";
 import { Oswald } from "next/font/google";
+import FadeUpAnimate from "../../FadeUpAnimate/FadeUpAnimate";
 
 type Props = {
   lang: string;
@@ -38,31 +39,33 @@ const PartnersStars: FC<Props> = ({ lang }) => {
           arbeiten wir <span className={styles.highlight}> zusammen</span>
         </h2>
         <div className={styles.benefitsItems}>
-          {StarsData.map((item) => (
-            <div key={item.title} className={styles.benefitsItem}>
-              <div className={styles.benefitsItemNumber}>
-                <svg
-                  width="86"
-                  height="82"
-                  viewBox="0 0 86 82"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M42.7975 0L52.9007 31.0942H85.5951L59.1447 50.3115L69.2479 81.4058L42.7975 62.1885L16.3472 81.4058L26.4503 50.3115L0 31.0942H32.6944L42.7975 0Z"
-                    stroke="none"
+          {StarsData.map((item, index) => (
+            <FadeUpAnimate key={item.title} delay={index * 150}>
+              <div className={styles.benefitsItem}>
+                <div className={styles.benefitsItemNumber}>
+                  <svg
+                    width="86"
+                    height="82"
+                    viewBox="0 0 86 82"
+                    xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="none"
-                    fill="#BD8948"
-                  ></path>
-                </svg>
+                  >
+                    <path
+                      d="M42.7975 0L52.9007 31.0942H85.5951L59.1447 50.3115L69.2479 81.4058L42.7975 62.1885L16.3472 81.4058L26.4503 50.3115L0 31.0942H32.6944L42.7975 0Z"
+                      stroke="none"
+                      preserveAspectRatio="none"
+                      fill="#BD8948"
+                    ></path>
+                  </svg>
+                </div>
+                <div className={styles.benefitsItemContent}>
+                  <h3 className={styles.benefitsItemTitle}>{item.title}</h3>
+                  <p className={styles.benefitsItemDescription}>
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <div className={styles.benefitsItemContent}>
-                <h3 className={styles.benefitsItemTitle}>{item.title}</h3>
-                <p className={styles.benefitsItemDescription}>
-                  {item.description}
-                </p>
-              </div>
-            </div>
+            </FadeUpAnimate>
           ))}
         </div>
       </div>

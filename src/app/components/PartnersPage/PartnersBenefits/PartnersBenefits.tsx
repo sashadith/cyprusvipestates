@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from "./PartnersBenefits.module.scss";
 import { Oswald } from "next/font/google";
+import FadeUpAnimate from "../../FadeUpAnimate/FadeUpAnimate";
 
 type Props = {
   lang: string;
@@ -48,17 +49,19 @@ const PartnersBenefits: FC<Props> = ({ lang }) => {
         </h2>
         <div className={styles.benefitsItems}>
           {BenefitsData.map((item, index) => (
-            <div key={index} className={styles.benefitsItem}>
-              <div className={styles.benefitsItemNumber}>
-                <span className={styles.number}>{item.number}</span>
+            <FadeUpAnimate key={index} delay={index * 100}>
+              <div className={styles.benefitsItem}>
+                <div className={styles.benefitsItemNumber}>
+                  <span className={styles.number}>{item.number}</span>
+                </div>
+                <div className={styles.benefitsItemContent}>
+                  <h3 className={styles.benefitsItemTitle}>{item.title}</h3>
+                  <p className={styles.benefitsItemDescription}>
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <div className={styles.benefitsItemContent}>
-                <h3 className={styles.benefitsItemTitle}>{item.title}</h3>
-                <p className={styles.benefitsItemDescription}>
-                  {item.description}
-                </p>
-              </div>
-            </div>
+            </FadeUpAnimate>
           ))}
         </div>
       </div>

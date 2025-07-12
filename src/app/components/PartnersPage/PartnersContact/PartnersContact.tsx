@@ -4,6 +4,7 @@ import FormPartners from "../../FormPartners/FormPartners";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Oswald } from "next/font/google";
 import Image from "next/image";
+import FadeUpAnimate from "../../FadeUpAnimate/FadeUpAnimate";
 
 type Props = {
   lang: string;
@@ -26,9 +27,11 @@ const PartnersContact: FC<Props> = ({ lang, form }) => {
               <span className={styles.highlight}> dich </span>
               als partner!
             </h2>
-            <div className={styles.formContainer}>
-              <FormPartners lang={lang} form={form} />
-            </div>
+            <FadeUpAnimate>
+              <div className={styles.formContainer}>
+                <FormPartners lang={lang} form={form} />
+              </div>
+            </FadeUpAnimate>
           </div>
           <Image
             src="https://cdn.sanity.io/files/88gk88s2/production/f8e80269dea26143ecd6c4f26bf204a1fc78fe4e.png"
