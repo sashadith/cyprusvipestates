@@ -15,6 +15,7 @@ import PartnersCta from "@/app/components/PartnersPage/PartnersCta/PartnersCta";
 import PartnersStars from "@/app/components/PartnersPage/PartnersStars/PartnersStars";
 import PartnersCount from "@/app/components/PartnersPage/PartnersCount/PartnersCount";
 import PartnersContact from "@/app/components/PartnersPage/PartnersContact/PartnersContact";
+import ModalPartners from "@/app/components/ModalPartners/ModalPartners";
 
 type Props = {
   params: { lang: string };
@@ -38,7 +39,6 @@ const PartnersPage = async ({ params }: Props) => {
   return (
     <>
       <Header params={params} translations={translations} />
-
       <main className="main-partners">
         <div className="partners-wrapper">
           <PartnersHero lang={lang} />
@@ -48,6 +48,7 @@ const PartnersPage = async ({ params }: Props) => {
           <PartnersCount lang={lang} />
           <PartnersContact lang={lang} form={formDocument} />
         </div>
+        <ModalPartners lang={params.lang} formDocument={formDocument} />
       </main>
 
       <Footer params={params} />
