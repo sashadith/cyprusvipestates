@@ -1,0 +1,53 @@
+import React, { FC } from "react";
+import styles from "./PartnersContact.module.scss";
+import FormPartners from "../../FormPartners/FormPartners";
+import { FormStandardDocument } from "@/types/formStandardDocument";
+import { Oswald } from "next/font/google";
+import Image from "next/image";
+
+type Props = {
+  lang: string;
+  form: FormStandardDocument;
+};
+
+const oswald = Oswald({
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400"],
+});
+
+const PartnersContact: FC<Props> = ({ lang, form }) => {
+  return (
+    <section className={styles.contacts}>
+      <div className="container">
+        <div className={styles.contactsBlock}>
+          <div className={styles.contactsWrapper}>
+            <h2 className={`${styles.title} ${oswald.className}`}>
+              Registriere
+              <span className={styles.highlight}> dich </span>
+              als partner!
+            </h2>
+            <div className={styles.formContainer}>
+              <FormPartners lang={lang} form={form} />
+            </div>
+          </div>
+          <Image
+            src="https://cdn.sanity.io/files/88gk88s2/production/f8e80269dea26143ecd6c4f26bf204a1fc78fe4e.png"
+            alt="Partnering with Cyprus VIP Estates"
+            width={416}
+            height={850}
+            className={styles.imageOne}
+          />
+          <Image
+            src="https://cdn.sanity.io/files/88gk88s2/production/5dec9449a1856a42ed6aacf8bf2e9d0dadbb0b29.png"
+            alt="Partnering with Cyprus VIP Estates"
+            width={323}
+            height={610}
+            className={styles.imageTwo}
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default PartnersContact;

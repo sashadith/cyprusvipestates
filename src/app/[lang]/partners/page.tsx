@@ -5,6 +5,8 @@ import Footer from "@/app/components/Footer/Footer";
 import { i18n } from "@/i18n.config";
 import { getTranslations } from "next-intl/server";
 import { Translation } from "@/types/homepage";
+import { getFormStandardDocumentByLang } from "@/sanity/sanity.utils";
+import { FormStandardDocument } from "@/types/formStandardDocument";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import PartnersHero from "@/app/components/PartnersPage/PartnersHero/PartnersHero";
 import ModalBrochure from "@/app/components/ModalBrochure/ModalBrochure";
@@ -12,6 +14,7 @@ import PartnersBenefits from "@/app/components/PartnersPage/PartnersBenefits/Par
 import PartnersCta from "@/app/components/PartnersPage/PartnersCta/PartnersCta";
 import PartnersStars from "@/app/components/PartnersPage/PartnersStars/PartnersStars";
 import PartnersCount from "@/app/components/PartnersPage/PartnersCount/PartnersCount";
+import PartnersContact from "@/app/components/PartnersPage/PartnersContact/PartnersContact";
 
 type Props = {
   params: { lang: string };
@@ -19,6 +22,9 @@ type Props = {
 
 const PartnersPage = async ({ params }: Props) => {
   const { lang } = params;
+
+  const formDocument: FormStandardDocument =
+    await getFormStandardDocumentByLang(lang);
 
   // const t = await getTranslations({ locale: lang, namespace: "partners" });
 
@@ -40,6 +46,7 @@ const PartnersPage = async ({ params }: Props) => {
           <PartnersCta lang={lang} />
           <PartnersStars lang={lang} />
           <PartnersCount lang={lang} />
+          <PartnersContact lang={lang} form={formDocument} />
         </div>
       </main>
 
