@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const MONDAY_API_URL = "https://api.monday.com/v2";
 const MONDAY_API_KEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjQ0MDQyNzMyNiwiYWFpIjoxMSwidWlkIjo2MjE1MTQ3MSwiaWFkIjoiMjAyNC0xMS0yM1QxODo1NTo0Ny40NThaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjM5NDMwODYsInJnbiI6ImV1YzEifQ.t5IONmg4UE6uHeN7qmkBI1cEGE4YKcYkDgutGA6q_Ic";
-const BOARD_ID = "1761987486";
+const BOARD_ID = "2048161725";
 
 export async function POST(request: Request) {
   try {
