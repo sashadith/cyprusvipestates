@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styles from "./PartnersBenefits.module.scss";
-import { Oswald } from "next/font/google";
+import { Oswald, Libre_Baskerville } from "next/font/google";
 import FadeUpAnimate from "../../FadeUpAnimate/FadeUpAnimate";
 
 type Props = {
@@ -10,6 +10,11 @@ type Props = {
 const oswald = Oswald({
   subsets: ["latin", "cyrillic"],
   weight: ["300", "400"],
+});
+
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 type BenefitItem = {
@@ -47,7 +52,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Exklusive Immobilien",
         description:
-          "Du erhältst Zugriff auf unsere aktuelle Immobiliendatenbank mit ausgewählten Angeboten und exklusiven Provisionskonditionen.",
+          "Du erhältst Zugriff auf unsere Datenbank und verkaufst exklusive Immobilien mit ausgewählten Angeboten und einmaligen Provisionskonditionen.",
       },
       {
         number: "4",
@@ -78,7 +83,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Exclusive properties",
         description:
-          "You get access to our up-to-date property database with selected listings and exclusive commission terms.",
+          "You get access to our database and sell exclusive properties with selected offers and unique commission conditions.",
       },
       {
         number: "4",
@@ -109,7 +114,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Ekskluzywne nieruchomości",
         description:
-          "Otrzymujesz dostęp do naszej bazy ofert z wyselekcjonowanymi nieruchomościami i preferencyjnymi warunkami prowizji.",
+          "Otrzymujesz dostęp do naszej bazy danych i sprzedajesz ekskluzywne nieruchomości z wyselekcjonowanymi ofertami i wyjątkowymi warunkami prowizji.",
       },
       {
         number: "4",
@@ -140,7 +145,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Эксклюзивная недвижимость",
         description:
-          "Вы получаете доступ к актуальной базе объектов с эксклюзивными условиями вознаграждения.",
+          "Вы получаете доступ к нашей базе данных и продаёте эксклюзивную недвижимость с отобранными предложениями и уникальными условиями комиссии.",
       },
       {
         number: "4",
@@ -168,7 +173,11 @@ const PartnersBenefits: FC<Props> = ({ lang }) => {
             <FadeUpAnimate key={index} delay={index * 100}>
               <div className={styles.benefitsItem}>
                 <div className={styles.benefitsItemNumber}>
-                  <span className={styles.number}>{item.number}</span>
+                  <span
+                    className={`${styles.number} ${libreBaskerville.className}`}
+                  >
+                    {item.number}
+                  </span>
                 </div>
                 <div className={styles.benefitsItemContent}>
                   <h3 className={styles.benefitsItemTitle}>{item.title}</h3>

@@ -20,6 +20,10 @@
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
+
+  @media screen and (min-width: 980px) {
+    row-gap: 100px;
+  }
 }
 
 .benefitsItem {
