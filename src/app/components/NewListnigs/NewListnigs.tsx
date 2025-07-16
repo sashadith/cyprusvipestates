@@ -59,7 +59,17 @@ export default async function NewListnigs({ lang }: Props) {
                               ? "Цена от"
                               : "Price from"}
                       &nbsp;
-                      {project.keyFeatures.price.toLocaleString()} €
+                      {project.keyFeatures?.price != null
+                        ? `${project.keyFeatures.price.toLocaleString()} €`
+                        : lang === "en"
+                          ? "on request"
+                          : lang === "de"
+                            ? "auf Anfrage"
+                            : lang === "pl"
+                              ? "na zapytanie"
+                              : lang === "ru"
+                                ? "по запросу"
+                                : "on request"}
                     </p>
                   </div>
                   <div className={styles.button}>
