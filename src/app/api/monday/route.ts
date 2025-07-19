@@ -29,7 +29,8 @@ export async function POST(request: Request) {
       text_mkkwekh3: email,
       text_mkkwk9kt: currentPage,
       text_mkq6spmc: message,
-      date4: cyprusDateTime,
+      date4: currentDate,
+      text_mkt0gyvy: cyprusDateTime,
     };
     if (message) cols.text_message = message;
 
