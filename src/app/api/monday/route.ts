@@ -13,15 +13,12 @@ export async function POST(request: Request) {
 
     const currentDate = new Date().toISOString().split("T")[0];
 
-    const cyprusDateTime = new Date().toLocaleString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
+    const cyprusTime = new Intl.DateTimeFormat("en-GB", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
       timeZone: "Asia/Nicosia",
-    });
+    }).format(new Date()); // например: "13:45"
 
     // Собираем column_values динамически
     const cols: Record<string, string> = {
@@ -29,9 +26,10 @@ export async function POST(request: Request) {
       text_mkkwekh3: email,
       text_mkkwk9kt: currentPage,
       text_mkq6spmc: message,
-      date4: currentDate,
-      text_mkt0gyvy: cyprusDateTime,
+      text_mkt0yf6q: currentDate,
+      text_mkt0gyvy: cyprusTime,
     };
+
     if (message) cols.text_message = message;
 
     const query = `
