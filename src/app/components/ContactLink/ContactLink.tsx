@@ -66,6 +66,7 @@ export default function ContactLink({ contact }: Props) {
         src={urlFor(contact.icon).url()}
         width={30}
         height={30}
+        unoptimized
       />
       <p className={styles.contactLabel}>{contact.label}</p>
     </Link>

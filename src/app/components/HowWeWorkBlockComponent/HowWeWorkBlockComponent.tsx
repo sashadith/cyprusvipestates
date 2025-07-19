@@ -92,6 +92,7 @@ const HowWeWorkBlockComponent: FC<Props> = ({ block, lang }) => {
                     src={icon}
                     width={80}
                     height={80}
+                    unoptimized
                     className={styles.icon}
                   />
                 </div>

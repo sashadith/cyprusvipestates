@@ -35,6 +35,7 @@ const ProjectLink: FC<Props> = ({
           alt={previewImage.alt || title}
           className={styles.image}
           fill={true}
+          unoptimized
         />
         <div className={styles.projectInfo}>
           <p className={styles.projectTitle}>{title}</p>

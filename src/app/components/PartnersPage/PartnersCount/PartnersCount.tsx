@@ -135,6 +135,7 @@ const PartnersCount: FC<Props> = ({ lang }) => {
                     alt="Cyprus VIP Estates Benefits"
                     width={80}
                     height={80}
+                    unoptimized
                     className={styles.icon}
                   />
                 </div>

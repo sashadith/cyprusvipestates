@@ -22,6 +22,7 @@ const LogosCarousel: FC<Props> = ({ logos }) => {
               src={urlFor(logo).url()}
               width={250}
               height={200}
+              unoptimized
               className={styles.logoIcon}
             />
           </div>

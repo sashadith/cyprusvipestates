@@ -95,6 +95,7 @@ const Footer = async ({ params }: Props) => {
                   width={400}
                   height={400}
                   className={styles.image}
+                  unoptimized
                 />
               </div>
               <div className={styles.socialLinks}>
@@ -111,6 +112,7 @@ const Footer = async ({ params }: Props) => {
                       src={urlFor(socialLink.icon).url()}
                       width={50}
                       height={50}
+                      unoptimized
                     />
                   </Link>
                 ))}

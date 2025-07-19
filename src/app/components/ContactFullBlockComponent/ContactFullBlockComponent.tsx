@@ -67,6 +67,7 @@ const ContactFullBlockComponent: FC<Props> = ({ block, lang }) => {
                     src={urlFor(contact.icon).url()}
                     width={50}
                     height={50}
+                    unoptimized
                   />
                   <p className={styles.contactLabel}>
                     {contact.title}: {contact.label}

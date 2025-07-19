@@ -25,6 +25,7 @@ const PropertyCard: FC<Props> = ({ property, lang }) => {
               alt={property.title}
               fill={true}
               className={styles.image}
+              unoptimized
             />
           )}
         </div>

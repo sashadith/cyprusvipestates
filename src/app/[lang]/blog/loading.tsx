@@ -10,6 +10,7 @@ export default function Loading() {
         width={180}
         height={230}
         className="loader-img"
+        unoptimized
       />
     </div>
   );

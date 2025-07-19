@@ -28,6 +28,7 @@ const HowWeWorkBlock: FC<Props> = ({ work }) => {
                     src={urlFor(step.icon).url()}
                     width={80}
                     height={80}
+                    unoptimized
                     className={styles.icon}
                   />
                 </div>

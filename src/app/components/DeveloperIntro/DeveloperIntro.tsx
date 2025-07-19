@@ -26,6 +26,7 @@ const DeveloperIntro: FC<Props> = ({ titleFull, excerpt, logo }) => {
               width={200}
               height={200}
               className="imagePoster"
+              unoptimized
             />
           </div>
         </div>

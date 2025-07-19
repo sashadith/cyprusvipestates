@@ -56,6 +56,7 @@ const VideoPreview: FC<Props> = ({ videoId, videoPreview }) => {
             alt="Video preview"
             src={urlFor(videoPreview).url()}
             fill
+            unoptimized
             className={styles.imagePoster}
           />
         </div>

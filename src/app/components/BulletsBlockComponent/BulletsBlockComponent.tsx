@@ -91,6 +91,7 @@ const BulletsBlockComponent: FC<Props> = ({ block, lang }) => {
                   width={250}
                   height={250}
                   className={styles.image}
+                  unoptimized
                 />
               </div>
               <p className={styles.text}>{texts[index]}</p>

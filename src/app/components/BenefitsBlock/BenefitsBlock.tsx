@@ -27,6 +27,7 @@ const BenefitsBlock: FC<Props> = ({ benefitsBlock }) => {
                     width={80}
                     height={80}
                     className={styles.icon}
+                    unoptimized
                   />
                 </div>
                 <div className={styles.content}>

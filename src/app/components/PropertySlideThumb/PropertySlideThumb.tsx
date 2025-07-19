@@ -16,6 +16,7 @@ const PropertySlideThumb: FC<Props> = ({ image }) => {
         alt={image.alt || "default alt text"}
         className={styles.image}
         fill={true}
+        unoptimized
       />
     </div>
   );

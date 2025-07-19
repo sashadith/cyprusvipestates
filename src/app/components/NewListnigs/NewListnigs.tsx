@@ -44,6 +44,7 @@ export default async function NewListnigs({ lang }: Props) {
                   alt={project.previewImage.alt || project.title}
                   className={styles.image}
                   fill={true}
+                  unoptimized
                 />
                 <div className={styles.projectInfo}>
                   <div className={styles.content}>

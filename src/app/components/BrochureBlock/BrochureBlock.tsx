@@ -28,6 +28,7 @@ const BrochureBlock: FC<Props> = ({ brochure }) => {
                   width={65}
                   height={65}
                   className={styles.logo}
+                  unoptimized
                 />
               </div>
               <div className={styles.startText}>
@@ -45,6 +46,7 @@ const BrochureBlock: FC<Props> = ({ brochure }) => {
                     width={20}
                     height={20}
                     className={styles.checkMark}
+                    unoptimized
                   />
                   {item.listItem}
                 </li>
