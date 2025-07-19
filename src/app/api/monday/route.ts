@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       text_mkkwekh3: email,
       text_mkkwk9kt: currentPage,
       text_mkq6spmc: message,
-      text_mkt0yf6q: currentDate,
+      date_mkt0wz3n: currentDate,
       text_mkt0gyvy: cyprusTime,
     };
 
