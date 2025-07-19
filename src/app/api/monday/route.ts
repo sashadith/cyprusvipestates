@@ -13,13 +13,23 @@ export async function POST(request: Request) {
 
     const currentDate = new Date().toISOString().split("T")[0];
 
+    const cyprusDateTime = new Date().toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Nicosia",
+    });
+
     // Собираем column_values динамически
     const cols: Record<string, string> = {
       text_mkkwm0b4: phone,
       text_mkkwekh3: email,
       text_mkkwk9kt: currentPage,
       text_mkq6spmc: message,
-      date4: currentDate,
+      date4: cyprusDateTime,
     };
     if (message) cols.text_message = message;
 
