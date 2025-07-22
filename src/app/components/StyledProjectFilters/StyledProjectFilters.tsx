@@ -1,8 +1,18 @@
-// components/StyledProjectFilters.tsx
-import React from "react";
-import styles from "./StyledProjectFilters.module.scss";
+"use client";
+
+import React, { useCallback, useMemo, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import FloatingSelect, { OptionType } from "../FloatingSelect/FloatingSelect";
 import FloatingLabelInput from "../FloatingLabelInput/FloatingLabelInput";
+import styles from "./StyledProjectFilters.module.scss";
+
+function debounce<T extends (...args: any[]) => void>(fn: T, wait = 300) {
+  let t: ReturnType<typeof setTimeout> | null = null;
+  return (...args: Parameters<T>) => {
+    if (t) clearTimeout(t);
+    t = setTimeout(() => fn(...args), wait);
+  };
+}
 
 type ProjectFiltersProps = {
   lang: string;
@@ -11,13 +21,6 @@ type ProjectFiltersProps = {
   priceTo?: number | string | null;
   propertyType?: string;
 };
-
-const cityOptions: OptionType[] = [
-  { label: "All cities", value: "" },
-  { label: "Paphos", value: "Paphos" },
-  { label: "Limassol", value: "Limassol" },
-  { label: "Larnaca", value: "Larnaca" },
-];
 
 const cityOptionsByLang: Record<string, OptionType[]> = {
   en: [
@@ -85,111 +88,148 @@ const propertyTypeOptionsByLang: Record<string, OptionType[]> = {
   ],
 };
 
-const StyledProjectFilters: React.FC<ProjectFiltersProps> = ({
+export default function StyledProjectFilters({
   lang,
   city,
   priceFrom,
   priceTo,
   propertyType,
-}) => {
-  const cityOptions = cityOptionsByLang[lang] || cityOptionsByLang["en"];
-  const propertyTypeOptions =
-    propertyTypeOptionsByLang[lang] || propertyTypeOptionsByLang["en"];
+}: ProjectFiltersProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [, startTransition] = useTransition();
+
+  const cityOptions = cityOptionsByLang[lang];
+  const typeOptions = propertyTypeOptionsByLang[lang];
+
+  const updateQuery = useCallback(
+    (next: Record<string, unknown>) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      Object.entries(next).forEach(([key, value]) => {
+        if (value === "" || value === null || value === undefined) {
+          params.delete(key);
+        } else {
+          params.set(key, String(value));
+        }
+      });
+
+      params.delete("page");
+
+      startTransition(() => {
+        router.replace(`?${params.toString()}`, { scroll: false });
+      });
+    },
+    [router, searchParams, startTransition]
+  );
+
+  const debouncedUpdate = useMemo(
+    () => debounce(updateQuery, 300),
+    [updateQuery]
+  );
+
+  const cityDefault = city
+    ? (cityOptions.find((o) => o.value === city) ?? null)
+    : null;
+  const typeDefault = propertyType
+    ? (typeOptions.find((o) => o.value === propertyType) ?? null)
+    : null;
+
+  const labelCity =
+    lang === "de"
+      ? "Stadt"
+      : lang === "ru"
+        ? "Город"
+        : lang === "pl"
+          ? "Miasto"
+          : "City";
+  const labelPriceFrom =
+    lang === "de"
+      ? "Preis von (€)"
+      : lang === "ru"
+        ? "Цена от (€)"
+        : lang === "pl"
+          ? "Cena od (€)"
+          : "Price from (€)";
+  const labelPriceTo =
+    lang === "de"
+      ? "Preis bis (€)"
+      : lang === "ru"
+        ? "Цена до (€)"
+        : lang === "pl"
+          ? "Cena do (€)"
+          : "Price to (€)";
+  const labelPropertyType =
+    lang === "de"
+      ? "Immobilientyp"
+      : lang === "ru"
+        ? "Тип недвижимости"
+        : lang === "pl"
+          ? "Typ nieruchomości"
+          : "Property Type";
+  const labelReset =
+    lang === "de"
+      ? "Zurücksetzen"
+      : lang === "ru"
+        ? "Сбросить"
+        : lang === "pl"
+          ? "Resetuj"
+          : "Reset";
 
   return (
-    <form method="get" className={styles.form}>
+    <div className={styles.form}>
       <div className={styles.formElements}>
         <FloatingSelect
-          label={
-            lang === "en"
-              ? "City"
-              : lang === "de"
-                ? "Stadt"
-                : lang === "pl"
-                  ? "Miasto"
-                  : lang === "ru"
-                    ? "Город"
-                    : "City"
-          }
+          label={labelCity}
           name="city"
           options={cityOptions}
-          defaultValue={
-            city ? cityOptions.find((opt) => opt.value === city) || null : null
-          }
+          defaultValue={cityDefault}
+          onChange={(opt) => updateQuery({ city: opt?.value ?? "" })}
         />
 
         <FloatingLabelInput
-          label={
-            lang === "en"
-              ? "Price from (€)"
-              : lang === "de"
-                ? "Preis von (€)"
-                : lang === "pl"
-                  ? "Cena od (€)"
-                  : lang === "ru"
-                    ? "Цена от (€)"
-                    : "Price from (€)"
-          }
+          label={labelPriceFrom}
           name="priceFrom"
           type="number"
-          defaultValue={priceFrom ? String(priceFrom) : ""}
+          defaultValue={priceFrom != null ? String(priceFrom) : ""}
+          onChange={(e) => debouncedUpdate({ priceFrom: e.target.value })}
+          className={styles.input}
         />
 
         <FloatingLabelInput
-          label={
-            lang === "en"
-              ? "Price to (€)"
-              : lang === "de"
-                ? "Preis bis (€)"
-                : lang === "pl"
-                  ? "Cena do (€)"
-                  : lang === "ru"
-                    ? "Цена до (€)"
-                    : "Price to (€)"
-          }
+          label={labelPriceTo}
           name="priceTo"
           type="number"
-          defaultValue={priceTo ? String(priceTo) : ""}
+          defaultValue={priceTo != null ? String(priceTo) : ""}
+          onChange={(e) => debouncedUpdate({ priceTo: e.target.value })}
+          className={styles.input}
         />
 
         <FloatingSelect
-          label={
-            lang === "en"
-              ? "Property Type"
-              : lang === "de"
-                ? "Immobilientyp"
-                : lang === "pl"
-                  ? "Typ nieruchomości"
-                  : lang === "ru"
-                    ? "Тип недвижимости"
-                    : "Property Type"
-          }
+          label={labelPropertyType}
           name="propertyType"
-          options={propertyTypeOptions}
-          defaultValue={
-            propertyType
-              ? propertyTypeOptions.find((opt) => opt.value === propertyType) ||
-                null
-              : null
-          }
+          options={typeOptions}
+          defaultValue={typeDefault}
+          onChange={(opt) => updateQuery({ propertyType: opt?.value ?? "" })}
         />
       </div>
 
       <div style={{ marginTop: "1rem" }}>
-        <button type="submit" className={styles.button}>
-          {lang === "en"
-            ? "Apply filters"
-            : lang === "de"
-              ? "Filter anwenden"
-              : lang === "pl"
-                ? "Zastosuj filtry"
-                : lang === "ru"
-                  ? "Применить фильтры"
-                  : "Apply filters"}
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() =>
+            updateQuery({
+              city: "",
+              priceFrom: "",
+              priceTo: "",
+              propertyType: "",
+            })
+          }
+        >
+          {labelReset}
         </button>
       </div>
-    </form>
+    </div>
   );
-};
-
-export default StyledProjectFilters;
+}
