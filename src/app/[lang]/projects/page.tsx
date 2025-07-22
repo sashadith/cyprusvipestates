@@ -1,5 +1,6 @@
-// app/projects/page.tsx
-import React from "react";
+import React, { Suspense } from "react";
+import ProjectsGrid from "./ProjectsGrid";
+import ProjectsGridSkeleton from "./ProjectsGridSkeleton";
 import Link from "next/link";
 import {
   getFilteredProjects,
@@ -149,33 +150,26 @@ export default async function ProjectsPage({
           />
         </div>
         <div className="container">
-          {projects.length === 0 ? (
-            <NoProjects lang={lang} />
-          ) : (
-            <div className="projects">
-              {projects.map((project: any) => {
-                const projectUrl =
-                  project.slug && project.slug.current
-                    ? lang === defaultLocale
-                      ? `/projects/${project.slug.current}`
-                      : `/${lang}/projects/${project.slug.current}`
-                    : "#";
-                return (
-                  <ProjectLink
-                    key={project._id}
-                    url={projectUrl}
-                    previewImage={project.previewImage}
-                    title={project.title}
-                    price={project.keyFeatures?.price ?? 0}
-                    bedrooms={project.keyFeatures?.bedrooms ?? 0}
-                    coveredArea={project.keyFeatures?.coveredArea ?? 0}
-                    plotSize={project.keyFeatures?.plotSize ?? 0}
-                    lang={lang}
-                  />
-                );
-              })}
-            </div>
-          )}
+          <Suspense
+            key={JSON.stringify({
+              city,
+              priceFrom,
+              priceTo,
+              propertyType,
+              currentPage,
+            })}
+            fallback={<ProjectsGridSkeleton />}
+          >
+            <ProjectsGrid
+              lang={lang}
+              skip={skip}
+              pageSize={PAGE_SIZE}
+              city={city}
+              priceFrom={priceFrom}
+              priceTo={priceTo}
+              propertyType={propertyType}
+            />
+          </Suspense>
         </div>
         <div className="pagination-links" style={{ marginTop: "2rem" }}>
           {totalPages > 1 && (

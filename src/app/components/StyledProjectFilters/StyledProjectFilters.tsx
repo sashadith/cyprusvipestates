@@ -124,7 +124,7 @@ export default function StyledProjectFilters({
   );
 
   const debouncedUpdate = useMemo(
-    () => debounce(updateQuery, 300),
+    () => debounce(updateQuery, 700),
     [updateQuery]
   );
 
