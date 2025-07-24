@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, FocusEvent } from "react";
+import React, { useState, FocusEvent, useEffect } from "react";
 import Select, {
   StylesConfig,
   SingleValue,
@@ -14,7 +14,7 @@ type FloatingSelectProps = {
   label: string;
   name: string;
   options: OptionType[];
-  defaultValue?: OptionType | null;
+  value?: OptionType | null;
   onChange?: (option: SingleValue<OptionType>) => void;
 };
 
@@ -22,17 +22,14 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
   label,
   name,
   options,
-  defaultValue = null,
+  value = null,
   onChange,
 }) => {
   const [focused, setFocused] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<OptionType | null>(
-    defaultValue
-  );
 
   const handleFocus = () => setFocused(true);
   const handleBlur = (e: FocusEvent) => {
-    if (!selectedOption) {
+    if (!value || value.value === "") {
       setFocused(false);
     }
   };
@@ -41,9 +38,7 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
     newValue: SingleValue<OptionType> | MultiValue<OptionType>,
     actionMeta: ActionMeta<OptionType>
   ) => {
-    // Если вы используете одиночный выбор, приводим значение к SingleValue<OptionType>
     const singleOption = newValue as SingleValue<OptionType>;
-    setSelectedOption(singleOption);
     if (onChange) {
       onChange(singleOption);
     }
@@ -65,7 +60,6 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
     }),
     dropdownIndicator: (provided) => ({
       ...provided,
-      // marginTop: "-3px", // Поднимаем стрелку
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -73,15 +67,14 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
     }),
     singleValue: (provided) => ({
       ...provided,
-      marginTop: "-10px", // Поднимаем выбранный текст
+      marginTop: "-10px",
     }),
     clearIndicator: (provided) => ({
       ...provided,
-      // marginTop: "-1px", // Поднимаем индикатор-крестик
     }),
     input: (provided) => ({
       ...provided,
-      marginTop: "-8px", // Поднимаем вводимый текст и курсор
+      marginTop: "-8px",
     }),
     placeholder: (provided) => ({
       ...provided,
@@ -93,7 +86,6 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
     }),
     option: (provided, state) => ({
       ...provided,
-      // Если опция выбрана, используем основной цвет, иначе при ховере – прозрачную версию
       backgroundColor: state.isSelected
         ? "#bd8948"
         : state.isFocused
@@ -107,12 +99,21 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
     }),
   };
 
+  useEffect(() => {
+    // активируем лейбл, если есть выбранная опция (включая value === "")
+    if (value) {
+      setFocused(true);
+    } else {
+      setFocused(false);
+    }
+  }, [value]);
+
   return (
     <div className={styles.selectContainer}>
       <Select
         name={name}
         options={options}
-        value={selectedOption}
+        value={value ?? null}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -122,7 +123,7 @@ const FloatingSelect: React.FC<FloatingSelectProps> = ({
       <label
         htmlFor={name}
         className={`${styles.floatingLabel} ${
-          focused || selectedOption ? styles.active : ""
+          focused || value ? styles.active : ""
         }`}
       >
         {label}

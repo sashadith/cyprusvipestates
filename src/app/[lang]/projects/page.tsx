@@ -1,6 +1,4 @@
-import React, { Suspense } from "react";
-import ProjectsGrid from "./ProjectsGrid";
-import ProjectsGridSkeleton from "./ProjectsGridSkeleton";
+import React from "react";
 import Link from "next/link";
 import {
   getFilteredProjects,
@@ -28,6 +26,8 @@ type SearchParams = {
   priceFrom?: string;
   priceTo?: string;
   propertyType?: string;
+  sort?: string;
+  q?: string;
 };
 
 type ProjectsPageProps = {
@@ -106,12 +106,16 @@ export default async function ProjectsPage({
   const priceTo = searchParams.priceTo ? Number(searchParams.priceTo) : null;
   const propertyType = searchParams.propertyType || "";
   const skip = (currentPage - 1) * PAGE_SIZE;
+  const sort = searchParams.sort || "priceAsc";
+  const q = searchParams.q || "";
 
   const projects = await getFilteredProjects(lang, skip, PAGE_SIZE, {
     city,
     priceFrom,
     priceTo,
     propertyType,
+    sort,
+    q,
   });
   const totalProjects = await getFilteredProjectsCount(lang, {
     city,
@@ -147,29 +151,38 @@ export default async function ProjectsPage({
             priceFrom={priceFrom}
             priceTo={priceTo}
             propertyType={propertyType}
+            sort={sort}
+            q={q}
           />
         </div>
         <div className="container">
-          <Suspense
-            key={JSON.stringify({
-              city,
-              priceFrom,
-              priceTo,
-              propertyType,
-              currentPage,
-            })}
-            fallback={<ProjectsGridSkeleton />}
-          >
-            <ProjectsGrid
-              lang={lang}
-              skip={skip}
-              pageSize={PAGE_SIZE}
-              city={city}
-              priceFrom={priceFrom}
-              priceTo={priceTo}
-              propertyType={propertyType}
-            />
-          </Suspense>
+          {projects.length === 0 ? (
+            <NoProjects lang={lang} />
+          ) : (
+            <div className="projects">
+              {projects.map((project: any) => {
+                const projectUrl =
+                  project.slug && project.slug.current
+                    ? lang === defaultLocale
+                      ? `/projects/${project.slug.current}`
+                      : `/${lang}/projects/${project.slug.current}`
+                    : "#";
+                return (
+                  <ProjectLink
+                    key={project._id}
+                    url={projectUrl}
+                    previewImage={project.previewImage}
+                    title={project.title}
+                    price={project.keyFeatures?.price ?? 0}
+                    bedrooms={project.keyFeatures?.bedrooms ?? 0}
+                    coveredArea={project.keyFeatures?.coveredArea ?? 0}
+                    plotSize={project.keyFeatures?.plotSize ?? 0}
+                    lang={lang}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
         <div className="pagination-links" style={{ marginTop: "2rem" }}>
           {totalPages > 1 && (

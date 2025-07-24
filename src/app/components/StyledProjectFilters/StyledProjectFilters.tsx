@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useCallback, useMemo, useTransition } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import FloatingSelect, { OptionType } from "../FloatingSelect/FloatingSelect";
 import FloatingLabelInput from "../FloatingLabelInput/FloatingLabelInput";
@@ -20,6 +26,8 @@ type ProjectFiltersProps = {
   priceFrom?: number | string | null;
   priceTo?: number | string | null;
   propertyType?: string;
+  sort?: string;
+  q?: string;
 };
 
 const cityOptionsByLang: Record<string, OptionType[]> = {
@@ -94,6 +102,8 @@ export default function StyledProjectFilters({
   priceFrom,
   priceTo,
   propertyType,
+  sort,
+  q,
 }: ProjectFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -101,6 +111,13 @@ export default function StyledProjectFilters({
 
   const cityOptions = cityOptionsByLang[lang];
   const typeOptions = propertyTypeOptionsByLang[lang];
+
+  const [cityValue, setCityValue] = useState("");
+  const [typeValue, setTypeValue] = useState("");
+  const [sortValue, setSortValue] = useState("");
+  const [priceFromValue, setPriceFromValue] = useState("");
+  const [priceToValue, setPriceToValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const updateQuery = useCallback(
     (next: Record<string, unknown>) => {
@@ -122,6 +139,24 @@ export default function StyledProjectFilters({
     },
     [router, searchParams, startTransition]
   );
+
+  const handleReset = () => {
+    setSearchValue("");
+    setCityValue("");
+    setPriceFromValue("");
+    setPriceToValue("");
+    setTypeValue("");
+    setSortValue("");
+
+    updateQuery({
+      city: "",
+      priceFrom: "",
+      priceTo: "",
+      propertyType: "",
+      sort: "",
+      q: "",
+    });
+  };
 
   const debouncedUpdate = useMemo(
     () => debounce(updateQuery, 700),
@@ -176,6 +211,10 @@ export default function StyledProjectFilters({
           ? "Resetuj"
           : "Reset";
 
+  useEffect(() => {
+    setSearchValue(q || "");
+  }, [q]);
+
   return (
     <div className={styles.form}>
       <div className={styles.formElements}>
@@ -183,16 +222,44 @@ export default function StyledProjectFilters({
           label={labelCity}
           name="city"
           options={cityOptions}
-          defaultValue={cityDefault}
-          onChange={(opt) => updateQuery({ city: opt?.value ?? "" })}
+          value={
+            cityValue === ""
+              ? null
+              : cityOptions.find((o) => o.value === cityValue) || null
+          }
+          onChange={(opt) => {
+            const val = opt?.value ?? "";
+            setCityValue(val);
+            updateQuery({ city: val });
+          }}
+        />
+
+        <FloatingSelect
+          label={labelPropertyType}
+          name="propertyType"
+          options={typeOptions}
+          value={
+            typeValue === ""
+              ? null
+              : typeOptions.find((o) => o.value === typeValue) || null
+          }
+          onChange={(opt) => {
+            const val = opt?.value ?? "";
+            setTypeValue(val);
+            updateQuery({ propertyType: val });
+          }}
         />
 
         <FloatingLabelInput
           label={labelPriceFrom}
           name="priceFrom"
           type="number"
-          defaultValue={priceFrom != null ? String(priceFrom) : ""}
-          onChange={(e) => debouncedUpdate({ priceFrom: e.target.value })}
+          value={String(priceFromValue)}
+          onChange={(e) => {
+            const val = e.target.value;
+            setPriceFromValue(val);
+            debouncedUpdate({ priceFrom: val });
+          }}
           className={styles.input}
         />
 
@@ -200,33 +267,59 @@ export default function StyledProjectFilters({
           label={labelPriceTo}
           name="priceTo"
           type="number"
-          defaultValue={priceTo != null ? String(priceTo) : ""}
-          onChange={(e) => debouncedUpdate({ priceTo: e.target.value })}
+          value={String(priceToValue)}
+          onChange={(e) => {
+            const val = e.target.value;
+            setPriceToValue(val);
+            debouncedUpdate({ priceTo: val });
+          }}
           className={styles.input}
         />
 
-        <FloatingSelect
-          label={labelPropertyType}
-          name="propertyType"
-          options={typeOptions}
-          defaultValue={typeDefault}
-          onChange={(opt) => updateQuery({ propertyType: opt?.value ?? "" })}
+        <FloatingLabelInput
+          label="Search by keyword"
+          name="q"
+          value={searchValue}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            setSearchValue(newValue);
+            debouncedUpdate({ q: newValue });
+          }}
+          className={styles.keywordInput}
         />
-      </div>
 
-      <div style={{ marginTop: "1rem" }}>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() =>
-            updateQuery({
-              city: "",
-              priceFrom: "",
-              priceTo: "",
-              propertyType: "",
-            })
+        <FloatingSelect
+          label="Sort by"
+          name="sort"
+          options={[
+            { label: "Price: Low to High", value: "priceAsc" },
+            { label: "Price: High to Low", value: "priceDesc" },
+            { label: "Title: A–Z", value: "titleAsc" },
+            { label: "Title: Z–A", value: "titleDesc" },
+          ]}
+          value={
+            sortValue
+              ? {
+                  label:
+                    sortValue === "priceAsc"
+                      ? "Price: Low to High"
+                      : sortValue === "priceDesc"
+                        ? "Price: High to Low"
+                        : sortValue === "titleAsc"
+                          ? "Title: A–Z"
+                          : "Title: Z–A",
+                  value: sortValue,
+                }
+              : null
           }
-        >
+          onChange={(opt) => {
+            const val = opt?.value ?? "";
+            setSortValue(val);
+            updateQuery({ sort: val });
+          }}
+        />
+
+        <button type="button" className={styles.button} onClick={handleReset}>
           {labelReset}
         </button>
       </div>

@@ -13,7 +13,7 @@ export type FloatingLabelInputProps = {
   name: string;
   type?: string;
   defaultValue?: string;
-  value?: string; // если захотите полностью контролировать извне
+  value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 };
@@ -34,27 +34,24 @@ const FloatingLabelInput = forwardRef<
     },
     ref
   ) => {
-    // если value передан — контролируемый режим, иначе внутренний стейт
     const [innerValue, setInnerValue] = useState(defaultValue);
     const isControlled = value !== undefined;
+    const currentValue = isControlled ? value! : innerValue;
 
-    // синхронизируем внутреннее значение, если поменялся defaultValue
+    const [focused, setFocused] = useState(Boolean(currentValue));
+
     useEffect(() => {
       if (!isControlled) {
         setInnerValue(defaultValue);
       }
     }, [defaultValue, isControlled]);
 
-    const currentValue = isControlled ? value! : innerValue;
-
-    const [focused, setFocused] = useState(Boolean(currentValue));
+    useEffect(() => {
+      setFocused(Boolean(currentValue));
+    }, [currentValue]);
 
     const handleFocus = () => setFocused(true);
-
-    const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-      if (!e.target.value) setFocused(false);
-    };
-
+    const handleBlur = () => {};
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       if (!isControlled) setInnerValue(e.target.value);
       onChange?.(e);
@@ -75,9 +72,7 @@ const FloatingLabelInput = forwardRef<
         />
         <label
           htmlFor={name}
-          className={`${styles.floatingLabel} ${
-            focused || currentValue ? styles.active : ""
-          }`}
+          className={`${styles.floatingLabel} ${focused ? styles.active : ""}`}
         >
           {label}
         </label>
