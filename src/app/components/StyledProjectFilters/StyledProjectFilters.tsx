@@ -203,6 +203,51 @@ export default function StyledProjectFilters({
         : lang === "pl"
           ? "Typ nieruchomości"
           : "Property Type";
+  const labelSearch =
+    lang === "de"
+      ? "Nach Stichwort suchen"
+      : lang === "ru"
+        ? "Поиск по ключевым словам"
+        : lang === "pl"
+          ? "Szukaj według słowa kluczowego"
+          : "Search by keyword";
+  const labelSort =
+    lang === "de"
+      ? "Sortieren nach"
+      : lang === "ru"
+        ? "Сортировка"
+        : lang === "pl"
+          ? "Sortuj według"
+          : "Sort by";
+
+  const sortOptions =
+    lang === "de"
+      ? [
+          { label: "Preis: aufsteigend", value: "priceAsc" },
+          { label: "Preis: absteigend", value: "priceDesc" },
+          { label: "Titel: A–Z", value: "titleAsc" },
+          { label: "Titel: Z–A", value: "titleDesc" },
+        ]
+      : lang === "ru"
+        ? [
+            { label: "Цена: по возрастанию", value: "priceAsc" },
+            { label: "Цена: по убыванию", value: "priceDesc" },
+            { label: "Название: A–Z", value: "titleAsc" },
+            { label: "Название: Z–A", value: "titleDesc" },
+          ]
+        : lang === "pl"
+          ? [
+              { label: "Cena: rosnąco", value: "priceAsc" },
+              { label: "Cena: malejąco", value: "priceDesc" },
+              { label: "Tytuł: A–Z", value: "titleAsc" },
+              { label: "Tytuł: Z–A", value: "titleDesc" },
+            ]
+          : [
+              { label: "Price: Low to High", value: "priceAsc" },
+              { label: "Price: High to Low", value: "priceDesc" },
+              { label: "Title: A–Z", value: "titleAsc" },
+              { label: "Title: Z–A", value: "titleDesc" },
+            ];
   const labelReset =
     lang === "de"
       ? "Zurücksetzen"
@@ -297,7 +342,7 @@ export default function StyledProjectFilters({
           />
 
           <FloatingLabelInput
-            label="Search by keyword"
+            label={labelSearch}
             name="q"
             value={searchValue}
             onChange={(e) => {
@@ -309,27 +354,12 @@ export default function StyledProjectFilters({
           />
 
           <FloatingSelect
-            label="Sort by"
+            label={labelSort}
             name="sort"
-            options={[
-              { label: "Price: Low to High", value: "priceAsc" },
-              { label: "Price: High to Low", value: "priceDesc" },
-              { label: "Title: A–Z", value: "titleAsc" },
-              { label: "Title: Z–A", value: "titleDesc" },
-            ]}
+            options={sortOptions}
             value={
               sortValue
-                ? {
-                    label:
-                      sortValue === "priceAsc"
-                        ? "Price: Low to High"
-                        : sortValue === "priceDesc"
-                          ? "Price: High to Low"
-                          : sortValue === "titleAsc"
-                            ? "Title: A–Z"
-                            : "Title: Z–A",
-                    value: sortValue,
-                  }
+                ? sortOptions.find((o) => o.value === sortValue) || null
                 : null
             }
             onChange={(opt) => {
