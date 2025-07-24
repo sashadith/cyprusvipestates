@@ -135,26 +135,15 @@ export default async function ProjectsPage({
       </div> */}
 
       <main style={{ paddingTop: "2rem" }}>
-        <div className="container">
-          <h1 className="h2-white header-mt">
-            {lang === "en"
-              ? "Luxury Real Estate Projects in Cyprus"
-              : lang === "de" || lang === "ru"
-                ? "Luxusimmobilien auf Zypern"
-                : lang === "pl"
-                  ? "Luksusowe projekty nieruchomości na Cyprze"
-                  : "Luxury Real Estate Projects in Cyprus"}
-          </h1>
-          <StyledProjectFilters
-            lang={lang}
-            city={city}
-            priceFrom={priceFrom}
-            priceTo={priceTo}
-            propertyType={propertyType}
-            sort={sort}
-            q={q}
-          />
-        </div>
+        <StyledProjectFilters
+          lang={lang}
+          city={city}
+          priceFrom={priceFrom}
+          priceTo={priceTo}
+          propertyType={propertyType}
+          sort={sort}
+          q={q}
+        />
         <div className="container">
           {projects.length === 0 ? (
             <NoProjects lang={lang} />

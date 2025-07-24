@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import FloatingSelect, { OptionType } from "../FloatingSelect/FloatingSelect";
 import FloatingLabelInput from "../FloatingLabelInput/FloatingLabelInput";
 import styles from "./StyledProjectFilters.module.scss";
+import Image from "next/image";
 
 function debounce<T extends (...args: any[]) => void>(fn: T, wait = 300) {
   let t: ReturnType<typeof setTimeout> | null = null;
@@ -217,111 +218,131 @@ export default function StyledProjectFilters({
 
   return (
     <div className={styles.form}>
-      <div className={styles.formElements}>
-        <FloatingSelect
-          label={labelCity}
-          name="city"
-          options={cityOptions}
-          value={
-            cityValue === ""
-              ? null
-              : cityOptions.find((o) => o.value === cityValue) || null
-          }
-          onChange={(opt) => {
-            const val = opt?.value ?? "";
-            setCityValue(val);
-            updateQuery({ city: val });
-          }}
+      <div className={styles.bg}>
+        <div className={styles.bgOverlay}></div>
+        <Image
+          src="https://cdn.sanity.io/files/88gk88s2/production/bef9ef8c1faaf4bb80be49714d5c345bc434b1e0.webp"
+          alt="Search"
+          fill
+          className={styles.backgroundImage}
         />
+      </div>
+      <div className={`${styles.formWrapper} container`}>
+        <h1 className="h2-white header-mt text-center">
+          {lang === "en"
+            ? "Luxury Real Estate Projects in Cyprus"
+            : lang === "de" || lang === "ru"
+              ? "Luxusimmobilien auf Zypern"
+              : lang === "pl"
+                ? "Luksusowe projekty nieruchomości na Cyprze"
+                : "Luxury Real Estate Projects in Cyprus"}
+        </h1>
+        <div className={styles.formElements}>
+          <FloatingSelect
+            label={labelCity}
+            name="city"
+            options={cityOptions}
+            value={
+              cityValue === ""
+                ? null
+                : cityOptions.find((o) => o.value === cityValue) || null
+            }
+            onChange={(opt) => {
+              const val = opt?.value ?? "";
+              setCityValue(val);
+              updateQuery({ city: val });
+            }}
+          />
 
-        <FloatingSelect
-          label={labelPropertyType}
-          name="propertyType"
-          options={typeOptions}
-          value={
-            typeValue === ""
-              ? null
-              : typeOptions.find((o) => o.value === typeValue) || null
-          }
-          onChange={(opt) => {
-            const val = opt?.value ?? "";
-            setTypeValue(val);
-            updateQuery({ propertyType: val });
-          }}
-        />
+          <FloatingSelect
+            label={labelPropertyType}
+            name="propertyType"
+            options={typeOptions}
+            value={
+              typeValue === ""
+                ? null
+                : typeOptions.find((o) => o.value === typeValue) || null
+            }
+            onChange={(opt) => {
+              const val = opt?.value ?? "";
+              setTypeValue(val);
+              updateQuery({ propertyType: val });
+            }}
+          />
 
-        <FloatingLabelInput
-          label={labelPriceFrom}
-          name="priceFrom"
-          type="number"
-          value={String(priceFromValue)}
-          onChange={(e) => {
-            const val = e.target.value;
-            setPriceFromValue(val);
-            debouncedUpdate({ priceFrom: val });
-          }}
-          className={styles.input}
-        />
+          <FloatingLabelInput
+            label={labelPriceFrom}
+            name="priceFrom"
+            type="number"
+            value={String(priceFromValue)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setPriceFromValue(val);
+              debouncedUpdate({ priceFrom: val });
+            }}
+            className={styles.input}
+          />
 
-        <FloatingLabelInput
-          label={labelPriceTo}
-          name="priceTo"
-          type="number"
-          value={String(priceToValue)}
-          onChange={(e) => {
-            const val = e.target.value;
-            setPriceToValue(val);
-            debouncedUpdate({ priceTo: val });
-          }}
-          className={styles.input}
-        />
+          <FloatingLabelInput
+            label={labelPriceTo}
+            name="priceTo"
+            type="number"
+            value={String(priceToValue)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setPriceToValue(val);
+              debouncedUpdate({ priceTo: val });
+            }}
+            className={styles.input}
+          />
 
-        <FloatingLabelInput
-          label="Search by keyword"
-          name="q"
-          value={searchValue}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            setSearchValue(newValue);
-            debouncedUpdate({ q: newValue });
-          }}
-          className={styles.keywordInput}
-        />
+          <FloatingLabelInput
+            label="Search by keyword"
+            name="q"
+            value={searchValue}
+            onChange={(e) => {
+              const newValue = e.target.value;
+              setSearchValue(newValue);
+              debouncedUpdate({ q: newValue });
+            }}
+            className={styles.keywordInput}
+          />
 
-        <FloatingSelect
-          label="Sort by"
-          name="sort"
-          options={[
-            { label: "Price: Low to High", value: "priceAsc" },
-            { label: "Price: High to Low", value: "priceDesc" },
-            { label: "Title: A–Z", value: "titleAsc" },
-            { label: "Title: Z–A", value: "titleDesc" },
-          ]}
-          value={
-            sortValue
-              ? {
-                  label:
-                    sortValue === "priceAsc"
-                      ? "Price: Low to High"
-                      : sortValue === "priceDesc"
-                        ? "Price: High to Low"
-                        : sortValue === "titleAsc"
-                          ? "Title: A–Z"
-                          : "Title: Z–A",
-                  value: sortValue,
-                }
-              : null
-          }
-          onChange={(opt) => {
-            const val = opt?.value ?? "";
-            setSortValue(val);
-            updateQuery({ sort: val });
-          }}
-        />
+          <FloatingSelect
+            label="Sort by"
+            name="sort"
+            options={[
+              { label: "Price: Low to High", value: "priceAsc" },
+              { label: "Price: High to Low", value: "priceDesc" },
+              { label: "Title: A–Z", value: "titleAsc" },
+              { label: "Title: Z–A", value: "titleDesc" },
+            ]}
+            value={
+              sortValue
+                ? {
+                    label:
+                      sortValue === "priceAsc"
+                        ? "Price: Low to High"
+                        : sortValue === "priceDesc"
+                          ? "Price: High to Low"
+                          : sortValue === "titleAsc"
+                            ? "Title: A–Z"
+                            : "Title: Z–A",
+                    value: sortValue,
+                  }
+                : null
+            }
+            onChange={(opt) => {
+              const val = opt?.value ?? "";
+              setSortValue(val);
+              updateQuery({ sort: val });
+            }}
+          />
 
-        <button type="button" className={styles.button} onClick={handleReset}>
-          {labelReset}
-        </button>
+          <button type="button" className={styles.button} onClick={handleReset}>
+            {labelReset}
+          </button>
+        </div>
       </div>
     </div>
   );
