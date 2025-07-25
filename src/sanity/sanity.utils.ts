@@ -1014,6 +1014,7 @@ export async function getFilteredProjectsCount(
     priceFrom?: number | null;
     priceTo?: number | null;
     propertyType?: string;
+    q?: string;
   }
 ) {
   const {
@@ -1021,6 +1022,7 @@ export async function getFilteredProjectsCount(
     priceFrom = null,
     priceTo = null,
     propertyType = "",
+    q = "",
   } = filters;
   const query = groq`
     count(
@@ -1030,7 +1032,8 @@ export async function getFilteredProjectsCount(
         ($city == "" || keyFeatures.city == $city) &&
         ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
         ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-        ($priceTo == null || keyFeatures.price <= $priceTo)
+        ($priceTo == null || keyFeatures.price <= $priceTo) &&
+        ($q == "" || title match $q || excerpt match $q)
       ]
     )
   `;
@@ -1040,6 +1043,7 @@ export async function getFilteredProjectsCount(
     priceFrom,
     priceTo,
     propertyType,
+    q,
   });
 }
 

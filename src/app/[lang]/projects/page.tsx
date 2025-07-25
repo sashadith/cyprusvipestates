@@ -122,6 +122,7 @@ export default async function ProjectsPage({
     priceFrom,
     priceTo,
     propertyType,
+    q,
   });
   const totalPages = Math.ceil(totalProjects / PAGE_SIZE);
 
@@ -178,33 +179,25 @@ export default async function ProjectsPage({
             <div className="pagination-links" style={{ marginTop: "2rem" }}>
               {Array.from({ length: totalPages }, (_, index) => {
                 const pageNum = index + 1;
-                const href =
-                  `?page=${pageNum}` +
-                  (city ? `&city=${city}` : "") +
-                  (priceFrom !== null ? `&priceFrom=${priceFrom}` : "") +
-                  (priceTo !== null ? `&priceTo=${priceTo}` : "") +
-                  (propertyType ? `&propertyType=${propertyType}` : "");
 
-                // Если текущая страница - активная, рендерим кнопку, иначе ссылку.
+                // собираем объект из всех активных фильтров
+                const params: Record<string, string> = {};
+                if (pageNum > 1) params.page = String(pageNum);
+                if (city) params.city = city;
+                if (priceFrom) params.priceFrom = String(priceFrom);
+                if (priceTo) params.priceTo = String(priceTo);
+                if (propertyType) params.propertyType = propertyType;
+                if (sort) params.sort = sort;
+                if (q) params.q = q;
+
+                const href = `?${new URLSearchParams(params).toString()}`;
+
                 return currentPage === pageNum ? (
-                  <button
-                    key={pageNum}
-                    disabled
-                    style={{
-                      marginRight: "0.5rem",
-                      textDecoration: "underline",
-                    }}
-                    className="pagination-link"
-                  >
+                  <button key={pageNum} disabled className="pagination-link">
                     {pageNum}
                   </button>
                 ) : (
-                  <Link
-                    key={pageNum}
-                    href={href}
-                    style={{ marginRight: "0.5rem" }}
-                    className="pagination-link"
-                  >
+                  <Link key={pageNum} href={href} className="pagination-link">
                     {pageNum}
                   </Link>
                 );
