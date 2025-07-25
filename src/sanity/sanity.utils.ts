@@ -942,7 +942,7 @@ export async function getFilteredProjects(
     priceTo?: number | null;
     propertyType?: string;
     q?: string;
-    sort?: string; // new
+    sort?: string;
   }
 ) {
   const {
@@ -963,26 +963,39 @@ export async function getFilteredProjects(
           ? "title asc"
           : sort === "titleDesc"
             ? "title desc"
-            : "";
+            : "_createdAt desc"; // fallback
 
   const query = groq`
-  *[
-    _type == "project" &&
-    language == $lang &&
-    ($city == "" || keyFeatures.city == $city) &&
-    ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-    ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-    ($priceTo == null || keyFeatures.price <= $priceTo) &&
-    ($q == "" || title match $q || excerpt match $q)
-  ] ${orderClause ? `| order(${orderClause})` : ""}
+    [
+      ...*[
+        _type == "project" &&
+        language == $lang &&
+        ($city == "" || keyFeatures.city == $city) &&
+        ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+        ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+        ($priceTo == null || keyFeatures.price <= $priceTo) &&
+        ($q == "" || title match $q)
+      ] | order(${orderClause}),
+      
+      ...*[
+        _type == "project" &&
+        language == $lang &&
+        ($city == "" || keyFeatures.city == $city) &&
+        ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+        ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+        ($priceTo == null || keyFeatures.price <= $priceTo) &&
+        ($q == "" || excerpt match $q) &&
+        !($q != "" && title match $q)
+      ] | order(${orderClause})
+    ]
     [${skip}...${skip + limit}] {
-    _id,
-    title,
-    "slug": slug[$lang],
-    previewImage,
-    keyFeatures
-  }
-`;
+      _id,
+      title,
+      "slug": slug[$lang],
+      previewImage,
+      keyFeatures
+    }
+  `;
 
   return await client.fetch(query, {
     lang,
