@@ -17,8 +17,12 @@ const WhatAppButtonProject: FC<Props> = ({ lang }) => {
     ru: "Здравствуйте! Я интересуюсь покупкой недвижимости на Кипре. Подскажите, пожалуйста, какие виллы или апартаменты доступны сейчас?",
   };
 
-  const text = encodeURIComponent(messages[lang] || messages.en);
-  const url = `https://api.whatsapp.com/send?phone=${phone}&text=${text}`;
+  const messageWithUrl: Record<string, string> = {
+    en: `${messages.en}\n\nI'm sending this message from the page:`,
+    de: `${messages.de}\n\nIch sende diese Nachricht von der Seite:`,
+    pl: `${messages.pl}\n\nWiadomość wysyłam ze strony:`,
+    ru: `${messages.ru}\n\nЯ отправляю это сообщение со страницы:`,
+  };
 
   const label =
     lang === "en"
@@ -31,23 +35,33 @@ const WhatAppButtonProject: FC<Props> = ({ lang }) => {
             ? "Написать в WhatsApp"
             : "Message us on WhatsApp";
 
-  const handleClick = () => {
-    if (typeof window !== "undefined" && window.dataLayer) {
-      window.dataLayer.push({
-        event: "whatsapp_click",
-        phone_number: phone,
-        page_url: window.location.href,
-      });
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (typeof window !== "undefined") {
+      const pageUrl = window.location.href;
+      const message =
+        (messageWithUrl[lang] || messageWithUrl.en) + ` ${pageUrl}`;
+      const encodedText = encodeURIComponent(message);
+      const finalUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`;
+
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: "whatsapp_click",
+          phone_number: phone,
+          page_url: pageUrl,
+        });
+      }
+
+      window.open(finalUrl, "_blank");
     }
   };
 
   return (
     <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.whatsappButton}
+      href="#"
       onClick={handleClick}
+      className={styles.whatsappButton}
       aria-label={label}
     >
       <FaWhatsapp size={20} />
