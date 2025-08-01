@@ -92,7 +92,7 @@ const FormPartners: FC<ContactFormProps> = ({
     setSubmitting(true);
     try {
       const currentPage = window.location.href; // Получаем текущий URL
-      const response = await axios.post("/api/monday-partners", {
+      const response = await axios.post("/api/email", {
         ...values,
         currentPage,
       });

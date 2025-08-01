@@ -8,10 +8,12 @@ export async function POST(request: NextRequest) {
   // console.log("Received data:", data);
 
   const transport = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.hostinger.com",
+    port: 465,
+    secure: true, // true для порта 465, false для 587
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD,
+      user: process.env.EMAIL_USER, // например: contact@yourdomain.com
+      pass: process.env.EMAIL_PASSWORD, // пароль или пароль приложения
     },
   });
 
@@ -22,7 +24,7 @@ export async function POST(request: NextRequest) {
     const mailOptions: Mail.Options = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-      subject: `Request from Cyprys VIP Estates`,
+      subject: `Partner Request from ${data.name}`,
       text: mailBody,
     };
 
