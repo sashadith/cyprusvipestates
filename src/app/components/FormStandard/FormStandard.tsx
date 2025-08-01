@@ -158,6 +158,16 @@ const FormStandard: FC<ContactFormProps> = ({
           <Form>
             {/* Поле для имени */}
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#bd8948"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+              </svg>
               <label
                 // htmlFor="name"
                 htmlFor={`${uid}-name`}
@@ -192,7 +202,7 @@ const FormStandard: FC<ContactFormProps> = ({
                 // id="phone"
                 id={`${uid}-phone`}
                 name="phone"
-                className={`${styles.inputField}`}
+                className={`${styles.inputField} ${styles.phoneInput}`}
                 onBlur={handleBlur}
                 onChange={(value) => setFieldValue("phone", value)}
               />
@@ -204,6 +214,16 @@ const FormStandard: FC<ContactFormProps> = ({
             </div>
 
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#bd8948"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
+              </svg>
               <label
                 // htmlFor="email"
                 htmlFor={`${uid}-email`}

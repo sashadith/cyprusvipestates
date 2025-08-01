@@ -193,6 +193,16 @@ const FormPartners: FC<ContactFormProps> = ({
           <Form>
             {/* Поле для имени */}
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#bd8948"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+              </svg>
               <label
                 // htmlFor="name"
                 htmlFor={`${uid}-name`}
@@ -216,6 +226,16 @@ const FormPartners: FC<ContactFormProps> = ({
             </div>
 
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="#bd8948"
+              >
+                <path d="M2 4v16h20V4H2zm4 4h4v2H6V8zm0 4h6v2H6v-2zm10 2c-1.1 0-2 .9-2 2h4c0-1.1-.9-2-2-2zm0-2c.83 0 1.5-.67 1.5-1.5S16.83 11 16 11s-1.5.67-1.5 1.5S15.17 14 16 14z" />
+              </svg>
               <label
                 htmlFor={`${uid}-surname`}
                 className={`${styles.label} ${filled.surname ? styles.filled : ""}`}
@@ -256,7 +276,7 @@ const FormPartners: FC<ContactFormProps> = ({
                 // id="phone"
                 id={`${uid}-phone`}
                 name="phone"
-                className={`${styles.inputField}`}
+                className={`${styles.inputField} ${styles.phoneInput}`}
                 onBlur={handleBlur}
                 onChange={(value) => setFieldValue("phone", value)}
               />
@@ -268,6 +288,16 @@ const FormPartners: FC<ContactFormProps> = ({
             </div>
 
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#bd8948"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
+              </svg>
               <label
                 // htmlFor="email"
                 htmlFor={`${uid}-email`}
@@ -291,6 +321,16 @@ const FormPartners: FC<ContactFormProps> = ({
             </div>
 
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="#bd8948"
+              >
+                <path d="M4 2v20h2v-7h13.5c.28 0 .5-.22.5-.5V3.5c0-.28-.22-.5-.5-.5H6V2H4z" />
+              </svg>
               <label
                 htmlFor={`${uid}-country`}
                 className={`${styles.label} ${filled.country ? styles.filled : ""}`}

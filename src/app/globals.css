@@ -101,13 +101,13 @@ input[type="number"]::-webkit-outer-spin-button {
   outline: none;
 }
 
-.PhoneInputCountry {
+/* .PhoneInputCountry {
   left: -5px;
 
   @media screen and (min-width: 768px) {
-    left: -20px;
+    left: -25px;
   }
-}
+} */
 
 .PhoneInputCountrySelectArrow {
   display: none !important;
