@@ -47,17 +47,44 @@ const FormPartners: FC<ContactFormProps> = ({
   const router = useRouter();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      ["name", "surname", "phone", "email", "country"].forEach((field) => {
-        const input = document.getElementById(field) as HTMLInputElement;
-        if (input && input.value) {
-          setFilled((f) => ({ ...f, [field]: true }));
+    const autofilledFields = [
+      "name",
+      "surname",
+      "phone",
+      "email",
+      "country",
+    ] as const;
+
+    const observer = new MutationObserver(() => {
+      autofilledFields.forEach((field) => {
+        const el = document.getElementById(`${uid}-${field}`) as
+          | HTMLInputElement
+          | HTMLTextAreaElement
+          | null;
+
+        if (el && el.value.trim() !== "") {
+          setFilled((prev) => {
+            if (prev[field]) return prev;
+            return { ...prev, [field]: true };
+          });
         }
       });
-    }, 100);
+    });
 
-    return () => clearInterval(interval);
-  }, []);
+    const form = document.querySelector("form");
+    if (form) {
+      observer.observe(form, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        characterData: true,
+      });
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [uid]);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
