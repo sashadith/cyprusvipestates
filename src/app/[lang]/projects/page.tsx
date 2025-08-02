@@ -4,7 +4,6 @@ import {
   getFilteredProjects,
   getFilteredProjectsCount,
   getProjectsPageByLang,
-  getPropertiesPageByLang,
 } from "@/sanity/sanity.utils";
 import { defaultLocale, i18n } from "@/i18n.config";
 import { Translation } from "@/types/homepage";

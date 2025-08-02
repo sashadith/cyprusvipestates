@@ -874,10 +874,19 @@ export async function getThreeProjectsBySameCity(
   const query = groq`
     *[
       _type == "project" &&
-      keyFeatures.city == $city &&
       language == $lang &&
+      keyFeatures.city == $city &&
+      defined(previewImage.asset) &&
+      !(_id in [
+        "project-akamantis-gardens-de",
+        "project-akamantis-gardens-en",
+        "project-akamantis-gardens-pl",
+        "project-akamantis-gardens-ru",
+        "drafts.project-akamantis-gardens-en"
+      ]) &&
+      !(_id match "drafts.*") &&
       ($excludeProjectId == null || _id != $excludeProjectId)
-    ]{
+    ] | order(_createdAt desc)[0...3] {
       _id,
       title,
       "slug": slug[$lang],
@@ -898,7 +907,18 @@ export async function getLastFiveProjectsByLang(
   lang: string
 ): Promise<Project[]> {
   const lastFiveProjectsQuery = groq`
-    *[_type == "project" && language == $lang] | order(_createdAt desc)[0...5] {
+    *[
+      _type == "project" &&
+      language == $lang &&
+      defined(previewImage) &&
+      !(_id in [
+        "project-akamantis-gardens-de",
+        "project-akamantis-gardens-en",
+        "project-akamantis-gardens-pl",
+        "project-akamantis-gardens-ru",
+        "drafts.project-akamantis-gardens-en"
+      ])
+    ] | order(_createdAt desc)[0...5] {
       _id,
       title,
       slug,
@@ -966,36 +986,50 @@ export async function getFilteredProjects(
             : "_createdAt desc"; // fallback
 
   const query = groq`
-    [
-      ...*[
-        _type == "project" &&
-        language == $lang &&
-        ($city == "" || keyFeatures.city == $city) &&
-        ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-        ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-        ($priceTo == null || keyFeatures.price <= $priceTo) &&
-        ($q == "" || title match $q)
-      ] | order(${orderClause}),
-      
-      ...*[
-        _type == "project" &&
-        language == $lang &&
-        ($city == "" || keyFeatures.city == $city) &&
-        ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-        ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-        ($priceTo == null || keyFeatures.price <= $priceTo) &&
-        ($q == "" || excerpt match $q) &&
-        !($q != "" && title match $q)
-      ] | order(${orderClause})
-    ]
-    [${skip}...${skip + limit}] {
-      _id,
-      title,
-      "slug": slug[$lang],
-      previewImage,
-      keyFeatures
-    }
-  `;
+  [
+    ...*[
+      _type == "project" &&
+      language == $lang &&
+      defined(previewImage.asset) &&
+      !(_id in [
+        "project-akamantis-gardens-de",
+        "project-akamantis-gardens-en",
+        "project-akamantis-gardens-pl",
+        "project-akamantis-gardens-ru",
+        "drafts.project-akamantis-gardens-en"
+      ]) &&
+      ($city == "" || keyFeatures.city == $city) &&
+      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+      ($priceTo == null || keyFeatures.price <= $priceTo) &&
+      ($q == "" || title match $q)
+        ] | order(${orderClause}),
+    ...*[
+      _type == "project" &&
+      language == $lang &&
+      !(_id in [
+        "project-akamantis-gardens-de",
+        "project-akamantis-gardens-en",
+        "project-akamantis-gardens-pl",
+        "project-akamantis-gardens-ru",
+        "drafts.project-akamantis-gardens-en"
+      ]) &&
+      ($city == "" || keyFeatures.city == $city) &&
+      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+      ($priceTo == null || keyFeatures.price <= $priceTo) &&
+      ($q == "" || excerpt match $q) &&
+      !($q != "" && title match $q)
+    ] | order(${orderClause})
+  ]
+  [${skip}...${skip + limit}] {
+    _id,
+    title,
+    "slug": slug[$lang],
+    previewImage,
+    keyFeatures
+  }
+`;
 
   return await client.fetch(query, {
     lang,
@@ -1025,18 +1059,26 @@ export async function getFilteredProjectsCount(
     q = "",
   } = filters;
   const query = groq`
-    count(
-      *[
-        _type == "project" &&
-        language == $lang &&
-        ($city == "" || keyFeatures.city == $city) &&
-        ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-        ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-        ($priceTo == null || keyFeatures.price <= $priceTo) &&
-        ($q == "" || title match $q || excerpt match $q)
-      ]
-    )
-  `;
+  count(
+    *[
+      _type == "project" &&
+      language == $lang &&
+      !(_id in [
+        "project-akamantis-gardens-de",
+        "project-akamantis-gardens-en",
+        "project-akamantis-gardens-pl",
+        "project-akamantis-gardens-ru",
+        "drafts.project-akamantis-gardens-en"
+      ]) &&
+      ($city == "" || keyFeatures.city == $city) &&
+      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+      ($priceTo == null || keyFeatures.price <= $priceTo) &&
+      ($q == "" || title match $q || excerpt match $q)
+    ]
+  )
+`;
+
   return await client.fetch(query, {
     lang,
     city,
