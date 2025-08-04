@@ -5,7 +5,7 @@
   font-weight: 500;
   line-height: 120%; /* 125% */
   letter-spacing: -0.64px;
-  max-width: 350px;
+  // max-width: 350px;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
 
   @media screen and (min-width: 570px) {
@@ -49,7 +49,7 @@
 }
 
 .popupContent {
-  max-width: 800px;
+  max-width: 750px;
   margin: 0 auto;
   padding: 0 20px;
 
@@ -65,11 +65,11 @@
 .popupContentWrapper {
   position: relative;
   background-color: #fff;
-  border-radius: 35px;
+  border-radius: 5px;
   overflow: hidden;
   padding-top: clamp(1.875rem, 0.563rem + 5.25vw, 4.5rem);
   padding-left: clamp(1.875rem, 0.563rem + 5.25vw, 4.5rem);
-  padding-right: clamp(2.813rem, 1rem + 7.25vw, 6.438rem);
+  padding-right: clamp(1.875rem, 0.563rem + 5.25vw, 4.5rem);
   padding-bottom: clamp(1.875rem, 0.563rem + 5.25vw, 4.5rem);
 
   // @media (max-width: 570px) {
