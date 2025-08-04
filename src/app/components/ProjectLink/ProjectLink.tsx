@@ -26,6 +26,10 @@ const ProjectLink: FC<Props> = ({
   plotSize,
   lang,
 }) => {
+  // if (!previewImage || !previewImage.asset) {
+  //   return null; // <-- просто не рендерим проект без картинки
+  // }
+
   return (
     <Link href={url} className={styles.project}>
       <div className={styles.projectImage}>

@@ -247,7 +247,15 @@ export async function getSinglePageByLang(
             _type == "project" &&
             language == $lang &&
             (!defined(^.filterCity) || keyFeatures.city == ^.filterCity) &&
-            (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType)
+            (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType) &&
+            defined(previewImage.asset) &&
+            !(_id in [
+              "project-akamantis-gardens-de",
+              "project-akamantis-gardens-en",
+              "project-akamantis-gardens-pl",
+              "project-akamantis-gardens-ru",
+              "drafts.project-akamantis-gardens-en"
+            ])
           ] | order(keyFeatures.price asc)[]{
             _id,
             title,
