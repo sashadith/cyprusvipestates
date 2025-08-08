@@ -16,6 +16,11 @@ import {
   HowWeWorkBlock,
   BulletsBlock,
   TableBlock,
+  LandingIntroBlock,
+  LandingTextFirst,
+  LandingTextSecond,
+  LandingProjectsBlock,
+  LandingFaqBlock,
 } from "./blog";
 import { BenefitsBlock, Image } from "./homepage";
 import { ImageAlt, Project } from "./project";
@@ -50,6 +55,11 @@ export type Singlepage = {
   allowIntroBlock: boolean;
   contentBlocks: Array<
     | TextContent
+    | LandingIntroBlock
+    | LandingTextFirst
+    | LandingTextSecond
+    | LandingProjectsBlock
+    | LandingFaqBlock
     | AccordionBlock
     | ContactFullBlock
     | TeamBlock

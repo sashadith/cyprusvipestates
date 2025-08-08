@@ -29,6 +29,11 @@ import {
   HowWeWorkBlock,
   BulletsBlock,
   TableBlock,
+  LandingIntroBlock,
+  LandingTextFirst,
+  LandingTextSecond,
+  LandingProjectsBlock,
+  LandingFaqBlock,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import {
@@ -57,6 +62,11 @@ import BulletsBlockComponent from "@/app/components/BulletsBlockComponent/Bullet
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
+import LandingIntroBlockComponent from "@/app/components/LandingPage/LandingIntroBlockComponent/LandingIntroBlockComponent";
+import LandingTextFirstComponent from "@/app/components/LandingPage/LandingTextFirstComponent/LandingTextFirstComponent";
+import LandingTextSecondComponent from "@/app/components/LandingPage/LandingTextSecondComponent/LandingTextSecondComponent";
+import LandingProjectsBlockComponent from "@/app/components/LandingPage/LandingProjectsBlockComponent/LandingProjectsBlockComponent";
+import LandingFaqBlockComponent from "@/app/components/LandingPage/LandingFaqBlockComponent/landingFaqBlockComponent";
 
 type Props = {
   params: {
@@ -337,6 +347,63 @@ const SinglePage = async ({ params }: Props) => {
       case "tableBlock":
         return (
           <TableBlockComponent key={block._key} block={block as TableBlock} />
+        );
+      case "landingIntroBlock":
+        return (
+          <LandingIntroBlockComponent
+            key={block._key}
+            block={block as LandingIntroBlock}
+            lang={lang}
+          />
+        );
+      case "landingTextFirst":
+        return (
+          <LandingTextFirstComponent
+            key={block._key}
+            lang={lang}
+            block={block as LandingTextFirst}
+          />
+        );
+      case "landingTextSecond":
+        return (
+          <LandingTextSecondComponent
+            key={block._key}
+            lang={lang}
+            block={block as LandingTextSecond}
+            formDocument={formDocument}
+          />
+        );
+      case "landingProjectsBlock":
+        const b = block as LandingProjectsBlock;
+        // Если поле projects отсутствует или null — считаем его пустым массивом
+        const manual = Array.isArray(b.projects) ? b.projects : [];
+        const projectsToShow =
+          manual.length > 0
+            ? manual
+            : Array.isArray(b.filteredProjects)
+              ? b.filteredProjects
+              : [];
+
+        return (
+          <LandingProjectsBlockComponent
+            key={b._key}
+            block={{
+              _key: b._key,
+              _type: b._type,
+              title: b.title,
+              projects: projectsToShow,
+            }}
+            lang={lang}
+          />
+        );
+      case "landingFaqBlock":
+        return (
+          <section className="singlepage-faq-block" key={block._key}>
+            <div className="container-short">
+              <h2 className="singlepage-h2">{block.title}</h2>
+              <AccordionContainer block={(block as LandingFaqBlock).faq} />
+            </div>
+          </section>
         );
       default:
         return <p key={block._key}>Unsupported block type</p>;

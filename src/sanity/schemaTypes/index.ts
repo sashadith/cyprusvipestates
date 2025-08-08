@@ -33,6 +33,11 @@ import blog from "./blog";
 import category from "./category";
 import blogPage from "./blogPage";
 import tableBlock from "./tableBlock";
+import landingIntroBlock from "./landingIntroBlock";
+import landingTextFirst from "./landingTextFirst";
+import landingTextSecond from "./landingTextSecond";
+import landingProjectsBlock from "./landingProjectsBlock";
+import landingFaqBlock from "./landingFaqBlock";
 
 export const schemaTypes = [
   header,
@@ -50,6 +55,11 @@ export const schemaTypes = [
   formStandardDocument,
   contentBlock,
   projectsSectionBlock,
+  landingIntroBlock,
+  landingProjectsBlock,
+  landingTextFirst,
+  landingTextSecond,
+  landingFaqBlock,
   textContent,
   faqBlock,
   contactFullBlock,

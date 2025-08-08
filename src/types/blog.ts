@@ -42,6 +42,26 @@ export type TextContent = {
   backgroundFull: string;
 };
 
+export type LandingText = {
+  _key: string;
+  _type: string;
+  content: any;
+};
+
+export type LandingIntroBlock = {
+  _key: string;
+  _type: "landingIntroBlock";
+  subtitle: string;
+  title: string;
+  description: string;
+  buttonLabel: string;
+  image: ImageAlt;
+};
+
+export type LandingTextFirst = LandingText;
+
+export type LandingTextSecond = LandingText;
+
 export type DoubleImagesBlock = {
   _key: string;
   _type: string;
@@ -222,6 +242,24 @@ export type ProjectsSectionBlock = {
 };
 // === Конец типов для ProjectsSectionBlick ===
 
+// === Типы для LandingProjectsBlock ===
+export type LandingProjectsBlock = {
+  _key: string;
+  _type: "landingProjectsBlock";
+  title: string;
+  filterCity?: "Paphos" | "Limassol" | "Larnaca";
+  filterPropertyType?:
+    | "Apartment"
+    | "Villa"
+    | "Townhouse"
+    | "Semi-detached villa"
+    | "Office"
+    | "Shop";
+  projects: Project[];
+  filteredProjects?: Project[];
+};
+// === Конец типов для LandingProjectsBlock ===
+
 export type AccordionBlock = {
   _key: string;
   _type: "accordionBlock";
@@ -241,6 +279,15 @@ export type FaqBlock = {
   marginBottom?: "small" | "medium" | "large";
 };
 // === Конец типов для FAQBlock ===
+
+// === Типы для Landing FAQ Block ===
+export type LandingFaqBlock = {
+  _key: string;
+  _type: "landingFaqBlock";
+  title: string;
+  faq: AccordionBlock;
+};
+// === Конец типов для Landing FAQ Block ===
 
 // === Типы для HowWeWorkBlock ===
 export type HowWeWorkBlock = {
@@ -320,18 +367,10 @@ export type Blog = {
   contentBlocks: Array<
     | TextContent
     | AccordionBlock
-    | ContactFullBlock
-    | TeamBlock
-    | LocationBlock
     | ImageFullBlock
     | ButtonBlock
-    | ImageBulletsBlock
-    | BenefitsBlock
-    | ReviewsFullBlock
     | FaqBlock
     | FormMinimalBlock
-    | HowWeWorkBlock
-    | BulletsBlock
     | ProjectsSectionBlock
     | TableBlock
   >;

@@ -162,6 +162,56 @@ export async function getSinglePageByLang(
             }
           }
         },
+        _type == "landingTextFirst" => {
+          _key,
+          _type,
+          backgroundColor,
+          paddingVertical,
+          paddingHorizontal,
+          marginTop,
+          marginBottom,
+          textAlign,
+          textColor,
+          backgroundFull,
+          content[] {
+          ...,
+            _type == "image" => {
+              _key,
+              _type,
+              alt,
+              asset->{
+                _ref,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+          }
+        },
+        _type == "landingTextSecond" => {
+          _key,
+          _type,
+          backgroundColor,
+          paddingVertical,
+          paddingHorizontal,
+          marginTop,
+          marginBottom,
+          textAlign,
+          textColor,
+          backgroundFull,
+          content[] {
+          ...,
+            _type == "image" => {
+              _key,
+              _type,
+              alt,
+              asset->{
+                _ref,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+          }
+        },
         _type == "contactFullBlock" => {
           _key,
           _type,
@@ -266,7 +316,45 @@ export async function getSinglePageByLang(
           marginTop,
           marginBottom
         },
+        _type == "landingProjectsBlock" => {
+          _key,
+          _type,
+          title,
+          filterCity,
+          filterPropertyType,
+          projects[]->{
+            _id,
+            title,
+            excerpt,
+            previewImage,
+            "slug": slug[$lang].current,
+            keyFeatures
+          },
+          "filteredProjects": *[
+            _type == "project" &&
+            language == $lang &&
+            (!defined(^.filterCity) || keyFeatures.city == ^.filterCity) &&
+            (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType) &&
+            defined(previewImage.asset) &&
+            !(_id in [
+              "project-akamantis-gardens-de",
+              "project-akamantis-gardens-en",
+              "project-akamantis-gardens-pl",
+              "project-akamantis-gardens-ru",
+              "drafts.project-akamantis-gardens-en"
+            ])
+          ] | order(keyFeatures.price asc)[]{
+            _id,
+            title,
+            "slug": slug[$lang].current,
+            previewImage,
+            keyFeatures
+          },
+        },
         _type != "textContent" &&
+        _type != "landingProjectsBlock" &&
+        _type != "landingTextFirst" &&
+        _type != "landingTextSecond" &&
         _type != "contactFullBlock" &&
         _type != "formMinimalBlock" &&
         _type != "projectsSectionBlock" => @
@@ -399,40 +487,6 @@ export async function getBlogPostByLang(
                 url,
                 metadata { dimensions { width, height } }
               }
-            }
-          }
-        },
-        // === контактный блок ===
-        _type == "contactFullBlock" => {
-          _key,
-          _type,
-          title,
-          description,
-          contacts,
-          form->{
-            _id,
-            _type,
-            language,
-            form {
-              inputName,
-              inputPhone,
-              inputCountry,
-              inputEmail,
-              inputMessage,
-              buttonText,
-              agreementText,
-              agreementLinkLabel,
-              agreementLinkDestination,
-              validationNameRequired,
-              validationPhoneRequired,
-              validationCountryRequired,
-              validationEmailRequired,
-              validationEmailInvalid,
-              validationMessageRequired,
-              validationAgreementRequired,
-              validationAgreementOneOf,
-              successMessage,
-              errorMessage
             }
           }
         },

@@ -67,6 +67,11 @@ const singlepage = {
       description:
         "Блоки контента, которые будут отображаться в статье. Это основное содержание статьи",
       of: [
+        { type: "landingIntroBlock" },
+        { type: "landingProjectsBlock" },
+        { type: "landingTextFirst" },
+        { type: "landingFaqBlock" },
+        { type: "landingTextSecond" },
         { type: "textContent" },
         { type: "doubleTextBlock" },
         { type: "accordionBlock" },
