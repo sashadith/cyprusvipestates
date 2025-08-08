@@ -66,7 +66,6 @@ import LandingIntroBlockComponent from "@/app/components/LandingPage/LandingIntr
 import LandingTextFirstComponent from "@/app/components/LandingPage/LandingTextFirstComponent/LandingTextFirstComponent";
 import LandingTextSecondComponent from "@/app/components/LandingPage/LandingTextSecondComponent/LandingTextSecondComponent";
 import LandingProjectsBlockComponent from "@/app/components/LandingPage/LandingProjectsBlockComponent/LandingProjectsBlockComponent";
-import LandingFaqBlockComponent from "@/app/components/LandingPage/LandingFaqBlockComponent/landingFaqBlockComponent";
 
 type Props = {
   params: {
