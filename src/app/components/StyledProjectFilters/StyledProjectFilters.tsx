@@ -258,8 +258,16 @@ export default function StyledProjectFilters({
           : "Reset";
 
   useEffect(() => {
-    setSearchValue(q || "");
-  }, [q]);
+    // Берём всё только из URL, чтобы UI всегда соответствовал адресу
+    const sp = new URLSearchParams(searchParams.toString());
+
+    setCityValue(sp.get("city") ?? "");
+    setTypeValue(sp.get("propertyType") ?? "");
+    setSortValue(sp.get("sort") ?? ""); // пусто = нет параметра => покажем placeholder
+    setPriceFromValue(sp.get("priceFrom") ?? "");
+    setPriceToValue(sp.get("priceTo") ?? "");
+    setSearchValue(sp.get("q") ?? "");
+  }, [searchParams]);
 
   return (
     <div className={styles.form}>
@@ -288,9 +296,9 @@ export default function StyledProjectFilters({
             name="city"
             options={cityOptions}
             value={
-              cityValue === ""
-                ? null
-                : cityOptions.find((o) => o.value === cityValue) || null
+              cityValue
+                ? (cityOptions.find((o) => o.value === cityValue) ?? null)
+                : null
             }
             onChange={(opt) => {
               const val = opt?.value ?? "";
@@ -304,9 +312,9 @@ export default function StyledProjectFilters({
             name="propertyType"
             options={typeOptions}
             value={
-              typeValue === ""
-                ? null
-                : typeOptions.find((o) => o.value === typeValue) || null
+              typeValue
+                ? (typeOptions.find((o) => o.value === typeValue) ?? null)
+                : null
             }
             onChange={(opt) => {
               const val = opt?.value ?? "";
@@ -319,26 +327,24 @@ export default function StyledProjectFilters({
             label={labelPriceFrom}
             name="priceFrom"
             type="number"
-            value={String(priceFromValue)}
+            value={priceFromValue}
             onChange={(e) => {
               const val = e.target.value;
               setPriceFromValue(val);
               debouncedUpdate({ priceFrom: val });
             }}
-            className={styles.input}
           />
 
           <FloatingLabelInput
             label={labelPriceTo}
             name="priceTo"
             type="number"
-            value={String(priceToValue)}
+            value={priceToValue}
             onChange={(e) => {
               const val = e.target.value;
               setPriceToValue(val);
               debouncedUpdate({ priceTo: val });
             }}
-            className={styles.input}
           />
 
           <FloatingLabelInput
@@ -346,9 +352,9 @@ export default function StyledProjectFilters({
             name="q"
             value={searchValue}
             onChange={(e) => {
-              const newValue = e.target.value;
-              setSearchValue(newValue);
-              debouncedUpdate({ q: newValue });
+              const val = e.target.value;
+              setSearchValue(val);
+              debouncedUpdate({ q: val });
             }}
             className={styles.keywordInput}
           />
@@ -359,7 +365,7 @@ export default function StyledProjectFilters({
             options={sortOptions}
             value={
               sortValue
-                ? sortOptions.find((o) => o.value === sortValue) || null
+                ? (sortOptions.find((o) => o.value === sortValue) ?? null)
                 : null
             }
             onChange={(opt) => {

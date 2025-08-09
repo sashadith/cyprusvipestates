@@ -1045,7 +1045,10 @@ export async function getFilteredProjects(
           ? "title asc"
           : sort === "titleDesc"
             ? "title desc"
-            : "_createdAt desc"; // fallback
+            : "_createdAt desc";
+
+  // паттерн поиска — только если q >= 3 символов
+  const qPattern = q && q.length >= 3 ? `${q}*` : "";
 
   const query = groq`
   [
@@ -1064,11 +1067,12 @@ export async function getFilteredProjects(
       ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
       ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
       ($priceTo == null || keyFeatures.price <= $priceTo) &&
-      ($q == "" || title match $q)
+      ($qPattern == "" || title match $qPattern)
         ] | order(${orderClause}),
     ...*[
       _type == "project" &&
       language == $lang &&
+      defined(previewImage.asset) &&
       !(_id in [
         "project-akamantis-gardens-de",
         "project-akamantis-gardens-en",
@@ -1080,8 +1084,8 @@ export async function getFilteredProjects(
       ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
       ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
       ($priceTo == null || keyFeatures.price <= $priceTo) &&
-      ($q == "" || excerpt match $q) &&
-      !($q != "" && title match $q)
+      ($qPattern == "" || excerpt match $qPattern) &&
+      !($qPattern != "" && title match $qPattern)
     ] | order(${orderClause})
   ]
   [${skip}...${skip + limit}] {
@@ -1099,7 +1103,7 @@ export async function getFilteredProjects(
     priceFrom,
     priceTo,
     propertyType,
-    q: q || "",
+    qPattern,
   });
 }
 
@@ -1125,6 +1129,7 @@ export async function getFilteredProjectsCount(
     *[
       _type == "project" &&
       language == $lang &&
+      defined(previewImage.asset) &&
       !(_id in [
         "project-akamantis-gardens-de",
         "project-akamantis-gardens-en",
