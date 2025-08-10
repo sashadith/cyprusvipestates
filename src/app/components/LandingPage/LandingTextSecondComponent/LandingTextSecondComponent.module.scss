@@ -20,4 +20,12 @@
       font-weight: 500;
     }
   }
+
+  @media screen and (min-width: 980px) {
+    li {
+      svg {
+        margin-top: 11px;
+      }
+    }
+  }
 }
