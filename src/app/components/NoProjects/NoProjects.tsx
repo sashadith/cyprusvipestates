@@ -12,13 +12,13 @@ const NoProjects: FC<Props> = ({ lang }) => {
       style={{ margin: "2rem 0", textAlign: "center" }}
     >
       {lang === "en"
-        ? "No projects found."
+        ? "No projects found. Please try searching with different parameters."
         : lang === "de"
-          ? "Keine Projekte gefunden."
+          ? "Keine Projekte gefunden. Versuchen Sie, nach anderen Parametern zu suchen."
           : lang === "pl"
-            ? "Nie znaleziono projektów."
+            ? "Nie znaleziono projektów. Spróbuj wyszukać według innych parametrów."
             : lang === "ru"
-              ? "Проекты не найдены."
+              ? "Проекты не найдены. Попробуйте поискать по другим параметрам."
               : "No projects found."}
     </div>
   );
