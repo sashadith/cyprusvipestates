@@ -1160,10 +1160,12 @@ export async function getAllProjectsLocationsByLang(lang: string): Promise<
   {
     _id: string;
     title: string;
-    slug: string; // плоская строка slug[$lang].current
+    slug: string;
     location: { lat: number; lng: number };
     city?: string;
     price?: number;
+    previewUrl?: string; // ⟵ добавили
+    previewAlt?: string; // ⟵ добавили
   }[]
 > {
   const query = groq`
@@ -1178,7 +1180,10 @@ export async function getAllProjectsLocationsByLang(lang: string): Promise<
       "slug": slug[$lang].current,
       location,
       "city": keyFeatures.city,
-      "price": keyFeatures.price
+      "price": keyFeatures.price,
+      // основной превью
+      "previewUrl": coalesce(previewImage.asset->url, images[0].asset->url),
+      "previewAlt": coalesce(previewImage.alt, title)
     }
   `;
   return await client.fetch(query, { lang });

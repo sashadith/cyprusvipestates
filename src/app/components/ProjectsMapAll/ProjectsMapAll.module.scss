@@ -1,45 +1,69 @@
 .mapWrap { height: 420px; width: 100%; }
 @media (min-width: 768px) { .mapWrap { height: 560px; } }
+
 .grayscaleTile { filter: grayscale(1); }
 
-/* --- фиксы Leaflet: только внутри этого компонента --- */
+/* фиксы Leaflet внутри компонента */
 .mapWrap :global(.leaflet-container .leaflet-pane img),
 .mapWrap :global(.leaflet-container .leaflet-pane canvas),
-.mapWrap :global(.leaflet-container .leaflet-pane svg) {
-  max-width: none !important;
-}
+.mapWrap :global(.leaflet-container .leaflet-pane svg) { max-width: none !important; }
+.mapWrap :global(.leaflet-container img.leaflet-tile) { max-width: none !important; }
+.mapWrap :global(.leaflet-container .leaflet-popup-close-button) { color: #fff; top: 5px; right: 5px; }
 
-.mapWrap :global(.leaflet-container img.leaflet-tile) {
-  max-width: none !important;
-}
-
-/* --- стили кластера (если используешь react-leaflet-cluster) --- */
-.mapWrap :global(.cluster-wrapper) {
+/* ==== стили карточки-попапа с фоном ==== */
+.projectPopup :global(.leaflet-popup-content-wrapper) {
+  padding: 0;
   background: transparent;
+  box-shadow: none;
+  border-radius: 14px;
 }
-.mapWrap :global(.cluster-badge) {
-  display: grid;
-  place-items: center;
-  min-width: 34px;
-  min-height: 34px;
-  padding: 4px;
-  border-radius: 9999px;
-  background: #111827cc;
+.projectPopup :global(.leaflet-popup-tip) { display: none; }
+.projectPopup :global(.leaflet-popup-content) {
+  margin: 0 !important;
+}
+
+.popupCard {
+  width: 320px;
+  height: 190px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.popupOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.5);
   color: #fff;
-  font-weight: 700;
-  border: 2px solid #ffffff80;
-  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  display: grid;
+  align-content: end;
+  gap: 8px;
+  padding: 12px;
 }
-.mapWrap :global(.cluster-badge span) {
-  line-height: 1;
-  font-size: 13px;
+
+.popupTitle { font-weight: 700; font-size: 14px; line-height: 1.25; }
+.popupMeta { font-size: 12px; opacity: .95; }
+
+.popupActions {
+  display: flex; flex-wrap: wrap; gap: 8px;
 }
+.popupActions a, .popupActions button {
+  font-size: 12px;
+  color: #fff; text-decoration: underline;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 8px; padding: 4px 8px;
+  cursor: pointer;
+}
+.popupActions button { text-decoration: none; }
 
 .projectLink {
+  display: inline-block;
+  margin-top: 4px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
   text-decoration: underline;
-  color: #000;
-  &:hover {
-    text-decoration: underline;
-    color: darken(#0070f3, 10%);
-  }
 }
