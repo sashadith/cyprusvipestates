@@ -1156,6 +1156,34 @@ export async function getFilteredProjectsCount(
   });
 }
 
+export async function getAllProjectsLocationsByLang(lang: string): Promise<
+  {
+    _id: string;
+    title: string;
+    slug: string; // плоская строка slug[$lang].current
+    location: { lat: number; lng: number };
+    city?: string;
+    price?: number;
+  }[]
+> {
+  const query = groq`
+    *[
+      _type == "project" &&
+      language == $lang &&
+      defined(location.lat) && defined(location.lng) &&
+      !(_id match "drafts.*")
+    ]{
+      _id,
+      title,
+      "slug": slug[$lang].current,
+      location,
+      "city": keyFeatures.city,
+      "price": keyFeatures.price
+    }
+  `;
+  return await client.fetch(query, { lang });
+}
+
 export async function getAllProperties(lang: string) {
   const query = groq`*[_type == "property" && language == $lang] | order(publishedAt desc) {
     _id,

@@ -1,0 +1,45 @@
+.mapWrap { height: 420px; width: 100%; }
+@media (min-width: 768px) { .mapWrap { height: 560px; } }
+.grayscaleTile { filter: grayscale(1); }
+
+/* --- фиксы Leaflet: только внутри этого компонента --- */
+.mapWrap :global(.leaflet-container .leaflet-pane img),
+.mapWrap :global(.leaflet-container .leaflet-pane canvas),
+.mapWrap :global(.leaflet-container .leaflet-pane svg) {
+  max-width: none !important;
+}
+
+.mapWrap :global(.leaflet-container img.leaflet-tile) {
+  max-width: none !important;
+}
+
+/* --- стили кластера (если используешь react-leaflet-cluster) --- */
+.mapWrap :global(.cluster-wrapper) {
+  background: transparent;
+}
+.mapWrap :global(.cluster-badge) {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 4px;
+  border-radius: 9999px;
+  background: #111827cc;
+  color: #fff;
+  font-weight: 700;
+  border: 2px solid #ffffff80;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+.mapWrap :global(.cluster-badge span) {
+  line-height: 1;
+  font-size: 13px;
+}
+
+.projectLink {
+  text-decoration: underline;
+  color: #000;
+  &:hover {
+    text-decoration: underline;
+    color: darken(#0070f3, 10%);
+  }
+}

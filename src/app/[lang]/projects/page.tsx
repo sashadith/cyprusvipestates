@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   getFilteredProjects,
   getFilteredProjectsCount,
   getProjectsPageByLang,
+  getAllProjectsLocationsByLang,
 } from "@/sanity/sanity.utils";
 import { defaultLocale, i18n } from "@/i18n.config";
 import { Translation } from "@/types/homepage";
@@ -49,6 +51,11 @@ export async function generateMetadata({
     description: data?.seo.metaDescription,
   };
 }
+
+const ProjectsMapAll = dynamic(
+  () => import("@/app/components/ProjectsMapAll/ProjectsMapAll"),
+  { ssr: false }
+);
 
 export default async function ProjectsPage({
   params,
@@ -124,6 +131,9 @@ export default async function ProjectsPage({
     q,
   });
   const totalPages = Math.ceil(totalProjects / PAGE_SIZE);
+
+  // получаем ВСЕ проекты с координатами (статично, без фильтров/пагинации)
+  const allMarkers = await getAllProjectsLocationsByLang(lang);
 
   return (
     <>
@@ -203,6 +213,18 @@ export default async function ProjectsPage({
               })}
             </div>
           )}
+        </div>
+        {/* === СТАБИЛЬНАЯ СТАТИЧНАЯ КАРТА СО ВСЕМИ ПРОЕКТАМИ === */}
+        <div
+          style={{
+            marginTop: "2rem",
+            width: "100%",
+            height: "500px",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <ProjectsMapAll lang={lang} markers={allMarkers} />
         </div>
         <FormStatic lang={params.lang} />
         <WhatsAppButton lang={params.lang} />
