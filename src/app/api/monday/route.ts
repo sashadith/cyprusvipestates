@@ -85,9 +85,9 @@ export async function POST(request: Request) {
       await transporter.sendMail({
         from: process.env.EMAIL_USER!,
         to: process.env.EMAIL_TO || process.env.EMAIL_USER!,
-        subject: "New lead — Cyprus VIP Estates",
-        text: "new lead from Cyprus VIP Estates. check your board in Monday.",
-        html: "<p>new lead from <b>Cyprus VIP Estates</b>. check your board in Monday.</p>",
+        subject: "New Lead — Cyprus VIP Estates",
+        text: "New lead from Cyprus VIP Estates. Check your board in Monday.",
+        html: "<p>New lead from <b>Cyprus VIP Estates</b>. Check your board in Monday.</p>",
         replyTo: email || undefined,
       });
     } catch (mailErr) {
