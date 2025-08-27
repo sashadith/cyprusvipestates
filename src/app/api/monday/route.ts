@@ -1,48 +1,46 @@
-// app/api/monday/route.ts
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 
 const MONDAY_API_URL = "https://api.monday.com/v2";
 const MONDAY_API_KEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjQ0MDQyNzMyNiwiYWFpIjoxMSwidWlkIjo2MjE1MTQ3MSwiaWFkIjoiMjAyNC0xMS0yM1QxODo1NTo0Ny40NThaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjM5NDMwODYsInJnbiI6ImV1YzEifQ.t5IONmg4UE6uHeN7qmkBI1cEGE4YKcYkDgutGA6q_Ic";
-const BOARD_ID = "2048161725";
-
-// Настрой почты (Hostinger)
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || "smtp.hostinger.com",
-  port: Number(process.env.EMAIL_PORT || 465),
-  secure: String(process.env.EMAIL_SECURE || "true") === "true", // true для 465
-  auth: {
-    user: process.env.EMAIL_USER!, // напр. contact@yourdomain.com
-    pass: process.env.EMAIL_PASSWORD!, // SMTP / app password
-  },
-});
+const BOARD_ID = "1761987486";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, surname, phone, email, message, country, currentPage } = body;
+    // const { name, phone, email, currentPage } = body;
+    const { name, phone, email, message, currentPage } = body;
 
     const currentDate = new Date().toISOString().split("T")[0];
 
+    const cyprusTime = new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Nicosia",
+    }).format(new Date()); // например: "13:45"
+
+    // Собираем column_values динамически
     const cols: Record<string, string> = {
-      text_mksse3wx: surname,
       text_mkkwm0b4: phone,
       text_mkkwekh3: email,
       text_mkkwk9kt: currentPage,
       text_mkq6spmc: message,
-      text_mkssckrt: country,
-      date4: currentDate,
+      date_mkt0wz3n: currentDate,
+      text_mkt0gyvy: cyprusTime,
     };
+
     if (message) cols.text_message = message;
 
     const query = `
       mutation {
         create_item (
           board_id: ${BOARD_ID},
-          item_name: "${String(name).replace(/"/g, '\\"')}",
+          item_name: "${name}",
           column_values: "${JSON.stringify(cols).replace(/"/g, '\\"')}"
-        ) { id }
+        ) {
+          id
+        }
       }
     `;
 
@@ -50,7 +48,7 @@ export async function POST(request: Request) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: MONDAY_API_KEY, // оставляем в коде, как просил
+        Authorization: MONDAY_API_KEY,
       },
       body: JSON.stringify({ query }),
     });
@@ -65,33 +63,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // ==== EMAIL УВЕДОМЛЕНИЕ ====
-    // Короткое сообщение по твоему тексту
-    const subject = "New lead — Cyprus VIP Estates";
-    const text =
-      "New lead from Cyprus VIP Estates. check your board in Monday.";
-    const html = `<p>New lead from <b>Cyprus VIP Estates</b>. check your board in Monday.</p>`;
-
-    try {
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER!,
-        to: process.env.EMAIL_USER!, // получатель(и)
-        subject,
-        text,
-        html,
-        replyTo: email || undefined, // удобно отвечать сразу лидy, если нужно
-      });
-    } catch (mailErr) {
-      console.error("Email send error:", mailErr);
-      // не валим основной поток — лид уже создан в Monday
-      return NextResponse.json(
-        { message: "Lead sent to Monday; email notification failed" },
-        { status: 200 }
-      );
-    }
-
     return NextResponse.json(
-      { message: "Lead sent to Monday; email notification delivered" },
+      { message: "Lead successfully sent to monday.com" },
       { status: 200 }
     );
   } catch (error) {
