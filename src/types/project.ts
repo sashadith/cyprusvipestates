@@ -58,6 +58,7 @@ export type KeyFeatures = {
   coveredArea: string;
   plotSize: string;
   energyEfficiency: EnergyEfficiency;
+  completionDate: string;
   price: number;
   lang: string;
 };

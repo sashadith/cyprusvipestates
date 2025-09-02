@@ -228,6 +228,14 @@ const project = {
           },
         },
         {
+          name: "completionDate",
+          title: "Completion date",
+          type: "date",
+          options: {
+            dateFormat: "YYYY-MM",
+          },
+        },
+        {
           name: "price",
           title: "Price",
           type: "number",

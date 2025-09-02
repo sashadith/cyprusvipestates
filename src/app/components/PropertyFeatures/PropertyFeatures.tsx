@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import styles from "./PropertyFeatures.module.scss";
 import { PropertyType } from "@/types/homepage";
 import { KeyFeatures } from "@/types/project";
+import { formatMonthYear } from "@/lib/formatMonthYear";
 
 const cityTranslations: {
   [city in "Paphos" | "Limassol" | "Larnaca"]: {
@@ -40,6 +41,9 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
   if (!keyFeatures) {
     return <div>Нет данных о ключевых особенностях</div>;
   }
+  const completion = keyFeatures.completionDate
+    ? formatMonthYear(keyFeatures.completionDate, lang, { capitalize: true })
+    : null;
   return (
     <section className={styles.propertyFeatures}>
       <div className={styles.propertyFeaturesInner}>
@@ -203,6 +207,22 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
                 <div className={styles.featureValue}>
                   {keyFeatures.energyEfficiency}
                 </div>
+              </div>
+            )}
+            {completion && (
+              <div className={styles.feature}>
+                <div className={styles.featureText}>
+                  {lang === "en"
+                    ? "Completion date"
+                    : lang === "de"
+                      ? "Fertigstellungsdatum"
+                      : lang === "pl"
+                        ? "Data zakończenia"
+                        : lang === "ru"
+                          ? "Дата сдачи проекта"
+                          : "Completion date"}
+                </div>
+                <div className={styles.featureValue}>{completion}</div>
               </div>
             )}
             {keyFeatures.price && (
