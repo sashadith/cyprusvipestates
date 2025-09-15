@@ -29,12 +29,24 @@ const BlogSlide: FC<Props> = ({
   // console.log("file", file);
   return (
     <div className={styles.slide}>
-      <Image
-        alt={title}
-        src={urlFor(image).url()}
-        fill={true}
-        className={styles.imagePoster}
-      />
+      {/* if image is available */}
+      {image && (
+        <Image
+          alt={title}
+          src={urlFor(image).url()}
+          fill={true}
+          className={styles.imagePoster}
+        />
+      )}
+      {/* else poster image */}
+      <div className={styles.posterImage}>
+        <Image
+          alt={title}
+          src="https://cdn.sanity.io/files/88gk88s2/production/bef9ef8c1faaf4bb80be49714d5c345bc434b1e0.webp"
+          fill={true}
+          className={styles.imagePoster}
+        />
+      </div>
       <div className={styles.overlayWide}></div>
       <div className={styles.content}>
         <div className={styles.overlay}></div>

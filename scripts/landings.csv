@@ -1,375 +1,1110 @@
-ID,Meta Title EN,Meta Description EN,Slug EN,Subtitle EN,Title EN,Ecxerpt EN,Intro Button EN,Meta Title DE,Meta Description DE,Slug DE,Pretitle DE,Title DE,Ecxerpt DE,Intro Button DE,Meta Title PL,Meta Desctription PL,Slug PL,Pretitle PL,Title PL,Ecxerpt PL,Intro Button PL,Meta Title RU,Meta Description RU,Slug RU,Pretitle RU,Title RU,Ecxerpt RU,Intro Button RU,Projects Title EN,Projects Title DE,Projects Title PL,Projects Title RU,Filter City,Filter Type,"Projects (slugs, comma)",TextFirst EN,TextFirst DE,TextFirst PL,TextFirst RU,FAQ Title EN,FAQ EN,FAQ Title DE,FAQ DE,FAQ Title PL,FAQ PL,FAQ Title RU,FAQ RU,TextSecond EN,TextSecond DE,TextSecond PL,TextSecond RU,Parent EN,Parent DE,Parent PL,Parent RU,Preview Image,Preview Alt EN,Preview Alt DE,Preview Alt PL,Preview Alt RU
-id,seo_metaTitle_en,seo_metaDescription_en,slug_en,landingIntro_subtitle_en,landingIntro_title_en,landingIntro_desc_en,landingIntro_button_en,seo_metaTitle_de,seo_metaDescription_de,slug_de,landingIntro_subtitle_de,landingIntro_title_de,landingIntro_desc_de,landingIntro_button_de,seo_metaTitle_pl,seo_metaDescription_pl,slug_pl,landingIntro_subtitle_pl,landingIntro_title_pl,landingIntro_desc_pl,landingIntro_button_pl,seo_metaTitle_ru,seo_metaDescription_ru,slug_ru,landingIntro_subtitle_ru,landingIntro_title_ru,landingIntro_desc_ru,landingIntro_button_ru,landingProjects_title_en,landingProjects_title_de,landingProjects_title_pl,landingProjects_title_ru,landingProjects_city,landingProjects_propertyType,landingProjects_projects_slugs,textFirst_en,textFirst_de,textFirst_pl,textFirst_ru,faq_title_en,faq_en,faq_title_de,faq_de,faq_title_pl,faq_pl,faq_title_ru,faq_ru,textSecond_en,textSecond_de,textSecond_pl,textSecond_ru,parent_en,parent_de,parent_pl,parent_ru,previewImage_path,previewImage_alt_en,previewImage_alt_de,previewImage_alt_pl,previewImage_alt_ru
-villas-residence-permit,"Cyprus Villas for Residence Permit — No Commission, from €300k","Buy a new Cyprus villa from €300 000 direct from developer, get Golden Visa for you and family—no commission, full support.",villas-for-cyprus-residency-permit-no-commission,Luxury Cyprus Villas — Live & Invest,Cyprus Villas for Residence Permit — No Commission,Explore premium Cyprus villas from €300 000 that qualify for Golden Visa. No agency fee—purchase direct from developer. Full process support for your family’s residency.,Get a Сonsultation,Zypern Villen für Aufenthaltstitel – Provisionsfrei ab 300.000 €,"Kaufen Sie eine Neubau-Villa auf Zypern ab 300.000 € direkt vom Bauträger. Golden Visa für Sie & Ihre Familie – provisionsfrei, komplette Betreuung.",villen-zypern-aufenthaltstitel-provisionsfrei,Luxusvillen auf Zypern – Leben & Investieren,Villen auf Zypern für Aufenthaltstitel – Provisionsfrei,"Entdecken Sie exklusive Villen auf Zypern ab 300.000 €, die für das Golden Visa qualifizieren. Provisionsfrei, direkt vom Bauträger, mit kompletter Unterstützung.",Lassen Sie sich beraten,Wille na Cyprze na pobyt stały – Bez prowizji od 300 000 €,"Kup nową willę na Cyprze od 300 000 € bez prowizji. Golden Visa dla Ciebie i rodziny – bezpośrednio od dewelopera, pełna obsługa.",wille-na-cyprze-na-pobyt-staly-bez-prowizji,Luksusowe wille na Cyprze – Żyj i inwestuj,Wille na Cyprze na pobyt stały – Bez prowizji,"Odkryj ekskluzywne wille na Cyprze od 300 000 €, które kwalifikują się do programu Golden Visa. Bez prowizji, od dewelopera, z pełnym wsparciem.",Uzyskaj konsultację,"Виллы на Кипре для ВНЖ — без комиссии, от €300 000","Купите виллу на Кипре от €300 000 и получите ВНЖ без комиссии. Прямо от застройщика, полный пакет услуг, оформление за 2–3 месяца.",villy-dlya-vnzh-na-kipre-bez-komissii,Премиум виллы на Кипре — жить и инвестировать,Виллы на Кипре для получения вида на жительство — без комиссии,"Элитные виллы на Кипре от €300 000 для получения ВНЖ. Без комиссии. Работаем напрямую с застройщиками. Включена семья, полное сопровождение сделки.",Получить консультацию,The best villas in Cyprus for obtaining permanent residence,Die besten Villen in Zypern für den Erhalt eines dauerhaften Wohnsitzes,"Najlepsze wille na Cyprze, w których można uzyskać stały pobyt",Лучшие виллы на Кипре для получения ПМЖ,,Villa,,"Cyprus Villas for Residence Permit — No Commission
+ID,Meta Title EN,Meta Description EN,Slug EN,Subtitle EN,Title EN,Ecxerpt EN,Intro Button EN,Meta Title DE,Meta Description DE,Slug DE,Pretitle DE,Title DE,Ecxerpt DE,Intro Button DE,Meta Title PL,Meta Desctription PL,Slug PL,Pretitle PL,Title PL,Ecxerpt PL,Intro Button PL,Meta Title RU,Meta Description RU,Slug RU,Pretitle RU,Title RU,Ecxerpt RU,Intro Button RU,Projects Title EN,Projects Title DE,Projects Title PL,Projects Title RU,Filter City,Filter Type,"Projects (slugs, comma)",TextFirst EN,TextSecond EN,FAQ Title EN,FAQ EN,TextFirst DE,TextSecond DE,FAQ Title DE,FAQ DE,TextFirst PL,TextSecond PL,FAQ Title PL,FAQ PL,TextFirst RU,TextSecond RU,FAQ Title RU,FAQ RU,Parent EN,Parent DE,Parent PL,Parent RU,Preview Image,Preview Alt EN,Preview Alt DE,Preview Alt PL,Preview Alt RU
+id,seo_metaTitle_en,seo_metaDescription_en,slug_en,landingIntro_subtitle_en,landingIntro_title_en,landingIntro_desc_en,landingIntro_button_en,seo_metaTitle_de,seo_metaDescription_de,slug_de,landingIntro_subtitle_de,landingIntro_title_de,landingIntro_desc_de,landingIntro_button_de,seo_metaTitle_pl,seo_metaDescription_pl,slug_pl,landingIntro_subtitle_pl,landingIntro_title_pl,landingIntro_desc_pl,landingIntro_button_pl,seo_metaTitle_ru,seo_metaDescription_ru,slug_ru,landingIntro_subtitle_ru,landingIntro_title_ru,landingIntro_desc_ru,landingIntro_button_ru,landingProjects_title_en,landingProjects_title_de,landingProjects_title_pl,landingProjects_title_ru,landingProjects_city,landingProjects_propertyType,landingProjects_projects_slugs,textFirst_en,textSecond_en,faq_title_en,faq_en,textFirst_de,textSecond_de,faq_title_de,faq_de,textFirst_pl,textSecond_pl,faq_title_pl,faq_pl,textFirst_ru,textSecond_ru,faq_title_ru,faq_ru,parent_en,parent_de,parent_pl,parent_ru,previewImage_path,previewImage_alt_en,previewImage_alt_de,previewImage_alt_pl,previewImage_alt_ru
+large-villas-in-cyprus,Large Villas in Cyprus for Sale – No Agency Fee,"Explore new large villas in Cyprus for sale in Paphos, Limassol & Larnaca. No commission – buy directly from the developer.",large-villas-cyprus,Spacious Homes,Large Villas in Cyprus,Browse our collection of large villas for sale in Cyprus – ideal for families and groups. All properties are brand-new and commission-free.,Get a Consultation,Große Villen auf Zypern kaufen – Neubauten ohne Provision,"Exklusive große Villen auf Zypern direkt vom Bauträger kaufen. Neue Projekte in Paphos, Limassol & Larnaka. Ohne Maklerprovision.",grosse-villen-zypern,Moderne Luxusvillen,Große Villen auf Zypern,"Entdecken Sie neue große Villen auf Zypern. Direktverkauf ohne Maklerprovision. Top-Lagen in Paphos, Limassol und Larnaka. Ideal für Eigennutzer und Investoren.",Lassen Sie sich beraten,Duże wille na Cyprze na sprzedaż – Nowe domy bez prowizji,"Kup luksusową dużą willę na Cyprze w Pafos, Larnace lub Limassol bez prowizji. Bezpośrednio od dewelopera.",duze-wille-na-cyprze,Nowe wille,Duże wille na Cyprze,"Odkryj nowe duże wille na Cyprze – idealne dla rodzin, grup i inwestorów. Bez ukrytych kosztów, bez prowizji, bez pośredników.",Uzyskaj konsultację,Большие виллы на Кипре — продажа элитных новостроек,"Продажа больших вилл на Кипре от застройщиков. Новые проекты в Пафосе, Лимассоле и Ларнаке. Без комиссии. Полное сопровождение.",bolshie-villy-na-kipre,Просторное жилье,Большие виллы на Кипре,"Элитные и просторные виллы на Кипре. Новостройки от застройщика в Пафосе, Лимассоле и Ларнаке. Без комиссии. Полное юридическое сопровождение.",Заказать консультацию,List of The Large Villas in Cyprus,Liste der großen Villen auf Zypern,Lista dużych willi na Cyprze,Список больших вилл на Кипре,,Villa,,"Discover Large Villas in Cyprus – Spacious New Homes for Sale with No Commission
 
-We offer new-construction villas in Cyprus that enable investors to obtain a Golden Visa (permanent residence permit) for themselves and their families. Our clients pay no agency commission—we work directly with developers to ensure the best conditions and full legal assistance.
+We sell new large villas in Cyprus, designed for families, groups, and investors looking for generous space, privacy, and luxury. Our listings feature newly built villas in Paphos, Limassol, and Larnaca — perfect whether you’re looking for a permanent residence, a vacation escape, or a rental investment, all directly from trusted developers.
 
-What Is the Cyprus Golden Visa via Property Investment?
+Important: Clients pay zero commission — you buy directly from the developer. There are no agency fees, no hidden costs, and no extra charges.
 
-This residency-by-investment program grants permanent residence for investment in Cyprus real estate starting at €300 000 + VAT. The permit is issued without an expiry date and extends to include the investor’s spouse and dependent children. After approximately 8 years of legal residency, citizenship application is possible.
+With villa sizes starting from four to seven bedrooms, each property is tailored to meet the needs of large families or buyers looking for flexible multi-purpose living — all within proximity to the Mediterranean Sea.
 
-Primary condition:
+Why Buy a Large Villa in Cyprus?
 
-The purchase must be of brand-new residential property directly from a developer, with resale options excluded.
-Minimum annual income of €50 000 from foreign sources; + €15 000 for spouse, + €10 000 per child.
-Permanent residence is not mandatory—visiting at least once every two years keeps the permit valid.
-Employment in Cyprus is prohibited, though earning income from remote or overseas business activities is allowed.
+Cyprus continues to attract buyers from the UK, Scandinavia, the UAE, and Israel thanks to its relaxed lifestyle, tax advantages, modern infrastructure, and mild climate year-round. But more importantly, large villas offer something unique: true independence and comfort for those who value space and seclusion.
 
-Benefits of Purchasing Through Us
+Key reasons to choose a large villa in Cyprus:
 
-Family-inclusive permit — residency for spouse and children included.
-No agency fee — transparent pricing; you pay only for the property.
-Direct developer access — exclusive access to premium new-build projects.
-Full legal support — due-diligence, residency application, bank account setup, immigration assistance.
-Fast-track process — residency granted within ~2–3 months post-purchase.","Villen auf Zypern für Aufenthaltstitel – Provisionsfrei
+Space for everyone: Multiple en-suite bedrooms, large living areas, separate guest wings, and outdoor terraces.
+Private lifestyle: Enjoy your own pool, garden, and BBQ zone without sharing amenities.
+Great for relocation: Large villas are ideal for families moving permanently to Cyprus.
+Strong investment: Villas in Cyprus hold value well and are in high demand for luxury holiday rentals.
 
-Wir bieten Neubauvillen auf Zypern an, die es Investoren ermöglichen, für sich und ihre Familie ein Golden Visa (dauerhafte Aufenthaltserlaubnis) zu erhalten. Unsere Kunden zahlen keine Maklerprovision – wir arbeiten direkt mit den Bauträgern zusammen und sichern Ihnen die besten Konditionen sowie vollständige juristische Unterstützung.
+Popular Locations for Large Villas in Cyprus
 
-Was ist das Golden Visa Programm auf Zypern?
+We offer a diverse portfolio of large villas in Paphos, Limassol, and Larnaca, each location offering distinct advantages:
 
-Dieses Investitionsprogramm gewährt eine dauerhafte Aufenthaltserlaubnis für Investitionen in zypriotische Immobilien ab 300.000 € + MwSt.. Die Genehmigung gilt unbegrenzt und schließt Ehepartner und unterhaltsberechtigte Kinder ein. Nach etwa acht Jahren legalen Aufenthalts kann ein Antrag auf Staatsbürgerschaft gestellt werden.
+Paphos – Relaxed Family Life
 
-Wichtige Voraussetzungen:
+Located on the western coast, Paphos is a cultural and family-friendly city. Large villas here often feature panoramic sea views, proximity to golf courses, and serene residential neighborhoods. It's ideal for families seeking a peaceful environment with full amenities.
 
-Erwerb von neuen Wohnimmobilien direkt vom Bauträger, kein Zweitverkauf.
-Nachweis eines Mindesteinkommens von 50.000 € aus dem Ausland; + 15.000 € für den Ehepartner, + 10.000 € pro Kind.
-Keine Residenzpflicht – ein Besuch alle zwei Jahre reicht aus, um den Status zu behalten.
-Keine Anstellung auf Zypern erlaubt, aber Fernarbeit oder Auslandsgeschäft ist möglich.
+Limassol – Cosmopolitan Investment Hub
 
-Vorteile beim Kauf über uns
+Limassol offers a more upscale and vibrant lifestyle. Many large villas in Limassol are located in private gated communities near international schools, marinas, and business centers. This area attracts entrepreneurs and expats alike.
 
-Familienfreundlich – Aufenthaltstitel für Ehepartner und Kinder inklusive.
-Provisionsfrei – Sie zahlen nur den Immobilienpreis.
-Direkter Zugang zu Bauträgern – exklusive Premium-Neubauprojekte.
-Komplette juristische Unterstützung – Due Diligence, Antragsverfahren, Kontoeröffnung, Einwanderungsservice.
-Schnelles Verfahren – Aufenthaltstitel in ca. 2–3 Monaten nach Kauf.","Zakup nowej willi na Cyprze to nie tylko prestiżowa inwestycja w nieruchomość w jednym z najatrakcyjniejszych miejsc w Europie. To również możliwość uzyskania pozwolenia na pobyt stały (Golden Visa) dla Ciebie, Twojego małżonka i dzieci. Współpracując z nami, kupujesz bez prowizji, bezpośrednio od sprawdzonych deweloperów, a my zapewniamy Ci pełne wsparcie – od wyboru nieruchomości po odbiór karty pobytu.
+Larnaca – Quiet Coastal Living
 
-Program Golden Visa – Czym jest i dlaczego warto
+If you're looking for value and convenience, Larnaca provides easy access to the international airport, golden beaches, and local tavernas. New developments in this area offer large villas with sea views and modern designs at attractive prices.","New Build Villas – High Standards, Zero Fees
 
-Golden Visa na Cyprze to program inwestycyjny, dzięki któremu można uzyskać stałe prawo pobytu w zamian za inwestycję w nieruchomość o wartości co najmniej 300 000 € + VAT. Jest to jedna z najprostszych i najszybszych dróg do legalnego zamieszkania na Cyprze, korzystania z jego przywilejów podatkowych oraz swobodnego poruszania się po krajach strefy Schengen.
+All our large villas are new construction projects from trusted developers, which means:
 
-Najważniejsze zasady programu:
+Full legal documentation
+Energy-efficient and eco-compliant buildings
+Smart home technology (in selected projects)
+Secure payment terms and construction guarantees
 
-Inwestycja tylko w nowe nieruchomości mieszkalne od dewelopera (rynek pierwotny).
-Minimalny roczny dochód z zagranicy: 50 000 € (+ 15 000 € na małżonka, + 10 000 € na każde dziecko).
-Wystarczy wizyta na Cyprze raz na dwa lata, aby utrzymać status pobytowy.
-Brak wymogu zdawania egzaminów językowych czy z historii Cypru.
-Brak prawa do pracy w cypryjskich firmach – możliwa jest praca zdalna lub prowadzenie działalności poza Cyprem.
+You don’t pay us a commission. The full price goes to the developer. Our service is 100% free for buyers — we represent your interests while ensuring the best possible deal.
 
-Korzyści dla inwestorów z Polski
+What’s Included in a Typical Large Villa?
 
-Pakiet rodzinny – pozwolenie na pobyt stały obejmuje małżonka i dzieci do 25. roku życia.
-Bez prowizji – płacisz tylko cenę nieruchomości z umowy.
-Dostęp do najlepszych projektów – współpracujemy wyłącznie ze sprawdzonymi deweloperami.
-Pełne bezpieczeństwo transakcji – weryfikacja dokumentów, due diligence, opieka prawna.
-Krótki czas oczekiwania – Golden Visa w zaledwie 2–3 miesiące od zakupu.
-Możliwość dochodu z najmu – wynajem krótko- i długoterminowy.
-Ścieżka do obywatelstwa – po ok. 8 latach legalnego pobytu.","Элитные виллы с правом на ВНЖ
+While features vary by location and budget, most large villas include:
 
-Мы предлагаем виллы на Кипре, покупка которых даёт право на получение вида на жительство для вас и вашей семьи. Все объекты — первичный рынок от ведущих застройщиков страны. Клиент не платит агентству ни одного евро комиссии — мы работаем напрямую с девелоперами, обеспечивая лучшие условия и полное юридическое сопровождение сделки.
+4 to 7 bedrooms, many with en-suite bathrooms
+Open-plan living and dining areas
+Private swimming pool and landscaped garden
+Roof terrace or sea view balcony
+Covered parking or garage
+Solar water heating systems
+Fitted kitchen with branded appliances
+Gated community or individual plot with fencing
 
-Что такое ВНЖ на Кипре через покупку недвижимости
+Who Are These Villas Ideal For?
 
-Программа получения вида на жительство на Кипре предназначена для инвесторов, приобретающих недвижимость стоимостью от €300 000 + НДС.
-Это один из самых быстрых и надёжных способов легально жить в стране, пользоваться льготами налогового резидента и свободно перемещаться по странам ЕС.
+Large families looking to relocate or spend summers together
+Entrepreneurs and expats needing office space at home
+Buy-to-let investors interested in group holiday rentals
+Multigenerational households seeking independence under one roof
 
-Основные требования:
+Legal Process & Support
 
-покупка только первичной недвижимости от застройщика;
-подтверждение годового дохода от €50 000 из-за границы (+€15 000 на супруга и +€10 000 на каждого ребёнка);
-обязательное посещение Кипра минимум 1 раз в 2 года;
-отсутствие трудовой деятельности на территории Кипра (до получения гражданства).
+We assist you every step of the way — from the initial property tour to the title deed transfer. Our team speaks English, German, Polish, and Russian, and we work with qualified lawyers and developers only.
 
-Преимущества программы
+Property reservation
+Contract drafting and legal due diligence
+Optional property customization
+Final payments and handover
 
-Семейный пакет — ВНЖ сразу для супруга/супруги и детей до 25 лет.
-Простое оформление — решение в течение 2–3 месяцев.
-Низкие налоги — отсутствует налог на недвижимость, льготы для резидентов.
-Путь к гражданству — возможность подать на паспорт Кипра через 7–8 лет.
-Нет требования постоянного проживания — достаточно одного визита раз в два года.",FAQ,"What is the minimum investment? :: €300,000 plus VAT invested in brand-new residential real estate purchased directly from a developer.
-$ Is the family included? :: Yes—permit covers spouse and dependent children.
-$ Can I work in Cyprus with this visa? :: No—employment is not allowed, but you may run a remote or foreign-based business.
-$ Do I need to live in Cyprus? :: No—visits once every two years are sufficient.
-$ Can this lead to citizenship? :: Yes — after approximately eight years, you become eligible to apply for Cypriot citizenship.
-$ Can the villa be rented out? :: Yes, short-term and long-term rentals are permitted.
-$ Are there property taxes? :: There is no yearly property tax — only utility bills, local municipal charges, and rental income tax when applicable.
-$ How fast is the residency process? :: Around 2–3 months after document submission.
-$ What documents are needed? :: Passport, sales contract, proof of income, clear criminal record, health insurance.
-$ Is aid provided for bank account setup? :: Yes—we assist in opening a Cyprus bank account efficiently.",FAQ,"Wie hoch ist die Mindestinvestition? :: 300.000 € + MwSt. in eine neue Wohnimmobilie vom Bauträger.
-$ Ist die Familie eingeschlossen? :: Ja – der Titel gilt für Ehepartner und unterhaltsberechtigte Kinder.
-$ Darf ich mit diesem Visa in Zypern arbeiten? :: Nein – eine Anstellung ist nicht erlaubt, Fernarbeit oder Auslandsgeschäft schon.
-$ Muss ich auf Zypern leben? :: Nein – ein Besuch alle zwei Jahre genügt.
-$ Kann dies zur Staatsbürgerschaft führen? :: Ja – nach etwa 8 Jahren kann ein Antrag gestellt werden.
-$ Darf die Villa vermietet werden? :: Ja, sowohl kurz- als auch langfristig.
-$ Gibt es Immobiliensteuern? :: Keine jährliche Immobiliensteuer; nur Nebenkosten, kommunale Abgaben und ggf. Einkommenssteuer aus Mieteinnahmen.
-$ Wie schnell ist der Prozess? :: Ca. 2–3 Monate nach Einreichung der Unterlagen.
-$ Welche Unterlagen sind erforderlich? :: Reisepass, Kaufvertrag, Einkommensnachweis, polizeiliches Führungszeugnis, Krankenversicherung.
-$ Helfen Sie bei der Kontoeröffnung? :: Ja – wir begleiten Sie bei der Kontoeröffnung in Zypern.",Najczęściej zadawane pytania,"Ile trzeba zainwestować, aby uzyskać Golden Visa? :: Minimum 300 000 € + VAT w nową nieruchomość mieszkalną od dewelopera.
-$ Czy program obejmuje całą rodzinę? :: Tak – małżonka, dzieci do 25. roku życia oraz w niektórych przypadkach rodziców inwestora.
-$ Czy mogę pracować na Cyprze z tym pozwoleniem? :: Nie – można prowadzić działalność poza Cyprem lub pracować zdalnie.
-$ Czy muszę mieszkać na Cyprze przez cały rok? :: Nie – wystarczy przyjazd raz na dwa lata.
-$ Czy mogę wynajmować willę? :: Tak – zarówno krótko-, jak i długoterminowo.
-$ Czy można potem ubiegać się o obywatelstwo? :: Tak – po około 8 latach pobytu.
-$ Czy są podatki od nieruchomości? :: Na Cyprze nie ma podatku od nieruchomości; płaci się jedynie opłaty komunalne i ewentualny podatek od dochodu z najmu.
-$ Jakie dokumenty są potrzebne? :: Paszport, umowa kupna-sprzedaży, potwierdzenie dochodów, zaświadczenie o niekaralności, ubezpieczenie zdrowotne.
-$ Czy pomagacie w otwarciu konta bankowego? :: Tak – cały proces można załatwić w 1–2 dni.
-$ Czy zakup nieruchomości na Cyprze jest bezpieczny? :: Tak – rynek jest stabilny, a my przeprowadzamy pełną analizę prawną każdej oferty.",Часто задаваемые вопросы,"Сколько стоит вилла, подходящая для получения ВНЖ на Кипре? :: Минимум €300 000 + НДС. Мы предлагаем виллы от €350 000 до €2 млн.
-$ Можно ли оформить ВНЖ всей семье? :: Да. Включаются супруг/супруга, дети до 25 лет, родители обеих сторон.
-$ Нужно ли сдавать экзамен по языку или истории Кипра? :: Нет, экзамен не требуется.
-$ Могу ли я работать на Кипре с таким ВНЖ? :: Нет, только доход из-за границы. Можно вести удалённый бизнес.
-$ Как быстро я получу ВНЖ после покупки виллы? :: В среднем — 2–3 месяца.
-$ Что произойдёт, если продать недвижимость? :: Статус утратится, если не купить другой подходящий объект.
-$ Можно ли сдавать виллу в аренду? :: Да, разрешено. Это может приносить дополнительный доход.
-$ Облагается ли владение виллой налогами? :: Налога на недвижимость нет. Есть только коммунальные платежи и муниципальный сбор.
-$ Можно ли потом получить гражданство Кипра? :: Да, через 7–8 лет проживания.
-$ Нужно ли постоянно жить на Кипре? :: Нет, достаточно визита раз в 2 года.
-$ Какие документы нужны для подачи на ВНЖ? :: Загранпаспорт
-Договор купли-продажи
-Подтверждение дохода
-Справка о несудимости
-Медстраховка
-$ Сложно ли открыть банковский счёт на Кипре? :: Нет, при помощи нашего юриста это занимает 1–2 дня.","Ideal Villa Locations in Cyprus
+Ready to Find Your Dream Villa?
 
-We specialize in prime locations across Cyprus:
+We handpick only the best large villas in Cyprus, ensuring quality, value, and location. Whether you want mountain views, sea panoramas, or proximity to international schools, we have something for you — and all without any buyer’s commission.
 
-Paphos — coastal charm, historic sites, golf and leisure.
-Limassol — cosmopolitan hub with strong infrastructure.
-Larnaca — tranquil living, close to the international airport.
+Browse our current listings or contact us now for a personalized consultation.",Frequently Asked Questions,"Do I pay a commission to your agency? :: 
+No. Our buyers pay no commission. We work directly with developers and do not add any fees to the property price.
+$Are these villas newly built or resale? :: 
+All listings are brand-new — either completed recently or off-plan. You will be the first owner.
+$Can I get residency through property purchase?
+Yes. Cyprus offers permanent residency to non-EU citizens who invest in property, subject to legal criteria.
+$Is financing available? :: 
+Mortgages are available for EU citizens and residents. We can connect you with local banks and financial advisors.
+$Can I rent the villa out as a holiday home? :: 
+Absolutely. Villas in touristic areas like Paphos and Limassol generate strong rental income, especially during summer.
+$Can I buy remotely without visiting Cyprus? :: 
+Yes. We offer remote video tours, digital contracts, and legal representation so you can complete the purchase from abroad.","Große Villen auf Zypern kaufen – Neubauten direkt vom Bauträger, ohne Maklerprovision
 
-Each villa features modern design, private pools, spacious layouts, and stunning sea or mountain views.
+Wir bieten eine exklusive Auswahl an großen Villen auf Zypern zum Verkauf an. Alle Objekte stammen von zuverlässigen Bauträgern und werden provisionsfrei verkauft.
 
-Final Thought
+Ob für den Eigenbedarf, als Feriendomizil oder Kapitalanlage – große Villen sind ideal für Käufer, die Wert auf Raum, Privatsphäre und hochwertige Ausstattung legen. Unsere Angebote befinden sich in den besten Regionen der Insel: Paphos, Limassol und Larnaka.
 
-Purchasing a villa in Cyprus is both a prestigious investment and a reliable path to permanent residence for you and your family. We offer exclusive new properties from developers—no commission, clear terms, and full support.
+Wichtig: Als Käufer zahlen Sie keine Maklerprovision. Sie kaufen direkt vom Bauträger. Unser Service ist für Sie kostenlos.
 
-Contact us now to find your ideal villa and secure your Golden Visa quickly and efficiently.","Top-Standorte für Villen auf Zypern
+Warum große Villen auf Zypern?
 
-Wir sind auf Premium-Standorte spezialisiert:
+Zypern bietet mehr als nur Sonne und Meer. Das Land punktet mit stabiler Wirtschaft, EU-Rechtssicherheit, niedriger Steuerlast und hervorragender Lebensqualität. Große Villen bieten dabei:
 
-Paphos – Küstenstadt mit Charme, historischen Stätten, Golf und Freizeitangeboten.
-Limassol – kosmopolitisches Zentrum mit exzellenter Infrastruktur.
-Larnaka – ruhiges Küstenleben, nahe dem internationalen Flughafen.
+Großzügige Wohnflächen ab 200 m²
+Mehrere Schlafzimmer mit ensuite Badezimmern
+Offene Wohn- und Essbereiche mit modernen Küchen
+Private Pools, Gärten, Terrassen mit Meerblick
+Luxuriöse Ausstattung, Smart-Home-Systeme, Fußbodenheizung
+Eigene Grundstücke mit hoher Privatsphäre
 
-Jede Villa bietet modernes Design, private Pools, großzügige Grundrisse und atemberaubende Meer- oder Bergblicke.
+Große Villen sind besonders gefragt bei anspruchsvollen Käufern und Investoren, die auf der Suche nach nachhaltigen Werten sind.
 
-Fazit
+Die besten Standorte für große Villen
+Paphos
 
-Der Kauf einer Villa auf Zypern ist sowohl eine prestigeträchtige Investition als auch ein sicherer Weg zu einem dauerhaften Aufenthaltstitel für Sie und Ihre Familie. Wir bieten exklusive Neubauprojekte direkt vom Bauträger – provisionsfrei, transparent und mit kompletter Unterstützung.
+Natur, Kultur und Ruhe. Paphos bietet Villen mit Blick auf das Mittelmeer, nahe gelegene Golfplätze und ruhige Wohngegenden – ideal für Rückzug und Erholung.
 
-Kontaktieren Sie uns noch heute, um Ihre Traumvilla zu finden und Ihr Golden Visa schnell und unkompliziert zu sichern.","Najlepsze lokalizacje na zakup willi
+Limassol
 
-Pafos – klimatyczne miasto nadmorskie, połączenie plaż, zabytków i pól golfowych. Idealne do życia i jako baza inwestycyjna.
-Limassol – nowoczesne centrum biznesu i rozrywki z luksusowymi projektami mieszkaniowymi.
-Larnaka – spokojne miasto z międzynarodowym lotniskiem, świetne do życia przez cały rok.
+Das wirtschaftliche Zentrum Zyperns. Hier finden Sie Premium-Villen in Küstenlage, nahe Yachthäfen, internationalen Schulen und Shopping Malls. Perfekt für berufstätige Käufer oder internationale Investoren.
 
-Każda oferowana przez nas willa wyróżnia się nowoczesną architekturą, prywatnym basenem, przestronnym wnętrzem i panoramicznym widokiem na morze lub góry.
+Larnaka
 
-Podsumowanie
+Ein Geheimtipp für preisbewusste Käufer. Die Region bietet moderne Villen in Flughafennähe und mit direkter Anbindung an das Stadtzentrum – ruhig, aber gut erreichbar.","Vorteile des Kaufs direkt vom Bauträger
 
-Zakup willi na Cyprze w ramach programu Golden Visa to szansa na bezpieczną inwestycję, prestiżowe miejsce do życia i dostęp do stałego pobytu dla całej rodziny. Dzięki współpracy z nami masz gwarancję braku prowizji, pełnej obsługi i dostępu do najlepszych projektów na rynku pierwotnym.
-Skontaktuj się z nami już dziś i rozpocznij proces uzyskania pozwolenia na pobyt na Cyprze w zaledwie kilka miesięcy.","Почему выбирают нас
+Kein Aufpreis, keine Provision
+Neu gebaute Immobilien mit Garantie
+Anpassbare Grundrisse und Ausstattung
+Energieeffiziente Bauweise nach EU-Standards
+Transparente Zahlungspläne und Vertragsbedingungen
 
-Без комиссии — вы платите только за недвижимость, указанную в договоре с застройщиком.
-Прямая работа с девелоперами — доступ к лучшим проектам без посредников.
-Юридическая проверка — due diligence, проверка документов, сопровождение в миграционной службе.
-Помощь на всех этапах — от выбора виллы до получения карты ВНЖ.
+Alle Projekte werden von unserem Team rechtlich geprüft und begleitet. Sie erhalten vollständige Sicherheit und Unterstützung – auch auf Deutsch.
 
-Где можно купить виллу для ВНЖ
+Investieren in große Villen auf Zypern
 
-Мы работаем по всему Кипру, предлагая премиальные проекты в трёх ключевых регионах:
-Пафос — курортный город с мягким климатом, близостью к пляжам и гольф-полям.
-Лимассол — деловой и культурный центр с развитой инфраструктурой.
-Ларнака — уютный прибрежный город с международным аэропортом.
+Große Villen eignen sich nicht nur zum Eigenbedarf, sondern auch hervorragend als Kapitalanlage:
 
-Каждая вилла спроектирована с учётом комфорта и современного дизайна: просторные планировки, частные бассейны, панорамные виды на море и горы.
+Hohe Mietnachfrage im Luxussegment
+Kurz- und Langzeitvermietung möglich
+Attraktive Bruttorenditen zwischen 5–7 %
+Wertzuwachs durch begrenztes Angebot in Top-Lagen
+Optional: Verwaltung und Vermietung durch lokale Partner
 
-Покупка виллы на Кипре — это престижная инвестиция и надёжный способ получить вид на жительство для всей семьи. Мы предлагаем лучшие проекты напрямую от застройщиков, без комиссии и лишних расходов.
-Свяжитесь с нами уже сегодня, чтобы выбрать идеальную виллу и оформить ВНЖ на Кипре в кратчайшие сроки.",,,,,villas-import.jpg,"Cyprus Villas for Residence Permit — No Commission, from €300k",Zypern Villen für Aufenthaltstitel – Provisionsfrei ab 300.000 €,Wille na Cyprze na pobyt stały – Bez prowizji od 300 000 €,"Виллы на Кипре для ВНЖ — без комиссии, от €300 000"
-apartments-cyprus-investors,Apartments in Cyprus for Investors – No Agency Fee,"Buy new apartments in Cyprus directly from developers. No agency fees. High rental yields in Paphos, Larnaca, Limassol.",apartments-in-cyprus-for-investors,Smart Investments in the Mediterranean,Apartments in Cyprus for Investors,"New-build Cyprus apartments for investors. High yields, value growth, and residency options – all with no agency fees.",Get a Сonsultation,Wohnungen auf Zypern für Investoren – Provisionsfrei,"Kaufen Sie Neubauwohnungen auf Zypern direkt vom Bauträger. Keine Maklerprovision. Hohe Renditen in Paphos, Larnaka und Limassol.",wohnungen-auf-zypern-fuer-investoren,Investieren ohne Zusatzkosten,Wohnungen auf Zypern für Investoren,"Neubauwohnungen auf Zypern für Investoren. Hohe Mietrenditen, Wertsteigerung und Aufenthaltsgenehmigung – alles provisionsfrei.",Lassen Sie sich beraten,Apartamenty na Cyprze dla inwestorów – Bez prowizji,"Kup apartament na Cyprze prosto od dewelopera. Bez prowizji. Wysoka stopa zwrotu w Pafos, Larnace i Limassol.",apartamenty-na-cyprze-dla-inwestorow,Inwestycja bez dodatkowych kosztów,Apartamenty na Cyprze dla inwestorów,"Nowe apartamenty na Cyprze dla inwestorów. Wysoka stopa zwrotu, wzrost wartości, możliwość uzyskania rezydencji – wszystko bez prowizji.",Uzyskaj konsultację,"Виллы на Кипре для ВНЖ — без комиссии, от €300 000","Купите апартаменты на Кипре напрямую от застройщика. Без комиссии. Выгодные инвестиции в Пафосе, Ларнаке и Лимассоле.",apartamenty-na-kipre-dlya-investorov,Инвестиции без переплат,Апартаменты на Кипре для инвесторов,"Инвестиционные апартаменты на Кипре от застройщиков. Доход, рост стоимости, ВНЖ. Без комиссии агентству.",Получить консультацию,The best villas in Cyprus for Investors,Die besten Villen auf Zypern für Investoren,Najlepsze wille na Cyprze dla inwestorów,Лучшие виллы на Кипре для инвесторов,,Apartment,,"We offer a handpicked selection of brand-new apartments in Cyprus, ideal for investors seeking strong returns, asset appreciation, and a stable investment climate. Every property is sold directly from reputable developers, meaning you pay zero agency fees – not a single extra euro.
+Zypern bietet darüber hinaus die Möglichkeit, bei Immobilienkauf von bestimmten Schwellenwerten ein dauerhaftes Aufenthaltsrecht zu beantragen.
 
-Purchasing property in Cyprus goes beyond acquiring real estate — it’s an investment in a lifestyle and a lasting financial asset in one of the Mediterranean’s most sought-after locations.
+Kaufprozess – einfach und sicher
 
-Why Cyprus Apartments Are a Prime Investment Choice
+Beratung & Auswahl passender Objekte
+Virtuelle oder persönliche Besichtigungen
+Reservierung & rechtliche Prüfung
+Vertragsunterzeichnung & Zahlung
+Übergabe & Eintragung ins Grundbuch
 
-Cyprus offers a rare combination of sunny weather all year round, a pro-business environment, and a real estate market that’s steadily on the rise. With tourism operating 12 months a year, rental demand remains high across coastal cities.
+Alle Schritte werden durch unser deutschsprachiges Team begleitet. Auch Fernkauf mit Vollmacht ist problemlos möglich.
 
-Apartments in Cyprus are especially appealing to investors because they:
+Jetzt große Villa auf Zypern finden
 
-Deliver high occupancy rates in both short-term and long-term rentals
-Require low maintenance costs compared to villas or houses
-Offer higher liquidity and quicker resale potential
-Appeal to both holidaymakers and long-term residents
+Kontaktieren Sie uns für eine persönliche Beratung. Wir helfen Ihnen, die passende große Villa zu finden – ob als Wohnsitz, Feriendomizil oder Investment. Direktverkauf ohne Maklerprovision.",Häufig gestellte Fragen,"Muss ich eine Provision zahlen? :: 
+Nein. Sie kaufen direkt vom Bauträger. Unser Service für Käufer ist vollständig provisionsfrei.
+$Kann ich die Villa aus dem Ausland kaufen? :: 
+Ja. Wir ermöglichen den vollständigen Kaufprozess online inklusive virtueller Besichtigung, Vertragsabwicklung und rechtlicher Begleitung.
+$Sind die Villen neu gebaut? :: 
+Ja. Es handelt sich ausschließlich um Neubauprojekte mit Baugenehmigung und moderner Ausstattung.
+$Kann ich die Villa vermieten? :: 
+Natürlich. Viele Käufer nutzen die Immobilien zur Ferienvermietung oder als langfristige Anlage.
+$Erhalte ich Eigentumsrechte? :: 
+Ja. Jede Villa wird mit einem offiziellen Title Deed oder Eintrag im zypriotischen Grundbuchsystem verkauft.
+$Ist eine individuelle Ausstattung möglich? :: 
+Bei Off-Plan-Projekten ja. Sie können Bodenbeläge, Küchendesign, Smart-Home-Funktionen und vieles mehr wählen.","Duże wille na Cyprze na sprzedaż – nowe projekty bez prowizji
 
-High Yields and Strong Value Growth
+Sprzedajemy nowe, przestronne wille na Cyprze – idealne dla rodzin, inwestorów oraz osób poszukujących luksusowego miejsca do życia lub wypoczynku. Nasza oferta obejmuje wyłącznie nowe inwestycje deweloperskie w prestiżowych lokalizacjach: Pafos, Limassol i Larnaka.
 
-Rental yields in Cyprus apartments average 6–10% annually, with popular areas like Paphos and Limassol offering even higher returns during the peak tourist season.
+Kupując z nami, nie płacisz prowizji – wszystkie transakcje są zawierane bezpośrednio z deweloperem, bez ukrytych kosztów i bez pośredników.
 
-New developments in sought-after neighbourhoods have shown value appreciation of 15–20% within 2–3 years after completion, making them an ideal hedge against inflation and currency fluctuations.","Wir bieten eine exklusive Auswahl an neuen Wohnungen auf Zypern, die perfekt auf die Bedürfnisse von Investoren zugeschnitten sind. Dank direkter Zusammenarbeit mit renommierten Bauträgern profitieren Sie von 0 % Maklerprovision und völliger Preistransparenz.
+Oferujemy kompleksowe wsparcie w języku polskim, na każdym etapie zakupu – od wyboru nieruchomości po odbiór kluczy i pomoc po przeprowadzce.
 
-Für deutschsprachige Investoren aus Deutschland, Österreich und der Schweiz ist Zypern seit Jahren ein gefragter Standort für Immobilieninvestitionen. Der Grund: ein stabiles politisches Umfeld, ein attraktives Steuersystem und ein mediterraner Lebensstil, der sowohl Mieter als auch Käufer anzieht.
+Dlaczego warto kupić dużą willę na Cyprze?
 
-Warum Wohnungen auf Zypern eine kluge Investition sind
-Zypern verbindet 320 Sonnentage pro Jahr mit einer stabil wachsenden Wirtschaft. Der Immobilienmarkt bietet kontinuierliche Wertsteigerung, während die Mietnachfrage das ganze Jahr über hoch bleibt – dank Tourismus, internationalen Unternehmen und Expats.
+Duże wille na Cyprze to nie tylko przestrzeń i komfort – to również opłacalna inwestycja i styl życia w śródziemnomorskim klimacie. Rynek cypryjski pozostaje stabilny, a nieruchomości tego typu cieszą się stałym zainteresowaniem – zarówno wśród nabywców prywatnych, jak i inwestorów krótkoterminowych.
+
+Co zyskujesz, wybierając dużą willę?
+
+Własny dom o powierzchni od 180 do 400 m²
+
+4–7 sypialni, często z prywatnymi łazienkami
+
+Przestronny salon, jadalnia, kuchnia w zabudowie
+
+Tarasy, ogrody, baseny i garaże
+
+Możliwość pracy zdalnej i wypoczynku w jednym miejscu
+
+Bliskość morza, plaż, szkół, sklepów i lotnisk
+
+Nowoczesne systemy bezpieczeństwa i zarządzania domem
+
+Lokalizacje idealne dla dużych willi
+Pafos – spokojna atmosfera i natura
+
+Pafos to miasto idealne dla rodzin. Znajdziesz tu wiele szkół, zieleni i nieruchomości z widokiem na morze. Okolica oferuje spokój, bezpieczeństwo oraz łatwy dostęp do infrastruktury miejskiej.
+
+Limassol – nowoczesne życie i prestiż
+
+Limassol to dynamiczne, rozwijające się miasto, idealne dla osób ceniących wygodę i styl. Wille często znajdują się w zamkniętych osiedlach z kontrolą dostępu. W pobliżu znajdziesz międzynarodowe szkoły, centra biznesowe i ekskluzywne sklepy.
+
+Larnaka – wygoda i bliskość lotniska
+
+Larnaka to kompromis pomiędzy spokojem a łatwym dostępem do reszty wyspy. Wille w tej części Cypru są przystępniejsze cenowo i doskonale nadają się do zamieszkania przez cały rok lub pod wynajem.","Standard wykończenia nowych willi
+
+Wszystkie oferowane nieruchomości to nowe inwestycje deweloperskie. Oznacza to nowoczesne technologie budowlane, wysokiej jakości materiały oraz możliwość personalizacji wykończenia.
+
+Co zazwyczaj znajduje się w standardzie?
+
+Systemy klimatyzacji i ogrzewania
+
+Kuchnie z wyposażeniem AGD
+
+Systemy fotowoltaiczne lub solarne
+
+Instalacje smart home (na życzenie)
+
+Baseny, jacuzzi, ogrody, miejsca na grill
+
+Ogrodzenie, monitoring, bramy automatyczne
+
+Możliwość dostosowania projektu do własnych potrzeb dostępna jest w większości inwestycji, zwłaszcza na wczesnym etapie budowy.
+
+Proces zakupu – krok po kroku
+
+Zakup nieruchomości na Cyprze jest przejrzysty i bezpieczny. Współpracujemy wyłącznie z zarejestrowanymi deweloperami i sprawdzonymi kancelariami prawnymi.
+
+Jak wygląda proces zakupu dużej willi?
+
+Wybór nieruchomości – prezentacja dostępnych willi, wizyta na miejscu lub online
+
+Rezerwacja willi – podpisanie umowy rezerwacyjnej z deweloperem
+
+Weryfikacja prawna – sprawdzenie stanu prawnego i przygotowanie umów
+
+Podpisanie umowy przedwstępnej i wpłata zaliczki
+
+Dalsze płatności zgodnie z harmonogramem budowy
+
+Odbiór nieruchomości i przeniesienie własności
+
+Cały proces wspierany jest przez nasz zespół polskojęzyczny.
+
+Gotowy na własną dużą willę na Cyprze?
+
+Skontaktuj się z nami już dziś. Zapewniamy profesjonalne doradztwo, szeroki wybór nieruchomości i kompleksowe wsparcie na każdym etapie zakupu. Bez prowizji, bez pośredników – tylko nowoczesne, duże wille prosto od dewelopera.",Najczęściej zadawane pytania,"Czy zapłacę prowizję przy zakupie? :: 
+Nie. Nie pobieramy żadnej prowizji od kupujących. Cała transakcja odbywa się bezpośrednio z deweloperem. Nasze wsparcie jest bezpłatne.
+$Czy nieruchomości są gotowe do odbioru? :: 
+W zależności od inwestycji – część willi dostępna jest od ręki, inne są w trakcie budowy lub oferowane w systemie off-plan. Zawsze informujemy o dokładnym harmonogramie.
+$Czy mogę kupić nieruchomość zdalnie? :: 
+Tak. Oferujemy prezentacje wideo, skanowanie dokumentów, pełną obsługę online oraz możliwość udzielenia pełnomocnictwa.
+$Czy możliwe jest uzyskanie stałego pobytu? :: 
+Tak. Inwestycja w nieruchomość na Cyprze umożliwia uzyskanie prawa pobytu dla całej rodziny – szczegóły zależne są od wartości zakupu.
+$Czy mogę zarabiać na wynajmie willi? :: 
+Oczywiście. Duże wille są popularne wśród turystów i rodzin podróżujących w grupach. Możesz liczyć na stałe przychody w sezonie i poza nim.
+$Czy nieruchomości mają tytuł własności? :: 
+Tak. Wszystkie oferowane wille posiadają lub będą posiadać pełny, legalny tytuł własności zgodny z cypryjskim prawem.","Элитные большие виллы на Кипре — новостройки без комиссии
+
+Мы предлагаем на продажу просторные, современные виллы на Кипре — только новые объекты напрямую от застройщиков, без агентской комиссии.
+Каждая вилла — это премиальная недвижимость с продуманной планировкой, большими участками, бассейнами, террасами и высоким уровнем приватности.
+
+Доступны объекты в ключевых регионах: Пафос, Лимассол и Ларнака.
+Покупка сопровождается нашими специалистами: от подбора до получения прав собственности.
+
+Почему стоит выбрать большую виллу на Кипре
+
+Кипр — стабильная, инвестиционно привлекательная страна с комфортным климатом, европейским законодательством и развитой инфраструктурой.
+Большая вилла — это не просто жильё, а полноценное пространство для жизни, отдыха, приёма гостей или сдачи в аренду.
+
+Что отличает большие виллы от стандартных домов:
+
+Площадь от 200 до 500 м²
+От 4 до 7 спален с ванными комнатами
+Гостевые апартаменты, кабинет, залы для приёмов
+Приватный бассейн, ландшафтный сад, терраса
+Панорамные виды на море или горы
+Парковка/гараж, сигнализация, система «умный дом»
+
+Такие дома подходят как для личного проживания, так и для инвестиционных целей — например, как элитная недвижимость под аренду или для получения ВНЖ.
+
+География: где на Кипре находятся лучшие большие виллы
+
+Пафос
+
+Район с самой расслабленной атмосферой. Здесь популярны виллы на холмах с морским видом, близко к полям для гольфа и охраняемым поселкам.
+
+Лимассол
+
+Самый дорогой и престижный регион с бизнес- и образовательной инфраструктурой. Здесь вы найдёте виллы премиум-класса в закрытых комплексах у моря.
+
+Ларнака
+
+Более спокойный и доступный по цене вариант. Большие виллы расположены в пригородах, где сочетается тишина, зелень и быстрая доступность к аэропорту.","Новостройки от застройщика: никаких комиссий
+
+Мы сотрудничаем напрямую с застройщиками. Это значит:
+Вы покупаете по официальной цене без наценок
+Нет агентской комиссии — вы не платите нам ничего
+Мы сопровождаем на всех этапах — от подбора до подписания договора
+Только проверенные проекты с разрешениями и гарантией
+
+Инвестиции в большие виллы на Кипре
+
+Крупные виллы всегда остаются в дефиците на рынке. Спрос на них стабильно высокий, особенно среди:
+
+Арендаторов, ищущих жильё на длительный срок
+Туристов, путешествующих группами
+Иностранных покупателей, оформляющих ВНЖ через недвижимость
+
+Рентабельность таких объектов может достигать 5–7% годовых в аренде, при этом они не теряют в цене даже в кризисные периоды.
+
+Как проходит покупка виллы
+
+Консультация и подбор объектов
+Организация онлайн- или офлайн-просмотра
+Подготовка договора резервирования
+Проверка документов юристом
+Оплата поэтапно или полностью
+Подписание договора купли-продажи
+Регистрация в земельном кадастре
+
+Для нерезидентов доступны услуги под ключ, включая доверенности и дистанционную покупку.
+
+Начните с консультации
+
+Оставьте заявку, и мы предложим вам актуальные предложения — с фото, планировками, доступными сроками сдачи и возможностью видеотура.
+Большие виллы на Кипре — это уровень, комфорт и выгода без переплат.",Часто задаваемые вопросы,"Нужно ли платить комиссию агентству? :: 
+Нет. Вы покупаете напрямую от застройщика. Мы не взимаем комиссию и сопровождаем сделку бесплатно для покупателя.
+$Можно ли купить виллу удалённо? :: 
+Да. Многие клиенты оформляют сделку дистанционно. Мы предоставляем видео-просмотры, договоры, поддержку на русском языке и работу по доверенности.
+$Какие документы подтверждают право собственности? :: 
+Каждая вилла имеет или получит титул собственности (Title Deed), выданный официально после завершения строительства и регистрации.
+$Возможна ли настройка планировки/отделки? :: 
+Да, при покупке на стадии строительства можно внести изменения в планировку, выбрать отделочные материалы, установить технику и системы автоматизации.
+$Какие дополнительные расходы? :: 
+Государственные сборы (налоги на регистрацию)
+Услуги юриста (если требуется независимая проверка)
+Коммунальные подключения (включены в некоторых проектах)
+При этом никаких комиссий агентству не будет.",,,,,large-families.jpg,Large Villas in Cyprus for Sale – No Agency Fee,Große Villen auf Zypern kaufen – Neubauten ohne Provision,Duże wille na Cyprze na sprzedaż – Nowe domy bez prowizji,Большие виллы на Кипре — продажа элитных новостроек
+villas-in-cyprus-for-investors,"Villas in Cyprus for Investors – New Builds, No Commission","Discover investment villas in Cyprus. Buy-to-let or resale properties in Limassol, Paphos & Larnaca. No agency fees. Direct from developers.",villas-in-cyprus-for-investors,Villas with high ROI,Villas in Cyprus for Investors,"Explore high-return investment villas in Cyprus. Choose from new builds in key locations like Limassol, Paphos and Larnaca. No agency commissions.",Get a Consultation,Villen in Zypern für Investoren – Neubauten ohne Maklerprovision,"Kapitalanlage in Villen auf Zypern. Neue Immobilien direkt vom Bauträger, ideal für Vermietung und Wertsteigerung. Keine Maklerprovision.",villen-in-zypern-fuer-investoren,Investitionsvillen,Villen in Zypern für Investoren,"Profitieren Sie von attraktiven Investitionsvillen auf Zypern. Neubauten in Paphos, Limassol und Larnaka. Hohe Rendite, keine Provision, rechtliche Sicherheit.",Lassen Sie sich beraten,Wille na Cyprze dla inwestorów – Nowe projekty bez prowizji,"Zainwestuj w willę na Cyprze. Nowe domy w Limassol, Pafos i Larnace bez prowizji. Idealne pod wynajem lub rezydencję. Pomoc prawna i zakup zdalny.",wille-na-cyprze-dla-inwestorow,Inwestycyjne wille,Wille na Cyprze dla inwestorów,"Nowoczesne wille na Cyprze idealne do inwestycji. Wysoka stopa zwrotu, atrakcyjna lokalizacja i pełna obsługa prawna. Kup bez prowizji.",Uzyskaj konsultację,Купить виллу на Кипре для инвестиций – Без комиссии,"Инвестируйте в новые виллы на Кипре. Высокая доходность, аренда, рост стоимости. Пафос, Лимассол, Ларнака. Без комиссии, полное сопровождение.",villy-na-kipre-dlya-investicij,Инвестиционные виллы,Виллы на Кипре для инвестиций,"Новые виллы на Кипре для инвестиций. Высокая доходность, аренда, прирост капитала. Только от застройщиков, без комиссии. Профессиональное сопровождение.",Заказать консультацию,List of the Villas in Cyprus for Investors,Liste der Villen auf Zypern für Investoren,Lista willi na Cyprze dla inwestorów,Список вилл на Кипре для инвесторов,,Villa,,"Villas in Cyprus for Investors – Buy-to-Let Properties from Developers
+
+We offer investment-grade villas in Cyprus, directly from developers, with no agency fees or hidden commissions. Whether you're a private investor looking for passive income or a company building a rental portfolio, Cyprus offers attractive opportunities with high rental yields, long-term value growth, and tax advantages.
+
+You don't pay us anything — we help you buy directly from trusted developers with clean title deeds and flexible payment plans.
+
+Why Invest in Villas in Cyprus?
+
+Cyprus is a top-tier location for real estate investment in Europe, with a stable legal framework, favorable tax regime, and high demand for holiday and long-term rentals.
+
+Here’s why investors from the UK, UAE, Israel, and Northern Europe continue to choose Cyprus:
+
+High Rental Demand – especially in cities like Limassol and Paphos
+Strong ROI – yields of 5–8% annually in top locations
+Low Property Taxes – no tax on rental income since 2015
+Golden Visa Program – permanent residency through real estate
+Eurozone Legal Protection – clear titles and EU law
+
+Villas remain a highly preferred asset class because of their flexibility: they can be rented short-term, long-term, or resold at profit after 3–5 years.
+
+Key Locations for Investment Villas
+
+Limassol – The Economic Powerhouse
+
+Limassol is the most developed and international city in Cyprus. It's a financial center with modern infrastructure, luxury amenities, and a fast-growing expat community.
+
+High-end villas in gated communities
+Close to international schools and offices
+Top choice for corporate leases and long-term rentals
+Prices from €450,000 – €3,000,000+
+
+Paphos – High ROI and Tourism Potential
+
+Paphos is a UNESCO-listed city that combines heritage with modern developments. It's one of the best areas for holiday rentals due to its airport, coastline, and golf resorts.
+
+New villa projects with sea views
+Strong short-term rental demand from tourists
+Prices from €350,000 – €1,500,000
+Popular for Golden Visa buyers
+
+Larnaca – Value for Money
+
+Larnaca is ideal for those looking for affordable investments with room for capital appreciation. The airport proximity and infrastructure upgrades increase demand here.
+
+Lower entry prices than Limassol
+Upcoming luxury villa developments
+Prices from €300,000 – €900,000
+High potential for long-term tenants","Types of Villas for Investors
+
+Depending on your goals, we help you choose the right investment strategy:
+
+Buy-to-Let Villas
+
+Generate steady income from long-term rentals or short-term tourist stays. High demand from digital nomads, expats, and families.
+
+Off-Plan Investments
+
+Buy early-stage projects at a discount. Customize the layout and finishes. Maximize resale value before or after completion.
+
+Ready-to-Rent Villas
+
+Fully furnished and turnkey properties with rental licenses, optimized for Airbnb or Booking.com listings.
+
+Portfolio-Scale Projects
+
+Ideal for institutional investors or high-net-worth individuals. We offer access to entire developments or multiple villas with property management.
+
+Advantages of Buying with Us
+
+0% Commission – No agency fees for buyers
+Direct from Developers – You buy at builder prices
+Legal Assistance – Title deed checks and contracts included
+Multilingual Support – English, German, Russian, Polish
+Remote Purchase Available – Fully digital transactions with power of attorney
+
+How the Purchase Process Works
+
+Property selection – You define your investment criteria
+Virtual or onsite viewings – We organize everything
+Reservation & legal review – Secure your villa
+Payment plan – Stage-based payments or full upfront
+Title deed registration – You receive full legal ownership
+
+Our team provides full assistance at every step — whether you’re on the island or investing remotely.
+
+Start Investing Today
+
+If you're seeking stable, high-yield real estate investments, Cyprus is a smart and secure option.
+Let us help you source the most promising villas — with no commission, full legal clarity, and multilingual support.
+
+Request current listings now and start your investment journey with confidence.",Frequently Asked Questions,"Do I need to pay any commission or agency fees? :: 
+No. All our investment properties come directly from developers. We do not charge investors any fees.
+$What is the expected rental yield? :: 
+Depending on the location, property type, and management, yields typically range from 5% to 8% annually, especially in Limassol and Paphos.
+$Can I invest remotely from abroad? :: 
+Yes. We offer full support for remote purchases, including virtual tours, document preparation, and legal execution under power of attorney.
+$Do investment villas qualify for Cyprus Residency? :: 
+Yes. Any villa purchased above €300,000 qualifies for the Cyprus Permanent Residency Program under Category F or Fast Track.
+$Are taxes on rental income high in Cyprus? :: 
+No. Since 2015, Cyprus does not levy income tax on rental earnings for foreign investors (with specific exemptions and conditions). VAT and transfer taxes are also favorable.
+$Can I resell the villa in a few years? :: 
+Yes. Most villas in key areas appreciate steadily and can be resold at a profit. Off-plan buyers often gain 10–20% value by completion.","Villen in Zypern für Investoren – direkt vom Bauträger kaufen
+
+Wir bieten eine exklusive Auswahl an Villen auf Zypern, die sich optimal für Investoren eignen. Alle Immobilien stammen direkt von Bauträgern, was bedeutet: keine Maklerprovision, volle Transparenz und rechtliche Sicherheit.
+
+Zypern entwickelt sich seit Jahren zu einem Hotspot für Immobilieninvestitionen in Europa. Mit stabiler Gesetzgebung, hoher Nachfrage nach Mietobjekten und attraktiven steuerlichen Vorteilen bietet die Insel hervorragende Bedingungen für Kapitalanleger.
+
+Warum in Villen auf Zypern investieren?
+
+Investitionsvillen auf Zypern bieten eine Kombination aus langfristiger Wertsteigerung, stetigem Mieteinkommen und der Option auf dauerhaften Aufenthalt in einem EU-Mitgliedstaat.
 
 Vorteile für Investoren:
 
-Hohe Auslastung durch Kurzzeit- und Langzeitmieter
+Renditen von 5–8 % jährlich bei Vermietung
+Wertzuwachs von 10–20 % in Neubauprojekten
+Keine Einkommensteuer auf Mieterlöse für viele Ausländer
+Zugang zur Daueraufenthaltsgenehmigung (Golden Visa) ab 300.000 €
+Rechtsklarheit durch EU-Grundbuchsystem
+Kauf ohne Provision, direkt vom Bauträger
 
-Einfache Verwaltung und geringe Nebenkosten
+Durch diese Kombination eignet sich eine Villa auf Zypern sowohl für kurzfristige als auch langfristige Investitionsstrategien.
 
-Attraktive Renditen im internationalen Vergleich
+Die besten Regionen für Investitionsvillen
 
-Gute Wiederverkaufsmöglichkeiten aufgrund knapper Neubauflächen
+Limassol – Das wirtschaftliche Herz Zyperns
 
-Rendite und Wertsteigerung – konkrete Zahlen
-In Paphos können möblierte Neubauwohnungen in Strandnähe jährliche Renditen von 7–10 % erzielen, bei saisonaler Vermietung sogar mehr. In Limassol liegt die Spitzenmiete für Luxuswohnungen bei 2 000–3 500 € pro Monat, was Investoren stabile Einnahmen sichert.
+Internationales Zentrum mit hoher Nachfrage nach Langzeitmieten
+Moderne Villen in exklusiven Wohnanlagen
+Nähe zu Büros, Schulen, Yachthäfen und Golfplätzen
+Preisniveau: ab 500.000 €
+Ideal für Geschäftsleute, digitale Nomaden und Expats
 
-Darüber hinaus verzeichnen Neubauprojekte in gefragten Lagen Wertzuwächse von 15–20 % innerhalb von 24–36 Monaten – ein starkes Argument für Kapitalwachstum.","Oferujemy starannie wyselekcjonowane nowe apartamenty na Cyprze, idealne dla inwestorów szukających stabilnego dochodu, wzrostu wartości nieruchomości oraz korzystnych warunków podatkowych. Wszystkie nieruchomości sprzedajemy bezpośrednio od sprawdzonych deweloperów, co oznacza zero prowizji – ani jednego dodatkowego euro.
+Paphos – Hohe Mietrenditen und touristische Nachfrage
 
-Inwestycja w nieruchomość na Cyprze to nie tylko zakup mieszkania – to sposób na zabezpieczenie kapitału i styl życia w sercu Morza Śródziemnego.
+Ganzjährig beliebte Tourismusregion
+Hohe Auslastung bei Ferienvermietung (Airbnb, Booking)
+Neue Villen mit Meerblick, moderne Architektur
+Preise ab 350.000 €
+Häufig genutzt für Golden Visa Käufe
 
-Dlaczego apartamenty na Cyprze to atrakcyjna inwestycja
+Larnaka – Solider Einstieg mit Entwicklungspotenzial
 
-Cypr łączy w sobie słoneczny klimat przez 320 dni w roku, dynamiczny rynek nieruchomości oraz stale rosnący sektor turystyczny. Popyt na wynajem utrzymuje się przez cały rok, co gwarantuje wysoką rentowność inwestycji.
+Günstigere Einstiegspreise im Vergleich zu Limassol
+Neue Infrastrukturprojekte und Flughafennähe
+Wachsender Bedarf an Mietobjekten
+Neubauten ab 300.000 €
+Gute Aussichten auf Wertsteigerung in den nächsten Jahren","Investitionsmodelle für Villen auf Zypern
 
-Apartamenty są szczególnie popularne wśród inwestorów, ponieważ:
+1. Fertiggestellte Villen zur Vermietung
 
-łatwo je wynająć zarówno krótkoterminowo, jak i długoterminowo,
-wymagają niskich kosztów utrzymania,
-charakteryzują się wysoką płynnością i możliwością szybkiej odsprzedaży,
-są atrakcyjne dla turystów oraz osób przeprowadzających się na stałe.
+Möbliert, mit Küche, Pool und Mietlizenz
+Sofortige Einnahmen durch kurzfristige oder langfristige Vermietung
+Verwaltung durch lokale Partner möglich
 
-Wysoka stopa zwrotu i wzrost wartości nieruchomości
+2. Off-Plan Projekte (Villen im Bau)
 
-Średnia stopa zwrotu z wynajmu apartamentu na Cyprze wynosi 6–10% rocznie, a w miejscowościach turystycznych, takich jak Pafos czy Limassol, może być jeszcze wyższa w sezonie.
-Nowe inwestycje w atrakcyjnych lokalizacjach potrafią zyskać 15–20% na wartości w ciągu 2–3 lat od oddania do użytku.","Мы продаём апартаменты на Кипре, идеально подходящие для инвесторов, которые ценят высокую доходность, надёжность и прозрачность сделки. Все объекты — новостройки от проверенных застройщиков, что гарантирует вам отсутствие посреднических комиссий и скрытых платежей.
+Frühbucherrabatte von bis zu 20 %
+Flexible Zahlungspläne
+Gestaltungsmöglichkeiten (Design, Ausstattung, Smart Home)
+Wertzuwachs bei Fertigstellung
 
-Вложение в кипрские апартаменты — это не просто покупка недвижимости, это билет в стабильное будущее, где капитал работает на вас каждый день.
+3. Portfolio-Investitionen
 
-Почему апартаменты на Кипре — выгодная инвестиция для иностранцев
+Kauf mehrerer Villen oder kompletter Projekte
+Ideal für Family Offices und institutionelle Investoren
+Effizientes Immobilienmanagement optional verfügbar
 
-Кипр — это солнечный климат 320 дней в году, мягкая налоговая система и динамично растущий рынок недвижимости. Туризм здесь не знает низкого сезона: весной, летом, осенью и даже зимой остров принимает гостей со всего мира.
+Ihre Vorteile beim Kauf mit uns
 
-Апартаменты становятся фаворитом среди инвесторов, потому что:
+Keine Provision – Sie zahlen nur den Preis des Bauträgers
+Rechtliche Prüfung und Begleitung inklusive
+Titelgarantie und saubere Eigentumsübertragung
+Deutschsprachige Betreuung – von erster Beratung bis Grundbucheintrag
+Remote-Kauf möglich – mit Vollmacht, auch komplett online
 
-их легко сдавать в аренду долгосрочно или посуточно;
-они востребованы как среди туристов, так и среди переезжающих на ПМЖ;
-их стоимость стабильно растёт благодаря ограниченному предложению в премиальных районах.
+So funktioniert der Kaufprozess
 
-Доходность апартаментов на Кипре и прогнозы роста цен
+Individuelle Beratung zu Ihren Zielen
+Auswahl passender Projekte nach Budget und Strategie
+Virtuelle oder persönliche Besichtigungen
+Reservierung und rechtliche Prüfung
+Vertragsabschluss mit Bauträger
+Zahlung (einmalig oder in Raten)
+Eintragung ins zypriotische Grundbuch
 
-Средняя доходность от сдачи апартаментов на Кипре достигает 6–10% годовых. В туристических зонах Пафоса и Лимассола доход в высокий сезон может быть выше. При этом за 2–3 года стоимость новых апартаментов на Кипре способна вырасти на 15–20%, что делает их отличным инструментом для сохранения и приумножения капитала.
+Alle Schritte werden durch unser Team vollständig begleitet – vor Ort oder aus der Ferne.
 
-Вложения в недвижимость здесь — это двойная выгода: вы получаете регулярный арендный доход и прирост стоимости объекта.",Frequently Asked Questions from Investors,"Can foreign buyers purchase apartments in Cyprus? :: Yes. Foreign nationals can buy apartments in Cyprus with full freehold ownership and legal title deeds.
+Jetzt in Villen auf Zypern investieren
 
-What taxes will I pay? :: Only a small stamp duty (0.15–0.20% of purchase price) applies. There’s no property tax and no inheritance tax in Cyprus.
+Ob als Feriendomizil, Renditeobjekt oder zweites Zuhause – eine Investitionsvilla auf Zypern bietet hohe Stabilität und nachhaltige Erträge.
 
-Can buying an apartment qualify me for residency? :: Yes. By fulfilling the required investment amount, you become eligible to apply for Permanent Residency or, in some cases, citizenship via investment programs.
+Kontaktieren Sie uns jetzt für aktuelle Angebote – provisionsfrei, rechtlich sicher, vollständig begleitet.",Häufig gestellte Fragen,"Muss ich Maklergebühren bezahlen? :: 
+Nein. Wir arbeiten direkt mit Bauträgern. Unsere Beratung ist für Sie als Käufer kostenlos.
+$Wie hoch sind die Renditen bei einer Villa? :: 
+Abhängig von Lage und Ausstattung liegt die jährliche Bruttorendite typischerweise zwischen 5 % und 8 %.
+$Kann ich eine Villa aus dem Ausland kaufen? :: 
+Ja. Wir ermöglichen komplett digitalen Kauf, inklusive virtueller Besichtigung, Vertragsabwicklung und Grundbucheintragung über eine Vollmacht.
+$Gibt es Steuervergünstigungen für ausländische Investoren? :: 
+In vielen Fällen sind Mieteinnahmen steuerfrei. Zudem gibt es keine Grundsteuer auf Zypern seit 2017.
 
-How long does the purchase process take? :: Typically between 1–3 months, depending on the payment schedule and developer.
+Erhalte ich durch den Kauf eine Aufenthaltsgenehmigung? :: 
+Ja. Ab einem Kaufpreis von 300.000 € qualifizieren Sie sich für das Permanent Residency Programm (auch bekannt als Golden Visa).
+$Wie liquide sind Villen auf dem zypriotischen Markt? :: 
+Villen in guten Lagen sind sehr gefragt und lassen sich nach 3–5 Jahren mit Gewinn weiterverkaufen, insbesondere Neubauten von renommierten Entwicklern.","Wille na Cyprze dla inwestorów – kup bezpośrednio od dewelopera
 
-5. What if I don’t live in Cyprus – who will manage my apartment? :: We provide comprehensive property management solutions, covering tenant acquisition, rent administration, and supervision of maintenance work.",Häufig gestellte Fragen von Investoren,"Können Ausländer Wohnungen auf Zypern kaufen? :: Ja, mit vollem Eigentumsrecht und Eintrag ins Grundbuch.
-$ Welche Steuern fallen an? :: Lediglich eine geringe Stempelsteuer von 0,15–0,20 % sowie die Übertragungsgebühr bei Eigentumsübertragung. Keine jährliche Immobiliensteuer.
-$ Ermöglicht der Kauf eine Aufenthaltsgenehmigung? :: Ja, ab einer bestimmten Investitionssumme ist ein dauerhafter Aufenthaltstitel möglich.
-$ Wie wird meine Wohnung vermietet, wenn ich nicht vor Ort bin? :: Wir bieten Full-Service-Property-Management, inkl. Mietersuche, Instandhaltung und Mietabrechnung.
-$ Ist Zypern ein sicherer Standort für Kapitalanlagen? :: Absolut – als EU-Mitgliedsstaat verfügt Zypern über ein stabiles Rechtssystem und Investorenschutz.
-$ Wie kann ich die Finanzierung gestalten? :: Es gibt flexible Zahlungspläne bei Bauträgern, oft in Raten bis zur Fertigstellung.",Najczęściej zadawane pytania inwestorów,"Czy obcokrajowiec może kupić apartament na Cyprze? :: Tak. Obywatele innych krajów mogą kupować nieruchomości z pełnym prawem własności.
-$ Jakie podatki będę płacić? :: Podstawowym kosztem jest opłata skarbowa przy rejestracji (0,15–0,20%). Na Cyprze nie ma podatku od nieruchomości ani podatku spadkowego.
-$ Czy zakup apartamentu umożliwia uzyskanie rezydencji? :: Tak, po spełnieniu wymogów inwestycyjnych można ubiegać się o stały pobyt.
-$ Ile trwa proces zakupu? :: Zazwyczaj od 1 do 3 miesięcy.
-$ Kto będzie zarządzał moim apartamentem, jeśli nie mieszkam na Cyprze? :: Oferujemy pełną obsługę wynajmu i zarządzania nieruchomością.",Часто задаваемые вопросы инвесторов,"Можно ли иностранцу купить апартаменты на Кипре? :: Да, иностранцы могут свободно приобретать недвижимость, в том числе апартаменты, с полной регистрацией права собственности.
-$ Какие налоги я буду платить? :: Основной налог — гербовый сбор при регистрации сделки (0,15–0,20%). Налога на недвижимость и налога на наследство в Кипре нет.
-$ Можно ли получить ВНЖ через покупку апартаментов? :: Да, при инвестициях от установленного порога вы можете претендовать на постоянный вид на жительство.
-$ Сколько времени занимает сделка? :: В среднем от выбора объекта до получения ключей проходит от 1 до 3 месяцев.
-$ Кто будет управлять апартаментами, если я не живу на Кипре? :: Мы предлагаем услуги управления недвижимостью: поиск арендаторов, приём платежей, контроль состояния объекта.","Legal and Tax Advantages of Investing in Cyprus Apartments
+Oferujemy na sprzedaż nowe wille na Cyprze, idealne do inwestycji. Wszystkie nieruchomości pochodzą bezpośrednio od deweloperów, a nasi klienci nie płacą prowizji.
 
-Purchasing an apartment in Cyprus comes with:
+Niezależnie od tego, czy planujesz inwestycję pod wynajem, chcesz zabezpieczyć kapitał, czy kupujesz dom z myślą o przyszłości – wille na Cyprze to sprawdzony sposób na stabilny dochód i wzrost wartości nieruchomości.
 
-Residency or citizenship eligibility through investment
-Transparent property registration with secure title deeds
-Zero inheritance tax and favourable tax rates for non-residents
+Dlaczego inwestować w wille na Cyprze?
 
-An EU jurisdiction with a robust legal framework
+Cypr od lat przyciąga inwestorów z całej Europy i Bliskiego Wschodu. Stabilny rynek nieruchomości, korzystne warunki podatkowe i rosnące zainteresowanie najmem czynią wyspę jednym z najatrakcyjniejszych miejsc do lokowania kapitału.
 
-Best Cities in Cyprus for Apartment Investments
-Paphos – A cultural gem and year-round tourist hotspot with stable rental demand.
-Larnaca — host to Cyprus’s primary international airport and boasting a fast-developing coastal promenade.
-Limassol – The business hub of Cyprus, offering luxury developments and premium rental yields.
+Główne atuty inwestycji:
 
-Why Work With Us – Your Trusted Cyprus Property Partner
+Wysoka stopa zwrotu – nawet 5–8% rocznie
+Brak podatku od dochodu z najmu (dla inwestorów zagranicznych)
+Możliwość uzyskania prawa pobytu (Golden Visa)
+Bezpieczny zakup z tytułem własności
+Wysoki popyt na najem krótkoterminowy i długoterminowy
 
-No agency fees – saving you up to 5% of the property value
-Direct contracts with verified developers
-Access to exclusive pre-launch and off-plan offers
-Assistance with residency applications and investment planning
+Dzięki temu, zakup willi to nie tylko prestiżowa nieruchomość, ale także realne źródło dochodu pasywnego.
 
-Investing in apartments in Cyprus is a strategic move that combines steady income, capital growth, and lifestyle benefits. With our expertise, you’ll secure the right property at the best terms – and start generating returns immediately.
+Najlepsze lokalizacje inwestycyjne na Cyprze
 
-Get in touch with us today to discover the newest investment prospects in Paphos, Larnaca, and Limassol.","Rechtliche und steuerliche Vorteile
+Limassol – centrum biznesu i luksusu
+
+Limassol to najbardziej rozwinięte miasto na Cyprze. Idealne dla inwestorów szukających nieruchomości o wysokim standardzie i potencjale wynajmu dla ekspatów, rodzin i firm.
+
+Wille w zamkniętych osiedlach
+Blisko plaży, szkół międzynarodowych i biur
+Ceny od 450 000 do 3 000 000 euro
+Najwyższy popyt na najem długoterminowy
+
+Pafos – turystyka i stabilne ROI
+
+Pafos to miasto wpisane na listę UNESCO, z silnym ruchem turystycznym przez cały rok. Wille w Pafos cieszą się dużym zainteresowaniem najemców sezonowych i właścicieli drugich domów.
+
+Nowe projekty z widokiem na morze
+Popyt na najem wakacyjny i krótkoterminowy
+Ceny od 350 000 euro
+Blisko lotniska i resortów golfowych
+
+Larnaka – przystępna cena, duży potencjał
+
+Larnaka to świetna opcja dla inwestorów z mniejszym budżetem. Dynamiczny rozwój miasta i bliskość lotniska sprawiają, że warto tu inwestować.
+
+Ceny od 300 000 euro
+Nowoczesne projekty willowe
+Wysoka dostępność najemców długoterminowych
+Dobra infrastruktura miejska i transportowa","Rodzaje inwestycji w wille
+
+W zależności od Twojej strategii i budżetu, oferujemy różne modele inwestycyjne:
+
+Wille w trakcie budowy (off-plan)
+
+Kupując na wczesnym etapie budowy, możesz liczyć na niższą cenę i możliwość personalizacji projektu. Po zakończeniu wartość rynkowa zwykle wzrasta o 10–20%.
+
+Gotowe wille pod wynajem
+
+W pełni wykończone, umeblowane i przygotowane do wynajmu krótkoterminowego. Niektóre posiadają już pozwolenia i licencje turystyczne.
+
+Portfele inwestycyjne
+
+Dla większych inwestorów oferujemy pakiety kilku willi lub dostęp do całych projektów. Możliwość zarządzania wynajmem przez lokalnego operatora.
+
+Co zyskujesz, kupując z nami?
+
+Brak prowizji – współpracujemy bezpośrednio z deweloperami
+Ceny deweloperskie – bez ukrytych kosztów i marż
+Wsparcie prawne – dokumentacja, tytuł własności, rejestracja
+Obsługa w języku polskim – również zdalnie
+Bezpieczny zakup z Polski – możliwy zakup przez pełnomocnictwo
+
+Proces zakupu – krok po kroku
+
+Konsultacja i analiza celów inwestycyjnych
+Przesłanie propozycji i materiałów inwestycyjnych
+Organizacja prezentacji online lub wizyty na miejscu
+Rezerwacja i weryfikacja prawna
+Podpisanie umowy i płatność zgodnie z harmonogramem
+Odbiór kluczy i formalności w kadastrze
+
+Zacznij inwestować z nami
+
+Zyskaj dostęp do najlepszych projektów willowych na Cyprze bez pośredników. Nasz zespół doradzi Ci krok po kroku, niezależnie od tego, czy jesteś inwestorem indywidualnym, czy firmą.
+Skontaktuj się z nami już dziś i poznaj aktualne oferty.",Najczęściej zadawane pytania,"Czy muszę płacić prowizję agencji? :: 
+Nie. Cała nasza pomoc dla kupujących jest bezpłatna. Otrzymujemy wynagrodzenie od dewelopera.
+$Jaka jest stopa zwrotu z inwestycji? :: 
+W zależności od lokalizacji i typu nieruchomości zwrot wynosi średnio 5–8% rocznie.
+$Czy mogę kupić nieruchomość zdalnie? :: 
+Tak. Cały proces – od wyboru po podpisanie umowy – możemy przeprowadzić online. Wystarczy pełnomocnictwo.
+$Czy inwestycja daje możliwość uzyskania pobytu na Cyprze? :: 
+Tak. Zakup nieruchomości od 300 000 euro kwalifikuje do programu pobytowego (permanent residence).
+$Czy dochód z najmu jest opodatkowany? :: 
+Dla wielu inwestorów zagranicznych dochód z najmu nie podlega opodatkowaniu na Cyprze, zgodnie z lokalnym i międzynarodowym prawem podatkowym.","Виллы на Кипре для инвестиций – новостройки с высокой доходностью
+
+Мы предлагаем виллы на Кипре, идеально подходящие для инвестиций. Это новые объекты напрямую от застройщиков в Пафосе, Лимассоле и Ларнаке.
+Вы не платите комиссию — покупка осуществляется без посредников, по официальным ценам.
+
+Кипр — это одна из самых стабильных и выгодных юрисдикций в Европе для инвестиций в недвижимость.
+Здесь высокий спрос на аренду, выгодное налогообложение и уверенный рост стоимости объектов.
+
+Почему стоит инвестировать в виллы на Кипре
+
+Кипр — это не только живописный остров с мягким климатом, но и площадка для надёжных капиталовложений. Виллы остаются наиболее востребованным и ликвидным типом жилья среди арендаторов и покупателей.
+
+Преимущества:
+
+5–8% доходности в год при аренде
+Рост стоимости на 15–25% за 3–5 лет
+Возможность получить ВНЖ Кипра при покупке от €300 000
+Нулевая комиссия агентству — мы работаем напрямую с застройщиками
+Прозрачная регистрация собственности по законам ЕС
+
+Виллы можно сдавать в краткосрочную аренду (туристам) или долгосрочную (семьям, экспатам), получать стабильный доход и перепродать с прибылью в будущем.
+
+География инвестиционных вилл Кипра
+
+Лимассол – элитный центр недвижимости
+
+Самый востребованный город на Кипре
+Престижные районы, бизнес-центры, марина
+Высокий спрос на аренду круглый год
+Виллы премиум-класса в закрытых комплексах
+Цены: от €500 000
+
+Пафос – популярное туристическое направление
+
+Город с высоким туристическим потоком
+Идеален для краткосрочной аренды
+Видовые участки, близость к морю и гольф-полям
+Цены: от €350 000
+Часто выбирается для ВНЖ через недвижимость
+
+Ларнака – выгодный входной порог
+
+Низкие цены по сравнению с Лимассолом
+Упрощенный доступ к аэропорту
+Перспективный рост спроса в ближайшие 3–5 лет
+Цены: от €300 000","Варианты инвестиций в недвижимость на Кипре
+
+Мы предлагаем несколько форматов инвестиционных проектов:
+
+1. Готовые виллы под аренду
+
+Полностью меблированы и готовы к сдаче
+Наличие арендной лицензии (при необходимости)
+Подходят для немедленного запуска дохода
+
+2. Виллы на стадии строительства (Off-Plan)
+
+Стоимость на 10–20% ниже рыночной
+Возможность выбрать планировку и отделку
+Повышение стоимости по мере завершения проекта
+
+3. Пакеты из нескольких объектов
+
+Идеальны для инвесторов с крупным бюджетом
+Возможность создания собственного мини-комплекса
+Управление сдачей через партнёрские компании
+
+Что вы получаете, покупая с нами
+
+Покупка напрямую от застройщика — вы платите официальную цену без наценки
+Отсутствие комиссии агентству — наш заработок оплачивает застройщик
+Проверенные объекты — каждый проект имеет разрешения и юридическую чистоту
+Сопровождение на русском языке — на всех этапах сделки
+Возможность покупки удалённо — мы всё организуем под ключ
+
+Этапы покупки инвестиционной виллы
+
+Анализ ваших целей и бюджета
+Подбор объектов и отправка презентаций
+Онлайн- или офлайн-просмотр
+Резервирование объекта и проверка документов
+Подписание договора и оплата по этапам
+Получение ключей и регистрация собственности
+
+Готовы инвестировать?
+
+Оставьте заявку — и мы подберём для вас наилучшие варианты инвестиционных вилл на Кипре с полной поддержкой и без комиссии.
+
+Инвестируйте безопасно, с доходом и перспективой роста капитала.",Часто задаваемые вопросы,"Нужно ли платить агентскую комиссию? :: 
+Нет. Вы покупаете напрямую от застройщика. Комиссия не взимается — все услуги для покупателя бесплатны.
+$Можно ли купить виллу удалённо? :: 
+Да, мы предоставляем возможность покупки дистанционно. Все документы подготавливаются, а сделка оформляется через доверенность.
+$Сколько можно зарабатывать на аренде? :: 
+При правильном выборе виллы доход может составлять 5–8% годовых. Особенно в Лимассоле и Пафосе.
+$Дают ли ВНЖ при покупке виллы на Кипре? :: 
+Да. При покупке недвижимости от €300 000 вы можете получить постоянный вид на жительство на Кипре (Fast Track).
+$Какие дополнительные расходы? :: 
+Госпошлины на регистрацию
+
+Услуги юриста (по желанию)
+
+Коммунальные подключения
+
+Комиссий агентству нет.
+$Насколько ликвидны такие объекты? :: 
+Виллы в хороших локациях легко продаются, особенно если это новостройки от брендов-застройщиков. Через 3–5 лет можно продать с прибылью.",,,,,villas-investors.jpg,"Villas in Cyprus for Investors – New Builds, No Commission",Villen in Zypern für Investoren – Neubauten ohne Maklerprovision,Wille na Cyprze dla inwestorów – Nowe projekty bez prowizji,Купить виллу на Кипре для инвестиций – Без комиссии
+luxury-villas-in-cyprus-over-1-million-euros,Buy Luxury Villa in Cyprus Over €1M –  Privacy & Prestige,"Explore luxury villas in Cyprus priced over €1,000,000. Limassol, Paphos & Larnaca. Sea views, pools, privacy. No commission. Buy directly from developers.",luxury-villas-in-cyprus-over-1-million,Ultra-luxury homes,Luxury Villas in Cyprus Over €1M,"Browse top-tier luxury villas in Cyprus over €1 million. Located in the island’s most prestigious areas, these homes offer space, security and exclusivity.",Get a Consultation,Luxusvillen auf Zypern über 1 Mio € – Neubauten ohne Provision,"Entdecken Sie Luxusvillen auf Zypern über 1 Mio €. Neubauprojekte in Limassol, Paphos & Larnaka. Meerblick, Pools, Prestige. Ohne Maklerprovision.",luxusvillen-zypern-ueber-1-mio,Exklusive Villen,Luxusvillen auf Zypern über 1 Mio €,"Exklusive Neubauvillen auf Zypern über 1 Mio €. Premium-Lagen in Limassol, Paphos und Larnaka. Ohne Maklerprovision. Vollständige rechtliche Begleitung.",Lassen Sie sich beraten,Luksusowe wille na Cyprze na sprzedaż powyżej 1 mln euro,"Odkryj luksusowe wille na Cyprze warte ponad 1 mln euro. Limassol, Pafos, Larnaka. Nowe projekty, baseny, widok na morze. Bez prowizji.",luksusowe-wille-na-cyprze-powyzej-1-mln-euro,Ekskluzywne wille,Luksusowe wille na Cyprze powyżej 1 mln euro,"Nowe luksusowe wille na Cyprze w najlepszych lokalizacjach – Limassol, Pafos, Larnaka. Ceny od 1 mln euro. Bez prowizji, bezpośrednio od dewelopera.",Uzyskaj konsultację,Элитные виллы на Кипре от 1 млн евро – премиум без комиссии,"Продажа элитных вилл на Кипре от 1 млн евро. Лимассол, Пафос, Ларнака. Новые проекты с бассейнами и видом на море. Без комиссии агентству.",elitnye-villy-na-kipre-ot-1-mln,Лакшери недвижимость,Элитные виллы на Кипре от 1 млн евро,"Каталог элитных вилл на Кипре стоимостью от 1 млн евро. Новостройки премиум-класса в Лимассоле, Пафосе и Ларнаке. Без комиссии. Полное сопровождение сделки.",Заказать консультацию,List of the Villas Over 1 mln euro,Liste der Villen über 1 Million Euro,Lista willi powyżej 1 miliona euro,Список вилл дороже 1 миллиона евро,,,"sunset-view-villas,riviera-residences,kueuenal-villas,el-pez,osmia-bee-home,adonis-beach-villas,davanti-mare,villen-cap-st-georges-resort,wille-cap-st-georges-resort,villas-cap-st-georges-resort,villy-cap-st-georges-resort,zeus-villas,the-gallery,panorama-hills,armonia-beach,oleander-homes,maniki-beach-villas,seascape-villas,zelemenos-mansion","Luxury Villas in Cyprus Over €1M – Sea View Homes with Privacy & Prestige
+
+We present a curated selection of luxury villas in Cyprus priced over €1 million, handpicked from the island’s most elite areas – Limassol, Paphos, and Larnaca. These villas are available directly from developers, meaning you pay zero agency fees.
+
+Each property offers more than just a home – it is a statement of lifestyle, exclusivity, and long-term value. Whether you're looking for a private retreat, a residence with investment potential, or a legacy property, Cyprus offers the ideal environment for high-net-worth individuals.
+
+Why Buy Luxury Villas Over €1M in Cyprus?
+
+Cyprus is increasingly favored by global buyers looking for prestigious real estate in a stable EU location. The island combines Mediterranean charm with modern infrastructure, tax benefits, and legal clarity.
+
+Key reasons to invest:
+
+Full ownership with title deeds
+Strategic EU location – 3 hours from Europe, Middle East, Russia
+High-end architectural design and finishing
+Tax advantages – low or no tax on global income for residents
+Residency benefits – properties over €300K qualify for permanent residency
+
+Villas over €1M typically offer the highest appreciation in value, the best rental returns in the luxury segment, and long-term capital security.
+
+Featured Locations for €1M+ Villas
+
+Limassol – The Prime Market
+
+Limassol is Cyprus’ business and luxury capital. Its real estate market is mature, competitive, and consistently growing in value.
+
+Ultra-modern seafront villas in gated communities
+Marina access, international schools, fine dining
+Ideal for permanent residence or executive rentals
+Prices: from €1M to €10M+
+
+Paphos – Tranquil Luxury with Sea Views
+
+Paphos offers serenity, stunning views, and elegant living. It’s ideal for those seeking privacy and proximity to golf resorts, wineries, and coastal life.
+
+Hilltop and beachfront villas with panoramic sea views
+Architectural designs tailored to blend with nature
+Popular among retirees and second-home buyers
+Prices: €1M–€4M
+
+Larnaca – Discreet Elegance and Accessibility
+
+Larnaca is undergoing a luxury transformation, with new projects catering to those who value location and modernity.
+
+Quiet beachfront neighborhoods
+Quick airport access (10–15 minutes)
+Competitive pricing compared to Limassol
+Prices: from €900K to €3M+","What to Expect from Luxury Villas Over €1M
+
+Private pools, large landscaped gardens
+Panoramic sea or mountain views
+Smart home systems, underfloor heating, solar panels
+Custom-built designs, sometimes fully furnished
+High ceilings, open-plan kitchens, and spa-style bathrooms
+Privacy and security, with 24/7 gated access (in communities)
+
+These villas are not only homes – they are secure assets, offering both lifestyle and long-term financial return.
+
+Buying Process – Simplified for International Buyers
+
+We support our clients throughout every step:
+Define your criteria and lifestyle needs
+Review private listings and brochures
+Virtual or on-site tours
+Reservation and legal due diligence
+Sign the contract and make payment in tranches
+Title deed transfer and handover
+
+Note: Our service is completely commission-free. You pay only the official price set by the developer.
+
+Investment Value of €1M+ Villas in Cyprus
+
+High rental yields in the luxury segment (up to 6%)
+Resale flexibility after 3–5 years, often at a profit
+No inheritance tax in Cyprus
+Permanent residency eligible
+Strong demand from expats, digital nomads, and international executives
+
+Whether used for personal residence or income generation, these villas retain exceptional long-term value.
+
+Begin Your Luxury Property Journey in Cyprus
+
+Discover the finest villas in Cyprus priced over €1M — exclusive homes offering sea views, modern design, and financial upside.
+
+Contact our expert team today for private listings, developer offers, and personalized guidance, all without any added commission.",Frequently Asked Questions,"Do I have to pay a commission to your agency? :: 
+No. We do not charge any buyer commissions. All villas are sold directly from developers at official prices.
+$Are these properties ready to move in? :: 
+Many are fully completed and furnished, while others are off-plan with customization options.
+$Can I purchase remotely from abroad? :: 
+Yes. We offer a full remote purchasing process, including digital viewings, legal services, and transaction support with power of attorney.
+$Is €1M enough for a top-tier villa in Limassol? :: 
+Yes, €1M+ gives access to high-quality villas, though ultra-premium options (seafront, marina) may range from €2M to €10M+.
+$Do €1M+ villas qualify for Cyprus Permanent Residency? :: 
+Absolutely. Any property above €300,000 qualifies. Investing over €1M also enhances your residency profile and tax status.
+$What taxes apply to luxury property in Cyprus? :: 
+Cyprus has no annual property tax, no inheritance tax, and low transfer fees. VAT applies only to first-time sales, and is often reduced or refunded for investors.","Luxusvillen auf Zypern über 1 Mio € – Prestigeimmobilien direkt vom Bauträger
+
+Wir präsentieren eine Auswahl an Luxusvillen auf Zypern über 1 Mio €, die höchste Ansprüche an Komfort, Design und Privatsphäre erfüllen. Alle Objekte stammen direkt von Bauträgern, sodass keine Maklerprovision für Käufer anfällt.
+
+Ob als Erstwohnsitz, Ferienresidenz oder Kapitalanlage – diese Immobilien stehen für Exklusivität und langfristige Wertsteigerung.
+
+Warum Luxusvillen über 1 Mio € auf Zypern kaufen?
+
+Zypern zählt zu den gefragtesten Standorten für Luxusimmobilien im Mittelmeerraum. Käufer profitieren von:
+
+Prestigelagen in Limassol, Paphos und Larnaka
+Volle Eigentumsrechte mit EU-konformen Title Deeds
+Moderne Architektur und hochwertige Ausstattung
+Sichere Investition mit stabiler Wertentwicklung
+Steuerliche Vorteile und keine Erbschaftssteuer
+Mietrenditen im Premiumsegment bis zu 6 % jährlich
+
+Luxusvillen über 1 Mio € sind nicht nur ein Zuhause, sondern ein Statussymbol und ein solider Vermögenswert.
+
+Premium-Standorte für Luxusvillen
+
+Limassol – Zentrum für Business und Lifestyle
+
+Gefragteste Region für Villen im Wert von über 1 Mio €
+Exklusive Küstenlagen und geschlossene Wohnanlagen
+Nähe zu Marinas, internationalen Schulen und Business-Zentren
+Preisspanne: 1 Mio € – 10 Mio €
+
+Paphos – Ruhe und Panorama
+
+Villen auf Hügeln mit atemberaubendem Meerblick
+Beliebt bei Käufern von Ferien- und Zweitwohnsitzen
+Kombination aus Natur, Kultur und Privatsphäre
+Preise: 1 Mio € – 4 Mio €
+
+Larnaka – Eleganz und Potenzial
+
+Attraktive Preise im Vergleich zu Limassol
+Moderne Projekte in Strandnähe
+Flughafen in unmittelbarer Nähe
+Preise: 900.000 € – 3 Mio €","Ausstattung von Luxusvillen ab 1 Mio €
+
+Luxusvillen auf Zypern bieten ein Höchstmaß an Komfort und Exklusivität. Typische Merkmale:
+
+Infinity-Pool und Spa-Bereich
+Panoramaterrassen mit Meer- oder Bergblick
+Großzügige Gärten mit Landschaftsdesign
+Smart-Home-Systeme, Fußbodenheizung, Solarpanels
+Designerküchen und hochwertige Materialien
+Tiefgaragen und Stellplätze für mehrere Fahrzeuge
+Sicherheits- und Überwachungssysteme
+
+Investitionsvorteile
+
+Stabile Rendite durch Vermietung im Luxussegment (5–6 % jährlich)
+Wertsteigerung von bis zu 20–30 % in 3–5 Jahren
+Golden Visa – Daueraufenthalt ab 300.000 € Kaufpreis
+Rechtssicherheit dank EU-Grundbuchsystem
+Keine Maklerprovision – direkter Kauf vom Bauträger
+
+Luxusimmobilien über 1 Mio € sind besonders liquide, da die Nachfrage nach Prestigeobjekten konstant hoch bleibt.
+
+Kaufprozess – transparent und sicher
+
+Individuelle Beratung und Auswahl von Villen
+Virtuelle oder persönliche Besichtigungen
+Reservierung und rechtliche Prüfung
+Vertragsabschluss direkt mit dem Bauträger
+Flexible Zahlungspläne oder einmalige Zahlung
+Eintragung ins Grundbuch und Übergabe
+
+Unser deutschsprachiges Team begleitet Sie während des gesamten Prozesses – auch beim Fernkauf über Vollmacht.
+
+Finden Sie Ihre Luxusvilla auf Zypern
+
+Entdecken Sie die schönsten Luxusvillen auf Zypern über 1 Mio €. Unsere Objekte stehen für Prestige, Komfort und sichere Investition.
+
+Kontaktieren Sie uns für aktuelle Angebote – direkt vom Bauträger, ohne Maklerprovision.",Häufig gestellte Fragen,"Muss ich Maklergebühren zahlen? :: 
+Nein. Der Kauf erfolgt provisionsfrei direkt vom Bauträger.
+$Sind diese Villen sofort bezugsfertig? :: 
+Einige Projekte sind schlüsselfertig, andere befinden sich im Bau. Bei Off-Plan-Käufen können Sie Ausstattung und Design individuell bestimmen.
+$Kann ich eine Villa aus dem Ausland erwerben? :: 
+Ja, der gesamte Prozess kann digital abgewickelt werden – inklusive virtueller Besichtigung und Vertragsabschluss.
+$Welche Rendite ist realistisch? :: 
+Im Luxussegment sind 5–6 % jährliche Bruttorendite durch Vermietung möglich, vor allem in Limassol und Paphos.
+$Bekomme ich ein Aufenthaltsrecht? :: 
+Ja, ab einem Kaufpreis von 300.000 € können Sie Daueraufenthalt beantragen. Immobilien über 1 Mio € verbessern Ihr Investorenprofil zusätzlich.
+$Welche Steuern fallen an? :: 
+Keine jährliche Immobiliensteuer
 Keine Erbschaftssteuer
+Grunderwerbssteuer und ggf. MwSt. bei Erstkauf","Luksusowe wille na Cyprze powyżej 1 mln euro – prestiżowe nieruchomości bez prowizji
 
-Niedrige Einkommenssteuer auf Mieteinnahmen
+Oferujemy luksusowe wille na Cyprze, których cena przekracza 1 mln euro. To nieruchomości z najwyższej półki, przeznaczone dla wymagających klientów poszukujących prywatności, prestiżu i gwarantowanej jakości. Wszystkie obiekty pochodzą bezpośrednio od deweloperów, dlatego nie pobieramy prowizji od kupujących.
 
-EU-Rechtssicherheit und Schutz des Eigentums
+Cypr to miejsce, gdzie luksus spotyka się z wygodą życia w klimacie śródziemnomorskim. Wille premium to nie tylko wyjątkowe domy, ale również stabilna inwestycja w przyszłość.
 
-Möglichkeit zur steuerlichen Optimierung für Nichtansässige
+Dlaczego warto kupić luksusową willę na Cyprze?
 
-Top-Standorte für Investitionen
-Paphos – Historische Stadt mit stetiger Mietnachfrage.
-Larnaka – Wachsende Hafenstadt mit attraktivem Preisniveau.
-Limassol – Business-Metropole mit luxuriösen Neubauprojekten.
+Rynek nieruchomości na Cyprze przyciąga zamożnych klientów z całej Europy i Bliskiego Wschodu. Inwestycja w luksusową willę powyżej 1 mln euro to połączenie elegancji, bezpieczeństwa i długoterminowej wartości kapitału.
 
-Warum mit uns investieren
+Najważniejsze zalety:
 
-Keine Maklerprovision – bis zu 5 % Ersparnis
-Zugang zu Off-Market-Angeboten
-Betreuung auf Deutsch vom Erstkontakt bis zur Schlüsselübergabe
-Unterstützung bei Aufenthaltsgenehmigung und Vermietung
+Prestiżowe lokalizacje – nadmorskie dzielnice Limassol, Pafos, Larnaki
+Pełna własność z tytułem prawnym (title deed)
+Nowoczesne projekty z inteligentnymi systemami i energooszczędnymi rozwiązaniami
+Prywatność i bezpieczeństwo – zamknięte kompleksy, monitoring, ochrona
+Wzrost wartości – nieruchomości premium rosną najszybciej
+Potencjał inwestycyjny – wynajem luksusowy generuje wyższe zyski
 
-Wohnungen auf Zypern bieten Investoren aus dem deutschsprachigen Raum eine Kombination aus hoher Rendite, Wertzuwachs und Lebensqualität. Kontaktieren Sie uns, um die besten Investitionsmöglichkeiten in Paphos, Larnaka und Limassol zu entdecken.","Korzyści prawne i podatkowe zakupu apartamentu na Cyprze
+Najlepsze lokalizacje dla willi premium
 
-Zakup apartamentu na Cyprze to:
+Limassol – serce biznesu i luksusu
 
-możliwość uzyskania rezydencji lub obywatelstwa w ramach programu inwestycyjnego,
-bezpieczna rejestracja i gwarancja tytułu własności,
-brak podatku spadkowego,
-atrakcyjny system podatkowy dla nierezydentów.
+Limassol to najbardziej prestiżowe miasto na Cyprze. Tu koncentruje się życie biznesowe, kulturalne i towarzyskie.
 
-Najlepsze miasta na inwestycje w apartamenty na Cyprze
+Wille nadmorskie z panoramicznym widokiem
+Bliskość mariny, szkół międzynarodowych i centrów biznesowych
+Ceny: od 1 mln do 10 mln euro
+Popularne wśród klientów korporacyjnych i inwestorów zagranicznych
 
-Pafos – kulturalne centrum i całoroczny kurort.
-Larnaka – dynamicznie rozwijające się miasto z głównym lotniskiem międzynarodowym.
-Limassol – centrum biznesowe z luksusowymi apartamentami i wysokimi stawkami wynajmu.
+Pafos – spokój i wyjątkowa sceneria
 
-Dlaczego warto inwestować z nami
+Pafos to region, w którym luksus łączy się z naturą i historią. Wille na wzgórzach i przy plażach zapewniają maksymalną prywatność.
 
-Brak prowizji – oszczędność do 5% wartości nieruchomości,
-umowy bezpośrednio z deweloperami,
-dostęp do ofert przedpremierowych,
-wsparcie w procesie uzyskania rezydencji.
+Wille z basenami i dużymi tarasami
+Widok na Morze Śródziemne i pola golfowe
+Ceny: od 1 mln do 4 mln euro
+Idealne jako drugie domy lub rezydencje wakacyjne
 
-Apartamenty na Cyprze dla inwestorów to połączenie stabilnego dochodu, wzrostu wartości kapitału oraz możliwości uzyskania rezydencji. Dzięki naszej wiedzy i kontaktom z deweloperami, znajdziemy nieruchomość, która zacznie zarabiać od pierwszego dnia. Skontaktuj się z nami, aby poznać aktualne oferty.","Юридические и налоговые преимущества покупки апартаментов на Кипре
+Larnaka – elegancja i dostępność
 
-Покупка апартаментов на Кипре открывает доступ к:
+Larnaka staje się nową destynacją dla luksusowych inwestycji. Rozwijają się tu projekty premium w atrakcyjnych cenach.
 
-ВНЖ или гражданству при выполнении условий программы инвестиций;
-прозрачной и безопасной системе регистрации;
-нулевому налогу на наследство;
-льготам для нерезидентов.
+Wille w spokojnych dzielnicach z dostępem do plaży
+Zaledwie 15 minut od lotniska
+Ceny: od 900 tys. do 3 mln euro
+Coraz częściej wybierane przez inwestorów szukających wzrostu wartości","Standard luksusowych willi powyżej 1 mln euro
 
-Все сделки мы сопровождаем совместно с лицензированными юристами, что гарантирует полную безопасность инвестиций.
+Każda z naszych ofert to najwyższy standard architektoniczny i wykończeniowy. Typowe elementy:
 
-Лучшие города Кипра для инвестиций в апартаменты
+Prywatne baseny typu infinity
+Ogrody zaprojektowane przez architektów krajobrazu
+Spa, sauny i siłownie w willach
+Inteligentne systemy zarządzania domem (smart home)
+Wyjątkowe wnętrza zaprojektowane przez projektantów premium
+Garaże na kilka samochodów i przestrzeń dla gości
 
-Пафос — культурный центр и популярный курорт, где апартаменты востребованы круглогодично.
-Ларнака — город с международным аэропортом и растущим туристическим потоком.
-Лимассол — премиум-локация с высокими ставками аренды и деловой активностью.
+Proces zakupu – w pełni przejrzysty
 
-Почему инвестировать с нами — это умное решение
+Kupując z nami, masz pewność:
 
-Без комиссии: экономите до 5% от стоимости.
-Прямые контракты с застройщиками.
-Доступ к закрытым предложениям и скидкам.
-Полное сопровождение и помощь в получении ВНЖ.
+Brak prowizji – cena deweloperska, bez ukrytych kosztów
+Pomoc prawna – kontrola dokumentów, pełne wsparcie
+Bezpieczna transakcja – zgodna z prawem UE
+Możliwość zakupu zdalnego – cały proces może odbyć się online
+Obsługa w języku polskim – pełne wsparcie na każdym etapie
 
-Апартаменты на Кипре для инвесторов — это сочетание надёжности, стабильного дохода и возможности получения вида на жительство. Мы знаем, как подобрать объект, который будет приносить прибыль уже с первого дня. Оставьте заявку — и начните путь к своему средиземноморскому активу прямо сейчас.",,,,,villas-import.jpg,Apartments in Cyprus for Investors – No Agency Fee,Wohnungen auf Zypern für Investoren – Provisionsfrei,Apartamenty na Cyprze dla inwestorów – Bez prowizji,Апартаменты на Кипре для инвесторов без комиссии
+Wartość inwestycyjna willi premium
+
+Luksusowe wille to aktywa, które nie tracą na wartości. Wręcz przeciwnie – w prestiżowych lokalizacjach rosną szybciej niż średnia rynkowa.
+
+Zwrot z wynajmu luksusowego: do 6% rocznie
+Sprzedaż po latach: potencjał wzrostu o 20–30%
+Brak podatku spadkowego na Cyprze
+Program rezydencji stałej przy zakupie od 300 tys. euro
+
+Zacznij swoją podróż po luksusowe nieruchomości na Cyprze
+
+Skontaktuj się z nami i odkryj najbardziej prestiżowe wille powyżej 1 mln euro na Cyprze. Oferujemy nieruchomości z widokiem na morze, w zamkniętych kompleksach i wyjątkowych lokalizacjach.
+
+Bez prowizji. Bez kompromisów. Tylko luksus najwyższej klasy.",Najczęściej zadawane pytania,"Czy muszę płacić prowizję agencji? :: 
+Nie. Kupujesz bezpośrednio od dewelopera. Nasze usługi są dla kupujących bezpłatne.
+$Czy wille powyżej 1 mln euro są gotowe do wprowadzenia się? :: 
+Większość jest wykończona i gotowa. Niektóre projekty są w budowie i oferują możliwość personalizacji.
+$Czy mogę kupić willę zdalnie? :: 
+Tak. Organizujemy prezentacje online, przygotowujemy dokumenty i prowadzimy cały proces na podstawie pełnomocnictwa.
+$Czy zakup willi daje prawo pobytu? :: 
+Tak. Nieruchomości powyżej 300 tys. euro kwalifikują się do programu stałego pobytu (Permanent Residency). Willa powyżej 1 mln euro znacznie wzmacnia profil inwestora.
+$Jakie dodatkowe koszty muszę uwzględnić? :: 
+Opłaty notarialne, podatki transferowe i VAT (tylko przy pierwszej sprzedaży). Brak podatku od nieruchomości.","Элитные виллы на Кипре от 1 млн евро – престижные новостройки без комиссии
+
+Мы предлагаем элитные виллы на Кипре стоимостью от 1 млн евро. Это новые объекты премиум-класса в Лимассоле, Пафосе и Ларнаке. Все виллы продаются напрямую от застройщика, поэтому вы не платите комиссию агентству.
+
+Каждый дом — это сочетание современных технологий, архитектуры мирового уровня и уникальных видов на Средиземное море. Покупка элитной виллы — это не только комфорт, но и инвестиция в надёжный актив.
+
+Почему стоит купить элитную виллу на Кипре от 1 млн евро
+
+Кипр входит в число ведущих направлений для приобретения недвижимости высокого класса. Виллы стоимостью свыше миллиона евро выбирают те, кто ценит:
+
+престижное расположение в лучших районах,
+полную приватность и безопасность,
+стабильность инвестиций и рост стоимости,
+налоговые преимущества для иностранных покупателей,
+возможность аренды с высокой доходностью.
+
+Элитная недвижимость сохраняет капитал и повышает его стоимость. Такие объекты востребованы всегда — как для личного проживания, так и на рынке аренды.
+
+Где расположены элитные виллы на Кипре
+
+Лимассол – столица роскоши
+
+Лимассол — самый престижный город на Кипре. Здесь сосредоточены бизнес-центры, элитные школы, марина, рестораны и бутики.
+
+Современные виллы у моря и в закрытых комплексах
+Цены: от €1 млн до €10 млн
+Востребованы среди инвесторов и состоятельных покупателей
+Отличный вариант для постоянного проживания
+
+Пафос – природа и уединение
+
+Пафос сочетает комфорт современного города и спокойную атмосферу курорта. Здесь популярны виллы на холмах с панорамными видами.
+
+Просторные участки и современные проекты
+
+Цены: от €1 млн до €4 млн
+Подходят для отдыха, аренды и ВНЖ
+Близость к гольф-клубам и морю
+
+Ларнака – новые горизонты
+
+Ларнака развивается как современный город с растущим рынком элитной недвижимости.
+
+Дома в прибрежных районах и новых комплексах
+Цены: от €900 тыс. до €3 млн
+Удобное расположение рядом с аэропортом
+Перспективный рост цен в ближайшие годы","Особенности элитных вилл от 1 млн евро
+
+Элитная недвижимость на Кипре отличается продуманной архитектурой и высоким уровнем оснащения.
+
+Что включают виллы класса «люкс»:
+
+собственные бассейны infinity,
+большие террасы и панорамные окна,
+система «умный дом», климат-контроль, солнечные панели,
+дизайнерские интерьеры, премиальная мебель,
+просторные кухни и гостиные open-space,
+SPA-зоны, сауны, тренажёрные залы,
+охраняемые комплексы и закрытые территории.
+
+Инвестиционный потенциал вилл на Кипре
+
+Элитные виллы на Кипре — это актив, который приносит доход и растёт в цене.
+
+Доходность от аренды: 5–6% в год
+Рост стоимости: до 20–30% за 3–5 лет
+Программа ВНЖ: покупка от €300 тыс. даёт право на получение резидентства
+Налоговые преимущества: нет налога на наследство, низкие ставки на международный доход
+
+Как проходит покупка
+
+Консультация и подбор объектов
+Онлайн- или офлайн-просмотр
+Резервирование и проверка документов
+Подписание договора с застройщиком
+Оплата поэтапно или единовременно
+Регистрация титула собственности
+
+Вы не платите комиссию агентству. Мы сопровождаем сделку бесплатно для покупателя.
+
+Сделайте шаг к собственности класса «люкс»
+
+Если вы ищете элитные виллы на Кипре от 1 млн евро, свяжитесь с нами. Мы предложим только лучшие объекты в Лимассоле, Пафосе и Ларнаке.
+
+Без комиссии. Без рисков. Только престижные новостройки премиум-класса.",Часто задаваемые вопросы,"Нужно ли платить комиссию агентству? :: 
+Нет. Все виллы продаются напрямую от застройщика. Вы платите только цену объекта.
+$Можно ли купить виллу удалённо? :: 
+Да. Мы организуем онлайн-показы, подготовку документов и сделку по доверенности.
+$Какой доход приносит аренда элитной виллы? :: 
+В среднем 5–6% годовых. В Лимассоле и Пафосе доходность выше за счёт высокого спроса.
+$Дают ли покупка элитной виллы право на ВНЖ? :: 
+Да, покупка недвижимости от €300 тыс. позволяет оформить ВНЖ. Виллы от 1 млн евро укрепляют инвестиционный статус.
+$Какие дополнительные расходы есть при покупке? :: 
+Государственные пошлины, налог на передачу права собственности, услуги юриста. Никакой комиссии агентству.",,,,,villas-investors.jpg,Buy Luxury Villa in Cyprus Over €1M –  Privacy & Prestige,Luxusvillen auf Zypern über 1 Mio € – Neubauten ohne Provision,Luksusowe wille na Cyprze na sprzedaż powyżej 1 mln euro,Элитные виллы на Кипре от 1 млн евро – премиум без комиссии

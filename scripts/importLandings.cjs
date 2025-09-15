@@ -77,16 +77,53 @@ async function uploadImage(src, localMap) {
   return _id;
 }
 
+/**
+ * ЯЗЫКОЗАВИСИМАЯ карта проектов:
+ *  - bySlug:  Map<`${lang}:${slug}`, _id>
+ *  - byTitle: Map<`${lang}:${lower(title)}`, _id>
+ * ДОПОЛНИТЕЛЬНО:
+ *  - anySlug: Map<lower(slug), _id> — кросс-языковой фолбэк, если slug заполнен только в одной локали.
+ *
+ * ВАЖНО: собираем по slug.de/en/pl/ru, НЕ используем поле document.language.
+ */
 async function buildProjectRefMap() {
-  // { `${lang}:${slug}`: _id }
-  const all = await client.fetch(`*[_type=="project"]{_id,language,"slug": slug[language].current, title}`);
-  const bySlug = {};
-  const byTitle = {};
+  const all = await client.fetch(`*[_type=="project"]{
+    _id,
+    title,
+    "slug_de": slug.de.current,
+    "slug_en": slug.en.current,
+    "slug_pl": slug.pl.current,
+    "slug_ru": slug.ru.current
+  }`);
+
+  const bySlug = new Map();
+  const byTitle = new Map();
+  const anySlug = new Map();
+  const lower = (s) => String(s || '').trim().toLowerCase();
+
   for (const p of all) {
-    if (p.slug) bySlug[`${p.language}:${p.slug}`] = p._id;
-    if (p.title) byTitle[`${p.language}:${p.title.toLowerCase()}`] = p._id;
+    const mapSlug = (langKey, slugVal) => {
+      if (!slugVal) return;
+      const trimmed = String(slugVal).trim();
+      bySlug.set(`${langKey}:${trimmed}`, p._id);
+      anySlug.set(lower(trimmed), p._id);
+    };
+    mapSlug('de', p.slug_de);
+    mapSlug('en', p.slug_en);
+    mapSlug('pl', p.slug_pl);
+    mapSlug('ru', p.slug_ru);
+
+    if (p.title) {
+      const t = lower(p.title);
+      byTitle.set(`de:${t}`, p._id);
+      byTitle.set(`en:${t}`, p._id);
+      byTitle.set(`pl:${t}`, p._id);
+      byTitle.set(`ru:${t}`, p._id);
+    }
   }
-  return { bySlug, byTitle };
+
+  console.log(`🔎 Project index built: bySlug=${bySlug.size}, byTitle=${byTitle.size}, anySlug=${anySlug.size}`);
+  return { bySlug, byTitle, anySlug };
 }
 
 async function findParentForLang(parentSlug, lang) {
@@ -104,7 +141,9 @@ async function findParentForLang(parentSlug, lang) {
 // ---------- main ----------
 async function run() {
   const localMap = await preloadImages();
-  const { bySlug: projectBySlug, byTitle: projectByTitle } = await buildProjectRefMap();
+
+  const { bySlug: projectBySlug, byTitle: projectByTitle, anySlug: projectAnySlug } = await buildProjectRefMap();
+  const lower = (s) => String(s || '').trim().toLowerCase();
 
   const csv = fs.readFileSync(CSV_PATH, 'utf8');
   const rows = parse(csv, { columns: true, skip_empty_lines: true, from_line: 2 });
@@ -127,11 +166,11 @@ async function run() {
     for (const lang of LANGS) {
       const docId = lang === DEFAULT_LANG ? baseId : `${baseId}.${lang}`;
 
-      // → Title берём из Intro Title
+      // → Title из Intro Title
       const introTitle = row[`landingIntro_title_${lang}`] || '';
-      const title = introTitle; // маппинг
+      const title = introTitle;
 
-      // → Excerpt берём из Intro Description (обрезаем до 200)
+      // → Excerpt из Intro Description (обрезаем до 200)
       const introDesc = row[`landingIntro_desc_${lang}`] || '';
       const excerpt = nonEmpty(introDesc) ? truncate(introDesc, 200) : '';
 
@@ -178,29 +217,53 @@ async function run() {
       const lpTitle = row[`landingProjects_title_${lang}`] || row.landingProjects_title || '';
       const lpCity = row.landingProjects_city || '';
       const lpType = row.landingProjects_propertyType || '';
+
+      // слаги из одной общей колонки, игнорируем '...'
       const rawKeys = String(row['landingProjects_projects_slugs'] || '')
         .split(',')
         .map(s => s.trim())
-        .filter(Boolean);
+        .filter(Boolean)
+        .filter(s => s !== '...');
 
       let lpProjects = null;
+
       if (rawKeys.length) {
         const resolved = [];
-        for (const key of rawKeys) {
-          const bySlug = projectBySlug[`${lang}:${key}`];
-          if (bySlug) {
-            resolved.push(bySlug);
+        const seen = new Set();
+
+        for (const keyRaw of rawKeys) {
+          const key = String(keyRaw).trim();
+          if (!key || key === '...') continue;
+          const kLower = lower(key);
+          if (seen.has(kLower)) continue;
+          seen.add(kLower);
+
+          // 1) строго по языку и слагу
+          const idBySlug = projectBySlug.get(`${lang}:${key}`);
+          if (idBySlug) { resolved.push(idBySlug); continue; }
+
+          // 2) по title в этом же языке
+          const idByTitle = projectByTitle.get(`${lang}:${kLower}`);
+          if (idByTitle) { resolved.push(idByTitle); continue; }
+
+          // 3) кросс-языковой фолбэк: этот слаг в любой локали
+          const idAny = projectAnySlug.get(kLower);
+          if (idAny) {
+            resolved.push(idAny);
+            console.warn(`ℹ️ using slug from another locale for key="${key}" (lang=${lang}) — заполните slug.${lang}.current в Sanity`);
             continue;
           }
-          const byTitle = projectByTitle[`${lang}:${key.toLowerCase()}`];
-          if (byTitle) {
-            resolved.push(byTitle);
-            continue;
-          }
-          console.warn(`⚠️ project not found for lang=${lang}, key="${key}" (neither slug nor title)`);
+
+          console.warn(`⚠️ project not found for lang=${lang}, key="${key}" (slug/title)`);
         }
+
         if (resolved.length) {
-          lpProjects = resolved.map(id => ({ _type: 'reference', _ref: id }));
+          const ts = Date.now();
+          lpProjects = resolved.map((id, i) => ({
+            _key: `pr-${i}-${ts}`,
+            _type: 'reference',
+            _ref: id,
+          }));
         }
       }
 
@@ -313,7 +376,38 @@ async function run() {
       await tx.commit();
       console.log(`✅ Imported ${baseId} (+i18n)`);
     } catch (e) {
-      console.error(`❌ ${baseId}: ${e.message}`);
+      const msg = String(e?.message || e);
+      // Если схема не принимает reference в списке — перезапишем документ, заменив ссылки на строки
+      if (/items? of type reference not valid for this list/i.test(msg) || /type reference not valid/i.test(msg)) {
+        console.warn(`↻ Fallback to slug strings for ${baseId} due to schema constraints...`);
+
+        for (const lang of LANGS) {
+          const docId = lang === DEFAULT_LANG ? baseId : `${baseId}.${lang}`;
+          try {
+            const doc = await client.getDocument(docId);
+            if (!doc?.contentBlocks) continue;
+
+            const patchedBlocks = doc.contentBlocks.map(block => {
+              if (block?._type !== 'landingProjectsBlock') return block;
+
+              const slugsCell = String(row['landingProjects_projects_slugs'] || '')
+                .split(',')
+                .map(s => String(s).trim())
+                .filter(Boolean)
+                .filter(s => s !== '...');
+
+              return { ...block, projects: slugsCell };
+            });
+
+            await client.patch(docId).set({ contentBlocks: patchedBlocks }).commit();
+            console.log(`✅ Fallback saved for ${docId}`);
+          } catch (err2) {
+            console.error(`❌ Fallback failed for ${docId}: ${err2.message}`);
+          }
+        }
+      } else {
+        console.error(`❌ ${baseId}: ${msg}`);
+      }
     }
   }
 }
