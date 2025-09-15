@@ -532,7 +532,16 @@ export async function getBlogPostByLang(
           title,
           filterCity,
           filterPropertyType,
-          projects[]->{
+          projects[]->[
+            !(_id in [
+              "project-akamantis-gardens-de",
+              "project-akamantis-gardens-en",
+              "project-akamantis-gardens-pl",
+              "project-akamantis-gardens-ru",
+              "drafts.project-akamantis-gardens-en"
+            ]) &&
+            !(_id match "drafts.*")
+          ]{
             _id,
             title,
             excerpt,
@@ -551,7 +560,15 @@ export async function getBlogPostByLang(
             _type == "project" &&
             language == $lang &&
             (!defined(^.filterCity) || keyFeatures.city == ^.filterCity) &&
-            (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType)
+            (!defined(^.filterPropertyType) || keyFeatures.propertyType == ^.filterPropertyType) &&
+            !(_id in [
+              "project-akamantis-gardens-de",
+              "project-akamantis-gardens-en",
+              "project-akamantis-gardens-pl",
+              "project-akamantis-gardens-ru",
+              "drafts.project-akamantis-gardens-en"
+            ]) &&
+            !(_id match "drafts.*")
           ] | order(keyFeatures.price asc)[] {
             _id,
             title,
