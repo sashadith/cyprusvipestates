@@ -532,16 +532,7 @@ export async function getBlogPostByLang(
           title,
           filterCity,
           filterPropertyType,
-          projects[]->[
-            !(_id in [
-              "project-akamantis-gardens-de",
-              "project-akamantis-gardens-en",
-              "project-akamantis-gardens-pl",
-              "project-akamantis-gardens-ru",
-              "drafts.project-akamantis-gardens-en"
-            ]) &&
-            !(_id match "drafts.*")
-          ]{
+          projects[]->{
             _id,
             title,
             excerpt,
