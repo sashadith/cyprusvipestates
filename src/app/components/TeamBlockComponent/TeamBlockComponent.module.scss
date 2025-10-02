@@ -56,6 +56,7 @@
   overflow: hidden;
   border-top: 4px solid #bd8948;
   border-bottom: 4px solid #bd8948;
+  flex: 1 0 60%;
 
   img {
     width: 100%;
@@ -68,18 +69,22 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .name {
   font-size: 18px;
   font-weight: 500;
   color: #fff;
+  margin-bottom: 10px;
 }
 
 .position {
   font-size: 18px;
   font-weight: 300;
   color: #fff;
+  margin-bottom: 10px;
 }
 
 .description {
@@ -87,7 +92,6 @@
   font-weight: 300;
   color: rgb(232, 232, 232);
   line-height: 1.5;
-  margin-bottom: 20px;
 }
 
 .button {

@@ -34,9 +34,9 @@ const TeamBlockComponent: FC<Props> = ({ block, lang }) => {
                   <div className={styles.memberInfoStart}>
                     <h3 className={styles.name}>{member.name}</h3>
                     <p className={styles.position}>{member.position}</p>
+                    <p className={styles.description}>{member.description}</p>
                   </div>
                   <div className={styles.memberInfoEnd}>
-                    <p className={styles.description}>{member.description}</p>
                     <div className={styles.button}>
                       <ButtonModal>
                         {lang === "en"
