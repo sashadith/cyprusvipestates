@@ -26,7 +26,7 @@ type Props = {
   videoId?: string;
   videoPreview?: ImageAlt;
   lang: string;
-  isActual: boolean;
+  isSold: boolean;
 };
 
 const PropertyIntro: FC<Props> = ({
@@ -36,10 +36,11 @@ const PropertyIntro: FC<Props> = ({
   videoId,
   videoPreview,
   lang,
-  isActual,
+  isSold,
 }) => {
   return (
     <section className={styles.popertyIntro}>
+      {isSold && <span className={styles.soldBadge}>Sold</span>}
       <ResponsiveMedia
         title={title}
         previewImage={previewImage}

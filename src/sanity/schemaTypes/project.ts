@@ -289,8 +289,8 @@ const project = {
       },
     }),
     defineField({
-      name: "isActual",
-      title: "Is Actual",
+      name: "isSold",
+      title: "Is Sold",
       type: "boolean",
       initialValue: false,
     }),
