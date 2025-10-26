@@ -1102,7 +1102,8 @@ export async function getFilteredProjects(
     title,
     "slug": slug[$lang],
     previewImage,
-    keyFeatures
+    keyFeatures,
+    isSold,
   }
 `;
 

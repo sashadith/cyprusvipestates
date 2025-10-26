@@ -14,6 +14,7 @@ type Props = {
   coveredArea: number;
   plotSize: number;
   lang: string;
+  isSold: boolean;
 };
 
 const ProjectLink: FC<Props> = ({
@@ -25,6 +26,7 @@ const ProjectLink: FC<Props> = ({
   coveredArea,
   plotSize,
   lang,
+  isSold,
 }) => {
   // if (!previewImage || !previewImage.asset) {
   //   return null; // <-- просто не рендерим проект без картинки
@@ -42,20 +44,30 @@ const ProjectLink: FC<Props> = ({
           unoptimized
         />
         <div className={styles.projectInfo}>
+          {isSold && (
+            <div className={styles.soldBadge}>
+              <img
+                src="https://cdn.sanity.io/files/88gk88s2/production/26e1326bb6674cac2ab950224bbc0b7d4fb7ba8a.png"
+                alt={title}
+              />
+            </div>
+          )}
           <p className={styles.projectTitle}>{title}</p>
-          <p className={styles.projectPrice}>
-            {lang === "en"
-              ? "Price from"
-              : lang === "de"
-                ? "Preis ab"
-                : lang === "pl"
-                  ? "Cena od"
-                  : lang === "ru"
-                    ? "Цена от"
-                    : "Price from"}
-            &nbsp;
-            {price.toLocaleString()} €
-          </p>
+          {!isSold && (
+            <p className={styles.projectPrice}>
+              {lang === "en"
+                ? "Price from"
+                : lang === "de"
+                  ? "Preis ab"
+                  : lang === "pl"
+                    ? "Cena od"
+                    : lang === "ru"
+                      ? "Цена от"
+                      : "Price from"}
+              &nbsp;
+              {price.toLocaleString()} €
+            </p>
+          )}
         </div>
       </div>
       <div className={styles.projectData}>

@@ -177,6 +177,7 @@ export default async function ProjectsPage({
                     coveredArea={project.keyFeatures?.coveredArea ?? 0}
                     plotSize={project.keyFeatures?.plotSize ?? 0}
                     lang={lang}
+                    isSold={project.isSold}
                   />
                 );
               })}
