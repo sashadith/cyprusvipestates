@@ -948,6 +948,7 @@ export async function getThreeProjectsBySameCity(
       language == $lang &&
       keyFeatures.city == $city &&
       defined(previewImage.asset) &&
+      isSold != true &&
       !(_id in [
         "project-akamantis-gardens-de",
         "project-akamantis-gardens-en",
@@ -1065,6 +1066,7 @@ export async function getFilteredProjects(
       _type == "project" &&
       language == $lang &&
       defined(previewImage.asset) &&
+      isSold != true &&
       !(_id in [
         "project-akamantis-gardens-de",
         "project-akamantis-gardens-en",
@@ -1082,6 +1084,7 @@ export async function getFilteredProjects(
       _type == "project" &&
       language == $lang &&
       defined(previewImage.asset) &&
+      isSold != true &&
       !(_id in [
         "project-akamantis-gardens-de",
         "project-akamantis-gardens-en",
@@ -1140,6 +1143,7 @@ export async function getFilteredProjectsCount(
       _type == "project" &&
       language == $lang &&
       defined(previewImage.asset) &&
+      isSold != true &&
       !(_id in [
         "project-akamantis-gardens-de",
         "project-akamantis-gardens-en",
