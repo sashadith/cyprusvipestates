@@ -40,7 +40,6 @@ const PropertyIntro: FC<Props> = ({
 }) => {
   return (
     <section className={styles.popertyIntro}>
-      {isSold && <span className={styles.soldBadge}>Sold</span>}
       <ResponsiveMedia
         title={title}
         previewImage={previewImage}
@@ -48,6 +47,14 @@ const PropertyIntro: FC<Props> = ({
         videoPreview={videoPreview}
       />
       <div className={`container ${styles.contentInner}`}>
+        {isSold && (
+          <div className={styles.soldBadge}>
+            <img
+              src="https://cdn.sanity.io/files/88gk88s2/production/26e1326bb6674cac2ab950224bbc0b7d4fb7ba8a.png"
+              alt={title}
+            />
+          </div>
+        )}
         <div className={styles.overlay}></div>
         <div className={styles.content}>
           <div className={styles.contentWrapper}>
