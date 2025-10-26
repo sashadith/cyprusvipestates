@@ -421,6 +421,7 @@ const SinglePage = async ({ params }: Props) => {
               previewImage={page.previewImage}
               excerpt={page.excerpt}
               lang={lang}
+              isActual={false}
             />
             <Breadcrumbs
               lang={lang}
