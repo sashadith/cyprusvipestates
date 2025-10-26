@@ -96,7 +96,7 @@ export type Project = {
   distances: Distances;
   fullDescription: any;
   faq: AccordionBlock;
-  // isActual: boolean;
+  isActual: boolean;
   language: string;
   slug: {
     [lang: string]: {

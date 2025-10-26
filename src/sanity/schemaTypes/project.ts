@@ -289,6 +289,12 @@ const project = {
       },
     }),
     defineField({
+      name: "isActual",
+      title: "Is Actual",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
       name: "language",
       type: "string",
       initialValue: "id",

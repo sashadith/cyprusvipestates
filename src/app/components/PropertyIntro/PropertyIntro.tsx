@@ -26,6 +26,7 @@ type Props = {
   videoId?: string;
   videoPreview?: ImageAlt;
   lang: string;
+  isActual: boolean;
 };
 
 const PropertyIntro: FC<Props> = ({
@@ -35,6 +36,7 @@ const PropertyIntro: FC<Props> = ({
   videoId,
   videoPreview,
   lang,
+  isActual,
 }) => {
   return (
     <section className={styles.popertyIntro}>
