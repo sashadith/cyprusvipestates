@@ -38,6 +38,7 @@ const LandingProjectsBlockComponent: FC<Props> = ({ block, lang }) => {
                   coveredArea={project.keyFeatures.coveredArea}
                   plotSize={project.keyFeatures.plotSize}
                   lang={lang}
+                  isSold={project.isSold}
                 />
               );
             })}

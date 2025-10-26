@@ -59,6 +59,7 @@ const ProjectSameCity = async ({ lang, city, currentProjectId }: Props) => {
                 coveredArea={project.keyFeatures.coveredArea}
                 plotSize={project.keyFeatures.plotSize}
                 lang={lang}
+                isSold={project.isSold}
               />
             );
           })}

@@ -150,6 +150,7 @@ const DeveloperPage = async ({ params }: Props) => {
                       coveredArea={parseFloat(project.keyFeatures.coveredArea)} // Преобразование строки в число
                       plotSize={parseFloat(project.keyFeatures.plotSize)} // Преобразование строки в число
                       lang={params.lang}
+                      isSold={project.isSold}
                     />
                   </div>
                 ))
