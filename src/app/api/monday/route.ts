@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     const data = await mondayRes.json();
     console.log("Monday response:", JSON.stringify(data));
 
-    // если не создалось — говорим фронту об ошибке
+    // Если не создалось — ошибка фронту
     if (data?.errors?.length || !data?.data?.create_item?.id) {
       return NextResponse.json(
         {
@@ -86,10 +86,9 @@ export async function POST(request: Request) {
 
     const newItemId = data.data.create_item.id;
 
-    // 2) пробуем переместить наверх
+    // 👇 вот это новый блок
     try {
-      // берём первый айтем с доски (то, что Monday считает "сверху" по выдаче)
-      const topItemsRes = await fetch(MONDAY_API_URL, {
+      await fetch(MONDAY_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,45 +96,18 @@ export async function POST(request: Request) {
         },
         body: JSON.stringify({
           query: `
-            query {
-              boards (ids: [${BOARD_ID}]) {
-                items (limit: 1) {
-                  id
-                }
-              }
-            }
-          `,
+        mutation {
+          change_item_position(
+            item_id: ${newItemId},
+            position_relative_method: top
+          ) {
+            id
+          }
+        }
+      `,
         }),
       });
-
-      const topData = await topItemsRes.json();
-      const topItemId = topData?.data?.boards?.[0]?.items?.[0]?.id;
-
-      // если есть верхний элемент и это не тот же самый новый лид — двигаем
-      if (topItemId && topItemId !== newItemId) {
-        await fetch(MONDAY_API_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: MONDAY_API_KEY,
-          },
-          body: JSON.stringify({
-            query: `
-              mutation {
-                change_item_position(
-                  item_id: ${newItemId},
-                  position_relative_method: before,
-                  relative_to_item_id: ${topItemId}
-                ) {
-                  id
-                }
-              }
-            `,
-          }),
-        });
-      }
     } catch (posErr) {
-      // Не роняем весь запрос, если не смогли поднять вверх.
       console.error("Monday position change error:", posErr);
     }
 
