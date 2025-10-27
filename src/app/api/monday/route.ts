@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 const MONDAY_API_URL = "https://api.monday.com/v2";
-const MONDAY_API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjQ0MDQyNzMyNiwiYWFpIjoxMSwidWlkIjo2MjE1MTQ3MSwiaWFkIjoiMjAyNC0xMS0yM1QxODo1NTo0Ny40NThaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjM5NDMwODYsInJnbiI6ImV1YzEifQ.t5IONmg4UE6uHeN7qmkBI1cEGE4YKcYkDgutGA6q_Ic";
+const MONDAY_API_KEY = process.env.MONDAY_API_KEY!;
 const BOARD_ID = 1761987486; // вернули рабочий id доски
 
 // SMTP (Hostinger через env — можно и хардкод, но env безопаснее)
