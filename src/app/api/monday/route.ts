@@ -28,7 +28,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    // дата и время
     const currentDate = new Date().toISOString().split("T")[0];
     const cyprusTime = new Intl.DateTimeFormat("en-GB", {
       hour: "2-digit",
@@ -37,29 +36,29 @@ export async function POST(request: Request) {
       timeZone: "Asia/Nicosia",
     }).format(new Date());
 
-    // значения для колонок в Monday
+    // колонка id — как в твоём ИЗНАЧАЛЬНОМ рабочем коде
     const cols: Record<string, string> = {
-      text_mkkwm0b4: phone, // phone
-      text_mkkwekh3: email, // email
-      text_mkkwk9kt: currentPage, // page url
-      text_mkq6spmc: message || "", // message
-      date_mkt0wz3n: currentDate, // date
-      text_mkt0gyvy: cyprusTime, // time in Cyprus
-      text_mkx4pb8s: preferredContact, // "phone" | "whatsapp" | "email"
+      text_mkkwm0b4: phone,
+      text_mkkwekh3: email,
+      text_mkkwk9kt: currentPage,
+      text_mkq6spmc: message || "",
+      date_mkt0wz3n: currentDate,
+      text_mkx4pb8s: preferredContact,
+      text_mkt0gyvy: cyprusTime,
     };
 
-    // 1) создаём item
     const mutationCreate = `
-      mutation {
-        create_item(
-          board_id: ${BOARD_ID},
-          item_name: "${String(name).replace(/"/g, '\\"')}",
-          column_values: "${JSON.stringify(cols).replace(/"/g, '\\"')}"
-        ) {
-          id
-        }
-      }
-    `;
+  mutation {
+    create_item(
+      board_id: ${BOARD_ID},
+      item_name: "${String(name).replace(/"/g, '\\"')}",
+      column_values: "${JSON.stringify(cols).replace(/"/g, '\\"')}",
+      position_relative_method: after_at
+    ) {
+      id
+    }
+  }
+`;
 
     const mondayRes = await fetch(MONDAY_API_URL, {
       method: "POST",
@@ -71,10 +70,11 @@ export async function POST(request: Request) {
     });
 
     const data = await mondayRes.json();
+    // для отладки: смотри логи на сервере Vercel/Host
     console.log("Monday response:", JSON.stringify(data));
 
-    // Если не создалось — ошибка фронту
     if (data?.errors?.length || !data?.data?.create_item?.id) {
+      // Явно прокинем ошибку, чтобы увидеть это на фронте во время теста
       return NextResponse.json(
         {
           error: "Monday create_item failed",
@@ -84,34 +84,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const newItemId = data.data.create_item.id;
-
-    // 👇 вот это новый блок
-    try {
-      await fetch(MONDAY_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: MONDAY_API_KEY,
-        },
-        body: JSON.stringify({
-          query: `
-        mutation {
-          change_item_position(
-            item_id: ${newItemId},
-            position_relative_method: top
-          ) {
-            id
-          }
-        }
-      `,
-        }),
-      });
-    } catch (posErr) {
-      console.error("Monday position change error:", posErr);
-    }
-
-    // 3) отправляем письмо (но не падаем, если письмо не ушло)
+    // === только если item создан — отправляем письмо ===
     try {
       await transporter.sendMail({
         from: process.env.EMAIL_USER!,
@@ -123,13 +96,13 @@ export async function POST(request: Request) {
       });
     } catch (mailErr) {
       console.error("Email send error:", mailErr);
+      // Лид есть в Monday; письмо не критично
       return NextResponse.json(
         { message: "Lead sent to Monday; email notification failed" },
         { status: 200 }
       );
     }
 
-    // всё ок
     return NextResponse.json(
       { message: "Lead sent to Monday; email notification delivered" },
       { status: 200 }
