@@ -168,22 +168,27 @@
 
 .radioGroupLabel {
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 300;
   color: #fff; // или тот цвет текста, который ты уже используешь в форме
 }
 
 .radioOption {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 0.659rem + 0.45vw, 1rem);
+  font-style: normal;
+  font-weight: 300;
   line-height: 1.4;
   cursor: pointer;
+  text-align: center;
 
   input[type="radio"] {
-    min-width: 16px;
-    min-height: 16px;
+    min-width: 10px;
+    min-height: 10px;
   }
 }
 

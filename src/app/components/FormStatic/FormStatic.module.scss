@@ -228,9 +228,8 @@
     color: #fff;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
     line-height: normal;
-    letter-spacing: -0.64px;
     margin-top: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
     margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
 }
@@ -242,7 +241,9 @@
   justify-content: center;
   gap: 0.5rem;
 
-  font-size: 0.7rem;
+  font-size: clamp(0.75rem, 0.659rem + 0.45vw, 1rem);
+  font-style: normal;
+  font-weight: 300;
   line-height: 1.4;
   cursor: pointer;
   text-align: center;

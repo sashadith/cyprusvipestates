@@ -84,12 +84,12 @@ const FormStandard: FC<ContactFormProps> = ({
       .oneOf(["phone", "whatsapp", "email"])
       .required(
         lang === "ru"
-          ? "Выберите удобный способ связи"
+          ? "Как с вами лучше связаться?"
           : lang === "de"
-            ? "Bitte bevorzugten Kontaktweg auswählen"
+            ? "Wie können wir Sie am besten kontaktieren?"
             : lang === "pl"
               ? "Wybierz preferowaną formę kontaktu"
-              : "Please choose your preferred contact method"
+              : "What’s the best way to contact you?"
       ),
     agreedToPolicy: Yup.boolean()
       .required(`${dataForm.validationAgreementRequired}`)
@@ -267,7 +267,7 @@ const FormStandard: FC<ContactFormProps> = ({
                     ? "Wie können wir Sie am besten kontaktieren?"
                     : lang === "pl"
                       ? "W jaki sposób najlepiej się z Tobą skontaktować?"
-                      : "How should we contact you?"}
+                      : "What’s the best way to contact you?"}
               </p>
               <div className={styles.radioGroupWrapper}>
                 <label className={styles.radioOption}>
