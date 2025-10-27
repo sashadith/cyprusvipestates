@@ -329,7 +329,9 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                     </div>
                   </div>
 
-                  <div className={styles.inputWrapper}>
+                  <div className={styles.inputWrapper}></div>
+
+                  <div>
                     <div className={styles.radioGroupWrapper}>
                       <span className={styles.radioGroupLabel}>
                         {lang === "ru"
@@ -398,9 +400,6 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                       component="div"
                       className={styles.error}
                     />
-                  </div>
-
-                  <div>
                     <button
                       type="submit"
                       className={styles.sentBtn}
