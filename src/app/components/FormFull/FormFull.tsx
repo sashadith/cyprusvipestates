@@ -17,6 +17,7 @@ export type FormData = {
   phone: string;
   email: string;
   message: string;
+  preferredContact: string;
   agreedToPolicy: boolean;
 };
 
@@ -69,6 +70,7 @@ const FormFull: FC<ContactFormProps> = ({
     phone: "",
     email: "",
     message: "",
+    preferredContact: "",
     agreedToPolicy: false,
   };
 
@@ -80,6 +82,17 @@ const FormFull: FC<ContactFormProps> = ({
       .email(`${dataForm.validationEmailInvalid}`)
       .required(`${dataForm.validationEmailRequired}`),
     message: Yup.string().required(dataForm.validationMessageRequired!),
+    preferredContact: Yup.string()
+      .oneOf(["phone", "whatsapp", "email"])
+      .required(
+        lang === "ru"
+          ? "Выберите удобный способ связи"
+          : lang === "de"
+            ? "Bitte bevorzugten Kontaktweg auswählen"
+            : lang === "pl"
+              ? "Wybierz preferowaną formę kontaktu"
+              : "Please choose your preferred contact method"
+      ),
     agreedToPolicy: Yup.boolean()
       .required(`${dataForm.validationAgreementRequired}`)
       .oneOf([true], `${dataForm.validationAgreementOneOf}`),
@@ -223,6 +236,69 @@ const FormFull: FC<ContactFormProps> = ({
               />
               <ErrorMessage
                 name="email"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+
+            <div className={styles.inputWrapper}>
+              <div className={styles.radioGroupWrapper}>
+                <span className={styles.radioGroupLabel}>
+                  {lang === "ru"
+                    ? "Как с вами лучше связаться?"
+                    : lang === "de"
+                      ? "Wie können wir Sie am besten kontaktieren?"
+                      : lang === "pl"
+                        ? "W jaki sposób najlepiej się z Tobą skontaktować?"
+                        : "How should we contact you?"}
+                </span>
+
+                <label className={styles.radioOption}>
+                  <Field type="radio" name="preferredContact" value="phone" />
+                  <span>
+                    {lang === "ru"
+                      ? "Позвоните мне"
+                      : lang === "de"
+                        ? "Rufen Sie mich an"
+                        : lang === "pl"
+                          ? "Zadzwońcie do mnie"
+                          : "Phone call"}
+                  </span>
+                </label>
+
+                <label className={styles.radioOption}>
+                  <Field
+                    type="radio"
+                    name="preferredContact"
+                    value="whatsapp"
+                  />
+                  <span>
+                    {lang === "ru"
+                      ? "Напишите в WhatsApp"
+                      : lang === "de"
+                        ? "Schreiben Sie mir auf WhatsApp"
+                        : lang === "pl"
+                          ? "Napisz na WhatsApp"
+                          : "WhatsApp"}
+                  </span>
+                </label>
+
+                <label className={styles.radioOption}>
+                  <Field type="radio" name="preferredContact" value="email" />
+                  <span>
+                    {lang === "ru"
+                      ? "Напишите на e-mail"
+                      : lang === "de"
+                        ? "Schreiben Sie mir eine E-Mail"
+                        : lang === "pl"
+                          ? "Napisz na e-mail"
+                          : "Email"}
+                  </span>
+                </label>
+              </div>
+
+              <ErrorMessage
+                name="preferredContact"
                 component="div"
                 className={styles.error}
               />

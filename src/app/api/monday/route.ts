@@ -21,10 +21,10 @@ const transporter = nodemailer.createTransport({
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, phone, email, message, currentPage } = body;
+    const { name, phone, email, message, preferredContact, currentPage } = body;
 
     // базовая валидация
-    if (!name || !phone || !email) {
+    if (!name || !phone || !email || !preferredContact) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
@@ -43,6 +43,7 @@ export async function POST(request: Request) {
       text_mkkwk9kt: currentPage,
       text_mkq6spmc: message || "",
       date_mkt0wz3n: currentDate,
+      text_mkx4pb8s: preferredContact,
       text_mkt0gyvy: cyprusTime,
     };
 
