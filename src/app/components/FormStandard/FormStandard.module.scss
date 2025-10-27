@@ -96,9 +96,9 @@
   padding: 20px 28px;
   color: #FFF;
   text-align: center;
-  font-size: 12px;
+  font-size: clamp(0.938rem, 0.597rem + 1.7vw, 1.875rem);
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   -webkit-box-shadow: 0px 6px 20px -5px rgba(0,0,0,0.28);
@@ -107,9 +107,6 @@
 
   @media screen and (min-width: 768px) {
     height: 70px;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
     padding-top: 20px;
   }
 
@@ -185,29 +182,34 @@
 }
 
 .radioGroupWrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3 , 1fr);
   align-items: center;
-  justify-content: start;
-  gap: clamp(1rem, 0.636rem + 1.82vw, 2rem);
+  justify-content: space-between;
+  gap: clamp(0.313rem, -0.028rem + 1.7vw, 1.25rem);
   margin-bottom: 0.5rem;
 }
 
 .radioGroupLabel {
-    color: #000;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    margin-top: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
-    margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin-top: 20px;
+  margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
 }
 
 .radioOption {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  // align-items: center;
+  // justify-content: center;
   gap: 0.5rem;
+  background: #F5F5F5;
+  height: 100%;
+  padding: 5px;
+  
 
   font-size: clamp(0.75rem, 0.659rem + 0.45vw, 1rem);
   font-style: normal;
@@ -219,6 +221,11 @@
   input[type="radio"] {
     min-width: 10px;
     min-height: 10px;
+  }
+
+  @media screen and (min-width: 768px) {
+    gap: 0.5rem;
+    padding: 10px 22px;
   }
 }
 

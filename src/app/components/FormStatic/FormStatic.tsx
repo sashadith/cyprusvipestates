@@ -351,11 +351,11 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                         />
                         <span>
                           {lang === "ru"
-                            ? "Позвоните мне"
+                            ? "Телефон"
                             : lang === "de"
-                              ? "Rufen Sie mich an"
+                              ? "Anruf"
                               : lang === "pl"
-                                ? "Zadzwońcie do mnie"
+                                ? "Telefonicznie"
                                 : "Phone call"}
                         </span>
                       </label>
@@ -368,11 +368,11 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                         />
                         <span>
                           {lang === "ru"
-                            ? "Напишите в WhatsApp"
+                            ? "WhatsApp"
                             : lang === "de"
-                              ? "Schreiben Sie mir auf WhatsApp"
+                              ? "WhatsApp"
                               : lang === "pl"
-                                ? "Napisz na WhatsApp"
+                                ? "WhatsApp"
                                 : "WhatsApp"}
                         </span>
                       </label>
@@ -385,11 +385,11 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                         />
                         <span>
                           {lang === "ru"
-                            ? "Напишите на e-mail"
+                            ? "Email"
                             : lang === "de"
-                              ? "Schreiben Sie mir eine E-Mail"
+                              ? "E-Mail"
                               : lang === "pl"
-                                ? "Napisz na e-mail"
+                                ? "E-mail"
                                 : "Email"}
                         </span>
                       </label>
