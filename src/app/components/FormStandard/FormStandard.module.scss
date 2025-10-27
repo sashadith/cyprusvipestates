@@ -186,30 +186,43 @@
 
 .radioGroupWrapper {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  align-items: center;
+  justify-content: start;
+  gap: clamp(1rem, 0.636rem + 1.82vw, 2rem);
   margin-bottom: 0.5rem;
 }
 
 .radioGroupLabel {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #fff; // или тот цвет текста, который ты уже используешь в форме
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    margin-top: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+    margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
 }
 
 .radioOption {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   line-height: 1.4;
   cursor: pointer;
+  text-align: center;
 
   input[type="radio"] {
-    min-width: 16px;
-    min-height: 16px;
+    min-width: 10px;
+    min-height: 10px;
   }
+}
+
+.radioOption input[type="radio"] {
+  accent-color: #bd8948; // например, фирменный зеленый Cyprus VIP Estates
 }
 
 .customCheckbox {

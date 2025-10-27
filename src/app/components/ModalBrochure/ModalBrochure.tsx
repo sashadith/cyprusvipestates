@@ -15,7 +15,7 @@ const customStyles: ReactModal.Styles = {
   content: {
     position: "absolute",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
-    padding: "20px",
+    // padding: "20px",
     width: "100%",
     height: "100%",
     display: "flex",

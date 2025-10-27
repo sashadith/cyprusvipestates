@@ -260,17 +260,16 @@ const FormStandard: FC<ContactFormProps> = ({
             </div>
 
             <div className={styles.inputWrapper}>
+              <p className={styles.radioGroupLabel}>
+                {lang === "ru"
+                  ? "Как с вами лучше связаться?"
+                  : lang === "de"
+                    ? "Wie können wir Sie am besten kontaktieren?"
+                    : lang === "pl"
+                      ? "W jaki sposób najlepiej się z Tobą skontaktować?"
+                      : "How should we contact you?"}
+              </p>
               <div className={styles.radioGroupWrapper}>
-                <span className={styles.radioGroupLabel}>
-                  {lang === "ru"
-                    ? "Как с вами лучше связаться?"
-                    : lang === "de"
-                      ? "Wie können wir Sie am besten kontaktieren?"
-                      : lang === "pl"
-                        ? "W jaki sposób najlepiej się z Tobą skontaktować?"
-                        : "How should we contact you?"}
-                </span>
-
                 <label className={styles.radioOption}>
                   <Field type="radio" name="preferredContact" value="phone" />
                   <span>
