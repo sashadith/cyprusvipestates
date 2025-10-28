@@ -44,15 +44,22 @@ export default function RootLayout({
       <body className={rubik.className}>
         <ModalProvider>{children}</ModalProvider>
 
-        {/* {hasAnalytics && (
+        {hasAnalytics && (
           <>
+            <GoogleAnalyticsWrapper />
+            <MicrosoftClarity hasConsent={true} />
+            <GoogleTagManager gtmId="GTM-MQNF6L9V" />
+            <GoogleAdsScript />
+            <FacebookPixel />
           </>
-        )} */}
-        <GoogleAnalyticsWrapper />
-        <MicrosoftClarity />
-        <GoogleTagManager gtmId="GTM-MQNF6L9V" />
-        <GoogleAdsScript />
-        <FacebookPixel />
+        )}
+
+        {!hasAnalytics && (
+          <>
+            {/* ВАЖНО: даже если нет согласия, мы можем проинициализировать Clarity в "no consent" режиме */}
+            <MicrosoftClarity hasConsent={false} />
+          </>
+        )}
 
         <CustomCookieConsent lang={params.lang as "en" | "de" | "pl" | "ru"} />
       </body>

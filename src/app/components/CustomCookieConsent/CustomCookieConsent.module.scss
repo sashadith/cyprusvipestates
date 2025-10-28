@@ -71,17 +71,17 @@
     transition: background-color 0.2s ease-in-out;
   }
 
+  // button:first-of-type {
+  //   background-color: #ffffff;
+  //   color: #1f1f1f;
+
+  //   &:hover {
+  //     background-color: #eaeaea;
+  //   }
+  // }
+
   button:first-of-type {
-    background-color: #ffffff;
-    color: #1f1f1f;
-
-    &:hover {
-      background-color: #eaeaea;
-    }
-  }
-
-  button:last-of-type {
-    background-color: #bd8948;
+    background-color: #fff;
     color: #000;
 
     &:hover {

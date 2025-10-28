@@ -2,8 +2,19 @@
 
 import { useEffect } from "react";
 
-const MicrosoftClarity = () => {
+declare global {
+  interface Window {
+    clarity: (...args: any[]) => void;
+  }
+}
+
+export default function MicrosoftClarity({
+  hasConsent,
+}: {
+  hasConsent: boolean;
+}) {
   useEffect(() => {
+    // инициализируем Clarity (как у тебя было)
     (function (c: any, l: Document, a: string, r: string, i: string) {
       c[a] =
         c[a] ||
@@ -20,7 +31,13 @@ const MicrosoftClarity = () => {
     })(window, document, "clarity", "script", "qoasnhd0ms");
   }, []);
 
-  return null;
-};
+  useEffect(() => {
+    // после инициализации явно сообщаем статус согласия
+    // это ключевое требование Microsoft
+    if (typeof window !== "undefined" && typeof window.clarity === "function") {
+      window.clarity("consent", hasConsent === true);
+    }
+  }, [hasConsent]);
 
-export default MicrosoftClarity;
+  return null;
+}
