@@ -202,9 +202,9 @@
 
 .radioOption {
   display: flex;
-  flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
+  // flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   background: #F5F5F5;
   height: 100%;
@@ -214,7 +214,7 @@
   font-size: clamp(0.75rem, 0.659rem + 0.45vw, 1rem);
   font-style: normal;
   font-weight: 300;
-  line-height: 1.4;
+  line-height: 0;
   cursor: pointer;
   text-align: center;
 
@@ -225,7 +225,7 @@
 
   @media screen and (min-width: 768px) {
     gap: 0.5rem;
-    padding: 10px 22px;
+    padding: 15px;
   }
 }
 
