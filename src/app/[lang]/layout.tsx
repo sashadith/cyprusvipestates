@@ -46,7 +46,6 @@ export default function RootLayout({
 
         {hasAnalytics && (
           <>
-            <GoogleAnalyticsWrapper />
             <MicrosoftClarity hasConsent={true} />
             <GoogleTagManager gtmId="GTM-MQNF6L9V" />
             <GoogleAdsScript />
@@ -60,6 +59,8 @@ export default function RootLayout({
             <MicrosoftClarity hasConsent={false} />
           </>
         )}
+
+        <GoogleAnalyticsWrapper />
 
         <CustomCookieConsent lang={params.lang as "en" | "de" | "pl" | "ru"} />
       </body>

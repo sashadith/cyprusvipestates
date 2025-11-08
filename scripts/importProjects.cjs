@@ -59,17 +59,205 @@ function normalizeMonthYear(input) {
 }
 
 // текст → PortableText блоки
-function textToPortableText(text = '') {
-  return text
-    .split(/\r?\n/)
-    .map(l => l.trim()).filter(Boolean)
-    .map((l, i) => ({
+// function textToPortableText(text = '') {
+//   return text
+//     .split(/\r?\n/)
+//     .map(l => l.trim()).filter(Boolean)
+//     .map((l, i) => ({
+//       _key: `pt-${i}-${Date.now()}`,
+//       _type: 'block',
+//       style: 'normal',
+//       markDefs: [],
+//       children: [{ _key: `span-${i}-${Date.now()}`, _type: 'span', text: l, marks: [] }]
+//     }));
+// }
+
+// --- Мини-Markdown → Portable Text (H1–H3, списки, жирный/курсив, ссылки)
+function mdToPT(text = '') {
+  const lines = String(text).replace(/\r\n/g, '\n').split('\n');
+  const blocks = [];
+
+  // Парсинг инлайновых марок: ссылки, жирный, курсив
+  const parseInline = (str, i) => {
+    const children = [];
+    const markDefs = [];
+
+    // 1) Ссылки вида [Anchor](https://example.com)
+    const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+    let last = 0;
+    let m;
+
+    const pushText = (t) => {
+      if (!t) return;
+      children.push({
+        _key: `span-${i}-${children.length}-${Date.now()}`,
+        _type: 'span',
+        text: t,
+        marks: []
+      });
+    };
+
+    while ((m = linkRegex.exec(str)) !== null) {
+      const before = str.slice(last, m.index);
+      if (before) pushText(before);
+
+      const key = `link-${i}-${markDefs.length}-${Date.now()}`;
+      markDefs.push({ _key: key, _type: 'link', href: m[2] });
+      children.push({
+        _key: `span-${i}-${children.length}-${Date.now()}`,
+        _type: 'span',
+        text: m[1],
+        marks: [key]
+      });
+
+      last = m.index + m[0].length;
+    }
+    const tail = str.slice(last);
+    if (tail) pushText(tail);
+
+    // 2) Жирный/курсив поверх уже созданных children
+    const applyMarks = (node, mark) => {
+      const isBold = mark === 'strong';
+      const re = isBold ? /\*\*([^*]+)\*\*/g : /\*([^*]+)\*/g;
+      const src = node.text;
+
+      let lastIdx = 0;
+      let mm;
+      const out = [];
+
+      while ((mm = re.exec(src)) !== null) {
+        if (mm.index > lastIdx) {
+          out.push({
+            ...node,
+            _key: node._key + `-t${out.length}`,
+            text: src.slice(lastIdx, mm.index),
+            marks: node.marks || []
+          });
+        }
+        out.push({
+          ...node,
+          _key: node._key + `-m${out.length}`,
+          text: mm[1],
+          marks: [...(node.marks || []), mark]
+        });
+        lastIdx = mm.index + mm[0].length;
+      }
+      if (lastIdx < src.length) {
+        out.push({
+          ...node,
+          _key: node._key + `-t${out.length}`,
+          text: src.slice(lastIdx),
+          marks: node.marks || []
+        });
+      }
+      return out;
+    };
+
+    let flat = [];
+    children.forEach(n => {
+      // bold
+      const withBold = applyMarks(n, 'strong');
+      // italic
+      withBold.forEach(b => {
+        const withItalic = applyMarks(b, 'em');
+        flat.push(...withItalic);
+      });
+    });
+
+    if (flat.length === 0) {
+      flat = [{
+        _key: `span-${i}-0-${Date.now()}`,
+        _type: 'span',
+        text: '',
+        marks: []
+      }];
+    }
+
+    return { children: flat, markDefs };
+  };
+
+  lines.forEach((raw, i) => {
+    const line = raw.replace(/\t/g, '    ');
+    if (!line.trim()) return; // пустая строка = разрыв абзаца/списка
+
+    // Заголовки
+    let m;
+    if ((m = line.match(/^###\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'h3',
+        markDefs,
+        children
+      });
+      return;
+    }
+    if ((m = line.match(/^##\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'h2',
+        markDefs,
+        children
+      });
+      return;
+    }
+    if ((m = line.match(/^#\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'h1',
+        markDefs,
+        children
+      });
+      return;
+    }
+
+    // Маркированные списки: -, *
+    if ((m = line.match(/^(?:-|\*)\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'normal',
+        listItem: 'bullet',
+        level: 1,
+        markDefs,
+        children
+      });
+      return;
+    }
+
+    // Нумерованные списки: 1. 2. ...
+    if ((m = line.match(/^\d+\.\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'normal',
+        listItem: 'number',
+        level: 1,
+        markDefs,
+        children
+      });
+      return;
+    }
+
+    // Обычный параграф
+    const { children, markDefs } = parseInline(line, i);
+    blocks.push({
       _key: `pt-${i}-${Date.now()}`,
       _type: 'block',
       style: 'normal',
-      markDefs: [],
-      children: [{ _key: `span-${i}-${Date.now()}`, _type: 'span', text: l, marks: [] }]
-    }));
+      markDefs,
+      children
+    });
+  });
+
+  return blocks;
 }
 
 // предзагрузка локальных картинок
@@ -90,20 +278,36 @@ async function preloadImages() {
 }
 
 // загрузка картинки (URL или локальный через map)
-async function uploadImage(src, localMap) {
+// --- uploadImage: мягкий режим и fallback в папку images
+async function uploadImage(src, localMap, { strict = true } = {}) {
   if (!src) return null;
   const b = path.basename(src.trim());
   if (localMap[b]) return localMap[b];
+
+  // URL
   if (/^https?:\/\//.test(src)) {
     const res = await fetch(src);
-    if (!res.ok) throw new Error(res.statusText);
+    if (!res.ok) {
+      if (!strict) return null;
+      throw new Error(res.statusText);
+    }
     const buf = Buffer.from(await res.arrayBuffer());
     const fn = path.basename(new URL(src).pathname);
     const { _id } = await client.assets.upload('image', buf, { filename: fn });
     return _id;
   }
-  const abs = path.resolve(__dirname, src);
-  if (!fs.existsSync(abs)) throw new Error(`Not found: ${abs}`);
+
+  // Локальный путь: пробуем как есть...
+  let abs = path.resolve(__dirname, src);
+  // ...и fallback в каталог изображений
+  if (!fs.existsSync(abs)) {
+    abs = path.join(LOCAL_IMG_DIR, b);
+  }
+
+  if (!fs.existsSync(abs)) {
+    if (!strict) return null;
+    throw new Error(`Not found: ${abs}`);
+  }
   const { _id } = await client.assets.upload('image', fs.createReadStream(abs), { filename: path.basename(abs) });
   return _id;
 }
@@ -146,6 +350,7 @@ async function run() {
       const title = row[`title_${lang}`] || '';
       const excerpt = row[`excerpt_${lang}`] || '';
       const slug = row[`slug_${lang}`] || '';
+      const computedAlt = (seo.metaTitle || title || slug || '').trim();
 
       // — previewImage + alt
       let previewRef = null;
@@ -162,22 +367,35 @@ async function run() {
         catch (e) { console.error(`⚠️ videoPreview upload failed: ${e.message}`); }
       }
 
-      // — галерея + alt для каждого языка
+      // — галерея (ALT для всех изображений = computedAlt)
       const imgFiles = (row.images_paths || '').split(',').map(s => s.trim()).filter(Boolean);
-      const alts = (row[`images_alts_${lang}`] || '').split('/').map(s => s.trim());
-      const images = await Promise.all(imgFiles.map(async (fn, i) => {
-        const ref = await uploadImage(fn, localMap);
-        return {
-          _key: `img-${lang}-${i}-${Date.now()}`,
-          _type: 'image',
-          asset: { _ref: ref },
-          alt: alts[i] || ''
-        };
-      }));
+      // const alts = (row[`images_alts_${lang}`] || '').split('/').map(s => s.trim());
+      const imagesSettled = await Promise.allSettled(
+        imgFiles.map(async (fn, i) => {
+          const ref = await uploadImage(fn, localMap, { strict: false }); // не валим процесс
+          if (!ref) {
+            console.warn(`⚠️ image skipped (not found): ${fn}`);
+            return null;
+          }
+          return {
+            _key: `img-${lang}-${i}-${Date.now()}`,
+            _type: 'image',
+            asset: { _ref: ref },
+            alt: computedAlt
+          };
+        })
+      );
+      const images = imagesSettled
+        .filter(r => r.status === 'fulfilled' && r.value)
+        .map(r => r.value);
 
-      // — description и fullDescription как единый массив блоков
-      const description = textToPortableText(row[`description_${lang}`] || '');
-      const fullDescription = textToPortableText(row[`fullDescription_${lang}`] || '');
+      // // — description и fullDescription как единый массив блоков
+      // const description = textToPortableText(row[`description_${lang}`] || '');
+      // const fullDescription = textToPortableText(row[`fullDescription_${lang}`] || '');
+
+      // — description / fullDescription: поддержка мини-Markdown
+      const description = mdToPT(row[`description_${lang}`] || '');
+      const fullDescription = mdToPT(row[`fullDescription_${lang}`] || '');
 
       // — location
       const lat = parseFloat(row.location_lat) || 0;
@@ -230,7 +448,7 @@ async function run() {
         return {
           _key: `faq-${lang}-${i}-${Date.now()}`,
           question: q || '',
-          answer: textToPortableText(a || '')
+          answer: mdToPT(a || '')
         };
       });
 
@@ -249,7 +467,7 @@ async function run() {
           previewImage: {
             _type: 'image',
             asset: { _ref: previewRef },
-            alt: row[`previewImage_alt_${lang}`] || ''
+            alt: computedAlt
           }
         }),
 
@@ -260,7 +478,7 @@ async function run() {
           videoPreview: {
             _type: 'image',
             asset: { _ref: videoPreviewRef },
-            alt: row[`videoPreview_alt_${lang}`] || ''
+            alt: computedAlt
           }
         }),
 
