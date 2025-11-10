@@ -1170,6 +1170,82 @@ export async function getFilteredProjectsCount(
   });
 }
 
+export async function getFilteredProjectLocationsByLang(
+  lang: string,
+  filters: {
+    city?: string;
+    priceFrom?: number | null;
+    priceTo?: number | null;
+    propertyType?: string;
+    q?: string;
+  }
+): Promise<
+  {
+    _id: string;
+    title: string;
+    slug: string;
+    location: { lat: number; lng: number };
+    city?: string;
+    price?: number;
+    previewUrl?: string;
+    previewAlt?: string;
+  }[]
+> {
+  const {
+    city = "",
+    priceFrom = null,
+    priceTo = null,
+    propertyType = "",
+    q = "",
+  } = filters;
+
+  // как в getFilteredProjects: ищем только при q >= 3
+  const qPattern = q && q.length >= 3 ? `${q}*` : "";
+
+  const query = groq`
+    *[
+      _type == "project" &&
+      language == $lang &&
+      defined(location.lat) && defined(location.lng) &&
+      isSold != true &&
+      !(_id in [
+        "project-akamantis-gardens-de",
+        "project-akamantis-gardens-en",
+        "project-akamantis-gardens-pl",
+        "project-akamantis-gardens-ru",
+        "drafts.project-akamantis-gardens-en"
+      ]) &&
+      ($city == "" || keyFeatures.city == $city) &&
+      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+      ($priceTo == null || keyFeatures.price <= $priceTo) &&
+      (
+        $qPattern == "" ||
+        title match $qPattern ||
+        excerpt match $qPattern
+      )
+    ]{
+      _id,
+      title,
+      "slug": slug[$lang].current,
+      "location": { "lat": location.lat, "lng": location.lng },
+      "city": keyFeatures.city,
+      "price": keyFeatures.price,
+      "previewUrl": coalesce(previewImage.asset->url, images[0].asset->url),
+      "previewAlt": coalesce(previewImage.alt, title)
+    }
+  `;
+
+  return await client.fetch(query, {
+    lang,
+    city,
+    priceFrom,
+    priceTo,
+    propertyType,
+    qPattern,
+  });
+}
+
 export async function getAllProjectsLocationsByLang(lang: string): Promise<
   {
     _id: string;

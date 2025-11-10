@@ -6,6 +6,7 @@ import {
   getFilteredProjectsCount,
   getProjectsPageByLang,
   getAllProjectsLocationsByLang,
+  getFilteredProjectLocationsByLang,
 } from "@/sanity/sanity.utils";
 import { defaultLocale, i18n } from "@/i18n.config";
 import { Translation } from "@/types/homepage";
@@ -135,6 +136,15 @@ export default async function ProjectsPage({
   // получаем ВСЕ проекты с координатами (статично, без фильтров/пагинации)
   const allMarkers = await getAllProjectsLocationsByLang(lang);
 
+  // ⟵ ВАЖНО: теперь берём маркеры по тем же фильтрам (без пагинации)
+  const filteredMarkers = await getFilteredProjectLocationsByLang(lang, {
+    city,
+    priceFrom,
+    priceTo,
+    propertyType,
+    q,
+  });
+
   return (
     <>
       {/* Рендерим Header с переводами аналогично странице проекта */}
@@ -225,7 +235,7 @@ export default async function ProjectsPage({
             overflow: "hidden",
           }}
         >
-          <ProjectsMapAll lang={lang} markers={allMarkers} />
+          <ProjectsMapAll lang={lang} markers={filteredMarkers} />
         </div>
         <FormStatic lang={params.lang} />
         <WhatsAppButton lang={params.lang} />
