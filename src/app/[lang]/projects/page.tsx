@@ -237,51 +237,91 @@ export default async function ProjectsPage({
                 display: "flex",
                 gap: ".5rem",
                 flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              {buildPagination(currentPage, totalPages, 2).map((item, idx) => {
-                if (item === "...") {
-                  return (
-                    <span
-                      key={`ellipsis-${idx}`}
-                      className="pagination-ellipsis"
-                      aria-hidden="true"
-                      style={{ padding: "0 .5rem" }}
-                    >
-                      …
-                    </span>
-                  );
-                }
+              {/* helper для сборки href с текущими фильтрами */}
+              {(() => {
+                const makeHref = (page: number) => {
+                  const paramsObj: Record<string, string> = {};
+                  if (page > 1) paramsObj.page = String(page);
+                  if (city) paramsObj.city = city;
+                  if (priceFrom != null)
+                    paramsObj.priceFrom = String(priceFrom);
+                  if (priceTo != null) paramsObj.priceTo = String(priceTo);
+                  if (propertyType) paramsObj.propertyType = propertyType;
+                  if (sort) paramsObj.sort = sort;
+                  if (q) paramsObj.q = q;
+                  return `?${new URLSearchParams(paramsObj).toString()}`;
+                };
 
-                const pageNum = item as number;
+                return (
+                  <>
+                    {/* Prev */}
+                    {currentPage > 1 && (
+                      <Link
+                        href={makeHref(currentPage - 1)}
+                        className="pagination-link"
+                        aria-label="Previous"
+                      >
+                        ‹
+                      </Link>
+                    )}
 
-                // собираем объект из всех активных фильтров
-                const paramsObj: Record<string, string> = {};
-                if (pageNum > 1) paramsObj.page = String(pageNum);
-                if (city) paramsObj.city = city;
-                if (priceFrom != null) paramsObj.priceFrom = String(priceFrom);
-                if (priceTo != null) paramsObj.priceTo = String(priceTo);
-                if (propertyType) paramsObj.propertyType = propertyType;
-                if (sort) paramsObj.sort = sort;
-                if (q) paramsObj.q = q;
+                    {/* Страницы с многоточиями */}
+                    {buildPagination(currentPage, totalPages, 2).map(
+                      (item, idx) => {
+                        if (item === "...") {
+                          return (
+                            <span
+                              key={`ellipsis-${idx}`}
+                              className="pagination-ellipsis"
+                              aria-hidden="true"
+                              style={{ padding: "0 .5rem" }}
+                            >
+                              …
+                            </span>
+                          );
+                        }
 
-                const href = `?${new URLSearchParams(paramsObj).toString()}`;
+                        const pageNum = item as number;
+                        const href = makeHref(pageNum);
 
-                return pageNum === currentPage ? (
-                  <button
-                    key={pageNum}
-                    disabled
-                    className="pagination-link pagination-link-active"
-                    aria-current="page"
-                  >
-                    {pageNum}
-                  </button>
-                ) : (
-                  <Link key={pageNum} href={href} className="pagination-link">
-                    {pageNum}
-                  </Link>
+                        return pageNum === currentPage ? (
+                          <button
+                            key={pageNum}
+                            disabled
+                            className="pagination-link pagination-link-active"
+                            aria-current="page"
+                          >
+                            {pageNum}
+                          </button>
+                        ) : (
+                          <Link
+                            key={pageNum}
+                            href={href}
+                            className="pagination-link"
+                          >
+                            {pageNum}
+                          </Link>
+                        );
+                      }
+                    )}
+
+                    {/* Next */}
+                    {currentPage < totalPages && (
+                      <Link
+                        href={makeHref(currentPage + 1)}
+                        className="pagination-link"
+                        aria-label="Next"
+                      >
+                        ›
+                      </Link>
+                    )}
+                  </>
                 );
-              })}
+              })()}
             </div>
           )}
         </div>

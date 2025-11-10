@@ -365,19 +365,17 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .pagination-ellipsis {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.625rem 1.25rem;
+  height: 100%;
   background: transparent;
   border: 2px solid #bd8948;
   color: #fff;
   font-size: 1rem;
   font-weight: 400;
   transition: background 0.3s, color 0.3s;
-
-  &:hover {
-    background: #bd8948;
-    color: #fff;
-  }
 }
 
 .pagination-link-active {
