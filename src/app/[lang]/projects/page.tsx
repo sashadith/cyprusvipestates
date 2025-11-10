@@ -58,6 +58,40 @@ const ProjectsMapAll = dynamic(
   { ssr: false }
 );
 
+// pagination
+function buildPagination(current: number, total: number, neighbors = 2) {
+  if (total <= 1) return [] as (number | "...")[];
+
+  // Если страниц немного — показываем все без эллипсисов
+  if (total <= 2 * neighbors + 5) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  const pages: (number | "...")[] = [];
+
+  const start = Math.max(2, current - neighbors);
+  const end = Math.min(total - 1, current + neighbors);
+
+  pages.push(1);
+
+  if (start > 2) {
+    pages.push("...");
+  }
+
+  for (let p = start; p <= end; p++) {
+    pages.push(p);
+  }
+
+  if (end < total - 1) {
+    pages.push("...");
+  }
+
+  pages.push(total);
+
+  return pages;
+}
+// pagination end
+
 export default async function ProjectsPage({
   params,
   searchParams,
@@ -196,24 +230,50 @@ export default async function ProjectsPage({
         </div>
         <div className="pagination-links" style={{ marginTop: "2rem" }}>
           {totalPages > 1 && (
-            <div className="pagination-links" style={{ marginTop: "2rem" }}>
-              {Array.from({ length: totalPages }, (_, index) => {
-                const pageNum = index + 1;
+            <div
+              className="pagination-links"
+              style={{
+                marginTop: "2rem",
+                display: "flex",
+                gap: ".5rem",
+                flexWrap: "wrap",
+              }}
+            >
+              {buildPagination(currentPage, totalPages, 2).map((item, idx) => {
+                if (item === "...") {
+                  return (
+                    <span
+                      key={`ellipsis-${idx}`}
+                      className="pagination-ellipsis"
+                      aria-hidden="true"
+                      style={{ padding: "0 .5rem" }}
+                    >
+                      …
+                    </span>
+                  );
+                }
+
+                const pageNum = item as number;
 
                 // собираем объект из всех активных фильтров
-                const params: Record<string, string> = {};
-                if (pageNum > 1) params.page = String(pageNum);
-                if (city) params.city = city;
-                if (priceFrom) params.priceFrom = String(priceFrom);
-                if (priceTo) params.priceTo = String(priceTo);
-                if (propertyType) params.propertyType = propertyType;
-                if (sort) params.sort = sort;
-                if (q) params.q = q;
+                const paramsObj: Record<string, string> = {};
+                if (pageNum > 1) paramsObj.page = String(pageNum);
+                if (city) paramsObj.city = city;
+                if (priceFrom != null) paramsObj.priceFrom = String(priceFrom);
+                if (priceTo != null) paramsObj.priceTo = String(priceTo);
+                if (propertyType) paramsObj.propertyType = propertyType;
+                if (sort) paramsObj.sort = sort;
+                if (q) paramsObj.q = q;
 
-                const href = `?${new URLSearchParams(params).toString()}`;
+                const href = `?${new URLSearchParams(paramsObj).toString()}`;
 
-                return currentPage === pageNum ? (
-                  <button key={pageNum} disabled className="pagination-link">
+                return pageNum === currentPage ? (
+                  <button
+                    key={pageNum}
+                    disabled
+                    className="pagination-link pagination-link-active"
+                    aria-current="page"
+                  >
                     {pageNum}
                   </button>
                 ) : (
@@ -225,6 +285,7 @@ export default async function ProjectsPage({
             </div>
           )}
         </div>
+
         {/* === СТАБИЛЬНАЯ СТАТИЧНАЯ КАРТА СО ВСЕМИ ПРОЕКТАМИ === */}
         <div
           style={{
