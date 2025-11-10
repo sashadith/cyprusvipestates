@@ -1057,60 +1057,49 @@ export async function getFilteredProjects(
             ? "title desc"
             : "_createdAt desc";
 
-  // паттерн поиска — только если q >= 3 символов
+  // Ищем только если q >= 3 символов
   const qPattern = q && q.length >= 3 ? `${q}*` : "";
 
   const query = groq`
-  [
-    ...*[
-      _type == "project" &&
-      language == $lang &&
-      defined(previewImage.asset) &&
-      isSold != true &&
-      !(_id in [
-        "project-akamantis-gardens-de",
-        "project-akamantis-gardens-en",
-        "project-akamantis-gardens-pl",
-        "project-akamantis-gardens-ru",
-        "drafts.project-akamantis-gardens-en"
-      ]) &&
-      ($city == "" || keyFeatures.city == $city) &&
-      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-      ($priceTo == null || keyFeatures.price <= $priceTo) &&
-      ($qPattern == "" || title match $qPattern)
-        ] | order(${orderClause}),
-    ...*[
-      _type == "project" &&
-      language == $lang &&
-      defined(previewImage.asset) &&
-      isSold != true &&
-      !(_id in [
-        "project-akamantis-gardens-de",
-        "project-akamantis-gardens-en",
-        "project-akamantis-gardens-pl",
-        "project-akamantis-gardens-ru",
-        "drafts.project-akamantis-gardens-en"
-      ]) &&
-      ($city == "" || keyFeatures.city == $city) &&
-      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-      ($priceTo == null || keyFeatures.price <= $priceTo) &&
-      ($qPattern == "" || excerpt match $qPattern) &&
-      !($qPattern != "" && title match $qPattern)
-    ] | order(${orderClause})
-  ]
-  [${skip}...${skip + limit}] {
-    _id,
-    title,
-    "slug": slug[$lang],
-    previewImage,
-    keyFeatures,
-    isSold,
-  }
+*[
+  _type == "project" &&
+  language == $lang &&
+  defined(previewImage.asset) &&
+  isSold != true &&
+  !(_id in [
+    "project-akamantis-gardens-de",
+    "project-akamantis-gardens-en",
+    "project-akamantis-gardens-pl",
+    "project-akamantis-gardens-ru",
+    "drafts.project-akamantis-gardens-en"
+  ]) &&
+  ($city == "" || keyFeatures.city == $city) &&
+  ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+  ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+  ($priceTo == null || keyFeatures.price <= $priceTo) &&
+  (
+    $qPattern == "" ||
+    title match $qPattern ||
+    excerpt match $qPattern
+  )
+]
+| order(
+    // При наличии q — сначала те, что совпали по title, затем по excerpt
+    ($qPattern != "" && title match $qPattern) desc,
+    ($qPattern != "" && excerpt match $qPattern) desc,
+    ${orderClause}
+  )
+[${skip}...${skip + limit}]{
+  _id,
+  title,
+  "slug": slug[$lang],
+  previewImage,
+  keyFeatures,
+  isSold
+}
 `;
 
-  return await client.fetch(query, {
+  return client.fetch(query, {
     lang,
     city,
     priceFrom,
@@ -1137,36 +1126,44 @@ export async function getFilteredProjectsCount(
     propertyType = "",
     q = "",
   } = filters;
+
+  // Тот же qPattern, что и в getFilteredProjects
+  const qPattern = q && q.length >= 3 ? `${q}*` : "";
+
   const query = groq`
-  count(
-    *[
-      _type == "project" &&
-      language == $lang &&
-      defined(previewImage.asset) &&
-      isSold != true &&
-      !(_id in [
-        "project-akamantis-gardens-de",
-        "project-akamantis-gardens-en",
-        "project-akamantis-gardens-pl",
-        "project-akamantis-gardens-ru",
-        "drafts.project-akamantis-gardens-en"
-      ]) &&
-      ($city == "" || keyFeatures.city == $city) &&
-      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-      ($priceTo == null || keyFeatures.price <= $priceTo) &&
-      ($q == "" || title match $q || excerpt match $q)
-    ]
-  )
+count(
+  *[
+    _type == "project" &&
+    language == $lang &&
+    defined(previewImage.asset) &&
+    isSold != true &&
+    !(_id in [
+      "project-akamantis-gardens-de",
+      "project-akamantis-gardens-en",
+      "project-akamantis-gardens-pl",
+      "project-akamantis-gardens-ru",
+      "drafts.project-akamantis-gardens-en"
+    ]) &&
+    ($city == "" || keyFeatures.city == $city) &&
+    ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+    ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+    ($priceTo == null || keyFeatures.price <= $priceTo) &&
+    (
+      $qPattern == "" ||
+      title match $qPattern ||
+      excerpt match $qPattern
+    )
+  ]
+)
 `;
 
-  return await client.fetch(query, {
+  return client.fetch(query, {
     lang,
     city,
     priceFrom,
     priceTo,
     propertyType,
-    q,
+    qPattern,
   });
 }
 
