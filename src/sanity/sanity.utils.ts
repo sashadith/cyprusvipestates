@@ -1035,6 +1035,11 @@ export async function getFilteredProjects(
     propertyType?: string;
     q?: string;
     sort?: string;
+    // ⬇⬇⬇ новенькое:
+    north?: number | null;
+    south?: number | null;
+    east?: number | null;
+    west?: number | null;
   }
 ) {
   const {
@@ -1044,6 +1049,10 @@ export async function getFilteredProjects(
     propertyType = "",
     q = "",
     sort = "priceAsc",
+    north = null,
+    south = null,
+    east = null,
+    west = null,
   } = filters;
 
   const orderClause =
@@ -1057,7 +1066,6 @@ export async function getFilteredProjects(
             ? "title desc"
             : "_createdAt desc";
 
-  // Ищем только если q >= 3 символов
   const qPattern = q && q.length >= 3 ? `${q}*` : "";
 
   const query = groq`
@@ -1081,14 +1089,20 @@ export async function getFilteredProjects(
     $qPattern == "" ||
     title match $qPattern ||
     excerpt match $qPattern
+  ) &&
+  // ⬇⬇⬇ bbox (включается только если все 4 заданы)
+  (
+    $north == null || $south == null || $east == null || $west == null ||
+    (defined(location.lat) && defined(location.lng) &&
+     location.lat <= $north && location.lat >= $south &&
+     location.lng <= $east  && location.lng >= $west)
   )
 ]
 | order(
-    // При наличии q — сначала те, что совпали по title, затем по excerpt
-    ($qPattern != "" && title match $qPattern) desc,
-    ($qPattern != "" && excerpt match $qPattern) desc,
-    ${orderClause}
-  )
+  ($qPattern != "" && title match $qPattern) desc,
+  ($qPattern != "" && excerpt match $qPattern) desc,
+  ${orderClause}
+)
 [${skip}...${skip + limit}]{
   _id,
   title,
@@ -1096,8 +1110,7 @@ export async function getFilteredProjects(
   previewImage,
   keyFeatures,
   isSold
-}
-`;
+}`;
 
   return client.fetch(query, {
     lang,
@@ -1106,6 +1119,10 @@ export async function getFilteredProjects(
     priceTo,
     propertyType,
     qPattern,
+    north,
+    south,
+    east,
+    west,
   });
 }
 
@@ -1117,6 +1134,11 @@ export async function getFilteredProjectsCount(
     priceTo?: number | null;
     propertyType?: string;
     q?: string;
+    // ⬇⬇⬇
+    north?: number | null;
+    south?: number | null;
+    east?: number | null;
+    west?: number | null;
   }
 ) {
   const {
@@ -1125,37 +1147,43 @@ export async function getFilteredProjectsCount(
     priceTo = null,
     propertyType = "",
     q = "",
+    north = null,
+    south = null,
+    east = null,
+    west = null,
   } = filters;
 
-  // Тот же qPattern, что и в getFilteredProjects
   const qPattern = q && q.length >= 3 ? `${q}*` : "";
 
   const query = groq`
-count(
-  *[
-    _type == "project" &&
-    language == $lang &&
-    defined(previewImage.asset) &&
-    isSold != true &&
-    !(_id in [
-      "project-akamantis-gardens-de",
-      "project-akamantis-gardens-en",
-      "project-akamantis-gardens-pl",
-      "project-akamantis-gardens-ru",
-      "drafts.project-akamantis-gardens-en"
-    ]) &&
-    ($city == "" || keyFeatures.city == $city) &&
-    ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-    ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-    ($priceTo == null || keyFeatures.price <= $priceTo) &&
-    (
-      $qPattern == "" ||
-      title match $qPattern ||
-      excerpt match $qPattern
-    )
-  ]
-)
-`;
+count(*[
+  _type == "project" &&
+  language == $lang &&
+  defined(previewImage.asset) &&
+  isSold != true &&
+  !(_id in [
+    "project-akamantis-gardens-de",
+    "project-akamantis-gardens-en",
+    "project-akamantis-gardens-pl",
+    "project-akamantis-gardens-ru",
+    "drafts.project-akamantis-gardens-en"
+  ]) &&
+  ($city == "" || keyFeatures.city == $city) &&
+  ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+  ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+  ($priceTo == null || keyFeatures.price <= $priceTo) &&
+  (
+    $qPattern == "" ||
+    title match $qPattern ||
+    excerpt match $qPattern
+  ) &&
+  (
+    $north == null || $south == null || $east == null || $west == null ||
+    (defined(location.lat) && defined(location.lng) &&
+    location.lat <= $north && location.lat >= $south &&
+    location.lng <= $east  && location.lng >= $west)
+  )
+])`;
 
   return client.fetch(query, {
     lang,
@@ -1164,6 +1192,10 @@ count(
     priceTo,
     propertyType,
     qPattern,
+    north,
+    south,
+    east,
+    west,
   });
 }
 
@@ -1175,71 +1207,75 @@ export async function getFilteredProjectLocationsByLang(
     priceTo?: number | null;
     propertyType?: string;
     q?: string;
+    // ⬇⬇⬇
+    north?: number | null;
+    south?: number | null;
+    east?: number | null;
+    west?: number | null;
   }
-): Promise<
-  {
-    _id: string;
-    title: string;
-    slug: string;
-    location: { lat: number; lng: number };
-    city?: string;
-    price?: number;
-    previewUrl?: string;
-    previewAlt?: string;
-  }[]
-> {
+) {
   const {
     city = "",
     priceFrom = null,
     priceTo = null,
     propertyType = "",
     q = "",
+    north = null,
+    south = null,
+    east = null,
+    west = null,
   } = filters;
 
-  // как в getFilteredProjects: ищем только при q >= 3
   const qPattern = q && q.length >= 3 ? `${q}*` : "";
 
   const query = groq`
-    *[
-      _type == "project" &&
-      language == $lang &&
-      defined(location.lat) && defined(location.lng) &&
-      isSold != true &&
-      !(_id in [
-        "project-akamantis-gardens-de",
-        "project-akamantis-gardens-en",
-        "project-akamantis-gardens-pl",
-        "project-akamantis-gardens-ru",
-        "drafts.project-akamantis-gardens-en"
-      ]) &&
-      ($city == "" || keyFeatures.city == $city) &&
-      ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
-      ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
-      ($priceTo == null || keyFeatures.price <= $priceTo) &&
-      (
-        $qPattern == "" ||
-        title match $qPattern ||
-        excerpt match $qPattern
-      )
-    ]{
-      _id,
-      title,
-      "slug": slug[$lang].current,
-      "location": { "lat": location.lat, "lng": location.lng },
-      "city": keyFeatures.city,
-      "price": keyFeatures.price,
-      "previewUrl": coalesce(previewImage.asset->url, images[0].asset->url),
-      "previewAlt": coalesce(previewImage.alt, title)
-    }
-  `;
-
-  return await client.fetch(query, {
+*[
+  _type == "project" &&
+  language == $lang &&
+  defined(location.lat) && defined(location.lng) &&
+  isSold != true &&
+  !(_id in [
+    "project-akamantis-gardens-de",
+    "project-akamantis-gardens-en",
+    "project-akamantis-gardens-pl",
+    "project-akamantis-gardens-ru",
+    "drafts.project-akamantis-gardens-en"
+  ]) &&
+  ($city == "" || keyFeatures.city == $city) &&
+  ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
+  ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
+  ($priceTo == null || keyFeatures.price <= $priceTo) &&
+  (
+    $qPattern == "" ||
+    title match $qPattern ||
+    excerpt match $qPattern
+  ) &&
+  (
+    $north == null || $south == null || $east == null || $west == null ||
+    (location.lat <= $north && location.lat >= $south &&
+    location.lng <= $east  && location.lng >= $west)
+  )
+]{
+  _id,
+  title,
+  "slug": slug[$lang].current,
+  "location": { "lat": location.lat, "lng": location.lng },
+  "city": keyFeatures.city,
+  "price": keyFeatures.price,
+  "previewUrl": coalesce(previewImage.asset->url, images[0].asset->url),
+  "previewAlt": coalesce(previewImage.alt, title)
+}`;
+  return client.fetch(query, {
     lang,
     city,
     priceFrom,
     priceTo,
     propertyType,
     qPattern,
+    north,
+    south,
+    east,
+    west,
   });
 }
 

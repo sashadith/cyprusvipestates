@@ -30,6 +30,10 @@ type SearchParams = {
   propertyType?: string;
   sort?: string;
   q?: string;
+  north?: number;
+  south?: number;
+  east?: number;
+  west?: number;
 };
 
 type ProjectsPageProps = {
@@ -149,6 +153,10 @@ export default async function ProjectsPage({
   const skip = (currentPage - 1) * PAGE_SIZE;
   const sort = searchParams.sort || "priceAsc";
   const q = searchParams.q || "";
+  const north = searchParams.north ? Number(searchParams.north) : null;
+  const south = searchParams.south ? Number(searchParams.south) : null;
+  const east = searchParams.east ? Number(searchParams.east) : null;
+  const west = searchParams.west ? Number(searchParams.west) : null;
 
   const projects = await getFilteredProjects(lang, skip, PAGE_SIZE, {
     city,
@@ -157,6 +165,10 @@ export default async function ProjectsPage({
     propertyType,
     sort,
     q,
+    north,
+    south,
+    east,
+    west,
   });
   const totalProjects = await getFilteredProjectsCount(lang, {
     city,
@@ -164,6 +176,10 @@ export default async function ProjectsPage({
     priceTo,
     propertyType,
     q,
+    north,
+    south,
+    east,
+    west,
   });
   const totalPages = Math.ceil(totalProjects / PAGE_SIZE);
 
@@ -177,6 +193,10 @@ export default async function ProjectsPage({
     priceTo,
     propertyType,
     q,
+    north,
+    south,
+    east,
+    west,
   });
 
   return (

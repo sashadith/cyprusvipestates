@@ -156,6 +156,10 @@ export default function StyledProjectFilters({
       propertyType: "",
       sort: "",
       q: "",
+      north: "",
+      south: "",
+      east: "",
+      west: "",
     });
   };
 

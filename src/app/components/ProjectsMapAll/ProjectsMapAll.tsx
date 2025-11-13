@@ -1,7 +1,8 @@
 "use client";
 
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { useRouter, useSearchParams } from "next/navigation";
 import L from "leaflet";
 import Link from "next/link";
 import styles from "./ProjectsMapAll.module.scss";
@@ -56,16 +57,117 @@ const useValidMarkers = (items: MarkerItem[]) =>
     [items]
   );
 
+function debounce<T extends (...a: any[]) => void>(fn: T, wait = 500) {
+  let t: any;
+  return (...args: Parameters<T>) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), wait);
+  };
+}
+
+const BoundsSync: FC = () => {
+  const map = useMap();
+  const router = useRouter();
+  const sp = useSearchParams();
+
+  const userInteractingRef = useRef(false);
+  const round6 = (n: number) => Number(n.toFixed(6));
+
+  // Писать bbox в URL только после действий пользователя
+  const pushBounds = useMemo(
+    () =>
+      debounce((b: L.LatLngBounds) => {
+        if (!userInteractingRef.current) return;
+
+        const ne = b.getNorthEast();
+        const sw = b.getSouthWest();
+
+        const next = {
+          north: String(round6(ne.lat)),
+          east: String(round6(ne.lng)),
+          south: String(round6(sw.lat)),
+          west: String(round6(sw.lng)),
+        };
+
+        // если в URL уже такие же значения — ничего не пишем
+        const same =
+          sp.get("north") === next.north &&
+          sp.get("east") === next.east &&
+          sp.get("south") === next.south &&
+          sp.get("west") === next.west;
+
+        if (same) return;
+
+        const p = new URLSearchParams(sp.toString());
+        p.set("north", next.north);
+        p.set("east", next.east);
+        p.set("south", next.south);
+        p.set("west", next.west);
+        p.delete("page"); // при смене карты сбрасываем пагинацию
+        router.replace(`?${p.toString()}`, { scroll: false });
+
+        // считаем, что действие завершилось
+        userInteractingRef.current = false;
+      }, 400),
+    [router, sp]
+  );
+
+  useEffect(() => {
+    // пометки о «пользовательской» навигации
+    const onUserStart = () => (userInteractingRef.current = true);
+    map.on("dragstart", onUserStart);
+    map.on("zoomstart", onUserStart);
+    map.on("movestart", onUserStart); // на всякий
+
+    const onMoveEnd = () => pushBounds(map.getBounds());
+    map.on("moveend", onMoveEnd);
+
+    return () => {
+      map.off("dragstart", onUserStart);
+      map.off("zoomstart", onUserStart);
+      map.off("movestart", onUserStart);
+      map.off("moveend", onMoveEnd);
+    };
+  }, [map, pushBounds]);
+
+  // При маунте: если bbox есть в URL — применяем его (это программное действие, не пишем в URL)
+  useEffect(() => {
+    const n = parseFloat(sp.get("north") || "");
+    const s = parseFloat(sp.get("south") || "");
+    const e = parseFloat(sp.get("east") || "");
+    const w = parseFloat(sp.get("west") || "");
+    if ([n, s, e, w].every(Number.isFinite)) {
+      map.fitBounds(
+        [
+          [s, w],
+          [n, e],
+        ],
+        { padding: [32, 32] }
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return null;
+};
+
 const FitBounds: FC<{ markers: MarkerItem[] }> = ({ markers }) => {
   const map = useMap();
   const valid = useValidMarkers(markers);
+  const sp = useSearchParams(); // NEW
+  const bboxInUrl = ["north", "south", "east", "west"].every(
+    (k) => !!sp.get(k)
+  );
+
   useEffect(() => {
+    if (bboxInUrl) return; // если в URL уже есть bbox — не трогаем
     if (!valid.length) return;
     const bounds = L.latLngBounds(
       valid.map((m) => [m.location!.lat!, m.location!.lng!] as [number, number])
     );
     map.fitBounds(bounds, { padding: [32, 32] });
-  }, [valid, map]);
+  }, [valid, map, bboxInUrl]);
+
   return null;
 };
 
@@ -193,6 +295,8 @@ const ProjectsMapAll: FC<Props> = ({ lang, markers }) => {
           className={styles.grayscaleTile}
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
+
+        <BoundsSync />
 
         {valid.map((m) => {
           const href = m.slug
