@@ -247,6 +247,7 @@ export default async function ProjectsPage({
                         isSold={project.isSold}
                         videoId={project.videoId}
                         isNew={project.isNew}
+                        images={project.images}
                       />
                     );
                   })}

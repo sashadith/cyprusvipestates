@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 import styles from "./ProjectLinkAll.module.scss";
+import ProjectCardSlider from "../ProjectCardSlider/ProjectCardSlider";
 
 type Props = {
   url: string;
   previewImage: ImageAlt;
+  images: ImageAlt[];
   title: string;
   price: number;
   bedrooms: number;
@@ -22,6 +24,7 @@ type Props = {
 const ProjectLinkAll: FC<Props> = ({
   url,
   previewImage,
+  images,
   title,
   price,
   bedrooms,
@@ -36,17 +39,25 @@ const ProjectLinkAll: FC<Props> = ({
   //   return null; // <-- просто не рендерим проект без картинки
   // }
 
+  const sliderImages = [
+    previewImage,
+    ...(images || []).filter(
+      (img) => img?.asset?._ref !== previewImage?.asset?._ref
+    ),
+  ].slice(0, 5);
+
   return (
     <Link href={url} className={styles.project}>
       <div className={styles.projectImage}>
         <div className={styles.overlay}></div>
-        <Image
+        <ProjectCardSlider images={sliderImages} title={title} lang={lang} />
+        {/* <Image
           src={urlFor(previewImage).url()}
           alt={previewImage.alt || title}
           className={styles.image}
           fill={true}
           unoptimized
-        />
+        /> */}
         <div className={styles.projectTile}>
           {videoId ? (
             <p className={styles.projectTileItem}>

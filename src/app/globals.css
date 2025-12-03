@@ -348,14 +348,6 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-/* .projects-map__projects, .projects-map__map {
-  flex: 1 1 100%;
-
-  @media screen and (min-width: 1200px) {
-    flex: 1 1 50%;
-  }
-} */
-
 .projects-map__projects {
   flex: 1 1 100%;
 

@@ -1108,6 +1108,7 @@ export async function getFilteredProjects(
   title,
   "slug": slug[$lang],
   previewImage,
+  "images": images[0...5],
   keyFeatures,
   isSold,
   videoId,
@@ -1115,7 +1116,7 @@ export async function getFilteredProjects(
     _type == "project" &&
     language == $lang &&
     !(_id match "drafts.*")
-  ] | order(_createdAt desc)[0...15]._id
+  ] | order(_createdAt desc)[0...20]._id
 }`;
 
   return client.fetch(query, {
