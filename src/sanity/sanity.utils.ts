@@ -1094,8 +1094,8 @@ export async function getFilteredProjects(
   (
     $north == null || $south == null || $east == null || $west == null ||
     (defined(location.lat) && defined(location.lng) &&
-     location.lat <= $north && location.lat >= $south &&
-     location.lng <= $east  && location.lng >= $west)
+    location.lat <= $north && location.lat >= $south &&
+    location.lng <= $east  && location.lng >= $west)
   )
 ]
 | order(
@@ -1109,7 +1109,13 @@ export async function getFilteredProjects(
   "slug": slug[$lang],
   previewImage,
   keyFeatures,
-  isSold
+  isSold,
+  videoId,
+  "isNew": _id in *[
+    _type == "project" &&
+    language == $lang &&
+    !(_id match "drafts.*")
+  ] | order(_createdAt desc)[0...15]._id
 }`;
 
   return client.fetch(query, {

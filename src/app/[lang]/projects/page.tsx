@@ -19,6 +19,7 @@ import { Metadata } from "next";
 import Footer from "@/app/components/Footer/Footer";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import FormStatic from "@/app/components/FormStatic/FormStatic";
+import ProjectLinkAll from "@/app/components/ProjectLinkAll/ProjectLinkAll";
 
 const PAGE_SIZE = 12;
 
@@ -218,7 +219,57 @@ export default async function ProjectsPage({
           sort={sort}
           q={q}
         />
-        <div className="container">
+        <section className="projects-map">
+          <div className="projects-map__wrapper">
+            <div className="projects-map__projects">
+              {projects.length === 0 ? (
+                <NoProjects lang={lang} />
+              ) : (
+                <div className="projects-map__projects-list">
+                  {projects.map((project: any) => {
+                    const projectUrl =
+                      project.slug && project.slug.current
+                        ? lang === defaultLocale
+                          ? `/projects/${project.slug.current}`
+                          : `/${lang}/projects/${project.slug.current}`
+                        : "#";
+                    return (
+                      <ProjectLinkAll
+                        key={project._id}
+                        url={projectUrl}
+                        previewImage={project.previewImage}
+                        title={project.title}
+                        price={project.keyFeatures?.price ?? 0}
+                        bedrooms={project.keyFeatures?.bedrooms ?? 0}
+                        coveredArea={project.keyFeatures?.coveredArea ?? 0}
+                        plotSize={project.keyFeatures?.plotSize ?? 0}
+                        lang={lang}
+                        isSold={project.isSold}
+                        videoId={project.videoId}
+                        isNew={project.isNew}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            <div className="projects-map__map">
+              <div
+                className="map-sticky"
+                // style={{
+                //   marginTop: "2rem",
+                //   width: "100%",
+                //   height: "500px",
+                //   position: "relative",
+                //   overflow: "hidden",
+                // }}
+              >
+                <ProjectsMapAll lang={lang} markers={filteredMarkers} />
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* <div className="container">
           {projects.length === 0 ? (
             <NoProjects lang={lang} />
           ) : (
@@ -247,7 +298,7 @@ export default async function ProjectsPage({
               })}
             </div>
           )}
-        </div>
+        </div> */}
         <div className="pagination-links" style={{ marginTop: "2rem" }}>
           {totalPages > 1 && (
             <div
@@ -347,7 +398,7 @@ export default async function ProjectsPage({
         </div>
 
         {/* === СТАБИЛЬНАЯ СТАТИЧНАЯ КАРТА СО ВСЕМИ ПРОЕКТАМИ === */}
-        <div
+        {/* <div
           style={{
             marginTop: "2rem",
             width: "100%",
@@ -357,7 +408,7 @@ export default async function ProjectsPage({
           }}
         >
           <ProjectsMapAll lang={lang} markers={filteredMarkers} />
-        </div>
+        </div> */}
         <FormStatic lang={params.lang} />
         <WhatsAppButton lang={params.lang} />
       </main>
