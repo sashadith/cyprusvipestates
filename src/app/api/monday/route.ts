@@ -6,6 +6,20 @@ const MONDAY_API_URL = "https://api.monday.com/v2";
 const MONDAY_API_KEY = process.env.MONDAY_API_KEY!;
 const BOARD_ID = 1761987486; // вернули рабочий id доски
 
+// простой in-memory rate limit (под Vercel тоже работает на уровень инстанса)
+const rateLimitMap = new Map<string, number[]>();
+
+function isRateLimited(ip: string, limit = 5, windowMs = 60_000) {
+  const now = Date.now();
+  const timestamps = rateLimitMap.get(ip) || [];
+
+  const filtered = timestamps.filter((t) => now - t < windowMs);
+  filtered.push(now);
+
+  rateLimitMap.set(ip, filtered);
+  return filtered.length > limit;
+}
+
 // SMTP (Hostinger через env — можно и хардкод, но env безопаснее)
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || "smtp.hostinger.com",
@@ -18,9 +32,59 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(request: Request) {
+  const ip =
+    request.headers.get("x-forwarded-for") ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
+
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   try {
     const body = await request.json();
-    const { name, phone, email, message, preferredContact, currentPage } = body;
+    const {
+      name,
+      phone,
+      email,
+      message,
+      preferredContact,
+      currentPage,
+      company,
+      formStartTime,
+    } = body;
+
+    // ===============================
+    // ✅ АНТИСПАМ ЗАЩИТА
+    // ===============================
+
+    // 1. Honeypot — если заполнено скрытое поле
+    if (company) {
+      return NextResponse.json({ error: "Bot detected" }, { status: 403 });
+    }
+
+    // 2. Слишком быстрая отправка (< 3 секунд)
+    if (formStartTime && Date.now() - formStartTime < 3000) {
+      return NextResponse.json(
+        { error: "Too fast submission" },
+        { status: 403 }
+      );
+    }
+
+    // 3. Проверка заголовков
+    const userAgent = request.headers.get("user-agent") || "";
+    const referer = request.headers.get("referer") || "";
+
+    if (!userAgent || !referer) {
+      return NextResponse.json(
+        { error: "Suspicious request" },
+        { status: 403 }
+      );
+    }
+
+    // ===============================
+    // ✅ БАЗОВАЯ ВАЛИДАЦИЯ
+    // ===============================
 
     // базовая валидация
     if (!name || !phone || !email || !preferredContact) {

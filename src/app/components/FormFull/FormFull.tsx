@@ -20,6 +20,8 @@ export type FormData = {
   message: string;
   preferredContact: string;
   agreedToPolicy: boolean;
+  company: string; // honeypot field
+  formStartTime: number;
 };
 
 export interface ContactFormProps {
@@ -47,6 +49,8 @@ const FormFull: FC<ContactFormProps> = ({
   const dataForm = form.form;
   const router = useRouter(); // Используйте useRouter из next/navigation
 
+  const [formStartTime] = useState(() => Date.now());
+
   useEffect(() => {
     const interval = setInterval(() => {
       (["name", "phone", "email", "message"] as const).forEach((field) => {
@@ -73,6 +77,8 @@ const FormFull: FC<ContactFormProps> = ({
     message: "",
     preferredContact: "",
     agreedToPolicy: false,
+    company: "", // honeypot field
+    formStartTime,
   };
 
   const validationSchema = Yup.object({
@@ -325,6 +331,14 @@ const FormFull: FC<ContactFormProps> = ({
                 className={styles.error}
               />
             </div>
+
+            <Field
+              type="text"
+              name="company"
+              style={{ display: "none" }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
 
             <div className={styles.customCheckbox}>
               <Field

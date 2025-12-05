@@ -19,6 +19,7 @@ export type FormData = {
   email: string;
   preferredContact: "";
   agreedToPolicy: boolean;
+  company: string; // honeypot field
 };
 
 export interface ContactFormProps {
@@ -62,6 +63,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
     email: "",
     preferredContact: "",
     agreedToPolicy: false,
+    company: "", // honeypot field
   };
 
   const validationSchema = Yup.object({
@@ -420,6 +422,13 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                     </button>
                   </div>
                 </div>
+                <Field
+                  type="text"
+                  name="company"
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
                 <div className={styles.customCheckbox}>
                   <Field
                     type="checkbox"
