@@ -348,7 +348,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-.projects-map__projects {
+/* .projects-map__projects {
   flex: 1 1 100%;
 
   @media screen and (min-width: 1200px) {
@@ -362,7 +362,7 @@ input[type="number"]::-webkit-outer-spin-button {
   @media screen and (min-width: 1200px) {
     flex: 1 1 40%;
   }
-}
+} */
 
 .projects-map__projects-list {
   display: grid;

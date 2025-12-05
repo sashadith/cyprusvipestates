@@ -64,16 +64,16 @@
   color: #fff;
 }
 
-.formBlock {
+// .formBlock {
 
-  @media screen and (min-width: 980px) {
-    padding-left: clamp(1.25rem, -7.102rem + 13.64vw, 3.125rem);
+//   @media screen and (min-width: 980px) {
+//     padding-left: clamp(1.25rem, -7.102rem + 13.64vw, 3.125rem);
 
-    button {
-      width: fit-content;
-      justify-content: flex-start;
-      margin-inline: unset;
-      font-weight: 400;
-    }
-  }
-}
+//     button {
+//       width: fit-content;
+//       justify-content: flex-start;
+//       margin-inline: unset;
+//       font-weight: 400;
+//     }
+//   }
+// }

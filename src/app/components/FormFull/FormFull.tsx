@@ -11,6 +11,7 @@ import styles from "./FormFull.module.scss";
 import { Form as FormType } from "@/types/form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import PhoneField from "../ui/PhoneField/PhoneField";
 
 export type FormData = {
   name: string;
@@ -173,6 +174,16 @@ const FormFull: FC<ContactFormProps> = ({
           <Form>
             {/* Поле для имени */}
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#bd8948"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+              </svg>
               <label
                 // htmlFor="name"
                 htmlFor={`${uid}-name`}
@@ -195,30 +206,19 @@ const FormFull: FC<ContactFormProps> = ({
               />
             </div>
 
-            <div className={styles.inputWrapper}>
-              <label
-                // htmlFor="phone"
-                htmlFor={`${uid}-phone`}
-                className={`${styles.label} ${styles.labelPhone} ${filled.phone ? styles.filled : ""}`}
-              >
-                {dataForm.inputPhone}
-              </label>
-              <PhoneInput
-                // id="phone"
-                id={`${uid}-phone`}
-                name="phone"
-                className={`${styles.inputField}`}
-                onBlur={handleBlur}
-                onChange={(value) => setFieldValue("phone", value)}
-              />
-              <ErrorMessage
-                name="phone"
-                component="div"
-                className={styles.error}
-              />
-            </div>
+            <PhoneField label={dataForm.inputPhone} />
 
             <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#bd8948"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
+              </svg>
               <label
                 // htmlFor="email"
                 htmlFor={`${uid}-email`}
@@ -242,26 +242,25 @@ const FormFull: FC<ContactFormProps> = ({
             </div>
 
             <div className={styles.inputWrapper}>
+              <p className={styles.radioGroupLabel}>
+                {lang === "ru"
+                  ? "Как с вами лучше связаться?"
+                  : lang === "de"
+                    ? "Wie können wir Sie am besten kontaktieren?"
+                    : lang === "pl"
+                      ? "W jaki sposób najlepiej się z Tobą skontaktować?"
+                      : "What’s the best way to contact you?"}
+              </p>
               <div className={styles.radioGroupWrapper}>
-                <span className={styles.radioGroupLabel}>
-                  {lang === "ru"
-                    ? "Как с вами лучше связаться?"
-                    : lang === "de"
-                      ? "Wie können wir Sie am besten kontaktieren?"
-                      : lang === "pl"
-                        ? "W jaki sposób najlepiej się z Tobą skontaktować?"
-                        : "How should we contact you?"}
-                </span>
-
                 <label className={styles.radioOption}>
                   <Field type="radio" name="preferredContact" value="phone" />
                   <span>
                     {lang === "ru"
-                      ? "Позвоните мне"
+                      ? "Телефон"
                       : lang === "de"
-                        ? "Rufen Sie mich an"
+                        ? "Anruf"
                         : lang === "pl"
-                          ? "Zadzwońcie do mnie"
+                          ? "Telefonicznie"
                           : "Phone call"}
                   </span>
                 </label>
@@ -274,11 +273,11 @@ const FormFull: FC<ContactFormProps> = ({
                   />
                   <span>
                     {lang === "ru"
-                      ? "Напишите в WhatsApp"
+                      ? "WhatsApp"
                       : lang === "de"
-                        ? "Schreiben Sie mir auf WhatsApp"
+                        ? "WhatsApp"
                         : lang === "pl"
-                          ? "Napisz na WhatsApp"
+                          ? "WhatsApp"
                           : "WhatsApp"}
                   </span>
                 </label>
@@ -287,11 +286,11 @@ const FormFull: FC<ContactFormProps> = ({
                   <Field type="radio" name="preferredContact" value="email" />
                   <span>
                     {lang === "ru"
-                      ? "Напишите на e-mail"
+                      ? "Email"
                       : lang === "de"
-                        ? "Schreiben Sie mir eine E-Mail"
+                        ? "E-Mail"
                         : lang === "pl"
-                          ? "Napisz na e-mail"
+                          ? "E-mail"
                           : "Email"}
                   </span>
                 </label>
