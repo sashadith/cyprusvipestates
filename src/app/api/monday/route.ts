@@ -90,7 +90,17 @@ export async function POST(request: Request) {
         to: process.env.EMAIL_TO || process.env.EMAIL_USER!,
         subject: "New Lead — Cyprus VIP Estates",
         text: "New lead from Cyprus VIP Estates. Check your board in Monday.",
-        html: "<p>New lead from <b>Cyprus VIP Estates</b>. Check your board in Monday.</p>",
+        html: `
+          <h2>New Lead — Cyprus VIP Estates</h2>
+          <p><b>Name:</b> ${name}</p>
+          <p><b>Phone:</b> ${phone}</p>
+          <p><b>Email:</b> ${email}</p>
+          <p><b>Preferred contact:</b> ${preferredContact}</p>
+          ${message ? `<p><b>Message:</b><br/>${message}</p>` : ""}
+          <hr/>
+          <p><b>Page:</b> ${currentPage}</p>
+          <p><b>Date (Cyprus):</b> ${currentDate} ${cyprusTime}</p>
+        `,
         replyTo: email || undefined,
       });
     } catch (mailErr) {
