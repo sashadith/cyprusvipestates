@@ -115,6 +115,7 @@ const FormFull: FC<ContactFormProps> = ({
       const response = await axios.post("/api/monday", {
         ...values,
         currentPage,
+        lang,
       });
       if (response.status === 200) {
         resetForm({});
