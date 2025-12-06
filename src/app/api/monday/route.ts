@@ -1,5 +1,5 @@
 // app/api/monday/route.ts
-import { getAutoReplyHtml } from "@/lib/emailTemplates";
+import { getAutoReplyEmail } from "@/lib/emailTemplates";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
@@ -153,7 +153,7 @@ export async function POST(request: Request) {
     try {
       await transporter.sendMail({
         from: process.env.EMAIL_USER!,
-        to: process.env.EMAIL_TO || process.env.EMAIL_USER!,
+        to: process.env.EMAIL_TO || "office@cyprusvipestates.com",
         subject: "New Lead — Cyprus VIP Estates",
         text: "New lead from Cyprus VIP Estates. Check your board in Monday.",
         html: `
@@ -165,36 +165,29 @@ export async function POST(request: Request) {
           ${message ? `<p><b>Message:</b><br/>${message}</p>` : ""}
           <hr/>
           <p><b>Page:</b> ${currentPage}</p>
-          <p><b>Date (Cyprus):</b> ${currentDate} ${cyprusTime}</p>
         `,
         replyTo: email || undefined,
       });
-      // === AUTO-REPLY TO CLIENT ===
-      await transporter.sendMail({
-        from: `"Cyprus VIP Estates" <${process.env.EMAIL_USER!}>`,
-        to: email, // ⬅️ ВАЖНО: письмо уходит ЛИДУ
-        subject:
-          lang === "ru"
-            ? "Мы получили вашу заявку"
-            : lang === "de"
-              ? "Wir haben Ihre Anfrage erhalten"
-              : lang === "pl"
-                ? "Otrzymaliśmy Twoje zgłoszenie"
-                : "We received your request",
-
-        html: getAutoReplyHtml(name),
-      });
     } catch (mailErr) {
-      console.error("Email send error:", mailErr);
-      // Лид есть в Monday; письмо не критично
-      return NextResponse.json(
-        { message: "Lead sent to Monday; email notification failed" },
-        { status: 200 }
-      );
+      console.error("Email send error (internal notification):", mailErr);
+    }
+
+    // 2) Автоответ клиенту с учётом языка
+    try {
+      const { subject, html } = getAutoReplyEmail({ name, lang });
+
+      await transporter.sendMail({
+        from: `"Cyprus VIP Estates" <office@cyprusvipestates.com>`,
+        to: email,
+        subject,
+        html,
+      });
+    } catch (autoReplyErr) {
+      console.error("Email send error (auto-reply to client):", autoReplyErr);
     }
 
     return NextResponse.json(
-      { message: "Lead sent to Monday; email notification delivered" },
+      { message: "Lead sent to Monday; emails processed" },
       { status: 200 }
     );
   } catch (err) {
