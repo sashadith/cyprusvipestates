@@ -1,4 +1,5 @@
 // app/api/monday/route.ts
+import { getAutoReplyHtml } from "@/lib/emailTemplates";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
@@ -181,40 +182,7 @@ export async function POST(request: Request) {
                 ? "Otrzymaliśmy Twoje zgłoszenie"
                 : "We received your request",
 
-        html: `
-    <h2>Thank you for your request!</h2>
-
-    ${
-      lang === "ru"
-        ? `<p>Здравствуйте, <b>${name}</b>!</p>
-          <p>Мы получили вашу заявку и уже работаем над ней.</p>
-          <p>Наш специалист свяжется с вами в ближайшее время.</p>`
-        : lang === "de"
-          ? `<p>Hallo <b>${name}</b>,</p>
-          <p>wir haben Ihre Anfrage erhalten und bearbeiten sie bereits.</p>
-          <p>Unser Berater wird Sie in Kürze kontaktieren.</p>`
-          : lang === "pl"
-            ? `<p>Witaj <b>${name}</b>,</p>
-          <p>otrzymaliśmy Twoje zapytanie i już je przetwarzamy.</p>
-          <p>Skontaktujemy się z Tobą w najbliższym czasie.</p>`
-            : `<p>Hello <b>${name}</b>,</p>
-          <p>we have received your request and are already processing it.</p>
-          <p>Our specialist will contact you shortly.</p>`
-    }
-
-    <hr />
-
-    <p><b>Your contact details:</b></p>
-    <p>📧 Email: ${email}</p>
-    <p>📞 Phone: ${phone}</p>
-
-    ${message ? `<p><b>Your message:</b><br/>${message}</p>` : ""}
-
-    <hr />
-
-    <p>Cyprus VIP Estates</p>
-    <p>Website: <a href="https://cyprusvipestates.com">cyprusvipestates.com</a></p>
-  `,
+        html: getAutoReplyHtml(name),
       });
     } catch (mailErr) {
       console.error("Email send error:", mailErr);
