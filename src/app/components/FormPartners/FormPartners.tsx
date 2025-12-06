@@ -19,6 +19,7 @@ export type FormData = {
   country: string;
   agreedToPolicy: boolean;
   company: string; // honeypot field
+  formStartTime: number;
 };
 
 export interface ContactFormProps {
@@ -46,6 +47,8 @@ const FormPartners: FC<ContactFormProps> = ({
 
   const dataForm = form.form;
   const router = useRouter();
+
+  const [formStartTime] = useState(() => Date.now());
 
   useEffect(() => {
     const autofilledFields = [
@@ -100,6 +103,7 @@ const FormPartners: FC<ContactFormProps> = ({
     country: "",
     agreedToPolicy: false,
     company: "", // honeypot field
+    formStartTime,
   };
 
   const validationSchema = Yup.object({
@@ -124,6 +128,7 @@ const FormPartners: FC<ContactFormProps> = ({
       const response = await axios.post("/api/email", {
         ...values,
         currentPage,
+        lang,
       });
       if (response.status === 200) {
         resetForm({});

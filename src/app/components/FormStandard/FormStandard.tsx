@@ -20,6 +20,7 @@ export type FormData = {
   email: string;
   agreedToPolicy: boolean;
   company: string; // honeypot field
+  formStartTime: number;
 };
 
 export interface ContactFormProps {
@@ -45,7 +46,9 @@ const FormStandard: FC<ContactFormProps> = ({
   });
 
   const dataForm = form.form;
-  const router = useRouter(); // Используйте useRouter из next/navigation
+  const router = useRouter();
+
+  const [formStartTime] = useState(() => Date.now());
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,6 +76,7 @@ const FormStandard: FC<ContactFormProps> = ({
     preferredContact: "",
     agreedToPolicy: false,
     company: "", // honeypot field
+    formStartTime,
   };
 
   const validationSchema = Yup.object({
@@ -108,6 +112,7 @@ const FormStandard: FC<ContactFormProps> = ({
       const response = await axios.post("/api/monday", {
         ...values,
         currentPage,
+        lang,
       });
       if (response.status === 200) {
         resetForm({});
