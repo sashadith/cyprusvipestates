@@ -39,6 +39,7 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           followUs: "Мы в соцсетях:",
           reason:
             "Вы получили это письмо, потому что оставили заявку на сайте Cyprus VIP Estates.",
+          link: "https://cyprusvipestates.com/ru/projects",
         };
       case "pl":
         return {
@@ -58,6 +59,7 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           followUs: "Znajdź nas w mediach społecznościowych:",
           reason:
             "Otrzymujesz tę wiadomość, ponieważ wysłałeś formularz na stronie Cyprus VIP Estates.",
+          link: "https://cyprusvipestates.com/pl/projects",
         };
       case "de":
         return {
@@ -77,6 +79,7 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           followUs: "Folgen Sie uns:",
           reason:
             "Sie erhalten diese E-Mail, weil Sie eine Anfrage auf der Website von Cyprus VIP Estates gesendet haben.",
+          link: "https://cyprusvipestates.com/projects",
         };
       default:
         return {
@@ -96,6 +99,7 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           followUs: "Follow us:",
           reason:
             "You received this email because you submitted an enquiry on the Cyprus VIP Estates website.",
+          link: "https://cyprusvipestates.com/en/projects",
         };
     }
   })();
@@ -118,9 +122,9 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           <tr>
             <td align="center" style="padding:24px 24px 8px 24px;">
               <img src="https://cdn.sanity.io/images/88gk88s2/production/c4911e6ba6654becbeda47f9485754fbcfeb407e-500x634.png" 
-                   alt="Cyprus VIP Estates" 
-                   width="80"
-                   style="display:block; height:auto;" />
+                  alt="Cyprus VIP Estates" 
+                  width="80"
+                  style="display:block; height:auto;" />
             </td>
           </tr>
 
@@ -160,18 +164,18 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           <!-- CTA BUTTON -->
           <tr>
             <td align="center" style="padding:8px 32px 24px 32px;">
-              <a href="https://cyprusvipestates.com/projects"
-                 target="_blank"
-                 style="
-                   display:inline-block;
-                   padding:12px 28px;
-                   background-color:#bd8948;
-                   color:#ffffff;
-                   text-decoration:none;
-                   font-size:14px;
-                   border-radius:4px;
-                   font-weight:400;
-                 ">
+              <a href="${t.link}"
+                target="_blank"
+                style="
+                  display:inline-block;
+                  padding:12px 28px;
+                  background-color:#bd8948;
+                  color:#ffffff;
+                  text-decoration:none;
+                  font-size:14px;
+                  border-radius:4px;
+                  font-weight:400;
+                ">
                 ${t.ctaText}
               </a>
             </td>
@@ -191,17 +195,63 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           </tr>
 
           <!-- SOCIAL LINKS -->
+          <!-- SOCIAL ICONS -->
           <tr>
-            <td align="center" style="padding:0 32px 24px 32px; color:#777777; font-size:12px; line-height:1.6;">
-              <p style="margin:0 0 6px 0;">${t.followUs}</p>
-              <p style="margin:0;">
-                <a href="https://www.instagram.com/cyprusvipestates/" style="color:#bd8948; text-decoration:none;">Instagram</a> ·
-                <a href="https://www.youtube.com/@cyprusvipestates" style="color:#bd8948; text-decoration:none;">YouTube</a> ·
-                <a href="https://www.facebook.com/cyprusvipestates" style="color:#bd8948; text-decoration:none;">Facebook</a> ·
-                <a href="https://www.tiktok.com/@cyprusvipestates" style="color:#bd8948; text-decoration:none;">TikTok</a>
+            <td align="center" style="padding:0 32px 24px 32px;">
+              <p style="margin:0 0 10px 0; color:#777777; font-size:12px;">
+                ${t.followUs}
               </p>
+
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:0 6px;">
+                    <a href="https://www.instagram.com/cyprusvipestates/" target="_blank">
+                      <img
+                        src="https://cdn.sanity.io/images/88gk88s2/production/30e5d8455eba417a6f316c1ca4185ac0518b0cbe-114x114.png"
+                        alt="Instagram"
+                        width="28"
+                        style="display:block; border:0;"
+                      />
+                    </a>
+                  </td>
+
+                  <td style="padding:0 6px;">
+                    <a href="https://www.youtube.com/@cyprusvipestates" target="_blank">
+                      <img
+                        src="https://cdn.sanity.io/images/88gk88s2/production/cbbb7f73e8035e57234878fe3e829b7fd000ea12-115x115.png"
+                        alt="YouTube"
+                        width="28"
+                        style="display:block; border:0;"
+                      />
+                    </a>
+                  </td>
+
+                  <td style="padding:0 6px;">
+                    <a href="https://www.facebook.com/cyprusvipestates" target="_blank">
+                      <img
+                        src="https://cdn.sanity.io/images/88gk88s2/production/9977be1059061f3cf9f51680049d8e69217d88c6-116x115.png"
+                        alt="Facebook"
+                        width="28"
+                        style="display:block; border:0;"
+                      />
+                    </a>
+                  </td>
+
+                  <td style="padding:0 6px;">
+                    <a href="https://www.tiktok.com/@cyprusvipestates" target="_blank">
+                      <img
+                        src="https://cdn.sanity.io/images/88gk88s2/production/9c5586f5ca7f08011d0c929dff77a396adcae8fe-64x64.png"
+                        alt="TikTok"
+                        width="28"
+                        style="display:block; border:0;"
+                      />
+                    </a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
+          <!-- END SOCIAL ICONS -->
 
           <!-- FOOTER SMALL -->
           <tr>
