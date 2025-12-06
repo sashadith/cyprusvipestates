@@ -182,17 +182,17 @@ export function getAutoReplyEmail({ name, lang = "en" }: AutoReplyOptions) {
           </tr>
 
           <!-- CONTACT BLOCK -->
-          // <tr>
-          //   <td align="left" style="padding:0 32px 16px 32px; color:#333333; font-size:13px; line-height:1.6; border-top:1px solid #eeeeee;">
-          //     <p style="margin:16px 0 4px 0;"><strong>Cyprus VIP Estates</strong></p>
-          //     <p style="margin:0;">
-          //       Phone / WhatsApp: <a href="tel:+35799278285" style="color:#bd8948; text-decoration:none;">+357 99 278 285</a><br />
-          //       WhatsApp: <a href="https://wa.me/35799278285" style="color:#bd8948; text-decoration:none;">Chat on WhatsApp</a><br />
-          //       Email: <a href="mailto:office@cyprusvipestates.com" style="color:#bd8948; text-decoration:none;">office@cyprusvipestates.com</a><br />
-          //       Website: <a href="https://cyprusvipestates.com" style="color:#bd8948; text-decoration:none;">cyprusvipestates.com</a>
-          //     </p>
-          //   </td>
-          // </tr>
+          <!-- <tr>
+            <td align="left" style="padding:0 32px 16px 32px; color:#333333; font-size:13px; line-height:1.6; border-top:1px solid #eeeeee;">
+              <p style="margin:16px 0 4px 0;"><strong>Cyprus VIP Estates</strong></p>
+              <p style="margin:0;">
+                Phone / WhatsApp: <a href="tel:+35799278285" style="color:#bd8948; text-decoration:none;">+357 99 278 285</a><br />
+                WhatsApp: <a href="https://wa.me/35799278285" style="color:#bd8948; text-decoration:none;">Chat on WhatsApp</a><br />
+                Email: <a href="mailto:office@cyprusvipestates.com" style="color:#bd8948; text-decoration:none;">office@cyprusvipestates.com</a><br />
+                Website: <a href="https://cyprusvipestates.com" style="color:#bd8948; text-decoration:none;">cyprusvipestates.com</a>
+              </p>
+            </td>
+          </tr> -->
 
           <!-- SOCIAL LINKS -->
           <!-- SOCIAL ICONS -->
