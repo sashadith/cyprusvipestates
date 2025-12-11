@@ -19,21 +19,206 @@ const LOCAL_IMG_DIR = path.resolve(__dirname, 'images');
 const LANGS = ['de', 'pl', 'en', 'ru'];
 const DEFAULT_LANG = 'de';
 
+const FAQ_DEFAULT_TITLES = {
+  en: 'Frequently asked questions',
+  de: 'Häufig gestellte Fragen',
+  pl: 'Najczęściej zadawane pytania',
+  ru: 'Часто задаваемые вопросы',
+};
+
 // ---------- utils ----------
 const nonEmpty = (v) => v !== undefined && v !== null && String(v).trim() !== '';
 
-function toPT(text = '') {
-  return String(text)
-    .split(/\r?\n/)
-    .map(s => s.trim())
-    .filter(Boolean)
-    .map((t, i) => ({
+// mini-Markdown → Portable Text (H1–H3, списки, жирный/курсив, ссылки)
+function mdToPT(text = '') {
+  const lines = String(text).replace(/\r\n/g, '\n').split('\n');
+  const blocks = [];
+
+  const parseInline = (str, i) => {
+    const children = [];
+    const markDefs = [];
+
+    // 1) ссылки [Anchor](https://example.com)
+    const linkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+    let last = 0;
+    let m;
+
+    const pushText = (t) => {
+      if (!t) return;
+      children.push({
+        _key: `span-${i}-${children.length}-${Date.now()}`,
+        _type: 'span',
+        text: t,
+        marks: [],
+      });
+    };
+
+    while ((m = linkRegex.exec(str)) !== null) {
+      const before = str.slice(last, m.index);
+      if (before) pushText(before);
+
+      const key = `link-${i}-${markDefs.length}-${Date.now()}`;
+      markDefs.push({ _key: key, _type: 'link', href: m[2] });
+      children.push({
+        _key: `span-${i}-${children.length}-${Date.now()}`,
+        _type: 'span',
+        text: m[1],
+        marks: [key],
+      });
+
+      last = m.index + m[0].length;
+    }
+    const tail = str.slice(last);
+    if (tail) pushText(tail);
+
+    // 2) жирный / курсив
+    const applyMarks = (node, mark) => {
+      const isBold = mark === 'strong';
+      const re = isBold ? /\*\*([^*]+)\*\*/g : /\*([^*]+)\*/g;
+      const src = node.text;
+
+      let lastIdx = 0;
+      let mm;
+      const out = [];
+
+      while ((mm = re.exec(src)) !== null) {
+        if (mm.index > lastIdx) {
+          out.push({
+            ...node,
+            _key: node._key + `-t${out.length}`,
+            text: src.slice(lastIdx, mm.index),
+            marks: node.marks || [],
+          });
+        }
+        out.push({
+          ...node,
+          _key: node._key + `-m${out.length}`,
+          text: mm[1],
+          marks: [...(node.marks || []), mark],
+        });
+        lastIdx = mm.index + mm[0].length;
+      }
+      if (lastIdx < src.length) {
+        out.push({
+          ...node,
+          _key: node._key + `-t${out.length}`,
+          text: src.slice(lastIdx),
+          marks: node.marks || [],
+        });
+      }
+      return out;
+    };
+
+    let flat = [];
+    children.forEach((n) => {
+      const withBold = applyMarks(n, 'strong');
+      withBold.forEach((b) => {
+        const withItalic = applyMarks(b, 'em');
+        flat.push(...withItalic);
+      });
+    });
+
+    if (flat.length === 0) {
+      flat = [
+        {
+          _key: `span-${i}-0-${Date.now()}`,
+          _type: 'span',
+          text: '',
+          marks: [],
+        },
+      ];
+    }
+
+    return { children: flat, markDefs };
+  };
+
+  lines.forEach((raw, i) => {
+    const line = raw.replace(/\t/g, '    ');
+    if (!line.trim()) return;
+
+    let m;
+
+    // ### H3
+    if ((m = line.match(/^###\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'h3',
+        markDefs,
+        children,
+      });
+      return;
+    }
+
+    // ## H2
+    if ((m = line.match(/^##\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'h2',
+        markDefs,
+        children,
+      });
+      return;
+    }
+
+    // # H1
+    if ((m = line.match(/^#\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'h1',
+        markDefs,
+        children,
+      });
+      return;
+    }
+
+    // маркированный список - / *
+    if ((m = line.match(/^(?:-|\*)\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'normal',
+        listItem: 'bullet',
+        level: 1,
+        markDefs,
+        children,
+      });
+      return;
+    }
+
+    // нумерованный список 1. 2. ...
+    if ((m = line.match(/^\d+\.\s+(.*)$/))) {
+      const { children, markDefs } = parseInline(m[1], i);
+      blocks.push({
+        _key: `pt-${i}-${Date.now()}`,
+        _type: 'block',
+        style: 'normal',
+        listItem: 'number',
+        level: 1,
+        markDefs,
+        children,
+      });
+      return;
+    }
+
+    // обычный параграф
+    const { children, markDefs } = parseInline(line, i);
+    blocks.push({
       _key: `pt-${i}-${Date.now()}`,
       _type: 'block',
       style: 'normal',
-      markDefs: [],
-      children: [{ _key: `span-${i}-${Date.now()}`, _type: 'span', text: t, marks: [] }],
-    }));
+      markDefs,
+      children,
+    });
+  });
+
+  return blocks;
 }
 
 function truncate(str = '', n = 200) {
@@ -58,24 +243,50 @@ async function preloadImages() {
   return map;
 }
 
-async function uploadImage(src, localMap) {
+async function uploadImage(src, localMap, { strict = true } = {}) {
   if (!nonEmpty(src)) return null;
-  const b = path.basename(String(src).trim());
+
+  const trimmed = String(src).trim();
+  const b = path.basename(trimmed);
+
+  // 1) если уже предзагружено — сразу отдаем asset id
   if (localMap[b]) return localMap[b];
 
-  if (/^https?:\/\//.test(src)) {
-    const res = await fetch(src);
-    if (!res.ok) throw new Error(res.statusText);
+  // 2) URL-картинка
+  if (/^https?:\/\//.test(trimmed)) {
+    const res = await fetch(trimmed);
+    if (!res.ok) {
+      if (!strict) return null;
+      throw new Error(res.statusText);
+    }
     const buf = Buffer.from(await res.arrayBuffer());
-    const fn = path.basename(new URL(src).pathname);
+    const fn = path.basename(new URL(trimmed).pathname);
     const { _id } = await client.assets.upload('image', buf, { filename: fn });
     return _id;
   }
-  const abs = path.resolve(__dirname, src);
-  if (!fs.existsSync(abs)) throw new Error(`Not found: ${abs}`);
-  const { _id } = await client.assets.upload('image', fs.createReadStream(abs), { filename: path.basename(abs) });
+
+  // 3) Локальный путь: сначала пробуем как есть...
+  let abs = path.resolve(__dirname, trimmed);
+
+  // ...потом fallback в каталог LOCAL_IMG_DIR
+  if (!fs.existsSync(abs)) {
+    abs = path.join(LOCAL_IMG_DIR, b);
+  }
+
+  // если файла нет — мягкий режим или ошибка
+  if (!fs.existsSync(abs)) {
+    if (!strict) return null;
+    throw new Error(`Not found: ${abs}`);
+  }
+
+  const { _id } = await client.assets.upload(
+    'image',
+    fs.createReadStream(abs),
+    { filename: path.basename(abs) }
+  );
   return _id;
 }
+
 
 /**
  * ЯЗЫКОЗАВИСИМАЯ карта проектов:
@@ -154,10 +365,15 @@ async function run() {
     const tx = client.transaction();
 
     // Preview Image (общий ассет)
+    // Preview Image (общий ассет)
     let previewRef = null;
     if (nonEmpty(row.previewImage_path)) {
       try {
-        previewRef = await uploadImage(row.previewImage_path, localMap);
+        // strict: false — не валим процесс, если картинки нет
+        previewRef = await uploadImage(row.previewImage_path, localMap, { strict: false });
+        if (!previewRef) {
+          console.warn(`⚠️ preview image not found: ${row.previewImage_path}`);
+        }
       } catch (e) {
         console.warn(`⚠️ preview upload failed: ${e.message}`);
       }
@@ -181,10 +397,15 @@ async function run() {
       const introSubtitle = row[`landingIntro_subtitle_${lang}`] || '';
       const introBtn = row[`landingIntro_button_${lang}`] || '';
 
-      // Preview per-language alt
-      const previewAlt = row[`previewImage_alt_${lang}`] || '';
+      // alt как в проектах: metaTitle → title → slug
+      const computedAlt = (seo_metaTitle || title || slug || '').trim();
+
       const previewImage = previewRef
-        ? { _type: 'image', asset: { _type: 'reference', _ref: previewRef }, ...(nonEmpty(previewAlt) && { alt: previewAlt }) }
+        ? {
+          _type: 'image',
+          asset: { _type: 'reference', _ref: previewRef },
+          ...(nonEmpty(computedAlt) && { alt: computedAlt }),
+        }
         : null;
 
       // landingIntroBlock (картинка = previewImage)
@@ -207,7 +428,7 @@ async function run() {
             image: {
               _type: 'image',
               asset: { _type: 'reference', _ref: previewRef },
-              ...(nonEmpty(previewAlt) && { alt: previewAlt }),
+              ...(nonEmpty(computedAlt) && { alt: computedAlt }),
             },
           }),
         }
@@ -282,12 +503,13 @@ async function run() {
       // landingTextFirst
       const tfText = row[`textFirst_${lang}`] || '';
       const textFirstBlock = nonEmpty(tfText)
-        ? { _key: `b-tf-${lang}-${Date.now()}`, _type: 'landingTextFirst', content: toPT(tfText) }
+        ? { _key: `b-tf-${lang}-${Date.now()}`, _type: 'landingTextFirst', content: mdToPT(tfText) }
         : null;
 
       // landingFaqBlock
-      const faqTitle = row[`faq_title_${lang}`] || '';
+      let faqTitle = row[`faq_title_${lang}`] || '';      // <- теперь let
       const faqRaw = row[`faq_${lang}`] || '';
+
       const faqItems = String(faqRaw)
         .split('$')
         .map(s => s.trim())
@@ -297,11 +519,16 @@ async function run() {
           const item = {
             _key: `faq-${lang}-${i}-${Date.now()}`,
             ...(nonEmpty(q) && { question: q }),
-            ...(nonEmpty(a) && { answer: toPT(a) }),
+            ...(nonEmpty(a) && { answer: mdToPT(a) }),
           };
           return item;
         })
         .filter(obj => obj.question || obj.answer);
+
+      // если в CSV заголовок пустой, но есть хотя бы один FAQ — подставляем дефолтный
+      if (!nonEmpty(faqTitle) && faqItems.length) {
+        faqTitle = FAQ_DEFAULT_TITLES[lang] || 'FAQ';
+      }
 
       const faqBlock =
         nonEmpty(faqTitle) || faqItems.length
@@ -316,7 +543,7 @@ async function run() {
       // landingTextSecond
       const tsText = row[`textSecond_${lang}`] || '';
       const textSecondBlock = nonEmpty(tsText)
-        ? { _key: `b-ts-${lang}-${Date.now()}`, _type: 'landingTextSecond', content: toPT(tsText) }
+        ? { _key: `b-ts-${lang}-${Date.now()}`, _type: 'landingTextSecond', content: mdToPT(tsText) }
         : null;
 
       // contentBlocks

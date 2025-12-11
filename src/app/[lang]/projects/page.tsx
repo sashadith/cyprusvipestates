@@ -317,6 +317,7 @@ export default async function ProjectsPage({
               {(() => {
                 const makeHref = (page: number) => {
                   const paramsObj: Record<string, string> = {};
+
                   if (page > 1) paramsObj.page = String(page);
                   if (city) paramsObj.city = city;
                   if (priceFrom != null)
@@ -325,6 +326,13 @@ export default async function ProjectsPage({
                   if (propertyType) paramsObj.propertyType = propertyType;
                   if (sort) paramsObj.sort = sort;
                   if (q) paramsObj.q = q;
+
+                  // 👇 добавляем bbox ТОЛЬКО если он реально установлен
+                  if (north != null) paramsObj.north = String(north);
+                  if (south != null) paramsObj.south = String(south);
+                  if (east != null) paramsObj.east = String(east);
+                  if (west != null) paramsObj.west = String(west);
+
                   return `?${new URLSearchParams(paramsObj).toString()}`;
                 };
 
