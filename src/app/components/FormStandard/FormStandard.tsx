@@ -19,7 +19,7 @@ export type FormData = {
   preferredContact: string;
   email: string;
   agreedToPolicy: boolean;
-  fax: string; // honeypot field
+  company: string; // honeypot field
   formStartTime: number;
 };
 
@@ -48,24 +48,17 @@ const FormStandard: FC<ContactFormProps> = ({
   const dataForm = form.form;
   const router = useRouter();
 
-  // const [formStartTime] = useState(() => Date.now());
-  const [formStartTime, setFormStartTime] = useState(0);
+  const [formStartTime] = useState(() => Date.now());
 
   useEffect(() => {
     const interval = setInterval(() => {
       ["name", "phone", "email"].forEach((field) => {
-        const input = document.querySelector(
-          `[name="${field}"]`
-        ) as HTMLInputElement | null;
-
-        const hasValue = Boolean(input?.value?.trim());
-        setFilled((f) =>
-          f[field as keyof typeof f] === hasValue
-            ? f
-            : { ...f, [field]: hasValue }
-        );
+        const input = document.getElementById(field) as HTMLInputElement;
+        if (input && input.value) {
+          setFilled((f) => ({ ...f, [field]: true }));
+        }
       });
-    }, 200);
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
@@ -82,7 +75,7 @@ const FormStandard: FC<ContactFormProps> = ({
     email: "",
     preferredContact: "",
     agreedToPolicy: false,
-    fax: "", // honeypot field
+    company: "", // honeypot field
     formStartTime,
   };
 
@@ -115,17 +108,9 @@ const FormStandard: FC<ContactFormProps> = ({
   ) => {
     setSubmitting(true);
     try {
-      const currentPage = window.location.href;
-      const fst = formStartTime || Date.now();
-      const phoneFinal =
-        values.phone ||
-        (document.querySelector('[name="phone"]') as HTMLInputElement | null)
-          ?.value ||
-        "";
+      const currentPage = window.location.href; // Получаем текущий URL
       const response = await axios.post("/api/monday", {
         ...values,
-        phone: phoneFinal,
-        formStartTime: fst,
         currentPage,
         lang,
       });
@@ -189,15 +174,8 @@ const FormStandard: FC<ContactFormProps> = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, setFieldValue, values }) => (
-          <Form
-            onFocusCapture={() =>
-              !formStartTime && setFormStartTime(Date.now())
-            }
-            onChangeCapture={() =>
-              !formStartTime && setFormStartTime(Date.now())
-            }
-          >
+        {({ isSubmitting, setFieldValue }) => (
+          <Form>
             {/* Поле для имени */}
             <div className={styles.inputWrapper}>
               <svg
@@ -245,12 +223,8 @@ const FormStandard: FC<ContactFormProps> = ({
                 id={`${uid}-phone`}
                 name="phone"
                 className={`${styles.inputField} ${styles.phoneInput}`}
-                // onBlur={handleBlur}
-                value={values.phone}
-                onChange={(value) => {
-                  setFieldValue("phone", value);
-                  setFilled((f) => ({ ...f, phone: Boolean(value) }));
-                }}
+                onBlur={handleBlur}
+                onChange={(value) => setFieldValue("phone", value)}
               />
               <ErrorMessage
                 name="phone"
@@ -373,11 +347,10 @@ const FormStandard: FC<ContactFormProps> = ({
 
             <Field
               type="text"
-              name="fax"
+              name="company"
               style={{ display: "none" }}
               tabIndex={-1}
-              autoComplete="new-password"
-              aria-hidden="true"
+              autoComplete="off"
             />
 
             <div className={styles.customCheckbox}>
