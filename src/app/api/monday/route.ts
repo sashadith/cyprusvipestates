@@ -7,6 +7,26 @@ const MONDAY_API_URL = "https://api.monday.com/v2";
 const MONDAY_API_KEY = process.env.MONDAY_API_KEY!;
 const BOARD_ID = 1761987486; // вернули рабочий id доски
 
+const ALLOWED_HOSTS = new Set([
+  "cyprusvipestates.com",
+  "www.cyprusvipestates.com",
+]);
+
+function safeUrl(raw: string) {
+  try {
+    const u = new URL(raw);
+    return u;
+  } catch {
+    return null;
+  }
+}
+
+function isAllowedHostFromUrl(raw: string) {
+  const u = safeUrl(raw);
+  if (!u) return false;
+  return ALLOWED_HOSTS.has(u.hostname);
+}
+
 // простой in-memory rate limit (под Vercel тоже работает на уровень инстанса)
 const rateLimitMap = new Map<string, number[]>();
 
@@ -14,6 +34,22 @@ function getClientIp(request: Request) {
   const xff = request.headers.get("x-forwarded-for");
   if (xff) return xff.split(",")[0].trim(); // берём первый IP
   return request.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
+const rateLimitEmailMap = new Map<string, number[]>();
+
+function isRateLimitedKey(
+  map: Map<string, number[]>,
+  key: string,
+  limit = 3,
+  windowMs = 60_000
+) {
+  const now = Date.now();
+  const timestamps = map.get(key) || [];
+  const filtered = timestamps.filter((t) => now - t < windowMs);
+  filtered.push(now);
+  map.set(key, filtered);
+  return filtered.length > limit;
 }
 
 function escapeHtml(input: unknown) {
@@ -57,9 +93,30 @@ function blocked(reason: string, extra?: Record<string, any>) {
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  const userAgentHeader = request.headers.get("user-agent") || "";
-  const userAgent = userAgentHeader || "ua";
-  const ipKey = ip === "unknown" ? `unknown:${userAgent}` : ip;
+  // const userAgentHeader = request.headers.get("user-agent") || "";
+  // const userAgent = userAgentHeader || "ua";
+  const ua = request.headers.get("user-agent") || "";
+  const ipKey = ip === "unknown" ? `unknown:${ua || "ua"}` : ip;
+  if (!ua) return blocked("ua");
+
+  // Content-Type должен быть json (минимальная фильтрация мусора)
+  const ct = request.headers.get("content-type") || "";
+  if (!ct.includes("application/json")) {
+    return blocked("content_type");
+  }
+
+  const origin = request.headers.get("origin") || "";
+  const referer = request.headers.get("referer") || "";
+
+  // referer обязателен и должен быть твоим доменом
+  if (!referer || !isAllowedHostFromUrl(referer)) {
+    return blocked("bad_referer");
+  }
+
+  // origin (если есть) тоже должен быть твоим доменом
+  if (origin && !isAllowedHostFromUrl(origin)) {
+    return blocked("bad_origin");
+  }
 
   if (isRateLimited(ipKey)) {
     return blocked("rate_limit");
@@ -75,19 +132,30 @@ export async function POST(request: Request) {
       preferredContact,
       currentPage,
       fax,
+      company,
       formStartTime,
       lang,
     } = body;
+
+    const page = String(currentPage ?? "").trim();
+    if (!page) return blocked("missing_page");
+
+    const pageUrl = safeUrl(page);
+    if (!pageUrl) return blocked("bad_page_url");
+    if (!ALLOWED_HOSTS.has(pageUrl.hostname)) return blocked("page_host");
+
+    // referer.host должен совпадать с currentPage.host
+    const refUrl = safeUrl(referer);
+    if (!refUrl) return blocked("bad_referer_url");
+    if (refUrl.hostname !== pageUrl.hostname) return blocked("page_mismatch");
 
     // ===============================
     // ✅ АНТИСПАМ ЗАЩИТА
     // ===============================
 
     // 1. Honeypot — если заполнено скрытое поле
-    if (String(fax ?? "").trim().length > 0) {
-      console.log("Blocked by honeypot", { fax });
-      return blocked("honeypot");
-    }
+    const honeypot = String(fax ?? company ?? "").trim();
+    if (honeypot.length > 0) return blocked("honeypot");
 
     // 2. Слишком быстрая отправка (< 1,5 секунд)
     const startedRaw = Number(formStartTime);
@@ -104,14 +172,6 @@ export async function POST(request: Request) {
       return blocked("timing", { startedRaw, elapsed });
     }
 
-    // 3. Проверка заголовков
-    const referer = request.headers.get("referer") || "";
-
-    if (!userAgentHeader || !referer) {
-      console.log("Blocked by headers", { userAgentHeader, referer });
-      return blocked("headers");
-    }
-
     // ===============================
     // ✅ БАЗОВАЯ ВАЛИДАЦИЯ
     // ===============================
@@ -126,6 +186,11 @@ export async function POST(request: Request) {
       .trim()
       .toLowerCase();
 
+    // preferredContact только из списка
+    if (!["phone", "whatsapp", "email"].includes(preferredNorm)) {
+      return blocked("preferredContact");
+    }
+
     const messageNorm = String(message ?? "").trim();
     const messageHtml = escapeHtml(messageNorm).replace(/\n/g, "<br/>");
 
@@ -133,14 +198,14 @@ export async function POST(request: Request) {
       return blocked("missing_fields");
     }
 
-    // preferredContact только из списка
-    if (!["phone", "whatsapp", "email"].includes(preferredNorm)) {
-      return blocked("preferredContact");
-    }
-
     // email (простая, но рабочая)
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNorm)) {
       return blocked("email");
+    }
+
+    // rate limit по email — только если email валидный
+    if (isRateLimitedKey(rateLimitEmailMap, emailNorm, 3, 60_000)) {
+      return blocked("rate_limit_email");
     }
 
     // имя: длина + защита от "токенов"
