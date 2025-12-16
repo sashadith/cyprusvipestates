@@ -10,6 +10,12 @@ const BOARD_ID = 1761987486; // вернули рабочий id доски
 // простой in-memory rate limit (под Vercel тоже работает на уровень инстанса)
 const rateLimitMap = new Map<string, number[]>();
 
+function getClientIp(request: Request) {
+  const xff = request.headers.get("x-forwarded-for");
+  if (xff) return xff.split(",")[0].trim(); // берём первый IP
+  return request.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
 function isRateLimited(ip: string, limit = 5, windowMs = 60_000) {
   const now = Date.now();
   const timestamps = rateLimitMap.get(ip) || [];
@@ -33,12 +39,11 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(request: Request) {
-  const ip =
-    request.headers.get("x-forwarded-for") ||
-    request.headers.get("x-real-ip") ||
-    "unknown";
+  const ip = getClientIp(request);
+  const userAgent = request.headers.get("user-agent") || "ua";
+  const ipKey = ip === "unknown" ? `unknown:${userAgent}` : ip;
 
-  if (isRateLimited(ip)) {
+  if (isRateLimited(ipKey)) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 
@@ -74,7 +79,6 @@ export async function POST(request: Request) {
     }
 
     // 3. Проверка заголовков
-    const userAgent = request.headers.get("user-agent") || "";
     const referer = request.headers.get("referer") || "";
 
     if (!userAgent || !referer) {
