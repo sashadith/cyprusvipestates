@@ -48,17 +48,24 @@ const FormStandard: FC<ContactFormProps> = ({
   const dataForm = form.form;
   const router = useRouter();
 
-  const [formStartTime] = useState(() => Date.now());
+  // const [formStartTime] = useState(() => Date.now());
+  const [formStartTime, setFormStartTime] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       ["name", "phone", "email"].forEach((field) => {
-        const input = document.getElementById(field) as HTMLInputElement;
-        if (input && input.value) {
-          setFilled((f) => ({ ...f, [field]: true }));
-        }
+        const input = document.querySelector(
+          `[name="${field}"]`
+        ) as HTMLInputElement | null;
+
+        const hasValue = Boolean(input?.value?.trim());
+        setFilled((f) =>
+          f[field as keyof typeof f] === hasValue
+            ? f
+            : { ...f, [field]: hasValue }
+        );
       });
-    }, 100);
+    }, 200);
 
     return () => clearInterval(interval);
   }, []);
@@ -108,9 +115,11 @@ const FormStandard: FC<ContactFormProps> = ({
   ) => {
     setSubmitting(true);
     try {
-      const currentPage = window.location.href; // Получаем текущий URL
+      const currentPage = window.location.href;
+      const fst = formStartTime || Date.now(); // Получаем текущий URL
       const response = await axios.post("/api/monday", {
         ...values,
+        formStartTime: fst,
         currentPage,
         lang,
       });
@@ -175,7 +184,14 @@ const FormStandard: FC<ContactFormProps> = ({
         onSubmit={onSubmit}
       >
         {({ isSubmitting, setFieldValue }) => (
-          <Form>
+          <Form
+            onFocusCapture={() =>
+              !formStartTime && setFormStartTime(Date.now())
+            }
+            onChangeCapture={() =>
+              !formStartTime && setFormStartTime(Date.now())
+            }
+          >
             {/* Поле для имени */}
             <div className={styles.inputWrapper}>
               <svg
@@ -223,8 +239,11 @@ const FormStandard: FC<ContactFormProps> = ({
                 id={`${uid}-phone`}
                 name="phone"
                 className={`${styles.inputField} ${styles.phoneInput}`}
-                onBlur={handleBlur}
-                onChange={(value) => setFieldValue("phone", value)}
+                // onBlur={handleBlur}
+                onChange={(value) => {
+                  setFieldValue("phone", value);
+                  setFilled((f) => ({ ...f, phone: Boolean(value) }));
+                }}
               />
               <ErrorMessage
                 name="phone"

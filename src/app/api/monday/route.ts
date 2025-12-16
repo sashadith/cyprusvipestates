@@ -80,16 +80,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true }, { status: 200 }); // тихо игнорим
     }
 
-    // 2. Слишком быстрая отправка (< 3 секунд)
-    const started = Number(formStartTime);
-    const elapsed = Date.now() - started;
+    // 2. Слишком быстрая отправка (< 1,5 секунд)
+    const startedRaw = Number(formStartTime);
+    const elapsed = Date.now() - startedRaw;
 
     if (
-      !Number.isFinite(started) ||
-      elapsed < 3000 ||
+      !Number.isFinite(startedRaw) ||
+      startedRaw <= 0 ||
+      elapsed < 1500 ||
       elapsed > 2 * 60 * 60 * 1000
     ) {
-      return NextResponse.json({ ok: true }, { status: 200 }); // тихо игнорим
+      return NextResponse.json({ ok: true }, { status: 200 });
     }
 
     // 3. Проверка заголовков
