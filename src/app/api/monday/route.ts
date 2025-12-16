@@ -16,6 +16,15 @@ function getClientIp(request: Request) {
   return request.headers.get("x-real-ip")?.trim() || "unknown";
 }
 
+function escapeHtml(input: unknown) {
+  return String(input ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function isRateLimited(ip: string, limit = 5, windowMs = 60_000) {
   const now = Date.now();
   const timestamps = rateLimitMap.get(ip) || [];
@@ -40,7 +49,8 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
-  const userAgent = request.headers.get("user-agent") || "ua";
+  const userAgentHeader = request.headers.get("user-agent") || "";
+  const userAgent = userAgentHeader || "ua";
   const ipKey = ip === "unknown" ? `unknown:${userAgent}` : ip;
 
   if (isRateLimited(ipKey)) {
@@ -66,26 +76,27 @@ export async function POST(request: Request) {
     // ===============================
 
     // 1. Honeypot — если заполнено скрытое поле
-    if (company) {
-      return NextResponse.json({ error: "Bot detected" }, { status: 403 });
+    if (String(company ?? "").trim().length > 0) {
+      return NextResponse.json({ ok: true }, { status: 200 }); // тихо игнорим
     }
 
     // 2. Слишком быстрая отправка (< 3 секунд)
-    if (formStartTime && Date.now() - formStartTime < 3000) {
-      return NextResponse.json(
-        { error: "Too fast submission" },
-        { status: 403 }
-      );
+    const started = Number(formStartTime);
+    const elapsed = Date.now() - started;
+
+    if (
+      !Number.isFinite(started) ||
+      elapsed < 3000 ||
+      elapsed > 2 * 60 * 60 * 1000
+    ) {
+      return NextResponse.json({ ok: true }, { status: 200 }); // тихо игнорим
     }
 
     // 3. Проверка заголовков
     const referer = request.headers.get("referer") || "";
 
-    if (!userAgent || !referer) {
-      return NextResponse.json(
-        { error: "Suspicious request" },
-        { status: 403 }
-      );
+    if (!userAgentHeader || !referer) {
+      return NextResponse.json({ ok: true }, { status: 200 });
     }
 
     // ===============================
@@ -93,8 +104,47 @@ export async function POST(request: Request) {
     // ===============================
 
     // базовая валидация
-    if (!name || !phone || !email || !preferredContact) {
+    const nameNorm = String(name ?? "").trim();
+    const emailNorm = String(email ?? "")
+      .trim()
+      .toLowerCase();
+    const phoneNorm = String(phone ?? "").trim();
+    const preferredNorm = String(preferredContact ?? "")
+      .trim()
+      .toLowerCase();
+
+    const messageNorm = String(message ?? "").trim();
+    const messageHtml = escapeHtml(messageNorm).replace(/\n/g, "<br/>");
+
+    if (!nameNorm || !phoneNorm || !emailNorm || !preferredNorm) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    }
+
+    // preferredContact только из списка
+    if (!["phone", "whatsapp", "email"].includes(preferredNorm)) {
+      return NextResponse.json({ ok: true }, { status: 200 });
+    }
+
+    // email (простая, но рабочая)
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNorm)) {
+      return NextResponse.json({ ok: true }, { status: 200 });
+    }
+
+    // имя: длина + защита от "токенов"
+    if (nameNorm.length < 2 || nameNorm.length > 60) {
+      return NextResponse.json({ ok: true }, { status: 200 });
+    }
+    const compactName = nameNorm.replace(/\s+/g, "");
+    if (compactName.length >= 12 && /^[a-z0-9]+$/i.test(compactName)) {
+      return NextResponse.json({ ok: true }, { status: 200 });
+    }
+    if (/[A-Z].*[A-Z].*[A-Z].*[A-Z]/.test(nameNorm) && !/\s/.test(nameNorm)) {
+      return NextResponse.json({ ok: true }, { status: 200 });
+    }
+
+    // телефон: очень грубо, но эффективно против мусора
+    if (phoneNorm.length < 7 || phoneNorm.length > 25) {
+      return NextResponse.json({ ok: true }, { status: 200 });
     }
 
     const currentDate = new Date().toISOString().split("T")[0];
@@ -107,27 +157,27 @@ export async function POST(request: Request) {
 
     // колонка id — как в твоём ИЗНАЧАЛЬНОМ рабочем коде
     const cols: Record<string, string> = {
-      text_mkkwm0b4: phone,
-      text_mkkwekh3: email,
-      text_mkkwk9kt: currentPage,
-      text_mkq6spmc: message || "",
+      text_mkkwm0b4: phoneNorm,
+      text_mkkwekh3: emailNorm,
+      text_mkkwk9kt: String(currentPage ?? ""),
+      text_mkq6spmc: messageNorm,
       date_mkt0wz3n: currentDate,
-      text_mkx4pb8s: preferredContact,
+      text_mkx4pb8s: preferredNorm,
       text_mkt0gyvy: cyprusTime,
     };
 
     const mutationCreate = `
-  mutation {
-    create_item(
-      board_id: ${BOARD_ID},
-      item_name: "${String(name).replace(/"/g, '\\"')}",
-      column_values: "${JSON.stringify(cols).replace(/"/g, '\\"')}",
-      position_relative_method: after_at
-    ) {
-      id
-    }
-  }
-`;
+      mutation {
+        create_item(
+          board_id: ${BOARD_ID},
+          item_name: "${String(nameNorm).replace(/"/g, '\\"')}",
+          column_values: "${JSON.stringify(cols).replace(/"/g, '\\"')}",
+          position_relative_method: after_at
+        ) {
+          id
+        }
+      }
+    `;
 
     const mondayRes = await fetch(MONDAY_API_URL, {
       method: "POST",
@@ -162,15 +212,15 @@ export async function POST(request: Request) {
         text: "New lead from Cyprus VIP Estates. Check your board in Monday.",
         html: `
           <h2>New Lead — Cyprus VIP Estates</h2>
-          <p><b>Name:</b> ${name}</p>
-          <p><b>Phone:</b> ${phone}</p>
-          <p><b>Email:</b> ${email}</p>
-          <p><b>Preferred contact:</b> ${preferredContact}</p>
-          ${message ? `<p><b>Message:</b><br/>${message}</p>` : ""}
+          <p><b>Name:</b> ${nameNorm}</p>
+          <p><b>Phone:</b> ${phoneNorm}</p>
+          <p><b>Email:</b> ${emailNorm}</p>
+          <p><b>Preferred contact:</b> ${preferredNorm}</p>
+          ${messageNorm ? `<p><b>Message:</b><br/>${messageHtml}</p>` : ""}
           <hr/>
           <p><b>Page:</b> ${currentPage}</p>
         `,
-        replyTo: email || undefined,
+        replyTo: emailNorm || undefined,
       });
     } catch (mailErr) {
       console.error("Email send error (internal notification):", mailErr);
@@ -178,11 +228,11 @@ export async function POST(request: Request) {
 
     // 2) Автоответ клиенту с учётом языка
     try {
-      const { subject, html } = getAutoReplyEmail({ name, lang });
+      const { subject, html } = getAutoReplyEmail({ name: nameNorm, lang });
 
       await transporter.sendMail({
         from: `"Cyprus VIP Estates" <office@cyprusvipestates.com>`,
-        to: email,
+        to: emailNorm,
         subject,
         html,
       });
