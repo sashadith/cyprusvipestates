@@ -61,10 +61,37 @@ const formStandard = defineType({
       type: "string",
     }),
     defineField({
+      name: "validationNameTooShort",
+      title: "Validation Name Too Short",
+      type: "string",
+    }),
+    defineField({
+      name: "validationNameTooLong",
+      title: "Validation Name Too Long",
+      type: "string",
+    }),
+    defineField({
       name: "validationPhoneRequired",
       title: "Validation Phone Required",
       type: "string",
       description: "Validation message for phone input",
+    }),
+    defineField({
+      name: "validationPhoneTooShort",
+      title: "Validation Phone Too Short",
+      type: "string",
+      description: "Validation message for phone input",
+    }),
+    defineField({
+      name: "validationPhoneTooLong",
+      title: "Validation Phone Too Long",
+      type: "string",
+      description: "Validation message for phone input",
+    }),
+    defineField({
+      name: "validationPhoneInvalid",
+      title: "Validation Phone Invalid",
+      type: "string",
     }),
     defineField({
       name: "validationCountryRequired",
@@ -113,6 +140,13 @@ const formStandard = defineType({
       title: "Error Message",
       type: "string",
       description: "Message displayed after failed form submission",
+    }),
+    defineField({
+      name: "spamBlockedMessage",
+      title: "Spam Blocked Message",
+      type: "string",
+      description:
+        "Message displayed if spam is detected (e.g., honeypot field filled or too fast submission)",
     }),
   ],
 });

@@ -62,7 +62,7 @@ export async function POST(request: Request) {
   const ipKey = ip === "unknown" ? `unknown:${userAgent}` : ip;
 
   if (isRateLimited(ipKey)) {
-    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    return blocked("rate_limit");
   }
 
   try {
@@ -84,8 +84,6 @@ export async function POST(request: Request) {
     // ===============================
 
     // 1. Honeypot — если заполнено скрытое поле
-    const debug = true;
-
     if (String(fax ?? "").trim().length > 0) {
       console.log("Blocked by honeypot", { fax });
       return blocked("honeypot");
@@ -132,7 +130,7 @@ export async function POST(request: Request) {
     const messageHtml = escapeHtml(messageNorm).replace(/\n/g, "<br/>");
 
     if (!nameNorm || !phoneNorm || !emailNorm || !preferredNorm) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+      return blocked("missing_fields");
     }
 
     // preferredContact только из списка
@@ -147,14 +145,14 @@ export async function POST(request: Request) {
 
     // имя: длина + защита от "токенов"
     if (nameNorm.length < 2 || nameNorm.length > 60) {
-      return NextResponse.json({ ok: true }, { status: 200 });
+      return blocked("name");
     }
     const compactName = nameNorm.replace(/\s+/g, "");
     if (compactName.length >= 22 && /^[a-z0-9]+$/i.test(compactName)) {
-      return NextResponse.json({ ok: true }, { status: 200 });
+      return blocked("name_token");
     }
     if (/[A-Z].*[A-Z].*[A-Z].*[A-Z]/.test(nameNorm) && !/\s/.test(nameNorm)) {
-      return NextResponse.json({ ok: true }, { status: 200 });
+      return blocked("name_caps");
     }
 
     // телефон: очень грубо, но эффективно против мусора

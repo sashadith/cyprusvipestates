@@ -9,7 +9,12 @@ export type Form = {
   agreementLinkLabel: string;
   agreementLinkDestination: string;
   validationNameRequired: string;
+  validationNameTooShort: string;
+  validationNameTooLong: string;
   validationPhoneRequired: string;
+  validationPhoneTooShort: string;
+  validationPhoneTooLong: string;
+  validationPhoneInvalid: string;
   validationCountryRequired: string;
   validationEmailRequired: string;
   validationEmailInvalid: string;
@@ -18,4 +23,5 @@ export type Form = {
   validationAgreementOneOf: string;
   successMessage: string;
   errorMessage: string;
+  spamBlockedMessage: string;
 };

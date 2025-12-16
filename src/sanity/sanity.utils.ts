@@ -233,7 +233,12 @@ export async function getSinglePageByLang(
               agreementLinkLabel,
               agreementLinkDestination,
               validationNameRequired,
+              validationNameTooShort,
+              validationNameTooLong,
               validationPhoneRequired,
+              validationPhoneTooShort,
+              validationPhoneTooLong,
+              validationPhoneInvalid,
               validationCountryRequired,
               validationEmailRequired,
               validationEmailInvalid,
@@ -241,7 +246,8 @@ export async function getSinglePageByLang(
               validationAgreementRequired,
               validationAgreementOneOf,
               successMessage,
-              errorMessage
+              errorMessage,
+              spamBlockedMessage
             }
           }
         },
@@ -265,7 +271,12 @@ export async function getSinglePageByLang(
               agreementLinkLabel,
               agreementLinkDestination,
               validationNameRequired,
+              validationNameTooShort,
+              validationNameTooLong,
               validationPhoneRequired,
+              validationPhoneTooShort,
+              validationPhoneTooLong,
+              validationPhoneInvalid,
               validationCountryRequired,
               validationEmailRequired,
               validationEmailInvalid,
@@ -273,7 +284,8 @@ export async function getSinglePageByLang(
               validationAgreementRequired,
               validationAgreementOneOf,
               successMessage,
-              errorMessage
+              errorMessage,
+              spamBlockedMessage
             }
           },
           marginTop,
@@ -513,7 +525,12 @@ export async function getBlogPostByLang(
               agreementLinkLabel,
               agreementLinkDestination,
               validationNameRequired,
+              validationNameTooShort,
+              validationNameTooLong,
               validationPhoneRequired,
+              validationPhoneTooShort,
+              validationPhoneTooLong,
+              validationPhoneInvalid,
               validationCountryRequired,
               validationEmailRequired,
               validationEmailInvalid,
@@ -521,7 +538,8 @@ export async function getBlogPostByLang(
               validationAgreementRequired,
               validationAgreementOneOf,
               successMessage,
-              errorMessage
+              errorMessage,
+              spamBlockedMessage
             }
           }
         },

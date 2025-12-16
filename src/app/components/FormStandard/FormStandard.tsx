@@ -1,7 +1,14 @@
 "use client";
 
-import { FC, useState, useEffect, useId } from "react";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
+import { FC, useState, useEffect, useId, useRef } from "react";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FormikHelpers,
+  FormikProps,
+} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import PhoneInput from "react-phone-number-input";
@@ -11,6 +18,17 @@ import styles from "./FormStandard.module.scss";
 import { Form as FormType } from "@/types/form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+const NAME_MIN = 2;
+const NAME_MAX = 22;
+const PHONE_MIN = 7;
+const PHONE_MAX = 25;
+
+function tpl(str: string | undefined, vars: Record<string, string | number>) {
+  return String(str ?? "").replace(/\{(\w+)\}/g, (_, k) =>
+    vars[k] !== undefined ? String(vars[k]) : `{${k}}`
+  );
+}
 
 export type FormData = {
   name: string;
@@ -51,29 +69,45 @@ const FormStandard: FC<ContactFormProps> = ({
   // const [formStartTime] = useState(() => Date.now());
   const [formStartTime, setFormStartTime] = useState(0);
 
+  const formikRef = useRef<FormikProps<FormData> | null>(null);
+
   useEffect(() => {
     const interval = setInterval(() => {
+      const f = formikRef.current;
       const fields = ["name", "email"] as const;
 
-      // проверим обычные поля
       fields.forEach((field) => {
         const input = document.querySelector(
           `[name="${field}"]`
         ) as HTMLInputElement | null;
-        const hasValue = Boolean(input?.value?.trim());
 
-        setFilled((f) =>
-          f[field] === hasValue ? f : { ...f, [field]: hasValue }
+        const domVal = input?.value?.trim() ?? "";
+        const hasValue = Boolean(domVal);
+
+        // синхронизация autofill → Formik
+        if (f && domVal && !String(f.values[field] ?? "").trim()) {
+          f.setFieldValue(field, domVal, false);
+        }
+
+        setFilled((prev) =>
+          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue }
         );
       });
 
-      // проверим phone отдельно (PhoneInput — не всегда HTMLInputElement)
+      // phone
       const phoneEl = document.querySelector(
         `[name="phone"]`
       ) as HTMLInputElement | null;
-      const phoneHasValue = Boolean(phoneEl?.value?.trim());
-      setFilled((f) =>
-        f.phone === phoneHasValue ? f : { ...f, phone: phoneHasValue }
+
+      const domPhone = phoneEl?.value?.trim() ?? "";
+      const phoneHasValue = Boolean(domPhone);
+
+      if (f && domPhone && !String(f.values.phone ?? "").trim()) {
+        f.setFieldValue("phone", domPhone, false);
+      }
+
+      setFilled((prev) =>
+        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue }
       );
     }, 200);
 
@@ -101,12 +135,67 @@ const FormStandard: FC<ContactFormProps> = ({
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required(`${dataForm.validationNameRequired}`),
-    phone: Yup.string().required(`${dataForm.validationPhoneRequired}`),
-    // country: Yup.string().required(`${dataForm.validationCountryRequired}`),
+    name: Yup.string()
+      .transform((v) => (typeof v === "string" ? v.trim() : v))
+      .required(dataForm.validationNameRequired)
+      .test("name-min", function (value) {
+        const current = (value ?? "").trim().length;
+        if (current >= NAME_MIN) return true;
+        return this.createError({
+          message: tpl(dataForm.validationNameTooShort, {
+            min: NAME_MIN,
+            current,
+          }),
+        });
+      })
+      .test("name-max", function (value) {
+        const current = (value ?? "").trim().length;
+        if (current <= NAME_MAX) return true;
+        return this.createError({
+          message: tpl(dataForm.validationNameTooLong, {
+            max: NAME_MAX,
+            current,
+          }),
+        });
+      }),
+
+    phone: Yup.string()
+      .required(dataForm.validationPhoneRequired)
+      .test("phone-min", function (value) {
+        const current = String(value ?? "").trim().length;
+        if (current >= PHONE_MIN) return true;
+        return this.createError({
+          message: tpl(dataForm.validationPhoneTooShort, {
+            min: PHONE_MIN,
+            current,
+          }),
+        });
+      })
+      .test("phone-max", function (value) {
+        const current = String(value ?? "").trim().length;
+        if (current <= PHONE_MAX) return true;
+        return this.createError({
+          message: tpl(dataForm.validationPhoneTooLong, {
+            max: PHONE_MAX,
+            current,
+          }),
+        });
+      })
+      .test("phone-format", function (value) {
+        // очень мягкая проверка, без “паления” антиспама:
+        const v = String(value ?? "").trim();
+        if (!v) return true;
+        // допускаем +, пробелы, скобки, дефисы
+        const ok = /^[+0-9()\-\s]{7,25}$/.test(v);
+        if (ok) return true;
+        return this.createError({ message: dataForm.validationPhoneInvalid });
+      }),
+
     email: Yup.string()
-      .email(`${dataForm.validationEmailInvalid}`)
-      .required(`${dataForm.validationEmailRequired}`),
+      .transform((v) => (typeof v === "string" ? v.trim() : v))
+      .email(dataForm.validationEmailInvalid)
+      .required(dataForm.validationEmailRequired),
+
     preferredContact: Yup.string()
       .oneOf(["phone", "whatsapp", "email"])
       .required(
@@ -118,9 +207,10 @@ const FormStandard: FC<ContactFormProps> = ({
               ? "Wybierz preferowaną formę kontaktu"
               : "What’s the best way to contact you?"
       ),
+
     agreedToPolicy: Yup.boolean()
-      .required(`${dataForm.validationAgreementRequired}`)
-      .oneOf([true], `${dataForm.validationAgreementOneOf}`),
+      .required(dataForm.validationAgreementRequired)
+      .oneOf([true], dataForm.validationAgreementOneOf),
   });
 
   const onSubmit = async (
@@ -131,11 +221,7 @@ const FormStandard: FC<ContactFormProps> = ({
 
     try {
       const currentPage = window.location.href;
-      const phoneFinal =
-        values.phone ||
-        (document.querySelector('[name="phone"]') as HTMLInputElement | null)
-          ?.value ||
-        "";
+      const phoneFinal = values.phone || "";
 
       const response = await axios.post("/api/monday", {
         ...values,
@@ -179,17 +265,16 @@ const FormStandard: FC<ContactFormProps> = ({
         console.warn("Form blocked/failed:", response.data);
         throw new Error(response.data?.blocked || "blocked_or_failed");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error:", error);
-      setMessage(
-        lang === "ru"
-          ? "Произошла ошибка при отправке заявки. Попробуйте позже."
-          : lang === "de"
-            ? "Beim Senden der Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
-            : lang === "pl"
-              ? "Wystąpił błąd podczas wysyłania zapytania. Spróbuj ponownie później."
-              : "An error occurred while sending the request. Please try again later."
-      );
+      const blocked = error?.response?.data?.blocked; // если ты так отдаёшь
+      const okFalse = error?.response?.data?.ok === false;
+
+      if (blocked || okFalse) {
+        setMessage(dataForm.spamBlockedMessage || dataForm.errorMessage);
+      } else {
+        setMessage(dataForm.errorMessage);
+      }
       setTimeout(() => {
         setMessage(null);
       }, 7000);
@@ -206,6 +291,9 @@ const FormStandard: FC<ContactFormProps> = ({
     <>
       {message && <div className={styles.popup}>{message}</div>}
       <Formik
+        innerRef={(inst) => {
+          formikRef.current = inst;
+        }}
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
@@ -231,14 +319,20 @@ const FormStandard: FC<ContactFormProps> = ({
               >
                 {dataForm.inputName}
               </label>
-              <Field
-                // id="name"
-                id={`${uid}-name`}
-                name="name"
-                type="text"
-                className={`${styles.inputField}`}
-                onBlur={handleBlur}
-              />
+              <Field name="name">
+                {({ field, form }: any) => (
+                  <input
+                    {...field}
+                    id={`${uid}-name`}
+                    type="text"
+                    className={styles.inputField}
+                    onBlur={(e) => {
+                      field.onBlur(e); // ✅ важно: touched
+                      handleBlur(e as any); // твоя логика label filled
+                    }}
+                  />
+                )}
+              </Field>
               <ErrorMessage
                 name="name"
                 component="div"
@@ -255,15 +349,17 @@ const FormStandard: FC<ContactFormProps> = ({
                 {dataForm.inputPhone}
               </label>
               <PhoneInput
-                // id="phone"
                 id={`${uid}-phone`}
                 name="phone"
                 className={`${styles.inputField} ${styles.phoneInput}`}
-                // onBlur={handleBlur}
                 value={values.phone}
                 onChange={(value) => {
                   setFieldValue("phone", value);
                   setFilled((f) => ({ ...f, phone: Boolean(value) }));
+                }}
+                onBlur={() => {
+                  // ✅ помечаем touched вручную
+                  formikRef.current?.setFieldTouched("phone", true, true);
                 }}
               />
               <ErrorMessage
@@ -291,14 +387,20 @@ const FormStandard: FC<ContactFormProps> = ({
               >
                 {dataForm.inputEmail}
               </label>
-              <Field
-                // id="email"
-                id={`${uid}-email`}
-                name="email"
-                type="email"
-                className={`${styles.inputField}`}
-                onBlur={handleBlur}
-              />
+              <Field name="email">
+                {({ field }: any) => (
+                  <input
+                    {...field}
+                    id={`${uid}-email`}
+                    type="email"
+                    className={styles.inputField}
+                    onBlur={(e) => {
+                      field.onBlur(e); // ✅ touched
+                      handleBlur(e as any); // твой filled
+                    }}
+                  />
+                )}
+              </Field>
               <ErrorMessage
                 name="email"
                 component="div"
