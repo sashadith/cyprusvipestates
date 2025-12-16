@@ -19,7 +19,7 @@ export type FormData = {
   preferredContact: string;
   email: string;
   agreedToPolicy: boolean;
-  company: string; // honeypot field
+  fax: string; // honeypot field
   formStartTime: number;
 };
 
@@ -82,7 +82,7 @@ const FormStandard: FC<ContactFormProps> = ({
     email: "",
     preferredContact: "",
     agreedToPolicy: false,
-    company: "", // honeypot field
+    fax: "", // honeypot field
     formStartTime,
   };
 
@@ -116,9 +116,15 @@ const FormStandard: FC<ContactFormProps> = ({
     setSubmitting(true);
     try {
       const currentPage = window.location.href;
-      const fst = formStartTime || Date.now(); // Получаем текущий URL
+      const fst = formStartTime || Date.now();
+      const phoneFinal =
+        values.phone ||
+        (document.querySelector('[name="phone"]') as HTMLInputElement | null)
+          ?.value ||
+        "";
       const response = await axios.post("/api/monday", {
         ...values,
+        phone: phoneFinal,
         formStartTime: fst,
         currentPage,
         lang,
@@ -183,7 +189,7 @@ const FormStandard: FC<ContactFormProps> = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, setFieldValue }) => (
+        {({ isSubmitting, setFieldValue, values }) => (
           <Form
             onFocusCapture={() =>
               !formStartTime && setFormStartTime(Date.now())
@@ -240,6 +246,7 @@ const FormStandard: FC<ContactFormProps> = ({
                 name="phone"
                 className={`${styles.inputField} ${styles.phoneInput}`}
                 // onBlur={handleBlur}
+                value={values.phone}
                 onChange={(value) => {
                   setFieldValue("phone", value);
                   setFilled((f) => ({ ...f, phone: Boolean(value) }));
@@ -366,10 +373,11 @@ const FormStandard: FC<ContactFormProps> = ({
 
             <Field
               type="text"
-              name="company"
+              name="fax"
               style={{ display: "none" }}
               tabIndex={-1}
-              autoComplete="off"
+              autoComplete="new-password"
+              aria-hidden="true"
             />
 
             <div className={styles.customCheckbox}>

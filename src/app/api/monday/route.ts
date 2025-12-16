@@ -66,7 +66,7 @@ export async function POST(request: Request) {
       message,
       preferredContact,
       currentPage,
-      company,
+      fax,
       formStartTime,
       lang,
     } = body;
@@ -76,7 +76,8 @@ export async function POST(request: Request) {
     // ===============================
 
     // 1. Honeypot — если заполнено скрытое поле
-    if (String(company ?? "").trim().length > 0) {
+    if (String(fax ?? "").trim().length > 0) {
+      console.log("Blocked by honeypot", { fax });
       return NextResponse.json({ ok: true }, { status: 200 }); // тихо игнорим
     }
 
@@ -90,6 +91,7 @@ export async function POST(request: Request) {
       elapsed < 1500 ||
       elapsed > 2 * 60 * 60 * 1000
     ) {
+      console.log("Blocked by timing anti-spam", { startedRaw, elapsed });
       return NextResponse.json({ ok: true }, { status: 200 });
     }
 
