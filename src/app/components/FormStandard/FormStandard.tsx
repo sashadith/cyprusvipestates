@@ -19,7 +19,7 @@ export type FormData = {
   preferredContact: string;
   email: string;
   agreedToPolicy: boolean;
-  company: string; // honeypot field
+  fax: string; // honeypot field
   formStartTime: number;
 };
 
@@ -48,20 +48,41 @@ const FormStandard: FC<ContactFormProps> = ({
   const dataForm = form.form;
   const router = useRouter();
 
-  const [formStartTime] = useState(() => Date.now());
+  // const [formStartTime] = useState(() => Date.now());
+  const [formStartTime, setFormStartTime] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      ["name", "phone", "email"].forEach((field) => {
-        const input = document.getElementById(field) as HTMLInputElement;
-        if (input && input.value) {
-          setFilled((f) => ({ ...f, [field]: true }));
-        }
+      const fields = ["name", "email"] as const;
+
+      // проверим обычные поля
+      fields.forEach((field) => {
+        const input = document.querySelector(
+          `[name="${field}"]`
+        ) as HTMLInputElement | null;
+        const hasValue = Boolean(input?.value?.trim());
+
+        setFilled((f) =>
+          f[field] === hasValue ? f : { ...f, [field]: hasValue }
+        );
       });
-    }, 100);
+
+      // проверим phone отдельно (PhoneInput — не всегда HTMLInputElement)
+      const phoneEl = document.querySelector(
+        `[name="phone"]`
+      ) as HTMLInputElement | null;
+      const phoneHasValue = Boolean(phoneEl?.value?.trim());
+      setFilled((f) =>
+        f.phone === phoneHasValue ? f : { ...f, phone: phoneHasValue }
+      );
+    }, 200);
+
+    if (formStartTime === 0) {
+      setFormStartTime(Date.now());
+    }
 
     return () => clearInterval(interval);
-  }, []);
+  }, [formStartTime]);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -75,8 +96,8 @@ const FormStandard: FC<ContactFormProps> = ({
     email: "",
     preferredContact: "",
     agreedToPolicy: false,
-    company: "", // honeypot field
-    formStartTime,
+    fax: "", // honeypot field
+    formStartTime: 0,
   };
 
   const validationSchema = Yup.object({
@@ -107,14 +128,28 @@ const FormStandard: FC<ContactFormProps> = ({
     { setSubmitting, resetForm }: FormikHelpers<FormData>
   ) => {
     setSubmitting(true);
+
     try {
-      const currentPage = window.location.href; // Получаем текущий URL
+      const currentPage = window.location.href;
+      const phoneFinal =
+        values.phone ||
+        (document.querySelector('[name="phone"]') as HTMLInputElement | null)
+          ?.value ||
+        "";
+
       const response = await axios.post("/api/monday", {
         ...values,
+        phone: phoneFinal,
+        formStartTime: formStartTime, // используем фиксированное время
         currentPage,
         lang,
       });
-      if (response.status === 200) {
+
+      if (
+        response.status === 200 &&
+        response.data?.ok === true &&
+        response.data?.created === true
+      ) {
         resetForm({});
         setFilled({ name: false, phone: false, email: false });
 
@@ -141,7 +176,8 @@ const FormStandard: FC<ContactFormProps> = ({
           setMessage(null);
         }, 5000);
       } else {
-        throw new Error("Failed to send lead to monday.com");
+        console.warn("Form blocked/failed:", response.data);
+        throw new Error(response.data?.blocked || "blocked_or_failed");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -174,7 +210,7 @@ const FormStandard: FC<ContactFormProps> = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, setFieldValue }) => (
+        {({ isSubmitting, setFieldValue, values }) => (
           <Form>
             {/* Поле для имени */}
             <div className={styles.inputWrapper}>
@@ -223,8 +259,12 @@ const FormStandard: FC<ContactFormProps> = ({
                 id={`${uid}-phone`}
                 name="phone"
                 className={`${styles.inputField} ${styles.phoneInput}`}
-                onBlur={handleBlur}
-                onChange={(value) => setFieldValue("phone", value)}
+                // onBlur={handleBlur}
+                value={values.phone}
+                onChange={(value) => {
+                  setFieldValue("phone", value);
+                  setFilled((f) => ({ ...f, phone: Boolean(value) }));
+                }}
               />
               <ErrorMessage
                 name="phone"
@@ -347,10 +387,11 @@ const FormStandard: FC<ContactFormProps> = ({
 
             <Field
               type="text"
-              name="company"
+              name="fax"
               style={{ display: "none" }}
               tabIndex={-1}
-              autoComplete="off"
+              autoComplete="new-password"
+              aria-hidden="true"
             />
 
             <div className={styles.customCheckbox}>
