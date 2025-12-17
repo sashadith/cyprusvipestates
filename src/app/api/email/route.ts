@@ -1,41 +1,203 @@
-import { type NextRequest, NextResponse } from "next/server";
+// app/api/email/route.ts
+import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import Mail from "nodemailer/lib/mailer";
 
-export async function POST(request: NextRequest) {
-  const data = await request.json();
+const ALLOWED_HOSTS = new Set([
+  "cyprusvipestates.com",
+  "www.cyprusvipestates.com",
+]);
 
-  // console.log("Received data:", data);
+// in-memory rate limits (на уровне инстанса)
+const rateLimitIpMap = new Map<string, number[]>();
+const rateLimitEmailMap = new Map<string, number[]>();
 
-  const transport = nodemailer.createTransport({
-    host: "smtp.hostinger.com",
-    port: 465,
-    secure: true, // true для порта 465, false для 587
-    auth: {
-      user: process.env.EMAIL_USER, // например: contact@yourdomain.com
-      pass: process.env.EMAIL_PASSWORD, // пароль или пароль приложения
-    },
-  });
-
-  // Проверка наличия всех полей
-  if (data.name && data.phone && data.country && data.email) {
-    const mailBody = `Name: ${data.name}\nSurname: ${data.surname}\nPhone: ${data.phone}\nEmail: ${data.email}\nCountry: ${data.country}`;
-
-    const mailOptions: Mail.Options = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: `Partner Request from ${data.name}`,
-      text: mailBody,
-    };
-
-    try {
-      await transport.sendMail(mailOptions);
-      return NextResponse.json({ message: "Email sent" });
-    } catch (err: any) {
-      return NextResponse.json({ error: err.message }, { status: 500 });
-    }
+function safeUrl(raw: string) {
+  try {
+    return new URL(raw);
+  } catch {
+    return null;
   }
+}
 
-  // Если какие-то данные отсутствуют, вернуть ошибку
-  return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+function isAllowedHostFromUrl(raw: string) {
+  const u = safeUrl(raw);
+  if (!u) return false;
+  return ALLOWED_HOSTS.has(u.hostname);
+}
+
+function getClientIp(request: Request) {
+  const xff = request.headers.get("x-forwarded-for");
+  if (xff) return xff.split(",")[0].trim();
+  return request.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
+function isRateLimitedKey(
+  map: Map<string, number[]>,
+  key: string,
+  limit = 3,
+  windowMs = 60_000
+) {
+  const now = Date.now();
+  const timestamps = map.get(key) || [];
+  const filtered = timestamps.filter((t) => now - t < windowMs);
+  filtered.push(now);
+  map.set(key, filtered);
+  return filtered.length > limit;
+}
+
+function escapeHtml(input: unknown) {
+  return String(input ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function blocked(reason: string, extra?: Record<string, any>) {
+  const debug = process.env.NODE_ENV !== "production";
+  return NextResponse.json(
+    debug ? { ok: false, blocked: reason, ...extra } : { ok: false },
+    { status: 200 }
+  );
+}
+
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST || "smtp.hostinger.com",
+  port: Number(process.env.EMAIL_PORT || 465),
+  secure: String(process.env.EMAIL_SECURE || "true") === "true",
+  auth: {
+    user: process.env.EMAIL_USER!,
+    pass: process.env.EMAIL_PASSWORD!,
+  },
+});
+
+export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  const ua = request.headers.get("user-agent") || "";
+  const ipKey = ip === "unknown" ? `unknown:${ua || "ua"}` : ip;
+
+  if (!ua) return blocked("ua");
+
+  const ct = request.headers.get("content-type") || "";
+  if (!ct.includes("application/json")) return blocked("content_type");
+
+  const origin = request.headers.get("origin") || "";
+  const referer = request.headers.get("referer") || "";
+
+  if (!referer || !isAllowedHostFromUrl(referer)) return blocked("bad_referer");
+  if (origin && !isAllowedHostFromUrl(origin)) return blocked("bad_origin");
+
+  if (isRateLimitedKey(rateLimitIpMap, ipKey, 5, 60_000))
+    return blocked("rate_limit_ip");
+
+  try {
+    const body = await request.json();
+
+    const {
+      name,
+      surname,
+      phone,
+      email,
+      country,
+      agreedToPolicy,
+      company, // honeypot
+      formStartTime,
+      currentPage,
+      lang,
+    } = body;
+
+    // currentPage обязателен и должен быть на твоём домене
+    const page = String(currentPage ?? "").trim();
+    if (!page) return blocked("missing_page");
+
+    const pageUrl = safeUrl(page);
+    if (!pageUrl) return blocked("bad_page_url");
+    if (!ALLOWED_HOSTS.has(pageUrl.hostname)) return blocked("page_host");
+
+    // referer.host должен совпадать с currentPage.host
+    const refUrl = safeUrl(referer);
+    if (!refUrl) return blocked("bad_referer_url");
+    if (refUrl.hostname !== pageUrl.hostname) return blocked("page_mismatch");
+
+    // honeypot
+    const honeypot = String(company ?? "").trim();
+    if (honeypot.length > 0) return blocked("honeypot");
+
+    // timing
+    const startedRaw = Number(formStartTime);
+    const elapsed = Date.now() - startedRaw;
+
+    if (
+      !Number.isFinite(startedRaw) ||
+      startedRaw <= 0 ||
+      elapsed < 1500 ||
+      elapsed > 2 * 60 * 60 * 1000
+    ) {
+      return blocked("timing", { startedRaw, elapsed });
+    }
+
+    // нормализация
+    const nameNorm = String(name ?? "").trim();
+    const surnameNorm = String(surname ?? "").trim();
+    const phoneNorm = String(phone ?? "").trim();
+    const emailNorm = String(email ?? "")
+      .trim()
+      .toLowerCase();
+    const countryNorm = String(country ?? "").trim();
+
+    if (!nameNorm || !surnameNorm || !phoneNorm || !emailNorm || !countryNorm) {
+      return blocked("missing_fields");
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNorm)) return blocked("email");
+
+    // rate limit по email (после валидации email)
+    if (isRateLimitedKey(rateLimitEmailMap, emailNorm, 3, 60_000)) {
+      return blocked("rate_limit_email");
+    }
+
+    // agreedToPolicy — базовая проверка
+    if (agreedToPolicy !== true) return blocked("agreement");
+
+    // письмо
+    const mailBodyText =
+      `Partner request\n\n` +
+      `Name: ${nameNorm}\n` +
+      `Surname: ${surnameNorm}\n` +
+      `Phone: ${phoneNorm}\n` +
+      `Email: ${emailNorm}\n` +
+      `Country: ${countryNorm}\n` +
+      `Lang: ${String(lang ?? "")}\n` +
+      `Page: ${page}\n`;
+
+    const mailBodyHtml = `
+      <h2>Partner request</h2>
+      <p><b>Name:</b> ${escapeHtml(nameNorm)}</p>
+      <p><b>Surname:</b> ${escapeHtml(surnameNorm)}</p>
+      <p><b>Phone:</b> ${escapeHtml(phoneNorm)}</p>
+      <p><b>Email:</b> ${escapeHtml(emailNorm)}</p>
+      <p><b>Country:</b> ${escapeHtml(countryNorm)}</p>
+      <hr/>
+      <p><b>Lang:</b> ${escapeHtml(String(lang ?? ""))}</p>
+      <p><b>Page:</b> ${escapeHtml(page)}</p>
+    `;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER!,
+      to: process.env.EMAIL_TO || process.env.EMAIL_USER!,
+      subject: `Partner Request — ${nameNorm} ${surnameNorm}`,
+      text: mailBodyText,
+      html: mailBodyHtml,
+      replyTo: emailNorm || undefined,
+    });
+
+    return NextResponse.json({ ok: true }, { status: 200 });
+  } catch (err) {
+    console.error("Email route internal error:", err);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }
