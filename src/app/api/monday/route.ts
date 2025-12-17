@@ -286,6 +286,7 @@ export async function POST(request: Request) {
       await transporter.sendMail({
         from: process.env.EMAIL_USER!,
         to: process.env.EMAIL_TO || "office@cyprusvipestates.com",
+        cc: process.env.EMAIL_COFOUNDER || undefined,
         subject: "New Lead — Cyprus VIP Estates",
         text: "New lead from Cyprus VIP Estates. Check your board in Monday.",
         html: `

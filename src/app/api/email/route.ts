@@ -186,6 +186,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: process.env.EMAIL_USER!,
       to: process.env.EMAIL_TO || process.env.EMAIL_USER!,
+      cc: process.env.EMAIL_COFOUNDER || undefined,
       subject: `Partner Request — ${nameNorm} ${surnameNorm}`,
       text: mailBodyText,
       html: mailBodyHtml,
