@@ -7,6 +7,9 @@ const ALLOWED_HOSTS = new Set([
   "www.cyprusvipestates.com",
 ]);
 
+// если этот роут ТОЛЬКО для партнёров — включи whitelist путей:
+const ALLOWED_PATH_PREFIXES = ["/partners"]; // при необходимости добавь: "/de/partners", "/pl/partners" и т.д.
+
 // in-memory rate limits (на уровне инстанса)
 const rateLimitIpMap = new Map<string, number[]>();
 const rateLimitEmailMap = new Map<string, number[]>();
@@ -54,11 +57,26 @@ function escapeHtml(input: unknown) {
     .replace(/'/g, "&#39;");
 }
 
+// анти-токен: длинная строка без пробелов, только буквы/цифры
+function looksLikeToken(value: string) {
+  const v = String(value ?? "")
+    .trim()
+    .replace(/\s+/g, "");
+  if (v.length < 18) return false;
+  if (!/^[a-z0-9]+$/i.test(v)) return false;
+  return true;
+}
+
+function countDigits(value: string) {
+  const m = String(value ?? "").match(/\d/g);
+  return m ? m.length : 0;
+}
+
 function blocked(reason: string, extra?: Record<string, any>) {
   const debug = process.env.NODE_ENV !== "production";
   return NextResponse.json(
     debug ? { ok: false, blocked: reason, ...extra } : { ok: false },
-    { status: 200 }
+    { status: 200 } // всегда 200
   );
 }
 
@@ -88,8 +106,9 @@ export async function POST(request: Request) {
   if (!referer || !isAllowedHostFromUrl(referer)) return blocked("bad_referer");
   if (origin && !isAllowedHostFromUrl(origin)) return blocked("bad_origin");
 
-  if (isRateLimitedKey(rateLimitIpMap, ipKey, 5, 60_000))
+  if (isRateLimitedKey(rateLimitIpMap, ipKey, 5, 60_000)) {
     return blocked("rate_limit_ip");
+  }
 
   try {
     const body = await request.json();
@@ -114,6 +133,14 @@ export async function POST(request: Request) {
     const pageUrl = safeUrl(page);
     if (!pageUrl) return blocked("bad_page_url");
     if (!ALLOWED_HOSTS.has(pageUrl.hostname)) return blocked("page_host");
+
+    // если роут только для партнёров — ограничь путь
+    if (ALLOWED_PATH_PREFIXES.length) {
+      const okPath = ALLOWED_PATH_PREFIXES.some((p) =>
+        pageUrl.pathname.startsWith(p)
+      );
+      if (!okPath) return blocked("bad_path");
+    }
 
     // referer.host должен совпадать с currentPage.host
     const refUrl = safeUrl(referer);
@@ -159,6 +186,25 @@ export async function POST(request: Request) {
 
     // agreedToPolicy — базовая проверка
     if (agreedToPolicy !== true) return blocked("agreement");
+
+    // ✅ анти-токен / анти-бот эвристики (как раз под твой спам)
+    if (
+      looksLikeToken(nameNorm) ||
+      looksLikeToken(surnameNorm) ||
+      looksLikeToken(countryNorm)
+    ) {
+      return blocked("token_fields");
+    }
+
+    // телефон: цифры в адекватном диапазоне
+    const digits = countDigits(phoneNorm);
+    if (digits < 8 || digits > 16) return blocked("phone_digits");
+
+    // запрет на очень “шаблонные” номера
+    const onlyDigits = phoneNorm.replace(/\D/g, "");
+    if (/^(\d)\1{6,}$/.test(onlyDigits)) return blocked("phone_repeated"); // 0000000
+    if ("0123456789012345".includes(onlyDigits) && onlyDigits.length >= 7)
+      return blocked("phone_sequence");
 
     // письмо
     const mailBodyText =
