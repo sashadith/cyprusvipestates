@@ -2,13 +2,25 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+/**
+ * Разрешённые хосты, с которых может приходить форма
+ * (и которые допустимы в currentPage)
+ */
 const ALLOWED_HOSTS = new Set([
   "cyprusvipestates.com",
   "www.cyprusvipestates.com",
 ]);
 
-// если этот роут ТОЛЬКО для партнёров — включи whitelist путей:
-const ALLOWED_PATH_PREFIXES = ["/partners"]; // при необходимости добавь: "/de/partners", "/pl/partners" и т.д.
+/**
+ * Разрешаем только страницу партнёров во всех языках:
+ * /partners
+ * /partners/
+ * /de/partners
+ * /pl/partners
+ * /ru/partners
+ * и т.д.
+ */
+const PARTNERS_PATH_RE = /^\/([a-z]{2}\/)?partners\/?$/i;
 
 // in-memory rate limits (на уровне инстанса)
 const rateLimitIpMap = new Map<string, number[]>();
@@ -20,6 +32,13 @@ function safeUrl(raw: string) {
   } catch {
     return null;
   }
+}
+
+function normalizeHost(host: string) {
+  return String(host || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^www\./i, "");
 }
 
 function isAllowedHostFromUrl(raw: string) {
@@ -57,7 +76,7 @@ function escapeHtml(input: unknown) {
     .replace(/'/g, "&#39;");
 }
 
-// анти-токен: длинная строка без пробелов, только буквы/цифры
+// анти-токен: длинная строка без пробелов, только буквы/цифры (как у твоего спама)
 function looksLikeToken(value: string) {
   const v = String(value ?? "")
     .trim()
@@ -72,11 +91,14 @@ function countDigits(value: string) {
   return m ? m.length : 0;
 }
 
-function blocked(reason: string, extra?: Record<string, any>) {
-  const debug = process.env.NODE_ENV !== "production";
+function blocked(
+  allowDebug: boolean,
+  reason: string,
+  extra?: Record<string, any>
+) {
   return NextResponse.json(
-    debug ? { ok: false, blocked: reason, ...extra } : { ok: false },
-    { status: 200 } // всегда 200
+    allowDebug ? { ok: false, blocked: reason, ...extra } : { ok: false },
+    { status: 200 } // всегда 200 — не обучаем ботов
   );
 }
 
@@ -91,23 +113,33 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(request: Request) {
+  // Debug только для тебя (если добавишь ANTISPAM_DEBUG_TOKEN и отправишь хедер)
+  const allowDebug =
+    Boolean(process.env.ANTISPAM_DEBUG_TOKEN) &&
+    request.headers.get("x-debug-token") === process.env.ANTISPAM_DEBUG_TOKEN;
+
   const ip = getClientIp(request);
   const ua = request.headers.get("user-agent") || "";
   const ipKey = ip === "unknown" ? `unknown:${ua || "ua"}` : ip;
 
-  if (!ua) return blocked("ua");
+  if (!ua) return blocked(allowDebug, "ua");
 
   const ct = request.headers.get("content-type") || "";
-  if (!ct.includes("application/json")) return blocked("content_type");
+  if (!ct.includes("application/json"))
+    return blocked(allowDebug, "content_type");
 
   const origin = request.headers.get("origin") || "";
   const referer = request.headers.get("referer") || "";
 
-  if (!referer || !isAllowedHostFromUrl(referer)) return blocked("bad_referer");
-  if (origin && !isAllowedHostFromUrl(origin)) return blocked("bad_origin");
+  // базовый фильтр по источнику запроса
+  if (!referer || !isAllowedHostFromUrl(referer))
+    return blocked(allowDebug, "bad_referer");
+  if (origin && !isAllowedHostFromUrl(origin))
+    return blocked(allowDebug, "bad_origin");
 
+  // rate limit по IP/UA
   if (isRateLimitedKey(rateLimitIpMap, ipKey, 5, 60_000)) {
-    return blocked("rate_limit_ip");
+    return blocked(allowDebug, "rate_limit_ip");
   }
 
   try {
@@ -126,30 +158,33 @@ export async function POST(request: Request) {
       lang,
     } = body;
 
-    // currentPage обязателен и должен быть на твоём домене
+    // currentPage обязателен и должен быть на домене
     const page = String(currentPage ?? "").trim();
-    if (!page) return blocked("missing_page");
+    if (!page) return blocked(allowDebug, "missing_page");
 
     const pageUrl = safeUrl(page);
-    if (!pageUrl) return blocked("bad_page_url");
-    if (!ALLOWED_HOSTS.has(pageUrl.hostname)) return blocked("page_host");
+    if (!pageUrl) return blocked(allowDebug, "bad_page_url");
+    if (!ALLOWED_HOSTS.has(pageUrl.hostname))
+      return blocked(allowDebug, "page_host", { host: pageUrl.hostname });
 
-    // если роут только для партнёров — ограничь путь
-    if (ALLOWED_PATH_PREFIXES.length) {
-      const okPath = ALLOWED_PATH_PREFIXES.some((p) =>
-        pageUrl.pathname.startsWith(p)
-      );
-      if (!okPath) return blocked("bad_path");
+    // ограничиваем только партнёрскую страницу (важно для защиты API)
+    if (!PARTNERS_PATH_RE.test(pageUrl.pathname)) {
+      return blocked(allowDebug, "bad_path", { path: pageUrl.pathname });
     }
 
-    // referer.host должен совпадать с currentPage.host
+    // referer.host должен совпадать с currentPage.host (с учётом www/non-www)
     const refUrl = safeUrl(referer);
-    if (!refUrl) return blocked("bad_referer_url");
-    if (refUrl.hostname !== pageUrl.hostname) return blocked("page_mismatch");
+    if (!refUrl) return blocked(allowDebug, "bad_referer_url");
+    if (normalizeHost(refUrl.hostname) !== normalizeHost(pageUrl.hostname)) {
+      return blocked(allowDebug, "page_mismatch", {
+        refererHost: refUrl.hostname,
+        pageHost: pageUrl.hostname,
+      });
+    }
 
     // honeypot
     const honeypot = String(company ?? "").trim();
-    if (honeypot.length > 0) return blocked("honeypot");
+    if (honeypot.length > 0) return blocked(allowDebug, "honeypot");
 
     // timing
     const startedRaw = Number(formStartTime);
@@ -161,7 +196,7 @@ export async function POST(request: Request) {
       elapsed < 1500 ||
       elapsed > 2 * 60 * 60 * 1000
     ) {
-      return blocked("timing", { startedRaw, elapsed });
+      return blocked(allowDebug, "timing", { startedRaw, elapsed });
     }
 
     // нормализация
@@ -174,37 +209,42 @@ export async function POST(request: Request) {
     const countryNorm = String(country ?? "").trim();
 
     if (!nameNorm || !surnameNorm || !phoneNorm || !emailNorm || !countryNorm) {
-      return blocked("missing_fields");
+      return blocked(allowDebug, "missing_fields");
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNorm)) return blocked("email");
+    // email формат
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNorm))
+      return blocked(allowDebug, "email");
 
-    // rate limit по email (после валидации email)
+    // rate limit по email (после валидации)
     if (isRateLimitedKey(rateLimitEmailMap, emailNorm, 3, 60_000)) {
-      return blocked("rate_limit_email");
+      return blocked(allowDebug, "rate_limit_email");
     }
 
-    // agreedToPolicy — базовая проверка
-    if (agreedToPolicy !== true) return blocked("agreement");
+    // согласие
+    if (agreedToPolicy !== true) return blocked(allowDebug, "agreement");
 
-    // ✅ анти-токен / анти-бот эвристики (как раз под твой спам)
+    // анти-токен / анти-бот эвристики (под твой реальный спам)
     if (
       looksLikeToken(nameNorm) ||
       looksLikeToken(surnameNorm) ||
       looksLikeToken(countryNorm)
     ) {
-      return blocked("token_fields");
+      return blocked(allowDebug, "token_fields");
     }
 
     // телефон: цифры в адекватном диапазоне
     const digits = countDigits(phoneNorm);
-    if (digits < 8 || digits > 16) return blocked("phone_digits");
+    if (digits < 8 || digits > 16)
+      return blocked(allowDebug, "phone_digits", { digits });
 
-    // запрет на очень “шаблонные” номера
+    // запрет “шаблонных” номеров
     const onlyDigits = phoneNorm.replace(/\D/g, "");
-    if (/^(\d)\1{6,}$/.test(onlyDigits)) return blocked("phone_repeated"); // 0000000
-    if ("0123456789012345".includes(onlyDigits) && onlyDigits.length >= 7)
-      return blocked("phone_sequence");
+    if (/^(\d)\1{6,}$/.test(onlyDigits))
+      return blocked(allowDebug, "phone_repeated"); // 0000000...
+    if ("01234567890123456789".includes(onlyDigits) && onlyDigits.length >= 7) {
+      return blocked(allowDebug, "phone_sequence");
+    }
 
     // письмо
     const mailBodyText =
@@ -242,6 +282,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (err) {
     console.error("Email route internal error:", err);
+    // тут можно оставить 500 — это не “обучение ботов” (они всё равно не увидят деталей),
+    // но если хочешь абсолютный 200 — можно заменить на blocked(...)
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
