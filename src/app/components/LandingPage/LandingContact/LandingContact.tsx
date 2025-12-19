@@ -24,24 +24,24 @@ type PartnersContactTranslation = {
 
 const translations: Record<string, PartnersContactTranslation> = {
   de: {
-    titleStart: "Registriere ",
-    titleHighlight: "dich",
-    titleEnd: " als partner!",
+    titleStart: "Sende ",
+    titleHighlight: " Anfrage",
+    titleEnd: " jetzt!",
   },
   en: {
-    titleStart: "Register ",
-    titleHighlight: "now",
-    titleEnd: " as a partner!",
+    titleStart: "Send ",
+    titleHighlight: "request",
+    titleEnd: " now!",
   },
   pl: {
-    titleStart: "Zarejestruj ",
-    titleHighlight: "się",
-    titleEnd: " jako partner!",
+    titleStart: "Wyślij ",
+    titleHighlight: "prośbę",
+    titleEnd: " teraz!",
   },
   ru: {
-    titleStart: "Зарегистрируйся ",
-    titleHighlight: "сейчас",
-    titleEnd: " как партнёр!",
+    titleStart: "Отправить ",
+    titleHighlight: "запрос",
+    titleEnd: " сейчас!",
   },
 };
 
