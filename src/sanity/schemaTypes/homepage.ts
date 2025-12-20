@@ -33,6 +33,67 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "heroBlock",
+      title: "Hero Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "video",
+          title: "Video",
+          type: "file",
+        }),
+        defineField({
+          name: "posterImage",
+          title: "Poster Image",
+          type: "image",
+        }),
+        defineField({
+          name: "heroTitle",
+          title: "Hero Title",
+          type: "string",
+        }),
+        defineField({
+          name: "heroSubtitle",
+          title: "Hero Subtitle",
+          type: "string",
+        }),
+        defineField({
+          name: "heroDescription",
+          title: "Hero Description",
+          type: "string",
+        }),
+        defineField({
+          name: "type",
+          title: "Type",
+          type: "string",
+          options: {
+            list: [
+              { title: "Link", value: "link" },
+              { title: "Button", value: "button" },
+            ],
+          },
+        }),
+        defineField({
+          name: "linkLabel",
+          title: "Link Label",
+          type: "string",
+          hidden: ({ parent }) => parent?.type !== "link",
+        }),
+        defineField({
+          name: "linkDestination",
+          title: "Link Destination",
+          type: "string",
+          hidden: ({ parent }) => parent?.type !== "link",
+        }),
+        defineField({
+          name: "buttonLabel",
+          title: "Button Label",
+          type: "string",
+          hidden: ({ parent }) => parent?.type !== "button",
+        }),
+      ],
+    }),
+    defineField({
       name: "sliderMain",
       title: "Slider Main",
       type: "array",

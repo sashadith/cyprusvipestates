@@ -46,6 +46,26 @@ export type Brochure = {
   image: Image;
 };
 
+export type HeroBlock = {
+  _key?: string;
+  _type: "heroBlock";
+  video: {
+    _type: "file";
+    asset?: {
+      _ref: string;
+      url: string;
+    };
+  };
+  posterImage?: Image;
+  heroTitle: string;
+  heroSubtitle?: string;
+  heroDescription?: string;
+  type?: "link" | "button";
+  linkLabel?: string;
+  linkDestination?: string;
+  buttonLabel?: string;
+};
+
 export type Slide = {
   _key: string;
   _type: string;
@@ -179,6 +199,7 @@ export type Homepage = {
   _rev: string;
   title: string;
   seo: Seo;
+  heroBlock: HeroBlock;
   sliderMain: Slide[];
   homepageTitle: string;
   brochureBlock: Brochure;

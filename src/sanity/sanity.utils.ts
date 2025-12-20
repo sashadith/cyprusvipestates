@@ -31,6 +31,25 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
     _id,
     title,
     seo,
+    heroBlock{
+      _key,
+      _type,
+      heroTitle,
+      heroSubtitle,
+      heroDescription,
+      type,
+      linkLabel,
+      linkDestination,
+      buttonLabel,
+      video{
+        _type,
+        "asset": asset->{
+          _ref,
+          url
+        }
+      },
+      posterImage
+    },
     sliderMain[]{
       _key,
       _type,

@@ -27,6 +27,7 @@ import homepage from "@/sanity/schemaTypes/homepage";
 import HowWeWorkBlock from "../components/HowWeWorkBlock/HowWeWorkBlock";
 import ReviewsFullBlockComponent from "../components/ReviewsFullBlockComponent/ReviewsFullBlockComponent";
 import WhatsAppButton from "../components/WhatsAppButton/WhatsAppButton";
+import HomepageHero from "../components/HomepageHero/HomepageHero";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -91,7 +92,8 @@ export default async function Home({ params }: Props) {
     <>
       <Header params={params} translations={translations} />
       <main>
-        <Hero slides={homePage.sliderMain} />
+        {/* <Hero slides={homePage.sliderMain} /> */}
+        <HomepageHero heroBlock={homePage.heroBlock} />
         <BrochureBlock brochure={homePage.brochureBlock} />
         <AboutBlock aboutBlock={homePage.aboutBlock} />
         <DescriptionBlock descriptionBlock={homePage.descriptionBlock} />
