@@ -33,10 +33,11 @@ const HomepageHero: FC<Props> = ({ heroBlock }) => {
         <div className={styles.overlay}></div>
         <div className={styles.content}>
           <div className={styles.contentWrapper}>
-            <h1 className={styles.title}>{heroTitle}</h1>
-            {heroSubtitle && (
-              <h2 className={styles.subtitle}>{heroSubtitle}</h2>
-            )}
+            <h1 className={styles.title}>
+              <span>Cyprus VIP Estates</span>
+              <br />
+              {heroTitle}
+            </h1>
             <p className={styles.description}>{heroDescription}</p>
             <div className={styles.button}>
               {type === "button" && buttonLabel && (
