@@ -58,7 +58,6 @@ export type HeroBlock = {
   };
   posterImage?: Image;
   heroTitle: string;
-  heroSubtitle?: string;
   heroDescription?: string;
   type?: "link" | "button";
   linkLabel?: string;

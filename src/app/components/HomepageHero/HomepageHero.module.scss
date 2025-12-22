@@ -57,13 +57,9 @@
   padding-bottom: 20px;
   padding-inline: clamp(1.25rem, 0.568rem + 3.41vw, 3.125rem);
 
-  @media screen and (min-width: 768px) {
-    max-width: 90%;
-  }
-
-  @media screen and (min-width: 1024px) {
-    left: 20%;
-  }
+  // @media screen and (min-width: 768px) {
+  //   max-width: 90%;
+  // }
 }
 
 .overlayWide {
@@ -98,6 +94,14 @@
   font-weight: 300;
   line-height: 1.2;
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+
+  @media screen and (min-width: 768px) {
+    max-width: 90%;
+  }
+
+  @media screen and (min-width: 980) {
+    max-width: 80%;
+  }
 }
 
 .link {

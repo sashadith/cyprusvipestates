@@ -53,11 +53,6 @@ export default defineType({
           type: "string",
         }),
         defineField({
-          name: "heroSubtitle",
-          title: "Hero Subtitle",
-          type: "string",
-        }),
-        defineField({
           name: "heroDescription",
           title: "Hero Description",
           type: "string",

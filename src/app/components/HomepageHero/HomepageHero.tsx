@@ -14,7 +14,6 @@ const HomepageHero: FC<Props> = ({ heroBlock }) => {
     video,
     posterImage,
     heroTitle,
-    heroSubtitle,
     heroDescription,
     type,
     linkLabel,

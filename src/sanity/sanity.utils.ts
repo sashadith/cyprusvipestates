@@ -35,7 +35,6 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
       _key,
       _type,
       heroTitle,
-      heroSubtitle,
       heroDescription,
       type,
       linkLabel,
