@@ -61,8 +61,8 @@
 }
 
 .phoneInput {
-  @extend .inputField; // или дублируй свойства
-  padding-inline: 20px; // ← меньше справа-слева
+  @extend .inputField;
+  padding-inline: 20px;
   display: flex;
   align-items: center;
   width: 100%;
