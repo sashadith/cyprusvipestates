@@ -342,17 +342,18 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
 
                 {/* Preferred contact */}
                 <div className={styles.inputWrapper}>
-                  <div className={styles.radioGroupWrapper}>
-                    <span className={styles.radioGroupLabel}>
-                      {lang === "ru"
-                        ? "Как с вами лучше связаться?"
-                        : lang === "de"
-                          ? "Wie können wir Sie am besten kontaktieren?"
-                          : lang === "pl"
-                            ? "W jaki sposób najlepiej się z Tobą skontaktować?"
-                            : "What’s the best way to contact you?"}
-                    </span>
+                  {/* <div className={styles.radioGroupWrapper}> */}
+                  <span className={styles.radioGroupLabel}>
+                    {lang === "ru"
+                      ? "Как с вами лучше связаться?"
+                      : lang === "de"
+                        ? "Wie können wir Sie am besten kontaktieren?"
+                        : lang === "pl"
+                          ? "W jaki sposób najlepiej się z Tobą skontaktować?"
+                          : "What’s the best way to contact you?"}
+                  </span>
 
+                  <div className={styles.radioGroupWrapper}>
                     <label className={styles.radioOption}>
                       <Field
                         type="radio"
@@ -361,11 +362,11 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
                       />
                       <span>
                         {lang === "ru"
-                          ? "Позвоните мне"
+                          ? "Телефон"
                           : lang === "de"
-                            ? "Rufen Sie mich an"
+                            ? "Anruf"
                             : lang === "pl"
-                              ? "Zadzwońcie do mnie"
+                              ? "Telefonicznie"
                               : "Phone call"}
                       </span>
                     </label>
@@ -378,11 +379,11 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
                       />
                       <span>
                         {lang === "ru"
-                          ? "Напишите в WhatsApp"
+                          ? "WhatsApp"
                           : lang === "de"
-                            ? "Schreiben Sie mir auf WhatsApp"
+                            ? "WhatsApp"
                             : lang === "pl"
-                              ? "Napisz na WhatsApp"
+                              ? "WhatsApp"
                               : "WhatsApp"}
                       </span>
                     </label>
@@ -395,15 +396,16 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
                       />
                       <span>
                         {lang === "ru"
-                          ? "Напишите на e-mail"
+                          ? "Email"
                           : lang === "de"
-                            ? "Schreiben Sie mir eine E-Mail"
+                            ? "E-Mail"
                             : lang === "pl"
-                              ? "Napisz na e-mail"
+                              ? "E-mail"
                               : "Email"}
                       </span>
                     </label>
                   </div>
+                  {/* </div> */}
 
                   <ErrorMessage
                     name="preferredContact"
