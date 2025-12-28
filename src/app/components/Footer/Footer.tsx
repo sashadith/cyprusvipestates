@@ -127,7 +127,7 @@ const Footer = async ({ params }: Props) => {
                   </p>
                 ))}
               </div>
-              <p className={styles.paragraph}>{vatNumber}</p>
+              {/* <p className={styles.paragraph}>{vatNumber}</p> */}
             </div>
             <div className={styles.contactBlock}>
               <p className={styles.title}>{contactTitle}</p>
