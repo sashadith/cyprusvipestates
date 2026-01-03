@@ -38,6 +38,7 @@ import landingTextFirst from "./landingTextFirst";
 import landingTextSecond from "./landingTextSecond";
 import landingProjectsBlock from "./landingProjectsBlock";
 import landingFaqBlock from "./landingFaqBlock";
+import notFoundPage from "./notFoundPage";
 
 export const schemaTypes = [
   header,
@@ -50,6 +51,7 @@ export const schemaTypes = [
   category,
   propertiesPage,
   property,
+  notFoundPage,
   footer,
   formStandard,
   formStandardDocument,

@@ -4,6 +4,7 @@ import {
   getFormStandardDocumentByLang,
   getDeveloperByLang,
   getProjectsByDeveloper,
+  getNotFoundPageByLang,
 } from "@/sanity/sanity.utils";
 import Header from "@/app/components/Header/Header";
 import Footer from "@/app/components/Footer/Footer";
@@ -24,6 +25,7 @@ import DeveloperIntro from "@/app/components/DeveloperIntro/DeveloperIntro";
 import ProjectLink from "@/app/components/ProjectLink/ProjectLink";
 import DeveloperSchemaMarkup from "@/app/components/DeveloperSchemaMarkup/DeveloperSchemaMarkup";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
+import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -53,8 +55,19 @@ const DeveloperPage = async ({ params }: Props) => {
   const { lang, slug } = params;
   const developer = await getDeveloperByLang(lang, slug);
 
+  // if (!developer) {
+  //   return null;
+  // }
+
   if (!developer) {
-    return null;
+    const notFoundPage = await getNotFoundPageByLang(lang);
+    return (
+      <>
+        <Header params={params} translations={[]} />
+        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+        <Footer params={params} />
+      </>
+    ); // Рендеринг компонента NotFound
   }
 
   const projects = await getProjectsByDeveloper(lang, developer._id);

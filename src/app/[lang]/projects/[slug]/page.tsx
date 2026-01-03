@@ -2,6 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import {
   getFormStandardDocumentByLang,
+  getNotFoundPageByLang,
   getProjectByLang,
 } from "@/sanity/sanity.utils";
 import Header from "@/app/components/Header/Header";
@@ -27,6 +28,7 @@ import AccordionContainer from "@/app/components/AccordionContainer/AccordionCon
 import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import WhatAppButtonProject from "@/app/components/WhatAppButtonProject/WhatAppButtonProject";
+import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -56,8 +58,19 @@ const ProjectPage = async ({ params }: Props) => {
   const { lang, slug } = params;
   const project = await getProjectByLang(lang, slug);
 
+  // if (!project) {
+  //   return null;
+  // }
+
   if (!project) {
-    return null;
+    const notFoundPage = await getNotFoundPageByLang(lang);
+    return (
+      <>
+        <Header params={params} translations={[]} />
+        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+        <Footer params={params} />
+      </>
+    ); // Рендеринг компонента NotFound
   }
 
   // console.log("faq", project.faq);

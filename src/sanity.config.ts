@@ -34,6 +34,7 @@ export default defineConfig({
         "blog",
         "blogPage",
         "category",
+        "notFoundPage",
       ],
     }),
   ],
@@ -58,6 +59,7 @@ export default defineConfig({
             "blog",
             "blogPage",
             "category",
+            "notFoundPage",
           ].includes(template.id)
       ),
   },

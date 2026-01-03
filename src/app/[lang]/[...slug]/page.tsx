@@ -11,6 +11,7 @@ import {
   getFormStandardDocumentByLang,
   getSinglePageByLang,
   getAllPathsForLang,
+  getNotFoundPageByLang,
 } from "@/sanity/sanity.utils";
 import {
   AccordionBlock,
@@ -66,6 +67,7 @@ import LandingIntroBlockComponent from "@/app/components/LandingPage/LandingIntr
 import LandingTextFirstComponent from "@/app/components/LandingPage/LandingTextFirstComponent/LandingTextFirstComponent";
 import LandingTextSecondComponent from "@/app/components/LandingPage/LandingTextSecondComponent/LandingTextSecondComponent";
 import LandingProjectsBlockComponent from "@/app/components/LandingPage/LandingProjectsBlockComponent/LandingProjectsBlockComponent";
+import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 
 type Props = {
   params: {
@@ -74,7 +76,7 @@ type Props = {
   };
 };
 
-export const dynamicParams = false;
+// export const dynamicParams = false;
 export const revalidate = 60;
 
 /**
@@ -144,12 +146,30 @@ const SinglePage = async ({ params }: Props) => {
   const current = slug[slug.length - 1] || "";
   const page = (await getSinglePageByLang(lang, current)) as Singlepage | null;
 
+  // if (!page) {
+  //   return <p>Страница не найдена</p>;
+  // }
+
   if (!page) {
-    return <p>Страница не найдена</p>;
+    const notFoundPage = await getNotFoundPageByLang(lang);
+    return (
+      <>
+        <Header params={params} translations={[]} />
+        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+        <Footer params={params} />
+      </>
+    ); // Рендеринг компонента NotFound
   }
 
   if (slug.length === 1 && page?.parentPage) {
-    notFound();
+    const notFoundPage = await getNotFoundPageByLang(lang);
+    return (
+      <>
+        <Header params={params} translations={[]} />
+        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+        <Footer params={params} />
+      </>
+    ); // Рендеринг компонента NotFound
   }
 
   const parentSlug = page.parentPage?.slug[lang]?.current;

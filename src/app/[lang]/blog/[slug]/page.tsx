@@ -12,6 +12,7 @@ import { i18n } from "@/i18n.config";
 import {
   getBlogPostByLang,
   getFormStandardDocumentByLang,
+  getNotFoundPageByLang,
 } from "@/sanity/sanity.utils";
 import {
   AccordionBlock,
@@ -41,6 +42,7 @@ import SchemaBlogPost from "@/app/components/SchemaBlogPost/SchemaBlogPost";
 import ProjectsSectionSlider from "@/app/components/ProjectsSectionSlider/ProjectsSectionSlider";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
+import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -61,8 +63,19 @@ const PagePost = async ({ params }: Props) => {
   const { lang, slug } = params;
   const blog = await getBlogPostByLang(lang, slug);
 
+  // if (!blog) {
+  //   return <p>Страница не найдена</p>;
+  // }
+
   if (!blog) {
-    return <p>Страница не найдена</p>;
+    const notFoundPage = await getNotFoundPageByLang(lang);
+    return (
+      <>
+        <Header params={params} translations={[]} />
+        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+        <Footer params={params} />
+      </>
+    ); // Рендеринг компонента NotFound
   }
 
   const formDocument: FormStandardDocument =

@@ -12,6 +12,7 @@ import { ProjectsPage } from "@/types/projectsPage";
 import { Developer } from "@/types/developer";
 import { Blog } from "@/types/blog";
 import { BlogPage } from "@/types/blogPage";
+import { NotFoundPage } from "@/types/notFoundPage";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -1410,4 +1411,25 @@ export async function getPropertiesPageByLang(
   );
 
   return propertiesPage;
+}
+
+export async function getNotFoundPageByLang(
+  lang: string
+): Promise<NotFoundPage> {
+  const notFoundPageQuery = groq`*[_type == "notFoundPage" && language == $lang][0] {
+    _id,
+    seo,
+    textStart,
+    textEnd,
+    description,
+    buttonText,
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      slug,
+    },
+  }`;
+
+  const notFoundPage = await client.fetch(notFoundPageQuery, { lang });
+
+  return notFoundPage;
 }
