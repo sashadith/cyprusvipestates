@@ -79,7 +79,9 @@ export const RichText = {
     h3: ({ children }: any) => <h3 className={styles.h3}>{children}</h3>,
     h4: ({ children }: any) => <h4 className={styles.h4}>{children}</h4>,
     blockquote: ({ children }: any) => (
-      <blockquote className={styles.blockquote}>{children}</blockquote>
+      <div className={styles.blockquoteWrapper}>
+        <blockquote className={styles.blockquote}>{children}</blockquote>
+      </div>
     ),
   },
   marks: {
