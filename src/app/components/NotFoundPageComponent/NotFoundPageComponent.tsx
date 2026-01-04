@@ -35,13 +35,13 @@ const NotFoundPageComponent: FC<Props> = ({ notFoundPage, lang }) => {
                 </LinkPrimary>
               </div>
             </div>
-          </div>
-          <div className={styles.imageBlock}>
-            <img
-              src="https://cdn.sanity.io/files/88gk88s2/production/40cbe6eb7197905bf9ffc938cad80c648888ef21.jpg"
-              alt={textStart}
-              className={styles.image}
-            />
+            <div className={styles.imageBlock}>
+              <img
+                src="https://cdn.sanity.io/files/88gk88s2/production/40cbe6eb7197905bf9ffc938cad80c648888ef21.jpg"
+                alt={textStart}
+                className={styles.image}
+              />
+            </div>
           </div>
         </div>
       </div>
