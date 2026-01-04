@@ -38,7 +38,7 @@ const NotFoundPageComponent: FC<Props> = ({ notFoundPage, lang }) => {
           </div>
           <div className={styles.imageBlock}>
             <img
-              src="https://cdn.sanity.io/files/88gk88s2/production/02f10ae939ac3d39fd7a3b8dd07546eea549419a.png"
+              src="https://cdn.sanity.io/files/88gk88s2/production/40cbe6eb7197905bf9ffc938cad80c648888ef21.jpg"
               alt={textStart}
               className={styles.image}
             />
