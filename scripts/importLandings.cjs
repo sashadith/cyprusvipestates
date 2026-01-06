@@ -500,6 +500,12 @@ async function run() {
           }
           : null;
 
+      // landingTextStart
+      const tStartText = row[`textStart_${lang}`] || '';
+      const textStartBlock = nonEmpty(tStartText)
+        ? { _key: `b-tstart-${lang}-${Date.now()}`, _type: 'landingTextStart', content: mdToPT(tStartText) }
+        : null;
+
       // landingTextFirst
       const tfText = row[`textFirst_${lang}`] || '';
       const textFirstBlock = nonEmpty(tfText)
@@ -549,6 +555,7 @@ async function run() {
       // contentBlocks
       const contentBlocks = [
         introBlock,
+        textStartBlock,
         projectsBlock,
         textFirstBlock,
         faqBlock,

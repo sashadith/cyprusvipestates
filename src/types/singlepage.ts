@@ -17,6 +17,7 @@ import {
   BulletsBlock,
   TableBlock,
   LandingIntroBlock,
+  LandingTextStart,
   LandingTextFirst,
   LandingTextSecond,
   LandingProjectsBlock,
@@ -56,6 +57,7 @@ export type Singlepage = {
   contentBlocks: Array<
     | TextContent
     | LandingIntroBlock
+    | LandingTextStart
     | LandingTextFirst
     | LandingTextSecond
     | LandingProjectsBlock

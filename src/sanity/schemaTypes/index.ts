@@ -39,6 +39,7 @@ import landingTextSecond from "./landingTextSecond";
 import landingProjectsBlock from "./landingProjectsBlock";
 import landingFaqBlock from "./landingFaqBlock";
 import notFoundPage from "./notFoundPage";
+import landingTextStart from "./landingTextStart";
 
 export const schemaTypes = [
   header,
@@ -59,6 +60,7 @@ export const schemaTypes = [
   projectsSectionBlock,
   landingIntroBlock,
   landingProjectsBlock,
+  landingTextStart,
   landingTextFirst,
   landingTextSecond,
   landingFaqBlock,

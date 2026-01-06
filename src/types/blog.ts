@@ -58,6 +58,8 @@ export type LandingIntroBlock = {
   image: ImageAlt;
 };
 
+export type LandingTextStart = LandingText;
+
 export type LandingTextFirst = LandingText;
 
 export type LandingTextSecond = LandingText;
