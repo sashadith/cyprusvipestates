@@ -17,15 +17,11 @@ const LandingTextStartComponent: FC<Props> = ({ block, lang }) => {
     <>
       <section className={styles.textContentComponent}>
         <div className="container-short">
-          <FadeUpAnimate>
-            <div>
-              <PortableText value={block.content} components={RichText} />
-            </div>
-          </FadeUpAnimate>
+          <div>
+            <PortableText value={block.content} components={RichText} />
+          </div>
         </div>
       </section>
-      <LandingOrder lang={lang} />
-      <LandingCta lang={lang} />
     </>
   );
 };
