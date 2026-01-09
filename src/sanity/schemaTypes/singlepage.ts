@@ -69,6 +69,7 @@ const singlepage = {
       of: [
         { type: "landingIntroBlock" },
         { type: "landingProjectsBlock" },
+        { type: "landingTextStart" },
         { type: "landingTextFirst" },
         { type: "landingFaqBlock" },
         { type: "landingTextSecond" },
