@@ -35,6 +35,7 @@ import {
   LandingTextSecond,
   LandingProjectsBlock,
   LandingFaqBlock,
+  LandingTextStart,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import {
@@ -68,6 +69,7 @@ import LandingTextFirstComponent from "@/app/components/LandingPage/LandingTextF
 import LandingTextSecondComponent from "@/app/components/LandingPage/LandingTextSecondComponent/LandingTextSecondComponent";
 import LandingProjectsBlockComponent from "@/app/components/LandingPage/LandingProjectsBlockComponent/LandingProjectsBlockComponent";
 import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
+import LandingTextStartComponent from "@/app/components/LandingPage/LandingTextStartComponent/LandingTextStartComponent";
 
 type Props = {
   params: {
@@ -373,6 +375,14 @@ const SinglePage = async ({ params }: Props) => {
             key={block._key}
             block={block as LandingIntroBlock}
             lang={lang}
+          />
+        );
+      case "landingTextStart":
+        return (
+          <LandingTextStartComponent
+            key={block._key}
+            lang={lang}
+            block={block as LandingTextStart}
           />
         );
       case "landingTextFirst":
