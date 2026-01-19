@@ -1,5 +1,4 @@
 import { defineArrayMember, defineType, defineField } from "sanity";
-import PortableTextSafeInput from "../inputs/PortableTextSafeInput";
 
 export default defineType({
   name: "contentBlock",
@@ -7,10 +6,6 @@ export default defineType({
   type: "array",
   // ✅ помогает при создании нового поля (но не решает Ctrl+A/Ctrl+V сам по себе)
   initialValue: [],
-  // ✅ стабилизирует любые "временные" неправильные значения
-  // components: {
-  //   input: PortableTextSafeInput,
-  // },
   of: [
     defineArrayMember({
       title: "Block",
