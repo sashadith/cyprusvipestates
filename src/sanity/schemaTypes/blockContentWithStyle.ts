@@ -9,6 +9,7 @@ const blockContentWithStyle = defineType({
       name: "content",
       title: "Content",
       type: "contentBlock", // Используем ваш существующий тип contentBlock для текстового контента
+      initialValue: [],
     }),
     defineField({
       name: "backgroundColor",
