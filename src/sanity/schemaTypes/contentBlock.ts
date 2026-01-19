@@ -8,9 +8,9 @@ export default defineType({
   // ✅ помогает при создании нового поля (но не решает Ctrl+A/Ctrl+V сам по себе)
   initialValue: [],
   // ✅ стабилизирует любые "временные" неправильные значения
-  components: {
-    input: PortableTextSafeInput,
-  },
+  // components: {
+  //   input: PortableTextSafeInput,
+  // },
   of: [
     defineArrayMember({
       title: "Block",
