@@ -1,10 +1,16 @@
-import { PortableTextInput } from "sanity";
-import { useMemo } from "react";
+// src/sanity/inputs/PortableTextSafeInput.tsx
+import React, { useEffect } from "react";
+import { ArrayOfObjectsInputProps, PatchEvent, setIfMissing } from "sanity";
 
-export default function PortableTextSafeInput(props: any) {
-  const safeValue = useMemo(() => {
-    return Array.isArray(props.value) ? props.value : [];
-  }, [props.value]);
+export default function PortableTextSafeInput(props: ArrayOfObjectsInputProps) {
+  const { value, onChange, renderDefault } = props;
 
-  return <PortableTextInput {...props} value={safeValue} />;
+  useEffect(() => {
+    // Критично: при некоторых paste-сценариях value может быть null/undefined
+    if (value == null) {
+      onChange(PatchEvent.from(setIfMissing([])));
+    }
+  }, [value, onChange]);
+
+  return renderDefault(props);
 }
