@@ -44,7 +44,7 @@ async function generateSitemap(): Promise<SitemapPage[]> {
     pages.push(
       ...projects
         .map((proj) => {
-          const slug = proj.slug[lang]?.current;
+          const slug = proj.slug?.[lang]?.current;
           if (!slug) return null;
           const route = `${prefix}/projects/${slug}`;
           return {
@@ -54,7 +54,7 @@ async function generateSitemap(): Promise<SitemapPage[]> {
             priority: 0.8,
           };
         })
-        .filter((x): x is SitemapPage => Boolean(x))
+        .filter((x): x is SitemapPage => Boolean(x)),
     );
 
     // — Страницы разработчиков —
@@ -68,7 +68,7 @@ async function generateSitemap(): Promise<SitemapPage[]> {
     pages.push(
       ...developers
         .map((dev) => {
-          const slug = dev.slug[lang]?.current;
+          const slug = dev.slug?.[lang]?.current;
           if (!slug) return null;
           const route = `${prefix}/developers/${slug}`;
           return {
@@ -78,7 +78,7 @@ async function generateSitemap(): Promise<SitemapPage[]> {
             priority: 0.8,
           };
         })
-        .filter((x): x is SitemapPage => Boolean(x))
+        .filter((x): x is SitemapPage => Boolean(x)),
     );
 
     // — Обычные «одноуровневые» страницы (singlepage) любой вложенности —
@@ -94,7 +94,7 @@ async function generateSitemap(): Promise<SitemapPage[]> {
           changefreq: "weekly",
           priority: segments.length === 1 ? 0.9 : 0.8,
         };
-      })
+      }),
     );
 
     // — Список статей блога —
@@ -120,7 +120,7 @@ async function generateSitemap(): Promise<SitemapPage[]> {
             changefreq: "weekly",
             priority: 0.8,
           };
-        })
+        }),
     );
   }
 
@@ -138,7 +138,7 @@ ${pages
     <loc>${url}</loc>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority.toFixed(1)}</priority>
-  </url>`
+  </url>`,
   )
   .join("")}
 </urlset>`;
