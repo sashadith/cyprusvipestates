@@ -9,7 +9,7 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET as string;
 
 export default defineConfig({
-  badePath: "/admin",
+  basePath: "/admin",
   name: "cyprusvipestates",
   title: "Cyprus VIP Estates",
   projectId,
@@ -60,7 +60,7 @@ export default defineConfig({
             "blogPage",
             "category",
             "notFoundPage",
-          ].includes(template.id)
+          ].includes(template.id),
       ),
   },
 });
