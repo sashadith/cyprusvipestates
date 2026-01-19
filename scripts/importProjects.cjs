@@ -260,18 +260,75 @@ function mdToPT(text = '') {
   return blocks;
 }
 
-// предзагрузка локальных картинок
+function isImageFile(name) {
+  return /\.(jpe?g|png|webp)$/i.test(name);
+}
+
+function walkDir(dir) {
+  const out = [];
+  if (!fs.existsSync(dir)) return out;
+
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...walkDir(full));
+    else if (entry.isFile() && isImageFile(entry.name)) out.push(full);
+  }
+  return out;
+}
+
+function resolveImageSourcesFromCSV(row) {
+  const raw = (row.images_paths || '').trim();
+
+  // A) список через запятую — оставляем как было
+  if (raw.includes(',')) {
+    return raw.split(',').map(s => s.trim()).filter(Boolean);
+  }
+
+  // B) "folder:project-001" или просто "project-001"
+  const folderPrefix = raw.match(/^folder:(.+)$/i);
+  const folderName = folderPrefix ? folderPrefix[1].trim() : raw;
+
+  // C) пусто → папка по умолчанию = row.id
+  const effectiveFolder = folderName || String(row.id || '').trim();
+  if (!effectiveFolder) return [];
+
+  const dir = path.join(LOCAL_IMG_DIR, effectiveFolder);
+  if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
+    // если это не папка — считаем, что это одиночный путь/URL (совместимость)
+    return raw ? [raw] : [];
+  }
+
+  const files = fs.readdirSync(dir)
+    .filter(isImageFile)
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+
+  // Возвращаем relative path от LOCAL_IMG_DIR, например "project-001/01.jpg"
+  return files.map(f => `${effectiveFolder}/${f}`);
+}
+
+// предзагрузка локальных картинок (рекурсивно), ключ = relative path от LOCAL_IMG_DIR
 async function preloadImages() {
   const map = {};
-  if (!fs.existsSync(LOCAL_IMG_DIR)) return map;
-  for (const file of fs.readdirSync(LOCAL_IMG_DIR).filter(f => /\.(jpe?g|png|webp)$/i.test(f))) {
-    const full = path.join(LOCAL_IMG_DIR, file);
+  const files = walkDir(LOCAL_IMG_DIR);
+
+  for (const absPath of files) {
+    const rel = path.relative(LOCAL_IMG_DIR, absPath).replace(/\\/g, '/'); // важно для Windows
     try {
-      const { _id } = await client.assets.upload('image', fs.createReadStream(full), { filename: file });
-      map[file] = _id;
-      console.log(`📦 Preloaded ${file} → ${_id}`);
+      const { _id } = await client.assets.upload(
+        'image',
+        fs.createReadStream(absPath),
+        { filename: path.basename(absPath) }
+      );
+
+      // главное: хранить по относительному пути
+      map[rel] = _id;
+
+      // fallback по basename, чтобы не сломать старые CSV
+      map[path.basename(rel)] ??= _id;
+
+      console.log(`📦 Preloaded ${rel} → ${_id}`);
     } catch (e) {
-      console.error(`⚠️ ${file}: ${e.message}`);
+      console.error(`⚠️ ${rel}: ${e.message}`);
     }
   }
   return map;
@@ -281,25 +338,33 @@ async function preloadImages() {
 // --- uploadImage: мягкий режим и fallback в папку images
 async function uploadImage(src, localMap, { strict = true } = {}) {
   if (!src) return null;
-  const b = path.basename(src.trim());
+
+  const cleaned = src.trim().replace(/\\/g, '/');
+
+  // 1) точное совпадение по relative path (например "project-001/01.jpg")
+  if (localMap[cleaned]) return localMap[cleaned];
+
+  // 2) fallback по basename (например "01.jpg")
+  const b = path.basename(cleaned);
   if (localMap[b]) return localMap[b];
 
   // URL
-  if (/^https?:\/\//.test(src)) {
-    const res = await fetch(src);
+  if (/^https?:\/\//.test(cleaned)) {
+    const res = await fetch(cleaned);
     if (!res.ok) {
       if (!strict) return null;
       throw new Error(res.statusText);
     }
     const buf = Buffer.from(await res.arrayBuffer());
-    const fn = path.basename(new URL(src).pathname);
+    const fn = path.basename(new URL(cleaned).pathname);
     const { _id } = await client.assets.upload('image', buf, { filename: fn });
     return _id;
   }
 
   // Локальный путь: пробуем как есть...
-  let abs = path.resolve(__dirname, src);
-  // ...и fallback в каталог изображений
+  let abs = path.resolve(__dirname, cleaned);
+
+  // ...и fallback в каталог изображений по basename
   if (!fs.existsSync(abs)) {
     abs = path.join(LOCAL_IMG_DIR, b);
   }
@@ -308,6 +373,7 @@ async function uploadImage(src, localMap, { strict = true } = {}) {
     if (!strict) return null;
     throw new Error(`Not found: ${abs}`);
   }
+
   const { _id } = await client.assets.upload('image', fs.createReadStream(abs), { filename: path.basename(abs) });
   return _id;
 }
@@ -368,7 +434,7 @@ async function run() {
       }
 
       // — галерея (ALT для всех изображений = computedAlt)
-      const imgFiles = (row.images_paths || '').split(',').map(s => s.trim()).filter(Boolean);
+      const imgFiles = resolveImageSourcesFromCSV(row);
       // const alts = (row[`images_alts_${lang}`] || '').split('/').map(s => s.trim());
       const imagesSettled = await Promise.allSettled(
         imgFiles.map(async (fn, i) => {
