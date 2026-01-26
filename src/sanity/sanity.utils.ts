@@ -95,7 +95,7 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return homepage;
@@ -115,6 +115,7 @@ export async function getFooterByLang(lang: string) {
     newsletterButtonLabel,
     copyright,
     policyLinks,
+    discklaimer,
   }`;
 
   const footer = await client.fetch(footerQuery, { lang });
@@ -123,7 +124,7 @@ export async function getFooterByLang(lang: string) {
 }
 
 export async function getFormStandardDocumentByLang(
-  lang: string
+  lang: string,
 ): Promise<FormStandardDocument> {
   const formStandardDocumentQuery = groq`*[_type == "formStandardDocument" && language == $lang][0] {
   _id,
@@ -140,7 +141,7 @@ export async function getFormStandardDocumentByLang(
 
 export async function getSinglePageByLang(
   lang: string,
-  slug: string
+  slug: string,
 ): Promise<Singlepage | null> {
   const singlePageQuery = groq`
     *[
@@ -439,7 +440,7 @@ export async function getAllPathsForLang(lang: string): Promise<string[][]> {
         "parent": parentPage->slug[$lang].current
       }
     `,
-    { lang }
+    { lang },
   );
 
   // строим дерево — точно так же, как в generateStaticParams
@@ -463,7 +464,7 @@ export async function getAllPathsForLang(lang: string): Promise<string[][]> {
 // === Blog Post ===
 export async function getBlogPostByLang(
   lang: string,
-  slug: string
+  slug: string,
 ): Promise<Blog> {
   const blogQuery = groq`
     *[
@@ -648,7 +649,7 @@ export async function getBlogPostByLang(
   const blog = await client.fetch(
     blogQuery,
     { lang, slug },
-    { next: { revalidate: 60 } }
+    { next: { revalidate: 60 } },
   );
   return blog;
 }
@@ -675,7 +676,7 @@ export async function getBlogPageByLang(lang: string): Promise<BlogPage> {
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return blogPage;
@@ -707,7 +708,7 @@ export async function getBlogPostsByLang(lang: string): Promise<Blog[]> {
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return blogPosts;
@@ -718,7 +719,7 @@ export async function getBlogPostsByLang(lang: string): Promise<Blog[]> {
 export async function getBlogPostsByLangWithPagination(
   lang: string,
   limit: number,
-  offset: number
+  offset: number,
 ): Promise<Blog[]> {
   const blogPostsQuery = groq`
     *[_type == "blog" && language == $lang] | order(publishedAt desc)[$offset...$offset + $limit] {
@@ -746,7 +747,7 @@ export async function getBlogPostsByLangWithPagination(
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return blogPosts;
@@ -763,7 +764,7 @@ export async function getTotalBlogPostsByLang(lang: string): Promise<number> {
 
 export async function getPropertyByLang(
   lang: string,
-  slug: string
+  slug: string,
 ): Promise<Property | null> {
   const propertyQuery = groq`*[_type == "property" && slug[$lang].current == $slug][0] {
     _id,
@@ -804,14 +805,14 @@ export async function getPropertyByLang(
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return property;
 }
 
 export async function getProjectsPageByLang(
-  lang: string
+  lang: string,
 ): Promise<ProjectsPage> {
   const projectsPageQuery = groq`*[_type == "projectsPage" && language == $lang][0] {
     _id,
@@ -830,7 +831,7 @@ export async function getProjectsPageByLang(
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return projects;
@@ -838,7 +839,7 @@ export async function getProjectsPageByLang(
 
 export async function getProjectByLang(
   lang: string,
-  slug: string
+  slug: string,
 ): Promise<Project | null> {
   const projectQuery = groq`*[_type == "project" && slug[$lang].current == $slug][0] {
     _id,
@@ -895,14 +896,14 @@ export async function getProjectByLang(
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return project;
 }
 
 export async function getAllDevelopersByLang(
-  lang: string
+  lang: string,
 ): Promise<Developer[]> {
   const query = groq`
     *[_type == "developer" && language == $lang] | order(_createdAt desc) {
@@ -917,7 +918,7 @@ export async function getAllDevelopersByLang(
 
 export async function getDeveloperByLang(
   lang: string,
-  slug: string
+  slug: string,
 ): Promise<Developer | null> {
   const developerQuery = groq`*[_type == "developer" && slug[$lang].current == $slug][0] {
     _id,
@@ -953,7 +954,7 @@ export async function getDeveloperByLang(
 
 export async function getProjectsByDeveloper(
   lang: string,
-  developerId: string
+  developerId: string,
 ): Promise<Project[]> {
   const query = groq`
     *[
@@ -977,7 +978,7 @@ export async function getProjectsByDeveloper(
 export async function getThreeProjectsBySameCity(
   lang: string,
   city: string,
-  excludeProjectId?: string // чтобы исключить текущий проект
+  excludeProjectId?: string, // чтобы исключить текущий проект
 ) {
   const query = groq`
     *[
@@ -1013,7 +1014,7 @@ export async function getThreeProjectsBySameCity(
 }
 
 export async function getLastFiveProjectsByLang(
-  lang: string
+  lang: string,
 ): Promise<Project[]> {
   const lastFiveProjectsQuery = groq`
     *[
@@ -1041,7 +1042,7 @@ export async function getLastFiveProjectsByLang(
     { lang },
     {
       next: { revalidate: 60 },
-    }
+    },
   );
 
   return projects;
@@ -1077,7 +1078,7 @@ export async function getFilteredProjects(
     south?: number | null;
     east?: number | null;
     west?: number | null;
-  }
+  },
 ) {
   const {
     city = "",
@@ -1183,7 +1184,7 @@ export async function getFilteredProjectsCount(
     south?: number | null;
     east?: number | null;
     west?: number | null;
-  }
+  },
 ) {
   const {
     city = "",
@@ -1256,7 +1257,7 @@ export async function getFilteredProjectLocationsByLang(
     south?: number | null;
     east?: number | null;
     west?: number | null;
-  }
+  },
 ) {
   const {
     city = "",
@@ -1387,7 +1388,7 @@ export async function getFileBySlug(slug: string): Promise<SanityFile | null> {
 }
 
 export async function getPropertiesPageByLang(
-  lang: string
+  lang: string,
 ): Promise<PropertiesPage> {
   const propertiesPageQuery = groq`*[_type == "propertiesPage" && language == $lang][0] {
     _id,
@@ -1407,14 +1408,14 @@ export async function getPropertiesPageByLang(
       next: {
         revalidate: 60,
       },
-    }
+    },
   );
 
   return propertiesPage;
 }
 
 export async function getNotFoundPageByLang(
-  lang: string
+  lang: string,
 ): Promise<NotFoundPage> {
   const notFoundPageQuery = groq`*[_type == "notFoundPage" && language == $lang][0] {
     _id,

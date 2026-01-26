@@ -32,6 +32,7 @@ const Footer = async ({ params }: Props) => {
     newsletterButtonLabel,
     copyright,
     policyLinks,
+    discklaimer,
   } = data;
 
   const cleanLink = (link: string) => {
@@ -159,7 +160,7 @@ const Footer = async ({ params }: Props) => {
               <div className={styles.policyLinks}>
                 {policyLinks.map(
                   (
-                    policyLink: FooterLink // Укажите тип для policyLink
+                    policyLink: FooterLink, // Укажите тип для policyLink
                   ) => (
                     <Link
                       href={policyLink.link}
@@ -168,11 +169,12 @@ const Footer = async ({ params }: Props) => {
                     >
                       {policyLink.label}
                     </Link>
-                  )
+                  ),
                 )}
               </div>
             </div>
           </div>
+          <div className={styles.discklaimer}>{discklaimer}</div>
         </div>
       </div>
     </footer>

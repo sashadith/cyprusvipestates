@@ -146,6 +146,11 @@ const footer = {
       ],
     }),
     defineField({
+      name: "discklaimer",
+      title: "Discklaimer",
+      type: "string",
+    }),
+    defineField({
       name: "language",
       type: "string",
       initialValue: "id",

@@ -48,4 +48,5 @@ export type Footer = {
   newsletterButtonLabel: string;
   copyright: string;
   policyLinks: Link[];
+  discklaimer: string;
 };
