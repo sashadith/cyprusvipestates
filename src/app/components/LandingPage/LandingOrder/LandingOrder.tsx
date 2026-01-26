@@ -52,7 +52,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Kaufvertrag und rechtliche Prüfung",
         description:
-          "Unsere Experten begleiten Sie bei allen rechtlichen Schritten – von der Vertragsvorbereitung bis zur Eintragung ins Grundbuch.",
+          "Wir vermitteln Ihnen vertrauenswürdige Rechtsexperten, die sich um den Vertrag kümmern – von der Vertragsvorbereitung bis zur Eintragung ins Grundbuch.",
       },
       {
         number: "4",
@@ -83,7 +83,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Purchase agreement & legal checks",
         description:
-          "Our experts assist with all legal steps – from preparing the contract to registering the property in the Land Registry.",
+          "We introduce you to trusted legal experts who handle the contract to registering the property in the Land Registry.",
       },
       {
         number: "4",
@@ -114,7 +114,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Umowa zakupu i weryfikacja prawna",
         description:
-          "Nasi eksperci przeprowadzą Cię przez wszystkie formalności – od przygotowania umowy po wpis do księgi wieczystej.",
+          "Przedstawiamy Państwu zaufanych ekspertów prawnych, którzy zajmują się umowami – od przygotowania umowy po wpis do księgi wieczystej.",
       },
       {
         number: "4",
@@ -145,7 +145,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Договор и юридическая проверка",
         description:
-          "Наши эксперты проведут вас через все юридические этапы — от подготовки договора до регистрации собственности в земельном кадастре.",
+          "Мы предоставим вам проверенных юристов, который занимаются договором, — от подготовки договора до регистрации собственности в земельном кадастре.",
       },
       {
         number: "4",
