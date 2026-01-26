@@ -52,7 +52,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Exklusive Immobilien",
         description:
-          "Du erhältst Zugriff auf unsere Datenbank und verkaufst exklusive Immobilien mit ausgewählten Angeboten und einmaligen Provisionskonditionen.",
+          "Du erhältst Zugriff auf unsere Datenbank und verkaufst exklusive Immobilien mit ausgewählten Angeboten und einmaligen Servicegebühren.",
       },
       {
         number: "4",
@@ -71,7 +71,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "1",
         title: "Fast payouts",
         description:
-          "We pay a 30% advance within 14 days of payment confirmation by the developer. The remaining 70% will be paid once we receive the full commission.",
+          "We pay a 30% advance within 14 days of payment confirmation by the developer. The remaining 70% will be paid once we receive the full service fee.",
       },
       {
         number: "2",
@@ -102,7 +102,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "1",
         title: "Szybkie wypłaty",
         description:
-          "Wypłacamy 30% zaliczki w ciągu 14 dni od potwierdzenia płatności przez dewelopera. Pozostałe 70% otrzymasz po pełnym rozliczeniu prowizji.",
+          "Wypłacamy 30% zaliczki w ciągu 14 dni od potwierdzenia płatności przez dewelopera. Pozostałe 70% otrzymasz po pełnym rozliczeniu opłaty za usługę.",
       },
       {
         number: "2",
@@ -145,7 +145,7 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "3",
         title: "Эксклюзивная недвижимость",
         description:
-          "Вы получаете доступ к нашей базе данных и продаёте эксклюзивную недвижимость с отобранными предложениями и уникальными условиями комиссии.",
+          "Вы получаете доступ к нашей базе данных и продаёте эксклюзивную недвижимость с отобранными предложениями и уникальными условиями сервисного сбора.",
       },
       {
         number: "4",
