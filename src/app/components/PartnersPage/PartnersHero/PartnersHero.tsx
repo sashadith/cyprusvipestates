@@ -32,7 +32,7 @@ const translations: Record<string, PartnersHeroTranslation> = {
     subtitleBottom:
       "Verdiene bis zu 40 % unserer unserer Marketing-Erfolgsgebühr*",
     button: "jetzt partner werden!",
-    note: "* Für Immobilienkäufe erhalten unsere Partner eine Vermittlungsgebühr von 30 % bis 50 %. Für die Empfehlung von Eigentümern bestehender Immobilien zahlen wir 10 % Vermittlungsprovision.",
+    note: "* Für Immobilienkäufe erhalten unsere Partner eine Vermittlungsgebühr von 30 % bis 50 %. Für die Empfehlung von Eigentümern bestehender Immobilien zahlen wir 10 % Vermittlungshonorar.",
   },
   en: {
     subtitleTop: "Become a partner of Cyprus VIP Estates",

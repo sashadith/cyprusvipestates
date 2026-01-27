@@ -45,7 +45,7 @@ const translations: Record<string, PartnersStarsTranslation> = {
       {
         title: "Immobilienagenturen und private Vermittler",
         description:
-          "Du erhältst Zugriff auf unsere aktuelle Immobiliendatenbank mit ausgewählten Angeboten und exklusiven Provisionskonditionen.",
+          "Du erhältst Zugriff auf unsere aktuelle Immobiliendatenbank mit ausgewählten Angeboten und exklusiven Konditionen.",
       },
     ],
   },

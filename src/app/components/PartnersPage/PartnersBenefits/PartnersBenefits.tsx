@@ -40,13 +40,13 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "1",
         title: "Schnelle Auszahlungen",
         description:
-          "Wir zahlen innerhalb von 14 Tagen nach Zahlungsbestätigung durch den Bauträger einen 30% Vorschuss aus. Die verbleibenden 70 % erhältst Du, sobald wir die vollständige Provision erhalten haben.",
+          "Wir zahlen innerhalb von 14 Tagen nach Zahlungsbestätigung durch den Bauträger einen 30% Vorschuss aus. Die verbleibenden 70 % erhältst Du, sobald wir die vollständige Vergütung erhalten haben.",
       },
       {
         number: "2",
         title: "Zusammenarbeit mit Experten",
         description:
-          "Wir organisieren Besichtigungen, kümmern uns um alle rechtlichen Angelegenheiten und unterstützen Dich bei der kompletten Abwicklung.",
+          "Wir organisieren Besichtigungen, koordinieren den Kontakt zu unabhängigen Anwälten und unterstützen Dich bei der kompletten Abwicklung.",
       },
       {
         number: "3",
