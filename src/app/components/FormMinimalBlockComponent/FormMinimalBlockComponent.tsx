@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 
 export type FormData = {
   name: string;
+  surname: string;
   phone: string;
   email: string;
   message: string;
@@ -46,6 +47,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
   const [message, setMessage] = useState<string | null>(null);
   const [filled, setFilled] = useState({
     name: false,
+    surname: false,
     phone: false,
     email: false,
     message: false,
@@ -60,7 +62,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
   useEffect(() => {
     const interval = setInterval(() => {
       const f = formikRef.current;
-      const fields = ["name", "email", "message"] as const;
+      const fields = ["name", "surname", "email", "message"] as const;
 
       fields.forEach((field) => {
         const el = document.querySelector(`[name="${field}"]`) as
@@ -77,13 +79,13 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
         }
 
         setFilled((prev) =>
-          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue }
+          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue },
         );
       });
 
       // ✅ phone отдельно (PhoneInput рендерит input внутри)
       const phoneEl = document.querySelector(
-        `[name="phone"]`
+        `[name="phone"]`,
       ) as HTMLInputElement | null;
 
       const domPhone = (phoneEl?.value ?? "").trim();
@@ -94,7 +96,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
       }
 
       setFilled((prev) =>
-        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue }
+        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
       );
     }, 200);
 
@@ -106,7 +108,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
   }, [formStartTime]);
 
   const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFilled((prev) => ({ ...prev, [name]: value.trim() !== "" }));
@@ -114,6 +116,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
 
   const initialValues: FormData = {
     name: "",
+    surname: "",
     phone: "",
     email: "",
     message: "",
@@ -125,6 +128,11 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
 
   const validationSchema = Yup.object({
     name: Yup.string().required(`${dataForm.validationNameRequired}`),
+
+    surname: Yup.string().required(
+      (dataForm as any).validationSurnameRequired ??
+        dataForm.validationNameRequired,
+    ),
 
     phone: Yup.string().required(`${dataForm.validationPhoneRequired}`),
 
@@ -143,7 +151,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
             ? "Wie können wir Sie am besten kontaktieren?"
             : lang === "pl"
               ? "Wybierz preferowaną formę kontaktu"
-              : "What’s the best way to contact you?"
+              : "What’s the best way to contact you?",
       ),
 
     agreedToPolicy: Yup.boolean()
@@ -153,7 +161,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
 
   const onSubmit = async (
     values: FormData,
-    { setSubmitting, resetForm }: FormikHelpers<FormData>
+    { setSubmitting, resetForm }: FormikHelpers<FormData>,
   ) => {
     setSubmitting(true);
 
@@ -174,7 +182,13 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
         response.data?.created === true
       ) {
         resetForm({});
-        setFilled({ name: false, phone: false, email: false, message: false });
+        setFilled({
+          name: false,
+          surname: false,
+          phone: false,
+          email: false,
+          message: false,
+        });
 
         // GTM
         if (typeof window !== "undefined" && window.dataLayer) {
@@ -194,7 +208,7 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
               ? "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden."
               : lang === "pl"
                 ? "Otrzymaliśmy Twoje zapytanie i skontaktujemy się z Tobą wkrótce."
-                : "We have received your request and will contact you shortly."
+                : "We have received your request and will contact you shortly.",
         );
 
         setTimeout(() => setMessage(null), 5000);
@@ -279,6 +293,56 @@ const FormMinimalBlockComponent: FC<ContactFormProps> = ({
 
                   <ErrorMessage
                     name="name"
+                    component="div"
+                    className={styles.error}
+                  />
+                </div>
+
+                {/* Surname */}
+                <div className={styles.inputWrapper}>
+                  <svg
+                    className={styles.icon}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="#bd8948"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                  </svg>
+
+                  <label
+                    htmlFor={`${uid}-surname`}
+                    className={`${styles.label} ${filled.surname ? styles.filled : ""}`}
+                  >
+                    {(dataForm as any).inputSurname ??
+                      (lang === "ru"
+                        ? "Фамилия"
+                        : lang === "de"
+                          ? "Nachname"
+                          : lang === "pl"
+                            ? "Nazwisko"
+                            : "Surname")}
+                  </label>
+
+                  <Field name="surname">
+                    {({ field }: any) => (
+                      <input
+                        {...field}
+                        id={`${uid}-surname`}
+                        type="text"
+                        className={styles.inputField}
+                        onBlur={(e) => {
+                          field.onBlur(e); // ✅ touched
+                          handleBlur(e);
+                        }}
+                        autoComplete="family-name"
+                      />
+                    )}
+                  </Field>
+
+                  <ErrorMessage
+                    name="surname"
                     component="div"
                     className={styles.error}
                   />

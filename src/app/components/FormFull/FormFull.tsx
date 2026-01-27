@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 
 export type FormData = {
   name: string;
+  surname: string;
   phone: string;
   email: string;
   message: string;
@@ -47,6 +48,7 @@ const FormFull: FC<ContactFormProps> = ({
 
   const [filled, setFilled] = useState({
     name: false,
+    surname: false,
     phone: false,
     email: false,
     message: false,
@@ -62,7 +64,7 @@ const FormFull: FC<ContactFormProps> = ({
     const interval = setInterval(() => {
       const f = formikRef.current;
 
-      const fields = ["name", "email", "message"] as const;
+      const fields = ["name", "surname", "email", "message"] as const;
 
       fields.forEach((field) => {
         const el = document.querySelector(`[name="${field}"]`) as
@@ -79,13 +81,13 @@ const FormFull: FC<ContactFormProps> = ({
         }
 
         setFilled((prev) =>
-          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue }
+          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue },
         );
       });
 
       // ✅ phone отдельно
       const phoneEl = document.querySelector(
-        `[name="phone"]`
+        `[name="phone"]`,
       ) as HTMLInputElement | null;
 
       const domPhone = (phoneEl?.value ?? "").trim();
@@ -96,7 +98,7 @@ const FormFull: FC<ContactFormProps> = ({
       }
 
       setFilled((prev) =>
-        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue }
+        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
       );
     }, 200);
 
@@ -108,7 +110,7 @@ const FormFull: FC<ContactFormProps> = ({
   }, [formStartTime]);
 
   const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFilled((prev) => ({ ...prev, [name]: value.trim() !== "" }));
@@ -116,6 +118,7 @@ const FormFull: FC<ContactFormProps> = ({
 
   const initialValues: FormData = {
     name: "",
+    surname: "",
     phone: "",
     email: "",
     message: "",
@@ -129,6 +132,13 @@ const FormFull: FC<ContactFormProps> = ({
     name: Yup.string()
       .transform((v) => (typeof v === "string" ? v.trim() : v))
       .required(`${dataForm.validationNameRequired}`),
+
+    surname: Yup.string()
+      .transform((v) => (typeof v === "string" ? v.trim() : v))
+      .required(
+        (dataForm as any).validationSurnameRequired ??
+          dataForm.validationNameRequired,
+      ),
 
     phone: Yup.string().required(`${dataForm.validationPhoneRequired}`),
 
@@ -150,7 +160,7 @@ const FormFull: FC<ContactFormProps> = ({
             ? "Bitte bevorzugten Kontaktweg auswählen"
             : lang === "pl"
               ? "Wybierz preferowaną formę kontaktu"
-              : "Please choose your preferred contact method"
+              : "Please choose your preferred contact method",
       ),
 
     agreedToPolicy: Yup.boolean()
@@ -160,7 +170,7 @@ const FormFull: FC<ContactFormProps> = ({
 
   const onSubmit = async (
     values: FormData,
-    { setSubmitting, resetForm }: FormikHelpers<FormData>
+    { setSubmitting, resetForm }: FormikHelpers<FormData>,
   ) => {
     setSubmitting(true);
 
@@ -181,7 +191,13 @@ const FormFull: FC<ContactFormProps> = ({
         response.data?.created === true
       ) {
         resetForm({});
-        setFilled({ name: false, phone: false, email: false, message: false });
+        setFilled({
+          name: false,
+          surname: false,
+          phone: false,
+          email: false,
+          message: false,
+        });
 
         if (typeof window !== "undefined" && window.dataLayer) {
           window.dataLayer.push({
@@ -200,7 +216,7 @@ const FormFull: FC<ContactFormProps> = ({
               ? "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden."
               : lang === "pl"
                 ? "Otrzymaliśmy Twoje zapytanie i skontaktujemy się z Tobą wkrótce."
-                : "We have received your request and will contact you shortly."
+                : "We have received your request and will contact you shortly.",
         );
 
         setTimeout(() => setMessagePopup(null), 5000);
@@ -224,7 +240,7 @@ const FormFull: FC<ContactFormProps> = ({
               ? "Beim Senden der Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
               : lang === "pl"
                 ? "Wystąpił błąd podczas wysyłania zapytania. Spróbuj ponownie później."
-                : "An error occurred while sending the request. Please try again later."
+                : "An error occurred while sending the request. Please try again later.",
         );
       }
 
@@ -285,6 +301,56 @@ const FormFull: FC<ContactFormProps> = ({
 
               <ErrorMessage
                 name="name"
+                component="div"
+                className={styles.error}
+              />
+            </div>
+
+            {/* Surname */}
+            <div className={styles.inputWrapper}>
+              <svg
+                className={styles.icon}
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="#bd8948"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+              </svg>
+
+              <label
+                htmlFor={`${uid}-surname`}
+                className={`${styles.label} ${filled.surname ? styles.filled : ""}`}
+              >
+                {(dataForm as any).inputSurname ??
+                  (lang === "ru"
+                    ? "Фамилия"
+                    : lang === "de"
+                      ? "Nachname"
+                      : lang === "pl"
+                        ? "Nazwisko"
+                        : "Surname")}
+              </label>
+
+              <Field name="surname">
+                {({ field }: any) => (
+                  <input
+                    {...field}
+                    id={`${uid}-surname`}
+                    type="text"
+                    className={styles.inputField}
+                    onBlur={(e) => {
+                      field.onBlur(e);
+                      handleBlur(e);
+                    }}
+                    autoComplete="family-name"
+                  />
+                )}
+              </Field>
+
+              <ErrorMessage
+                name="surname"
                 component="div"
                 className={styles.error}
               />

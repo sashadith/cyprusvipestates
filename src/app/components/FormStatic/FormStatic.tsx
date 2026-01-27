@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 
 export type FormData = {
   name: string;
+  surname: string;
   phone: string;
   // country: string;
   email: string;
@@ -33,6 +34,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
   const [message, setMessage] = useState<string | null>(null);
   const [filled, setFilled] = useState({
     name: false,
+    surname: false,
     phone: false,
     email: false,
   });
@@ -43,13 +45,25 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      ["name", "phone", "email"].forEach((field) => {
-        const input = document.getElementById(field) as HTMLInputElement;
-        if (input && input.value) {
-          setFilled((f) => ({ ...f, [field]: true }));
-        }
+      (["name", "surname", "email"] as const).forEach((field) => {
+        const input = document.querySelector(
+          `[name="${field}"]`,
+        ) as HTMLInputElement | null;
+        const hasValue = Boolean(input?.value?.trim());
+        setFilled((prev) =>
+          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue },
+        );
       });
-    }, 100);
+
+      // phone отдельно (PhoneInput рендерит input внутри)
+      const phoneEl = document.querySelector(
+        `[name="phone"]`,
+      ) as HTMLInputElement | null;
+      const phoneHasValue = Boolean(phoneEl?.value?.trim());
+      setFilled((prev) =>
+        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
+      );
+    }, 200);
 
     return () => clearInterval(interval);
   }, []);
@@ -61,6 +75,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
 
   const initialValues: FormData = {
     name: "",
+    surname: "",
     phone: "",
     // country: "",
     email: "",
@@ -78,7 +93,16 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
           ? "Name ist erforderlich"
           : lang === "pl"
             ? "Imię jest wymagane"
-            : "Name is required"
+            : "Name is required",
+    ),
+    surname: Yup.string().required(
+      lang === "ru"
+        ? "Фамилия обязательна"
+        : lang === "de"
+          ? "Nachname ist erforderlich"
+          : lang === "pl"
+            ? "Nazwisko jest wymagane"
+            : "Surname is required",
     ),
     phone: Yup.string().required(
       lang === "ru"
@@ -87,7 +111,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
           ? "Telefon ist erforderlich"
           : lang === "pl"
             ? "Telefon jest wymagany"
-            : "Phone is required"
+            : "Phone is required",
     ),
     email: Yup.string()
       .email(
@@ -97,7 +121,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
             ? "Ungültige E-Mail Adresse"
             : lang === "pl"
               ? "Nieprawidłowy format email"
-              : "Invalid email address"
+              : "Invalid email address",
       )
       .required(
         lang === "ru"
@@ -106,7 +130,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
             ? "E-Mail ist erforderlich"
             : lang === "pl"
               ? "Email jest wymagany"
-              : "Email is required"
+              : "Email is required",
       ),
     preferredContact: Yup.string()
       .oneOf(["phone", "whatsapp", "email"])
@@ -117,7 +141,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
             ? "Wie können wir Sie am besten kontaktieren?"
             : lang === "pl"
               ? "Wybierz preferowaną formę kontaktu"
-              : "What’s the best way to contact you?"
+              : "What’s the best way to contact you?",
       ),
     agreedToPolicy: Yup.boolean()
       .required(
@@ -127,7 +151,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
             ? "Zustimmung erforderlich"
             : lang === "pl"
               ? "Zgoda jest wymagana"
-              : "Consent is required"
+              : "Consent is required",
       )
       .oneOf(
         [true],
@@ -137,13 +161,13 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
             ? "Einverständnis erforderlich"
             : lang === "pl"
               ? "Wymagane wyrażenie zgody"
-              : "Consent required"
+              : "Consent required",
       ),
   });
 
   const onSubmit = async (
     values: FormData,
-    { setSubmitting, resetForm }: FormikHelpers<FormData>
+    { setSubmitting, resetForm }: FormikHelpers<FormData>,
   ) => {
     setSubmitting(true);
     try {
@@ -155,7 +179,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
       });
       if (response.status === 200) {
         resetForm({});
-        setFilled({ name: false, phone: false, email: false });
+        setFilled({ name: false, surname: false, phone: false, email: false });
 
         // GTM event
         if (typeof window !== "undefined" && window.dataLayer) {
@@ -174,7 +198,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
               ? "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden."
               : lang === "pl"
                 ? "Otrzymaliśmy Twoje zapytanie i skontaktujemy się z Tobą wkrótce."
-                : "We have received your request and will contact you shortly."
+                : "We have received your request and will contact you shortly.",
         );
         setTimeout(() => {
           setMessage(null);
@@ -191,7 +215,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
             ? "Beim Senden der Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
             : lang === "pl"
               ? "Wystąpił błąd podczas wysyłania zapytania. Spróbuj ponownie później."
-              : "An error occurred while sending the request. Please try again later."
+              : "An error occurred while sending the request. Please try again later.",
       );
       setTimeout(() => {
         setMessage(null);
@@ -262,6 +286,47 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                       />
                       <ErrorMessage
                         name="name"
+                        component="div"
+                        className={styles.error}
+                      />
+                    </div>
+
+                    <div className={styles.inputWrapper}>
+                      <svg
+                        className={styles.icon}
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="#bd8948"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                      </svg>
+
+                      <label
+                        htmlFor={`${uid}-surname`}
+                        className={`${styles.label} ${filled.surname ? styles.filled : ""}`}
+                      >
+                        {lang === "ru"
+                          ? "Фамилия"
+                          : lang === "de"
+                            ? "Nachname"
+                            : lang === "pl"
+                              ? "Nazwisko"
+                              : "Surname"}
+                      </label>
+
+                      <Field
+                        id={`${uid}-surname`}
+                        name="surname"
+                        type="text"
+                        className={`${styles.inputField}`}
+                        onBlur={handleBlur}
+                        autoComplete="family-name"
+                      />
+
+                      <ErrorMessage
+                        name="surname"
                         component="div"
                         className={styles.error}
                       />

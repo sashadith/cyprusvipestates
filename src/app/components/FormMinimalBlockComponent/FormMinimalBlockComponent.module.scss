@@ -10,6 +10,17 @@
   }
 }
 
+.nameSurnameWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
 .inputWrapper {
   margin-bottom: 15px;
   position: relative;
