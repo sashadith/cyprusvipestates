@@ -68,7 +68,7 @@ const translations: Record<string, PartnersStarsTranslation> = {
       {
         title: "Agencies and private brokers",
         description:
-          "You get access to our updated property database with selected listings and exclusive commission terms.",
+          "You get access to our updated property database with selected listings and exclusive referral fee terms.",
       },
     ],
   },
@@ -91,7 +91,7 @@ const translations: Record<string, PartnersStarsTranslation> = {
       {
         title: "Agencje i pośrednicy",
         description:
-          "Otrzymujesz dostęp do naszej aktualnej bazy nieruchomości z wybranymi ofertami i korzystnymi warunkami prowizji.",
+          "Otrzymujesz dostęp do naszej aktualnej bazy nieruchomości z wybranymi ofertami i korzystnymi warunkami wynagrodzenia.",
       },
     ],
   },

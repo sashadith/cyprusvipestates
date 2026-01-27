@@ -77,13 +77,13 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "2",
         title: "Expert collaboration",
         description:
-          "We organize viewings, handle all legal matters, and support you throughout the entire process.",
+          "We organize viewings, coordinate with independent lawyers, who handle legal matters, and support you throughout the entire process.",
       },
       {
         number: "3",
         title: "Exclusive properties",
         description:
-          "You get access to our database and sell exclusive properties with selected offers and unique commission conditions.",
+          "You get access to our database and sell exclusive properties with selected offers and unique referral fee conditions.",
       },
       {
         number: "4",
@@ -108,13 +108,13 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "2",
         title: "Współpraca z ekspertami",
         description:
-          "Organizujemy prezentacje, zajmujemy się kwestiami prawnymi i wspieramy Cię na każdym etapie transakcji.",
+          "Organizujemy prezentacje, koordynujemy kontakt z niezależnymi prawnikami i wspieramy Cię na każdym etapie transakcji.",
       },
       {
         number: "3",
         title: "Ekskluzywne nieruchomości",
         description:
-          "Otrzymujesz dostęp do naszej bazy danych i sprzedajesz ekskluzywne nieruchomości z wyselekcjonowanymi ofertami i wyjątkowymi warunkami prowizji.",
+          "Otrzymujesz dostęp do naszej bazy danych i sprzedajesz ekskluzywne nieruchomości z wyselekcjonowanymi ofertami i wyjątkowymi warunkami wynagrodzenia.",
       },
       {
         number: "4",
@@ -133,13 +133,13 @@ const translations: Record<string, PartnersBenefitsTranslation> = {
         number: "1",
         title: "Быстрые выплаты",
         description:
-          "Мы выплачиваем аванс 30% в течение 14 дней после подтверждения оплаты от застройщика. Остальные 70% — после получения всей комиссии.",
+          "Мы выплачиваем аванс 30% в течение 14 дней после подтверждения оплаты от застройщика. Остальные 70% — после получения всего вознаграждения.",
       },
       {
         number: "2",
         title: "Сотрудничество с экспертами",
         description:
-          "Мы организуем показы, берём на себя юридические вопросы и сопровождаем сделку от начала до конца.",
+          "Мы организуем показы, координируем работу с независимыми юристами и сопровождаем сделку от начала до конца.",
       },
       {
         number: "3",

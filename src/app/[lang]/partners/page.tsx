@@ -29,20 +29,22 @@ const metadataByLang = {
       "Werden Sie Partner von Cyprus VIP Estates. Wir bieten attraktive Erfolgshonorare für Tippgeber, Berater und Vermittler im Bereich Zypern-Immobilien. Jetzt anmelden und Marketing-Partner werden!",
   },
   en: {
-    title: "Partner Program for Real Estate Agents – Cyprus VIP Estates",
+    title:
+      "Partner Program for Property Consultants & Marketers – Cyprus VIP Estates",
     description:
-      "Become a partner of Cyprus VIP Estates – earn up to 50% commission by promoting luxury properties in Cyprus.",
+      "Become a partner of Cyprus VIP Estates – earn up to 50% referral fee by promoting luxury properties in Cyprus.",
   },
   pl: {
-    title: "Program partnerski dla agentów nieruchomości – Cyprus VIP Estates",
+    title:
+      "Program partnerski dla doradców ds. nieruchomości – Cyprus VIP Estates",
     description:
-      "Zostań partnerem Cyprus VIP Estates – zarabiaj do 50% prowizji, promując luksusowe nieruchomości na Cyprze.",
+      "Zostań partnerem Cyprus VIP Estates – zarabiaj do 50% wynagrodzenia, promując luksusowe nieruchomości na Cyprze.",
   },
   ru: {
     title:
-      "Партнёрская программа для агентов по недвижимости – Cyprus VIP Estates",
+      "Партнёрская программа для консультантов по недвижимости – Cyprus VIP Estates",
     description:
-      "Станьте партнёром Cyprus VIP Estates — зарабатывайте до 50% комиссии, продвигая элитную недвижимость на Кипре.",
+      "Станьте партнёром Cyprus VIP Estates — зарабатывайте до 50% вознаграждения, продвигая элитную недвижимость на Кипре.",
   },
 };
 
