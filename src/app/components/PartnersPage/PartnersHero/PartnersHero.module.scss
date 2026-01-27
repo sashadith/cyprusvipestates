@@ -77,7 +77,7 @@
 }
 
 .subtitle {
-  font-size: 24px;
+  font-size: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem);
   font-weight: 300;
   line-height: 1.2;
   text-transform: uppercase;
@@ -99,7 +99,7 @@
 }
 
 .highlight {
-  font-size: clamp(2.063rem, 1.531rem + 2.13vw, 3.125rem);
+  font-size: clamp(2.5rem, 2.313rem + 0.75vw, 3.125rem);
   color: #bd8948;
 }
 

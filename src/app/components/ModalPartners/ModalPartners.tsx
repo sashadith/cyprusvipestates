@@ -11,7 +11,7 @@ import FormPartners from "../FormPartners/FormPartners";
 const customStyles: ReactModal.Styles = {
   overlay: {
     backgroundColor: "rgba(242, 244, 247, 0.7)",
-    zIndex: 999,
+    zIndex: 1000,
   },
   content: {
     position: "absolute",
