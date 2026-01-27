@@ -24,9 +24,9 @@ type Props = {
 const metadataByLang = {
   de: {
     title:
-      "Partnerprogramm für Immobilienagenturen und Makler – Cyprus VIP Estates",
+      "Partnerprogramm für Immobilien-Tippgeber & Berater – Cyprus VIP Estates",
     description:
-      "Werde Partner von Cyprus VIP Estates – verdiene bis zu 50 % Provision beim Verkauf exklusiver Immobilien auf Zypern.",
+      "Werden Sie Partner von Cyprus VIP Estates. Wir bieten attraktive Erfolgshonorare für Tippgeber, Berater und Vermittler im Bereich Zypern-Immobilien. Jetzt anmelden und Marketing-Partner werden!",
   },
   en: {
     title: "Partner Program for Real Estate Agents – Cyprus VIP Estates",
