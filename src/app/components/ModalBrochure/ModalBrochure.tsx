@@ -10,12 +10,12 @@ import FormStandard from "../FormStandard/FormStandard";
 const customStyles: ReactModal.Styles = {
   overlay: {
     backgroundColor: "rgba(242, 244, 247, 0.7)",
-    zIndex: 999,
+    zIndex: 1000,
   },
   content: {
     position: "absolute",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
-    // padding: "20px",
+    padding: "0",
     width: "100%",
     height: "100%",
     display: "flex",

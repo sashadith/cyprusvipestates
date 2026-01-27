@@ -1,5 +1,6 @@
 export type Form = {
   inputName: string;
+  inputSurname: string;
   inputPhone: string;
   inputCountry: string;
   inputEmail: string;
@@ -9,8 +10,11 @@ export type Form = {
   agreementLinkLabel: string;
   agreementLinkDestination: string;
   validationNameRequired: string;
+  validationSurnameRequired: string;
   validationNameTooShort: string;
   validationNameTooLong: string;
+  validationSurnameTooShort: string;
+  validationSurnameTooLong: string;
   validationPhoneRequired: string;
   validationPhoneTooShort: string;
   validationPhoneTooLong: string;

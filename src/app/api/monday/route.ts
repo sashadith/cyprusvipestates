@@ -42,7 +42,7 @@ function isRateLimitedKey(
   map: Map<string, number[]>,
   key: string,
   limit = 3,
-  windowMs = 60_000
+  windowMs = 60_000,
 ) {
   const now = Date.now();
   const timestamps = map.get(key) || [];
@@ -87,7 +87,7 @@ function blocked(reason: string, extra?: Record<string, any>) {
   const debug = process.env.NODE_ENV !== "production";
   return NextResponse.json(
     debug ? { ok: false, blocked: reason, ...extra } : { ok: false },
-    { status: 200 } // ✅ ВСЕГДА 200, чтобы “не обучать” ботов статусами
+    { status: 200 }, // ✅ ВСЕГДА 200, чтобы “не обучать” ботов статусами
   );
 }
 
@@ -126,6 +126,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const {
       name,
+      surname,
       phone,
       email,
       message,
@@ -178,6 +179,8 @@ export async function POST(request: Request) {
 
     // базовая валидация
     const nameNorm = String(name ?? "").trim();
+    const surnameNorm = String(surname ?? "").trim();
+    const fullNameNorm = [nameNorm, surnameNorm].filter(Boolean).join(" ");
     const emailNorm = String(email ?? "")
       .trim()
       .toLowerCase();
@@ -211,6 +214,9 @@ export async function POST(request: Request) {
     // имя: длина + защита от "токенов"
     if (nameNorm.length < 2 || nameNorm.length > 60) {
       return blocked("name");
+    }
+    if (surnameNorm && (surnameNorm.length < 2 || surnameNorm.length > 60)) {
+      return blocked("surname");
     }
     const compactName = nameNorm.replace(/\s+/g, "");
     if (compactName.length >= 22 && /^[a-z0-9]+$/i.test(compactName)) {
@@ -248,7 +254,7 @@ export async function POST(request: Request) {
       mutation {
         create_item(
           board_id: ${BOARD_ID},
-          item_name: "${String(nameNorm).replace(/"/g, '\\"')}",
+          item_name: "${String(fullNameNorm).replace(/"/g, '\\"')}",
           column_values: "${JSON.stringify(cols).replace(/"/g, '\\"')}",
           position_relative_method: after_at
         ) {
@@ -277,7 +283,7 @@ export async function POST(request: Request) {
           error: "Monday create_item failed",
           details: data?.errors || data,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -325,13 +331,13 @@ export async function POST(request: Request) {
         created: true,
         message: "Lead sent to Monday; emails processed",
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (err) {
     console.error("Internal error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

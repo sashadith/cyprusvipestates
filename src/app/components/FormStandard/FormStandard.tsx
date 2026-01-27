@@ -21,17 +21,20 @@ import { useRouter } from "next/navigation";
 
 const NAME_MIN = 2;
 const NAME_MAX = 22;
+const SURNAME_MIN = 2;
+const SURNAME_MAX = 22;
 const PHONE_MIN = 7;
 const PHONE_MAX = 25;
 
 function tpl(str: string | undefined, vars: Record<string, string | number>) {
   return String(str ?? "").replace(/\{(\w+)\}/g, (_, k) =>
-    vars[k] !== undefined ? String(vars[k]) : `{${k}}`
+    vars[k] !== undefined ? String(vars[k]) : `{${k}}`,
   );
 }
 
 export type FormData = {
   name: string;
+  surname: string;
   phone: string;
   // country: string;
   preferredContact: string;
@@ -58,6 +61,7 @@ const FormStandard: FC<ContactFormProps> = ({
   const [message, setMessage] = useState<string | null>(null);
   const [filled, setFilled] = useState({
     name: false,
+    surname: false,
     phone: false,
     // country: false,
     email: false,
@@ -74,11 +78,11 @@ const FormStandard: FC<ContactFormProps> = ({
   useEffect(() => {
     const interval = setInterval(() => {
       const f = formikRef.current;
-      const fields = ["name", "email"] as const;
+      const fields = ["name", "surname", "email"] as const;
 
       fields.forEach((field) => {
         const input = document.querySelector(
-          `[name="${field}"]`
+          `[name="${field}"]`,
         ) as HTMLInputElement | null;
 
         const domVal = input?.value?.trim() ?? "";
@@ -90,13 +94,13 @@ const FormStandard: FC<ContactFormProps> = ({
         }
 
         setFilled((prev) =>
-          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue }
+          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue },
         );
       });
 
       // phone
       const phoneEl = document.querySelector(
-        `[name="phone"]`
+        `[name="phone"]`,
       ) as HTMLInputElement | null;
 
       const domPhone = phoneEl?.value?.trim() ?? "";
@@ -107,7 +111,7 @@ const FormStandard: FC<ContactFormProps> = ({
       }
 
       setFilled((prev) =>
-        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue }
+        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
       );
     }, 200);
 
@@ -125,6 +129,7 @@ const FormStandard: FC<ContactFormProps> = ({
 
   const initialValues: FormData = {
     name: "",
+    surname: "",
     phone: "",
     // country: "",
     email: "",
@@ -156,6 +161,38 @@ const FormStandard: FC<ContactFormProps> = ({
             max: NAME_MAX,
             current,
           }),
+        });
+      }),
+
+    surname: Yup.string()
+      .transform((v) => (typeof v === "string" ? v.trim() : v))
+      .required(
+        // если в Sanity/форме есть отдельное сообщение — лучше его
+        (dataForm as any).validationSurnameRequired ??
+          dataForm.validationNameRequired,
+      )
+      .test("surname-min", function (value) {
+        const current = (value ?? "").trim().length;
+        if (current >= SURNAME_MIN) return true;
+
+        return this.createError({
+          message: tpl(
+            (dataForm as any).validationSurnameTooShort ??
+              dataForm.validationNameTooShort,
+            { min: SURNAME_MIN, current },
+          ),
+        });
+      })
+      .test("surname-max", function (value) {
+        const current = (value ?? "").trim().length;
+        if (current <= SURNAME_MAX) return true;
+
+        return this.createError({
+          message: tpl(
+            (dataForm as any).validationSurnameTooLong ??
+              dataForm.validationNameTooLong,
+            { max: SURNAME_MAX, current },
+          ),
         });
       }),
 
@@ -205,7 +242,7 @@ const FormStandard: FC<ContactFormProps> = ({
             ? "Wie können wir Sie am besten kontaktieren?"
             : lang === "pl"
               ? "Wybierz preferowaną formę kontaktu"
-              : "What’s the best way to contact you?"
+              : "What’s the best way to contact you?",
       ),
 
     agreedToPolicy: Yup.boolean()
@@ -215,7 +252,7 @@ const FormStandard: FC<ContactFormProps> = ({
 
   const onSubmit = async (
     values: FormData,
-    { setSubmitting, resetForm }: FormikHelpers<FormData>
+    { setSubmitting, resetForm }: FormikHelpers<FormData>,
   ) => {
     setSubmitting(true);
 
@@ -237,7 +274,7 @@ const FormStandard: FC<ContactFormProps> = ({
         response.data?.created === true
       ) {
         resetForm({});
-        setFilled({ name: false, phone: false, email: false });
+        setFilled({ name: false, surname: false, phone: false, email: false });
 
         // GTM event
         if (typeof window !== "undefined" && window.dataLayer) {
@@ -256,7 +293,7 @@ const FormStandard: FC<ContactFormProps> = ({
               ? "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden."
               : lang === "pl"
                 ? "Otrzymaliśmy Twoje zapytanie i skontaktujemy się z Tobą wkrótce."
-                : "We have received your request and will contact you shortly."
+                : "We have received your request and will contact you shortly.",
         );
         setTimeout(() => {
           setMessage(null);
@@ -300,44 +337,97 @@ const FormStandard: FC<ContactFormProps> = ({
       >
         {({ isSubmitting, setFieldValue, values }) => (
           <Form>
-            {/* Поле для имени */}
-            <div className={styles.inputWrapper}>
-              <svg
-                className={styles.icon}
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="#bd8948"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
-              </svg>
-              <label
-                // htmlFor="name"
-                htmlFor={`${uid}-name`}
-                className={`${styles.label} ${filled.name ? styles.filled : ""}`}
-              >
-                {dataForm.inputName}
-              </label>
-              <Field name="name">
-                {({ field, form }: any) => (
-                  <input
-                    {...field}
-                    id={`${uid}-name`}
-                    type="text"
-                    className={styles.inputField}
-                    onBlur={(e) => {
-                      field.onBlur(e); // ✅ важно: touched
-                      handleBlur(e as any); // твоя логика label filled
-                    }}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                name="name"
-                component="div"
-                className={styles.error}
-              />
+            <div className={styles.nameSurnameWrapper}>
+              {/* Поле для имени */}
+              <div className={styles.inputWrapper}>
+                <svg
+                  className={styles.icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#bd8948"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                </svg>
+                <label
+                  // htmlFor="name"
+                  htmlFor={`${uid}-name`}
+                  className={`${styles.label} ${filled.name ? styles.filled : ""}`}
+                >
+                  {dataForm.inputName}
+                </label>
+                <Field name="name">
+                  {({ field, form }: any) => (
+                    <input
+                      {...field}
+                      id={`${uid}-name`}
+                      type="text"
+                      className={styles.inputField}
+                      onBlur={(e) => {
+                        field.onBlur(e); // ✅ важно: touched
+                        handleBlur(e as any); // твоя логика label filled
+                      }}
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+
+              {/* Поле для фамилии */}
+              <div className={styles.inputWrapper}>
+                <svg
+                  className={styles.icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#bd8948"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                </svg>
+
+                <label
+                  htmlFor={`${uid}-surname`}
+                  className={`${styles.label} ${filled.surname ? styles.filled : ""}`}
+                >
+                  {/* если в dataForm есть inputSurname — идеально */}
+                  {(dataForm as any).inputSurname ??
+                    (lang === "ru"
+                      ? "Фамилия"
+                      : lang === "de"
+                        ? "Nachname"
+                        : lang === "pl"
+                          ? "Nazwisko"
+                          : "Surname")}
+                </label>
+
+                <Field name="surname">
+                  {({ field }: any) => (
+                    <input
+                      {...field}
+                      id={`${uid}-surname`}
+                      type="text"
+                      className={styles.inputField}
+                      onBlur={(e) => {
+                        field.onBlur(e); // touched
+                        handleBlur(e as any); // filled label
+                      }}
+                      autoComplete="family-name"
+                    />
+                  )}
+                </Field>
+
+                <ErrorMessage
+                  name="surname"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
             </div>
 
             <div className={styles.inputWrapper}>

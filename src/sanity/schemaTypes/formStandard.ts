@@ -16,6 +16,11 @@ const formStandard = defineType({
       type: "string",
     }),
     defineField({
+      name: "inputSurname",
+      title: "Input Surname",
+      type: "string",
+    }),
+    defineField({
       name: "inputPhone",
       title: "Input Phone",
       type: "string",
@@ -61,13 +66,28 @@ const formStandard = defineType({
       type: "string",
     }),
     defineField({
+      name: "validationSurnameRequired",
+      title: "Validation Surname Required",
+      type: "string",
+    }),
+    defineField({
       name: "validationNameTooShort",
       title: "Validation Name Too Short",
       type: "string",
     }),
     defineField({
+      name: "validationSurnameTooShort",
+      title: "Validation Surname Too Short",
+      type: "string",
+    }),
+    defineField({
       name: "validationNameTooLong",
       title: "Validation Name Too Long",
+      type: "string",
+    }),
+    defineField({
+      name: "validationSurnameTooLong",
+      title: "Validation Surname Too Long",
       type: "string",
     }),
     defineField({
