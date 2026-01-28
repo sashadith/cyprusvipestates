@@ -415,56 +415,58 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                               : "What’s the best way to contact you?"}
                       </span>
 
-                      <label className={styles.radioOption}>
-                        <Field
-                          type="radio"
-                          name="preferredContact"
-                          value="phone"
-                        />
-                        <span>
-                          {lang === "ru"
-                            ? "Телефон"
-                            : lang === "de"
-                              ? "Anruf"
-                              : lang === "pl"
-                                ? "Telefonicznie"
-                                : "Phone call"}
-                        </span>
-                      </label>
+                      <div className={styles.radioOptions}>
+                        <label className={styles.radioOption}>
+                          <Field
+                            type="radio"
+                            name="preferredContact"
+                            value="phone"
+                          />
+                          <span>
+                            {lang === "ru"
+                              ? "Телефон"
+                              : lang === "de"
+                                ? "Anruf"
+                                : lang === "pl"
+                                  ? "Telefonicznie"
+                                  : "Phone call"}
+                          </span>
+                        </label>
 
-                      <label className={styles.radioOption}>
-                        <Field
-                          type="radio"
-                          name="preferredContact"
-                          value="whatsapp"
-                        />
-                        <span>
-                          {lang === "ru"
-                            ? "WhatsApp"
-                            : lang === "de"
+                        <label className={styles.radioOption}>
+                          <Field
+                            type="radio"
+                            name="preferredContact"
+                            value="whatsapp"
+                          />
+                          <span>
+                            {lang === "ru"
                               ? "WhatsApp"
-                              : lang === "pl"
+                              : lang === "de"
                                 ? "WhatsApp"
-                                : "WhatsApp"}
-                        </span>
-                      </label>
+                                : lang === "pl"
+                                  ? "WhatsApp"
+                                  : "WhatsApp"}
+                          </span>
+                        </label>
 
-                      <label className={styles.radioOption}>
-                        <Field
-                          type="radio"
-                          name="preferredContact"
-                          value="email"
-                        />
-                        <span>
-                          {lang === "ru"
-                            ? "Email"
-                            : lang === "de"
-                              ? "E-Mail"
-                              : lang === "pl"
-                                ? "E-mail"
-                                : "Email"}
-                        </span>
-                      </label>
+                        <label className={styles.radioOption}>
+                          <Field
+                            type="radio"
+                            name="preferredContact"
+                            value="email"
+                          />
+                          <span>
+                            {lang === "ru"
+                              ? "Email"
+                              : lang === "de"
+                                ? "E-Mail"
+                                : lang === "pl"
+                                  ? "E-mail"
+                                  : "Email"}
+                          </span>
+                        </label>
+                      </div>
                     </div>
 
                     <ErrorMessage
