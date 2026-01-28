@@ -297,7 +297,7 @@ export async function POST(request: Request) {
         text: "New lead from Cyprus VIP Estates. Check your board in Monday.",
         html: `
           <h2>New Lead — Cyprus VIP Estates</h2>
-          <p><b>Name:</b> ${nameNorm}</p>
+          <p><b>Name:</b> ${fullNameNorm}</p>
           <p><b>Phone:</b> ${phoneNorm}</p>
           <p><b>Email:</b> ${emailNorm}</p>
           <p><b>Preferred contact:</b> ${preferredNorm}</p>
