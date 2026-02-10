@@ -338,14 +338,18 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+.leaflet-control {
+  display: none !important;
+}
+
 .projects-map__wrapper {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
 
-  @media screen and (min-width: 1200px) {
+  /* @media screen and (min-width: 1200px) {
     grid-template-columns: 1fr 0.7fr;
-  }
+  } */
 }
 
 .projects-map__projects-list {
@@ -353,21 +357,25 @@ input[type="number"]::-webkit-outer-spin-button {
   grid-template-columns: 1fr;
   gap: 20px;
 
-  @media screen and (min-width: 1200px) {
-    grid-template-columns: repeat(2, 1fr);
+  @media screen and (min-width: 786px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: 980px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .map-sticky {
   width: 100%;
-  height: 500px;
+  /* height: 560px; */
   position: relative;
   overflow: hidden;
 
   @media screen and (min-width: 1200px) {
     position: sticky;
     top: 80px;
-    height: 500px;
+    /* height: 560px; */
   }
 }
 

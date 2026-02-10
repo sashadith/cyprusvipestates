@@ -60,7 +60,7 @@ export async function generateMetadata({
 
 const ProjectsMapAll = dynamic(
   () => import("@/app/components/ProjectsMapAll/ProjectsMapAll"),
-  { ssr: false }
+  { ssr: false },
 );
 
 // pagination
@@ -129,7 +129,7 @@ export default async function ProjectsPage({
           }
           return acc;
         },
-        []
+        [],
       )
       .join(" ");
 
@@ -221,6 +221,20 @@ export default async function ProjectsPage({
         />
         <section className="projects-map">
           <div className="projects-map__wrapper">
+            <div className="projects-map__map">
+              <div
+                className="map-sticky"
+                // style={{
+                //   marginTop: "2rem",
+                //   width: "100%",
+                //   height: "500px",
+                //   position: "relative",
+                //   overflow: "hidden",
+                // }}
+              >
+                <ProjectsMapAll lang={lang} markers={filteredMarkers} />
+              </div>
+            </div>
             <div className="projects-map__projects">
               {projects.length === 0 ? (
                 <NoProjects lang={lang} />
@@ -253,20 +267,6 @@ export default async function ProjectsPage({
                   })}
                 </div>
               )}
-            </div>
-            <div className="projects-map__map">
-              <div
-                className="map-sticky"
-                // style={{
-                //   marginTop: "2rem",
-                //   width: "100%",
-                //   height: "500px",
-                //   position: "relative",
-                //   overflow: "hidden",
-                // }}
-              >
-                <ProjectsMapAll lang={lang} markers={filteredMarkers} />
-              </div>
             </div>
           </div>
         </section>
@@ -386,7 +386,7 @@ export default async function ProjectsPage({
                             {pageNum}
                           </Link>
                         );
-                      }
+                      },
                     )}
 
                     {/* Next */}

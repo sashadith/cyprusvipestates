@@ -7,6 +7,8 @@ import L from "leaflet";
 import Link from "next/link";
 import styles from "./ProjectsMapAll.module.scss";
 import "leaflet/dist/leaflet.css";
+import "leaflet-gesture-handling/dist/leaflet-gesture-handling.css";
+import "leaflet-gesture-handling";
 
 type Lang = "en" | "de" | "ru" | "pl";
 
@@ -52,9 +54,9 @@ const useValidMarkers = (items: MarkerItem[]) =>
           typeof m.location.lat === "number" &&
           typeof m.location.lng === "number" &&
           !Number.isNaN(m.location.lat) &&
-          !Number.isNaN(m.location.lng)
+          !Number.isNaN(m.location.lng),
       ),
-    [items]
+    [items],
   );
 
 function debounce<T extends (...a: any[]) => void>(fn: T, wait = 500) {
@@ -109,7 +111,7 @@ const BoundsSync: FC = () => {
         // считаем, что действие завершилось
         userInteractingRef.current = false;
       }, 400),
-    [router, sp]
+    [router, sp],
   );
 
   useEffect(() => {
@@ -142,7 +144,7 @@ const BoundsSync: FC = () => {
           [s, w],
           [n, e],
         ],
-        { padding: [32, 32] }
+        { padding: [32, 32] },
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -156,14 +158,16 @@ const FitBounds: FC<{ markers: MarkerItem[] }> = ({ markers }) => {
   const valid = useValidMarkers(markers);
   const sp = useSearchParams(); // NEW
   const bboxInUrl = ["north", "south", "east", "west"].every(
-    (k) => !!sp.get(k)
+    (k) => !!sp.get(k),
   );
 
   useEffect(() => {
     if (bboxInUrl) return; // если в URL уже есть bbox — не трогаем
     if (!valid.length) return;
     const bounds = L.latLngBounds(
-      valid.map((m) => [m.location!.lat!, m.location!.lng!] as [number, number])
+      valid.map(
+        (m) => [m.location!.lat!, m.location!.lng!] as [number, number],
+      ),
     );
     map.fitBounds(bounds, { padding: [32, 32] });
   }, [valid, map, bboxInUrl]);
@@ -214,7 +218,7 @@ function buildMapLinks(lat: number, lng: number) {
 
 function t(
   label: "coords" | "copy" | "copied" | "open" | "route" | "osm",
-  lang: Lang
+  lang: Lang,
 ) {
   const dict: Record<Lang, any> = {
     en: {
@@ -268,6 +272,32 @@ type Props = {
   markers: MarkerItem[];
 };
 
+const GESTURE_TEXT: Record<
+  Lang,
+  { touch: string; scroll: string; scrollMac: string }
+> = {
+  de: {
+    touch: "Zum Bewegen zwei Finger verwenden",
+    scroll: "Strg + Scrollen zum Zoomen",
+    scrollMac: "\u2318 + Scrollen zum Zoomen",
+  },
+  en: {
+    touch: "Use two fingers to pan",
+    scroll: "Ctrl + scroll to zoom",
+    scrollMac: "\u2318 + scroll to zoom",
+  },
+  pl: {
+    touch: "Użyj dwóch palców, aby przesuwać mapę",
+    scroll: "Ctrl + scroll, aby przybliżyć",
+    scrollMac: "\u2318 + scroll, aby przybliżyć",
+  },
+  ru: {
+    touch: "Используйте два пальца, чтобы перемещать карту",
+    scroll: "Ctrl + скролл для масштабирования",
+    scrollMac: "\u2318 + скролл для масштабирования",
+  },
+};
+
 const ProjectsMapAll: FC<Props> = ({ lang, markers }) => {
   const valid = useValidMarkers(markers);
   const center: [number, number] = [35.1264, 33.4299];
@@ -289,6 +319,13 @@ const ProjectsMapAll: FC<Props> = ({ lang, markers }) => {
         zoom={8}
         scrollWheelZoom
         style={{ height: "100%", width: "100%" }}
+        {...({
+          gestureHandling: true,
+          gestureHandlingOptions: {
+            text: GESTURE_TEXT[LANG] ?? GESTURE_TEXT.de, // de как default
+            duration: 3000, // опционально: сколько держать подсказку (мс)
+          },
+        } as any)}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
