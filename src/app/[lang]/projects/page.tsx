@@ -254,20 +254,6 @@ export default async function ProjectsPage({
                 </div>
               )}
             </div>
-            <div className="projects-map__map">
-              <div
-                className="map-sticky"
-                // style={{
-                //   marginTop: "2rem",
-                //   width: "100%",
-                //   height: "500px",
-                //   position: "relative",
-                //   overflow: "hidden",
-                // }}
-              >
-                <ProjectsMapAll lang={lang} markers={filteredMarkers} />
-              </div>
-            </div>
           </div>
         </section>
         {/* <div className="container">
@@ -306,6 +292,7 @@ export default async function ProjectsPage({
               className="pagination-links"
               style={{
                 marginTop: "2rem",
+                marginBottom: "1rem",
                 display: "flex",
                 gap: ".5rem",
                 flexWrap: "wrap",
@@ -404,6 +391,21 @@ export default async function ProjectsPage({
               })()}
             </div>
           )}
+        </div>
+
+        <div className="projects-map__map">
+          <div
+            className="map-sticky"
+            // style={{
+            //   marginTop: "2rem",
+            //   width: "100%",
+            //   height: "500px",
+            //   position: "relative",
+            //   overflow: "hidden",
+            // }}
+          >
+            <ProjectsMapAll lang={lang} markers={filteredMarkers} />
+          </div>
         </div>
 
         {/* === СТАБИЛЬНАЯ СТАТИЧНАЯ КАРТА СО ВСЕМИ ПРОЕКТАМИ === */}
