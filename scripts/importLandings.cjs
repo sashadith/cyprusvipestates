@@ -29,6 +29,32 @@ const FAQ_DEFAULT_TITLES = {
 // ---------- utils ----------
 const nonEmpty = (v) => v !== undefined && v !== null && String(v).trim() !== '';
 
+function parseCsvWithSecondHeader(csvText) {
+  const cleaned = String(csvText).replace(/^\uFEFF/, '');
+  const lines = cleaned.split(/\r?\n/);
+  if (lines.length < 2) return [];
+
+  // строка 2 = машинные названия колонок
+  const headerLine = lines[1];
+
+  // парсим заголовок корректно (с учётом кавычек и запятых)
+  const [columns] = parse(headerLine, {
+    relax_quotes: true,
+    skip_empty_lines: true,
+    relax_column_count: true,
+  });
+
+  // парсим весь CSV, но:
+  // - columns: columns (вручную заданные имена)
+  // - from_line: 3 (данные начинаются с 3-й строки)
+  return parse(cleaned, {
+    columns,
+    from_line: 3,
+    skip_empty_lines: true,
+    relax_quotes: true,
+  });
+}
+
 // mini-Markdown → Portable Text (H1–H3, списки, жирный/курсив, ссылки)
 function mdToPT(text = '') {
   const lines = String(text).replace(/\r\n/g, '\n').split('\n');
@@ -357,7 +383,7 @@ async function run() {
   const lower = (s) => String(s || '').trim().toLowerCase();
 
   const csv = fs.readFileSync(CSV_PATH, 'utf8');
-  const rows = parse(csv, { columns: true, skip_empty_lines: true, from_line: 2 });
+  const rows = parseCsvWithSecondHeader(csv);
 
   for (const row of rows) {
     const baseId = `single-${row.id}`;

@@ -72,6 +72,27 @@ function normalizeMonthYear(input) {
 //     }));
 // }
 
+function parseCsvWithSecondHeader(csvText) {
+  const cleaned = String(csvText).replace(/^\uFEFF/, '');
+  const lines = cleaned.split(/\r?\n/);
+  if (lines.length < 2) return [];
+
+  const headerLine = lines[1]; // 2-я строка = машинные колонки
+  const [columns] = parse(headerLine, {
+    relax_quotes: true,
+    skip_empty_lines: true,
+    relax_column_count: true,
+  });
+
+  return parse(cleaned, {
+    columns,
+    from_line: 3,          // данные с 3-й строки
+    skip_empty_lines: true,
+    relax_quotes: true,
+    relax_column_count: true,
+  });
+}
+
 // --- Мини-Markdown → Portable Text (H1–H3, списки, жирный/курсив, ссылки)
 function mdToPT(text = '') {
   const lines = String(text).replace(/\r\n/g, '\n').split('\n');
@@ -393,13 +414,13 @@ async function run() {
 
   // 3) Чтение CSV
   const csv = fs.readFileSync(CSV_PATH, 'utf8');
-  const rows = parse(csv, {
-    columns: true,
-    skip_empty_lines: true,
-    from_line: 2
-  });
+  const rows = parseCsvWithSecondHeader(csv);
 
   for (const row of rows) {
+    if (!row.id) {
+      console.warn('⚠️ row.id is empty, skipping row:', row);
+      continue;
+    }
     const baseId = `project-${row.id}`;
     const metaRefs = [];
 
@@ -421,16 +442,19 @@ async function run() {
       // — previewImage + alt
       let previewRef = null;
       if (row.previewImage_path) {
-        try { previewRef = await uploadImage(row.previewImage_path, localMap); }
-        catch (e) { console.error(`⚠️ preview upload failed: ${e.message}`); }
+        try {
+          previewRef = await uploadImage(row.previewImage_path, localMap, { strict: false });
+          if (!previewRef) console.warn(`⚠️ preview image not found: ${row.previewImage_path}`);
+        } catch (e) {
+          console.warn(`⚠️ preview upload failed: ${e.message}`);
+        }
       }
 
-      // — videoPreview + alt
+      // — videoPreview: всегда такое же, как previewImage
       const videoId = row.videoId || '';
-      let videoPreviewRef = null;
-      if (row.videoPreview_path) {
-        try { videoPreviewRef = await uploadImage(row.videoPreview_path, localMap); }
-        catch (e) { console.error(`⚠️ videoPreview upload failed: ${e.message}`); }
+      const videoPreviewRef = videoId ? previewRef : null;
+      if (videoId && !previewRef) {
+        console.warn(`⚠️ videoId задан, но previewImage_path пустой/не найден (row id=${row.id}). videoPreview не будет.`);
       }
 
       // — галерея (ALT для всех изображений = computedAlt)
