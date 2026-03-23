@@ -963,11 +963,8 @@ export async function getDeveloperByLang(
     developerQuery,
     { lang, slug },
     {
-      cache: "no-store",
+      next: { revalidate: 60 },
     },
-    // {
-    //   next: { revalidate: 60 },
-    // },
   );
 }
 
