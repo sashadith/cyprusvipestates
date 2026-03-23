@@ -959,9 +959,16 @@ export async function getDeveloperByLang(
     },
   }`;
 
-  const developer = await client.fetch(developerQuery, { lang, slug });
-
-  return developer;
+  return await client.fetch(
+    developerQuery,
+    { lang, slug },
+    {
+      cache: "no-store",
+    },
+    // {
+    //   next: { revalidate: 60 },
+    // },
+  );
 }
 
 export async function getProjectsByDeveloper(
