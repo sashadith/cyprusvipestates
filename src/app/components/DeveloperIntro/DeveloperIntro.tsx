@@ -20,14 +20,21 @@ const DeveloperIntro: FC<Props> = ({ titleFull, excerpt, logo }) => {
             {excerpt && <p className={styles.description}>{excerpt}</p>}
           </div>
           <div className={styles.logo}>
-            <Image
-              alt={logo.alt || titleFull}
-              src={urlFor(logo).url()}
-              width={200}
-              height={200}
-              className="imagePoster"
-              unoptimized
-            />
+            {logo?.asset?._ref ? (
+              <Image
+                alt={logo.alt || titleFull}
+                src={urlFor(logo).url()}
+                width={200}
+                height={200}
+                className="imagePoster"
+                unoptimized
+              />
+            ) : (
+              <img
+                src="https://cdn.sanity.io/files/88gk88s2/production/82c40f36d0c0cec712ca09a2c7149ac3c9b7dbf1.png"
+                alt={titleFull}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getDeveloperByLang(lang, slug);
 
   let previewImageUrl: string | undefined = undefined;
-  if (data?.logo) {
+  if (data?.logo?.asset?._ref) {
     previewImageUrl = urlFor(data.logo).width(1200).url();
   }
 
@@ -107,7 +107,7 @@ const DeveloperPage = async ({ params }: Props) => {
           }
           return acc;
         },
-        []
+        [],
       )
       .join(" ");
 

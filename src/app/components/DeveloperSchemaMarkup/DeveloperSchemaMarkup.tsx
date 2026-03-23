@@ -15,13 +15,14 @@ const DeveloperSchemaMarkup: React.FC<DeveloperSchemaMarkupProps> = ({
   const schemaOrgJSONLD = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: developer.title, // или, если есть поле titleFull, можно его использовать
+    name: developer.title,
     url: pageUrl,
-    logo: developer.logo ? urlFor(developer.logo).url() : undefined,
+    logo: developer.logo?.asset?._ref
+      ? urlFor(developer.logo).url()
+      : undefined,
     description:
       developer.excerpt ||
       (typeof developer.description === "string" ? developer.description : ""),
-    // Дополнительно можно добавить ссылки на соцсети или контактные данные, если они есть
   };
 
   return (
