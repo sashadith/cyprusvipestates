@@ -34,7 +34,7 @@ type Props = {
 const popupMessages: Record<SupportedLang, string> = {
   de: "Diese Immobilie befindet sich hier.",
   en: "This property is located here.",
-  ru: "Здесь находится этот объект.",
+  ru: "Объект находится здесь.",
   pl: "Tutaj znajduje się ta nieruchomość.",
 };
 
