@@ -242,7 +242,7 @@ function t(
       copy: "Скопировать",
       copied: "Скопировано!",
       open: "Открыть в Google Картах",
-      route: "Маршрут (Google/Apple)",
+      route: "Google/Apple",
       osm: "Открыть в OSM",
     },
     pl: {
