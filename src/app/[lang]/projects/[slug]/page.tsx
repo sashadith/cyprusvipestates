@@ -101,7 +101,7 @@ const ProjectPage = async ({ params }: Props) => {
           }
           return acc;
         },
-        []
+        [],
       )
       .join(" ");
 
@@ -120,7 +120,7 @@ const ProjectPage = async ({ params }: Props) => {
     () => import("../../../components/PropertyMap/PropertyMap"),
     {
       ssr: false,
-    }
+    },
   );
 
   return (
@@ -165,7 +165,12 @@ const ProjectPage = async ({ params }: Props) => {
           </div>
         </div>
         <PropertyDistances distances={project.distances} lang={params.lang} />
-        <MapWithNoSSR lat={project.location.lat} lng={project.location.lng} />
+        <MapWithNoSSR
+          lat={project.location.lat}
+          lng={project.location.lng}
+          lang={params.lang}
+          showPopup={true}
+        />
         <FormStatic lang={params.lang} />
         <FullDescriptionBlock description={project.fullDescription} />
         {project.faq && (

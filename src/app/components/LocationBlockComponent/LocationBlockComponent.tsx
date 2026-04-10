@@ -13,12 +13,17 @@ const LocationBlockComponent: FC<Props> = ({ block, lang }) => {
     () => import("../../components/PropertyMap/PropertyMap"),
     {
       ssr: false,
-    }
+    },
   );
 
   return (
     <div>
-      <MapWithNoSSR lat={block.location.lat} lng={block.location.lng} />
+      <MapWithNoSSR
+        lat={block.location.lat}
+        lng={block.location.lng}
+        lang={lang}
+        showPopup={false}
+      />
     </div>
   );
 };
