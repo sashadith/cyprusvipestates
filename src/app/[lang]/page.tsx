@@ -73,7 +73,7 @@ export default async function Home({ params }: Props) {
           }
           return acc;
         },
-        []
+        [],
       )
       .join(" ");
 
@@ -100,10 +100,10 @@ export default async function Home({ params }: Props) {
         <NewListnigs lang={params.lang} />
         <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />
         <HowWeWorkBlock work={homePage.howWeWorkBlock} />
-        <DevelopersLogos
+        {/* <DevelopersLogos
           logos={homePage.logosBlock?.logos}
           lang={params.lang}
-        />
+        /> */}
         <ParallaxImage image={homePage.parallaxImage} />
         <ReviewsFullBlockComponent
           block={homePage.reviewsFullBlock}
