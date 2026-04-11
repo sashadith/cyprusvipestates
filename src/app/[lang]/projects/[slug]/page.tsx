@@ -170,6 +170,15 @@ const ProjectPage = async ({ params }: Props) => {
           lng={project.location.lng}
           lang={params.lang}
           showPopup={true}
+          title={project.title}
+          // slug={project.slug?.current}
+          city={project.keyFeatures?.city}
+          price={project.keyFeatures?.price}
+          previewUrl={
+            project.previewImage
+              ? urlFor(project.previewImage).width(800).height(500).url()
+              : undefined
+          }
         />
         <FormStatic lang={params.lang} />
         <FullDescriptionBlock description={project.fullDescription} />
