@@ -1081,6 +1081,7 @@ export async function getAllProjectsByLang(lang: string): Promise<Project[]> {
 type ProjectListItem = {
   _id: string;
   title: string;
+  excerpt?: string;
   slug: { current: string } | string;
   previewImage: any;
   images?: any[];
@@ -1091,6 +1092,7 @@ type ProjectListItem = {
     bedrooms?: string;
     coveredArea?: string;
     plotSize?: string;
+    completionDate?: string;
   };
   isSold?: boolean;
   videoId?: string;
@@ -1102,6 +1104,15 @@ type ProjectListItem = {
 
 function getNumericPrice(project: ProjectListItem): number {
   return Number(project?.keyFeatures?.price ?? 0);
+}
+
+function getCompletionTimestamp(project: ProjectListItem): number | null {
+  const rawDate = project?.keyFeatures?.completionDate;
+
+  if (!rawDate) return null;
+
+  const timestamp = new Date(rawDate).getTime();
+  return Number.isNaN(timestamp) ? null : timestamp;
 }
 
 function getProjectScore(project: ProjectListItem): number {
@@ -1215,6 +1226,30 @@ function sortProjectsStandard(
 
     case "titleDesc":
       return items.sort((a, b) => (b.title || "").localeCompare(a.title || ""));
+
+    case "completionSoon":
+      return items.sort((a, b) => {
+        const aCompletion = getCompletionTimestamp(a);
+        const bCompletion = getCompletionTimestamp(b);
+
+        // У обоих есть дата — ближайшая выше
+        if (aCompletion !== null && bCompletion !== null) {
+          return aCompletion - bCompletion;
+        }
+
+        // У a есть дата, у b нет — a выше
+        if (aCompletion !== null && bCompletion === null) {
+          return -1;
+        }
+
+        // У b есть дата, у a нет — b выше
+        if (aCompletion === null && bCompletion !== null) {
+          return 1;
+        }
+
+        // Если ни у кого нет даты — fallback по title
+        return (a.title || "").localeCompare(b.title || "");
+      });
 
     default:
       return items.sort((a, b) => {

@@ -230,6 +230,7 @@ export default function StyledProjectFilters({
           { label: "Empfohlen", value: "recommended" },
           { label: "Preis: aufsteigend", value: "priceAsc" },
           { label: "Preis: absteigend", value: "priceDesc" },
+          { label: "Fertigstellung: am frühesten", value: "completionSoon" },
           { label: "Titel: A–Z", value: "titleAsc" },
           { label: "Titel: Z–A", value: "titleDesc" },
         ]
@@ -238,6 +239,7 @@ export default function StyledProjectFilters({
             { label: "Рекомендуемые", value: "recommended" },
             { label: "Цена: по возрастанию", value: "priceAsc" },
             { label: "Цена: по убыванию", value: "priceDesc" },
+            { label: "Сдача: ближайшая", value: "completionSoon" },
             { label: "Название: A–Z", value: "titleAsc" },
             { label: "Название: Z–A", value: "titleDesc" },
           ]
@@ -246,6 +248,7 @@ export default function StyledProjectFilters({
               { label: "Polecane", value: "recommended" },
               { label: "Cena: rosnąco", value: "priceAsc" },
               { label: "Cena: malejąco", value: "priceDesc" },
+              { label: "Oddanie: najszybciej", value: "completionSoon" },
               { label: "Tytuł: A–Z", value: "titleAsc" },
               { label: "Tytuł: Z–A", value: "titleDesc" },
             ]
@@ -253,6 +256,7 @@ export default function StyledProjectFilters({
               { label: "Recommended", value: "recommended" },
               { label: "Price: Low to High", value: "priceAsc" },
               { label: "Price: High to Low", value: "priceDesc" },
+              { label: "Completion: Soonest first", value: "completionSoon" },
               { label: "Title: A–Z", value: "titleAsc" },
               { label: "Title: Z–A", value: "titleDesc" },
             ];

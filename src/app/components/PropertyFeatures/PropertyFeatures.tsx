@@ -213,14 +213,14 @@ const PropertyFeatures: FC<Props> = ({ keyFeatures, lang }) => {
               <div className={styles.feature}>
                 <div className={styles.featureText}>
                   {lang === "en"
-                    ? "Completion date"
+                    ? "Completion month"
                     : lang === "de"
-                      ? "Fertigstellungsdatum"
+                      ? "Fertigstellungsmonat"
                       : lang === "pl"
-                        ? "Data zakończenia"
+                        ? "Miesiąc zakończenia"
                         : lang === "ru"
-                          ? "Дата сдачи проекта"
-                          : "Completion date"}
+                          ? "Месяц завершения"
+                          : "Completion month"}
                 </div>
                 <div className={styles.featureValue}>{completion}</div>
               </div>
