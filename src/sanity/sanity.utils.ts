@@ -1078,6 +1078,153 @@ export async function getAllProjectsByLang(lang: string): Promise<Project[]> {
   return projects;
 }
 
+type ProjectListItem = {
+  _id: string;
+  title: string;
+  slug: { current: string } | string;
+  previewImage: any;
+  images?: any[];
+  keyFeatures?: {
+    price?: number;
+    city?: string;
+    propertyType?: string;
+    bedrooms?: string;
+    coveredArea?: string;
+    plotSize?: string;
+  };
+  isSold?: boolean;
+  videoId?: string;
+  isNew?: boolean;
+  isFeatured?: boolean;
+  listingPriority?: number;
+  _createdAt?: string;
+};
+
+function getNumericPrice(project: ProjectListItem): number {
+  return Number(project?.keyFeatures?.price ?? 0);
+}
+
+function getProjectScore(project: ProjectListItem): number {
+  let score = 0;
+
+  if (project.isFeatured) score += 100000;
+  score += (project.listingPriority ?? 0) * 1000;
+
+  if (project.videoId) score += 200;
+  if (project.isNew) score += 100;
+
+  return score;
+}
+
+function getPriceSegment(price: number): "low" | "mid" | "high" | "luxury" {
+  if (price < 300000) return "low";
+  if (price < 600000) return "mid";
+  if (price < 1000000) return "high";
+  return "luxury";
+}
+
+function sortWithinBucket(projects: ProjectListItem[]): ProjectListItem[] {
+  return [...projects].sort((a, b) => {
+    const scoreDiff = getProjectScore(b) - getProjectScore(a);
+    if (scoreDiff !== 0) return scoreDiff;
+
+    const priceDiff = getNumericPrice(b) - getNumericPrice(a);
+    if (priceDiff !== 0) return priceDiff;
+
+    return (a.title || "").localeCompare(b.title || "");
+  });
+}
+
+function interleaveByPriceSegments(
+  projects: ProjectListItem[],
+): ProjectListItem[] {
+  const buckets: Record<"low" | "mid" | "high" | "luxury", ProjectListItem[]> =
+    {
+      low: [],
+      mid: [],
+      high: [],
+      luxury: [],
+    };
+
+  for (const project of projects) {
+    const segment = getPriceSegment(getNumericPrice(project));
+    buckets[segment].push(project);
+  }
+
+  buckets.low = sortWithinBucket(buckets.low);
+  buckets.mid = sortWithinBucket(buckets.mid);
+  buckets.high = sortWithinBucket(buckets.high);
+  buckets.luxury = sortWithinBucket(buckets.luxury);
+
+  const result: ProjectListItem[] = [];
+
+  // Можно потом тюнить под бизнес
+  const pattern: Array<"mid" | "high" | "low" | "luxury"> = [
+    "mid",
+    "high",
+    "low",
+    "luxury",
+    "mid",
+    "high",
+  ];
+
+  let added = true;
+
+  while (added) {
+    added = false;
+
+    for (const bucketName of pattern) {
+      const nextItem = buckets[bucketName].shift();
+      if (nextItem) {
+        result.push(nextItem);
+        added = true;
+      }
+    }
+  }
+
+  return result;
+}
+
+function sortProjectsRecommended(
+  projects: ProjectListItem[],
+): ProjectListItem[] {
+  const featured = projects.filter((p) => p.isFeatured);
+  const regular = projects.filter((p) => !p.isFeatured);
+
+  const featuredMixed = interleaveByPriceSegments(featured);
+  const regularMixed = interleaveByPriceSegments(regular);
+
+  return [...featuredMixed, ...regularMixed];
+}
+
+function sortProjectsStandard(
+  projects: ProjectListItem[],
+  sort: string,
+): ProjectListItem[] {
+  const items = [...projects];
+
+  switch (sort) {
+    case "priceAsc":
+      return items.sort((a, b) => getNumericPrice(a) - getNumericPrice(b));
+
+    case "priceDesc":
+      return items.sort((a, b) => getNumericPrice(b) - getNumericPrice(a));
+
+    case "titleAsc":
+      return items.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+
+    case "titleDesc":
+      return items.sort((a, b) => (b.title || "").localeCompare(a.title || ""));
+
+    default:
+      return items.sort((a, b) => {
+        const aDate = a._createdAt ? new Date(a._createdAt).getTime() : 0;
+        const bDate = b._createdAt ? new Date(b._createdAt).getTime() : 0;
+        return bDate - aDate;
+      });
+  }
+}
+
 export async function getFilteredProjects(
   lang: string,
   skip: number,
@@ -1089,7 +1236,6 @@ export async function getFilteredProjects(
     propertyType?: string;
     q?: string;
     sort?: string;
-    // ⬇⬇⬇ новенькое:
     north?: number | null;
     south?: number | null;
     east?: number | null;
@@ -1102,23 +1248,12 @@ export async function getFilteredProjects(
     priceTo = null,
     propertyType = "",
     q = "",
-    sort = "priceAsc",
+    sort = "recommended",
     north = null,
     south = null,
     east = null,
     west = null,
   } = filters;
-
-  const orderClause =
-    sort === "priceAsc"
-      ? "keyFeatures.price asc"
-      : sort === "priceDesc"
-        ? "keyFeatures.price desc"
-        : sort === "titleAsc"
-          ? "title asc"
-          : sort === "titleDesc"
-            ? "title desc"
-            : "_createdAt desc";
 
   const qPattern = q && q.length >= 3 ? `${q}*` : "";
 
@@ -1135,6 +1270,7 @@ export async function getFilteredProjects(
     "project-akamantis-gardens-ru",
     "drafts.project-akamantis-gardens-en"
   ]) &&
+  !(_id match "drafts.*") &&
   ($city == "" || keyFeatures.city == $city) &&
   ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
   ($priceFrom == null || keyFeatures.price >= $priceFrom) &&
@@ -1144,28 +1280,27 @@ export async function getFilteredProjects(
     title match $qPattern ||
     excerpt match $qPattern
   ) &&
-  // ⬇⬇⬇ bbox (включается только если все 4 заданы)
   (
     $north == null || $south == null || $east == null || $west == null ||
-    (defined(location.lat) && defined(location.lng) &&
-    location.lat <= $north && location.lat >= $south &&
-    location.lng <= $east  && location.lng >= $west)
+    (
+      defined(location.lat) && defined(location.lng) &&
+      location.lat <= $north && location.lat >= $south &&
+      location.lng <= $east && location.lng >= $west
+    )
   )
-]
-| order(
-  ($qPattern != "" && title match $qPattern) desc,
-  ($qPattern != "" && excerpt match $qPattern) desc,
-  ${orderClause}
-)
-[${skip}...${skip + limit}]{
+]{
   _id,
+  _createdAt,
   title,
+  excerpt,
   "slug": slug[$lang],
   previewImage,
   "images": images[0...5],
   keyFeatures,
   isSold,
   videoId,
+  isFeatured,
+  listingPriority,
   "isNew": _id in *[
     _type == "project" &&
     language == $lang &&
@@ -1173,7 +1308,7 @@ export async function getFilteredProjects(
   ] | order(_createdAt desc)[0...20]._id
 }`;
 
-  return client.fetch(query, {
+  const projects: ProjectListItem[] = await client.fetch(query, {
     lang,
     city,
     priceFrom,
@@ -1185,6 +1320,51 @@ export async function getFilteredProjects(
     east,
     west,
   });
+
+  let sortedProjects: ProjectListItem[] = [];
+
+  if (sort === "recommended") {
+    sortedProjects = sortProjectsRecommended(projects);
+  } else {
+    sortedProjects = sortProjectsStandard(projects, sort);
+  }
+
+  // если есть keyword-search, чуть усилим релевантность в начале
+  if (qPattern) {
+    const normalizedQ = q.toLowerCase();
+
+    sortedProjects = [...sortedProjects].sort((a, b) => {
+      const aTitleMatch = a.title?.toLowerCase().includes(normalizedQ) ? 1 : 0;
+      const bTitleMatch = b.title?.toLowerCase().includes(normalizedQ) ? 1 : 0;
+
+      if (aTitleMatch !== bTitleMatch) {
+        return bTitleMatch - aTitleMatch;
+      }
+
+      const aExcerptMatch = (a as any).excerpt
+        ?.toLowerCase?.()
+        .includes?.(normalizedQ)
+        ? 1
+        : 0;
+      const bExcerptMatch = (b as any).excerpt
+        ?.toLowerCase?.()
+        .includes?.(normalizedQ)
+        ? 1
+        : 0;
+
+      if (aExcerptMatch !== bExcerptMatch) {
+        return bExcerptMatch - aExcerptMatch;
+      }
+
+      if (sort === "recommended") {
+        return 0;
+      }
+
+      return 0;
+    });
+  }
+
+  return sortedProjects.slice(skip, skip + limit);
 }
 
 export async function getFilteredProjectsCount(
@@ -1229,6 +1409,7 @@ count(*[
     "project-akamantis-gardens-ru",
     "drafts.project-akamantis-gardens-en"
   ]) &&
+  !(_id match "drafts.*") &&
   ($city == "" || keyFeatures.city == $city) &&
   ($propertyType == "" || keyFeatures.propertyType == $propertyType) &&
   ($priceFrom == null || keyFeatures.price >= $priceFrom) &&

@@ -152,7 +152,7 @@ export default async function ProjectsPage({
   const priceTo = searchParams.priceTo ? Number(searchParams.priceTo) : null;
   const propertyType = searchParams.propertyType || "";
   const skip = (currentPage - 1) * PAGE_SIZE;
-  const sort = searchParams.sort || "priceAsc";
+  const sort = searchParams.sort || "recommended";
   const q = searchParams.q || "";
   const north = searchParams.north ? Number(searchParams.north) : null;
   const south = searchParams.south ? Number(searchParams.south) : null;

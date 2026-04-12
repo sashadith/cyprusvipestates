@@ -96,6 +96,8 @@ export type Project = {
   distances: Distances;
   fullDescription: any;
   faq: AccordionBlock;
+  isFeatured?: boolean;
+  listingPriority?: number;
   isSold: boolean;
   language: string;
   slug: {

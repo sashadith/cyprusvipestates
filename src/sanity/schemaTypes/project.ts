@@ -289,6 +289,20 @@ const project = {
       },
     }),
     defineField({
+      name: "isFeatured",
+      title: "Featured project",
+      type: "boolean",
+      initialValue: false,
+    }),
+    defineField({
+      name: "listingPriority",
+      title: "Listing priority",
+      type: "number",
+      initialValue: 0,
+      validation: (Rule) =>
+        Rule.min(0).max(100).warning("Recommended range: 0–100"),
+    }),
+    defineField({
       name: "isSold",
       title: "Is Sold",
       type: "boolean",

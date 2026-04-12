@@ -138,7 +138,7 @@ export default function StyledProjectFilters({
         router.replace(`?${params.toString()}`, { scroll: false });
       });
     },
-    [router, searchParams, startTransition]
+    [router, searchParams, startTransition],
   );
 
   const handleReset = () => {
@@ -165,7 +165,7 @@ export default function StyledProjectFilters({
 
   const debouncedUpdate = useMemo(
     () => debounce(updateQuery, 700),
-    [updateQuery]
+    [updateQuery],
   );
 
   const cityDefault = city
@@ -227,6 +227,7 @@ export default function StyledProjectFilters({
   const sortOptions =
     lang === "de"
       ? [
+          { label: "Empfohlen", value: "recommended" },
           { label: "Preis: aufsteigend", value: "priceAsc" },
           { label: "Preis: absteigend", value: "priceDesc" },
           { label: "Titel: A–Z", value: "titleAsc" },
@@ -234,6 +235,7 @@ export default function StyledProjectFilters({
         ]
       : lang === "ru"
         ? [
+            { label: "Рекомендуемые", value: "recommended" },
             { label: "Цена: по возрастанию", value: "priceAsc" },
             { label: "Цена: по убыванию", value: "priceDesc" },
             { label: "Название: A–Z", value: "titleAsc" },
@@ -241,12 +243,14 @@ export default function StyledProjectFilters({
           ]
         : lang === "pl"
           ? [
+              { label: "Polecane", value: "recommended" },
               { label: "Cena: rosnąco", value: "priceAsc" },
               { label: "Cena: malejąco", value: "priceDesc" },
               { label: "Tytuł: A–Z", value: "titleAsc" },
               { label: "Tytuł: Z–A", value: "titleDesc" },
             ]
           : [
+              { label: "Recommended", value: "recommended" },
               { label: "Price: Low to High", value: "priceAsc" },
               { label: "Price: High to Low", value: "priceDesc" },
               { label: "Title: A–Z", value: "titleAsc" },
