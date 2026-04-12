@@ -192,6 +192,35 @@ export type ProjectsBlock = {
   projects: Project[];
 };
 
+export type FeaturedProjectReference = {
+  _key: string;
+  _type: "reference";
+  _ref: string;
+};
+
+export type FeaturedProject = {
+  _id: string;
+  _type: string;
+  title: string;
+  slug: string;
+  previewImage: ImageAlt;
+  isSold: boolean;
+  keyFeatures: {
+    price: number;
+    bedrooms: number;
+    coveredArea: number;
+    plotSize: number;
+  };
+};
+
+export type FeaturedProjectsBlock = {
+  _key?: string;
+  _type?: string;
+  title: string;
+  description: string;
+  projects: FeaturedProject[];
+};
+
 export type Homepage = {
   _type: "homepage";
   _id: string;
@@ -202,6 +231,7 @@ export type Homepage = {
   sliderMain: Slide[];
   homepageTitle: string;
   brochureBlock: Brochure;
+  featuredProjectsBlock: FeaturedProjectsBlock;
   aboutBlock: AboutBlock;
   descriptionBlock: DescriptionBlock;
   projectsBlock: ProjectsBlock;

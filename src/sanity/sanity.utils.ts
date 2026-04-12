@@ -62,6 +62,24 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
       buttonLabel,
     },
     brochureBlock,
+    featuredProjectsBlock{
+      title,
+      description,
+      projects[]->{
+        _id,
+        _type,
+        title,
+        "slug": slug[$lang].current,
+        previewImage,
+        isSold,
+        keyFeatures{
+          price,
+          bedrooms,
+          coveredArea,
+          plotSize
+        }
+      }
+    },
     homepageTitle,
     aboutBlock,
     descriptionBlock{

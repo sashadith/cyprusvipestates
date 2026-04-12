@@ -28,6 +28,7 @@ import HowWeWorkBlock from "../components/HowWeWorkBlock/HowWeWorkBlock";
 import ReviewsFullBlockComponent from "../components/ReviewsFullBlockComponent/ReviewsFullBlockComponent";
 import WhatsAppButton from "../components/WhatsAppButton/WhatsAppButton";
 import HomepageHero from "../components/HomepageHero/HomepageHero";
+import FeaturedProjectsHomepage from "../components/FeaturedProjectsHomepage/FeaturedProjectsHomepage";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -96,6 +97,10 @@ export default async function Home({ params }: Props) {
         <HomepageHero heroBlock={homePage.heroBlock} />
         <BrochureBlock brochure={homePage.brochureBlock} />
         <AboutBlock aboutBlock={homePage.aboutBlock} />
+        <FeaturedProjectsHomepage
+          featuredProjectsBlock={homePage.featuredProjectsBlock}
+          lang={params.lang}
+        />
         <DescriptionBlock descriptionBlock={homePage.descriptionBlock} />
         <NewListnigs lang={params.lang} />
         <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />

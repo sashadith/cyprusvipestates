@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
   name: "homepage",
@@ -201,6 +201,43 @@ export default defineType({
           name: "image",
           title: "Image",
           type: "image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "featuredProjectsBlock",
+      title: "Featured Projects Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "text",
+          rows: 5,
+        }),
+        defineField({
+          name: "projects",
+          title: "Projects",
+          type: "array",
+          of: [
+            defineArrayMember({
+              name: "projectRef",
+              title: "Project Reference",
+              type: "reference",
+              to: [{ type: "project" }],
+              options: {
+                filter: ({ document }) => ({
+                  filter: "language == $language",
+                  params: { language: document.language },
+                }),
+              },
+            }),
+          ],
         }),
       ],
     }),
