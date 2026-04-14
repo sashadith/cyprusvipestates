@@ -95,7 +95,7 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
         "current": slug[$lang].current,
         "parent": parentPage->slug[$lang].current
       }`,
-      { lang }
+      { lang },
     );
 
     // строим вложенные массивы slug
@@ -137,9 +137,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const current = slug[slug.length - 1] || "";
   const page = (await getSinglePageByLang(lang, current)) as Singlepage | null;
 
+  if (!page) {
+    return {};
+  }
+
+  const path = slug.join("/");
+  const canonical =
+    lang === "de"
+      ? `https://cyprusvipestates.com/${path}`
+      : `https://cyprusvipestates.com/${lang}/${path}`;
+
   return {
-    title: page?.seo.metaTitle,
-    description: page?.seo.metaDescription,
+    title: page?.seo?.metaTitle || page?.title,
+    description: page?.seo?.metaDescription || page?.excerpt,
+    alternates: {
+      canonical,
+    },
   };
 }
 
@@ -148,31 +161,43 @@ const SinglePage = async ({ params }: Props) => {
   const current = slug[slug.length - 1] || "";
   const page = (await getSinglePageByLang(lang, current)) as Singlepage | null;
 
-  // if (!page) {
-  //   return <p>Страница не найдена</p>;
-  // }
-
   if (!page) {
-    const notFoundPage = await getNotFoundPageByLang(lang);
-    return (
-      <>
-        <Header params={params} translations={[]} />
-        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
-        <Footer params={params} />
-      </>
-    ); // Рендеринг компонента NotFound
+    notFound();
   }
 
   if (slug.length === 1 && page?.parentPage) {
-    const notFoundPage = await getNotFoundPageByLang(lang);
-    return (
-      <>
-        <Header params={params} translations={[]} />
-        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
-        <Footer params={params} />
-      </>
-    ); // Рендеринг компонента NotFound
+    notFound();
   }
+
+  // if (!page) {
+  //   return <p>Page Not Found</p>;
+  // }
+
+  // if (slug.length === 1 && page?.parentPage) {
+  //   return <p>Page Not Found</p>;
+  // }
+
+  // if (!page) {
+  //   const notFoundPage = await getNotFoundPageByLang(lang);
+  //   return (
+  //     <>
+  //       <Header params={params} translations={[]} />
+  //       <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+  //       <Footer params={params} />
+  //     </>
+  //   ); // Рендеринг компонента NotFound
+  // }
+
+  // if (slug.length === 1 && page?.parentPage) {
+  //   const notFoundPage = await getNotFoundPageByLang(lang);
+  //   return (
+  //     <>
+  //       <Header params={params} translations={[]} />
+  //       <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+  //       <Footer params={params} />
+  //     </>
+  //   ); // Рендеринг компонента NotFound
+  // }
 
   const parentSlug = page.parentPage?.slug[lang]?.current;
   const parentTitle = page.parentPage?.title;
@@ -188,18 +213,24 @@ const SinglePage = async ({ params }: Props) => {
         "locationBlock",
         "teamBlock",
         "reviewsFullBlock",
-      ].includes(b._type)
+      ].includes(b._type),
   );
 
-  const generateSlug = (slugObj: any, language: string) => {
-    const cur = slugObj?.[language]?.current;
-    if (!cur) return "#";
-    return language === "de"
-      ? `https://cyprusvipestates.com/${cur}`
-      : `https://cyprusvipestates.com/${language}/${cur}`;
-  };
+  // const generateSlug = (slugObj: any, language: string) => {
+  //   const cur = slugObj?.[language]?.current;
+  //   if (!cur) return "#";
+  //   return language === "de"
+  //     ? `https://cyprusvipestates.com/${cur}`
+  //     : `https://cyprusvipestates.com/${language}/${cur}`;
+  // };
 
-  const url = generateSlug({ [lang]: { current } }, lang);
+  // const url = generateSlug({ [lang]: { current } }, lang);
+  const fullPath = slug.join("/");
+
+  const url =
+    lang === "de"
+      ? `https://cyprusvipestates.com/${fullPath}`
+      : `https://cyprusvipestates.com/${lang}/${fullPath}`;
   const structuredDataProps = {
     slug: current,
     lang,
