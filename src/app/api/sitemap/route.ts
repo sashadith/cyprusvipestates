@@ -57,7 +57,7 @@ async function generateSitemap(): Promise<SitemapPage[]> {
         .filter((x): x is SitemapPage => Boolean(x)),
     );
 
-    // — Страницы разработчиков —
+    // — Страницы застройщиков —
     pages.push({
       route: `${prefix}/developers`,
       url: `${websiteUrl}${prefix}/developers`,

@@ -3,9 +3,10 @@ import React, { FC } from "react";
 import styles from "./PropertySlideThumb.module.scss";
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
+import { ImageModal } from "@/types/project";
 
 type Props = {
-  image: ImageAlt;
+  image: ImageAlt | ImageModal;
 };
 
 const PropertySlideThumb: FC<Props> = ({ image }) => {

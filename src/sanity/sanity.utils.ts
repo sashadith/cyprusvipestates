@@ -880,7 +880,21 @@ export async function getProjectByLang(
     previewImage,
     videoId,
     videoPreview,
-    images,
+    images[]{
+      _key,
+      _type,
+      alt,
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height
+          }
+        }
+      }
+    },
     description[]{
       ...,
         _type == "image" => {

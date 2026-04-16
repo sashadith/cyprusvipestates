@@ -161,43 +161,43 @@ const SinglePage = async ({ params }: Props) => {
   const current = slug[slug.length - 1] || "";
   const page = (await getSinglePageByLang(lang, current)) as Singlepage | null;
 
+  // if (!page) {
+  //   notFound();
+  // }
+
+  // if (slug.length === 1 && page?.parentPage) {
+  //   notFound();
+  // }
+
+  // if (!page) {
+  //   return <p>Page Not Found</p>;
+  // }
+
+  // if (slug.length === 1 && page?.parentPage) {
+  //   return <p>Page Not Found</p>;
+  // }
+
   if (!page) {
-    notFound();
+    const notFoundPage = await getNotFoundPageByLang(lang);
+    return (
+      <>
+        <Header params={params} translations={[]} />
+        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+        <Footer params={params} />
+      </>
+    ); // Рендеринг компонента NotFound
   }
 
   if (slug.length === 1 && page?.parentPage) {
-    notFound();
+    const notFoundPage = await getNotFoundPageByLang(lang);
+    return (
+      <>
+        <Header params={params} translations={[]} />
+        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
+        <Footer params={params} />
+      </>
+    ); // Рендеринг компонента NotFound
   }
-
-  // if (!page) {
-  //   return <p>Page Not Found</p>;
-  // }
-
-  // if (slug.length === 1 && page?.parentPage) {
-  //   return <p>Page Not Found</p>;
-  // }
-
-  // if (!page) {
-  //   const notFoundPage = await getNotFoundPageByLang(lang);
-  //   return (
-  //     <>
-  //       <Header params={params} translations={[]} />
-  //       <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
-  //       <Footer params={params} />
-  //     </>
-  //   ); // Рендеринг компонента NotFound
-  // }
-
-  // if (slug.length === 1 && page?.parentPage) {
-  //   const notFoundPage = await getNotFoundPageByLang(lang);
-  //   return (
-  //     <>
-  //       <Header params={params} translations={[]} />
-  //       <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
-  //       <Footer params={params} />
-  //     </>
-  //   ); // Рендеринг компонента NotFound
-  // }
 
   const parentSlug = page.parentPage?.slug[lang]?.current;
   const parentTitle = page.parentPage?.title;

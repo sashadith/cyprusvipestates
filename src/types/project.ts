@@ -34,6 +34,24 @@ export type ImageAlt = {
   };
 };
 
+export type ImageModal = {
+  _key: string;
+  _type: "image";
+  alt?: string;
+  asset?: {
+    _id?: string;
+    _ref?: string;
+    _type?: string;
+    url?: string;
+    metadata?: {
+      dimensions?: {
+        width?: number;
+        height?: number;
+      };
+    };
+  };
+};
+
 export type Developer = {
   _id: string;
   _type: string;
@@ -88,7 +106,7 @@ export type Project = {
   previewImage: ImageAlt;
   videoId: string;
   videoPreview: ImageAlt;
-  images: ImageAlt[];
+  images: ImageModal[];
   description: any;
   location: GeoPoint;
   developer: Developer;

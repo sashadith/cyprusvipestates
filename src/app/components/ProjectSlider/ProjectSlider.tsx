@@ -9,16 +9,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import styles from "./ProjectSlider.module.scss";
-import modalStyles from "./Modal.module.scss"; // Стили для модального окна
+import modalStyles from "./Modal.module.scss";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import PropertySlideThumb from "../PropertySlideThumb/PropertySlideThumb";
-import { ImageAlt } from "@/types/property";
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
+import { ImageModal } from "@/types/project";
 
-// Выполняем установку appElement после монтирования компонента
-// Если элемент с id "__next" не найден, используем document.body
 const setModalAppElement = () => {
   if (typeof document !== "undefined") {
     const appElement = document.querySelector("#__next") || document.body;
@@ -27,40 +25,33 @@ const setModalAppElement = () => {
 };
 
 type Props = {
-  images: ImageAlt[];
+  images: ImageModal[];
 };
 
 const ProjectSlider: FC<Props> = ({ images }) => {
-  // Состояние для открытия/закрытия модального окна и активного индекса слайда
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Ссылки на экземпляры Swiper для синхронизации
   const [mainSwiper, setMainSwiper] = useState<any>(null);
   const [modalSwiper, setModalSwiper] = useState<any>(null);
 
-  // Выполняем установку appElement после монтирования компонента
   useEffect(() => {
     setModalAppElement();
   }, []);
 
-  // Функция открытия модального окна, при которой сохраняется индекс выбранного слайда
   const openModal = (index: number) => {
     setActiveIndex(index);
     setIsModalOpen(true);
   };
 
-  // Закрытие модального окна
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   return (
     <>
-      {/* Главный слайдер с миниатюрами */}
       <Swiper
         onSwiper={setMainSwiper}
-        // Синхронизация с модальным слайдером
         controller={{ control: modalSwiper }}
         navigation={{
           nextEl: ".next-button",
@@ -68,7 +59,6 @@ const ProjectSlider: FC<Props> = ({ images }) => {
         }}
         slidesPerView={4}
         spaceBetween={20}
-        // pagination={{ clickable: true }}
         modules={[Navigation, Controller]}
         breakpoints={{
           0: {
@@ -91,8 +81,10 @@ const ProjectSlider: FC<Props> = ({ images }) => {
         className={styles.slider}
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} onClick={() => openModal(index)}>
-            {/* Оборачиваем слайд в <div> с cursor:pointer */}
+          <SwiperSlide
+            key={image._key || index}
+            onClick={() => openModal(index)}
+          >
             <div style={{ cursor: "pointer" }}>
               <PropertySlideThumb image={image} />
             </div>
@@ -100,16 +92,15 @@ const ProjectSlider: FC<Props> = ({ images }) => {
         ))}
 
         <div className={styles.navButtons}>
-          <button className="prev-button">
+          <button className="prev-button" type="button">
             <IoIosArrowBack fontSize="3.5rem" color="#bd8948" />
           </button>
-          <button className="next-button">
+          <button className="next-button" type="button">
             <IoIosArrowForward fontSize="3.5rem" color="#bd8948" />
           </button>
         </div>
       </Swiper>
 
-      {/* Модальное окно с полноэкранным слайдером */}
       <ReactModal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -117,15 +108,17 @@ const ProjectSlider: FC<Props> = ({ images }) => {
         className={modalStyles.modalContent}
         overlayClassName={modalStyles.modalOverlay}
       >
-        {/* Кнопка закрытия модального окна */}
-        <button className={modalStyles.closeButton} onClick={closeModal}>
+        <button
+          className={modalStyles.closeButton}
+          onClick={closeModal}
+          type="button"
+        >
           &times;
         </button>
 
         <Swiper
           initialSlide={activeIndex}
           onSwiper={setModalSwiper}
-          // Синхронизация с главным слайдером
           controller={{ control: mainSwiper }}
           spaceBetween={10}
           navigation={{
@@ -136,24 +129,33 @@ const ProjectSlider: FC<Props> = ({ images }) => {
           modules={[Navigation, Pagination, Controller]}
           className={modalStyles.fullscreenSlider}
         >
-          {images.map((image, index) => (
-            <SwiperSlide key={index}>
-              <Image
-                src={urlFor(image).url()}
-                alt={image.alt || "Cyprus VIP Estate Project"}
-                className={modalStyles.fullscreenImage}
-                fill={true}
-                // width={1080}
-                // height={720}
-              />
-            </SwiperSlide>
-          ))}
+          {images.map((image, index) => {
+            const width = image.asset?.metadata?.dimensions?.width || 1600;
+            const height = image.asset?.metadata?.dimensions?.height || 900;
+            const src = image.asset?.url || urlFor(image).url();
+
+            return (
+              <SwiperSlide key={image._key || index}>
+                <div className={modalStyles.imageFrame}>
+                  <Image
+                    src={src}
+                    alt={image.alt || "Cyprus VIP Estate Project"}
+                    className={modalStyles.fullscreenImage}
+                    width={width}
+                    height={height}
+                    sizes="(max-width: 768px) 92vw, 98vw"
+                    // priority={index === activeIndex}
+                  />
+                </div>
+              </SwiperSlide>
+            );
+          })}
 
           <div className={modalStyles.modalNavButtons}>
-            <button className="modal-prev-button">
+            <button className="modal-prev-button" type="button">
               <IoIosArrowBack fontSize="3.5rem" color="#bd8948" />
             </button>
-            <button className="modal-next-button">
+            <button className="modal-next-button" type="button">
               <IoIosArrowForward fontSize="3.5rem" color="#bd8948" />
             </button>
           </div>
