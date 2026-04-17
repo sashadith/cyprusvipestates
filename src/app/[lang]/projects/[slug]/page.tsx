@@ -29,6 +29,8 @@ import SchemaMarkup from "@/app/components/SchemaMarkup/SchemaMarkup";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import WhatAppButtonProject from "@/app/components/WhatAppButtonProject/WhatAppButtonProject";
 import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
+import RoiCalculator from "@/app/components/roi-calculator/RoiCalculator";
+import ModalRoiCalculator from "@/app/components/ModalRoiCalculator/ModalRoiCalculator";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -145,7 +147,7 @@ const ProjectPage = async ({ params }: Props) => {
             <div className="property-description">
               <PropertyDescription description={project.description} />
               <div className="property-button">
-                <ButtonModal>
+                <ButtonModal modalType="brochure">
                   {lang === "en"
                     ? "Enquire this amazing project now!"
                     : lang === "de"
@@ -161,10 +163,22 @@ const ProjectPage = async ({ params }: Props) => {
             </div>
             <div className="property-features">
               <PropertyFeatures keyFeatures={project.keyFeatures} lang={lang} />
+              <div className="property-features-roi-button">
+                <ButtonModal modalType="roiCalculator">
+                  {lang === "ru"
+                    ? "Рассчитать ROI"
+                    : lang === "de"
+                      ? "ROI berechnen"
+                      : lang === "pl"
+                        ? "Oblicz ROI"
+                        : "Calculate ROI"}
+                </ButtonModal>
+              </div>
             </div>
           </div>
         </div>
         <PropertyDistances distances={project.distances} lang={params.lang} />
+        {/* <RoiCalculator project={project} lang={params.lang} /> */}
         <MapWithNoSSR
           lat={project.location.lat}
           lng={project.location.lng}
@@ -208,6 +222,7 @@ const ProjectPage = async ({ params }: Props) => {
 
       <Footer params={params} />
       <ModalBrochure lang={params.lang} formDocument={formDocument} />
+      <ModalRoiCalculator lang={params.lang} project={project} />
     </>
   );
 };

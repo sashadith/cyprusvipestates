@@ -303,6 +303,48 @@ const project = {
         Rule.min(0).max(100).warning("Recommended range: 0–100"),
     }),
     defineField({
+      name: "investmentData",
+      title: "Investment data",
+      type: "object",
+      fields: [
+        defineField({
+          name: "expectedMonthlyRent",
+          title: "Expected monthly rent",
+          type: "number",
+        }),
+        defineField({
+          name: "furnishingEstimate",
+          title: "Furnishing estimate",
+          type: "number",
+        }),
+        defineField({
+          name: "annualServiceCharge",
+          title: "Annual service charge",
+          type: "number",
+        }),
+        defineField({
+          name: "sellingCostsPercent",
+          title: "Selling costs (%)",
+          type: "number",
+        }),
+        defineField({
+          name: "managementPercent",
+          title: "Management (%)",
+          type: "number",
+        }),
+        defineField({
+          name: "maintenancePercent",
+          title: "Maintenance (%)",
+          type: "number",
+        }),
+        defineField({
+          name: "customBuildPeriodYears",
+          title: "Custom build period (years)",
+          type: "number",
+        }),
+      ],
+    }),
+    defineField({
       name: "isSold",
       title: "Is Sold",
       type: "boolean",

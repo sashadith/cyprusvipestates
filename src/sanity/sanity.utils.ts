@@ -911,6 +911,7 @@ export async function getProjectByLang(
     location,
     developer,
     keyFeatures,
+    investmentData,
     distances,
     fullDescription[]{
       ...,

@@ -8,6 +8,16 @@ export type AccordionBlock = {
   }>;
 };
 
+export type InvestmentData = {
+  expectedMonthlyRent?: number;
+  furnishingEstimate?: number;
+  annualServiceCharge?: number;
+  sellingCostsPercent?: number;
+  managementPercent?: number;
+  maintenancePercent?: number;
+  customBuildPeriodYears?: number;
+};
+
 type PropertyType = "Apartment" | "Villa";
 
 type PropertyPurpose = "Sale" | "Rent";
@@ -114,6 +124,7 @@ export type Project = {
   distances: Distances;
   fullDescription: any;
   faq: AccordionBlock;
+  investmentData: InvestmentData;
   isFeatured?: boolean;
   listingPriority?: number;
   isSold: boolean;

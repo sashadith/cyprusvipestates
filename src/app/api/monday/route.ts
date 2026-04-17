@@ -10,6 +10,7 @@ const BOARD_ID = 1761987486; // вернули рабочий id доски
 const ALLOWED_HOSTS = new Set([
   "cyprusvipestates.com",
   "www.cyprusvipestates.com",
+  "localhost",
 ]);
 
 function safeUrl(raw: string) {

@@ -1,16 +1,22 @@
 "use client";
+
 import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "./ModalBrochure.module.scss";
+import styles from "../ModalBrochure/ModalBrochure.module.scss";
 import { useModal } from "@/app/context/ModalContext";
-import { FormStandardDocument } from "@/types/formStandardDocument";
-import FormStandard from "../FormStandard/FormStandard";
+import {
+  RoiCalculationResult,
+  RoiCalculatorInput,
+  RoiScenario,
+  RoiStrategy,
+} from "@/lib/roi";
+import FormRoi from "../FormRoi/FormRoi";
 
 const customStyles: ReactModal.Styles = {
   overlay: {
     backgroundColor: "rgba(242, 244, 247, 0.7)",
-    zIndex: 1000,
+    zIndex: 1100,
   },
   content: {
     position: "absolute",
@@ -28,14 +34,17 @@ const customStyles: ReactModal.Styles = {
 
 type Props = {
   lang: string;
-  formDocument: FormStandardDocument;
+  strategy: RoiStrategy;
+  scenario: RoiScenario;
+  input: RoiCalculatorInput;
+  result: RoiCalculationResult;
 };
 
-const ModalBrochure = ({ lang, formDocument }: Props) => {
-  const { isBrochureOpen, closeBrochure } = useModal();
+const ModalRoi = ({ lang, strategy, scenario, input, result }: Props) => {
+  const { isRoiOpen, closeRoi } = useModal();
 
   useEffect(() => {
-    if (isBrochureOpen) {
+    if (isRoiOpen) {
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
@@ -44,14 +53,14 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
     return () => {
       document.body.classList.remove("no-scroll");
     };
-  }, [isBrochureOpen]);
+  }, [isRoiOpen]);
 
   return (
     <AnimatePresence>
       <Modal
         closeTimeoutMS={50}
-        isOpen={isBrochureOpen}
-        onRequestClose={closeBrochure}
+        isOpen={isRoiOpen}
+        onRequestClose={closeRoi}
         ariaHideApp={false}
         style={customStyles}
       >
@@ -68,29 +77,41 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
                 <div className={styles.formText}>
                   <h3 className={styles.modalTitle}>
                     {lang === "ru"
-                      ? "Укажите контакты для связи"
+                      ? "Отправить расчет на email"
                       : lang === "de"
-                        ? "Kontaktieren Sie mich!"
+                        ? "Berechnung per E-Mail senden"
                         : lang === "pl"
-                          ? "Proszę podać swoje dane kontaktowe"
-                          : "Please provide your contact details"}
+                          ? "Wyślij kalkulację na e-mail"
+                          : "Send calculation by email"}
                   </h3>
                   <p className={styles.modalText}>
                     {lang === "ru"
-                      ? "Свяжемся с вами как можно скорее"
+                      ? "Мы отправим вам копию расчета и получим ее на нашу почту."
                       : lang === "de"
-                        ? "Geben Sie Ihre Daten ein, damit wir Sie kontaktieren können"
+                        ? "Wir senden Ihnen eine Kopie der Berechnung und erhalten sie auch auf unserer Seite."
                         : lang === "pl"
-                          ? "Skontaktujemy się z Tobą jak najszybciej"
-                          : "We will contact you as soon as possible"}
+                          ? "Wyślemy Ci kopię kalkulacji i otrzymamy ją również na naszą skrzynkę."
+                          : "We will send you a copy of the calculation and receive it on our side as well."}
                   </p>
                 </div>
 
                 <div className={styles.formInner}>
-                  <FormStandard form={formDocument} lang={lang} />
+                  <FormRoi
+                    lang={lang}
+                    strategy={strategy}
+                    scenario={scenario}
+                    input={input}
+                    result={result}
+                    onFormSubmitSuccess={() => {
+                      setTimeout(() => {
+                        closeRoi();
+                      }, 2500);
+                    }}
+                  />
                 </div>
               </div>
-              <button className={styles.closeButton} onClick={closeBrochure}>
+
+              <button className={styles.closeButton} onClick={closeRoi}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -115,4 +136,4 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
   );
 };
 
-export default ModalBrochure;
+export default ModalRoi;

@@ -9,6 +9,7 @@ import nodemailer from "nodemailer";
 const ALLOWED_HOSTS = new Set([
   "cyprusvipestates.com",
   "www.cyprusvipestates.com",
+  "localhost",
 ]);
 
 /**
@@ -57,7 +58,7 @@ function isRateLimitedKey(
   map: Map<string, number[]>,
   key: string,
   limit = 3,
-  windowMs = 60_000
+  windowMs = 60_000,
 ) {
   const now = Date.now();
   const timestamps = map.get(key) || [];
@@ -94,11 +95,11 @@ function countDigits(value: string) {
 function blocked(
   allowDebug: boolean,
   reason: string,
-  extra?: Record<string, any>
+  extra?: Record<string, any>,
 ) {
   return NextResponse.json(
     allowDebug ? { ok: false, blocked: reason, ...extra } : { ok: false },
-    { status: 200 } // всегда 200 — не обучаем ботов
+    { status: 200 }, // всегда 200 — не обучаем ботов
   );
 }
 
@@ -286,7 +287,7 @@ export async function POST(request: Request) {
     // но если хочешь абсолютный 200 — можно заменить на blocked(...)
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
