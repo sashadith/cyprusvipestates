@@ -33,10 +33,10 @@ type Props = {
 };
 
 const ModalBrochure = ({ lang, formDocument }: Props) => {
-  const { isModalOpen, closeModal } = useModal(); // Используйте хук useModal для управления состоянием модального окна
+  const { isBrochureOpen, closeBrochure } = useModal();
 
   useEffect(() => {
-    if (isModalOpen) {
+    if (isBrochureOpen) {
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
@@ -45,15 +45,15 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
     return () => {
       document.body.classList.remove("no-scroll");
     };
-  }, [isModalOpen]);
+  }, [isBrochureOpen]);
 
   // console.log("formDocument", formDocument);
   return (
     <AnimatePresence>
       <Modal
         closeTimeoutMS={50}
-        isOpen={isModalOpen} // Состояние открытия модального окна
-        onRequestClose={closeModal} // Функция для закрытия модального окна
+        isOpen={isBrochureOpen}
+        onRequestClose={closeBrochure}
         ariaHideApp={false}
         style={customStyles}
       >
@@ -92,7 +92,7 @@ const ModalBrochure = ({ lang, formDocument }: Props) => {
                   <FormPartners form={formDocument} lang={lang} />
                 </div>
               </div>
-              <button className={styles.closeButton} onClick={closeModal}>
+              <button className={styles.closeButton} onClick={closeBrochure}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
