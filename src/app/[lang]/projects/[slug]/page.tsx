@@ -31,6 +31,7 @@ import WhatAppButtonProject from "@/app/components/WhatAppButtonProject/WhatAppB
 import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 import RoiCalculator from "@/app/components/roi-calculator/RoiCalculator";
 import ModalRoiCalculator from "@/app/components/ModalRoiCalculator/ModalRoiCalculator";
+import MetaViewContentTracker from "@/app/components/MetaViewContentTracker/MetaViewContentTracker";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -130,6 +131,13 @@ const ProjectPage = async ({ params }: Props) => {
       <SchemaMarkup project={project} />
       <Header params={params} translations={translations} />
       <main>
+        <MetaViewContentTracker
+          title={project.title}
+          projectId={project._id}
+          price={project.keyFeatures?.price ?? null}
+          city={project.keyFeatures?.city}
+          propertyType={project.keyFeatures?.propertyType}
+        />
         <PropertyIntro
           title={project.title}
           excerpt={project.excerpt}
