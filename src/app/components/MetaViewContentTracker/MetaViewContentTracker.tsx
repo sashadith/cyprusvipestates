@@ -17,14 +17,17 @@ const MetaViewContentTracker = ({
   city,
   propertyType,
 }: Props) => {
+  const eventId = `${projectId}-${Date.now()}`;
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (!window.fbq) return;
 
     window.fbq("track", "ViewContent", {
+      eventID: eventId,
       content_name: title,
       content_ids: [projectId],
-      content_type: "product",
+      content_type: "property",
       content_category: "property",
       value: typeof price === "number" ? price : 0,
       currency: "EUR",
