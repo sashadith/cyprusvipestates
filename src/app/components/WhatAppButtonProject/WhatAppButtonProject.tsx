@@ -45,11 +45,20 @@ const WhatAppButtonProject: FC<Props> = ({ lang }) => {
       const encodedText = encodeURIComponent(message);
       const finalUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`;
 
+      if (window.fbq) {
+        window.fbq("track", "Contact", {
+          method: "whatsapp",
+          placement: "project_whatsapp_button",
+          page_location: pageUrl,
+        });
+      }
+
       if (window.dataLayer) {
         window.dataLayer.push({
           event: "whatsapp_click",
           phone_number: phone,
           page_url: pageUrl,
+          placement: "project_whatsapp_button",
         });
       }
 
