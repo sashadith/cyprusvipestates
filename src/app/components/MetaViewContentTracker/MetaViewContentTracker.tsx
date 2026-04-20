@@ -2,12 +2,6 @@
 
 import { useEffect } from "react";
 
-declare global {
-  interface Window {
-    fbq?: (...args: any[]) => void;
-  }
-}
-
 type Props = {
   title: string;
   projectId: string;

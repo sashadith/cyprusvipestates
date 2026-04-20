@@ -273,6 +273,14 @@ const FormStandard: FC<ContactFormProps> = ({
         response.data?.ok === true &&
         response.data?.created === true
       ) {
+        // Meta Pixel Lead
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {
+            form_name: "standard_form",
+            page_location: currentPage,
+            preferred_contact: values.preferredContact,
+          });
+        }
         resetForm({});
         setFilled({ name: false, surname: false, phone: false, email: false });
 
