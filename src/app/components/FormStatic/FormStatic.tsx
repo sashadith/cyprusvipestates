@@ -178,6 +178,15 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
         lang,
       });
       if (response.status === 200) {
+        // Meta Pixel Lead
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {
+            form_name: "form_full",
+            page_location: currentPage,
+            preferred_contact: values.preferredContact,
+          });
+        }
+
         resetForm({});
         setFilled({ name: false, surname: false, phone: false, email: false });
 

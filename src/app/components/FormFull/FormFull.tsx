@@ -190,6 +190,15 @@ const FormFull: FC<ContactFormProps> = ({
         response.data?.ok === true &&
         response.data?.created === true
       ) {
+        // Meta Pixel Lead
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {
+            form_name: "form_full",
+            page_location: currentPage,
+            preferred_contact: values.preferredContact,
+          });
+        }
+
         resetForm({});
         setFilled({
           name: false,

@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 
 function tpl(str: string | undefined, vars: Record<string, string | number>) {
   return String(str ?? "").replace(/\{(\w+)\}/g, (_, k) =>
-    vars[k] !== undefined ? String(vars[k]) : `{${k}}`
+    vars[k] !== undefined ? String(vars[k]) : `{${k}}`,
   );
 }
 
@@ -82,7 +82,7 @@ const FormPartners: FC<ContactFormProps> = ({
 
       fields.forEach((field) => {
         const el = document.querySelector(
-          `[name="${field}"]`
+          `[name="${field}"]`,
         ) as HTMLInputElement | null;
 
         const domVal = (el?.value ?? "").trim();
@@ -94,13 +94,13 @@ const FormPartners: FC<ContactFormProps> = ({
         }
 
         setFilled((prev) =>
-          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue }
+          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue },
         );
       });
 
       // phone отдельно
       const phoneEl = document.querySelector(
-        `[name="phone"]`
+        `[name="phone"]`,
       ) as HTMLInputElement | null;
 
       const domPhone = (phoneEl?.value ?? "").trim();
@@ -111,7 +111,7 @@ const FormPartners: FC<ContactFormProps> = ({
       }
 
       setFilled((prev) =>
-        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue }
+        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
       );
     }, 200);
 
@@ -120,7 +120,7 @@ const FormPartners: FC<ContactFormProps> = ({
   }, [formStartTime]);
 
   const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFilled((prev) => ({ ...prev, [name]: value.trim() !== "" }));
@@ -171,7 +171,7 @@ const FormPartners: FC<ContactFormProps> = ({
             ? "Nachname ist erforderlich"
             : lang === "pl"
               ? "Nazwisko jest wymagane"
-              : "Surname is required"
+              : "Surname is required",
       )
       .test("surname-min", function (value) {
         const current = (value ?? "").trim().length;
@@ -248,7 +248,7 @@ const FormPartners: FC<ContactFormProps> = ({
             ? "Land ist erforderlich"
             : lang === "pl"
               ? "Kraj jest wymagany"
-              : "Country is required"
+              : "Country is required",
       )
       .test("country-min", function (value) {
         const current = (value ?? "").trim().length;
@@ -286,7 +286,7 @@ const FormPartners: FC<ContactFormProps> = ({
 
   const onSubmit = async (
     values: FormData,
-    { setSubmitting, resetForm }: FormikHelpers<FormData>
+    { setSubmitting, resetForm }: FormikHelpers<FormData>,
   ) => {
     setSubmitting(true);
 
@@ -302,6 +302,14 @@ const FormPartners: FC<ContactFormProps> = ({
       });
 
       if (response.status === 200 && response.data?.ok === true) {
+        // Meta Pixel Lead
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {
+            form_name: "partners_form",
+            page_location: currentPage,
+          });
+        }
+
         resetForm({});
         setFilled({
           name: false,
@@ -329,7 +337,7 @@ const FormPartners: FC<ContactFormProps> = ({
               ? "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden."
               : lang === "pl"
                 ? "Otrzymaliśmy Twoje zapytanie i skontaktujemy się z Tobą wkrótce."
-                : "We have received your request and will contact you shortly."
+                : "We have received your request and will contact you shortly.",
         );
 
         setTimeout(() => setMessagePopup(null), 5000);
@@ -352,7 +360,7 @@ const FormPartners: FC<ContactFormProps> = ({
               ? "Beim Senden der Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
               : lang === "pl"
                 ? "Wystąpił błąd podczas wysyłania zapytania. Spróbuj ponownie później."
-                : "An error occurred while sending the request. Please try again later."
+                : "An error occurred while sending the request. Please try again later.",
         );
       }
 

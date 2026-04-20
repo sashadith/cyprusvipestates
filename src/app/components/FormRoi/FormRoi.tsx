@@ -465,6 +465,16 @@ const FormRoi: FC<Props> = ({
       });
 
       if (response.status === 200 && response.data?.ok === true) {
+        // Meta Pixel Lead
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Lead", {
+            form_name: "roi_form",
+            page_location: currentPage,
+            preferred_contact: values.preferredContact,
+            roi_strategy: strategy,
+            roi_scenario: scenario,
+          });
+        }
         resetForm({});
         setFilled({ name: false, surname: false, phone: false, email: false });
 
