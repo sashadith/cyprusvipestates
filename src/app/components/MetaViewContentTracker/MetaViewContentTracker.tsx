@@ -36,6 +36,7 @@ const MetaViewContentTracker = ({
       currency: "EUR",
       city: city || "",
       property_type: propertyType || "",
+      page_location: window.location.href,
     });
   }, [title, projectId, price, city, propertyType]);
 
