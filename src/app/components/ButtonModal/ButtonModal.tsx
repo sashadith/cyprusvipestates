@@ -18,6 +18,18 @@ export const ButtonModal = ({
   const { openBrochure, openRoi, openRoiCalculator } = useModal();
 
   const handleClick = () => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "InitiateCheckout", {
+        form_name:
+          modalType === "roi"
+            ? "roi_modal"
+            : modalType === "roiCalculator"
+              ? "roi_calculator_modal"
+              : "brochure_modal",
+        page_location: window.location.href,
+      });
+    }
+
     if (modalType === "roi") {
       openRoi();
       return;
