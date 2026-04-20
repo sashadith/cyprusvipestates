@@ -6,6 +6,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
 import { Contact } from "@/types/footer";
 import FormFull from "../FormFull/FormFull";
+import TrackedContactLink from "../TrackedContactLink/TrackedContactLink";
 
 type Props = {
   block: ContactFullBlock;
@@ -57,10 +58,12 @@ const ContactFullBlockComponent: FC<Props> = ({ block, lang }) => {
             <p className={styles.description}>{description}</p>
             <div className={styles.contacts}>
               {contacts.map((contact) => (
-                <Link
+                <TrackedContactLink
                   href={getContactHref(contact)}
                   key={contact._key}
                   className={styles.contact}
+                  contactType={contact.type}
+                  placement="contact_full_block"
                 >
                   <Image
                     alt={contact.label}
@@ -72,7 +75,7 @@ const ContactFullBlockComponent: FC<Props> = ({ block, lang }) => {
                   <p className={styles.contactLabel}>
                     {contact.title}: {contact.label}
                   </p>
-                </Link>
+                </TrackedContactLink>
               ))}
             </div>
           </div>

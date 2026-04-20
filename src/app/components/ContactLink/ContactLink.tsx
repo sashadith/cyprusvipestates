@@ -38,17 +38,36 @@ export default function ContactLink({ contact }: Props) {
   };
 
   const handleClick = () => {
-    if (typeof window !== "undefined" && window.dataLayer) {
-      const type =
-        contact.type === "Link" && contact.label.match(/^\+?\d+$/)
-          ? "WhatsApp"
-          : contact.type;
+    if (typeof window === "undefined") return;
 
+    const pageUrl = window.location.href;
+
+    let method: "phone" | "email" | "whatsapp" | "link" = "link";
+
+    if (contact.type === "Phone") method = "phone";
+    if (contact.type === "Email") method = "email";
+
+    if (contact.type === "Link" && contact.label.match(/^\+?\d+$/)) {
+      method = "whatsapp";
+    }
+
+    // ✅ Meta Pixel
+    if (window.fbq) {
+      window.fbq("track", "Contact", {
+        method,
+        placement: "footer_contact",
+        page_location: pageUrl,
+      });
+    }
+
+    // ✅ GTM (у тебя уже было — просто чуть улучшим)
+    if (window.dataLayer) {
       window.dataLayer.push({
         event: "contact_click",
-        contact_type: type,
+        contact_type: method,
         contact_label: contact.label,
-        page_url: window.location.href,
+        placement: "footer_contact",
+        page_url: pageUrl,
       });
     }
   };
