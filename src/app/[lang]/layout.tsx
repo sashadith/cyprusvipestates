@@ -16,6 +16,9 @@ const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 export const metadata: Metadata = {
   title: "Cyprus VIP Estates",
   description: "Cyprus VIP Estates - Luxury Real Estate in Cyprus",
+  other: {
+    "facebook-domain-verification": "coiknnpjsr2rrcrbht6mvhjdbld3ul",
+  },
 };
 
 export default function RootLayout({
