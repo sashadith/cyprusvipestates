@@ -1,5 +1,6 @@
 // app/api/monday/route.ts
 import { getAutoReplyEmail } from "@/lib/emailTemplates";
+import { sendTelegramMessage } from "@/lib/telegram";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
@@ -286,6 +287,26 @@ export async function POST(request: Request) {
         },
         { status: 400 },
       );
+    }
+
+    const pageUrlString = pageUrl.toString();
+    const itemId = data?.data?.create_item?.id;
+    const mondayLink = `https://cyprusvipestates.monday.com/boards/${BOARD_ID}/pulses/${itemId}`;
+
+    const telegramMessage =
+      `<b>🔥 New Lead</b>\n\n` +
+      `<b>${escapeHtml(fullNameNorm || "-")}</b>\n` +
+      `${escapeHtml(phoneNorm || "-")}\n` +
+      `${escapeHtml(emailNorm || "-")}\n` +
+      `Preferred: ${escapeHtml(preferredNorm || "-")}\n` +
+      (messageNorm ? `<b>Message:</b>\n${escapeHtml(messageNorm)}\n` : "") +
+      `<a href="${pageUrlString}">Open page</a>\n\n` +
+      `<a href="${mondayLink}">Open in Monday</a>`;
+
+    try {
+      await sendTelegramMessage(telegramMessage);
+    } catch (telegramErr) {
+      console.error("Telegram send error:", telegramErr);
     }
 
     // === только если item создан — отправляем письмо ===
