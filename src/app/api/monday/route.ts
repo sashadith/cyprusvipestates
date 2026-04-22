@@ -292,9 +292,14 @@ export async function POST(request: Request) {
     const pageUrlString = pageUrl.toString();
     const itemId = data?.data?.create_item?.id;
     const mondayLink = `https://cyprusvipestates.monday.com/boards/${BOARD_ID}/pulses/${itemId}`;
+    const langNorm = String(lang ?? "").toLowerCase();
+
+    const owner = langNorm === "de" || langNorm === "en" ? "Sasha" : "Alex";
+    const ownerTag = owner === "Sasha" ? "@sashadith" : "@bandziuk";
 
     const telegramMessage =
       `<b>🔥 New Lead</b>\n\n` +
+      `<b>Owner:</b> ${owner} ${ownerTag}\n\n` +
       `<b>${escapeHtml(fullNameNorm || "-")}</b>\n` +
       `${escapeHtml(phoneNorm || "-")}\n` +
       `${escapeHtml(emailNorm || "-")}\n` +
