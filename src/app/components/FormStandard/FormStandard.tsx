@@ -345,50 +345,130 @@ const FormStandard: FC<ContactFormProps> = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, setFieldValue, values }) => (
-          <Form>
-            <div className={styles.nameSurnameWrapper}>
-              {/* Поле для имени */}
+        {({ isSubmitting, setFieldValue, values }) => {
+          const isNameFilled = Boolean(values.name.trim());
+          const isSurnameFilled = Boolean(values.surname.trim());
+          const isEmailFilled = Boolean(values.email.trim());
+
+          return (
+            <Form>
+              <div className={styles.nameSurnameWrapper}>
+                <div className={styles.inputWrapper}>
+                  <svg
+                    className={styles.icon}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="#bd8948"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                  </svg>
+
+                  <label
+                    htmlFor={`${uid}-name`}
+                    className={`${styles.label} ${isNameFilled ? styles.filled : ""}`}
+                  >
+                    {dataForm.inputName}
+                  </label>
+
+                  <Field name="name">
+                    {({ field }: any) => (
+                      <input
+                        {...field}
+                        id={`${uid}-name`}
+                        type="text"
+                        autoComplete="given-name"
+                        className={styles.inputField}
+                        onBlur={field.onBlur}
+                      />
+                    )}
+                  </Field>
+
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className={styles.error}
+                  />
+                </div>
+
+                <div className={styles.inputWrapper}>
+                  <svg
+                    className={styles.icon}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="#bd8948"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                  </svg>
+
+                  <label
+                    htmlFor={`${uid}-surname`}
+                    className={`${styles.label} ${isSurnameFilled ? styles.filled : ""}`}
+                  >
+                    {(dataForm as any).inputSurname ??
+                      (lang === "ru"
+                        ? "Фамилия"
+                        : lang === "de"
+                          ? "Nachname"
+                          : lang === "pl"
+                            ? "Nazwisko"
+                            : "Surname")}
+                  </label>
+
+                  <Field name="surname">
+                    {({ field }: any) => (
+                      <input
+                        {...field}
+                        id={`${uid}-surname`}
+                        type="text"
+                        autoComplete="family-name"
+                        className={styles.inputField}
+                        onBlur={field.onBlur}
+                      />
+                    )}
+                  </Field>
+
+                  <ErrorMessage
+                    name="surname"
+                    component="div"
+                    className={styles.error}
+                  />
+                </div>
+              </div>
+
               <div className={styles.inputWrapper}>
-                <svg
-                  className={styles.icon}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="#bd8948"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
-                </svg>
-                <label
-                  // htmlFor="name"
-                  htmlFor={`${uid}-name`}
-                  className={`${styles.label} ${filled.name ? styles.filled : ""}`}
-                >
-                  {dataForm.inputName}
-                </label>
-                <Field name="name">
-                  {({ field, form }: any) => (
-                    <input
-                      {...field}
-                      id={`${uid}-name`}
-                      type="text"
-                      className={styles.inputField}
-                      onBlur={(e) => {
-                        field.onBlur(e); // ✅ важно: touched
-                        handleBlur(e as any); // твоя логика label filled
-                      }}
-                    />
-                  )}
-                </Field>
+                <PhoneInput
+                  id={`${uid}-phone`}
+                  name="phone"
+                  aria-label={dataForm.inputPhone}
+                  placeholder={dataForm.inputPhone}
+                  className={`${styles.inputField} ${styles.phoneInput}`}
+                  value={values.phone}
+                  defaultCountry="CY"
+                  international
+                  withCountryCallingCode
+                  smartCaret={false}
+                  autoComplete="tel"
+                  inputMode="tel"
+                  type="tel"
+                  onChange={(value) => {
+                    setFieldValue("phone", value || "", false);
+                  }}
+                  onBlur={() => {
+                    formikRef.current?.setFieldTouched("phone", true, true);
+                  }}
+                />
+
                 <ErrorMessage
-                  name="name"
+                  name="phone"
                   component="div"
                   className={styles.error}
                 />
               </div>
 
-              {/* Поле для фамилии */}
               <div className={styles.inputWrapper}>
                 <svg
                   className={styles.icon}
@@ -398,237 +478,145 @@ const FormStandard: FC<ContactFormProps> = ({
                   fill="#bd8948"
                   viewBox="0 0 24 24"
                 >
-                  <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                  <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
                 </svg>
 
                 <label
-                  htmlFor={`${uid}-surname`}
-                  className={`${styles.label} ${filled.surname ? styles.filled : ""}`}
+                  htmlFor={`${uid}-email`}
+                  className={`${styles.label} ${isEmailFilled ? styles.filled : ""}`}
                 >
-                  {/* если в dataForm есть inputSurname — идеально */}
-                  {(dataForm as any).inputSurname ??
-                    (lang === "ru"
-                      ? "Фамилия"
-                      : lang === "de"
-                        ? "Nachname"
-                        : lang === "pl"
-                          ? "Nazwisko"
-                          : "Surname")}
+                  {dataForm.inputEmail}
                 </label>
 
-                <Field name="surname">
+                <Field name="email">
                   {({ field }: any) => (
                     <input
                       {...field}
-                      id={`${uid}-surname`}
-                      type="text"
+                      id={`${uid}-email`}
+                      type="email"
+                      autoComplete="email"
                       className={styles.inputField}
-                      onBlur={(e) => {
-                        field.onBlur(e); // touched
-                        handleBlur(e as any); // filled label
-                      }}
-                      autoComplete="family-name"
+                      onBlur={field.onBlur}
                     />
                   )}
                 </Field>
 
                 <ErrorMessage
-                  name="surname"
+                  name="email"
                   component="div"
                   className={styles.error}
                 />
               </div>
-            </div>
 
-            <div className={styles.inputWrapper}>
-              <label
-                // htmlFor="phone"
-                htmlFor={`${uid}-phone`}
-                className={`${styles.label} ${styles.labelPhone} ${filled.phone ? styles.filled : ""}`}
-              >
-                {dataForm.inputPhone}
-              </label>
-              <PhoneInput
-                id={`${uid}-phone`}
-                name="phone"
-                className={`${styles.inputField} ${styles.phoneInput}`}
-                value={values.phone}
-                defaultCountry="CY"
-                international
-                withCountryCallingCode
-                smartCaret={false}
-                autoComplete="tel"
-                inputMode="tel"
-                type="tel"
-                onChange={(value) => {
-                  setFieldValue("phone", value || "", false);
-                  setFilled((f) => ({ ...f, phone: Boolean(value) }));
-                }}
-                onBlur={() => {
-                  formikRef.current?.setFieldTouched("phone", true, true);
-                }}
-              />
-              <ErrorMessage
-                name="phone"
-                component="div"
-                className={styles.error}
-              />
-            </div>
+              <div className={styles.inputWrapper}>
+                <p className={styles.radioGroupLabel}>
+                  {lang === "ru"
+                    ? "Как с вами лучше связаться?"
+                    : lang === "de"
+                      ? "Wie können wir Sie am besten kontaktieren?"
+                      : lang === "pl"
+                        ? "W jaki sposób najlepiej się z Tobą skontaktować?"
+                        : "What’s the best way to contact you?"}
+                </p>
 
-            <div className={styles.inputWrapper}>
-              <svg
-                className={styles.icon}
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="#bd8948"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
-              </svg>
-              <label
-                // htmlFor="email"
-                htmlFor={`${uid}-email`}
-                className={`${styles.label} ${filled.email ? styles.filled : ""}`}
-              >
-                {dataForm.inputEmail}
-              </label>
-              <Field name="email">
-                {({ field }: any) => (
-                  <input
-                    {...field}
-                    id={`${uid}-email`}
-                    type="email"
-                    className={styles.inputField}
-                    onBlur={(e) => {
-                      field.onBlur(e); // ✅ touched
-                      handleBlur(e as any); // твой filled
-                    }}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                name="email"
-                component="div"
-                className={styles.error}
-              />
-            </div>
+                <div className={styles.radioGroupWrapper}>
+                  <label className={styles.radioOption}>
+                    <Field type="radio" name="preferredContact" value="phone" />
+                    <span>
+                      {lang === "ru"
+                        ? "Телефон"
+                        : lang === "de"
+                          ? "Anruf"
+                          : lang === "pl"
+                            ? "Telefonicznie"
+                            : "Phone call"}
+                    </span>
+                  </label>
 
-            <div className={styles.inputWrapper}>
-              <p className={styles.radioGroupLabel}>
-                {lang === "ru"
-                  ? "Как с вами лучше связаться?"
-                  : lang === "de"
-                    ? "Wie können wir Sie am besten kontaktieren?"
-                    : lang === "pl"
-                      ? "W jaki sposób najlepiej się z Tobą skontaktować?"
-                      : "What’s the best way to contact you?"}
-              </p>
-              <div className={styles.radioGroupWrapper}>
-                <label className={styles.radioOption}>
-                  <Field type="radio" name="preferredContact" value="phone" />
-                  <span>
-                    {lang === "ru"
-                      ? "Телефон"
-                      : lang === "de"
-                        ? "Anruf"
-                        : lang === "pl"
-                          ? "Telefonicznie"
-                          : "Phone call"}
-                  </span>
-                </label>
+                  <label className={styles.radioOption}>
+                    <Field
+                      type="radio"
+                      name="preferredContact"
+                      value="whatsapp"
+                    />
+                    <span>WhatsApp</span>
+                  </label>
 
-                <label className={styles.radioOption}>
-                  <Field
-                    type="radio"
-                    name="preferredContact"
-                    value="whatsapp"
-                  />
-                  <span>
-                    {lang === "ru"
-                      ? "WhatsApp"
-                      : lang === "de"
-                        ? "WhatsApp"
-                        : lang === "pl"
-                          ? "WhatsApp"
-                          : "WhatsApp"}
-                  </span>
-                </label>
-
-                <label className={styles.radioOption}>
-                  <Field type="radio" name="preferredContact" value="email" />
-                  <span>
-                    {lang === "ru"
-                      ? "Email"
-                      : lang === "de"
+                  <label className={styles.radioOption}>
+                    <Field type="radio" name="preferredContact" value="email" />
+                    <span>
+                      {lang === "de"
                         ? "E-Mail"
                         : lang === "pl"
                           ? "E-mail"
                           : "Email"}
-                  </span>
-                </label>
+                    </span>
+                  </label>
+                </div>
+
+                <ErrorMessage
+                  name="preferredContact"
+                  component="div"
+                  className={styles.error}
+                />
               </div>
 
-              <ErrorMessage
-                name="preferredContact"
-                component="div"
-                className={styles.error}
-              />
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className={styles.sentBtn}
-                disabled={isSubmitting}
-                onClick={handleButtonClick}
-              >
-                {isSubmitting ? (
-                  <div className={styles.loader}></div>
-                ) : offerButtonCustomText ? (
-                  offerButtonCustomText
-                ) : (
-                  dataForm.buttonText
-                )}
-              </button>
-            </div>
-
-            <Field
-              type="text"
-              name="fax"
-              style={{ display: "none" }}
-              tabIndex={-1}
-              autoComplete="new-password"
-              aria-hidden="true"
-            />
-
-            <div className={styles.customCheckbox}>
-              <Field
-                type="checkbox"
-                name="agreedToPolicy"
-                id={`${uid}-agreedToPolicy`}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setFieldValue("agreedToPolicy", e.target.checked);
-                }}
-              />
-              <ErrorMessage
-                name="agreedToPolicy"
-                component="div"
-                className={styles.errorCheckbox}
-              />
-              <label htmlFor={`${uid}-agreedToPolicy`}>
-                {dataForm.agreementText}{" "}
-                <Link
-                  className={styles.policyLink}
-                  href={dataForm.agreementLinkDestination}
-                  target="_blank"
+              <div>
+                <button
+                  type="submit"
+                  className={styles.sentBtn}
+                  disabled={isSubmitting}
+                  onClick={handleButtonClick}
                 >
-                  {dataForm.agreementLinkLabel}
-                </Link>
-              </label>
-            </div>
-          </Form>
-        )}
+                  {isSubmitting ? (
+                    <div className={styles.loader}></div>
+                  ) : offerButtonCustomText ? (
+                    offerButtonCustomText
+                  ) : (
+                    dataForm.buttonText
+                  )}
+                </button>
+              </div>
+
+              <Field
+                type="text"
+                name="fax"
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="new-password"
+                aria-hidden="true"
+              />
+
+              <div className={styles.customCheckbox}>
+                <Field
+                  type="checkbox"
+                  name="agreedToPolicy"
+                  id={`${uid}-agreedToPolicy`}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setFieldValue("agreedToPolicy", e.target.checked);
+                  }}
+                />
+
+                <ErrorMessage
+                  name="agreedToPolicy"
+                  component="div"
+                  className={styles.errorCheckbox}
+                />
+
+                <label htmlFor={`${uid}-agreedToPolicy`}>
+                  {dataForm.agreementText}{" "}
+                  <Link
+                    className={styles.policyLink}
+                    href={dataForm.agreementLinkDestination}
+                    target="_blank"
+                  >
+                    {dataForm.agreementLinkLabel}
+                  </Link>
+                </label>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     </>
   );

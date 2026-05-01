@@ -13,10 +13,10 @@ import * as Yup from "yup";
 import axios from "axios";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 import styles from "./FormPartners.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 function tpl(str: string | undefined, vars: Record<string, string | number>) {
   return String(str ?? "").replace(/\{(\w+)\}/g, (_, k) =>
@@ -40,7 +40,7 @@ export type FormData = {
   email: string;
   country: string;
   agreedToPolicy: boolean;
-  company: string; // honeypot
+  company: string;
   formStartTime: number;
 };
 
@@ -60,16 +60,7 @@ const FormPartners: FC<ContactFormProps> = ({
   const uid = useId();
   const [messagePopup, setMessagePopup] = useState<string | null>(null);
 
-  const [filled, setFilled] = useState({
-    name: false,
-    surname: false,
-    phone: false,
-    email: false,
-    country: false,
-  });
-
   const dataForm = form.form;
-  const router = useRouter();
 
   const [formStartTime, setFormStartTime] = useState(0);
   const formikRef = useRef<FormikProps<FormData> | null>(null);
@@ -77,7 +68,6 @@ const FormPartners: FC<ContactFormProps> = ({
   useEffect(() => {
     const interval = setInterval(() => {
       const f = formikRef.current;
-
       const fields = ["name", "surname", "email", "country"] as const;
 
       fields.forEach((field) => {
@@ -86,45 +76,17 @@ const FormPartners: FC<ContactFormProps> = ({
         ) as HTMLInputElement | null;
 
         const domVal = (el?.value ?? "").trim();
-        const hasValue = Boolean(domVal);
 
-        // autofill → Formik
         if (f && domVal && !String(f.values[field] ?? "").trim()) {
           f.setFieldValue(field, domVal, false);
         }
-
-        setFilled((prev) =>
-          prev[field] === hasValue ? prev : { ...prev, [field]: hasValue },
-        );
       });
-
-      // phone отдельно
-      const phoneEl = document.querySelector(
-        `[name="phone"]`,
-      ) as HTMLInputElement | null;
-
-      const domPhone = (phoneEl?.value ?? "").trim();
-      const phoneHasValue = Boolean(domPhone);
-
-      if (f && domPhone && !String(f.values.phone ?? "").trim()) {
-        f.setFieldValue("phone", domPhone, false);
-      }
-
-      setFilled((prev) =>
-        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
-      );
     }, 200);
 
     if (formStartTime === 0) setFormStartTime(Date.now());
+
     return () => clearInterval(interval);
   }, [formStartTime]);
-
-  const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFilled((prev) => ({ ...prev, [name]: value.trim() !== "" }));
-  };
 
   const initialValues: FormData = {
     name: "",
@@ -134,7 +96,7 @@ const FormPartners: FC<ContactFormProps> = ({
     country: "",
     agreedToPolicy: false,
     company: "",
-    formStartTime: 0, // отправим реальное из state
+    formStartTime: 0,
   };
 
   const validationSchema = Yup.object({
@@ -227,8 +189,10 @@ const FormPartners: FC<ContactFormProps> = ({
       .test("phone-format", function (value) {
         const v = String(value ?? "").trim();
         if (!v) return true;
+
         const ok = /^[+0-9()\-\s]{7,25}$/.test(v);
         if (ok) return true;
+
         return this.createError({
           message: dataForm.validationPhoneInvalid || "Invalid phone number",
         });
@@ -292,17 +256,18 @@ const FormPartners: FC<ContactFormProps> = ({
 
     try {
       const currentPage = window.location.href;
+      const parsedPhone = parsePhoneNumberFromString(values.phone || "");
+      const phoneFinal = parsedPhone?.number || values.phone || "";
 
       const response = await axios.post("/api/email", {
         ...values,
-        phone: values.phone || "",
-        formStartTime, // ✅ фиксированное время
+        phone: phoneFinal,
+        formStartTime,
         currentPage,
         lang,
       });
 
       if (response.status === 200 && response.data?.ok === true) {
-        // Meta Pixel Lead
         if (typeof window !== "undefined" && window.fbq) {
           window.fbq("track", "Lead", {
             form_name: "partners_form",
@@ -311,15 +276,7 @@ const FormPartners: FC<ContactFormProps> = ({
         }
 
         resetForm({});
-        setFilled({
-          name: false,
-          surname: false,
-          phone: false,
-          email: false,
-          country: false,
-        });
 
-        // GTM event
         if (typeof window !== "undefined" && (window as any).dataLayer) {
           (window as any).dataLayer.push({
             event: "form_submission_success",
@@ -382,281 +339,271 @@ const FormPartners: FC<ContactFormProps> = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ isSubmitting, setFieldValue, values }) => (
-          <Form>
-            {/* Name */}
-            <div className={styles.inputWrapper}>
-              <svg
-                className={styles.icon}
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="#bd8948"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
-              </svg>
+        {({ isSubmitting, setFieldValue, values }) => {
+          const isNameFilled = Boolean(values.name.trim());
+          const isSurnameFilled = Boolean(values.surname.trim());
+          const isEmailFilled = Boolean(values.email.trim());
+          const isCountryFilled = Boolean(values.country.trim());
 
-              <label
-                htmlFor={`${uid}-name`}
-                className={`${styles.label} ${filled.name ? styles.filled : ""}`}
-              >
-                {dataForm.inputName}
-              </label>
-
-              <Field name="name">
-                {({ field }: any) => (
-                  <input
-                    {...field}
-                    id={`${uid}-name`}
-                    type="text"
-                    className={styles.inputField}
-                    onBlur={(e) => {
-                      field.onBlur(e);
-                      handleBlur(e);
-                    }}
-                  />
-                )}
-              </Field>
-
-              <ErrorMessage
-                name="name"
-                component="div"
-                className={styles.error}
-              />
-            </div>
-
-            {/* Surname */}
-            <div className={styles.inputWrapper}>
-              <svg
-                className={styles.icon}
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="#bd8948"
-              >
-                <path d="M2 4v16h20V4H2zm4 4h4v2H6V8zm0 4h6v2H6v-2zm10 2c-1.1 0-2 .9-2 2h4c0-1.1-.9-2-2-2zm0-2c.83 0 1.5-.67 1.5-1.5S16.83 11 16 11s-1.5.67-1.5 1.5S15.17 14 16 14z" />
-              </svg>
-
-              <label
-                htmlFor={`${uid}-surname`}
-                className={`${styles.label} ${filled.surname ? styles.filled : ""}`}
-              >
-                {lang === "en"
-                  ? "Surname"
-                  : lang === "ru"
-                    ? "Фамилия"
-                    : lang === "de"
-                      ? "Nachname"
-                      : lang === "pl"
-                        ? "Nazwisko"
-                        : "Surname"}
-              </label>
-
-              <Field name="surname">
-                {({ field }: any) => (
-                  <input
-                    {...field}
-                    id={`${uid}-surname`}
-                    type="text"
-                    className={styles.inputField}
-                    onBlur={(e) => {
-                      field.onBlur(e);
-                      handleBlur(e);
-                    }}
-                  />
-                )}
-              </Field>
-
-              <ErrorMessage
-                name="surname"
-                component="div"
-                className={styles.error}
-              />
-            </div>
-
-            {/* Phone */}
-            <div className={styles.inputWrapper}>
-              <label
-                htmlFor={`${uid}-phone`}
-                className={`${styles.label} ${styles.labelPhone} ${
-                  filled.phone ? styles.filled : ""
-                }`}
-              >
-                {dataForm.inputPhone}
-              </label>
-
-              <PhoneInput
-                id={`${uid}-phone`}
-                name="phone"
-                className={`${styles.inputField} ${styles.phoneInput}`}
-                value={values.phone}
-                onChange={(value) => {
-                  setFieldValue("phone", value);
-                  setFilled((f) => ({ ...f, phone: Boolean(value) }));
-                }}
-                onBlur={() => {
-                  formikRef.current?.setFieldTouched("phone", true, true);
-                }}
-              />
-
-              <ErrorMessage
-                name="phone"
-                component="div"
-                className={styles.error}
-              />
-            </div>
-
-            {/* Email */}
-            <div className={styles.inputWrapper}>
-              <svg
-                className={styles.icon}
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="#bd8948"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
-              </svg>
-
-              <label
-                htmlFor={`${uid}-email`}
-                className={`${styles.label} ${filled.email ? styles.filled : ""}`}
-              >
-                {dataForm.inputEmail}
-              </label>
-
-              <Field name="email">
-                {({ field }: any) => (
-                  <input
-                    {...field}
-                    id={`${uid}-email`}
-                    type="email"
-                    className={styles.inputField}
-                    onBlur={(e) => {
-                      field.onBlur(e);
-                      handleBlur(e);
-                    }}
-                  />
-                )}
-              </Field>
-
-              <ErrorMessage
-                name="email"
-                component="div"
-                className={styles.error}
-              />
-            </div>
-
-            {/* Country */}
-            <div className={styles.inputWrapper}>
-              <svg
-                className={styles.icon}
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="#bd8948"
-              >
-                <path d="M4 2v20h2v-7h13.5c.28 0 .5-.22.5-.5V3.5c0-.28-.22-.5-.5-.5H6V2H4z" />
-              </svg>
-
-              <label
-                htmlFor={`${uid}-country`}
-                className={`${styles.label} ${filled.country ? styles.filled : ""}`}
-              >
-                {lang === "en"
-                  ? "Country"
-                  : lang === "ru"
-                    ? "Страна"
-                    : lang === "de"
-                      ? "Land"
-                      : lang === "pl"
-                        ? "Kraj"
-                        : "Country"}
-              </label>
-
-              <Field name="country">
-                {({ field }: any) => (
-                  <input
-                    {...field}
-                    id={`${uid}-country`}
-                    type="text"
-                    className={styles.inputField}
-                    onBlur={(e) => {
-                      field.onBlur(e);
-                      handleBlur(e);
-                    }}
-                  />
-                )}
-              </Field>
-
-              <ErrorMessage
-                name="country"
-                component="div"
-                className={styles.error}
-              />
-            </div>
-
-            {/* Submit */}
-            <div>
-              <button
-                type="submit"
-                className={styles.sentBtn}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <div className={styles.loader}></div>
-                ) : offerButtonCustomText ? (
-                  offerButtonCustomText
-                ) : (
-                  dataForm.buttonText
-                )}
-              </button>
-            </div>
-
-            {/* Honeypot */}
-            <Field
-              type="text"
-              name="company"
-              style={{ display: "none" }}
-              tabIndex={-1}
-              autoComplete="new-password"
-              aria-hidden="true"
-            />
-
-            {/* Agreement */}
-            <div className={styles.customCheckbox}>
-              <Field
-                type="checkbox"
-                name="agreedToPolicy"
-                id={`${uid}-agreedToPolicy`}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setFieldValue("agreedToPolicy", e.target.checked);
-                }}
-              />
-
-              <ErrorMessage
-                name="agreedToPolicy"
-                component="div"
-                className={styles.errorCheckbox}
-              />
-
-              <label htmlFor={`${uid}-agreedToPolicy`}>
-                {dataForm.agreementText}{" "}
-                <Link
-                  className={styles.policyLink}
-                  href={dataForm.agreementLinkDestination}
-                  target="_blank"
+          return (
+            <Form>
+              <div className={styles.inputWrapper}>
+                <svg
+                  className={styles.icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#bd8948"
+                  viewBox="0 0 24 24"
                 >
-                  {dataForm.agreementLinkLabel}
-                </Link>
-              </label>
-            </div>
-          </Form>
-        )}
+                  <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                </svg>
+
+                <label
+                  htmlFor={`${uid}-name`}
+                  className={`${styles.label} ${isNameFilled ? styles.filled : ""}`}
+                >
+                  {dataForm.inputName}
+                </label>
+
+                <Field name="name">
+                  {({ field }: any) => (
+                    <input
+                      {...field}
+                      id={`${uid}-name`}
+                      type="text"
+                      autoComplete="given-name"
+                      className={styles.inputField}
+                      onBlur={field.onBlur}
+                    />
+                  )}
+                </Field>
+
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <svg
+                  className={styles.icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="#bd8948"
+                >
+                  <path d="M2 4v16h20V4H2zm4 4h4v2H6V8zm0 4h6v2H6v-2zm10 2c-1.1 0-2 .9-2 2h4c0-1.1-.9-2-2-2zm0-2c.83 0 1.5-.67 1.5-1.5S16.83 11 16 11s-1.5.67-1.5 1.5S15.17 14 16 14z" />
+                </svg>
+
+                <label
+                  htmlFor={`${uid}-surname`}
+                  className={`${styles.label} ${isSurnameFilled ? styles.filled : ""}`}
+                >
+                  {lang === "en"
+                    ? "Surname"
+                    : lang === "ru"
+                      ? "Фамилия"
+                      : lang === "de"
+                        ? "Nachname"
+                        : lang === "pl"
+                          ? "Nazwisko"
+                          : "Surname"}
+                </label>
+
+                <Field name="surname">
+                  {({ field }: any) => (
+                    <input
+                      {...field}
+                      id={`${uid}-surname`}
+                      type="text"
+                      autoComplete="family-name"
+                      className={styles.inputField}
+                      onBlur={field.onBlur}
+                    />
+                  )}
+                </Field>
+
+                <ErrorMessage
+                  name="surname"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <PhoneInput
+                  id={`${uid}-phone`}
+                  name="phone"
+                  aria-label={dataForm.inputPhone}
+                  placeholder={dataForm.inputPhone}
+                  className={`${styles.inputField} ${styles.phoneInput}`}
+                  value={values.phone}
+                  defaultCountry="CY"
+                  international
+                  withCountryCallingCode
+                  smartCaret={false}
+                  autoComplete="tel"
+                  inputMode="tel"
+                  type="tel"
+                  onChange={(value) => {
+                    setFieldValue("phone", value || "", false);
+                  }}
+                  onBlur={() => {
+                    formikRef.current?.setFieldTouched("phone", true, true);
+                  }}
+                />
+
+                <ErrorMessage
+                  name="phone"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <svg
+                  className={styles.icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="#bd8948"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
+                </svg>
+
+                <label
+                  htmlFor={`${uid}-email`}
+                  className={`${styles.label} ${isEmailFilled ? styles.filled : ""}`}
+                >
+                  {dataForm.inputEmail}
+                </label>
+
+                <Field name="email">
+                  {({ field }: any) => (
+                    <input
+                      {...field}
+                      id={`${uid}-email`}
+                      type="email"
+                      autoComplete="email"
+                      className={styles.inputField}
+                      onBlur={field.onBlur}
+                    />
+                  )}
+                </Field>
+
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+
+              <div className={styles.inputWrapper}>
+                <svg
+                  className={styles.icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="#bd8948"
+                >
+                  <path d="M4 2v20h2v-7h13.5c.28 0 .5-.22.5-.5V3.5c0-.28-.22-.5-.5-.5H6V2H4z" />
+                </svg>
+
+                <label
+                  htmlFor={`${uid}-country`}
+                  className={`${styles.label} ${isCountryFilled ? styles.filled : ""}`}
+                >
+                  {lang === "en"
+                    ? "Country"
+                    : lang === "ru"
+                      ? "Страна"
+                      : lang === "de"
+                        ? "Land"
+                        : lang === "pl"
+                          ? "Kraj"
+                          : "Country"}
+                </label>
+
+                <Field name="country">
+                  {({ field }: any) => (
+                    <input
+                      {...field}
+                      id={`${uid}-country`}
+                      type="text"
+                      autoComplete="country-name"
+                      className={styles.inputField}
+                      onBlur={field.onBlur}
+                    />
+                  )}
+                </Field>
+
+                <ErrorMessage
+                  name="country"
+                  component="div"
+                  className={styles.error}
+                />
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className={styles.sentBtn}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <div className={styles.loader}></div>
+                  ) : offerButtonCustomText ? (
+                    offerButtonCustomText
+                  ) : (
+                    dataForm.buttonText
+                  )}
+                </button>
+              </div>
+
+              <Field
+                type="text"
+                name="company"
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="new-password"
+                aria-hidden="true"
+              />
+
+              <div className={styles.customCheckbox}>
+                <Field
+                  type="checkbox"
+                  name="agreedToPolicy"
+                  id={`${uid}-agreedToPolicy`}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setFieldValue("agreedToPolicy", e.target.checked);
+                  }}
+                />
+
+                <ErrorMessage
+                  name="agreedToPolicy"
+                  component="div"
+                  className={styles.errorCheckbox}
+                />
+
+                <label htmlFor={`${uid}-agreedToPolicy`}>
+                  {dataForm.agreementText}{" "}
+                  <Link
+                    className={styles.policyLink}
+                    href={dataForm.agreementLinkDestination}
+                    target="_blank"
+                  >
+                    {dataForm.agreementLinkLabel}
+                  </Link>
+                </label>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     </>
   );
