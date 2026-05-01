@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 import styles from "./FormStandard.module.scss";
 import { Form as FormType } from "@/types/form";
@@ -99,20 +100,20 @@ const FormStandard: FC<ContactFormProps> = ({
       });
 
       // phone
-      const phoneEl = document.querySelector(
-        `[name="phone"]`,
-      ) as HTMLInputElement | null;
+      // const phoneEl = document.querySelector(
+      //   `[name="phone"]`,
+      // ) as HTMLInputElement | null;
 
-      const domPhone = phoneEl?.value?.trim() ?? "";
-      const phoneHasValue = Boolean(domPhone);
+      // const domPhone = phoneEl?.value?.trim() ?? "";
+      // const phoneHasValue = Boolean(domPhone);
 
-      if (f && domPhone && !String(f.values.phone ?? "").trim()) {
-        f.setFieldValue("phone", domPhone, false);
-      }
+      // if (f && domPhone && !String(f.values.phone ?? "").trim()) {
+      //   f.setFieldValue("phone", domPhone, false);
+      // }
 
-      setFilled((prev) =>
-        prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
-      );
+      // setFilled((prev) =>
+      //   prev.phone === phoneHasValue ? prev : { ...prev, phone: phoneHasValue },
+      // );
     }, 200);
 
     if (formStartTime === 0) {
@@ -258,7 +259,8 @@ const FormStandard: FC<ContactFormProps> = ({
 
     try {
       const currentPage = window.location.href;
-      const phoneFinal = values.phone || "";
+      const parsedPhone = parsePhoneNumberFromString(values.phone || "");
+      const phoneFinal = parsedPhone?.number || values.phone || "";
 
       const response = await axios.post("/api/monday", {
         ...values,
@@ -451,12 +453,18 @@ const FormStandard: FC<ContactFormProps> = ({
                 name="phone"
                 className={`${styles.inputField} ${styles.phoneInput}`}
                 value={values.phone}
+                defaultCountry="CY"
+                international
+                withCountryCallingCode
+                smartCaret={false}
+                autoComplete="tel"
+                inputMode="tel"
+                type="tel"
                 onChange={(value) => {
-                  setFieldValue("phone", value);
+                  setFieldValue("phone", value || "", false);
                   setFilled((f) => ({ ...f, phone: Boolean(value) }));
                 }}
                 onBlur={() => {
-                  // ✅ помечаем touched вручную
                   formikRef.current?.setFieldTouched("phone", true, true);
                 }}
               />
