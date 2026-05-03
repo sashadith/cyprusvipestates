@@ -305,7 +305,7 @@ export async function POST(request: Request) {
       `${escapeHtml(emailNorm || "-")}\n` +
       `Preferred: ${escapeHtml(preferredNorm || "-")}\n` +
       (messageNorm ? `<b>Message:</b>\n${escapeHtml(messageNorm)}\n` : "") +
-      `<a href="${pageUrlString}">${pageUrlString}</a>\n\n` +
+      `URL: <a href="${pageUrlString}">${pageUrlString}</a>\n\n` +
       `<a href="${mondayLink}">Open in Monday</a>`;
 
     try {
