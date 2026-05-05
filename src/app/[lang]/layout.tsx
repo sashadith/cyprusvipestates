@@ -10,6 +10,7 @@ import CustomCookieConsent from "../components/CustomCookieConsent/CustomCookieC
 import GoogleAdsScript from "../components/GoogleAdsScript/GoogleAdsScript";
 import FacebookPixel from "../components/FacebookPixel/FacebookPixel";
 import LenisProvider from "../components/LenisProvider/LenisProvider";
+import LinkedInPixel from "../components/LinkedInPixel/LinkedInPixel";
 
 const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 
@@ -53,6 +54,7 @@ export default function RootLayout({
             <GoogleTagManager gtmId="GTM-MQNF6L9V" />
             <GoogleAdsScript />
             <FacebookPixel />
+            <LinkedInPixel />
           </>
         )}
 
