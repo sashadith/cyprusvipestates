@@ -173,6 +173,14 @@ const FormFull: FC<ContactFormProps> = ({
             preferred_contact: values.preferredContact,
           });
         }
+        if (
+          typeof window !== "undefined" &&
+          typeof (window as any).lintrk === "function"
+        ) {
+          (window as any).lintrk("track", {
+            conversion_id: 27871505,
+          });
+        }
 
         resetForm({});
         setFilled({
