@@ -32,6 +32,7 @@ import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFou
 import RoiCalculator from "@/app/components/roi-calculator/RoiCalculator";
 import ModalRoiCalculator from "@/app/components/ModalRoiCalculator/ModalRoiCalculator";
 import MetaViewContentTracker from "@/app/components/MetaViewContentTracker/MetaViewContentTracker";
+import LinkedInConversionTracker from "@/app/components/LinkedInConversionTracker/LinkedInConversionTracker";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -138,6 +139,7 @@ const ProjectPage = async ({ params }: Props) => {
           city={project.keyFeatures?.city}
           propertyType={project.keyFeatures?.propertyType}
         />
+        <LinkedInConversionTracker conversionId={27871513} />
         <PropertyIntro
           title={project.title}
           excerpt={project.excerpt}

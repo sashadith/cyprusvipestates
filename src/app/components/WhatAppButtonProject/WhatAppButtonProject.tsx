@@ -53,6 +53,15 @@ const WhatAppButtonProject: FC<Props> = ({ lang }) => {
         });
       }
 
+      if (
+        typeof window !== "undefined" &&
+        typeof (window as any).lintrk === "function"
+      ) {
+        (window as any).lintrk("track", {
+          conversion_id: 27871529,
+        });
+      }
+
       if (window.dataLayer) {
         window.dataLayer.push({
           event: "whatsapp_click",
@@ -62,7 +71,9 @@ const WhatAppButtonProject: FC<Props> = ({ lang }) => {
         });
       }
 
-      window.open(finalUrl, "_blank");
+      setTimeout(() => {
+        window.open(finalUrl, "_blank");
+      }, 100);
     }
   };
 

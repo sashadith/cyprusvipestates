@@ -43,6 +43,7 @@ import ProjectsSectionSlider from "@/app/components/ProjectsSectionSlider/Projec
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
 import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
+import LinkedInConversionTracker from "@/app/components/LinkedInConversionTracker/LinkedInConversionTracker";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -105,7 +106,7 @@ const PagePost = async ({ params }: Props) => {
           }
           return acc;
         },
-        []
+        [],
       )
       .join(" ");
 
@@ -208,6 +209,7 @@ const PagePost = async ({ params }: Props) => {
         currentTitle={blog.title}
       />
       <main>
+        <LinkedInConversionTracker conversionId={27871521} />
         <div className="container">
           <div className="post-grid">
             <div className="post-content">
