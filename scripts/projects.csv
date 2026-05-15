@@ -1,321 +1,795 @@
 ID,Publication Date,Developer DE,Developer PL,Developer EN,Developer RU,Title EN,Meta Title EN,Meta Desctiption EN,Excerpt EN,Slug EN,Title DE,Meta Title DE,Meta Desctiption DE,Excerpt DE,Slug DE,Title PL,Meta Title PL,Meta Desctiption PL,Excerpt PL,Slug PL,Title RU,Meta Title RU,Meta Desctiption RU,Excerpt RU,Slug RU,Location Lat,Location Long,City,Property Type,Bedrooms,Covered Area,Plot Size,Completion Date,Price,Beach,Restaurants,Shops,Airport,Hospital,School,Center,Golf,Description EN,Description DE,Description PL,Description RU,Preview Image,Images,Video ID,Full Description EN,Full Description DE,Full Description PL,Full Description RU,FAQ EN,FAQ DE,FAQ PL,FAQ RU
 id,publishedAt,developer_de,developer_pl,developer_en,developer_ru,title_en,seo_metaTitle_en,seo_metaDescription_en,excerpt_en,slug_en,title_de,seo_metaTitle_de,seo_metaDescription_de,excerpt_de,slug_de,title_pl,seo_metaTitle_pl,seo_metaDescription_pl,excerpt_pl,slug_pl,title_ru,seo_metaTitle_ru,seo_metaDescription_ru,excerpt_ru,slug_ru,location_lat,location_lng,keyFeatures_city,keyFeatures_propertyType,keyFeatures_bedrooms,keyFeatures_coveredArea,keyFeatures_plotSize,completionDate,keyFeatures_price,distances_beach,distances_restaurants,distances_shops,distances_airport,distances_hospital,distances_school,distances_cityCenter,distances_golfCourt,description_en,description_de,description_pl,description_ru,previewImage_path,images_paths,videoId,fullDescription_en,fullDescription_de,fullDescription_pl,fullDescription_ru,faq_en,faq_de,faq_pl,faq_ru
-square-one-docs,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,The Docs,Luxury 1-2 Bedroom The Docks Apartments Limassol,"Buy 1-2 bedroom apartments at The Docks, Limassol. Near beach & marina. No commission. Ideal for living or investment in Cyprus real estate.","Modern 1–2 bedroom apartments for sale at The Docks in Limassol, just minutes from the beach and marina. Perfect for living or investment with no agency commission.",square-one-docs,The Docs,Luxus 1-2 Zimmer The Docks Wohnungen Limassol,"Kaufen Sie 1-2 Zimmer Wohnungen in The Docks, Limassol. Nahe Strand & Marina. Keine Provision. Ideal zum Wohnen oder als Investment.","Moderne 1–2 Zimmer Wohnungen in The Docks, Limassol, nur wenige Minuten vom Strand und der Marina. Ideal zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-docs,The Docs,Luksusowe 1-2 pokojowe The Docks Limassol sprzedaż,Kup 1-2 pokojowe apartamenty The Docks w Limassol. Blisko plaży i mariny. Bez prowizji. Idealne do zamieszkania lub inwestycji na Cyprze.,"Nowoczesne apartamenty 1–2 pokojowe w The Docks w Limassol, kilka minut od plaży i mariny. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-docs,The Docs,Купить апартаменты 1-2 спальни The Docks Лимассол,Купить 1-2 комнатные апартаменты The Docks в Лимассоле. Рядом с морем и мариной. Без комиссии. Отлично для жизни и инвестиций.,"Современные 1–2 комнатные апартаменты The Docks в Лимассоле, рядом с морем и мариной. Идеально для проживания или инвестиций, без комиссии.",square-one-docs,34.66425957121966,33.02464759140123,Limassol,Apartment,1-2,45-104,0,,270000,1,2,5,40,5,2,5,10,"The Docks is a modern residential development located in a vibrant and rapidly evolving area of Limassol. Designed with a focus on functionality and contemporary aesthetics, the project offers a refined collection of studios, one-bedroom, and two-bedroom apartments. It provides a balanced living environment that combines a sense of privacy and calm with the energy of a coastal city.
+alder-park-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,Alder Park,"2 Bedroom Apartments for Sale in Paphos, Cyprus","Buy luxury 2-bedroom apartments in Paphos, Cyprus. Near the beach, pool, underfloor heating and no extra agency commission.","Explore Alder Park in Paphos — modern 2-bedroom apartments near Tombs of the Kings with pool access, premium finishes and strong investment potential.",alder-park-oli,Alder Park,"2-Zimmer-Wohnungen in Paphos, Zypern kaufen","Moderne 2-Zimmer-Wohnungen in Paphos kaufen. Pool, Fußbodenheizung, Top-Lage und keine zusätzliche Agenturprovision.","Entdecken Sie Alder Park in Paphos – exklusive 2-Zimmer-Wohnungen nahe Tombs of the Kings mit moderner Ausstattung, Pool und Investitionspotenzial auf Zypern.",alder-park-oli,Alder Park,"Luksusowe apartamenty 2-pokojowe w Pafos, Cypr","Kup nowoczesne apartamenty w Pafos na Cyprze. Basen, ogrzewanie podłogowe i brak dodatkowej prowizji dla kupujących.","Poznaj Alder Park w Pafos – kameralny projekt 8 nowoczesnych apartamentów z basenem, wysokim standardem i dogodną lokalizacją blisko plaży.",alder-park-oli,Alder Park,"2-комнатные квартиры в Пафосе, Кипр купить","Купить квартиру в Пафосе, Кипр. Новый проект рядом с пляжем, бассейн, тёплый пол и без дополнительной комиссии покупателя.","Alder Park — новый жилой проект в Пафосе с современными 2-комнатными квартирами, бассейном, подогревом пола и удобным расположением рядом с морем.",alder-park-oli,34.775065137284805,32.407237525675384,Paphos,Apartment,2,76-80,0,,405000,3,3,4,20,10,8,6,15,"## Luxury 2 Bedroom Apartments for Sale in Paphos
 
-The development is positioned just moments from the city's waterfront, the marina, and key urban hubs, ensuring residents have easy access to business districts, leisure venues, and everyday amenities. With an Energy Efficiency Grade A+ and a focus on comfortable urban living, The Docks is situated in one of Limassol’s most promising locations, offering seamless connectivity to the broader city and main road networks.",,,,docs/docs.jpeg,docs,,,,,,,,,
-square-one-delo,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Delo Residences,Buy 1-2 Bedroom Apartments at Delo Residences in Limassol,"Buy 1-2 bedroom apartments at Delo Residences, Limassol. Quiet area, near center. No commission. Perfect for living or investment in Cyprus.","Modern 1–2 bedroom apartments for sale at Delo Residences in Limassol, located in a quiet residential area near the city center. Ideal for living or investment with no commission.",square-one-delo,Delo Residences,1-2 Zimmer Wohnungen in Delo Residences in Limassol kaufen,"Kaufen Sie 1-2 Zimmer Wohnungen in Delo Residences, Limassol. Ruhige Lage nahe Zentrum. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 1–2 Zimmer Wohnungen in Delo Residences, Limassol, in ruhiger Wohnlage nahe dem Zentrum. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-delo,Delo Residences,Kup apartamenty 1-2 pokojowe w Delo Residences w Limassol,Kup apartamenty 1-2 pokojowe Delo Residences w Limassol. Spokojna okolica blisko centrum. Bez prowizji. Idealne do życia lub inwestycji.,"Nowoczesne apartamenty 1–2 pokojowe w Delo Residences w Limassol, w spokojnej okolicy blisko centrum. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-delo,Delo Residences,"Купить апартаменты 1-2 спальни в Delo Residences, Лимассол",Купить апартаменты 1-2 спальни Delo Residences в Лимассоле. Тихий район рядом с центром. Без комиссии. Отлично для жизни и инвестиций.,"Современные апартаменты 1–2 спальни в Delo Residences, Лимассол, в тихом районе рядом с центром. Подходят для жизни и инвестиций, без комиссии.",square-one-delo,34.716023646299526,33.051657635581925,Limassol,Apartment,1-2,58-104,0,06-2028,235000,10,5,5,42,4,3,6,22,"## Contemporary Apartments in Agios Athanasios, Limassol
+Alder Park is a boutique residential development in the sought-after Tombs of the Kings area in Paphos, offering only 8 exclusive two-bedroom apartments designed for modern Mediterranean living. The project combines contemporary architecture, energy-efficient solutions and premium finishes while remaining close to beaches, restaurants, shopping facilities and central Paphos. Buyers do not pay an additional agency commission.
 
-DELO Residences is an exclusive residential development set in a peaceful neighbourhood of Agios Athanasios, one of the most desirable areas in Limassol. The project consists of a limited number of generously sized one- and two-bedroom apartments, created for those who value comfort, functionality, and refined design.
+Key features include:
 
-The concept of the development is based on clean architectural aesthetics, well-structured layouts, and a strong emphasis on privacy. Each apartment is designed to offer a bright and practical living space, combining modern materials with a timeless visual style.
+- 2-bedroom apartments (76–80 sqm)
+- Underfloor heating and concealed VRV cooling system
+- Energy efficiency class A
+- Communal swimming pool and children’s playground
+- Covered parking and private storage room
+- Gated entrance with alarm and intercom system
+- Approx. 5 minutes to beaches and central amenities
 
-## Prime Location with Excellent Accessibility
+Designed for comfortable year-round living or property investment in Cyprus, Alder Park offers a limited collection of apartments in one of Paphos’ most established residential locations.","## Luxuriöse 2-Zimmer-Wohnungen zum Verkauf in Paphos
 
-The location allows residents to enjoy a quiet residential atmosphere while staying close to everything Limassol has to offer. Shops, schools, and essential services are nearby, and the city centre, seafront, and popular leisure areas can be reached within minutes.
+Alder Park ist ein exklusives Wohnprojekt im gefragten Stadtteil Tombs of the Kings in Paphos und umfasst nur 8 moderne 2-Zimmer-Wohnungen. Das Projekt verbindet zeitgemäße Architektur, energieeffiziente Technologien und hochwertige Ausstattungen mit einer attraktiven Lage in der Nähe von Stränden, Restaurants, Einkaufsmöglichkeiten und dem Zentrum von Paphos. Käufer zahlen keine zusätzliche Agenturprovision.
 
-Convenient access to main roads makes commuting simple and efficient, whether for daily needs or travel across the city.
+Zu den wichtigsten Merkmalen gehören:
 
-The building is planned according to modern sustainability standards and is expected to achieve an A+ energy efficiency rating, ensuring reduced energy consumption and long-term cost savings. Project completion is scheduled for June 2028.","## Modernes Wohnen in Agios Athanasios, Limassol
+- 2-Zimmer-Wohnungen (76–80 m² Wohnfläche)
+- Fußbodenheizung und verdecktes VRV-Kühlsystem
+- Energieeffizienzklasse A
+- Gemeinschaftspool und Kinderspielbereich
+- Überdachter Parkplatz und privater Abstellraum
+- Geschlossene Wohnanlage mit Alarm- und Gegensprechanlage
+- Ca. 5 Minuten zu Stränden und wichtigen Einrichtungen
 
-DELO Residences ist ein modernes Boutique-Wohnprojekt in einer ruhigen und zugleich hervorragend angebundenen Wohngegend von Agios Athanasios in Limassol. Das Projekt umfasst eine exklusive Auswahl an großzügigen Apartments mit einem oder zwei Schlafzimmern, die Funktionalität mit stilvollem Design verbinden. Klare architektonische Linien, durchdachte Grundrisse und Liebe zum Detail schaffen ein komfortables und privates Wohnumfeld.
+Alder Park wurde für komfortables Wohnen das ganze Jahr über sowie für Immobilienkäufer entwickelt, die eine moderne Wohnung in einer der beliebtesten Regionen von Paphos suchen. Die begrenzte Anzahl an Einheiten macht das Projekt zusätzlich attraktiv für Eigennutzung oder langfristige Investitionen auf Zypern.","## Nowoczesne apartamenty 2-pokojowe na sprzedaż w Pafos
 
-Jede Wohnung wurde mit Fokus auf Einfachheit, hochwertige Materialien und zeitlose Eleganz gestaltet und eignet sich sowohl für den Eigenbedarf als auch als attraktive Immobilieninvestition in Limassol.
+Alder Park to kameralna inwestycja mieszkaniowa położona w popularnej okolicy Tombs of the Kings w Pafos. Projekt obejmuje jedynie 8 nowoczesnych apartamentów z wysokim standardem wykończenia, ogrzewaniem podłogowym oraz dostępem do wspólnego basenu. Kupujący nie płacą dodatkowej prowizji agencji.
 
-## Zentrale Lage und hohe Energieeffizienz
+Najważniejsze cechy inwestycji:
 
-Die Anlage befindet sich in unmittelbarer Nähe zu allen wichtigen Einrichtungen des täglichen Lebens und ist nur wenige Minuten vom Stadtzentrum von Limassol, der Küste und beliebten Freizeitangeboten entfernt. Dank der guten Anbindung an das Straßennetz sind alle wichtigen Ziele schnell erreichbar.
+- apartamenty 2-pokojowe (76–80 m²);
+- ogrzewanie podłogowe i system chłodzenia VRV;
+- klasa energetyczna A;
+- wspólny basen i plac zabaw;
+- miejsce parkingowe oraz komórka lokatorska;
+- około 5 minut do plaży i centrum Pafos.","## Современные квартиры на продажу в Пафосе, Кипр
 
-DELO Residences wird nach modernen Energieeffizienzstandards gebaut und strebt die Energieklasse A+ an, was einen geringeren Energieverbrauch und langfristige Einsparungen bedeutet. Die Fertigstellung ist für Juni 2028 geplant.","## Nowoczesne mieszkania w Agios Athanasios, Limassol
+Alder Park — новый жилой проект в популярном районе Tombs of the Kings в Пафосе, включающий всего 8 современных 2-комнатных квартир. Комплекс сочетает удобное расположение рядом с пляжами и инфраструктурой с современными технологиями, включая подогрев пола, скрытую систему охлаждения VRV и класс энергоэффективности A. Покупатели не оплачивают дополнительную комиссию агентству.
 
-DELO Residences to nowoczesna inwestycja typu boutique, położona w spokojnej, a jednocześnie bardzo dobrze skomunikowanej części Agios Athanasios w Limassol. Projekt obejmuje ograniczoną liczbę przestronnych apartamentów z jedną lub dwiema sypialniami, zaprojektowanych z myślą o funkcjonalności i eleganckiej prostocie. Przemyślane układy, nowoczesna architektura oraz dbałość o detale zapewniają komfort i prywatność mieszkańcom.
+Основные преимущества проекта:
 
-Każdy apartament został zaprojektowany z wykorzystaniem wysokiej jakości materiałów i ponadczasowego designu, dzięki czemu jest to doskonała propozycja zarówno do zamieszkania, jak i inwestycji w nieruchomości w Limassol.
+- квартиры площадью 76–80 м²;
+- подогрев пола и энергоэффективные решения;
+- общий бассейн и детская площадка;
+- крытая парковка и помещение для хранения;
+- закрытая территория с системой безопасности;
+- около 5 минут до пляжей, ресторанов и центра Пафоса.
 
-## Doskonała lokalizacja i energooszczędność
+Alder Park подойдёт покупателям, которые рассматривают недвижимость на Кипре для постоянного проживания, отдыха или долгосрочного владения в одном из наиболее востребованных районов Пафоса.",alder-park/alder-park-01.jpg,alder-park,,"## Alder Park Apartments for Sale in Paphos, Cyprus
 
-Inwestycja znajduje się w pobliżu wszystkich niezbędnych udogodnień, a jednocześnie zaledwie kilka minut od centrum Limassol, wybrzeża oraz popularnych miejsc rekreacyjnych. Dogodny dostęp do głównych dróg zapewnia szybkie przemieszczanie się po mieście.
+We offer Alder Park apartments for sale in Paphos — an exclusive collection of modern 2-bedroom residences located in the sought-after Tombs of the Kings area. Designed for comfortable Mediterranean living and long-term property value, this boutique development combines contemporary architecture, energy efficiency and premium finishes. Buyers do not pay additional agency commission.
 
-DELO Residences zostało zaprojektowane zgodnie z wysokimi standardami efektywności energetycznej i planowane jest uzyskanie klasy A+, co oznacza niższe zużycie energii i oszczędności w dłuższej perspektywie. Zakończenie budowy przewidziane jest na czerwiec 2028 roku.","## Современные апартаменты в Agios Athanasios, Лимассол
+Alder Park consists of only eight luxury apartments, creating a more private residential environment compared to larger developments. The project is positioned close to beaches, restaurants, shopping areas and central Paphos, making it attractive both for permanent living and property investment.
 
-DELO Residences — это современный бутик-проект, расположенный в тихом и при этом удобном районе Agios Athanasios в Лимассоле. Комплекс включает ограниченное количество просторных апартаментов с одной и двумя спальнями, спроектированных с акцентом на функциональность и элегантную простоту. Продуманные планировки, современная архитектура и внимание к деталям создают комфортную и приватную среду для жизни.
+## Why Buy Property in the Tombs of the Kings Area in Paphos?
 
-Каждая квартира выполнена с использованием качественных материалов и в актуальном, но при этом вне времени дизайне, что делает проект отличным выбором как для проживания, так и для инвестиций в недвижимость на Кипре.
+Tombs of the Kings remains one of the most recognised residential locations in Paphos among local and international buyers. The area combines proximity to the sea, tourist infrastructure and year-round services.
 
-## Удобное расположение и энергоэффективность
+Residents can reach:
 
-Комплекс находится рядом с необходимой инфраструктурой и всего в нескольких минутах от центра Лимассола, набережной и популярных мест отдыха. Удобный выезд на основные дороги обеспечивает быстрый доступ ко всем ключевым точкам города.
+- beaches within approximately 5 minutes;
+- restaurants and cafés in around 3 minutes;
+- Kings Avenue Mall in under 5 minutes;
+- Paphos Harbour within several minutes;
+- Paphos International Airport in approximately 20–25 minutes.
 
-Проект соответствует современным стандартам энергоэффективности и планируется к сертификации класса A+, что позволяет снизить расходы на электроэнергию. Завершение строительства запланировано на июнь 2028 года.",delo/delo.jpeg,delo,,,,,,,,,
-square-one-solea,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Solea Residences,Buy 1-3 Bedroom Apartments at Solea Residences in Limassol,"Buy 1-3 bedroom apartments at Solea Residences, Limassol. Near city center & beach. No commission. Ideal for living or investment in Cyprus.","Modern 1–3 bedroom apartments for sale at Solea Residences in Limassol, close to the city center and beach. Ideal for living or investment with no commission.",square-one-solea,Solea Residences,1-3 Zimmer Wohnungen in Solea Residences in Limassol kaufen,"Kaufen Sie 1-3 Zimmer Wohnungen in Solea Residences, Limassol. Nahe Zentrum und Strand. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 1–3 Zimmer Wohnungen in Solea Residences, Limassol, nahe Zentrum und Strand. Ideal zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-solea,Solea Residences,Kup apartamenty 1-3 pokojowe w Solea Residences w Limassol,Kup apartamenty 1-3 pokojowe w Solea Residences w Limassol. Blisko centrum i plaży. Bez prowizji. Idealne do życia lub inwestycji.,"Nowoczesne apartamenty 1–3 pokojowe w Solea Residences w Limassol, blisko centrum i plaży. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-solea,Solea Residences,"Купить апартаменты 1-3 спальни в Solea Residences, Лимассол",Купить апартаменты 1-3 спальни Solea Residences в Лимассоле. Рядом с центром и морем. Без комиссии. Отлично для жизни и инвестиций.,"Современные апартаменты 1–3 спальни в Solea Residences, Лимассол, рядом с центром и морем. Подходят для жизни и инвестиций, без комиссии.",square-one-solea,34.67970951944425,33.03526190674579,Limassol,Apartment,1-3,59-188,0,03-2029,249000,4,4,5,40,10,5,1,15,"At SOLEA Residences, the emphasis is placed on intelligent living rather than excess. This upcoming development introduces a small-scale collection of private homes created for people who value well-organised space, contemporary architecture, and dependable construction standards. The scheme includes apartments with one, two, or three bedrooms, together with a small number of top-floor penthouses offering a more elevated residential experience.
+This accessibility supports both everyday convenience and rental demand.
 
-The overall character of the project is shaped by restraint and purpose. Instead of relying on decorative complexity, the design focuses on proportion, light, and everyday usability. Internal layouts are arranged to support modern routines, while the specification of materials reflects a preference for durability, visual consistency, and lasting value. The result is a residential environment that feels both refined and practical.
+## Luxury 2 Bedroom Apartments Designed for Modern Living
 
-Its address in Katholiki places residents within easy reach of the city’s essential network of services and facilities. Everyday conveniences are located roughly 400 metres away, a school can be found within 100 metres, and the seafront lies approximately 1.6 kilometres from the development. This setting makes the project suitable for permanent living as well as for buyers seeking a property with strong long-term appeal.
+The apartments provide approximately 76–80 sqm of covered internal area with spacious covered verandas. The interiors feature spacious open-concept layouts and expansive windows, allowing plenty of natural light to fill the living areas.
 
-SOLEA Residences also responds to current expectations in sustainable construction, with the building planned to meet A+ energy performance standards. Completion is scheduled for March 2029, making the project an attractive option for those looking ahead to a future home or a strategic acquisition in the Cyprus property market.","Bei SOLEA Residences steht nicht Übermaß, sondern durchdachtes Wohnen im Mittelpunkt. Dieses geplante Wohnprojekt umfasst eine kleine Auswahl an Einheiten, die für Menschen konzipiert wurden, die Wert auf klare Raumaufteilung, zeitgemäße Architektur und verlässliche Bauqualität legen. Das Angebot reicht von Apartments mit ein, zwei oder drei Schlafzimmern bis hin zu wenigen Penthäusern, die ein gehobenes Wohngefühl bieten.
+Key features include:
 
-Der Charakter des Projekts basiert auf Zurückhaltung und Funktionalität. Statt auf dekorative Überladung zu setzen, liegt der Fokus auf Proportion, Tageslicht und praktischer Nutzbarkeit. Die Grundrisse sind auf den modernen Alltag abgestimmt, während Materialien und Ausführung auf Langlebigkeit und Beständigkeit ausgelegt sind. So entsteht ein Wohnumfeld, das sowohl ästhetisch als auch alltagstauglich ist.
+- Underfloor heating with separate zones;
+- Concealed VRV cooling system;
+- Energy efficiency class A;
+- Thermal aluminium windows;
+- Built-in wardrobes;
+- Fully fitted kitchens;
+- Walk-in showers;
+- Covered parking;
+- Private storage;
+- Communal swimming pool;
+- Security systems and gated access.
 
-Die Lage im Stadtteil Katholiki ermöglicht einen schnellen Zugang zu wichtigen Einrichtungen und Infrastruktur. Geschäfte und Dienstleistungen befinden sich in etwa 400 Metern Entfernung, eine Schule ist nur rund 100 Meter entfernt, und die Küste liegt etwa 1,6 Kilometer vom Projekt entfernt. Dadurch eignet sich die Immobilie sowohl für den Eigenbedarf als auch als langfristige Investition.
+Unlike many standard apartments for sale in Cyprus, Alder Park integrates heating efficiency and security systems as part of the development concept.
 
-SOLEA Residences erfüllt zudem aktuelle Anforderungen an energieeffizientes Bauen und ist für die Energieklasse A+ vorgesehen. Die Fertigstellung ist für März 2029 geplant.","W projekcie SOLEA Residences nacisk położono na przemyślane i funkcjonalne życie, a nie na zbędny przepych. To kameralne osiedle obejmuje ograniczoną liczbę mieszkań zaprojektowanych z myślą o osobach ceniących uporządkowaną przestrzeń, nowoczesną architekturę oraz wysoką jakość wykonania. W ofercie znajdują się apartamenty z jedną, dwiema i trzema sypialniami, a także wybrane penthouse’y dla osób oczekujących większego komfortu i prywatności.
+## Is Alder Park Suitable for Investment Property in Cyprus?
 
-Charakter inwestycji opiera się na prostocie i funkcjonalności. Zamiast zbędnych ozdobników postawiono na odpowiednie proporcje, dostęp światła dziennego oraz praktyczne rozwiązania. Układy mieszkań zostały zaprojektowane z myślą o codziennym użytkowaniu, a zastosowane materiały zapewniają trwałość i estetykę na długie lata. Efektem jest przestrzeń, która łączy nowoczesny wygląd z wygodą życia.
+Property buyers frequently consider Paphos due to international demand, relocation trends and tourism activity. Apartments near the coastline and established infrastructure often attract interest from both long-term residents and seasonal visitors.
 
-Lokalizacja w dzielnicy Katholiki zapewnia szybki dostęp do kluczowej infrastruktury miejskiej. Sklepy i usługi znajdują się w odległości około 400 metrów, szkoła – zaledwie 100 metrów, a plaża oddalona jest o około 1,6 km. Dzięki temu inwestycja doskonale sprawdzi się zarówno do zamieszkania, jak i jako długoterminowa lokata kapitału.
+Alder Park benefits from:
 
-Projekt spełnia wysokie standardy efektywności energetycznej (klasa A+), a jego zakończenie planowane jest na marzec 2029 roku.","В проекте SOLEA Residences основной акцент сделан на продуманное и комфортное проживание, а не на избыточную роскошь. Это камерный жилой комплекс, включающий ограниченное количество квартир, созданных для людей, ценящих рациональную планировку, современную архитектуру и высокое качество строительства. В проекте представлены квартиры с одной, двумя и тремя спальнями, а также несколько пентхаусов с более высоким уровнем комфорта и приватности.
+- central Paphos location;
+- limited number of units;
+- modern specifications;
+- proximity to tourist zones;
+- premium finishes.
 
-Концепция проекта основана на простоте и функциональности. Здесь нет лишних декоративных элементов — внимание сосредоточено на пропорциях, естественном освещении и удобстве повседневного использования. Планировки продуманы с учетом современных потребностей, а используемые материалы обеспечивают долговечность и устойчивое качество. В результате создается пространство, сочетающее эстетичность и практичность.
+These characteristics may contribute to long-term attractiveness among future buyers and tenants.","## Alder Park Wohnungen zum Verkauf in Paphos, Zypern
 
-Расположение в районе Katholiki обеспечивает удобный доступ ко всей необходимой городской инфраструктуре. Основные сервисы и магазины находятся примерно в 400 метрах, школа — всего в 100 метрах, а расстояние до моря составляет около 1,6 км. Это делает проект привлекательным как для постоянного проживания, так и для инвестиций.
+Wir bieten Alder Park Wohnungen zum Verkauf in Paphos an – ein modernes Neubauprojekt mit nur acht exklusiven 2-Zimmer-Wohnungen in der gefragten Gegend Tombs of the Kings in Kato Paphos. Die Anlage wurde für Käufer entwickelt, die Wert auf moderne Architektur, Energieeffizienz und eine gute Lage nahe Strand und Infrastruktur legen. Käufer zahlen keine zusätzliche Agenturprovision.
 
-SOLEA Residences соответствует современным стандартам энергоэффективности (класс A+), а завершение строительства запланировано на март 2029 года.",solea/solea.jpeg,solea,,,,,,,,,
-square-one-achilleas,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Achilleas,Buy 1-2 Bedroom Apartments at Achilleas in Limassol,"Buy 1-2 bedroom apartments at Achilleas, Limassol. Close to center & beach. No commission. Ideal for living or investment in Cyprus.","Modern 1–2 bedroom apartments for sale at Achilleas in Limassol, near the city center and beach. Perfect for living or investment with no commission.",square-one-achilleas,Achilleas,1-2 Zimmer Wohnungen in Achilleas in Limassol kaufen,"Kaufen Sie 1-2 Zimmer Wohnungen in Achilleas, Limassol. Nahe Zentrum und Strand. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 1–2 Zimmer Wohnungen in Achilleas, Limassol, nahe Zentrum und Strand. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-achilleas,Achilleas,Kup apartamenty 1-2 pokojowe w Achilleas w Limassol,Kup apartamenty 1-2 pokojowe w Achilleas w Limassol. Blisko centrum i plaży. Bez prowizji. Idealne do życia lub inwestycji.,"Nowoczesne apartamenty 1–2 pokojowe w Achilleas w Limassol, blisko centrum i plaży. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-achilleas,Achilleas,"Купить апартаменты 1-2 спальни в Achilleas, Лимассол",Купить апартаменты 1-2 спальни Achilleas в Лимассоле. Рядом с центром и морем. Без комиссии. Отлично для жизни и инвестиций.,"Современные апартаменты 1–2 спальни в Achilleas, Лимассол, рядом с центром и морем. Подходят для жизни и инвестиций, без комиссии.",square-one-achilleas,34.69594577960347,33.04938444907352,Limassol,Apartment,1-2,94-146,0,08-2028,319000,5,2,3,35,5,6,1,20,"ACHILLEAS is conceived as a small-scale residential address in a well-established part of Limassol, designed for those who prioritise space, calm surroundings, and a sense of order in everyday living. The project brings together a limited number of one- and two-bedroom homes, each arranged to provide clarity in layout and comfort in use, without relying on unnecessary decorative elements.
+Alder Park kombiniert zeitgemäßes Design mit hochwertigen Materialien und technischer Ausstattung. Die Wohnungen verfügen über großzügige Balkone, moderne Grundrisse und Systeme für komfortables Wohnen während des gesamten Jahres. Das Projekt eignet sich sowohl für Eigennutzer als auch für Käufer, die Immobilien auf Zypern als langfristige Investition betrachten.
 
-The design direction focuses on restraint and proportion. Interiors are organised to feel open yet defined, allowing natural light to shape the atmosphere throughout the day. Instead of visual complexity, the project relies on balance, material consistency, and thoughtful spatial planning to create a comfortable and lasting living environment. Privacy is integrated into the layout, giving each residence a more independent and quiet character.
+## Warum Immobilien in Paphos kaufen: Vorteile der Region Tombs of the Kings
 
-From a location perspective, the development sits within practical reach of Limassol’s daily infrastructure. Schools, shops, and essential services are easily accessible, while the wider city — including business districts and main transport connections — can be reached within a short drive. This combination allows residents to remain connected without being immersed in the busiest urban zones.
+Paphos zählt seit Jahren zu den beliebtesten Regionen für internationale Immobilienkäufer auf Zypern. Besonders die Gegend Tombs of the Kings verbindet Küstennähe mit Restaurants, Einkaufsmöglichkeiten und touristischer Infrastruktur.
 
-The building is being developed in line with contemporary energy standards, targeting an A+ efficiency rating. Construction is expected to be completed by August 2028, positioning the project as a considered option for future ownership or investment in the local property market.","ACHILLEAS ist als kompakte Wohnanlage in einem gewachsenen und gut angebundenen Stadtteil von Limassol konzipiert. Das Projekt richtet sich an Menschen, die Wert auf klare Raumstruktur, Ruhe im Alltag und funktionale Wohnqualität legen. Es umfasst eine begrenzte Anzahl an Wohnungen mit ein oder zwei Schlafzimmern, die bewusst auf Übersichtlichkeit, Komfort und effiziente Nutzung ausgelegt sind.
+Ungefähre Entfernungen vom Projekt:
 
-Die architektonische Idee basiert auf Reduktion und ausgewogenen Proportionen. Die Innenräume wirken offen, ohne an Struktur zu verlieren, und profitieren von natürlichem Licht, das den Wohncharakter im Tagesverlauf prägt. Anstelle auffälliger Gestaltung setzt das Projekt auf Beständigkeit, durchdachte Grundrisse und eine ruhige, konsistente Materialwahl. Gleichzeitig wird ein hohes Maß an Privatsphäre gewährleistet, wodurch jede Einheit einen eigenständigen Charakter erhält.
+- Strand: ca. 5 Minuten
+- Restaurants und Cafés: ca. 3 Minuten
+- Einkaufsmöglichkeiten: ca. 5 Minuten
+- Zentrum von Kato Paphos: ca. 5 Minuten
+- Paphos International Airport: ca. 20–25 Minuten
+- Golfanlagen: ca. 15–20 Minuten
 
-Die Lage ermöglicht einen praktischen Zugang zur städtischen Infrastruktur. Schulen, Einkaufsmöglichkeiten und wichtige Dienstleistungen befinden sich in unmittelbarer Nähe, während Geschäftsviertel und Hauptverkehrsachsen in kurzer Fahrzeit erreichbar sind. So entsteht eine ausgewogene Kombination aus Erreichbarkeit und Wohnruhe.
+Die Lage bietet eine Kombination aus Alltagstauglichkeit und Nähe zu beliebten Freizeitbereichen, was sie für viele Käufer interessant macht.
 
-Das Gebäude wird nach aktuellen energetischen Standards entwickelt und ist auf die Energieeffizienzklasse A+ ausgelegt. Die Fertigstellung ist für August 2028 geplant und macht das Projekt sowohl für Eigennutzer als auch für Kapitalanleger interessant.","ACHILLEAS to kameralna inwestycja mieszkaniowa zlokalizowana w dobrze rozwiniętej części Limassol, zaprojektowana z myślą o osobach ceniących spokój, przejrzysty układ przestrzeni oraz komfort codziennego życia. Projekt obejmuje ograniczoną liczbę mieszkań z jedną lub dwiema sypialniami, w których nacisk położono na funkcjonalność i wygodne użytkowanie.
+## Moderne 2-Zimmer-Wohnungen mit hochwertiger Ausstattung in Paphos
 
-Założenia architektoniczne opierają się na prostocie i proporcjach. Wnętrza są jasne i uporządkowane, a naturalne światło odgrywa kluczową rolę w budowaniu atmosfery przestrzeni. Zamiast zbędnych ozdobników zastosowano spójne materiały oraz przemyślane układy mieszkań, które zapewniają komfort na co dzień. Dodatkowo zadbano o prywatność, dzięki czemu każda jednostka zachowuje bardziej indywidualny charakter.
+Die Wohnungen verfügen über ungefähr 76–80 m² Wohnfläche sowie überdachte Balkone. Große Fensterflächen sorgen für viel Tageslicht und ein offenes Wohngefühl. Die Architektur orientiert sich an modernen Neubauprojekten mit Fokus auf Komfort und Energieeffizienz.
 
-Lokalizacja umożliwia wygodny dostęp do najważniejszych elementów infrastruktury miejskiej. W pobliżu znajdują się szkoły, sklepy oraz podstawowe usługi, a do głównych tras komunikacyjnych i dzielnic biznesowych można szybko dojechać samochodem. To dobre połączenie dostępności i spokojnego otoczenia.
+Zur Ausstattung gehören unter anderem:
 
-Budynek powstaje zgodnie z nowoczesnymi standardami efektywności energetycznej i będzie spełniał normę A+. Planowane zakończenie inwestycji przypada na sierpień 2028 roku, co czyni ją atrakcyjną zarówno do zamieszkania, jak i jako inwestycję.","ACHILLEAS — это камерный жилой проект, расположенный в развитом районе Лимассола, ориентированный на тех, кто ценит спокойную атмосферу, продуманную планировку и комфорт в повседневной жизни. В комплексе предусмотрено ограниченное количество квартир с одной и двумя спальнями, каждая из которых спроектирована с акцентом на удобство и рациональное использование пространства.
+- Fußbodenheizung mit separaten Zonen
+- Verdecktes VRV-Kühlsystem
+- Energieeffizienzklasse A
+- Hochwertige Einbauküchen
+- Einbauschränke
+- Walk-In-Duschen
+- Überdachte Parkplätze
+- Privater Abstellraum
+- Alarmanlage und Gegensprechanlage
+- Gemeinschaftspool
+- Kinderspielbereich
+- Geschlossene Wohnanlage mit elektrischen Toren
 
-Архитектурная концепция строится на сдержанности и правильных пропорциях. Интерьеры остаются светлыми и структурированными, а естественное освещение формирует ощущение пространства в течение дня. Вместо декоративной перегруженности используется гармоничное сочетание материалов и логичные планировки, обеспечивающие комфорт и долговечность. При этом особое внимание уделено приватности, что делает каждую квартиру более уединённой.
+Diese Merkmale machen das Projekt attraktiv für Käufer, die modernen Wohnkomfort auf Zypern suchen.
 
-Расположение проекта обеспечивает удобный доступ ко всей необходимой инфраструктуре. В непосредственной близости находятся школы, магазины и базовые сервисы, а деловые районы и основные транспортные артерии города доступны всего за несколько минут на автомобиле. Это позволяет сохранить баланс между активной городской жизнью и спокойным проживанием.
+## Energieeffiziente Neubauwohnungen auf Zypern
 
-Здание проектируется в соответствии с современными стандартами энергоэффективности (класс A+), а завершение строительства запланировано на август 2028 года. Проект подходит как для собственного проживания, так и для долгосрочных инвестиций.",achilleas/achilleas.jpeg,achilleas,,,,,,,,,
-square-one-zaya,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Zaya Residences,"Buy 2-4 Bedroom Apartments at Zaya in Paphos, Cyprus","Buy 2-4 bedroom apartments at Zaya Residences, Paphos. Near beach & center. No commission. Ideal for living or investment in Cyprus.","Modern 2–4 bedroom apartments for sale at Zaya Residences in Paphos, close to the beach and city center. Perfect for living or investment with no commission.",square-one-zaya,Zaya Residences,"2-4 Zimmer Wohnungen in Zaya Residences kaufen in Paphos, Zypern","Kaufen Sie 2-4 Zimmer Wohnungen in Zaya Residences, Paphos. Nahe Strand und Zentrum. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 2–4 Zimmer Wohnungen in Zaya Residences, Paphos, nahe Strand und Zentrum. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-zaya,Zaya Residences,Kup apartamenty 2-4 pokojowe w Zaya Residences w Pafos,Kup apartamenty 2-4 pokojowe w Zaya Residences w Pafos. Blisko plaży i centrum. Bez prowizji. Idealne do życia lub inwestycji.,"Nowoczesne apartamenty 2–4 pokojowe w Zaya Residences w Pafos, blisko plaży i centrum. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-zaya,Zaya Residences,"Купить апартаменты 2-4 спальни в Zaya в Пафосе, Кипр",Купить апартаменты 2-4 спальни Zaya Residences в Пафосе. Рядом с морем и центром. Без комиссии. Отлично для жизни и инвестиций.,"Современные апартаменты 2–4 спальни в Zaya Residences, Пафос, рядом с морем и центром. Подходят для жизни и инвестиций, без комиссии.",square-one-zaya,34.7611156544662,32.434183093254205,Paphos,Apartment,2-4,98-197,0,05-2028,339000,4,2,3,12,5,3,4,6,"ZAYA Residences is planned as an intimate residential setting within a quieter part of Paphos, where daily life unfolds at a slower, more comfortable pace while remaining connected to the city. The project includes only two-bedroom homes, each offering a generous amount of space and a layout shaped around practical use rather than decorative ideas.
+Viele Immobilienkäufer achten zunehmend auf Energieeffizienz und langfristige Betriebskosten. Alder Park wurde mit thermischen Aluminiumfenstern, moderner Isolation und Energieklasse A geplant.
 
-The approach to design is deliberately restrained. Instead of relying on visual complexity, the interiors are organised to feel clear, balanced, and easy to live in. Light, proportions, and thoughtful zoning define the character of each apartment, creating an environment that supports both relaxation and routine. Privacy is built into the way the spaces are arranged, giving each residence a more personal and independent feel.
+Zusätzlich unterstützen:
 
-Positioned in the Universal district, the development allows residents to move easily between essential everyday locations and the more dynamic parts of the city. Shops, services, and local facilities are close at hand, while the historic centre, waterfront, and harbour can be reached within minutes by car. Road connections in the area make it simple to navigate across Paphos and beyond.
+- VRV-Kühlsysteme;
+- Fußbodenheizung;
+- hochwertige Baumaterialien;
+- moderne Verglasungssysteme
 
-The building is being developed with a focus on energy performance and is intended to meet A+ efficiency standards. Completion is scheduled for May 2028, offering a considered option for those looking ahead to a future home or a long-term investment.","ZAYA Residences ist als kompakte Wohnanlage in einem ruhigeren Teil von Paphos konzipiert, in dem der Alltag in einem entspannten Rhythmus verläuft, ohne auf eine gute Anbindung an die Stadt verzichten zu müssen. Das Projekt umfasst ausschließlich Wohnungen mit zwei Schlafzimmern, die durch ihre großzügige Raumaufteilung und funktionale Gestaltung überzeugen.
+ein angenehmes Raumklima während unterschiedlicher Jahreszeiten.
 
-Der gestalterische Ansatz setzt bewusst auf Zurückhaltung. Anstelle komplexer Details stehen Klarheit, ausgewogene Proportionen und eine angenehme Lichtführung im Mittelpunkt. Die Grundrisse sind so organisiert, dass sie sowohl Erholung als auch den Alltag optimal unterstützen. Gleichzeitig sorgt die durchdachte Raumaufteilung für ein hohes Maß an Privatsphäre und ein eigenständiges Wohngefühl.
+## Ist Alder Park als Kapitalanlage auf Zypern geeignet?
 
-Die Lage im Universal-Viertel ermöglicht eine schnelle Verbindung zu allen wichtigen Einrichtungen des täglichen Lebens. Einkaufsmöglichkeiten, Dienstleistungen und lokale Infrastruktur befinden sich in unmittelbarer Nähe. Das historische Zentrum, die Küste sowie der Hafen von Paphos sind in wenigen Fahrminuten erreichbar. Gute Straßenverbindungen erleichtern zudem die Mobilität innerhalb der gesamten Region.
+Internationale Käufer interessieren sich häufig für Immobilien in Paphos aufgrund der Kombination aus Küstenlage, Infrastruktur und Nachfrage nach modernen Wohnungen.
 
-Das Gebäude wird nach aktuellen energetischen Standards realisiert und ist auf die Energieeffizienzklasse A+ ausgelegt. Die Fertigstellung ist für Mai 2028 geplant.","ZAYA Residences to kameralna inwestycja zlokalizowana w spokojniejszej części Pafos, gdzie codzienne życie toczy się w bardziej zrównoważonym tempie, przy jednoczesnym zachowaniu dobrej komunikacji z miastem. Projekt obejmuje wyłącznie przestronne mieszkania z dwiema sypialniami, zaprojektowane z myślą o wygodzie i funkcjonalności.
+Faktoren, die bei Alder Park häufig berücksichtigt werden:
 
-Założenia architektoniczne opierają się na prostocie i przejrzystości. Wnętrza są uporządkowane, dobrze doświetlone i zaplanowane tak, aby wspierać zarówno odpoczynek, jak i codzienne aktywności. Szczególną uwagę poświęcono prywatności mieszkańców, dzięki czemu każde mieszkanie zapewnia poczucie komfortu i niezależności.
+- zentrale Lage in Paphos;
+- begrenzte Anzahl von Einheiten;
+- moderne Ausstattung;
+- Nähe zum Meer;
+- Nähe zu touristischen Bereichen;
+- hochwertige Bauweise.
 
-Inwestycja znajduje się w dzielnicy Universal, co gwarantuje łatwy dostęp do sklepów, usług oraz podstawowej infrastruktury. Historyczne centrum Pafos, nadmorska promenada oraz port są oddalone o zaledwie kilka minut jazdy samochodem. Dobrze rozwinięta sieć dróg umożliwia sprawne poruszanie się po całym regionie.
+Ob eine Immobilie zu individuellen Anlagezielen passt, hängt von persönlichen Umständen und unabhängiger Beratung ab.
 
-Budynek powstaje zgodnie z nowoczesnymi standardami efektywności energetycznej i będzie spełniał normę A+. Zakończenie inwestycji planowane jest na maj 2028 roku.","ZAYA Residences — это камерный жилой проект, расположенный в более спокойной части Пафоса, где жизнь проходит в размеренном ритме, при этом остаётся удобная связь с городской инфраструктурой. В комплексе представлены исключительно просторные квартиры с двумя спальнями, ориентированные на комфорт и практичность в повседневной жизни.
+## Gemeinschaftseinrichtungen und Wohnkomfort
 
-Архитектурная концепция основана на сдержанности и логичности. Пространства организованы таким образом, чтобы быть светлыми, удобными и функциональными, без лишних декоративных решений. Планировки продуманы с учетом баланса между отдыхом и повседневной активностью, а также обеспечивают достаточный уровень приватности для каждого жильца.
+Neben den Wohnungen selbst bietet das Projekt zusätzliche Bereiche für Bewohner:
 
-Расположение в районе Universal обеспечивает быстрый доступ ко всем необходимым сервисам и объектам инфраструктуры. Вблизи находятся магазины, услуги и повседневные удобства, а до исторического центра, побережья и порта Пафоса можно добраться всего за несколько минут на автомобиле. Развитая дорожная сеть позволяет легко перемещаться по всему региону.
+- Gemeinschaftspool;
+- Umkleidebereiche;
+- Spielplatz;
+- Lobbybereich;
+- Grünflächen;
+- gesicherter Zugang.
 
-Здание проектируется в соответствии с современными стандартами энергоэффективности (класс A+), а завершение строительства запланировано на май 2028 года.",zaya/zaya.jpeg,zaya,,,,,,,,,
-square-one-orama,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Orama Residences,Buy 2 Bedroom Apartments at Orama Residences in Limassol,"Buy 2 bedroom apartments at Orama Residences, Limassol. Near center & beach. No commission. Ideal for living or investment in Cyprus.","Modern 2 bedroom apartments for sale at Orama Residences in Limassol, close to the city center and beach. Perfect for living or investment with no commission.",square-one-orama,Orama Residences,2 Zimmer Wohnungen in Orama Residences in Limassol kaufen,"Kaufen Sie 2 Zimmer Wohnungen in Orama Residences, Limassol. Nahe Zentrum und Strand. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 2 Zimmer Wohnungen in Orama Residences, Limassol, nahe Zentrum und Strand. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-orama,Orama Residences,Kup apartamenty 2 pokojowe w Orama Residences w Limassol,Kup apartamenty 2 pokojowe w Orama Residences w Limassol. Blisko centrum i plaży. Bez prowizji. Idealne do życia lub inwestycji.,"Nowoczesne apartamenty 2 pokojowe w Orama Residences w Limassol, blisko centrum i plaży. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-orama,Orama Residences,"Купить апартаменты 2 спальни в Orama Residences, Лимассол",Купить апартаменты 2 спальни Orama Residences в Лимассоле. Рядом с центром и морем. Без комиссии. Отлично для жизни и инвестиций.,"Современные апартаменты 2 спальни в Orama Residences, Лимассол, рядом с центром и морем. Подходят для жизни и инвестиций, без комиссии.",square-one-orama,34.693743677178766,33.061614720237365,Limassol,Apartment,2,121-125,0,05-2028,459000,5,2,3,40,5,6,1,20,"ORAMA Residences is conceived as a refined residential address within one of Limassol’s more established and respected neighbourhoods. The development brings together a limited number of one- and two-bedroom apartments, each designed to offer a sense of space, clarity, and comfort suited to contemporary city living.
+Da das Projekt nur aus acht Wohnungen besteht, entsteht eine deutlich privatere Wohnatmosphäre als in größeren Anlagen.
 
-The project avoids excess in favour of balance and intention. Its architectural language is defined by clean forms and a measured approach to design, where interiors are organised to support both daily routines and moments of rest. The emphasis is placed on proportion, natural light, and thoughtful spatial arrangement, resulting in homes that feel composed, private, and easy to inhabit.
+## Entfernung zu Stränden, Infrastruktur und wichtigen Orten
 
-Positioned close to Makariou Avenue, the development provides direct access to key parts of the city. Educational institutions, retail areas, and a wide selection of dining options are all within convenient reach, while the central districts of Limassol can be accessed within minutes. This setting allows residents to remain connected to the city’s energy while enjoying a more composed residential atmosphere.
+Die Nähe zu alltäglichen Einrichtungen gehört zu den wichtigsten Kriterien vieler Käufer.","## Alder Park – apartamenty na sprzedaż w Pafos, Cypr
 
-The building is planned in line with modern energy performance requirements and is expected to achieve an A+ rating. Completion is scheduled for May 2028, making ORAMA Residences a considered option for future ownership or long-term investment.","ORAMA Residences ist als stilvolle Wohnadresse in einem der etablierten und angesehenen Stadtteile von Limassol konzipiert. Das Projekt umfasst eine begrenzte Anzahl an Wohnungen mit ein oder zwei Schlafzimmern, die darauf ausgelegt sind, Raum, Klarheit und Komfort für das moderne Stadtleben zu bieten.
+Oferujemy Alder Park na sprzedaż w Pafos – kameralną inwestycję obejmującą jedynie osiem nowoczesnych apartamentów zlokalizowanych w jednej z najbardziej rozpoznawalnych części miasta, Tombs of the Kings w Kato Pafos. Projekt został zaprojektowany z myślą o osobach poszukujących nieruchomości na Cyprze zarówno do zamieszkania przez cały rok, jak i do długoterminowego zabezpieczenia kapitału lub korzystania z nieruchomości sezonowo.
 
-Die Gestaltung verzichtet bewusst auf Überladenheit und setzt stattdessen auf Ausgewogenheit und klare Linien. Die Architektur folgt einer ruhigen Formsprache, während die Innenräume so strukturiert sind, dass sie sowohl den Alltag als auch Phasen der Erholung unterstützen. Proportionen, Tageslicht und eine durchdachte Raumaufteilung stehen im Mittelpunkt und schaffen ein Wohnumfeld, das zugleich privat und angenehm wirkt.
+Kupujący nie ponoszą dodatkowej prowizji. Oferowane ceny odpowiadają aktualnym warunkom deweloperskim dostępnym w momencie publikacji oferty.
 
-Durch die Nähe zur Makariou Avenue ist eine direkte Anbindung an zentrale Bereiche der Stadt gewährleistet. Bildungseinrichtungen, Einkaufsmöglichkeiten und vielfältige gastronomische Angebote sind schnell erreichbar, ebenso wie die wichtigsten Geschäfts- und Kulturviertel von Limassol. So verbindet die Lage urbane Dynamik mit einer ruhigeren Wohnatmosphäre.
+Alder Park wyróżnia się ograniczoną liczbą mieszkań, nowoczesnymi rozwiązaniami technologicznymi oraz położeniem zapewniającym szybki dostęp do plaż, restauracji, sklepów i codziennej infrastruktury. W porównaniu do dużych kompleksów mieszkaniowych projekt tworzy bardziej prywatne środowisko dla mieszkańców.
 
-Das Gebäude wird nach aktuellen energetischen Standards realisiert und ist auf die Energieeffizienzklasse A+ ausgelegt. Die Fertigstellung ist für Mai 2028 geplant.","ORAMA Residences to kameralna inwestycja mieszkaniowa zlokalizowana w jednej z bardziej prestiżowych i rozwiniętych części Limassol. Projekt obejmuje ograniczoną liczbę mieszkań z jedną lub dwiema sypialniami, zaprojektowanych tak, aby zapewnić przestrzeń, przejrzystość i komfort odpowiadający współczesnemu stylowi życia.
+## Dlaczego wielu zagranicznych kupujących wybiera Pafos do zakupu nieruchomości?
 
-Założenia architektoniczne opierają się na równowadze i prostocie formy. Zamiast nadmiaru detali postawiono na czytelne linie i funkcjonalne rozwiązania. Wnętrza zostały zaplanowane tak, aby wspierać zarówno codzienne funkcjonowanie, jak i odpoczynek. Odpowiednie proporcje, dostęp światła dziennego oraz przemyślany układ pomieszczeń tworzą przyjazną i prywatną przestrzeń do życia.
+Pafos od lat należy do najpopularniejszych regionów Cypru wśród zagranicznych nabywców. Powody są różne — część osób szuka drugiego domu w cieplejszym klimacie, inni planują przeprowadzkę lub interesują się rynkiem nieruchomości za granicą.
 
-Bliskość Makariou Avenue zapewnia wygodny dostęp do kluczowych punktów miasta. W pobliżu znajdują się szkoły, sklepy oraz liczne restauracje, a do głównych dzielnic biznesowych i kulturalnych można dotrzeć w ciągu kilku minut. Lokalizacja łączy miejską energię z bardziej spokojnym charakterem otoczenia.
+Najczęściej wymieniane zalety regionu obejmują:
 
-Budynek powstaje zgodnie z nowoczesnymi standardami efektywności energetycznej i będzie spełniał normę A+. Zakończenie inwestycji planowane jest na maj 2028 roku.","ORAMA Residences — это современный жилой проект, расположенный в одном из развитых и престижных районов Лимассола. Комплекс включает ограниченное количество квартир с одной и двумя спальнями, каждая из которых спроектирована с акцентом на пространство, удобство и комфорт, соответствующие современному городскому образу жизни.
+- ponad 300 słonecznych dni w roku;
+- dostęp do międzynarodowego lotniska;
+- rozwiniętą infrastrukturę;
+- prywatne placówki medyczne;
+- szkoły międzynarodowe;
+- bliskość morza;
+- duże społeczności międzynarodowe.
 
-Архитектурная концепция строится на балансе и сдержанности. Вместо избыточных декоративных решений используется лаконичный дизайн и продуманная организация пространства. Планировки ориентированы как на повседневные задачи, так и на отдых, а естественное освещение и гармоничные пропорции создают спокойную и комфортную атмосферу.
+Pafos pozostaje jednym z miast, gdzie codzienne funkcjonowanie jest stosunkowo wygodne również dla osób spoza Cypru.
 
-Расположение рядом с проспектом Makariou обеспечивает быстрый доступ к ключевым объектам города. В шаговой доступности находятся учебные заведения, магазины и рестораны, а также основные деловые и культурные районы Лимассола. Это позволяет сочетать активную городскую жизнь с более спокойной жилой средой.
+## Lokalizacja Alder Park – blisko plaży, restauracji i centrum Pafos
 
-Здание проектируется в соответствии с современными стандартами энергоэффективности (класс A+), а завершение строительства запланировано на май 2028 года.",orama/orama.jpeg,orama,,,,,,,,,
-square-one-aldo,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Aldo Residences,"Buy 2 Bedroom Apartments at Aldo in Limassol, Cyprus","Buy 2 bedroom apartments at Aldo Residences, Limassol. Quiet area, near center. No commission. Ideal for living or investment in Cyprus.","Modern 2 bedroom apartments for sale at Aldo Residences in Limassol, located in a quiet residential area. Perfect for living or investment with no commission.",square-one-aldo,Aldo Residences,"2 Zimmer Wohnungen in Aldo kaufen in Limassol, Zypern","Kaufen Sie 2 Zimmer Wohnungen in Aldo Residences, Limassol. Ruhige Lage nahe Zentrum. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 2 Zimmer Wohnungen in Aldo Residences, Limassol, in ruhiger Wohnlage. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-aldo,Aldo Residences,"Kup apartamenty 2 pokojowe w Aldo w Limassol, Cyprus",Kup apartamenty 2 pokojowe w Aldo Residences w Limassol. Spokojna okolica blisko centrum. Bez prowizji. Idealne do życia lub inwestycji.,"Nowoczesne apartamenty 2 pokojowe w Aldo Residences w Limassol, w spokojnej okolicy. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-aldo,Aldo Residences,"Купить апартаменты 2 спальни в Aldo в Лимассоле, Кипр",Купить апартаменты 2 спальни Aldo Residences в Лимассоле. Тихий район рядом с центром. Без комиссии. Отлично для жизни и инвестиций.,"Современные апартаменты 2 спальни в Aldo Residences, Лимассол, в тихом районе. Подходят для жизни и инвестиций, без комиссии.",square-one-aldo,34.71255692840059,33.03824199140123,Limassol,Apartment,2,97-139,0,05-2028,329000,10,5,5,42,4,3,6,22,"ALDO Residences is envisioned as a compact residential project located in Agios Athanasios, one of Limassol’s most established and sought-after districts. The development includes only six two-bedroom apartments, offering a more private and low-density living environment for those who prefer a quieter and more controlled residential setting.
+Inwestycja znajduje się w rejonie Tombs of the Kings, który łączy zabudowę mieszkaniową z infrastrukturą turystyczną i usługową.
 
-The concept focuses on clarity and practicality rather than excess. Each home is arranged to make everyday living comfortable and intuitive, with layouts that balance openness and separation of space. The design approach remains clean and measured, allowing the apartments to feel both functional and visually composed without unnecessary complexity.
+Przybliżony czas dojazdu:
 
-Positioned in a calm area with strong connectivity, the project allows residents to move easily between home and key parts of the city. The highway can be reached within minutes, providing quick access across Limassol, while the central districts are just a short drive away. Daily necessities such as supermarkets, schools, parks, and local services are located nearby, making the location especially convenient for regular routines.
+- plaża: około 5 minut;
+- restauracje i kawiarnie: 2–4 minuty;
+- sklepy: około 5 minut;
+- centrum Pafos: około 5 minut;
+- lotnisko: około 25 minut;
+- pole golfowe: około 18 minut.
 
-Agios Athanasios continues to show steady residential demand, which adds long-term value to the project. Combined with its limited scale and well-considered layout, ALDO Residences presents a practical choice for both personal use and property investment.
+Dla wielu kupujących lokalizacja stanowi jeden z najważniejszych czynników przy wyborze nieruchomości.
 
-The building is being developed to meet A+ energy performance standards, with completion planned for May 2028.","ALDO Residences ist als kompakte Wohnanlage im Stadtteil Agios Athanasios konzipiert, einem der gefragtesten und etabliertesten Wohngebiete von Limassol. Das Projekt umfasst lediglich sechs Wohnungen mit zwei Schlafzimmern und richtet sich an Menschen, die eine ruhigere Wohnatmosphäre sowie ein überschaubares Umfeld schätzen.
+## Jakie udogodnienia oferują apartamenty Alder Park?
 
-Im Mittelpunkt steht eine klare und funktionale Gestaltung. Die Grundrisse sind so organisiert, dass sie den Alltag erleichtern und gleichzeitig ein angenehmes Raumgefühl schaffen. Offene Bereiche werden sinnvoll mit privaten Zonen kombiniert, wodurch ein ausgewogenes Wohnkonzept entsteht. Die architektonische Ausrichtung bleibt bewusst zurückhaltend und konzentriert sich auf Struktur, Nutzbarkeit und Beständigkeit.
+Projekt obejmuje apartamenty o powierzchni około 76–80 m² z dużymi balkonami i nowoczesnym układem pomieszczeń.
 
-Die Lage verbindet Ruhe mit sehr guter Erreichbarkeit. Die Autobahn ist in wenigen Minuten erreichbar und ermöglicht schnelle Verbindungen innerhalb der Stadt und darüber hinaus. Gleichzeitig liegt das Zentrum von Limassol nur eine kurze Fahrt entfernt. Einkaufsmöglichkeiten, Schulen, Grünflächen und weitere wichtige Einrichtungen befinden sich in unmittelbarer Nähe.
+W standardzie znajdują się między innymi:
 
-Agios Athanasios gehört zu den stabil nachgefragten Wohnlagen der Stadt, was das Projekt auch langfristig attraktiv macht. In Kombination mit der geringen Anzahl an Einheiten ergibt sich eine interessante Option sowohl für Eigennutzer als auch für Investoren.
+- ogrzewanie podłogowe z podziałem stref;
+- ukryty system chłodzenia VRV;
+- klasa energetyczna A;
+- zabudowana kuchnia;
+- szafy wnękowe;
+- łazienki typu walk-in;
+- prywatny schowek;
+- miejsce parkingowe;
+- system alarmowy;
+- osiedle zamknięte;
+- wspólny basen;
+- plac zabaw.
 
-Das Gebäude wird nach modernen energetischen Standards errichtet und ist auf die Energieeffizienzklasse A+ ausgelegt. Die Fertigstellung ist für Mai 2028 geplant.","ALDO Residences to kameralna inwestycja zlokalizowana w dzielnicy Agios Athanasios, jednej z najbardziej pożądanych i rozwiniętych części Limassol. Projekt obejmuje zaledwie sześć mieszkań z dwiema sypialniami, co zapewnia większą prywatność oraz spokojniejsze warunki do życia.
+Takie rozwiązania są coraz częściej oczekiwane przez kupujących szukających nowoczesnych mieszkań na Cyprze.
 
-Koncepcja inwestycji opiera się na funkcjonalności i przejrzystości. Układy mieszkań zostały zaprojektowane tak, aby ułatwiać codzienne użytkowanie i jednocześnie zapewniać komfortową przestrzeń do życia. Odpowiednie połączenie stref otwartych i prywatnych tworzy zrównoważone środowisko mieszkalne. Architektura pozostaje prosta i uporządkowana, koncentrując się na praktycznych rozwiązaniach i trwałości.
+## Czy apartament w Pafos może być dobrym rozwiązaniem dla osób planujących przeprowadzkę?
 
-Lokalizacja łączy spokojne otoczenie z bardzo dobrą komunikacją. Autostrada znajduje się w niewielkiej odległości, co umożliwia szybkie przemieszczanie się po Limassol. Centrum miasta również jest łatwo dostępne. W pobliżu znajdują się sklepy, szkoły, tereny zielone oraz wszystkie niezbędne usługi.
+Osoby rozważające relokację zwracają uwagę nie tylko na cenę nieruchomości, ale również na codzienne funkcjonowanie. Znaczenie mają szkoły, opieka medyczna, dostęp do sklepów i komfort użytkowania przez cały rok.
 
-Agios Athanasios to obszar o stabilnym popycie na nieruchomości, co zwiększa atrakcyjność inwestycji w dłuższej perspektywie. Niewielka liczba mieszkań dodatkowo podnosi jej wartość zarówno dla osób prywatnych, jak i inwestorów.
+Ogrzewanie podłogowe, energooszczędne rozwiązania oraz infrastruktura w okolicy mogą wspierać całoroczne korzystanie z nieruchomości. Ostateczna przydatność zależy jednak od indywidualnych potrzeb i planów życiowych.","## Alder Park — квартиры на продажу в Пафосе, Кипр
 
-Budynek powstaje zgodnie z nowoczesnymi standardami efektywności energetycznej i będzie spełniał normę A+. Zakończenie inwestycji planowane jest na maj 2028 roku.","ALDO Residences — это камерный жилой проект, расположенный в районе Agios Athanasios, одном из самых востребованных и развитых районов Лимассола. Комплекс включает всего шесть квартир с двумя спальнями, что обеспечивает более спокойную атмосферу и высокий уровень приватности для жителей.
+Мы предлагаем квартиры Alder Park в Пафосе — современный жилой проект, расположенный в районе Tombs of the Kings в Като Пафосе, одном из наиболее известных районов западного Кипра. Комплекс включает всего восемь 2-комнатных квартир, что создаёт более приватную атмосферу по сравнению с крупными жилыми проектами.
 
-Основная идея проекта — практичность и удобство. Планировки продуманы таким образом, чтобы облегчить повседневную жизнь и при этом создать комфортное пространство для отдыха. Сбалансированное сочетание открытых и приватных зон формирует гармоничную жилую среду. Архитектура выдержана в сдержанном стиле и ориентирована на функциональность и долговечность.
+Проект ориентирован на покупателей, которые рассматривают недвижимость на Кипре как место для постоянного проживания, сезонного отдыха или долгосрочного владения. Покупатели не оплачивают дополнительную комиссию агентству.
 
-Расположение сочетает тишину жилого района с отличной транспортной доступностью. Автомагистраль находится всего в нескольких минутах езды, что позволяет быстро добраться в любую часть города. Центр Лимассола также расположен неподалёку. В шаговой доступности находятся магазины, школы, парки и необходимые сервисы.
+Alder Park сочетает современную архитектуру, энергоэффективные решения и расположение рядом с пляжами, магазинами, ресторанами и городской инфраструктурой. Благодаря ограниченному количеству квартир проект может быть интересен тем, кто предпочитает небольшие жилые комплексы.
 
-Agios Athanasios остаётся районом с устойчивым спросом на недвижимость, что делает проект привлекательным в долгосрочной перспективе. Ограниченное количество квартир дополнительно повышает его ценность как для проживания, так и для инвестиций.
+## Почему многие покупатели выбирают Пафос для покупки недвижимости на Кипре?
 
-Здание проектируется в соответствии с современными стандартами энергоэффективности (класс A+), а завершение строительства запланировано на май 2028 года.",aldo/aldo.jpeg,aldo,,,,,,,,,
-square-one-noa,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Noa Residences,"Buy 1-2 Bedroom Apartments at Noa in Limassol, Cyprus","Buy 1-2 bedroom apartments at Noa Residences, Limassol. Near city center & beach. No commission. Ideal for living or investment in Cyprus.","Modern 1–2 bedroom apartments for sale at Noa Residences in Limassol, close to the city center. Perfect for living or investment with no commission.",square-one-noa,Noa Residences,1-2 Zimmer Wohnungen in Noa Residences in Limassol kaufen,"Kaufen Sie 1-2 Zimmer Wohnungen in Noa Residences, Limassol. Nahe Zentrum und Strand. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 1–2 Zimmer Wohnungen in Noa Residences, Limassol, nahe Zentrum. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-noa,Noa Residences,Kup apartamenty 1-2 pokojowe w Noa Residences w Limassol,Kup apartamenty 1-2 pokojowe w Noa Residences w Limassol. Blisko centrum i plaży. Bez prowizji. Idealne do życia lub inwestycji.,"Nowoczesne apartamenty 1–2 pokojowe w Noa Residences w Limassol, blisko centrum. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-noa,Noa Residences,"Купить апартаменты 1-2 спальни в Noa Residences, Лимассол",Купить апартаменты 1-2 спальни Noa Residences в Лимассоле. Рядом с центром и морем. Без комиссии. Отлично для жизни и инвестиций.,"Современные апартаменты 1–2 спальни в Noa Residences, Лимассол, рядом с центром. Подходят для жизни и инвестиций, без комиссии.",square-one-noa,34.691949322704396,33.043936737434905,Limassol,Apartment,1-2,83-122,0,06-2028,299000,6,2,3,40,5,6,1,20,"NOA Residences is planned as a modern residential address located within Mesa Geitonia, a central district of Limassol known for its practicality and everyday convenience. The development includes a limited range of one- and two-bedroom apartments, each designed to offer a comfortable living environment while maintaining close access to the city’s main infrastructure.
+Пафос остаётся одним из самых популярных городов Кипра среди международных покупателей недвижимости. Район привлекает сочетанием мягкого климата, доступа к морю и развитой инфраструктуры.
 
-The project is defined by a balanced approach to design. Apartments are arranged to provide clear, usable space, with layouts that support both daily routines and relaxation. The architecture follows a clean and restrained direction, where light, proportion, and well-chosen materials shape the overall character of the interiors. Its slightly elevated positioning allows for more open outlooks and a greater sense of space.
+Покупатели часто рассматривают Пафос из-за:
 
-Living at NOA Residences means having essential services, schools, shops, and leisure options within easy reach. The development is located just a short distance from Makariou Street and the central areas of Limassol, making it easy to navigate between work, daily needs, and social life without long travel times.
+- более 300 солнечных дней в году;
+- международного аэропорта;
+- пляжей и набережных;
+- частных медицинских центров;
+- международных школ;
+- большого количества экспатов;
+- развитой городской инфраструктуры.
 
-The project is designed to create a quieter residential atmosphere despite its central location, with attention given to privacy and comfort. Mesa Geitonia remains an area with consistently strong demand, which supports both rental potential and long-term property value.
+Для части покупателей недвижимость здесь становится вторым домом, для других — вариантом переезда или покупки жилья за границей.
 
-The building is being developed in accordance with current energy performance standards and is expected to achieve an A+ rating. Completion is scheduled for June 2028.","NOA Residences ist als modernes Wohnprojekt im Stadtteil Mesa Geitonia konzipiert, einer zentral gelegenen und gut entwickelten Gegend von Limassol, die für ihre Alltagstauglichkeit bekannt ist. Die Anlage umfasst eine begrenzte Auswahl an Wohnungen mit ein oder zwei Schlafzimmern, die darauf ausgelegt sind, komfortables Wohnen mit direkter Anbindung an die städtische Infrastruktur zu verbinden.
+## Расположение Alder Park: близость к пляжу и инфраструктуре Пафоса
 
-Das Projekt folgt einem ausgewogenen Gestaltungskonzept. Die Grundrisse sind klar strukturiert und bieten funktionale Räume, die sowohl den Alltag als auch Erholung unterstützen. Die Architektur setzt auf eine reduzierte Formensprache, bei der Licht, Proportionen und sorgfältig ausgewählte Materialien die Atmosphäre bestimmen. Durch die leicht erhöhte Lage ergeben sich offenere Ausblicke und ein angenehmes Raumgefühl.
+Проект расположен в районе Tombs of the Kings, который считается одним из наиболее известных районов города.
 
-Bewohner profitieren von der unmittelbaren Nähe zu wichtigen Einrichtungen wie Schulen, Geschäften und Freizeitangeboten. Die Makariou Avenue sowie zentrale Bereiche von Limassol sind in kurzer Zeit erreichbar, was den Alltag besonders effizient gestaltet.
+Примерное время на автомобиле:
 
-Trotz der zentralen Lage wurde besonderer Wert auf eine ruhigere Wohnatmosphäre und ausreichende Privatsphäre gelegt. Mesa Geitonia gehört weiterhin zu den gefragten Wohnlagen der Stadt, was sich positiv auf Vermietbarkeit und langfristige Wertentwicklung auswirkt.
+- пляж: около 5 минут;
+- рестораны: 2–4 минуты;
+- магазины: около 5 минут;
+- центр Пафоса: около 5 минут;
+- аэропорт Пафоса: около 25 минут;
+- поля для гольфа: около 18 минут.
 
-Das Gebäude wird nach aktuellen energetischen Standards errichtet und ist auf die Energieeffizienzklasse A+ ausgelegt. Die Fertigstellung ist für Juni 2028 geplant.","NOA Residences to nowoczesna inwestycja mieszkaniowa zlokalizowana w dzielnicy Mesa Geitonia — centralnej i dobrze rozwiniętej części Limassol, cenionej za wygodę codziennego życia. Projekt obejmuje ograniczoną liczbę mieszkań z jedną lub dwiema sypialniami, zaprojektowanych tak, aby łączyć komfort zamieszkania z łatwym dostępem do infrastruktury miejskiej.
+Для покупателей, которые планируют жить на Кипре постоянно, близость повседневной инфраструктуры может играть важную роль.
 
-Koncepcja inwestycji opiera się na równowadze i funkcjonalności. Układy mieszkań są przejrzyste i praktyczne, dostosowane zarówno do codziennych potrzeb, jak i odpoczynku. Architektura utrzymana jest w minimalistycznym stylu, gdzie kluczową rolę odgrywają proporcje, światło dzienne oraz starannie dobrane materiały. Lekko podwyższone położenie zapewnia bardziej otwarte widoki i poczucie przestrzeni.
+## Современные квартиры с подогревом пола и энергоэффективными решениями
 
-Mieszkańcy mają szybki dostęp do szkół, sklepów oraz obiektów rekreacyjnych. W pobliżu znajduje się Makariou Avenue oraz centralne części Limassol, co pozwala sprawnie poruszać się po mieście.
+Квартиры Alder Park имеют площадь примерно 76–80 м² и большие балконы. Планировки ориентированы на комфортное использование пространства и естественное освещение.
 
-Pomimo centralnej lokalizacji zadbano o zachowanie spokojnej atmosfery oraz prywatności mieszkańców. Mesa Geitonia pozostaje dzielnicą o wysokim i stabilnym popycie na nieruchomości, co przekłada się na dobre perspektywy wynajmu i wzrostu wartości.
+Среди характеристик проекта:
 
-Budynek powstaje zgodnie z nowoczesnymi standardami efektywności energetycznej i będzie spełniał normę A+. Zakończenie inwestycji planowane jest na czerwiec 2028 roku.","NOA Residences — это современный жилой проект, расположенный в районе Mesa Geitonia — центральной и развитой части Лимассола, известной своей удобной инфраструктурой. Комплекс включает ограниченное количество квартир с одной и двумя спальнями, которые сочетают комфорт проживания с быстрым доступом ко всем ключевым объектам города.
+- подогрев пола с отдельными зонами;
+- скрытая система охлаждения VRV;
+- класс энергоэффективности A;
+- встроенные кухни;
+- встроенные шкафы;
+- душевые walk-in;
+- крытый паркинг;
+- индивидуальное помещение для хранения;
+- сигнализация;
+- домофон;
+- закрытая территория;
+- общий бассейн;
+- детская площадка.
 
-Проект основан на сбалансированном подходе к дизайну. Планировки продуманы и функциональны, обеспечивая удобство как в повседневной жизни, так и во время отдыха. Архитектура выдержана в сдержанном стиле, где важную роль играют свет, пропорции и качественные материалы. Благодаря немного возвышенному расположению открываются более свободные виды и создаётся ощущение пространства.
+## Подходит ли Alder Park для переезда на Кипр?
 
-Жители получают удобный доступ к школам, магазинам и зонам отдыха. Проспект Makariou и центральные районы Лимассола находятся всего в нескольких минутах, что делает передвижение по городу быстрым и удобным.
+Покупатели, рассматривающие переезд, обычно обращают внимание не только на стоимость жилья, но и на повседневный комфорт.
 
-Несмотря на центральное расположение, проект ориентирован на спокойную атмосферу и приватность. Район Mesa Geitonia остаётся востребованным, что обеспечивает хороший потенциал для аренды и долгосрочного роста стоимости недвижимости.
+Наличие отопления пола, современной системы охлаждения, близости к магазинам и медицинским учреждениям может быть преимуществом для круглогодичного проживания.
 
-Здание проектируется в соответствии с современными стандартами энергоэффективности (класс A+), а завершение строительства запланировано на июнь 2028 года.",noa/noa.jpeg,noa,,,,,,,,,
-square-one-aura,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Aura Residences,"Buy 1-2 Bedroom Apartments Aura in Limassol, Cyprus","Buy 1-2 bedroom apartments at Aura Residences, Limassol. Quiet area, great price. No commission. Ideal for living or investment in Cyprus.","Affordable 1–2 bedroom apartments for sale at Aura Residences in Limassol, located in a quiet residential area. Ideal for living or investment with no commission.",square-one-aura,Aura Residences,1-2 Zimmer Wohnungen in Aura Residences in Limassol kaufen,"Kaufen Sie 1-2 Zimmer Wohnungen in Aura Residences, Limassol. Ruhige Lage, attraktiver Preis. Keine Provision. Ideal zum Wohnen oder Investment.","Preiswerte 1–2 Zimmer Wohnungen in Aura Residences, Limassol, in ruhiger Wohnlage. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-aura,Aura Residences,Kup apartamenty 1-2 pokojowe w Aura Residences w Limassol,"Kup apartamenty 1-2 pokojowe w Aura Residences w Limassol. Spokojna okolica, atrakcyjna cena. Bez prowizji. Idealne do życia lub inwestycji.","Nowoczesne i przystępne cenowo apartamenty 1–2 pokojowe w Aura Residences w Limassol. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-aura,Aura Residences,"Купить апартаменты 1-2 спальни в Aura Residences, Лимассол","Купить апартаменты 1-2 спальни Aura Residences в Лимассоле. Тихий район, выгодная цена. Без комиссии. Отлично для жизни и инвестиций.","Доступные апартаменты 1–2 спальни в Aura Residences, Лимассол, в спокойном районе. Подходят для жизни и инвестиций, без комиссии.",square-one-aura,34.71111365809534,33.05430610311337,Limassol,Apartment,1-2,43-131,0,04-2028,175000,10,5,5,40,4,3,6,22,"Aura Residence brings together a collection of residential units within Agios Athanasios, a district of Limassol that offers a quieter setting while remaining closely tied to the city. The project consists of 16 homes, including studio layouts, one- and two-bedroom apartments, and several top-floor residences with expanded space and broader outlooks.
+Подходит ли недвижимость именно вам, зависит от образа жизни, семьи, планов и личных целей.
 
-The development is organised around clarity and everyday usability. Living spaces are structured to feel coherent and comfortable, with attention given to how rooms connect and function throughout the day. Natural light plays a key role in shaping the atmosphere, while the slightly elevated position of the building allows for more open views across the surrounding area, including distant sea lines.
+## Может ли квартира в Пафосе рассматриваться как инвестиционная недвижимость?
 
-From a practical standpoint, the location supports easy movement across Limassol. The nearby highway enables quick travel between districts, and the central part of the city can be reached within a short drive. Essential services, retail options, and daily conveniences are all situated within close reach, reducing the need for long commutes.
+При выборе недвижимости покупатели часто анализируют:
 
-Agios Athanasios continues to show steady residential demand, making developments in this area relevant for both end-users and property investors. With its limited number of units and considered layout approach, Aura Residence fits into this context as a well-positioned option for long-term ownership.
+- расположение;
+- качество строительства;
+- доступность инфраструктуры;
+- ограниченность предложения;
+- популярность района.
 
-The building is being developed in line with current energy performance expectations and is planned to meet A+ standards. Construction is scheduled for completion on April 28, 2028.","Aura Residence vereint eine Auswahl an Wohneinheiten im Stadtteil Agios Athanasios, einer Gegend von Limassol, die eine ruhigere Wohnatmosphäre bietet und gleichzeitig gut an die Stadt angebunden ist. Das Projekt umfasst insgesamt 16 Einheiten, darunter Studios, Wohnungen mit ein oder zwei Schlafzimmern sowie einige Einheiten in den oberen Etagen mit mehr Platz und weiterem Ausblick.
+Alder Park находится в одном из известных районов Пафоса и предлагает ограниченное количество квартир с современными характеристиками. Потенциальная привлекательность недвижимости всегда зависит от рыночной ситуации и индивидуальных ожиданий покупателя.","Is Alder Park a good property investment in Paphos, Cyprus? :: Alder Park may appeal to buyers looking for modern apartments in one of the most established areas of Paphos. The development is located in the Tombs of the Kings area, close to beaches, restaurants, shopping facilities and tourist infrastructure. Properties in central and coastal parts of Paphos often attract interest from both permanent residents and international buyers searching for second homes or relocation opportunities.
 
-Die Gestaltung orientiert sich an Klarheit und Alltagstauglichkeit. Die Räume sind so organisiert, dass sie logisch miteinander verbunden sind und ein angenehmes Wohngefühl schaffen. Natürliches Licht spielt eine zentrale Rolle für die Atmosphäre, während die leicht erhöhte Lage des Gebäudes offenere Perspektiven über die Umgebung bis hin zum Meer ermöglicht.
+The project also offers features commonly requested by modern property buyers, including underfloor heating, concealed VRV cooling systems, energy efficiency class A, covered parking and private storage. In addition, the limited number of apartments within the development may contribute to a more exclusive residential environment. Any investment decision should be made in line with your individual goals and, where appropriate, after seeking independent financial guidance.
+$Where exactly is Alder Park located in Paphos? :: Alder Park is situated in the popular Tombs of the Kings area in Kato Paphos, one of the best-known residential and tourist zones in western Cyprus. The area offers easy access to beaches, dining options, shopping destinations, and essential daily amenities.
 
-Die Lage erleichtert die Mobilität innerhalb der Stadt. Die nahegelegene Autobahn sorgt für schnelle Verbindungen zwischen den verschiedenen Stadtteilen, und das Zentrum von Limassol ist in kurzer Zeit erreichbar. Geschäfte, Dienstleistungen und andere Einrichtungen des täglichen Bedarfs befinden sich in unmittelbarer Nähe.
+Approximate driving distances include:
 
-Agios Athanasios zählt weiterhin zu den gefragten Wohnlagen, was das Projekt sowohl für Eigennutzer als auch für Investoren interessant macht. Die begrenzte Anzahl an Einheiten und die durchdachte Planung unterstreichen den langfristigen Wert der Immobilie.
+- Beach: around 5 minutes
+- Restaurants and cafés: 2–4 minutes
+- Shops and supermarkets: 3–5 minutes
+- Paphos Harbour: around 5–7 minutes
+- Paphos Airport: around 20–25 minutes
 
-Das Gebäude wird nach modernen energetischen Standards realisiert und ist auf die Energieeffizienzklasse A+ ausgelegt. Die Fertigstellung ist für den 28. April 2028 vorgesehen.","Aura Residence to inwestycja obejmująca 16 mieszkań, zlokalizowana w dzielnicy Agios Athanasios — spokojnej, a jednocześnie dobrze skomunikowanej części Limassol. W projekcie znajdują się studia, mieszkania z jedną i dwiema sypialniami oraz wybrane lokale na wyższych kondygnacjach, oferujące więcej przestrzeni i szersze widoki.
+This location may be attractive for buyers seeking permanent residence, holiday property or easy access to amenities.
+$How far is Alder Park from the beach and main attractions in Paphos? :: The nearest beaches can generally be reached within approximately five minutes by car, depending on traffic conditions. Nearby coastal areas include popular swimming spots and promenade zones frequently visited by residents and tourists.
 
-Koncepcja opiera się na funkcjonalności i przejrzystości przestrzeni. Układy mieszkań zostały zaplanowane w sposób logiczny i wygodny, tak aby zapewnić komfort codziennego użytkowania. Naturalne światło odgrywa istotną rolę w kształtowaniu wnętrz, a lekko podwyższone położenie budynku umożliwia bardziej otwarte widoki na okolicę, a także w kierunku morza.
+The development is also close to:
 
-Lokalizacja zapewnia wygodny dostęp do różnych części miasta. Bliskość autostrady umożliwia szybkie przemieszczanie się po Limassol, a centrum miasta znajduje się w niewielkiej odległości. W pobliżu dostępne są sklepy, usługi oraz inne elementy infrastruktury niezbędne na co dzień.
+- Kings Avenue Mall
+- Paphos Harbour
+- Tombs of the Kings archaeological area
+- cafés and restaurants
+- supermarkets
+- schools and medical services
 
-Agios Athanasios pozostaje jedną z bardziej pożądanych dzielnic, co sprawia, że inwestycja ma potencjał zarówno dla osób szukających własnego mieszkania, jak i inwestorów. Ograniczona liczba lokali oraz przemyślana koncepcja projektu zwiększają jego wartość w dłuższej perspektywie.
+Being close to both residential infrastructure and leisure facilities is one reason why properties in this part of Paphos continue to attract international buyers.
+$What features and amenities are included in Alder Park apartments? :: The apartments are designed with contemporary specifications intended to support year-round living. According to project information, features include:
 
-Budynek powstaje zgodnie z nowoczesnymi standardami efektywności energetycznej i będzie spełniał normę A+. Zakończenie inwestycji planowane jest na 28 kwietnia 2028 roku.","Aura Residence — это жилой проект, включающий 16 квартир, расположенный в районе Agios Athanasios — спокойной, но хорошо связанной с городом части Лимассола. В комплексе представлены студии, квартиры с одной и двумя спальнями, а также несколько квартир на верхних этажах, предлагающих больше пространства и более открытые виды.
+- Concealed VRV cooling system
+- Underfloor heating with separate zones
+- Energy efficiency class A
+- Fully fitted kitchens
+- Built-in wardrobes
+- Walk-in showers
+- Covered parking
+- Private storage room
+- Intercom and alarm system
+- Electric entrance gates
+- Communal swimming pool
+- Children’s playground area
 
-Проект ориентирован на удобство и логичную организацию пространства. Планировки продуманы таким образом, чтобы обеспечить комфортное использование в повседневной жизни. Естественное освещение играет важную роль в формировании атмосферы, а слегка возвышенное расположение здания открывает более широкие виды на окружающую территорию и в сторону моря.
+The development also incorporates thermal aluminium systems intended to improve energy performance.
+$Do purchasers need to pay any extra agency commission fees? :: Buyers purchasing property through our platform do not pay an additional agency commission. Property prices presented on the website reflect the developer’s pricing structure available at the time of publication.
 
-Расположение обеспечивает удобную транспортную доступность. Автомагистраль находится рядом, что позволяет быстро добраться до разных районов города, а центр Лимассола расположен всего в нескольких минутах езды. В непосредственной близости находятся магазины, услуги и вся необходимая инфраструктура.
+Purchase conditions, taxes and additional transaction costs may vary depending on buyer circumstances, residency status and legal requirements. Buyers commonly consult independent legal and financial professionals during the purchasing process.
+$Are Alder Park apartments suitable for permanent living or relocation to Cyprus? :: These apartments could appeal to those planning a relocation, thanks to their modern building standards and access to well-developed local infrastructure. Features such as underfloor heating, energy-efficient systems and proximity to schools, supermarkets and healthcare facilities support year-round living rather than only seasonal use.
 
-Agios Athanasios остаётся востребованным районом, что делает проект привлекательным как для проживания, так и для инвестиций. Ограниченное количество квартир и продуманная концепция повышают его долгосрочную ценность.
+Paphos continues to attract international residents due to climate, accessibility and established expatriate communities. Whether a property is suitable ultimately depends on individual lifestyle preferences and future objectives.
+$What apartment sizes are available in Alder Park? :: The project mainly consists of luxury 2-bedroom apartments with approximately 76–81 sqm of covered internal area depending on the unit. Covered verandas vary in size, providing additional outdoor living space.
 
-Здание проектируется в соответствии с современными стандартами энергоэффективности (класс A+), а завершение строительства запланировано на 28 апреля 2028 года.",aura/aura.jpeg,aura,,,,,,,,,
-square-one-lennox,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,Lennox Residences,Buy 2 Bedroom Apartments at Lennox Residences in Limassol,"Buy 2 bedroom apartments at Lennox Residences, Limassol. Quiet area, pool & rooftop options. No commission. Ideal for living or investment.","Modern 2 bedroom apartments for sale at Lennox Residences in Limassol, featuring pool and rooftop options. Ideal for living or investment with no commission.",square-one-lennox,Lennox Residences,2 Zimmer Wohnungen in Lennox Residences in Limassol kaufen,"Kaufen Sie 2 Zimmer Wohnungen in Lennox Residences, Limassol. Ruhige Lage, Pool & Dachterrassen. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne 2 Zimmer Wohnungen in Lennox Residences, Limassol, mit Pool und Dachterrassen. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-lennox,Lennox Residences,Kup apartamenty 2 pokojowe w Lennox Residences w Limassol,"Kup apartamenty 2 pokojowe w Lennox Residences w Limassol. Spokojna okolica, basen i tarasy. Bez prowizji. Idealne do życia lub inwestycji.","Nowoczesne apartamenty 2 pokojowe w Lennox Residences w Limassol, z basenem i tarasami. Idealne do zamieszkania lub inwestycji, bez prowizji.",square-one-lennox,Lennox Residences,"Купить апартаменты 2 спальни в Lennox Residences, Лимассол","Купить апартаменты 2 спальни Lennox Residences в Лимассоле. Тихий район, бассейн и террасы. Без комиссии. Отлично для жизни и инвестиций.","Современные апартаменты 2 спальни в Lennox Residences, Лимассол, с бассейном и террасами. Подходят для жизни и инвестиций, без комиссии.",square-one-lennox,34.70923329506711,33.062740177909674,Limassol,Apartment,2,71-89,0,10-2028,339000,10,5,5,42,4,5,6,20,"Lennox Residences is a residential project located in Agios Athanasios, an area of Limassol known for its quieter atmosphere and удобное расположение относительно города. The development includes 19 apartments, featuring one- and two-bedroom layouts as well as a limited number of upper-level residences with private rooftop spaces designed for outdoor use.
+Several apartments also include:
 
-The project is shaped around a practical approach to everyday living. Apartments are organised to provide a clear separation between functional areas, while maintaining a sense of openness and comfort. Elevated positioning allows for extended views across the surrounding landscape, including the city, nearby hills, and distant coastline, contributing to a more spacious and relaxed environment.
+- private storage areas;
+- covered parking spaces;
+- large balconies;
+- open-plan living areas.
 
-One of the central elements of the development is a large shared swimming pool, designed as a focal point for leisure and informal social use. This feature adds an additional layer of everyday convenience, creating a space where residents can spend time without leaving the property.
+Available layouts and specifications may differ between units.
+$When is the expected completion date of Alder Park? :: Project information indicates an estimated delivery period of approximately 24 months after signing. Actual timelines may vary depending on construction progress and administrative procedures.
 
-From a location perspective, the project offers efficient access to the main road network, allowing for quick movement across Limassol. Daily amenities, shops, and services are located nearby, while the central districts of the city can be reached within a short drive.
+Buyers often request updated availability and construction schedules before making purchasing decisions.
+$Is Alder Park a gated development? :: Yes. The development includes security-related features such as electric entrance gates, intercom access and individual alarm systems within apartments. These elements are intended to improve privacy and convenience for residents.
+$Can foreigners buy apartments in Cyprus? :: Foreign nationals can purchase property in Cyprus, although procedures and requirements may differ depending on citizenship and individual circumstances. Buyers commonly work with independent legal professionals to review contracts, ownership structure and transaction processes.
 
-Agios Athanasios remains a consistently востребованный район, supporting stable interest from both residents and investors. Within this context, Lennox Residences provides a balanced option for those considering either personal use or long-term property ownership.
+Requirements can change over time; therefore, professional guidance is generally recommended before proceeding with a purchase.
+$Why do buyers choose apartments in the Tombs of the Kings area? :: The Tombs of the Kings district remains one of the best-known parts of Paphos due to its combination of coastal access, tourist infrastructure and everyday amenities. Buyers often search for property in this area because of:
 
-The building is being developed to meet modern energy performance standards and is expected to achieve an A rating. Completion is scheduled for October 2028.","Lennox Residences ist ein Wohnprojekt im Stadtteil Agios Athanasios, einer Gegend von Limassol, die für ihre ruhigere Umgebung und gleichzeitig gute Anbindung bekannt ist. Die Anlage umfasst insgesamt 19 Wohnungen, darunter Einheiten mit ein oder zwei Schlafzimmern sowie ausgewählte Wohnungen in den oberen Etagen mit privaten Dachterrassen zur individuellen Nutzung.
+- proximity to beaches;
+- central location;
+- restaurants and entertainment;
+- established residential demand;
+- accessibility to Paphos Airport.
 
-Das Projekt folgt einem funktionalen Ansatz im Hinblick auf den Alltag. Die Grundrisse sind so gestaltet, dass sie eine klare Trennung der Wohnbereiche ermöglichen und gleichzeitig ein offenes und angenehmes Raumgefühl bewahren. Durch die erhöhte Lage ergeben sich weite Ausblicke über die Stadt, die umliegenden Hügel und bis hin zur Küste, was das Wohngefühl zusätzlich aufwertet.
+Properties in well-known locations may attract broader interest among future buyers and residents.","Müssen Käufer eine zusätzliche Agenturprovision zahlen? :: Nein. Käufer zahlen keine zusätzliche Agenturprovision. Die angebotenen Preise orientieren sich an den zum Veröffentlichungszeitpunkt verfügbaren Entwicklerpreisen. Zusätzliche Kosten wie Steuern oder rechtliche Gebühren können je nach individueller Situation variieren.
+$Wo befindet sich Alder Park genau?
 
-Ein zentrales Element der Anlage ist der großzügige Gemeinschaftspool, der als Treffpunkt und Erholungsbereich dient. Er bietet den Bewohnern eine Möglichkeit zur Entspannung direkt vor Ort und ergänzt die alltägliche Lebensqualität innerhalb des Projekts.
+Das Projekt liegt im bekannten Gebiet Tombs of the Kings in Kato Paphos, nahe Stränden, Restaurants, Einkaufsmöglichkeiten und touristischer Infrastruktur. Die Lage zählt zu den beliebtesten Wohngebieten in Paphos.
+$Wie weit ist Alder Park vom Strand entfernt? :: Die nächstgelegenen Strände sind mit dem Auto in ungefähr fünf Minuten erreichbar. Dadurch eignet sich die Lage für Käufer, die Nähe zum Meer suchen.
+$Sind die Wohnungen für dauerhaftes Wohnen geeignet? :: Ja. Merkmale wie Fußbodenheizung, Energieeffizienzklasse A, moderne Kühlung und Infrastruktur in der Umgebung können ganzjähriges Wohnen unterstützen.
+$Welche Ausstattung gehört zu den Wohnungen? :: Zur Ausstattung gehören unter anderem:
 
-Die Lage ermöglicht eine schnelle Anbindung an das Hauptstraßennetz, wodurch sich Limassol bequem erschließen lässt. Geschäfte, Dienstleistungen und Einrichtungen des täglichen Bedarfs befinden sich in der Nähe, während das Stadtzentrum in kurzer Zeit erreichbar ist.
+- Einbauküchen
+- Einbauschränke
+- Fußbodenheizung
+- VRV-Kühlung
+- Alarmanlage
+- Gegensprechanlage
+- überdachter Parkplatz
+- privater Abstellraum
+- Gemeinschaftspool
+$Wann ist die Fertigstellung geplant? :: Laut Projektinformationen wird die Übergabe ungefähr 24 Monate nach Vertragsunterzeichnung erwartet. Zeitpläne können sich abhängig vom Baufortschritt ändern.
+$Können Ausländer Immobilien auf Zypern kaufen? :: Ausländische Käufer können Immobilien auf Zypern erwerben. Anforderungen unterscheiden sich je nach Staatsangehörigkeit und individueller Situation. Viele Käufer arbeiten während des Kaufprozesses mit unabhängigen Fachberatern zusammen.
+$Warum kaufen internationale Käufer Immobilien in Paphos? :: Paphos wird häufig wegen Klima, Küstennähe, internationaler Gemeinschaft und Infrastruktur gewählt. Besonders moderne Neubauwohnungen nahe dem Meer ziehen internationale Käufer an.","Czy kupujący płacą dodatkową prowizję przy zakupie mieszkania w Alder Park? :: Nie. Kupujący nie ponoszą dodatkowej prowizji przy zakupie nieruchomości za pośrednictwem naszej platformy. Cena prezentowana przy inwestycji odpowiada aktualnym warunkom sprzedaży dostępnym w momencie publikacji oferty.
 
-Agios Athanasios gehört weiterhin zu den gefragten Wohnlagen, was das Projekt sowohl für Eigennutzer als auch für Investoren interessant macht. Die stabile Nachfrage in diesem Gebiet unterstützt die langfristige Attraktivität der Immobilie.
+Należy pamiętać, że poza ceną nieruchomości mogą pojawić się inne koszty związane z procesem zakupu, podatkami lub usługami zewnętrznych specjalistów. Zakres takich kosztów zależy od indywidualnej sytuacji kupującego.
+$Czy Alder Park jest odpowiedni jako inwestycja na Cyprze? :: Kupujący rozważający zakup nieruchomości inwestycyjnej zwykle analizują lokalizację, standard budynku oraz popyt na mieszkania w okolicy.
 
-Das Gebäude wird nach aktuellen energetischen Standards errichtet und ist auf die Energieeffizienzklasse A ausgelegt. Die Fertigstellung ist für Oktober 2028 geplant.","Lennox Residences to inwestycja mieszkaniowa zlokalizowana w dzielnicy Agios Athanasios — spokojnej części Limassol, która jednocześnie oferuje dobrą komunikację z resztą miasta. Projekt obejmuje 19 mieszkań, w tym lokale z jedną i dwiema sypialniami oraz wybrane apartamenty na wyższych kondygnacjach z prywatnymi tarasami na dachu.
+Alder Park znajduje się blisko infrastruktury turystycznej i codziennych usług. Projekt oferuje ograniczoną liczbę mieszkań, nowoczesne wyposażenie oraz lokalizację w jednej z najbardziej rozpoznawalnych części Pafos.
 
-Koncepcja inwestycji opiera się na funkcjonalności i wygodzie codziennego życia. Układy mieszkań zostały zaprojektowane w sposób przejrzysty, z wyraźnym podziałem na strefy, przy jednoczesnym zachowaniu przestronności i komfortu. Podwyższone położenie budynku zapewnia szerokie widoki na miasto, okoliczne wzgórza oraz w kierunku morza.
+Ocena potencjału inwestycyjnego zawsze zależy od indywidualnych celów finansowych oraz sytuacji rynkowej.
+$Jak daleko od inwestycji znajdują się plaże i restauracje? :: Najbliższe plaże można osiągnąć samochodem w około 5 minut. Restauracje i punkty usługowe znajdują się jeszcze bliżej.
 
-Istotnym elementem projektu jest duży basen wspólny, który pełni funkcję strefy wypoczynku i integracji mieszkańców. To przestrzeń umożliwiająca relaks bez konieczności opuszczania terenu inwestycji.
+Dzięki temu codzienne funkcjonowanie nie wymaga długich dojazdów, co bywa istotne zarówno dla mieszkańców, jak i osób korzystających z nieruchomości sezonowo.
+$Czy mieszkania posiadają ogrzewanie i klimatyzację? :: Tak. Apartamenty wyposażono w ogrzewanie podłogowe oraz system VRV odpowiadający za chłodzenie. Rozwiązania te mają wspierać komfort użytkowania podczas różnych pór roku.
+$Czy obiekt jest zamknięty i zabezpieczony? :: Projekt obejmuje między innymi:
 
-Lokalizacja zapewnia szybki dostęp do głównych dróg, co ułatwia poruszanie się po Limassol. W pobliżu znajdują się sklepy, usługi oraz inne udogodnienia codziennego życia, a centrum miasta oddalone jest o zaledwie kilka minut jazdy.
+- alarm w każdym apartamencie;
+- system domofonowy;
+- elektryczne bramy;
+- kontrolowany dostęp do osiedla.
 
-Agios Athanasios pozostaje jedną z bardziej pożądanych dzielnic, co sprawia, że inwestycja jest atrakcyjna zarówno dla osób prywatnych, jak i inwestorów. Stabilny popyt w tym obszarze sprzyja długoterminowemu wzrostowi wartości nieruchomości.
+Rozwiązania bezpieczeństwa są coraz częściej brane pod uwagę przez osoby kupujące nieruchomości za granicą.
+$Czy cudzoziemcy mogą kupować nieruchomości na Cyprze? :: Tak, obywatele innych krajów kupują nieruchomości na Cyprze. Procedury oraz wymagania mogą się jednak różnić w zależności od obywatelstwa i indywidualnej sytuacji kupującego.
 
-Budynek powstaje zgodnie z nowoczesnymi standardami efektywności energetycznej i będzie spełniał normę A. Zakończenie inwestycji planowane jest na październik 2028 roku.","Lennox Residences — это жилой проект, расположенный в районе Agios Athanasios, который отличается спокойной атмосферой и удобной связью с другими частями Лимассола. Комплекс включает 19 квартир, среди которых варианты с одной и двумя спальнями, а также несколько квартир на верхних этажах с собственными террасами на крыше.
+W praktyce wiele osób korzysta z pomocy niezależnych specjalistów podczas procesu zakupu.","Нужно ли покупателю платить дополнительную комиссию агентству? :: Нет. Покупатели не оплачивают дополнительную комиссию агентству при покупке недвижимости через нашу платформу. Стоимость объекта соответствует актуальным условиям продажи на момент публикации.
 
-Проект ориентирован на удобство и продуманную организацию пространства. Планировки обеспечивают чёткое разделение функциональных зон, сохраняя при этом ощущение простора и комфорта. Благодаря немного возвышенному расположению открываются широкие виды на город, холмы и в сторону моря.
+Дополнительные расходы могут зависеть от налогов, услуг независимых специалистов и индивидуальной ситуации покупателя.
+$Подходит ли Alder Park для постоянного проживания? :: Проект включает решения, которые могут поддерживать комфортное круглогодичное проживание: подогрев пола, энергоэффективность класса A, современное охлаждение и развитую инфраструктуру вокруг.
+$Насколько далеко находится море? :: Ближайшие пляжи расположены примерно в 5 минутах езды. Также рядом находятся прогулочные зоны, кафе и туристическая инфраструктура.
+$Есть ли парковка и место для хранения вещей? :: Да. Каждая квартира включает крытое парковочное место и отдельное помещение для хранения.
+$Когда планируется завершение строительства? :: Ориентировочный срок завершения проекта составляет около 24 месяцев после подписания договора. Сроки могут изменяться в зависимости от этапов строительства.
+$Можно ли иностранцам покупать недвижимость на Кипре? :: Иностранные граждане приобретают недвижимость на Кипре. Процесс покупки и требования могут различаться в зависимости от гражданства и обстоятельств покупателя.
+$Почему район Tombs of the Kings считается популярным? :: Район сочетает близость к морю, ресторанам, инфраструктуре и центру города. Благодаря этому многие покупатели рассматривают его для проживания или покупки недвижимости на Кипре."
+arbeo-park-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,Arbeo Park,"Luxury 1–2 Bedroom Arbeo Park for Sale in Paphos, Cyprus","Buy modern 1–2 bedroom apartments in Paphos. New build project near schools, airport and everyday amenities. No extra agency commission.","Explore Arbeo Park in Paphos — contemporary apartments designed for comfortable living, relocation or long-term property ownership in Cyprus.",arbeo-park-oli,Arbeo Park Apartments,"Luxus 1–2 Zimmer Arbeo Park in Paphos, Zypern","Moderne 1–2 Zimmer-Wohnungen in Paphos kaufen. Neubau nahe Schulen, Infrastruktur und Flughafen.","Entdecken Sie Arbeo Park – moderne Wohnungen in Paphos für Eigennutzung, Zweitwohnsitz oder langfristige Nutzung auf Zypern.",arbeo-park-oli,Arbeo Park Apartments,"1–2 pokojowe Arbeo Park na sprzedaż w Pafos, Cypr","Kup nowoczesne apartamenty w Pafos. Dobra lokalizacja, blisko szkół i lotniska. Bez dodatkowej prowizji.",Poznaj Arbeo Park – nowoczesne apartamenty w Pafos stworzone do codziennego życia lub zakupu nieruchomości na Cyprze.,arbeo-park-oli,Arbeo Park Apartments,"Arbeo Park 1–2 спальни на продажу в Пафосе, Кипр","Купить квартиру в Пафосе, Кипр. Новый жилой проект рядом со школами, инфраструктурой и аэропортом.",Arbeo Park — современный жилой проект в Пафосе с квартирами для постоянного проживания или покупки недвижимости на Кипре.,arbeo-park-oli,34.795931238871454,32.44723222759118,Paphos,Apartment,1-2,75-112,0,,315000,10,3,4,15,6,5,8,15,"## Modern Apartments for Sale in Paphos
 
-Одной из ключевых особенностей комплекса является большой общий бассейн, который служит зоной отдыха и общения для жителей. Это пространство позволяет проводить время на территории комплекса, не покидая его.
+Arbeo Park is a residential development in Paphos offering contemporary 1–2 bedroom apartments with modern layouts and convenient access to schools, shopping areas and the airport. The project may appeal to buyers considering relocation, year-round living or property ownership in Cyprus. Buyers do not pay additional agency commission.
 
-Расположение обеспечивает удобный доступ к основным транспортным магистралям, что позволяет быстро перемещаться по городу. В непосредственной близости находятся магазины, сервисы и вся необходимая инфраструктура, а до центра Лимассола можно добраться за несколько минут.
+Main features include:
 
-Agios Athanasios остаётся востребованным районом, что делает проект привлекательным как для проживания, так и для инвестиций. Стабильный спрос в этой локации поддерживает долгосрочную ценность недвижимости.
+- 1–2 bedroom apartments (75–112 sqm);
+- contemporary design;
+- convenient residential location;
+- close to schools and services;
+- approx. 15–18 mins to airport;
+- suitable for everyday living or second home use.","## Moderne Wohnungen in Paphos kaufen
 
-Здание проектируется в соответствии с современными стандартами энергоэффективности (класс A), а завершение строительства запланировано на октябрь 2028 года.",lennox/lennox.jpeg,lennox,,,,,,,,,
-square-one-collection,2026-03-25T10:40Z,Square One,Square One,Square One,Square One,The Collection Residences,Buy 1-2 Bedroom Apartments at The Collection in Limassol,"Buy 1-2 bedroom apartments at The Collection, Limassol Old Town. Steps from beach & marina. No commission. Ideal for living or investment.","Modern apartments for sale at The Collection in Limassol Old Town, just steps from the beach and marina. Ideal for living or investment with no commission.",square-one-collection,The Collection Residences,1-2 Zimmer Wohnungen in The Collection in Limassol kaufen,"Kaufen Sie 1-2 Zimmer Wohnungen in The Collection, Limassol Altstadt. Nahe Strand und Marina. Keine Provision. Ideal zum Wohnen oder Investment.","Moderne Wohnungen in The Collection, Limassol Altstadt, nahe Strand und Marina. Perfekt zum Wohnen oder als Kapitalanlage ohne Provision.",square-one-collection,The Collection Residences,Kup apartamenty 1-2 pokojowe w The Collection w Limassol,"Kup apartamenty 1-2 pokojowe w The Collection w Limassol. Centrum miasta, blisko plaży i mariny. Bez prowizji. Idealne do życia lub inwestycji.","Nowoczesne apartamenty w The Collection w Limassol, w centrum miasta, blisko plaży i mariny. Idealne do zamieszkania lub inwestycji.",square-one-collection,The Collection Residences,"Купить апартаменты 1-2 спальни в The Collection, Лимассол","Купить апартаменты 1-2 спальни The Collection в Лимассоле. Центр города, рядом с морем и мариной. Без комиссии. Отлично для жизни и инвестиций.","Современные апартаменты в The Collection, Лимассол, в центре города рядом с морем и мариной. Подходят для жизни и инвестиций, без комиссии.",square-one-collection,34.67971756228559,33.04285654795988,Limassol,Apartment,1-2,37-204,0,12-2028,259000,3,1,3,40,6,5,0,15,"The Collection is conceived as a city-focused residential project positioned within Limassol’s Old Town, an area where daily life unfolds among historic streets and active urban surroundings. The development includes a range of compact residences, from studios to one- and two-bedroom apartments, tailored for those who prefer a more dynamic and centrally located living environment.
+Arbeo Park bietet moderne 1–2 Zimmer-Wohnungen in einer Wohnlage von Paphos mit guter Anbindung an Schulen, Einkaufsmöglichkeiten und Flughafen.
 
-The design approach is centred on efficiency and clarity. Living spaces are arranged to make the most of their footprint, ensuring that each apartment remains practical and comfortable without unnecessary complexity. Clean lines, balanced proportions, and carefully considered layouts define the overall character, allowing residents to enjoy a functional home within a limited space.
+Hauptmerkmale:
 
-Living here means being directly connected to the city’s cultural and coastal highlights. The historic centre, marina area, and seafront promenade are all within easy reach, creating a setting where work, leisure, and everyday routines naturally overlap.
+- 75–112 m²;
+- moderne Architektur;
+- familienfreundliche Lage;
+- Nähe zur Infrastruktur;
+- ca. 18 Minuten zum Flughafen.","## Apartamenty na sprzedaż w Pafos
 
-Shared facilities within the development include spaces for fitness and relaxation, as well as common areas that support interaction between residents while maintaining a sense of independence. The project is delivered with a focus on ready-to-use interiors, making it suitable for immediate occupancy.
+Arbeo Park to projekt mieszkaniowy oferujący apartamenty 1–2 pokojowe w dogodnej części Pafos.
 
-With its central location and format adapted to modern urban lifestyles, The Collection aligns well with the needs of professionals and individuals seeking property in a high-demand part of Limassol, whether for personal use or rental purposes.","The Collection ist als urban ausgerichtetes Wohnprojekt im historischen Zentrum von Limassol konzipiert – einem Viertel, in dem sich das tägliche Leben zwischen Tradition und moderner Dynamik entfaltet. Das Projekt umfasst eine Auswahl kompakter Wohneinheiten, von Studios bis hin zu Wohnungen mit ein oder zwei Schlafzimmern, die sich besonders für Menschen eignen, die eine zentrale Lage und ein aktives Umfeld schätzen.
+Najważniejsze cechy:
 
-Der gestalterische Ansatz basiert auf Effizienz und klarer Struktur. Die Wohnflächen sind so organisiert, dass sie optimal genutzt werden können, ohne auf Komfort zu verzichten. Klare Linien, ausgewogene Proportionen und durchdachte Grundrisse prägen das Gesamtbild und ermöglichen funktionales Wohnen auch auf begrenztem Raum.
+- 75–112 m²;
+- nowoczesny układ;
+- blisko szkół;
+- szybki dojazd do lotniska;
+- infrastruktura w pobliżu.","## Современные квартиры в Пафосе
 
-Die Lage bietet direkten Zugang zu den wichtigsten städtischen und kulturellen Orten. Die Altstadt, der Yachthafen sowie die Promenade am Meer sind schnell erreichbar, wodurch sich Arbeit, Freizeit und Alltag harmonisch miteinander verbinden lassen.
+Arbeo Park предлагает квартиры 1–2 спальни в жилом районе Пафоса рядом со школами, магазинами и инфраструктурой.
 
-Zur Ausstattung gehören gemeinschaftliche Bereiche für Fitness und Erholung sowie Räume, die den Austausch zwischen den Bewohnern fördern, ohne die Privatsphäre einzuschränken. Die Wohnungen werden in einem bezugsfertigen Zustand angeboten, was einen sofortigen Einzug ermöglicht.
+Основные преимущества:
 
-Dank der zentralen Lage und der auf den urbanen Lebensstil ausgerichteten Konzeption eignet sich The Collection sowohl für Eigennutzer als auch für Investoren, die in eine stark nachgefragte Lage in Limassol investieren möchten.","The Collection to projekt mieszkaniowy o wyraźnie miejskim charakterze, zlokalizowany w samym sercu starego miasta Limassol — miejscu, gdzie historyczna zabudowa łączy się z dynamicznym stylem życia. Inwestycja obejmuje kompaktowe mieszkania, od studiów po lokale z jedną i dwiema sypialniami, skierowane do osób, które cenią centralną lokalizację i aktywne otoczenie.
+- площадь 75–112 м²;
+- удобное расположение;
+- близость к аэропорту;
+- подходит для постоянного проживания;
+- современный формат жилья.",arbeo-park/arbeo-park-00.jpg,arbeo-park,,,,,,,,,
+neon-homes-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,Neon Homes,"Luxury 3 Bedroom Neon Homes for Sale in Paphos, Cyprus","Buy luxury 3-bedroom villas in Paphos, Cyprus. Modern homes with private plots, easy beach access and no extra agency commission.","Neon Homes offers modern 3-bedroom villas in Paphos with private plots, contemporary layouts and convenient access to beaches, shops and the airport.",neon-homes-oli,Neon Homes,"Luxus 3 Zimmer Neon Homes in Paphos, Zypern","Moderne 3-Zimmer-Villen in Paphos kaufen. Private Grundstücke, Strandnähe, gute Lage und keine zusätzliche Käuferprovision.","Neon Homes bietet moderne 3-Zimmer-Villen in Paphos mit privaten Grundstücken und guter Anbindung an Strand, Shops und Flughafen.",neon-homes-oli,Neon Homes,"Luksusowe 3 sypialnie Neon Homes w Pafos, Cypr","Kup nowoczesne wille 3-sypialniane w Pafos. Prywatne działki, blisko plaży i lotniska, bez dodatkowej prowizji.","Neon Homes to nowoczesne wille 3-sypialniane w Pafos z prywatnymi działkami i wygodnym dostępem do plaży, sklepów i lotniska.",neon-homes-oli,Neon Homes,"Элитные 3 спальни Neon Homes в Пафосе, Кипр","Купить современную виллу с 3 спальнями в Пафосе. Частный участок, рядом пляжи, магазины, аэропорт и без доп. комиссии.","Neon Homes — современные виллы с 3 спальнями в Пафосе, частными участками и удобным доступом к пляжу, аэропорту и инфраструктуре.",neon-homes-oli,34.75333723681371,32.45622219999999,Paphos,Villa,3,138,278-364,,485000,7,5,5,12,10,8,10,10,"## Modern 3 Bedroom Villas for Sale in Paphos
 
-Koncepcja projektu opiera się na efektywnym wykorzystaniu przestrzeni. Układy mieszkań zostały zaprojektowane tak, aby zapewnić maksymalną funkcjonalność przy zachowaniu komfortu. Proste linie, proporcje i przemyślana organizacja wnętrz tworzą spójne i praktyczne środowisko do życia.
+Neon Homes is a contemporary villa development in Paphos offering 3-bedroom homes with covered areas of 138 sqm and private plots ranging from 278 to 364 sqm. The project is suitable for buyers looking for a modern villa in Cyprus for relocation, family living, holiday use or long-term ownership.
 
-Lokalizacja zapewnia bezpośredni dostęp do najważniejszych punktów miasta. Stare miasto, marina oraz nadmorska promenada znajdują się w zasięgu kilku minut, co pozwala łatwo łączyć pracę, życie codzienne i wypoczynek.
+Key features include:
 
-W projekcie przewidziano przestrzenie wspólne do aktywności fizycznej i relaksu, a także strefy sprzyjające integracji mieszkańców. Mieszkania oferowane są w standardzie „gotowe do zamieszkania”, co umożliwia szybkie wprowadzenie się.
+- 3-bedroom villas;
+- 138 sqm covered area;
+- private plots of 278–364 sqm;
+- approx. 7 minutes to the beach;
+- approx. 12 minutes to Paphos Airport;
+- convenient access to shops, restaurants and golf;
+- no extra agency commission for buyers.
 
-Dzięki centralnej lokalizacji i dopasowaniu do współczesnego stylu życia, The Collection stanowi atrakcyjną propozycję zarówno dla osób prywatnych, jak i inwestorów.","The Collection — это жилой проект с выраженным городским характером, расположенный в самом центре старого города Лимассола, где историческая атмосфера сочетается с активной современной жизнью. В проекте представлены компактные квартиры — от студий до вариантов с одной и двумя спальнями, ориентированные на тех, кто ценит центральное расположение и динамичную среду.
+Neon Homes may appeal to buyers looking for modern villas in Cyprus with convenient access to everyday infrastructure and coastal areas.","## Luxuriöse 3-Zimmer-Villen zum Verkauf in Paphos
 
-Концепция основана на рациональном использовании пространства. Планировки продуманы таким образом, чтобы обеспечить максимальную функциональность при сохранении комфорта. Лаконичный дизайн, сбалансированные пропорции и удобная организация помещений создают практичное и современное жилое пространство.
+Neon Homes ist ein modernes Wohnprojekt in Paphos mit zeitgemäßen 3-Zimmer-Villen, die für komfortables Wohnen auf Zypern konzipiert wurden. Jede Immobilie bietet ca. 138 m² Wohnfläche sowie private Grundstücke zwischen 278 und 364 m². Käufer zahlen keine zusätzliche Agenturprovision.
 
-Расположение обеспечивает быстрый доступ к ключевым точкам города. Старый город, марина и набережная находятся в непосредственной близости, что позволяет легко совмещать работу, отдых и повседневную жизнь.
+Zu den wichtigsten Merkmalen gehören:
 
-В комплексе предусмотрены общие зоны для спорта и отдыха, а также пространства, способствующие взаимодействию между жителями. Квартиры предлагаются в формате «готово к заселению», что позволяет сразу начать проживание или сдачу в аренду.
+- Villen mit 3 Schlafzimmern;
+- ca. 138 m² Wohnfläche;
+- private Grundstücke von 278–364 m²;
+- ca. 7 Minuten zum Strand;
+- ca. 12 Minuten zum Flughafen Paphos;
+- Nähe zu Restaurants, Einkaufsmöglichkeiten und Golf;
+- geeignet für Eigennutzung oder langfristiges Wohnen.
 
-Благодаря центральному расположению и ориентации на современный городской стиль жизни, The Collection подходит как для личного проживания, так и для инвестиций в востребованную недвижимость.",collection/collection.jpeg,collection,,,,,,,,,
+Neon Homes kann für Käufer interessant sein, die moderne Villen auf Zypern mit guter Infrastruktur suchen.","## Luksusowe wille 3-sypialniowe na sprzedaż w Pafos
+
+Neon Homes to nowoczesna inwestycja mieszkaniowa w Pafos obejmująca wille z 3 sypialniami zaprojektowane z myślą o codziennym komforcie i prywatności. Każda nieruchomość oferuje około 138 m² powierzchni użytkowej oraz prywatną działkę o powierzchni od 278 do 364 m². Kupujący nie ponoszą dodatkowej prowizji.
+
+Najważniejsze cechy projektu:
+
+- wille z 3 sypialniami;
+- około 138 m² powierzchni;
+- prywatne działki 278–364 m²;
+- około 7 minut do plaży;
+- około 12 minut do lotniska;
+- blisko sklepów, restauracji i pól golfowych;
+- odpowiednie do zamieszkania lub zakupu drugiego domu.
+
+Neon Homes może zainteresować osoby szukające nowoczesnej nieruchomości na Cyprze do codziennego życia lub długoterminowego użytkowania.","## Современные виллы с 3 спальнями на продажу в Пафосе
+
+Neon Homes — новый жилой проект в Пафосе, предлагающий современные виллы с 3 спальнями и частными участками. Каждая вилла включает около 138 м² внутренней площади и участок площадью 278–364 м², что создаёт дополнительное пространство для отдыха и повседневной жизни. Покупатели не оплачивают дополнительную комиссию агентству.
+
+Основные преимущества проекта:
+
+- виллы с 3 спальнями;
+- около 138 м² внутренней площади;
+- частные участки 278–364 м²;
+- примерно 7 минут до пляжа;
+- около 12 минут до аэропорта Пафоса;
+- близость к магазинам, ресторанам и гольф-клубам;
+- подходит для постоянного проживания, отдыха или покупки второго дома.
+
+Neon Homes может заинтересовать покупателей, которые ищут современную виллу на Кипре с удобным доступом к инфраструктуре и побережью.",neon-homes/neon-homes-00.jpg,neon-homes,,,,,,,,,
+nexus-house-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,Nexus House,"Luxury 3 Bedroom Nexus House for Sale in Paphos, Cyprus","Buy a luxury 3-bedroom apartment in Paphos, Cyprus. Modern layout, beach access, city amenities and no extra agency commission.","Nexus House offers a modern 3-bedroom apartment in Paphos with 119 sqm covered area, convenient city access and proximity to beaches.",nexus-house-oli,Nexus House,"Luxus 3 Zimmer Nexus House in Paphos, Zypern","Moderne 3-Zimmer-Wohnung in Paphos kaufen. Strandnähe, gute Infrastruktur und keine zusätzliche Käuferprovision.",Nexus House bietet eine moderne 3-Zimmer-Wohnung in Paphos mit ca. 119 m² Wohnfläche und guter Anbindung an Strand und Zentrum.,nexus-house-oli,Nexus House,"Luksusowe 3 sypialnie Nexus House w Pafos, Cypr","Kup nowoczesny apartament 3-sypialniowy w Pafos. Blisko plaży, centrum i infrastruktury. Bez dodatkowej prowizji.","Nexus House to nowoczesny apartament 3-sypialniowy w Pafos o powierzchni 119 m², blisko plaży i codziennej infrastruktury.",nexus-house-oli,Nexus House,"Элитные 3 спальни Nexus House в Пафосе, Кипр","Купить квартиру с 3 спальнями в Пафосе. Рядом пляж, центр, магазины, школы и без дополнительной комиссии.",Nexus House — современная квартира с 3 спальнями в Пафосе площадью около 119 м² рядом с пляжами и инфраструктурой.,nexus-house-oli,34.76305331589886,32.44299122698073,Paphos,Apartment,3,119,,,470000,6,4,5,13,9,8,8,12,"## Luxury 3 Bedroom Apartment for Sale in Paphos
+
+Nexus House is a modern residential project in Paphos offering a spacious 3-bedroom apartment with approximately 119 sqm of covered area. The location provides convenient access to beaches, restaurants, shops, schools, the airport and central Paphos. Buyers do not pay additional agency commission.
+
+Key features include:
+
+- 3-bedroom apartment;
+- 119 sqm covered area;
+- approx. 6 mins to the beach;
+- approx. 13 mins to Paphos Airport;
+- close to shops, restaurants and schools;
+- suitable for relocation, family living or long-term ownership.
+
+Nexus House may appeal to buyers looking for a larger modern apartment in Paphos with strong everyday convenience and coastal accessibility.","## Moderne 3-Zimmer-Wohnung in Paphos kaufen
+
+Nexus House ist ein modernes Wohnprojekt in Paphos mit einer großzügigen 3-Zimmer-Wohnung von ca. 119 m² Wohnfläche. Die Lage bietet schnellen Zugang zu Stränden, Restaurants, Einkaufsmöglichkeiten, Schulen, Flughafen und Stadtzentrum. Käufer zahlen keine zusätzliche Agenturprovision.
+
+Zu den wichtigsten Merkmalen gehören:
+
+- 3 Schlafzimmer;
+- ca. 119 m² Wohnfläche;
+- ca. 6 Minuten zum Strand;
+- ca. 13 Minuten zum Flughafen Paphos;
+- Nähe zu Geschäften, Restaurants und Schulen;
+- geeignet für Eigennutzung, Familie oder langfristiges Wohnen.","## Apartament 3-sypialniowy na sprzedaż w Pafos
+
+Nexus House to nowoczesny projekt mieszkaniowy w Pafos oferujący przestronny apartament z 3 sypialniami i powierzchnią około 119 m². Lokalizacja zapewnia wygodny dostęp do plaż, restauracji, sklepów, szkół, lotniska i centrum Pafos. Kupujący nie ponoszą dodatkowej prowizji.
+
+Najważniejsze cechy:
+
+- apartament z 3 sypialniami;
+- około 119 m² powierzchni;
+- około 6 minut do plaży;
+- około 13 minut do lotniska;
+- blisko sklepów, restauracji i szkół;
+- odpowiedni do zamieszkania, relokacji lub długoterminowego użytkowania.","## Современная квартира с 3 спальнями в Пафосе
+
+Nexus House — современный жилой проект в Пафосе с просторной квартирой на 3 спальни площадью около 119 м². Локация обеспечивает удобный доступ к пляжам, ресторанам, магазинам, школам, аэропорту и центру города. Покупатели не оплачивают дополнительную комиссию агентству.
+
+Основные преимущества:
+
+- квартира с 3 спальнями;
+- около 119 м² крытой площади;
+- примерно 6 минут до пляжа;
+- около 13 минут до аэропорта Пафоса;
+- рядом магазины, рестораны и школы;
+- подходит для постоянного проживания, релокации или долгосрочного владения.",nexus-house/nexus-house-02.jpg,nexus-house,,,,,,,,,
+pine-park-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,Pine Park,"Luxury 2 Bedroom Pine Park for Sale in Paphos, Cyprus","Buy a luxury 2-bedroom apartment in Paphos, Cyprus. Central location near beach, shops, restaurants and no extra agency commission.","Pine Park offers a modern 2-bedroom apartment in Paphos with 98 sqm covered area, close to beaches, restaurants, shops and city amenities.",pine-park-oli,Pine Park,"Luxus 2 Zimmer Pine Park in Paphos, Zypern","Moderne 2-Zimmer-Wohnung in Paphos kaufen. Zentrale Lage nahe Strand, Shops und Restaurants. Keine zusätzliche Provision.","Pine Park bietet eine moderne 2-Zimmer-Wohnung in Paphos mit ca. 98 m² Wohnfläche, nahe Strand, Shops und Restaurants.",pine-park-oli,Pine Park,"Luksusowe 2 sypialnie Pine Park w Pafos, Cypr","Kup nowoczesny apartament 2-sypialniowy w Pafos. Blisko plaży, sklepów i restauracji. Bez dodatkowej prowizji.","Pine Park to nowoczesny apartament 2-sypialniowy w Pafos o powierzchni 98 m², blisko plaży, sklepów i centrum.",pine-park-oli,Pine Park,"Элитные 2 спальни Pine Park в Пафосе, Кипр","Купить квартиру с 2 спальнями в Пафосе. Рядом пляж, магазины, рестораны, центр города и без дополнительной комиссии.","Pine Park — современная квартира с 2 спальнями в Пафосе площадью около 98 м² рядом с пляжем, магазинами и центром.",pine-park-oli,34.778300713787836,32.41642008465381,Paphos,Apartment,2,98,0,,385000,5,3,4,22,9,8,5,18,"## Luxury 2 Bedroom Apartment for Sale in Paphos
+
+Pine Park is a modern residential project in Paphos offering a 2-bedroom apartment with approximately 98 sqm of covered area. Located near the Tombs of the Kings area, the project provides convenient access to beaches, restaurants, shops and central Paphos. Buyers do not pay additional agency commission.
+
+Key features include:
+
+- 2-bedroom apartment;
+- 98 sqm covered area;
+- approx. 5 mins to the beach;
+- approx. 4 mins to shops;
+- approx. 22 mins to Paphos Airport;
+- close to restaurants and city amenities;
+- suitable for relocation, holidays or long-term ownership.","## Moderne 2-Zimmer-Wohnung in Paphos kaufen
+
+Pine Park ist ein modernes Wohnprojekt in Paphos mit einer 2-Zimmer-Wohnung von ca. 98 m² Wohnfläche. Die Lage nahe Tombs of the Kings bietet schnellen Zugang zu Strand, Restaurants, Einkaufsmöglichkeiten und Zentrum. Käufer zahlen keine zusätzliche Agenturprovision.
+
+Zu den wichtigsten Merkmalen gehören:
+
+- 2 Schlafzimmer;
+- ca. 98 m² Wohnfläche;
+- ca. 5 Minuten zum Strand;
+- ca. 4 Minuten zu Einkaufsmöglichkeiten;
+- ca. 22 Minuten zum Flughafen Paphos;
+- zentrale Lage in Paphos.","## Apartament 2-sypialniowy na sprzedaż w Pafos
+
+Pine Park to nowoczesny projekt mieszkaniowy w Pafos oferujący apartament z 2 sypialniami i powierzchnią około 98 m². Lokalizacja w pobliżu Tombs of the Kings zapewnia wygodny dostęp do plaż, restauracji, sklepów i centrum miasta. Kupujący nie ponoszą dodatkowej prowizji.
+
+Najważniejsze cechy:
+
+- apartament z 2 sypialniami;
+- około 98 m² powierzchni;
+- około 5 minut do plaży;
+- około 4 minuty do sklepów;
+- około 22 minuty do lotniska;
+- blisko restauracji i infrastruktury.","## Современная квартира с 2 спальнями в Пафосе
+
+Pine Park — современный жилой проект в Пафосе с квартирой на 2 спальни площадью около 98 м². Локация рядом с районом Tombs of the Kings обеспечивает удобный доступ к пляжам, ресторанам, магазинам и центру города. Покупатели не оплачивают дополнительную комиссию агентству.
+
+Основные преимущества:
+
+- квартира с 2 спальнями;
+- около 98 м² крытой площади;
+- примерно 5 минут до пляжа;
+- около 4 минут до магазинов;
+- около 22 минут до аэропорта Пафоса;
+- рядом рестораны и городская инфраструктура.",pine-park/pine-park-00.jpg,pine-park,,,,,,,,,
+roble-park-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,Roble Park,"Luxury 2 Bedroom Roble Park for Sale in Paphos, Cyprus","Buy a luxury 2-bedroom apartment in Paphos, Cyprus. Central location near beach, shops, restaurants and no extra agency commission.","Roble Park offers a modern 2-bedroom apartment in Paphos with 75 sqm covered area, close to beaches, restaurants, shops and city amenities.",roble-park-oli,Roble Park,"Luxus 2 Zimmer Roble Park in Paphos, Zypern","Moderne 2-Zimmer-Wohnung in Paphos kaufen. Zentrale Lage nahe Strand, Restaurants und Shops. Keine zusätzliche Provision.","Roble Park bietet eine moderne 2-Zimmer-Wohnung in Paphos mit ca. 75 m² Wohnfläche, nahe Strand, Zentrum und Infrastruktur.",roble-park-oli,Roble Park,"Luksusowe 2 sypialnie Roble Park w Pafos, Cypr","Kup nowoczesny apartament 2-sypialniowy w Pafos. Blisko plaży, restauracji, sklepów i bez dodatkowej prowizji.","Roble Park to nowoczesny apartament 2-sypialniowy w Pafos o powierzchni 75 m², blisko plaży, centrum i infrastruktury.",roble-park-oli,Roble Park,"Элитные 2 спальни Roble Park в Пафосе, Кипр","Купить квартиру с 2 спальнями в Пафосе. Рядом пляж, рестораны, магазины, центр города и без дополнительной комиссии.","Roble Park — современная квартира с 2 спальнями в Пафосе площадью около 75 м² рядом с пляжем, центром и инфраструктурой.",roble-park-oli,34.76123890477199,32.419113055817256,Paphos,Apartment,2,75-78,0,,420000,5,3,4,18,10,8,5,16,"## Luxury 2 Bedroom Apartment for Sale in Paphos
+
+Roble Park is a modern residential project in Paphos offering a 2-bedroom apartment with approximately 75 sqm of covered area. Its central location provides convenient access to beaches, restaurants, shops and everyday services, making it suitable for buyers considering relocation, holidays or long-term ownership in Cyprus. Buyers do not pay additional agency commission.
+
+Key features include:
+
+- 2-bedroom apartment;
+- 75 sqm covered area;
+- approx. 5 mins to the beach;
+- approx. 3 mins to restaurants;
+- approx. 4 mins to shops;
+- approx. 18 mins to Paphos Airport;
+- central Paphos location.","## Moderne 2-Zimmer-Wohnung in Paphos kaufen
+
+Roble Park ist ein modernes Wohnprojekt in Paphos mit einer 2-Zimmer-Wohnung von ca. 75 m² Wohnfläche. Die zentrale Lage bietet schnellen Zugang zu Strand, Restaurants, Einkaufsmöglichkeiten und alltäglichen Dienstleistungen. Käufer zahlen keine zusätzliche Agenturprovision.
+
+Zu den wichtigsten Merkmalen gehören:
+
+- 2 Schlafzimmer;
+- ca. 75 m² Wohnfläche;
+- ca. 5 Minuten zum Strand;
+- ca. 3 Minuten zu Restaurants;
+- ca. 4 Minuten zu Einkaufsmöglichkeiten;
+- ca. 18 Minuten zum Flughafen Paphos.","## Apartament 2-sypialniowy na sprzedaż w Pafos
+
+Roble Park to nowoczesny projekt mieszkaniowy w Pafos oferujący apartament z 2 sypialniami i powierzchnią około 75 m². Centralna lokalizacja zapewnia szybki dostęp do plaż, restauracji, sklepów i codziennych usług. Kupujący nie ponoszą dodatkowej prowizji.
+
+Najważniejsze cechy:
+
+- apartament z 2 sypialniami;
+- około 75 m² powierzchni;
+- około 5 minut do plaży;
+- około 3 minuty do restauracji;
+- około 4 minuty do sklepów;
+- około 18 minut do lotniska Pafos.","## Современная квартира с 2 спальнями в Пафосе
+
+Roble Park — современный жилой проект в Пафосе с квартирой на 2 спальни площадью около 75 м². Центральная локация обеспечивает удобный доступ к пляжам, ресторанам, магазинам и повседневной инфраструктуре. Покупатели не оплачивают дополнительную комиссию агентству.
+
+Основные преимущества:
+
+- квартира с 2 спальнями;
+- около 75 м² крытой площади;
+- примерно 5 минут до пляжа;
+- около 3 минут до ресторанов;
+- около 4 минут до магазинов;
+- около 18 минут до аэропорта Пафоса.",roble-park/roble-park-00.jpg,roble-park,,,,,,,,,
+the-cove-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,The Cove,"Luxury 3 Bedroom The Cove for Sale in Paphos, Cyprus","Buy a luxury 3-bedroom villa in Paphos, Cyprus. Large covered areas, coastal location, golf access and no extra agency commission.","The Cove offers luxury 3-bedroom villas in Paphos with spacious covered areas, private plots and convenient access to the beach, airport and golf.",the-cove-oli,The Cove,"Luxus 3 Zimmer The Cove in Paphos, Zypern","Luxuriöse 3-Zimmer-Villen in Paphos kaufen. Küstenlage, große Wohnflächen, Nähe zu Golf und Flughafen.","The Cove bietet luxuriöse 3-Zimmer-Villen in Paphos mit großzügigen Wohnflächen, Küstenlage und guter Anbindung an Flughafen und Golf.",the-cove-oli,The Cove,"Luksusowe 3 sypialnie The Cove w Pafos, Cypr","Kup luksusową willę 3-sypialniową w Pafos. Blisko plaży, lotniska i pól golfowych. Bez dodatkowej prowizji.","The Cove to luksusowe wille 3-sypialniowe w Pafos z dużą powierzchnią, blisko plaży, lotniska i infrastruktury golfowej.",the-cove-oli,The Cove,"Элитные 3 спальни The Cove в Пафосе, Кипр","Купить виллу с 3 спальнями в Пафосе. Просторная площадь, рядом пляж, аэропорт, гольф и без дополнительной комиссии.","The Cove — элитные виллы с 3 спальнями в Пафосе, просторной площадью и удобным доступом к пляжу, аэропорту и гольфу.",the-cove-oli,34.73845128972678,32.44704981349036,Paphos,Villa,3,251-304,69-89,,775000,4,5,6,10,12,10,12,8,"## Luxury 3 Bedroom Villas for Sale in Paphos
+
+The Cove is a premium villa development in Paphos offering 3-bedroom homes with generous covered areas of approximately 251–304 sqm. Located close to the coast, airport and golf facilities, the project is suitable for buyers seeking a spacious Cyprus villa for living, relocation or long-term ownership. Buyers do not pay additional agency commission.
+
+Key features include:
+
+- 3-bedroom villas;
+- 251–304 sqm covered area;
+- private plots of 69–89 sqm;
+- approx. 4 mins to the beach;
+- approx. 10 mins to Paphos Airport;
+- approx. 8 mins to golf facilities;
+- suitable for premium coastal living in Cyprus.","## Luxuriöse 3-Zimmer-Villen in Paphos kaufen
+
+The Cove ist ein hochwertiges Villenprojekt in Paphos mit modernen 3-Zimmer-Villen und großzügigen Wohnflächen von ca. 251–304 m². Die Lage nahe Küste, Flughafen und Golfanlagen macht das Projekt interessant für Käufer, die eine geräumige Villa auf Zypern suchen. Käufer zahlen keine zusätzliche Agenturprovision.
+
+Zu den wichtigsten Merkmalen gehören:
+
+- Villen mit 3 Schlafzimmern;
+- ca. 251–304 m² Wohnfläche;
+- private Grundstücke von 69–89 m²;
+- ca. 4 Minuten zum Strand;
+- ca. 10 Minuten zum Flughafen Paphos;
+- ca. 8 Minuten zu Golfanlagen;
+- geeignet für hochwertiges Wohnen nahe der Küste.","## Luksusowe wille 3-sypialniowe na sprzedaż w Pafos
+
+The Cove to prestiżowy projekt willowy w Pafos oferujący nowoczesne wille z 3 sypialniami i powierzchnią około 251–304 m². Lokalizacja blisko wybrzeża, lotniska i pól golfowych sprawia, że projekt może odpowiadać kupującym szukającym większej nieruchomości na Cyprze. Kupujący nie ponoszą dodatkowej prowizji.
+
+Najważniejsze cechy:
+
+- wille z 3 sypialniami;
+- około 251–304 m² powierzchni;
+- prywatne działki 69–89 m²;
+- około 4 minuty do plaży;
+- około 10 minut do lotniska Pafos;
+- około 8 minut do pól golfowych;
+- odpowiednie do komfortowego życia blisko wybrzeża.","## Элитные виллы с 3 спальнями на продажу в Пафосе
+
+The Cove — премиальный вилловый проект в Пафосе с современными виллами на 3 спальни и крытой площадью около 251–304 м². Локация рядом с побережьем, аэропортом и гольф-инфраструктурой подойдёт покупателям, которые ищут просторную виллу на Кипре для проживания, отдыха или долгосрочного владения. Покупатели не оплачивают дополнительную комиссию агентству.
+
+Основные преимущества:
+
+- виллы с 3 спальнями;
+- около 251–304 м² крытой площади;
+- частные участки 69–89 м²;
+- примерно 4 минуты до пляжа;
+- около 10 минут до аэропорта Пафоса;
+- около 8 минут до гольфа;
+- подходит для комфортной жизни рядом с побережьем.",the-cove/the-cove-00.jpg,the-cove,,,,,,,,,
+triangle-house-oli,2026-05-13T10:40Z,Olias Homes,Olias Homes,Olias Homes,Olias Homes,Triangle House,"Luxury 3 Bedroom Triangle House for Sale in Paphos, Cyprus","Buy a luxury custom-designed 3-bedroom villa in Paphos. Bespoke architecture, private plot and delivery within 24 months.",Triangle House is a bespoke designer villa project in Paphos offering a custom-built 3-bedroom home with modern architecture and private outdoor space.,triangle-house-oli,Triangle House,"Luxus 3 Zimmer Triangle House in Paphos, Zypern",Luxuriöse Designer-Villa in Paphos kaufen. Maßgeschneidertes Haus mit individueller Architektur und Übergabe in 24 Monaten.,"Triangle House ist ein individuelles Villenprojekt in Paphos mit moderner Architektur für Käufer, die ein einzigartiges Zuhause auf Zypern suchen.",triangle-house-oli,Triangle House,"Luksusowe 3 sypialnie Triangle House w Pafos, Cypr","Kup designerską willę w Pafos. Indywidualny projekt domu, prywatna działka i realizacja w około 24 miesiące.",Triangle House to nowoczesna willa projektowana na zamówienie dla osób szukających unikalnej nieruchomości na Cyprze.,triangle-house-oli,Triangle House,"Элитные 3 спальни Triangle House в Пафосе, Кипр","Купить дизайнерскую виллу в Пафосе. Индивидуальный проект, частный участок и строительство около 24 месяцев.","Triangle House — дизайнерская вилла в Пафосе, создаваемая по индивидуальному проекту для покупателей, которые ищут уникальную недвижимость на Кипре.",triangle-house-oli,34.782320890950224,32.40749735581726,Paphos,Villa,3,156,317,,770000,4,3,5,23,10,8,6,18,"## Custom Designed 3 Bedroom Villa in Paphos
+
+Triangle House is a bespoke architectural villa project in Paphos created for buyers seeking a modern custom-designed home in Cyprus. Unlike standard developments, the villa is built to order and combines contemporary architecture with functional living spaces and private outdoor areas.
+
+Key features include:
+
+- custom-designed 3-bedroom villa;
+- approx. 156 sqm covered area;
+- private 317 sqm plot;
+- bespoke architecture;
+- approx. 4 mins to the beach;
+- delivery estimated within 24 months after signing;
+- suitable for buyers seeking a unique Cyprus property.
+
+Triangle House may appeal to buyers looking for a personalised villa rather than a standard residential development.","## Individuell geplante Designer-Villa in Paphos
+
+Triangle House ist ein maßgeschneidertes Villenprojekt für Käufer, die eine moderne Designer-Immobilie auf Zypern suchen. Die Villa wird auf Bestellung gebaut und unterscheidet sich von klassischen Neubauprojekten.
+
+Hauptmerkmale:
+
+- 3 Schlafzimmer;
+- ca. 156 m² Wohnfläche;
+- privates Grundstück 317 m²;
+- individuelles Design;
+- ca. 4 Minuten zum Strand;
+- Fertigstellung ca. 24 Monate nach Vertragsunterzeichnung.","## Designerska willa 3-sypialniowa budowana na zamówienie
+
+Triangle House to indywidualny projekt architektoniczny w Pafos skierowany do kupujących poszukujących nowoczesnej willi tworzonej według założeń projektu, a nie standardowej inwestycji mieszkaniowej.
+
+Najważniejsze cechy:
+
+- willa z 3 sypialniami;
+- około 156 m² powierzchni;
+- prywatna działka 317 m²;
+- nowoczesna architektura;
+- około 4 minuty do plaży;
+- szacowany termin realizacji: około 24 miesięcy od podpisania umowy.
+
+Triangle House może zainteresować osoby szukające bardziej indywidualnej nieruchomości na Cyprze.","## Дизайнерская вилла с 3 спальнями в Пафосе под индивидуальный заказ
+
+Triangle House — архитектурный проект современной виллы в Пафосе, ориентированный на покупателей, которые ищут не типовую недвижимость, а индивидуальный дом с уникальным дизайном. Вилла строится под заказ и предполагает ориентировочный срок реализации около 24 месяцев после подписания договора.
+
+Основные особенности проекта:
+
+- вилла с 3 спальнями;
+- около 156 м² внутренней площади;
+- частный участок 317 м²;
+- современный дизайнерский подход;
+- примерно 4 минуты до пляжа;
+- ориентировочный срок строительства: около 24 месяцев;
+- подходит покупателям, которые ищут уникальную виллу на Кипре.
+
+Triangle House может заинтересовать тех, кто рассматривает покупку недвижимости с индивидуальной архитектурой и современным стилем, а не стандартный жилой проект.",triangle/triangle-00.jpg,triangle,,,,,,,,,

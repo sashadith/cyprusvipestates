@@ -1009,14 +1009,18 @@ export async function getProjectsByDeveloper(
     *[
       _type == "project" &&
       language == $lang &&
-      developer._ref == $developerId
+      developer._ref == $developerId &&
+      isSold != true &&
+      defined(previewImage.asset) &&
+      !(_id match "drafts.*")
     ] | order(_createdAt desc) {
       _id,
       title,
       slug,
       previewImage,
       keyFeatures,
-      language
+      language,
+      isSold
     }
   `;
 
