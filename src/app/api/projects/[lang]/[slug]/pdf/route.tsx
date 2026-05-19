@@ -15,8 +15,8 @@ import { formatMonthYear } from "@/lib/formatMonthYear";
 export const runtime = "nodejs";
 
 Font.register({
-  family: "Roboto",
-  src: "https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxM.ttf",
+  family: "DejaVuSans",
+  src: "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf",
 });
 
 const LOGO_URL =
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     backgroundColor: "#02060b",
     color: "#ffffff",
-    fontFamily: "Roboto",
+    fontFamily: "DejaVuSans",
   },
 
   heroWrapper: {
