@@ -33,6 +33,7 @@ import RoiCalculator from "@/app/components/roi-calculator/RoiCalculator";
 import ModalRoiCalculator from "@/app/components/ModalRoiCalculator/ModalRoiCalculator";
 import MetaViewContentTracker from "@/app/components/MetaViewContentTracker/MetaViewContentTracker";
 import LinkedInConversionTracker from "@/app/components/LinkedInConversionTracker/LinkedInConversionTracker";
+import ProjectPdfButton from "@/app/components/ProjectPdfButton/ProjectPdfButton";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -174,6 +175,7 @@ const ProjectPage = async ({ params }: Props) => {
             <div className="property-features">
               <PropertyFeatures keyFeatures={project.keyFeatures} lang={lang} />
               <div className="property-features-roi-button">
+                <ProjectPdfButton lang={lang} slug={slug} />
                 <ButtonModal modalType="roiCalculator">
                   {lang === "ru"
                     ? "Рассчитать ROI"
