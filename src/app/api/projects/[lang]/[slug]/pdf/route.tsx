@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: "100%",
-    height: 210,
+    height: 190,
     objectFit: "cover",
   },
 
@@ -70,9 +70,9 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    paddingTop: 15,
+    paddingTop: 14,
     paddingHorizontal: 40,
-    paddingBottom: 28,
+    paddingBottom: 12,
   },
 
   title: {
@@ -96,12 +96,12 @@ const styles = StyleSheet.create({
 
   sectionTitle: {
     fontSize: 16,
-    marginBottom: 28,
+    marginBottom: 10,
     color: "#ffffff",
   },
 
   section: {
-    marginBottom: 20,
+    marginBottom: 15,
   },
 
   divider: {
@@ -178,13 +178,12 @@ const styles = StyleSheet.create({
   },
 
   overviewSection: {
-    marginBottom: 20,
+    marginBottom: 18,
   },
 
   footer: {
-    marginTop: 12,
-    paddingTop: 14,
-    // borderTop: "1px solid #b88a45",
+    marginTop: 4,
+    paddingTop: 8,
     alignItems: "center",
   },
 
