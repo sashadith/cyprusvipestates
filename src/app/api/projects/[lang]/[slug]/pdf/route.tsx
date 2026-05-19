@@ -15,17 +15,8 @@ import { formatMonthYear } from "@/lib/formatMonthYear";
 export const runtime = "nodejs";
 
 Font.register({
-  family: "NotoSans",
-  fonts: [
-    {
-      src: "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans/files/noto-sans-latin-ext-400-normal.woff",
-      fontWeight: 400,
-    },
-    {
-      src: "https://cdn.jsdelivr.net/npm/@fontsource/noto-sans/files/noto-sans-cyrillic-400-normal.woff",
-      fontWeight: 400,
-    },
-  ],
+  family: "Roboto",
+  src: "https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxM.ttf",
 });
 
 const LOGO_URL =
@@ -37,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     backgroundColor: "#02060b",
     color: "#ffffff",
-    fontFamily: "NotoSans",
+    fontFamily: "Roboto",
   },
 
   heroWrapper: {
