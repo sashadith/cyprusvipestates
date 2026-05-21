@@ -22,7 +22,11 @@ const NavLinks: React.FC<Props> = ({ navLinks, params, closeMenu }) => {
 
   useEffect(() => {
     // Проверяем, находимся ли мы на главной странице
-    setIsHomePage(window.location.pathname === `/${params.lang}`);
+    setIsHomePage(
+      params.lang === "de"
+        ? window.location.pathname === "/"
+        : window.location.pathname === `/${params.lang}`,
+    );
 
     const handleScroll = () => {
       let closestSectionId = "";
@@ -59,7 +63,10 @@ const NavLinks: React.FC<Props> = ({ navLinks, params, closeMenu }) => {
       });
     } else if (!isHomePage) {
       // Перенаправление на главную страницу, если элемент не найден и не на главной странице
-      window.location.href = `/${params.lang}/#${sectionId}`;
+      window.location.href =
+        params.lang === "de"
+          ? `/#${sectionId}`
+          : `/${params.lang}/#${sectionId}`;
     }
   };
 

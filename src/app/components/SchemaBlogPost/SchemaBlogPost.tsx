@@ -14,7 +14,12 @@ const siteUrl = "https://cyprusvipestates.com";
 
 const SchemaBlogPost: React.FC<SchemaBlogPostProps> = ({ blog, lang }) => {
   // Собираем канонический URL
-  const slug = blog.slug[lang]?.current ?? blog.slug[defaultLocale].current;
+  const slug = blog.slug[lang]?.current;
+
+  if (!slug) {
+    return null;
+  }
+
   const url =
     lang === defaultLocale
       ? `${siteUrl}/blog/${slug}`
