@@ -105,7 +105,10 @@ const ProjectPage = async ({ params }: Props) => {
           ...acc,
           {
             language: lang.id,
-            path: `/${lang.id}/projects/${translationSlug}`,
+            path:
+              lang.id === "de"
+                ? `/projects/${translationSlug}`
+                : `/${lang.id}/projects/${translationSlug}`,
           },
         ]
       : acc;

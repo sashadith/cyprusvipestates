@@ -64,7 +64,7 @@ const PageBlog = async ({ params }: Props) => {
           }
           return acc;
         },
-        []
+        [],
       )
       .join(" ");
 
@@ -73,7 +73,10 @@ const PageBlog = async ({ params }: Props) => {
           ...acc,
           {
             language: lang.id,
-            path: `/${lang.id}/${translationSlug}`,
+            path:
+              lang.id === "de"
+                ? `/blog/${translationSlug}`
+                : `/${lang.id}/blog/${translationSlug}`,
           },
         ]
       : acc;

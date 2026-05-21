@@ -106,7 +106,10 @@ const DeveloperPage = async ({ params }: Props) => {
           ...acc,
           {
             language: lang.id,
-            path: `/${lang.id}/developers/${translationSlug}`,
+            path:
+              lang.id === "de"
+                ? `/developers/${translationSlug}`
+                : `/${lang.id}/developers/${translationSlug}`,
           },
         ]
       : acc;

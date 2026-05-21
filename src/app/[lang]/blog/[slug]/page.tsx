@@ -100,7 +100,10 @@ const PagePost = async ({ params }: Props) => {
           ...acc,
           {
             language: lang.id,
-            path: `/${lang.id}/blog/${translationSlug}`,
+            path:
+              lang.id === "de"
+                ? `/blog/${translationSlug}`
+                : `/${lang.id}/blog/${translationSlug}`,
           },
         ]
       : acc;
