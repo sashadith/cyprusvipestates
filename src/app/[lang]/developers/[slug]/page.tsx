@@ -1,4 +1,5 @@
 import React from "react";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import {
   getFormStandardDocumentByLang,
@@ -55,19 +56,8 @@ const DeveloperPage = async ({ params }: Props) => {
   const { lang, slug } = params;
   const developer = await getDeveloperByLang(lang, slug);
 
-  // if (!developer) {
-  //   return null;
-  // }
-
   if (!developer) {
-    const notFoundPage = await getNotFoundPageByLang(lang);
-    return (
-      <>
-        <Header params={params} translations={[]} />
-        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
-        <Footer params={params} />
-      </>
-    ); // Рендеринг компонента NotFound
+    notFound();
   }
 
   const projects = await getProjectsByDeveloper(lang, developer._id);
