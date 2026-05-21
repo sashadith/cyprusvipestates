@@ -81,6 +81,7 @@
   font-size: clamp(2rem, 2.5vw, 3.75rem);
   line-height: 120%;
   margin-bottom: 24px;
+  max-width: 900px;
 
   span {
     font-size: clamp(1.5rem, 1.5vw, 2.5rem);
@@ -103,8 +104,8 @@
     max-width: 90%;
   }
 
-  @media screen and (min-width: 980) {
-    max-width: 80%;
+  @media screen and (min-width: 980px) {
+    max-width: 68%;
   }
 }
 
