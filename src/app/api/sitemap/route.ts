@@ -1,8 +1,5 @@
-// src/app/api/sitemap/route.ts
 import {
-  getHomePageByLang,
   getAllProjectsByLang,
-  getProjectsPageByLang,
   getAllDevelopersByLang,
   getAllPathsForLang,
   getBlogPostsByLang,
@@ -18,6 +15,29 @@ type SitemapPage = {
   priority: number;
 };
 
+function escapeXml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function normalizeRoute(route: string) {
+  return route.replace(/\/+/g, "/").replace(/\/$/, "") || "/";
+}
+
+function addPage(pages: SitemapPage[], page: Omit<SitemapPage, "url">) {
+  const route = normalizeRoute(page.route);
+
+  pages.push({
+    ...page,
+    route,
+    url: `${websiteUrl}${route === "/" ? "/" : route}`,
+  });
+}
+
 async function generateSitemap(): Promise<SitemapPage[]> {
   const pages: SitemapPage[] = [];
 
@@ -25,117 +45,99 @@ async function generateSitemap(): Promise<SitemapPage[]> {
     const isDefault = lang === "de";
     const prefix = isDefault ? "" : `/${lang}`;
 
-    // — Главная страница —
-    pages.push({
-      route: isDefault ? `/` : `/${lang}`,
-      url: `${websiteUrl}${isDefault ? `/` : `/${lang}`}`,
+    addPage(pages, {
+      route: isDefault ? "/" : `/${lang}`,
       changefreq: "weekly",
       priority: 1.0,
     });
 
-    // — Страницы проектов —
-    pages.push({
+    addPage(pages, {
       route: `${prefix}/projects`,
-      url: `${websiteUrl}${prefix}/projects`,
       changefreq: "weekly",
       priority: 0.9,
     });
+
     const projects = await getAllProjectsByLang(lang);
-    pages.push(
-      ...projects
-        .map((proj) => {
-          const slug = proj.slug?.[lang]?.current;
-          if (!slug) return null;
-          const route = `${prefix}/projects/${slug}`;
-          return {
-            route,
-            url: `${websiteUrl}${route}`,
-            changefreq: "weekly",
-            priority: 0.8,
-          };
-        })
-        .filter((x): x is SitemapPage => Boolean(x)),
-    );
 
-    // — Страницы застройщиков —
-    pages.push({
+    projects.forEach((proj) => {
+      const slug = proj.slug?.[lang]?.current;
+      if (!slug) return;
+
+      addPage(pages, {
+        route: `${prefix}/projects/${slug}`,
+        changefreq: "weekly",
+        priority: 0.8,
+      });
+    });
+
+    addPage(pages, {
       route: `${prefix}/developers`,
-      url: `${websiteUrl}${prefix}/developers`,
       changefreq: "weekly",
       priority: 0.9,
     });
-    const developers = await getAllDevelopersByLang(lang);
-    pages.push(
-      ...developers
-        .map((dev) => {
-          const slug = dev.slug?.[lang]?.current;
-          if (!slug) return null;
-          const route = `${prefix}/developers/${slug}`;
-          return {
-            route,
-            url: `${websiteUrl}${route}`,
-            changefreq: "weekly",
-            priority: 0.8,
-          };
-        })
-        .filter((x): x is SitemapPage => Boolean(x)),
-    );
 
-    // — Обычные «одноуровневые» страницы (singlepage) любой вложенности —
+    const developers = await getAllDevelopersByLang(lang);
+
+    developers.forEach((dev) => {
+      const slug = dev.slug?.[lang]?.current;
+      if (!slug) return;
+
+      addPage(pages, {
+        route: `${prefix}/developers/${slug}`,
+        changefreq: "weekly",
+        priority: 0.8,
+      });
+    });
+
     const allPaths = await getAllPathsForLang(lang);
-    pages.push(
-      ...allPaths.map((segments) => {
+
+    allPaths
+      .filter((segments) => Array.isArray(segments) && segments.length > 0)
+      .forEach((segments) => {
         const route = isDefault
           ? `/${segments.join("/")}`
           : `/${lang}/${segments.join("/")}`;
-        return {
+
+        addPage(pages, {
           route,
-          url: `${websiteUrl}${route}`,
           changefreq: "weekly",
           priority: segments.length === 1 ? 0.9 : 0.8,
-        };
-      }),
-    );
+        });
+      });
 
-    // — Список статей блога —
-    pages.push({
+    addPage(pages, {
       route: `${prefix}/blog`,
-      url: `${websiteUrl}${prefix}/blog`,
       changefreq: "weekly",
       priority: 0.9,
     });
 
-    // — Отдельные статьи блога —
     const blogPosts = await getBlogPostsByLang(lang);
-    pages.push(
-      ...blogPosts
-        // фильтруем те записи, у которых нет slug для этого языка
-        .filter((post) => !!post.slug?.[lang]?.current)
-        .map((post) => {
-          const slug = post.slug[lang]!.current;
-          const route = `${prefix}/blog/${slug}`;
-          return {
-            route,
-            url: `${websiteUrl}${route}`,
-            changefreq: "weekly",
-            priority: 0.8,
-          };
-        }),
-    );
+
+    blogPosts.forEach((post) => {
+      const slug = post.slug?.[lang]?.current;
+      if (!slug) return;
+
+      addPage(pages, {
+        route: `${prefix}/blog/${slug}`,
+        changefreq: "weekly",
+        priority: 0.8,
+      });
+    });
   }
 
-  return pages;
+  return Array.from(new Map(pages.map((page) => [page.url, page])).values());
 }
 
 export async function GET() {
   const pages = await generateSitemap();
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages
   .map(
     ({ url, changefreq, priority }) => `
   <url>
-    <loc>${url}</loc>
+    <loc>${escapeXml(url)}</loc>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority.toFixed(1)}</priority>
   </url>`,
@@ -144,6 +146,8 @@ ${pages
 </urlset>`;
 
   return new Response(xml, {
-    headers: { "Content-Type": "application/xml" },
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+    },
   });
 }

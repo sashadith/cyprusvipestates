@@ -459,9 +459,14 @@ export async function getAllSinglePagesByLang(lang: string): Promise<
 }
 
 export async function getAllPathsForLang(lang: string): Promise<string[][]> {
-  const items: { current: string; parent?: string }[] = await client.fetch(
+  const items: { current?: string; parent?: string }[] = await client.fetch(
     groq`
-      *[_type=='singlepage' && language==$lang]{
+      *[
+        _type == "singlepage" &&
+        language == $lang &&
+        defined(slug[$lang].current) &&
+        !(_id match "drafts.*")
+      ]{
         "current": slug[$lang].current,
         "parent": parentPage->slug[$lang].current
       }
@@ -469,21 +474,30 @@ export async function getAllPathsForLang(lang: string): Promise<string[][]> {
     { lang },
   );
 
-  // строим дерево — точно так же, как в generateStaticParams
+  const cleanItems = items.filter((item) => Boolean(item.current));
+
   const map: Record<string, string[]> = {};
-  items.forEach(({ current, parent }) => {
+
+  cleanItems.forEach(({ current, parent }) => {
+    if (!current) return;
     if (!parent) map[current] = [current];
   });
+
   let added = true;
+
   while (added) {
     added = false;
-    items.forEach(({ current, parent }) => {
-      if (parent && map[parent] && !map[current]) {
+
+    cleanItems.forEach(({ current, parent }) => {
+      if (!current || !parent) return;
+
+      if (map[parent] && !map[current]) {
         map[current] = [...map[parent], current];
         added = true;
       }
     });
   }
+
   return Object.values(map);
 }
 
@@ -715,7 +729,13 @@ export async function getBlogPageByLang(lang: string): Promise<BlogPage> {
 
 // === Blog Posts All ===
 export async function getBlogPostsByLang(lang: string): Promise<Blog[]> {
-  const blogPostsQuery = groq`*[_type == 'blog' && language == $lang] | order(publishedAt desc) {
+  const blogPostsQuery = groq`
+  *[
+    _type == "blog" &&
+    language == $lang &&
+    defined(slug[$lang].current) &&
+    !(_id match "drafts.*")
+  ] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -726,8 +746,11 @@ export async function getBlogPostsByLang(lang: string): Promise<Blog[]> {
     },
     publishedAt,
     language,
-    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
-      slug,
+    "_translations": *[
+      _type == "translation.metadata" &&
+      references(^._id)
+    ].translations[].value->{
+      slug
     },
   }`;
 

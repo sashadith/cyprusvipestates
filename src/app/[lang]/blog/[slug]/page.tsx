@@ -1,18 +1,15 @@
 import React from "react";
+import { notFound } from "next/navigation";
 import AccordionContainer from "@/app/components/AccordionContainer/AccordionContainer";
 import BlogIntro from "@/app/components/BlogIntro/BlogIntro";
 import BlogVideo from "@/app/components/BlogVideo/BlogVideo";
 import Footer from "@/app/components/Footer/Footer";
 import Header from "@/app/components/Header/Header";
-// import LastArticles from "@/app/components/LastArticles/LastArticles";
-// import LinkPrimary from "@/app/components/LinkPrimary/LinkPrimary";
-
 import TextContentComponent from "@/app/components/TextContentComponent/TextContentComponent";
 import { i18n } from "@/i18n.config";
 import {
   getBlogPostByLang,
   getFormStandardDocumentByLang,
-  getNotFoundPageByLang,
 } from "@/sanity/sanity.utils";
 import {
   AccordionBlock,
@@ -42,7 +39,6 @@ import SchemaBlogPost from "@/app/components/SchemaBlogPost/SchemaBlogPost";
 import ProjectsSectionSlider from "@/app/components/ProjectsSectionSlider/ProjectsSectionSlider";
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
-import NotFoundPageComponent from "@/app/components/NotFoundPageComponent/NotFoundPageComponent";
 import LinkedInConversionTracker from "@/app/components/LinkedInConversionTracker/LinkedInConversionTracker";
 
 type Props = {
@@ -64,19 +60,8 @@ const PagePost = async ({ params }: Props) => {
   const { lang, slug } = params;
   const blog = await getBlogPostByLang(lang, slug);
 
-  // if (!blog) {
-  //   return <p>Страница не найдена</p>;
-  // }
-
   if (!blog) {
-    const notFoundPage = await getNotFoundPageByLang(lang);
-    return (
-      <>
-        <Header params={params} translations={[]} />
-        <NotFoundPageComponent notFoundPage={notFoundPage} lang={lang} />
-        <Footer params={params} />
-      </>
-    ); // Рендеринг компонента NotFound
+    notFound();
   }
 
   const formDocument: FormStandardDocument =
