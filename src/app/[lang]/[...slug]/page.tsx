@@ -247,7 +247,8 @@ const SinglePage = async ({ params }: Props) => {
 
     translations.push({
       language: code,
-      path: `/${code}/${match.join("/")}`,
+      path:
+        code === "de" ? `/${match.join("/")}` : `/${code}/${match.join("/")}`,
     });
   }
 

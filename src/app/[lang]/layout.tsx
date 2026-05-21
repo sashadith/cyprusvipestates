@@ -1,3 +1,4 @@
+// src/app/[lang]/layout.tsx
 import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
