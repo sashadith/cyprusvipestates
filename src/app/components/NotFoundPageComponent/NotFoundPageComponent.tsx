@@ -30,7 +30,9 @@ const NotFoundPageComponent: FC<Props> = ({ notFoundPage, lang }) => {
             <div className={styles.contentBottom}>
               <p className={styles.description}>{description}</p>
               <div className={styles.linkBlock}>
-                <LinkPrimary url={`/${lang}/projects`}>
+                <LinkPrimary
+                  url={lang === "de" ? "/projects" : `/${lang}/projects`}
+                >
                   {buttonText}
                 </LinkPrimary>
               </div>
