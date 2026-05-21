@@ -128,6 +128,7 @@ export type Project = {
   isFeatured?: boolean;
   listingPriority?: number;
   isSold: boolean;
+  _updatedAt?: string;
   language: string;
   slug: {
     [lang: string]: {

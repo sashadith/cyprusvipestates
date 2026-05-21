@@ -737,6 +737,7 @@ export async function getBlogPostsByLang(lang: string): Promise<Blog[]> {
     !(_id match "drafts.*")
   ] | order(publishedAt desc) {
     _id,
+    _updatedAt,
     title,
     slug,
     previewImage,
@@ -974,12 +975,19 @@ export async function getAllDevelopersByLang(
   lang: string,
 ): Promise<Developer[]> {
   const query = groq`
-    *[_type == "developer" && language == $lang] | order(_createdAt desc) {
+    *[
+      _type == "developer" &&
+      language == $lang &&
+      defined(slug[$lang].current) &&
+      !(_id match "drafts.*")
+    ] | order(_createdAt desc) {
       _id,
+      _updatedAt,
       title,
       slug
     }
   `;
+
   const developers = await client.fetch(query, { lang });
   return developers;
 }
@@ -1125,14 +1133,22 @@ export async function getLastFiveProjectsByLang(
 }
 
 export async function getAllProjectsByLang(lang: string): Promise<Project[]> {
-  const allProjectsQuery = groq`*[_type == "project" && language == $lang] | order(_createdAt desc) {
-    _id,
-    title,
-    slug,
-    previewImage,
-    keyFeatures,
-    language
-  }`;
+  const allProjectsQuery = groq`
+    *[
+      _type == "project" &&
+      language == $lang &&
+      defined(slug[$lang].current) &&
+      !(_id match "drafts.*")
+    ] | order(_createdAt desc) {
+      _id,
+      _updatedAt,
+      title,
+      slug,
+      previewImage,
+      keyFeatures,
+      language
+    }
+  `;
 
   const projects = await client.fetch(allProjectsQuery, { lang });
   return projects;

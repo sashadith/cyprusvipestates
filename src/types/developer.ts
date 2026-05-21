@@ -10,6 +10,7 @@ export type Developer = {
   excerpt: string;
   logo: ImageAlt;
   description: any;
+  _updatedAt?: string;
   language: string;
   slug: {
     [lang: string]: {
