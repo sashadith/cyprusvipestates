@@ -12,6 +12,7 @@ import GoogleAdsScript from "../components/GoogleAdsScript/GoogleAdsScript";
 import FacebookPixel from "../components/FacebookPixel/FacebookPixel";
 import LenisProvider from "../components/LenisProvider/LenisProvider";
 import LinkedInPixel from "../components/LinkedInPixel/LinkedInPixel";
+import Script from "next/script";
 
 const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 
@@ -53,7 +54,8 @@ export default function RootLayout({
     <html lang={params.lang}>
       <LenisProvider />
       <body className={rubik.className}>
-        <script
+        <Script
+          id="organization-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
