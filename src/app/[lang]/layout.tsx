@@ -18,6 +18,12 @@ const rubik = Rubik({ subsets: ["latin", "cyrillic"] });
 export const metadata: Metadata = {
   title: "Cyprus VIP Estates",
   description: "Cyprus VIP Estates - Luxury Real Estate in Cyprus",
+  applicationName: "Cyprus VIP Estates",
+  openGraph: {
+    siteName: "Cyprus VIP Estates",
+    type: "website",
+    url: "https://cyprusvipestates.com",
+  },
   other: {
     "facebook-domain-verification": "coiknnpjsr2rrcrbht6mvhjdbld3ul",
   },
@@ -47,6 +53,25 @@ export default function RootLayout({
     <html lang={params.lang}>
       <LenisProvider />
       <body className={rubik.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Cyprus VIP Estates",
+              alternateName: "Cyprus VIP Estates",
+              url: "https://cyprusvipestates.com",
+              logo: "https://cdn.sanity.io/images/88gk88s2/production/862e62ebddfc232ff9838efb63eb28685b515eb4-400x208.png",
+              sameAs: [
+                "https://www.instagram.com/cyprusvipestates",
+                "https://www.facebook.com/cyprusvipestates",
+                "https://www.youtube.com/@cyprusvipestates",
+                "https://www.tiktok.com/@cyprusvipestates",
+              ],
+            }),
+          }}
+        />
         <ModalProvider>{children}</ModalProvider>
 
         {hasAnalytics && (
