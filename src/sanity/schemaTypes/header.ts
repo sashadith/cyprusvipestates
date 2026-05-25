@@ -38,6 +38,28 @@ const header = {
               title: "Link",
               type: "string",
             }),
+            defineField({
+              name: "subLinks",
+              title: "Sub links",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  fields: [
+                    defineField({
+                      name: "label",
+                      title: "Label",
+                      type: "string",
+                    }),
+                    defineField({
+                      name: "link",
+                      title: "Link",
+                      type: "string",
+                    }),
+                  ],
+                },
+              ],
+            }),
           ],
         },
       ],
