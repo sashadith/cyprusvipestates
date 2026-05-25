@@ -166,7 +166,7 @@ const NavLinks: React.FC<Props> = ({ navLinks, params, closeMenu }) => {
                 </a>
               )}
 
-              {isMobile && hasSubLinks && (
+              {hasSubLinks && (
                 <button
                   type="button"
                   className={styles.chevronButton}
