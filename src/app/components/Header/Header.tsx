@@ -7,6 +7,7 @@ import styles from "./Header.module.scss";
 import Link from "next/link";
 import NavWrapper from "../NavWrapper/NavWrapper";
 import { Translation } from "@/types/homepage";
+import { ButtonModal } from "../ButtonModal/ButtonModal";
 
 type Props = {
   translations?: Translation[];
@@ -48,6 +49,15 @@ const Header = async ({ translations, params }: Props) => {
             </div>
             <div className={styles.contactData}>
               <div className={styles.contactButtons}>
+                <ButtonModal className={styles.headerCta}>
+                  {params.lang === "de"
+                    ? "Beratung anfragen"
+                    : params.lang === "pl"
+                      ? "Umów konsultację"
+                      : params.lang === "ru"
+                        ? "Получить консультацию"
+                        : "Get Consultation"}
+                </ButtonModal>
                 <LocaleSwitcher translations={translations} />
               </div>
             </div>
