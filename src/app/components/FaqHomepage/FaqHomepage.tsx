@@ -13,13 +13,16 @@ const FaqHomepage = ({ faqSection }: Props) => {
   if (!faqSection?.faq?.faq?.items?.length) return null;
 
   return (
-    <section className={styles.section}>
-      <div className="container-short">
+    <section className={styles.faqHomepage}>
+      <div className="container">
         {faqSection.faqTitle && (
-          <h2 className={styles.title}>{faqSection.faqTitle}</h2>
+          <h2 className="h2-white">{faqSection.faqTitle}</h2>
         )}
-
-        <AccordionContainer block={faqSection.faq.faq} />
+      </div>
+      <div className={styles.accordionWrapper}>
+        <div className="container-short">
+          <AccordionContainer block={faqSection.faq.faq} />
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,7 @@
 .accordion {
   margin-bottom: clamp(1.25rem, 0.938rem + 1.25vw, 1.875rem);
+  background-color: hsla(0, 0%, 100%, .05);
+  padding: clamp(1.875rem, 1.313rem + 2.25vw, 3rem);
 }
 
 .headerFlex {
@@ -33,7 +35,7 @@
   width: 100%;
   margin: 0;
   padding: 10px 40px;
-  font-size: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: 48px; /* 342.857% */

@@ -525,11 +525,6 @@ export default defineType({
         }),
       ],
     }),
-    // defineField({
-    //   name: "faqBlock",
-    //   title: "FAQ Block",
-    //   type: "faqBlock",
-    // }),
     defineField({
       name: "faqSection",
       title: "FAQ Section",
