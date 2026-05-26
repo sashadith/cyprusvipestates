@@ -551,3 +551,7 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-bottom: clamp(2.5rem, 0.625rem + 7.5vw, 6.25rem);
   }
 }
+
+strong {
+  font-weight: 400;
+}
