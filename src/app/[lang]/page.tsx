@@ -29,6 +29,7 @@ import ReviewsFullBlockComponent from "../components/ReviewsFullBlockComponent/R
 import WhatsAppButton from "../components/WhatsAppButton/WhatsAppButton";
 import HomepageHero from "../components/HomepageHero/HomepageHero";
 import FeaturedProjectsHomepage from "../components/FeaturedProjectsHomepage/FeaturedProjectsHomepage";
+import FaqHomepage from "../components/FaqHomepage/FaqHomepage";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -105,6 +106,9 @@ export default async function Home({ params }: Props) {
         <NewListnigs lang={params.lang} />
         <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />
         <HowWeWorkBlock work={homePage.howWeWorkBlock} />
+        {homePage.faqSection && (
+          <FaqHomepage faqSection={homePage.faqSection} />
+        )}
         {/* <DevelopersLogos
           logos={homePage.logosBlock?.logos}
           lang={params.lang}

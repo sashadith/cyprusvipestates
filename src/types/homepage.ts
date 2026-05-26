@@ -1,4 +1,4 @@
-import { ReviewsFullBlock } from "./blog";
+import { FaqBlock, ReviewsFullBlock } from "./blog";
 import { ImageAlt } from "./project";
 
 export type City = "Paphos" | "Limassol" | "Larnaca";
@@ -221,6 +221,11 @@ export type FeaturedProjectsBlock = {
   projects: FeaturedProject[];
 };
 
+export type FaqSection = {
+  faqTitle?: string;
+  faq?: FaqBlock;
+};
+
 export type Homepage = {
   _type: "homepage";
   _id: string;
@@ -239,6 +244,7 @@ export type Homepage = {
   parallaxImage: Image;
   benefitsBlock: BenefitsBlock;
   howWeWorkBlock: HowWeWorkBlock;
+  faqSection?: FaqSection;
   reviewsFullBlock: ReviewsFullBlock;
   reviewsBlock: ReviewsBlock;
   language: string;

@@ -97,6 +97,24 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
     parallaxImage,
     benefitsBlock,
     howWeWorkBlock,
+    faqSection{
+      faqTitle,
+      faq{
+        _key,
+        _type,
+        faq{
+          _key,
+          _type,
+          items[]{
+            _key,
+            question,
+            answer
+          }
+        },
+        marginTop,
+        marginBottom
+      }
+    },
     reviewsFullBlock,
     reviewsBlock,
     language,
