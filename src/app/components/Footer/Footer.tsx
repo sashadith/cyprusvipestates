@@ -7,6 +7,8 @@ import {
   SocialLink,
   Paragraph,
   Contact,
+  FooterColumn,
+  FooterColumnLink,
 } from "@/types/footer"; // Импортируйте тип Link и переименуйте его, чтобы избежать конфликта с Link из next/link
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity.client";
@@ -32,6 +34,7 @@ const Footer = async ({ params }: Props) => {
     newsletterButtonLabel,
     copyright,
     policyLinks,
+    footerColumns,
     discklaimer,
   } = data;
 
@@ -149,6 +152,54 @@ const Footer = async ({ params }: Props) => {
           </div>
         </div>
       </div>
+      {footerColumns?.length > 0 && (
+        <div className={styles.footerMiddle}>
+          <div className="container">
+            <nav
+              className={styles.footerColumns}
+              aria-label="Footer navigation"
+            >
+              {footerColumns.map((column: FooterColumn) => {
+                if (!column?.title && !column?.links?.length) return null;
+
+                return (
+                  <div key={column._key} className={styles.footerColumn}>
+                    {column.title && (
+                      <p className={styles.title}>{column.title}</p>
+                    )}
+
+                    {column.links?.length > 0 && (
+                      <ul className={styles.columnLinks}>
+                        {column.links.map((link: FooterColumnLink) => {
+                          if (!link?.label || !link?.url) return null;
+
+                          const isExternal = link.url.startsWith("http");
+
+                          return (
+                            <li key={link._key} className={styles.columnLink}>
+                              <Link
+                                href={link.url}
+                                {...(isExternal
+                                  ? {
+                                      target: "_blank",
+                                      rel: "noopener noreferrer",
+                                    }
+                                  : {})}
+                              >
+                                {link.label}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+      )}
       {/* <div className={styles.footerDivider}></div> */}
       <div className={styles.bottom}>
         <div className="container">

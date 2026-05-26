@@ -33,6 +33,18 @@ export type Contact = {
   type: ContactType;
 };
 
+export type FooterColumnLink = {
+  _key: string;
+  label: string;
+  url: string;
+};
+
+export type FooterColumn = {
+  _key: string;
+  title: string;
+  links: FooterColumnLink[];
+};
+
 export type Footer = {
   _type: "footer";
   _id: string;
@@ -48,5 +60,6 @@ export type Footer = {
   newsletterButtonLabel: string;
   copyright: string;
   policyLinks: Link[];
+  footerColumns: FooterColumn[];
   discklaimer: string;
 };

@@ -133,6 +133,7 @@ export async function getFooterByLang(lang: string) {
     newsletterButtonLabel,
     copyright,
     policyLinks,
+    footerColumns,
     discklaimer,
   }`;
 

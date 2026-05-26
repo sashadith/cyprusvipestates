@@ -146,6 +146,47 @@ const footer = {
       ],
     }),
     defineField({
+      name: "footerColumns",
+      title: "Footer SEO Columns",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Column title",
+              type: "string",
+            }),
+
+            defineField({
+              name: "links",
+              title: "Links",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  fields: [
+                    defineField({
+                      name: "label",
+                      title: "Label",
+                      type: "string",
+                    }),
+
+                    defineField({
+                      name: "url",
+                      title: "URL",
+                      type: "string",
+                    }),
+                  ],
+                },
+              ],
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: "discklaimer",
       title: "Discklaimer",
       type: "string",
