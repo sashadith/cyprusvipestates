@@ -58,7 +58,7 @@ export const RichText = {
                 <span>{child.props.children}</span>
               </>
             ),
-          })
+          }),
         )}
       </ul>
     ),
@@ -75,6 +75,7 @@ export const RichText = {
     //     {children}
     //   </h1>
     // ),
+    h1: ({ children }: any) => <h1 className={styles.h1}>{children}</h1>,
     h2: ({ children }: any) => <h2 className={styles.h2}>{children}</h2>,
     h3: ({ children }: any) => <h3 className={styles.h3}>{children}</h3>,
     h4: ({ children }: any) => <h4 className={styles.h4}>{children}</h4>,
