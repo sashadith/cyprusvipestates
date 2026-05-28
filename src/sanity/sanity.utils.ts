@@ -80,6 +80,7 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
         }
       }
     },
+    citiesBlock,
     homepageTitle,
     aboutBlock,
     descriptionBlock{

@@ -242,6 +242,54 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "citiesBlock",
+      title: "Cities Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "cities",
+          title: "Cities",
+          type: "array",
+          of: [
+            defineArrayMember({
+              name: "cityItem",
+              title: "City Item",
+              type: "object",
+              fields: [
+                defineField({
+                  name: "image",
+                  title: "Image",
+                  type: "image",
+                  fields: [
+                    {
+                      name: "alt",
+                      title: "Alt Text",
+                      type: "string",
+                    },
+                  ],
+                }),
+                defineField({
+                  name: "city",
+                  title: "City",
+                  type: "string",
+                }),
+                defineField({
+                  name: "link",
+                  title: "Link",
+                  type: "string",
+                }),
+              ],
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: "homepageTitle",
       title: "Homepage Title",
       type: "string",

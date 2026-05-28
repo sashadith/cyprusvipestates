@@ -33,6 +33,7 @@ import FaqHomepage from "../components/FaqHomepage/FaqHomepage";
 import { DoubleTextBlock, TextContent } from "@/types/blog";
 import TextContentComponent from "../components/TextContentComponent/TextContentComponent";
 import DoubleTextBlockComponent from "../components/DoubleTextBlockComponent/DoubleTextBlockComponent";
+import CitiesHomepage from "../components/CitiesHomepage/CitiesHomepage";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -125,6 +126,9 @@ export default async function Home({ params }: Props) {
           featuredProjectsBlock={homePage.featuredProjectsBlock}
           lang={params.lang}
         />
+        {homePage.citiesBlock && (
+          <CitiesHomepage citiesBlock={homePage.citiesBlock} />
+        )}
         <DescriptionBlock descriptionBlock={homePage.descriptionBlock} />
         <NewListnigs lang={params.lang} />
         <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />
@@ -135,9 +139,6 @@ export default async function Home({ params }: Props) {
           </div>
         ) : null}
 
-        {homePage.faqSection && (
-          <FaqHomepage faqSection={homePage.faqSection} />
-        )}
         {homePage.faqSection && (
           <FaqHomepage faqSection={homePage.faqSection} />
         )}

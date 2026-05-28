@@ -231,6 +231,21 @@ export type FaqSection = {
   faq?: FaqBlock;
 };
 
+export type CitiesBlockItem = {
+  _key: string;
+  _type: string;
+  image: ImageAlt;
+  city: string;
+  link: string;
+};
+
+export type CitiesBlock = {
+  _key?: string;
+  _type?: string;
+  title: string;
+  cities: CitiesBlockItem[];
+};
+
 export type Homepage = {
   _type: "homepage";
   _id: string;
@@ -242,6 +257,7 @@ export type Homepage = {
   homepageTitle: string;
   brochureBlock: Brochure;
   featuredProjectsBlock: FeaturedProjectsBlock;
+  citiesBlock: CitiesBlock;
   aboutBlock: AboutBlock;
   descriptionBlock: DescriptionBlock;
   projectsBlock: ProjectsBlock;
