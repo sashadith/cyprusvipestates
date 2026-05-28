@@ -526,6 +526,13 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "contentBlocks",
+      title: "SEO Content Blocks",
+      type: "array",
+      description: "SEO content blocks displayed before FAQ section",
+      of: [{ type: "textContent" }, { type: "doubleTextBlock" }],
+    }),
+    defineField({
       name: "faqSection",
       title: "FAQ Section",
       type: "object",

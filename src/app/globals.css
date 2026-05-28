@@ -555,3 +555,12 @@ input[type="number"]::-webkit-outer-spin-button {
 strong {
   font-weight: 500;
 }
+
+.contentBlocks {
+  padding-top: 50px;
+
+  .rightContent, .leftContent {
+    display: flex;
+    align-items: center;
+  }
+}

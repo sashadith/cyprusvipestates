@@ -97,6 +97,98 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
     parallaxImage,
     benefitsBlock,
     howWeWorkBlock,
+    contentBlocks[] {
+      _type == "textContent" => {
+        _key,
+        _type,
+        backgroundColor,
+        paddingVertical,
+        paddingHorizontal,
+        marginTop,
+        marginBottom,
+        textAlign,
+        textColor,
+        backgroundFull,
+        content[] {
+          ...,
+          _type == "image" => {
+            _key,
+            _type,
+            alt,
+            asset->{
+              _ref,
+              url,
+              metadata { dimensions { width, height } }
+            }
+          }
+        }
+      },
+
+      _type == "doubleTextBlock" => {
+        _key,
+        _type,
+        doubleTextBlockTitle,
+        leftContent {
+          type,
+          blockContent {
+            ...,
+            content[] {
+              ...,
+              _type == "image" => {
+                _key,
+                _type,
+                alt,
+                asset->{
+                  _ref,
+                  url,
+                  metadata { dimensions { width, height } }
+                }
+              }
+            }
+          },
+          image {
+            ...,
+            asset->{
+              _ref,
+              url,
+              metadata { dimensions { width, height } }
+            }
+          }
+        },
+        rightContent {
+          type,
+          blockContent {
+            ...,
+            content[] {
+              ...,
+              _type == "image" => {
+                _key,
+                _type,
+                alt,
+                asset->{
+                  _ref,
+                  url,
+                  metadata { dimensions { width, height } }
+                }
+              }
+            }
+          },
+          image {
+            ...,
+            asset->{
+              _ref,
+              url,
+              metadata { dimensions { width, height } }
+            }
+          }
+        },
+        isDivider,
+        marginTop,
+        marginBottom,
+        paddingTop,
+        paddingBottom
+      }
+    },
     faqSection{
       faqTitle,
       faq{

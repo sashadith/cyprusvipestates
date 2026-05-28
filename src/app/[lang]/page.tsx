@@ -30,6 +30,9 @@ import WhatsAppButton from "../components/WhatsAppButton/WhatsAppButton";
 import HomepageHero from "../components/HomepageHero/HomepageHero";
 import FeaturedProjectsHomepage from "../components/FeaturedProjectsHomepage/FeaturedProjectsHomepage";
 import FaqHomepage from "../components/FaqHomepage/FaqHomepage";
+import { DoubleTextBlock, TextContent } from "@/types/blog";
+import TextContentComponent from "../components/TextContentComponent/TextContentComponent";
+import DoubleTextBlockComponent from "../components/DoubleTextBlockComponent/DoubleTextBlockComponent";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -64,6 +67,26 @@ export default async function Home({ params }: Props) {
       }
       return newItem;
     });
+
+  const renderContentBlock = (block: TextContent | DoubleTextBlock) => {
+    switch (block._type) {
+      case "textContent":
+        return (
+          <TextContentComponent key={block._key} block={block as TextContent} />
+        );
+
+      case "doubleTextBlock":
+        return (
+          <DoubleTextBlockComponent
+            key={block._key}
+            block={block as DoubleTextBlock}
+          />
+        );
+
+      default:
+        return null;
+    }
+  };
 
   const translations = i18n.languages.reduce<Translation[]>((acc, lang) => {
     const translationSlug = homePageTranslationSlugs
@@ -106,6 +129,15 @@ export default async function Home({ params }: Props) {
         <NewListnigs lang={params.lang} />
         <BenefitsBlock benefitsBlock={homePage.benefitsBlock} />
         <HowWeWorkBlock work={homePage.howWeWorkBlock} />
+        {homePage.contentBlocks?.length ? (
+          <div className="contentBlocks">
+            {homePage.contentBlocks.map(renderContentBlock)}
+          </div>
+        ) : null}
+
+        {homePage.faqSection && (
+          <FaqHomepage faqSection={homePage.faqSection} />
+        )}
         {homePage.faqSection && (
           <FaqHomepage faqSection={homePage.faqSection} />
         )}

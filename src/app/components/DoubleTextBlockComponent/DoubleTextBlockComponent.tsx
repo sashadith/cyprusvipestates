@@ -94,7 +94,7 @@ const DoubleTextBlockComponent: FC<Props> = ({ block }) => {
         )} */}
         <div className={styles.wrapper}>
           <div
-            className={styles.leftContent}
+            className={`${styles.leftContent} leftContent`}
             style={{
               paddingTop: computedPaddingTop,
               paddingBottom: computedPaddingBottom,
@@ -104,7 +104,7 @@ const DoubleTextBlockComponent: FC<Props> = ({ block }) => {
           </div>
           {block.isDivider && <div className={styles.divider} />}
           <div
-            className={styles.rightContent}
+            className={`${styles.rightContent} rightContent`}
             style={{
               paddingTop: computedPaddingTop,
               paddingBottom: computedPaddingBottom,

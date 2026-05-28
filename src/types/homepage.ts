@@ -1,4 +1,9 @@
-import { FaqBlock, ReviewsFullBlock } from "./blog";
+import {
+  DoubleTextBlock,
+  FaqBlock,
+  ReviewsFullBlock,
+  TextContent,
+} from "./blog";
 import { ImageAlt } from "./project";
 
 export type City = "Paphos" | "Limassol" | "Larnaca";
@@ -243,6 +248,7 @@ export type Homepage = {
   logosBlock: LogosBlock;
   parallaxImage: Image;
   benefitsBlock: BenefitsBlock;
+  contentBlocks?: Array<TextContent | DoubleTextBlock>;
   howWeWorkBlock: HowWeWorkBlock;
   faqSection?: FaqSection;
   reviewsFullBlock: ReviewsFullBlock;
