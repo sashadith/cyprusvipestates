@@ -156,6 +156,49 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const portableTextToPlainText = (blocks: any[] = []) => {
+  return blocks
+    .map((block) => {
+      if (!block.children) return "";
+
+      return block.children.map((child: any) => child.text || "").join("");
+    })
+    .join(" ")
+    .trim();
+};
+
+const getFaqItemsFromBlocks = (blocks: any[] = []) => {
+  return blocks.flatMap((block) => {
+    const faq =
+      block._type === "accordionBlock"
+        ? block
+        : block._type === "faqBlock"
+          ? block.faq
+          : block._type === "landingFaqBlock"
+            ? block.faq
+            : null;
+
+    if (!faq?.items?.length) return [];
+
+    return faq.items
+      .filter((item: any) => item.question && item.answer)
+      .map((item: any) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: portableTextToPlainText(item.answer),
+        },
+      }))
+      .filter(
+        (item: any) =>
+          item.name &&
+          item.acceptedAnswer.text &&
+          item.acceptedAnswer.text.length > 0,
+      );
+  });
+};
+
 const SinglePage = async ({ params }: Props) => {
   const { lang, slug } = params;
   const current = slug[slug.length - 1] || "";
@@ -195,6 +238,7 @@ const SinglePage = async ({ params }: Props) => {
     await getFormStandardDocumentByLang(lang);
 
   const allBlocks = page.contentBlocks || [];
+  const faqItems = getFaqItemsFromBlocks(allBlocks);
   const sdBlocks = allBlocks.filter(
     (b): b is ContactFullBlock | TeamBlock | LocationBlock | ReviewsFullBlock =>
       [
@@ -464,6 +508,18 @@ const SinglePage = async ({ params }: Props) => {
     <>
       <Header params={params} translations={translations} />
       <StructuredData {...structuredDataProps} />
+      {faqItems.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqItems,
+            }),
+          }}
+        />
+      )}
       <main>
         {page.previewImage && page.allowIntroBlock && (
           <>
