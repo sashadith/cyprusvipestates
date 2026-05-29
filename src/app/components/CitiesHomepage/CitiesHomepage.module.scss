@@ -53,14 +53,14 @@
 
   @media (min-width: 768px) {
     &:hover {
-    .image {
-      transform: scale(1.05);
+      .image {
+        transform: scale(1.05);
+      }
+      .cityName {
+        background: transparent;
+        color: #fff;
+      }
     }
-    .cityName {
-      background: transparent;
-      color: #fff;
-    }
-  }
   }
 }
 
