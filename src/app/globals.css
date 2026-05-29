@@ -563,4 +563,8 @@ strong {
     display: flex;
     align-items: center;
   }
+  p, li {
+    font-size: 1.1rem !important;
+    font-weight: 300 !important;
+  }
 }
