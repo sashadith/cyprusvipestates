@@ -632,6 +632,7 @@ export async function getBlogPostByLang(
         metaDescription
       },
       publishedAt,
+      _updatedAt,
       category->{
         _id,
         title,

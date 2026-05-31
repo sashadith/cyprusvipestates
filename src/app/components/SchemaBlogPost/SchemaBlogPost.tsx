@@ -1,5 +1,4 @@
 // app/components/SchemaBlogPost.tsx
-"use client";
 import Script from "next/script";
 import { urlFor } from "@/sanity/sanity.client";
 import { defaultLocale } from "@/i18n.config";
@@ -12,13 +11,10 @@ interface SchemaBlogPostProps {
 
 const siteUrl = "https://cyprusvipestates.com";
 
-const SchemaBlogPost: React.FC<SchemaBlogPostProps> = ({ blog, lang }) => {
-  // Собираем канонический URL
-  const slug = blog.slug[lang]?.current;
+const SchemaBlogPost = ({ blog, lang }: SchemaBlogPostProps) => {
+  const slug = blog.slug?.[lang]?.current;
 
-  if (!slug) {
-    return null;
-  }
+  if (!slug) return null;
 
   const url =
     lang === defaultLocale
@@ -26,43 +22,57 @@ const SchemaBlogPost: React.FC<SchemaBlogPostProps> = ({ blog, lang }) => {
       : `${siteUrl}/${lang}/blog/${slug}`;
 
   const imageUrl = blog.previewImage
-    ? urlFor(blog.previewImage).url()
+    ? urlFor(blog.previewImage).width(1200).height(630).url()
     : undefined;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${url}#blogposting`,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": url,
     },
     headline: blog.title,
-    description: blog.seo.metaDescription,
-    image: imageUrl ? [imageUrl] : undefined,
+    description: blog.seo?.metaDescription,
+    image: imageUrl
+      ? {
+          "@type": "ImageObject",
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+        }
+      : undefined,
+    articleSection: blog.category?.title,
     author: {
-      "@type": "Person",
-      name: "Cyprus VIP Estates", // или реальный автор
+      "@type": "RealEstateAgent",
+      name: "Cyprus VIP Estates",
+      url: siteUrl,
     },
     publisher: {
-      "@type": "Organization",
+      "@type": "RealEstateAgent",
       name: "Cyprus VIP Estates",
+      url: siteUrl,
       logo: {
         "@type": "ImageObject",
-        url: "https://cdn.sanity.io/files/88gk88s2/production/a4760263e2ce6e46536dbc5ea7dcb55a7b5516c7.png", // путь к логотипу
+        url: "https://cdn.sanity.io/files/88gk88s2/production/a4760263e2ce6e46536dbc5ea7dcb55a7b5516c7.png",
       },
     },
     datePublished: blog.publishedAt,
-    dateModified: blog.publishedAt,
+    dateModified: blog._updatedAt || blog.publishedAt,
+    inLanguage: lang,
+    isAccessibleForFree: true,
   };
 
   return (
     <Script
-      id="schema-blogpost"
+      id={`schema-blogpost-${lang}-${slug}`}
       type="application/ld+json"
       strategy="beforeInteractive"
-    >
-      {JSON.stringify(jsonLd)}
-    </Script>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLd),
+      }}
+    />
   );
 };
 
