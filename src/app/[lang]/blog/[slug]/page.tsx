@@ -40,6 +40,7 @@ import ProjectsSectionSlider from "@/app/components/ProjectsSectionSlider/Projec
 import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
 import LinkedInConversionTracker from "@/app/components/LinkedInConversionTracker/LinkedInConversionTracker";
+import BlogAuthor from "@/app/components/BlogAuthor/BlogAuthor";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -207,6 +208,7 @@ const PagePost = async ({ params }: Props) => {
                 date={blog.publishedAt}
                 previewImage={blog.previewImage}
               />
+              {blog.author && <BlogAuthor author={blog.author} />}
               <article>
                 {blog.contentBlocks.map((block) => renderContentBlock(block))}
               </article>

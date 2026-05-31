@@ -40,6 +40,7 @@ import landingProjectsBlock from "./landingProjectsBlock";
 import landingFaqBlock from "./landingFaqBlock";
 import notFoundPage from "./notFoundPage";
 import landingTextStart from "./landingTextStart";
+import author from "./author";
 
 export const schemaTypes = [
   header,
@@ -82,6 +83,7 @@ export const schemaTypes = [
   howWeWorkBlock,
   bulletsBlock,
   developer,
+  author,
   docFile,
   localizedSlug,
 ];

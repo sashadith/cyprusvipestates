@@ -638,6 +638,22 @@ export async function getBlogPostByLang(
         title,
         slug
       },
+      author->{
+        _id,
+        name,
+        position,
+        specialization,
+        bio,
+        linkedin,
+        language,
+        image {
+          asset->{
+            _id,
+            url
+          },
+          alt
+        }
+      },
       previewImage {
         asset->{
           _id,

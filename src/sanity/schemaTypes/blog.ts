@@ -52,6 +52,22 @@ const blog = {
       },
     }),
     defineField({
+      name: "author",
+      title: "Author",
+      type: "reference",
+      to: [{ type: "author" }],
+      options: {
+        filter: ({ document }) => {
+          return {
+            filter: "language == $language",
+            params: {
+              language: document.language,
+            },
+          };
+        },
+      },
+    }),
+    defineField({
       name: "previewImage",
       title: "Preview Image",
       type: "image",

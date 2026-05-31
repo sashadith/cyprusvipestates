@@ -1,3 +1,4 @@
+import { Author } from "./author";
 import { FormStandardDocument } from "./formStandardDocument";
 import { navLink } from "./header";
 import { BenefitsBlock } from "./homepage";
@@ -364,6 +365,7 @@ export type Blog = {
   seo: Seo;
   publishedAt: string;
   category: Category;
+  author: Author;
   previewImage: ImageAlt;
   excerpt: string;
   contentBlocks: Array<

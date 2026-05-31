@@ -25,10 +25,36 @@ const SchemaBlogPost = ({ blog, lang }: SchemaBlogPostProps) => {
     ? urlFor(blog.previewImage).width(1200).height(630).url()
     : undefined;
 
+  const authorSchema = blog.author
+    ? {
+        "@type": "Person",
+        name: blog.author.name,
+        ...(blog.author.position && {
+          jobTitle: blog.author.position,
+        }),
+        ...(blog.author.bio && {
+          description: blog.author.bio,
+        }),
+        ...(blog.author.image && {
+          image: urlFor(blog.author.image).width(300).height(300).url(),
+        }),
+        ...(blog.author.linkedin && {
+          sameAs: [blog.author.linkedin],
+        }),
+        ...(blog.author.specialization?.length && {
+          knowsAbout: blog.author.specialization,
+        }),
+      }
+    : {
+        "@type": "Organization",
+        name: "Cyprus VIP Estates",
+        url: siteUrl,
+      };
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": `${url}#blogposting`,
+    "@type": "Article",
+    "@id": `${url}#article`,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": url,
@@ -44,11 +70,7 @@ const SchemaBlogPost = ({ blog, lang }: SchemaBlogPostProps) => {
         }
       : undefined,
     articleSection: blog.category?.title,
-    author: {
-      "@type": "RealEstateAgent",
-      name: "Cyprus VIP Estates",
-      url: siteUrl,
-    },
+    author: authorSchema,
     publisher: {
       "@type": "RealEstateAgent",
       name: "Cyprus VIP Estates",
@@ -66,7 +88,7 @@ const SchemaBlogPost = ({ blog, lang }: SchemaBlogPostProps) => {
 
   return (
     <Script
-      id={`schema-blogpost-${lang}-${slug}`}
+      id={`schema-article-${lang}-${slug}`}
       type="application/ld+json"
       strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
