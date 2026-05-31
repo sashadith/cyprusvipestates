@@ -55,7 +55,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: data?.seo.metaTitle,
       description: data?.seo.metaDescription,
-      images: previewImageUrl ? [{ url: previewImageUrl }] : [],
+      url:
+        lang === "de"
+          ? `https://cyprusvipestates.com/projects/${slug}`
+          : `https://cyprusvipestates.com/${lang}/projects/${slug}`,
+      siteName: "Cyprus VIP Estates",
+      locale: lang,
+      type: "website",
+      images: previewImageUrl
+        ? [
+            {
+              url: previewImageUrl,
+              width: 1200,
+              height: 630,
+              alt: data?.title,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data?.seo.metaTitle,
+      description: data?.seo.metaDescription,
+      images: previewImageUrl ? [previewImageUrl] : [],
     },
   };
 }

@@ -42,6 +42,7 @@ import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlock
 import LinkedInConversionTracker from "@/app/components/LinkedInConversionTracker/LinkedInConversionTracker";
 import BlogAuthor from "@/app/components/BlogAuthor/BlogAuthor";
 import RelatedArticle from "@/app/components/RelatedArticle/RelatedArticle";
+import { urlFor } from "@/sanity/sanity.client";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -52,9 +53,45 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = params;
   const data = await getBlogPostByLang(lang, slug);
 
+  const previewImageUrl = data?.previewImage
+    ? urlFor(data.previewImage).width(1200).height(630).url()
+    : undefined;
+
+  const url =
+    lang === "de"
+      ? `https://cyprusvipestates.com/blog/${slug}`
+      : `https://cyprusvipestates.com/${lang}/blog/${slug}`;
+
   return {
     title: data?.seo.metaTitle,
     description: data?.seo.metaDescription,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: data?.seo.metaTitle,
+      description: data?.seo.metaDescription,
+      url,
+      siteName: "Cyprus VIP Estates",
+      locale: lang,
+      type: "article",
+      images: previewImageUrl
+        ? [
+            {
+              url: previewImageUrl,
+              width: 1200,
+              height: 630,
+              alt: data?.title,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data?.seo.metaTitle,
+      description: data?.seo.metaDescription,
+      images: previewImageUrl ? [previewImageUrl] : [],
+    },
   };
 }
 
@@ -244,7 +281,9 @@ const PagePost = async ({ params }: Props) => {
                     ? "Powiązane artykuły"
                     : lang === "ru"
                       ? "Похожие статьи"
-                      : "Related Articles"}
+                      : lang === "de"
+                        ? "Ähnliche Artikel"
+                        : "Related Articles"}
               </h2>
               <div className="related-articles-list">
                 {blog.relatedArticles.map((article: RelatedArticleType) => (
