@@ -3,13 +3,15 @@
   border-radius: 5px;
   // background-color: #e5e7eb;
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 10px 20px 10px 10px;
+  max-width: 700px;
+  margin: 0 auto;
 
 }
 
 .authorWrapper {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 90px 1fr;
   gap: 20px;
   overflow: hidden;
 }
@@ -34,9 +36,15 @@
   font-weight: 300;
 }
 
+.authorDataWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
 .authorName {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .authorPosition {
@@ -46,12 +54,13 @@
 }
 
 .authorBio {
-  font-size: 0.95rem;
-  max-width: 650px;
+  font-size: 0.8rem;
 }
 
 .authorLinkedin {
   margin-top: 10px;
   font-size: 0.9rem;
   text-decoration: none;
+  width: fit-content;
+  color: var(--corp-color);
 }

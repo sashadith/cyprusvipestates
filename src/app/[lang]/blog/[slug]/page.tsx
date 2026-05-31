@@ -21,6 +21,7 @@ import {
   FormMinimalBlock,
   ProjectsSectionBlock,
   TableBlock,
+  RelatedArticle as RelatedArticleType,
 } from "@/types/blog";
 import { FormStandardDocument } from "@/types/formStandardDocument";
 import { Metadata } from "next";
@@ -31,7 +32,6 @@ import ContactFullBlockComponent from "@/app/components/ContactFullBlockComponen
 import ImageFullBlockComponent from "@/app/components/ImageFullBlockComponent/ImageFullBlockComponent";
 import ButtonBlockComponent from "@/app/components/ButtonBlockComponent/ButtonBlockComponent";
 import FormMinimalBlockComponent from "@/app/components/FormMinimalBlockComponent/FormMinimalBlockComponent";
-import PopularProperties from "@/app/components/PopularProperties/PopularProperties";
 import FormStatic from "@/app/components/FormStatic/FormStatic";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import BreadcrumbsBlog from "@/app/components/BreadcrumbsBlog/BreadcrumbsBlog";
@@ -41,6 +41,7 @@ import WhatsAppButton from "@/app/components/WhatsAppButton/WhatsAppButton";
 import TableBlockComponent from "@/app/components/TableBlockComponent/TableBlockComponent";
 import LinkedInConversionTracker from "@/app/components/LinkedInConversionTracker/LinkedInConversionTracker";
 import BlogAuthor from "@/app/components/BlogAuthor/BlogAuthor";
+import RelatedArticle from "@/app/components/RelatedArticle/RelatedArticle";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -200,46 +201,65 @@ const PagePost = async ({ params }: Props) => {
       <main>
         <LinkedInConversionTracker conversionId={27871521} />
         <div className="container">
-          <div className="post-grid">
-            <div className="post-content">
-              <BlogIntro
-                title={blog.title}
-                categoryTitle={blog.category.title}
-                date={blog.publishedAt}
-                previewImage={blog.previewImage}
-              />
-              {blog.author && <BlogAuthor author={blog.author} />}
-              <article>
-                {blog.contentBlocks.map((block) => renderContentBlock(block))}
-              </article>
-              {/* <BlogButtonWrapper>
+          {/* <div className="post-grid"> */}
+          <div className="post-content">
+            <BlogIntro
+              title={blog.title}
+              categoryTitle={blog.category.title}
+              date={blog.publishedAt}
+              previewImage={blog.previewImage}
+            />
+            {blog.author && <BlogAuthor author={blog.author} />}
+            <article>
+              {blog.contentBlocks.map((block) => renderContentBlock(block))}
+            </article>
+            {/* <BlogButtonWrapper>
                 <LinkPrimary href={`/${lang}/blog`}>
                   {lang === "en"
                     ? "Back to all articles"
                     : "Вернуться ко всем статьям"}
                 </LinkPrimary>
               </BlogButtonWrapper> */}
-            </div>
-            <div className="post-content sidebar">
-              <aside className="aside">
-                {blog.videoBlock &&
-                  blog.videoBlock.videoId &&
-                  blog.videoBlock.posterImage && (
-                    <BlogVideo
-                      videoId={blog.videoBlock.videoId}
-                      posterImage={blog.videoBlock.posterImage}
-                      title={blog.title}
-                    />
-                  )}
-              </aside>
-              {blog.popularProperties && (
-                <PopularProperties
-                  lang={lang}
-                  popularProperties={blog.popularProperties}
-                />
-              )}
-            </div>
           </div>
+          <div className="post-content sidebar">
+            <aside className="aside">
+              {blog.videoBlock &&
+                blog.videoBlock.videoId &&
+                blog.videoBlock.posterImage && (
+                  <BlogVideo
+                    videoId={blog.videoBlock.videoId}
+                    posterImage={blog.videoBlock.posterImage}
+                    title={blog.title}
+                  />
+                )}
+            </aside>
+          </div>
+          {/* </div> */}
+          {blog.relatedArticles && blog.relatedArticles.length > 0 && (
+            <div className="related-articles-section">
+              <h2 className="h2-white">
+                {lang === "en"
+                  ? "Related Articles"
+                  : lang === "pl"
+                    ? "Powiązane artykuły"
+                    : lang === "ru"
+                      ? "Похожие статьи"
+                      : "Related Articles"}
+              </h2>
+              <div className="related-articles-list">
+                {blog.relatedArticles.map((article: RelatedArticleType) => (
+                  <RelatedArticle
+                    key={article._id}
+                    title={article.title}
+                    category={article.category}
+                    slug={article.slug}
+                    previewImage={article.previewImage}
+                    lang={lang}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
           {/* <LastArticles params={{ lang, id: currentPostId }} /> */}
         </div>
         <FormStatic lang={params.lang} />

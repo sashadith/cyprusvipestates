@@ -31,22 +31,29 @@ const BlogAuthor: FC<Props> = ({ author }) => {
         </div>
 
         <div className={styles.authorInfo}>
-          <h2 className={styles.authorName}>{name}</h2>
-
-          {position && <p className={styles.authorPosition}>{position}</p>}
-
+          <div className={styles.authorData}>
+            <div className={styles.authorDataWrapper}>
+              <div className={styles.authorDataLeft}>
+                <h2 className={styles.authorName}>{name}</h2>
+                {position && (
+                  <p className={styles.authorPosition}>{position}</p>
+                )}
+              </div>
+              <div className={styles.authorDataRight}>
+                {linkedin && (
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.authorLinkedin}
+                  >
+                    LinkedIn
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
           {bio && <p className={styles.authorBio}>{bio}</p>}
-
-          {linkedin && (
-            <a
-              href={linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.authorLinkedin}
-            >
-              LinkedIn
-            </a>
-          )}
         </div>
       </div>
     </section>

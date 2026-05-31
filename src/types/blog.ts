@@ -381,6 +381,7 @@ export type Blog = {
   videoBlock: VideoBlock;
   popularProperties: navLink[];
   _updatedAt?: string;
+  relatedArticles: RelatedArticle[];
   language: string;
   slug: {
     [lang: string]: {

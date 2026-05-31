@@ -154,6 +154,38 @@ const blog = {
       ],
     }),
     defineField({
+      name: "relatedArticles",
+      title: "Related Articles",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "blog" }, { type: "singlepage" }],
+          options: {
+            filter: ({ document }) => {
+              const id = document._id;
+
+              // черновик и публикация
+              const draftId = id.startsWith("drafts.") ? id : `drafts.${id}`;
+              const publishedId = id.replace(/^drafts\./, "");
+
+              return {
+                filter: `
+              language == $language &&
+              !(_id in [$draftId, $publishedId])
+            `,
+                params: {
+                  language: document.language,
+                  draftId,
+                  publishedId,
+                },
+              };
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "language",
       type: "string",
       initialValue: "id",

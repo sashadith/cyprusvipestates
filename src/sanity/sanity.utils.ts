@@ -809,6 +809,27 @@ export async function getBlogPostByLang(
         label,
         link
       },
+      relatedArticles[]->{
+        _id,
+        title,
+        category->{
+          _id,
+          _type,
+          title,
+          slug,
+          language
+        },
+        slug,
+        publishedAt,
+        previewImage{
+          alt,
+          asset->{
+            _id,
+            url,
+            metadata { dimensions { width, height } }
+          }
+        }
+      },
       language,
       "_translations": *[
         _type == "translation.metadata" &&
