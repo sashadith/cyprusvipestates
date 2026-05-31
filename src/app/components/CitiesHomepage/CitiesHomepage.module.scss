@@ -75,8 +75,8 @@
   font-style: normal;
   font-weight: 400;
   padding: 0.625rem 1.25rem;
-  background: #c09d75;
-  border: 2px solid #c09d75;
+  background: var(--corp-color);
+  border: 2px solid var(--corp-color);
   text-transform: uppercase;
   transition: background 0.3s, color 0.3s;
 }
