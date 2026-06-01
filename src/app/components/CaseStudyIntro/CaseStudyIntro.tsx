@@ -38,6 +38,17 @@ const CaseStudyIntro: FC<Props> = ({
   lang,
   isSold,
 }) => {
+  const disclaimer =
+    lang === "en"
+      ? "Client privacy comes first, which is why sensitive business information and identifying details are not disclosed in this case study."
+      : lang === "de"
+        ? "Der Schutz der Privatsphäre unserer Kunden hat höchste Priorität. Daher werden in dieser Fallstudie keine vertraulichen Geschäftsinformationen oder identifizierenden Angaben offengelegt."
+        : lang === "pl"
+          ? "Prywatność klientów jest dla nas priorytetem, dlatego w tym studium przypadku nie ujawniamy poufnych informacji biznesowych ani danych umożliwiających identyfikację klienta."
+          : lang === "ru"
+            ? "Конфиденциальность клиентов для нас на первом месте, поэтому в данном кейсе не раскрываются чувствительные бизнес-данные и сведения, позволяющие идентифицировать клиента."
+            : "Client privacy comes first, which is why sensitive business information and identifying details are not disclosed in this case study.";
+
   return (
     <section className={styles.popertyIntro}>
       <div className={styles.overlay}></div>
@@ -66,6 +77,7 @@ const CaseStudyIntro: FC<Props> = ({
               </ButtonModal>
             </div>
           </div>
+          <p className={styles.disclaimer}>{disclaimer}</p>
         </div>
       </div>
     </section>
