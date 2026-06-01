@@ -1,6 +1,6 @@
 const websiteUrl = "https://cyprusvipestates.com";
 
-const sitemaps = ["projects", "blog", "pages", "developers"];
+const sitemaps = ["projects", "blog", "pages", "developers", "case-studies"];
 
 function escapeXml(value: string) {
   return value

@@ -3,11 +3,18 @@ import {
   getAllDevelopersByLang,
   getAllPathsForLang,
   getBlogPostsByLang,
+  getCaseStudiesByLang,
 } from "@/sanity/sanity.utils";
 
 const websiteUrl = "https://cyprusvipestates.com";
 const langs = ["de", "pl", "en", "ru"] as const;
-const sitemapTypes = ["projects", "blog", "pages", "developers"] as const;
+const sitemapTypes = [
+  "projects",
+  "blog",
+  "pages",
+  "developers",
+  "case-studies",
+] as const;
 
 type Lang = (typeof langs)[number];
 type SitemapType = (typeof sitemapTypes)[number];
@@ -178,10 +185,42 @@ async function generatePagesSitemap(): Promise<SitemapPage[]> {
   return pages;
 }
 
+async function generateCaseStudiesSitemap(): Promise<SitemapPage[]> {
+  const pages: SitemapPage[] = [];
+
+  for (const lang of langs) {
+    const isDefault = lang === "de";
+    const prefix = isDefault ? "" : `/${lang}`;
+
+    pages.push({
+      route: `${prefix}/case-studies`,
+      changefreq: "weekly",
+      priority: 0.8,
+    });
+
+    const caseStudies = await getCaseStudiesByLang(lang);
+
+    caseStudies.forEach((caseStudy) => {
+      const slug = caseStudy.slug?.[lang]?.current;
+      if (!slug) return;
+
+      pages.push({
+        route: `${prefix}/case-studies/${slug}`,
+        changefreq: "weekly",
+        priority: 0.7,
+        lastmod: caseStudy._updatedAt,
+      });
+    });
+  }
+
+  return pages;
+}
+
 async function generateSitemap(type: SitemapType) {
   if (type === "projects") return generateProjectsSitemap();
   if (type === "developers") return generateDevelopersSitemap();
   if (type === "blog") return generateBlogSitemap();
+  if (type === "case-studies") return generateCaseStudiesSitemap();
   if (type === "pages") return generatePagesSitemap();
 
   return [];

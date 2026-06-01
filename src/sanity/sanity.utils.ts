@@ -13,6 +13,7 @@ import { Developer } from "@/types/developer";
 import { Blog } from "@/types/blog";
 import { BlogPage } from "@/types/blogPage";
 import { NotFoundPage } from "@/types/notFoundPage";
+import { CaseStudy } from "@/types/caseStudy";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -965,6 +966,350 @@ export async function getTotalBlogPostsByLang(lang: string): Promise<number> {
   return total;
 }
 // === Blog Posts Count ===
+
+// === Case Study Page ===
+export async function getCaseStudyByLang(
+  lang: string,
+  slug: string,
+): Promise<CaseStudy | null> {
+  const caseStudyQuery = groq`
+    *[
+      _type == "caseStudy" &&
+      language == $lang &&
+      slug[$lang].current == $slug
+    ][0] {
+      _id,
+      _type,
+      title,
+      slug,
+      seo,
+      category,
+      fullTitle,
+      excerpt,
+      clientOverview,
+      previewImage {
+        asset->{
+          _id,
+          url,
+          metadata { dimensions { width, height } }
+        },
+        alt
+      },
+      caseDetails,
+      keyResults,
+      mainContent[] {
+        _type == "textContent" => {
+          _key,
+          _type,
+          backgroundColor,
+          paddingVertical,
+          paddingHorizontal,
+          marginTop,
+          marginBottom,
+          textAlign,
+          textColor,
+          backgroundFull,
+          content[] {
+            ...,
+            _type == "image" => {
+              _key,
+              _type,
+              alt,
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+          }
+        },
+        _type == "doubleTextBlock" => {
+          _key,
+          _type,
+          doubleTextBlockTitle,
+          leftContent {
+            type,
+            blockContent {
+              ...,
+              content[] {
+                ...,
+                _type == "image" => {
+                  _key,
+                  _type,
+                  alt,
+                  asset->{
+                    _id,
+                    url,
+                    metadata { dimensions { width, height } }
+                  }
+                }
+              }
+            },
+            image {
+              ...,
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+          },
+          rightContent {
+            type,
+            blockContent {
+              ...,
+              content[] {
+                ...,
+                _type == "image" => {
+                  _key,
+                  _type,
+                  alt,
+                  asset->{
+                    _id,
+                    url,
+                    metadata { dimensions { width, height } }
+                  }
+                }
+              }
+            },
+            image {
+              ...,
+              asset->{
+                _id,
+                url,
+                metadata { dimensions { width, height } }
+              }
+            }
+          },
+          isDivider,
+          marginTop,
+          marginBottom,
+          paddingTop,
+          paddingBottom
+        },
+        _type == "imageFullBlock" => {
+          _key,
+          _type,
+          image {
+            ...,
+            asset->{
+              _id,
+              url,
+              metadata { dimensions { width, height } }
+            }
+          },
+          marginTop,
+          marginBottom
+        },
+        _type == "formMinimalBlock" => {
+          _key,
+          _type,
+          title,
+          buttonText,
+          form->{
+            _id,
+            _type,
+            language,
+            form{
+              inputName,
+              inputSurname,
+              inputPhone,
+              inputCountry,
+              inputEmail,
+              inputMessage,
+              buttonText,
+              agreementText,
+              agreementLinkLabel,
+              agreementLinkDestination,
+              validationNameRequired,
+              validationSurnameRequired,
+              validationNameTooShort,
+              validationSurnameTooShort,
+              validationNameTooLong,
+              validationSurnameTooLong,
+              validationPhoneRequired,
+              validationPhoneTooShort,
+              validationPhoneTooLong,
+              validationPhoneInvalid,
+              validationCountryRequired,
+              validationEmailRequired,
+              validationEmailInvalid,
+              validationMessageRequired,
+              validationAgreementRequired,
+              validationAgreementOneOf,
+              successMessage,
+              errorMessage,
+              spamBlockedMessage
+            }
+          },
+          marginTop,
+          marginBottom
+        },
+        _type != "textContent" &&
+        _type != "doubleTextBlock" &&
+        _type != "imageFullBlock" &&
+        _type != "formMinimalBlock" => @
+      },
+      relatedProjects[]->{
+        _id,
+        title,
+        excerpt,
+        "slug": slug[$lang].current,
+        previewImage {
+          asset->{
+            _id,
+            url,
+            metadata { dimensions { width, height } }
+          },
+          alt
+        },
+        keyFeatures,
+        isSold
+      },
+      publishedAt,
+      _updatedAt,
+      language,
+      "_translations": *[
+        _type == "translation.metadata" &&
+        references(^._id)
+      ].translations[].value->{
+        slug
+      }
+    }
+  `;
+
+  return await client.fetch(
+    caseStudyQuery,
+    { lang, slug },
+    {
+      next: {
+        revalidate: 60,
+      },
+    },
+  );
+}
+// === Case Study Page ===
+
+// === Case Studies All ===
+export async function getCaseStudiesByLang(lang: string): Promise<CaseStudy[]> {
+  const caseStudiesQuery = groq`
+    *[
+      _type == "caseStudy" &&
+      language == $lang &&
+      defined(slug[$lang].current) &&
+      !(_id match "drafts.*")
+    ] | order(_updatedAt desc) {
+      _id,
+      _type,
+      _updatedAt,
+      title,
+      slug,
+      seo,
+      category,
+      excerpt,
+      clientOverview,
+      previewImage {
+        asset->{
+          _id,
+          url,
+          metadata { dimensions { width, height } }
+        },
+        alt
+      },
+      keyResults,
+      publishedAt,
+      language,
+      "_translations": *[
+        _type == "translation.metadata" &&
+        references(^._id)
+      ].translations[].value->{
+        slug
+      }
+    }
+  `;
+
+  return await client.fetch(
+    caseStudiesQuery,
+    { lang },
+    {
+      next: {
+        revalidate: 60,
+      },
+    },
+  );
+}
+// === Case Studies All ===
+
+// === Case Studies with Pagination ===
+export async function getCaseStudiesByLangWithPagination(
+  lang: string,
+  limit: number,
+  offset: number,
+): Promise<CaseStudy[]> {
+  const caseStudiesQuery = groq`
+    *[
+      _type == "caseStudy" &&
+      language == $lang &&
+      defined(slug[$lang].current) &&
+      !(_id match "drafts.*")
+    ] | order(_updatedAt desc)[$offset...$offset + $limit] {
+      _id,
+      _type,
+      title,
+      excerpt,
+      slug,
+      previewImage {
+        asset->{
+          _id,
+          url,
+          metadata { dimensions { width, height } }
+        },
+        alt
+      },
+      category,
+      clientOverview,
+      publishedAt,
+      _updatedAt,
+      language,
+      "_translations": *[
+        _type == "translation.metadata" &&
+        references(^._id)
+      ].translations[].value->{
+        slug
+      }
+    }
+  `;
+
+  const caseStudies = await client.fetch(
+    caseStudiesQuery,
+    { lang, limit, offset },
+    {
+      next: {
+        revalidate: 60,
+      },
+    },
+  );
+
+  return caseStudies;
+}
+// === Case Studies with Pagination ===
+
+// === Case Studies Count ===
+export async function getTotalCaseStudiesByLang(lang: string): Promise<number> {
+  const totalCaseStudiesQuery = groq`
+    count(*[
+      _type == "caseStudy" &&
+      language == $lang &&
+      defined(slug[$lang].current) &&
+      !(_id match "drafts.*")
+    ])
+  `;
+
+  const total = await client.fetch(totalCaseStudiesQuery, { lang });
+
+  return total;
+}
+// === Case Studies Count ===
 
 export async function getPropertyByLang(
   lang: string,
