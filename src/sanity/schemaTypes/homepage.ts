@@ -581,6 +581,60 @@ export default defineType({
       of: [{ type: "textContent" }, { type: "doubleTextBlock" }],
     }),
     defineField({
+      name: "featuredCaseStudiesBlock",
+      title: "Featured Case Studies Block",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Title",
+          type: "string",
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "text",
+          rows: 5,
+        }),
+        defineField({
+          name: "caseStudies",
+          title: "Case Studies",
+          type: "array",
+          of: [
+            defineArrayMember({
+              name: "caseStudyRef",
+              title: "Case Study Reference",
+              type: "reference",
+              to: [{ type: "caseStudy" }],
+              options: {
+                filter: ({ document }) => ({
+                  filter: "language == $language",
+                  params: { language: document.language },
+                }),
+              },
+            }),
+          ],
+        }),
+        defineField({
+          name: "button",
+          title: "Button",
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              title: "Label",
+              type: "string",
+            }),
+            defineField({
+              name: "url",
+              title: "URL",
+              type: "string",
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: "faqSection",
       title: "FAQ Section",
       type: "object",
@@ -632,60 +686,6 @@ export default defineType({
                 }),
               ],
             },
-          ],
-        }),
-      ],
-    }),
-    defineField({
-      name: "featuredCaseStudiesBlock",
-      title: "Featured Case Studies Block",
-      type: "object",
-      fields: [
-        defineField({
-          name: "title",
-          title: "Title",
-          type: "string",
-        }),
-        defineField({
-          name: "description",
-          title: "Description",
-          type: "text",
-          rows: 5,
-        }),
-        defineField({
-          name: "caseStudies",
-          title: "Case Studies",
-          type: "array",
-          of: [
-            defineArrayMember({
-              name: "caseStudyRef",
-              title: "Case Study Reference",
-              type: "reference",
-              to: [{ type: "caseStudy" }],
-              options: {
-                filter: ({ document }) => ({
-                  filter: "language == $language",
-                  params: { language: document.language },
-                }),
-              },
-            }),
-          ],
-        }),
-        defineField({
-          name: "button",
-          title: "Button",
-          type: "object",
-          fields: [
-            defineField({
-              name: "label",
-              title: "Label",
-              type: "string",
-            }),
-            defineField({
-              name: "url",
-              title: "URL",
-              type: "string",
-            }),
           ],
         }),
       ],
