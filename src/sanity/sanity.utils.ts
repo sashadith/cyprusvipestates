@@ -14,6 +14,7 @@ import { Blog } from "@/types/blog";
 import { BlogPage } from "@/types/blogPage";
 import { NotFoundPage } from "@/types/notFoundPage";
 import { CaseStudy } from "@/types/caseStudy";
+import { CaseStudiesPage } from "@/types/caseStudiesPage";
 
 export async function getHeaderByLang(lang: string): Promise<Header> {
   const headerQuery = groq`*[_type == "header" && language == $lang][0] {
@@ -1293,6 +1294,43 @@ export async function getCaseStudiesByLangWithPagination(
   return caseStudies;
 }
 // === Case Studies with Pagination ===
+
+// === Case Studies All ===
+export async function getCaseStudiesPageByLang(
+  lang: string,
+): Promise<CaseStudiesPage> {
+  const query = groq`
+    *[
+      _type == "caseStudiesPage" &&
+      language == $lang
+    ][0]{
+      _id,
+      title,
+      metaTitle,
+      metaDescription,
+      content,
+      language,
+
+      "_translations": *[
+        _type == "translation.metadata" &&
+        references(^._id)
+      ].translations[].value->{
+        slug
+      }
+    }
+  `;
+
+  return client.fetch(
+    query,
+    { lang },
+    {
+      next: {
+        revalidate: 60,
+      },
+    },
+  );
+}
+// === Case Studies All ===
 
 // === Case Studies Count ===
 export async function getTotalCaseStudiesByLang(lang: string): Promise<number> {

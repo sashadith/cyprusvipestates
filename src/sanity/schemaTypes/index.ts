@@ -42,6 +42,7 @@ import notFoundPage from "./notFoundPage";
 import landingTextStart from "./landingTextStart";
 import author from "./author";
 import caseStudy from "./caseStudy";
+import caseStudiesPage from "./caseStudiesPage";
 
 export const schemaTypes = [
   header,
@@ -52,6 +53,7 @@ export const schemaTypes = [
   blog,
   blogPage,
   caseStudy,
+  caseStudiesPage,
   category,
   propertiesPage,
   property,
