@@ -82,6 +82,38 @@ export async function getHomePageByLang(lang: string): Promise<Homepage> {
         }
       }
     },
+    featuredCaseStudiesBlock{
+      title,
+      description,
+      caseStudies[]->{
+        _id,
+        _type,
+        title,
+        excerpt,
+        category,
+        clientOverview,
+        slug,
+        previewImage{
+          asset->{
+            _id,
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+          alt
+        },
+        publishedAt,
+        _updatedAt
+      },
+      button{
+        label,
+        url
+      },
+    },
     citiesBlock,
     homepageTitle,
     aboutBlock,

@@ -5,6 +5,7 @@ import {
   TextContent,
 } from "./blog";
 import { ImageAlt } from "./project";
+import { CaseStudy } from "./caseStudy";
 
 export type City = "Paphos" | "Limassol" | "Larnaca";
 export type PropertyType = "Apartment" | "Villa";
@@ -246,6 +247,16 @@ export type CitiesBlock = {
   cities: CitiesBlockItem[];
 };
 
+export type FeaturedCaseStudiesBlock = {
+  title?: string;
+  description?: string;
+  caseStudies?: CaseStudy[];
+  button?: {
+    label?: string;
+    url?: string;
+  };
+};
+
 export type Homepage = {
   _type: "homepage";
   _id: string;
@@ -267,6 +278,7 @@ export type Homepage = {
   contentBlocks?: Array<TextContent | DoubleTextBlock>;
   howWeWorkBlock: HowWeWorkBlock;
   faqSection?: FaqSection;
+  featuredCaseStudiesBlock?: FeaturedCaseStudiesBlock;
   reviewsFullBlock: ReviewsFullBlock;
   reviewsBlock: ReviewsBlock;
   language: string;

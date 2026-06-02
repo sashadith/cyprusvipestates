@@ -34,6 +34,7 @@ import { DoubleTextBlock, TextContent } from "@/types/blog";
 import TextContentComponent from "../components/TextContentComponent/TextContentComponent";
 import DoubleTextBlockComponent from "../components/DoubleTextBlockComponent/DoubleTextBlockComponent";
 import CitiesHomepage from "../components/CitiesHomepage/CitiesHomepage";
+import FeaturedCaseStudies from "../components/FeaturedCaseStudies/FeaturedCaseStudies";
 
 type Props = {
   params: { lang: string; slug: string };
@@ -138,7 +139,12 @@ export default async function Home({ params }: Props) {
             {homePage.contentBlocks.map(renderContentBlock)}
           </div>
         ) : null}
-
+        {homePage.featuredCaseStudiesBlock && (
+          <FeaturedCaseStudies
+            block={homePage.featuredCaseStudiesBlock}
+            lang={params.lang}
+          />
+        )}
         {homePage.faqSection && (
           <FaqHomepage faqSection={homePage.faqSection} />
         )}
