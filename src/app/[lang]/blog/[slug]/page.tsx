@@ -99,6 +99,8 @@ const PagePost = async ({ params }: Props) => {
   const { lang, slug } = params;
   const blog = await getBlogPostByLang(lang, slug);
 
+  // console.log(JSON.stringify(blog.relatedArticles, null, 2));
+
   if (!blog) {
     notFound();
   }

@@ -34,6 +34,9 @@ export interface ContactFormProps {
   lang: string;
 }
 
+const consultantImage =
+  "https://cdn.sanity.io/files/88gk88s2/production/50b0d355d8507f9aadbe785a65e8a7233dd8f2e6.png";
+
 const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
   const uid = useId();
   const [message, setMessage] = useState<string | null>(null);
@@ -253,205 +256,200 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
 
           return (
             <Form>
-              <div className={styles.form}>
+              <section className={styles.form}>
                 <div className="container">
-                  <h2 className={styles.title}>
-                    {lang === "ru"
-                      ? "Оставьте заявку и мы свяжемся с вами в ближайшее время"
-                      : lang === "de"
-                        ? "Lassen Sie sich von uns beraten"
-                        : lang === "pl"
-                          ? "Zostaw zapytanie, a my skontaktujemy się z Tobą wkrótce"
-                          : "Leave your request and we will contact you shortly"}
-                  </h2>
-
                   <div className={styles.formWrapper}>
-                    <div className={styles.inputs}>
-                      <div className={styles.inputWrapper}>
-                        <svg
-                          className={styles.icon}
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="#bd8948"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
-                        </svg>
+                    <div className={styles.formContent}>
+                      <h2 className={styles.title}>
+                        {lang === "ru"
+                          ? "Оставьте заявку и мы свяжемся с вами в ближайшее время"
+                          : lang === "de"
+                            ? "Lassen Sie sich noch heute von uns beraten!"
+                            : lang === "pl"
+                              ? "Zostaw zapytanie, a my skontaktujemy się z Tobą wkrótce"
+                              : "Leave your request and we will contact you shortly"}
+                      </h2>
 
-                        <label
-                          htmlFor={`${uid}-name`}
-                          className={`${styles.label} ${
-                            isNameFilled ? styles.filled : ""
-                          }`}
-                        >
-                          {lang === "ru"
-                            ? "Ваше имя"
-                            : lang === "de"
-                              ? "Ihr Name"
-                              : lang === "pl"
-                                ? "Imię"
-                                : "Your name"}
-                        </label>
+                      <div className={styles.inputs}>
+                        <div className={styles.inputWrapper}>
+                          <svg
+                            className={styles.icon}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="#bd8948"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                          </svg>
+                          <label
+                            htmlFor={`${uid}-name`}
+                            className={`${styles.label} ${
+                              isNameFilled ? styles.filled : ""
+                            }`}
+                          >
+                            {lang === "ru"
+                              ? "Ваше имя"
+                              : lang === "de"
+                                ? "Ihr Vorname"
+                                : lang === "pl"
+                                  ? "Imię"
+                                  : "Your name"}
+                          </label>
 
-                        <Field name="name">
-                          {({ field }: any) => (
-                            <input
-                              {...field}
-                              id={`${uid}-name`}
-                              type="text"
-                              autoComplete="given-name"
-                              className={styles.inputField}
-                              onBlur={field.onBlur}
-                            />
-                          )}
-                        </Field>
+                          <Field name="name">
+                            {({ field }: any) => (
+                              <input
+                                {...field}
+                                id={`${uid}-name`}
+                                type="text"
+                                autoComplete="given-name"
+                                className={styles.inputField}
+                                onBlur={field.onBlur}
+                              />
+                            )}
+                          </Field>
 
-                        <ErrorMessage
-                          name="name"
-                          component="div"
-                          className={styles.error}
-                        />
+                          <ErrorMessage
+                            name="name"
+                            component="div"
+                            className={styles.error}
+                          />
+                        </div>
+
+                        <div className={styles.inputWrapper}>
+                          <svg
+                            className={styles.icon}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="#bd8948"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+                          </svg>
+                          <label
+                            htmlFor={`${uid}-surname`}
+                            className={`${styles.label} ${
+                              isSurnameFilled ? styles.filled : ""
+                            }`}
+                          >
+                            {lang === "ru"
+                              ? "Фамилия"
+                              : lang === "de"
+                                ? "Ihr Nachname"
+                                : lang === "pl"
+                                  ? "Nazwisko"
+                                  : "Surname"}
+                          </label>
+
+                          <Field name="surname">
+                            {({ field }: any) => (
+                              <input
+                                {...field}
+                                id={`${uid}-surname`}
+                                type="text"
+                                autoComplete="family-name"
+                                className={styles.inputField}
+                                onBlur={field.onBlur}
+                              />
+                            )}
+                          </Field>
+
+                          <ErrorMessage
+                            name="surname"
+                            component="div"
+                            className={styles.error}
+                          />
+                        </div>
+
+                        <div className={styles.inputWrapper}>
+                          <PhoneInput
+                            id={`${uid}-phone`}
+                            name="phone"
+                            aria-label={inputPhoneLabel}
+                            placeholder={inputPhoneLabel}
+                            className={`${styles.inputField} ${styles.phoneInput}`}
+                            value={values.phone}
+                            defaultCountry="CY"
+                            international
+                            withCountryCallingCode
+                            smartCaret={false}
+                            autoComplete="tel"
+                            inputMode="tel"
+                            type="tel"
+                            onChange={(value) => {
+                              setFieldValue("phone", value || "", false);
+                            }}
+                            onBlur={() => {
+                              formikRef.current?.setFieldTouched(
+                                "phone",
+                                true,
+                                true,
+                              );
+                            }}
+                          />
+
+                          <ErrorMessage
+                            name="phone"
+                            component="div"
+                            className={styles.error}
+                          />
+                        </div>
+
+                        <div className={styles.inputWrapper}>
+                          <svg
+                            className={styles.icon}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="#bd8948"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
+                          </svg>
+                          <label
+                            htmlFor={`${uid}-email`}
+                            className={`${styles.label} ${
+                              isEmailFilled ? styles.filled : ""
+                            }`}
+                          >
+                            {lang === "ru"
+                              ? "Ваш email"
+                              : lang === "de"
+                                ? "E-Mail Adresse"
+                                : lang === "pl"
+                                  ? "E-mail"
+                                  : "Email"}
+                          </label>
+
+                          <Field name="email">
+                            {({ field }: any) => (
+                              <input
+                                {...field}
+                                id={`${uid}-email`}
+                                type="email"
+                                autoComplete="email"
+                                className={styles.inputField}
+                                onBlur={field.onBlur}
+                              />
+                            )}
+                          </Field>
+
+                          <ErrorMessage
+                            name="email"
+                            component="div"
+                            className={styles.error}
+                          />
+                        </div>
                       </div>
 
-                      <div className={styles.inputWrapper}>
-                        <svg
-                          className={styles.icon}
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="#bd8948"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
-                        </svg>
-
-                        <label
-                          htmlFor={`${uid}-surname`}
-                          className={`${styles.label} ${
-                            isSurnameFilled ? styles.filled : ""
-                          }`}
-                        >
-                          {lang === "ru"
-                            ? "Фамилия"
-                            : lang === "de"
-                              ? "Nachname"
-                              : lang === "pl"
-                                ? "Nazwisko"
-                                : "Surname"}
-                        </label>
-
-                        <Field name="surname">
-                          {({ field }: any) => (
-                            <input
-                              {...field}
-                              id={`${uid}-surname`}
-                              type="text"
-                              autoComplete="family-name"
-                              className={styles.inputField}
-                              onBlur={field.onBlur}
-                            />
-                          )}
-                        </Field>
-
-                        <ErrorMessage
-                          name="surname"
-                          component="div"
-                          className={styles.error}
-                        />
-                      </div>
-
-                      <div className={styles.inputWrapper}>
-                        <PhoneInput
-                          id={`${uid}-phone`}
-                          name="phone"
-                          aria-label={inputPhoneLabel}
-                          placeholder={inputPhoneLabel}
-                          className={`${styles.inputField} ${styles.phoneInput}`}
-                          value={values.phone}
-                          defaultCountry="CY"
-                          international
-                          withCountryCallingCode
-                          smartCaret={false}
-                          autoComplete="tel"
-                          inputMode="tel"
-                          type="tel"
-                          onChange={(value) => {
-                            setFieldValue("phone", value || "", false);
-                          }}
-                          onBlur={() => {
-                            formikRef.current?.setFieldTouched(
-                              "phone",
-                              true,
-                              true,
-                            );
-                          }}
-                        />
-
-                        <ErrorMessage
-                          name="phone"
-                          component="div"
-                          className={styles.error}
-                        />
-                      </div>
-
-                      <div className={styles.inputWrapper}>
-                        <svg
-                          className={styles.icon}
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="#bd8948"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 13.5l-11-7.5v15h22v-15l-11 7.5zm0-2.5l11-7h-22l11 7z" />
-                        </svg>
-
-                        <label
-                          htmlFor={`${uid}-email`}
-                          className={`${styles.label} ${
-                            isEmailFilled ? styles.filled : ""
-                          }`}
-                        >
-                          {lang === "ru"
-                            ? "Ваш email"
-                            : lang === "de"
-                              ? "E-Mail Adresse"
-                              : lang === "pl"
-                                ? "E-mail"
-                                : "Email"}
-                        </label>
-
-                        <Field name="email">
-                          {({ field }: any) => (
-                            <input
-                              {...field}
-                              id={`${uid}-email`}
-                              type="email"
-                              autoComplete="email"
-                              className={styles.inputField}
-                              onBlur={field.onBlur}
-                            />
-                          )}
-                        </Field>
-
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          className={styles.error}
-                        />
-                      </div>
-                    </div>
-
-                    <div className={styles.inputWrapper}></div>
-
-                    <div>
                       <div className={styles.radioGroupWrapper}>
                         <span className={styles.radioGroupLabel}>
                           {lang === "ru"
                             ? "Как с вами лучше связаться?"
                             : lang === "de"
-                              ? "Wie können wir Sie am besten kontaktieren?"
+                              ? "Wie möchten Sie am besten kontaktiert werden?"
                               : lang === "pl"
                                 ? "W jaki sposób najlepiej się z Tobą skontaktować?"
                                 : "What’s the best way to contact you?"}
@@ -468,7 +466,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                               {lang === "ru"
                                 ? "Телефон"
                                 : lang === "de"
-                                  ? "Anruf"
+                                  ? "Telefon"
                                   : lang === "pl"
                                     ? "Telefonicznie"
                                     : "Phone call"}
@@ -504,7 +502,7 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                       <ErrorMessage
                         name="preferredContact"
                         component="div"
-                        className={styles.error}
+                        className={styles.errorRadio}
                       />
 
                       <button
@@ -525,76 +523,91 @@ const FormStatic: FC<ContactFormProps> = ({ onFormSubmitSuccess, lang }) => {
                           "Send"
                         )}
                       </button>
+
+                      <Field
+                        type="text"
+                        name="company"
+                        style={{ display: "none" }}
+                        tabIndex={-1}
+                        autoComplete="new-password"
+                        aria-hidden="true"
+                      />
+
+                      <div className={styles.customCheckbox}>
+                        <Field
+                          type="checkbox"
+                          name="agreedToPolicy"
+                          id={`${uid}-agreedToPolicy`}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>,
+                          ) => {
+                            setFieldValue("agreedToPolicy", e.target.checked);
+                          }}
+                        />
+
+                        <label htmlFor={`${uid}-agreedToPolicy`}>
+                          {lang === "ru"
+                            ? "Я согласен с "
+                            : lang === "de"
+                              ? "Ich habe die Bedingungen der "
+                              : lang === "pl"
+                                ? "Zgadzam się z "
+                                : "I agree with the terms of the "}
+
+                          <Link
+                            className={styles.policyLink}
+                            href={
+                              lang === "ru"
+                                ? "/ru/politika-privatnosti"
+                                : lang === "de"
+                                  ? "/datenschutzrichtlinie"
+                                  : lang === "pl"
+                                    ? "/pl/polityka-prywatnosci"
+                                    : "/en/privacy-policy"
+                            }
+                            target="_blank"
+                          >
+                            {lang === "ru"
+                              ? "Пользовательским соглашением"
+                              : lang === "de"
+                                ? "Benutzervereinbarung"
+                                : lang === "pl"
+                                  ? "Umowa użytkownika"
+                                  : "User agreement"}
+                          </Link>
+
+                          {lang === "ru"
+                            ? " прочитал и принимаю их"
+                            : lang === "de"
+                              ? " gelesen und akzeptiere sie"
+                              : lang === "pl"
+                                ? " przeczytałem i akceptuję je"
+                                : " read and accept them"}
+                        </label>
+
+                        <ErrorMessage
+                          name="agreedToPolicy"
+                          component="div"
+                          className={styles.errorCheckbox}
+                        />
+                      </div>
+                    </div>
+
+                    <div className={styles.imageWrapper}>
+                      <img
+                        src={consultantImage}
+                        alt="Sascha Dith, CEO Cyprus VIP Estates"
+                        className={styles.consultantImage}
+                      />
+
+                      <div className={styles.personCaption}>
+                        <strong>Sascha Dith</strong>
+                        <span>CEO Cyprus VIP Estates</span>
+                      </div>
                     </div>
                   </div>
-
-                  <Field
-                    type="text"
-                    name="company"
-                    style={{ display: "none" }}
-                    tabIndex={-1}
-                    autoComplete="new-password"
-                    aria-hidden="true"
-                  />
-
-                  <div className={styles.customCheckbox}>
-                    <Field
-                      type="checkbox"
-                      name="agreedToPolicy"
-                      id={`${uid}-agreedToPolicy`}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setFieldValue("agreedToPolicy", e.target.checked);
-                      }}
-                    />
-
-                    <ErrorMessage
-                      name="agreedToPolicy"
-                      component="div"
-                      className={styles.errorCheckbox}
-                    />
-
-                    <label htmlFor={`${uid}-agreedToPolicy`}>
-                      {lang === "ru"
-                        ? "Я согласен с "
-                        : lang === "de"
-                          ? "Ich habe die Bedingungen der "
-                          : lang === "pl"
-                            ? "Zgadzam się z "
-                            : "I agree with the terms of the "}
-
-                      <Link
-                        className={styles.policyLink}
-                        href={
-                          lang === "ru"
-                            ? "/ru/politika-privatnosti"
-                            : lang === "de"
-                              ? "/datenschutzrichtlinie"
-                              : lang === "pl"
-                                ? "/pl/polityka-prywatnosci"
-                                : "/en/privacy-policy"
-                        }
-                        target="_blank"
-                      >
-                        {lang === "ru"
-                          ? "Пользовательским соглашением"
-                          : lang === "de"
-                            ? "Benutzervereinbarung"
-                            : lang === "pl"
-                              ? "Umowa użytkownika"
-                              : "User agreement"}
-                      </Link>
-
-                      {lang === "ru"
-                        ? " прочитал и принимаю их"
-                        : lang === "de"
-                          ? " gelesen und akzeptiere sie"
-                          : lang === "pl"
-                            ? " przeczytałem i akceptuję je"
-                            : " read and accept them"}
-                    </label>
-                  </div>
                 </div>
-              </div>
+              </section>
             </Form>
           );
         }}
