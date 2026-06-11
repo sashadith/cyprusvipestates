@@ -114,8 +114,8 @@ const Footer = async ({ params }: Props) => {
                     <Image
                       alt={socialLink.label}
                       src={urlFor(socialLink.icon).url()}
-                      width={50}
-                      height={50}
+                      width={30}
+                      height={30}
                       unoptimized
                     />
                   </Link>
