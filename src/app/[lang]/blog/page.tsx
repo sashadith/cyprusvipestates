@@ -75,8 +75,8 @@ const PageBlog = async ({ params }: Props) => {
             language: lang.id,
             path:
               lang.id === "de"
-                ? `/blog/${translationSlug}`
-                : `/${lang.id}/blog/${translationSlug}`,
+                ? `/${translationSlug}`
+                : `/${lang.id}/${translationSlug}`,
           },
         ]
       : acc;

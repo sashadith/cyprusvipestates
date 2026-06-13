@@ -138,10 +138,7 @@ export default async function ProjectsPage({
           ...acc,
           {
             language: lang.id,
-            path:
-              lang.id === "de"
-                ? `/projects/${translationSlug}`
-                : `/${lang.id}/projects/${translationSlug}`,
+            path: lang.id === "de" ? `/projects` : `/${lang.id}/projects`,
           },
         ]
       : acc;
